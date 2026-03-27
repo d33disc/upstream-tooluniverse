@@ -16,7 +16,9 @@
           "description": "Maximum number of results to return (default: 10, max: 50)."
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint_type": "search_genes"
@@ -36,57 +38,48 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching mouse genes",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "symbol": {
-                    "type": ["string", "null"],
-                    "description": "Official gene symbol (e.g., 'Trp53')"
-                  },
-                  "name": {
-                    "type": ["string", "null"],
-                    "description": "Gene name"
-                  },
-                  "primary_key": {
-                    "type": ["string", "null"],
-                    "description": "MGI identifier (e.g., 'MGI:98834')"
-                  },
-                  "name_key": {
-                    "type": ["string", "null"],
-                    "description": "Gene display name with species (e.g., 'Trp53 (Mmu)')"
-                  },
-                  "category": {
-                    "type": ["string", "null"],
-                    "description": "Entity category (always 'gene')"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {"type": "integer"},
-                "query": {"type": "string"},
-                "source": {"type": "string"}
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
+      "type": "array",
+      "description": "List of matching mouse genes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Official gene symbol (e.g., 'Trp53')"
           },
-          "required": ["error"]
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Gene name"
+          },
+          "primary_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "MGI identifier (e.g., 'MGI:98834')"
+          },
+          "name_key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Gene display name with species (e.g., 'Trp53 (Mmu)')"
+          },
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Entity category (always 'gene')"
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -101,7 +94,9 @@
           "description": "MGI gene identifier with 'MGI:' prefix. Examples: 'MGI:98834' (Trp53/p53), 'MGI:104537' (Brca1), 'MGI:96677' (Kit), 'MGI:88039' (Apoe), 'MGI:88276' (Braf)."
         }
       },
-      "required": ["gene_id"]
+      "required": [
+        "gene_id"
+      ]
     },
     "fields": {
       "endpoint_type": "gene_detail"
@@ -115,91 +110,142 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
+      "type": "object",
+      "description": "Mouse gene details from MGI",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "MGI identifier (e.g., 'MGI:98834')"
+        },
+        "symbol": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Official gene symbol (e.g., 'Trp53')"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Full gene name (e.g., 'transformation related protein 53')"
+        },
+        "species": {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Mouse gene details from MGI",
-              "properties": {
-                "id": {
-                  "type": ["string", "null"],
-                  "description": "MGI identifier (e.g., 'MGI:98834')"
-                },
-                "symbol": {
-                  "type": ["string", "null"],
-                  "description": "Official gene symbol (e.g., 'Trp53')"
-                },
-                "name": {
-                  "type": ["string", "null"],
-                  "description": "Full gene name (e.g., 'transformation related protein 53')"
-                },
-                "species": {
-                  "type": "object",
-                  "properties": {
-                    "name": {"type": ["string", "null"]},
-                    "short_name": {"type": ["string", "null"]},
-                    "taxon_id": {"type": ["string", "null"]},
-                    "data_provider": {"type": ["string", "null"]}
-                  }
-                },
-                "gene_synopsis": {
-                  "type": ["string", "null"],
-                  "description": "Curated gene synopsis from MGI"
-                },
-                "automated_gene_synopsis": {
-                  "type": ["string", "null"],
-                  "description": "Automatically generated gene synopsis"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {"type": "string"}
-                },
-                "so_term": {
-                  "type": ["string", "null"],
-                  "description": "Sequence Ontology term (e.g., 'protein_coding_gene')"
-                },
-                "genomic_location": {
-                  "type": "object",
-                  "properties": {
-                    "chromosome": {"type": ["string", "null"]},
-                    "start": {"type": ["integer", "null"]},
-                    "end": {"type": ["integer", "null"]},
-                    "assembly": {"type": ["string", "null"]},
-                    "strand": {"type": ["string", "null"]}
-                  }
-                },
-                "cross_references": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": ["string", "null"]},
-                      "url": {"type": ["string", "null"]}
-                    }
-                  }
-                }
-              }
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "query_gene_id": {"type": "string"},
-                "data_provider": {"type": ["string", "null"]},
-                "source": {"type": "string"}
-              }
+            "short_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "taxon_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "data_provider": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
-        {
+        "gene_synopsis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Curated gene synopsis from MGI"
+        },
+        "automated_gene_synopsis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Automatically generated gene synopsis"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "so_term": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Sequence Ontology term (e.g., 'protein_coding_gene')"
+        },
+        "genomic_location": {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
+            "chromosome": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "start": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "end": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "assembly": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "strand": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "cross_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -224,7 +270,9 @@
           "description": "Page number for pagination (default: 1)."
         }
       },
-      "required": ["gene_id"]
+      "required": [
+        "gene_id"
+      ]
     },
     "fields": {
       "endpoint_type": "gene_phenotypes"
@@ -240,51 +288,34 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of phenotype annotations for the mouse gene",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": ["string", "null"],
-                    "description": "Gene symbol"
-                  },
-                  "gene_id": {
-                    "type": ["string", "null"],
-                    "description": "MGI gene ID"
-                  },
-                  "phenotype_statement": {
-                    "type": ["string", "null"],
-                    "description": "Phenotype description from MP ontology annotation"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {"type": "integer"},
-                "returned": {"type": "integer"},
-                "query_gene_id": {"type": "string"},
-                "page": {"type": "integer"},
-                "source": {"type": "string"}
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
+      "type": "array",
+      "description": "List of phenotype annotations for the mouse gene",
+      "items": {
+        "type": "object",
+        "properties": {
+          "gene_symbol": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Gene symbol"
           },
-          "required": ["error"]
+          "gene_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "MGI gene ID"
+          },
+          "phenotype_statement": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Phenotype description from MP ontology annotation"
+          }
         }
-      ]
+      }
     }
   }
 ]

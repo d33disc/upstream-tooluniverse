@@ -1,0 +1,871 @@
+[
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblMap_convert_coordinates"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblMap_translate_coordinates"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblPheno_get_by_gene"
+  },
+  {
+    "status": "timeout",
+    "detail": "Ensembl phenotype API unresponsive >35s; schema fixed (oneOf wrapper removed)",
+    "tool": "EnsemblPheno_get_by_region"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblPheno_get_by_variant"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_binding_matrix"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_constrained_elements"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_motif_features"
+  },
+  {
+    "tool": "EnsemblReg_get_regulatory_elements",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblSeq_get_id_sequence"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblSeq_get_region_sequence"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVar_get_population_frequencies"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVar_get_variant_consequences"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_annotate_hgvs"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_annotate_rsid"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_variant_recoder"
+  },
+  {
+    "tool": "EOL_get_collection",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "EOL_get_hierarchy_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "EOL_get_page",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "EOL_search_species",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "EpiGraphDB_get_drugs_for_trait",
+    "status": "pass_on_retry",
+    "detail": "slow (27s) but passes"
+  },
+  {
+    "tool": "EuropePMC_get_fulltext",
+    "status": "server_error",
+    "detail": "Full text fetch failed - server-side issue"
+  },
+  {
+    "tool": "EVA_get_variants_by_gene",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "assay_count was non-nullable integer; API returns null; made nullable",
+    "fixed": true,
+    "tool": "ExpressionAtlas_get_experiment"
+  },
+  {
+    "tool": "FAERS_count_additive_administration_routes",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FAERS_count_additive_adverse_reactions",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FAERS_count_additive_event_reports_by_country",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FAERS_count_additive_reaction_outcomes",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FAERS_count_additive_reports_by_reporter_country",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FAERS_count_additive_seriousness_classification",
+    "status": "auth",
+    "detail": "403 Forbidden from api.fda.gov"
+  },
+  {
+    "tool": "FDA_get_drug_label",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "tool": "FDA_get_drug_names_by_indication_aggregated",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_get_structure"
+  },
+  {
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_get_substance"
+  },
+  {
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_search_substances"
+  },
+  {
+    "tool": "FlyBase_get_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "FlyBase_get_gene_alleles",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "FlyBase_get_gene_disease_models",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "FlyBase_get_gene_expression",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "FlyBase_get_gene_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "FlyBase_get_gene_orthologs",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_annotate_mutation"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_annotate_variant"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_get_cancer_hotspots"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_get_canonical_transcript"
+  },
+  {
+    "tool": "GEO_get_dataset_details",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GEO_search_atacseq_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper; schema fix applied, 1 test 429 rate_limited",
+    "fixed": true
+  },
+  {
+    "tool": "GEO_search_chipseq_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper; schema fix applied, 1 test 429 rate_limited",
+    "fixed": true
+  },
+  {
+    "tool": "GEO_search_methylation_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper; schema fix applied, 1 test 429 rate_limited",
+    "fixed": true
+  },
+  {
+    "tool": "GEO_search_rnaseq_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper; schema fix applied, 1 test 429 rate_limited",
+    "fixed": true
+  },
+  {
+    "tool": "GIN_Guidelines_Search",
+    "status": "no_data",
+    "detail": "No guidelines found for query - stale test example"
+  },
+  {
+    "tool": "GitHub_search_repositories",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_get_glycan"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_get_glycoprotein"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_search_glycans"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_search_glycoproteins"
+  },
+  {
+    "tool": "GMrepo_get_phenotypes",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "GMrepo_search_species",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GNPS_compare_spectra"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GNPS_get_spectrum"
+  },
+  {
+    "tool": "GOAPI_get_gene_functions",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GOAPI_get_genes_by_function",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GOAPI_get_term",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GTEx_get_expression_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "subsetGroup was non-nullable string; API returns null; made nullable",
+    "fixed": true,
+    "tool": "GTEx_get_gene_expression"
+  },
+  {
+    "tool": "GTEx_query_eqtl",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GxA_get_experiment_expression",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GxA_get_experiment_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "GxA_list_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HGNC_fetch_gene_by_id",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HGNC_fetch_gene_by_symbol",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HGNC_search_by_location",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HGNC_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HMDB_get_diseases",
+    "status": "server_error",
+    "detail": "server returns invalid JSON"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "bad test example (context_name was invalid); fixed to use valid tissue name",
+    "fixed": true,
+    "tool": "HPA_get_contextual_biological_process_analysis"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "bad test example (disease_name needs underscore format); fixed to colon_cancer",
+    "fixed": true,
+    "tool": "HPA_get_disease_expression_by_gene_tissue_disease"
+  },
+  {
+    "tool": "HPA_get_protein_interactions_by_gene",
+    "status": "dead_api",
+    "detail": "ppi column removed from HPA"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "bad test example (empty tissue list, wrong gene); fixed to GAPDH+valid tissues",
+    "fixed": true,
+    "tool": "HPA_get_rna_expression_in_specific_tissues"
+  },
+  {
+    "tool": "HPO_get_term",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HPO_get_term_hierarchy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "HPO_search_terms",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "tool": "ICD11_browse_hierarchy",
+    "status": "auth",
+    "detail": "needs ICD_CLIENT_ID and ICD_CLIENT_SECRET"
+  },
+  {
+    "tool": "ICD11_get_entity",
+    "status": "auth",
+    "detail": "needs ICD_CLIENT_ID and ICD_CLIENT_SECRET"
+  },
+  {
+    "tool": "ICD11_search_diseases",
+    "status": "auth",
+    "detail": "needs ICD_CLIENT_ID and ICD_CLIENT_SECRET"
+  },
+  {
+    "tool": "INDRA_get_evidence_count",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "INDRA_get_statements",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "InterPro_get_clan_members",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterPro_get_entries_for_protein",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterPro_get_protein_domain_architecture",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterPro_get_proteins_by_domain",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterPro_get_structures_for_domain",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterPro_search_entries",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "InterProScan_scan_sequence",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "ITIS_get_full_record",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "ITIS_get_hierarchy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "ITIS_search_by_common_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "ITIS_search_by_scientific_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "KEGG_get_compound",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "KEGG_get_gene_pathways",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "KEGG_get_pathway_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "LNCipedia_get_lncrna",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "LNCipedia_get_lncrna_publications",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "LNCipedia_get_lncrna_xrefs",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "LNCipedia_search_lncrna",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "LNCipedia_search_ncrna_by_type",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MarineRegions_search_by_name",
+    "status": "pass_on_retry",
+    "detail": "slow but passes"
+  },
+  {
+    "tool": "MEME_discover_motifs",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "tool": "MEME_fimo_scan",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "tool": "MeSH_get_descriptor",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MeSH_search_descriptors",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MeSH_search_terms",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MetaboAnalyst_get_pathway_library",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "MetaboAnalyst_name_to_id",
+    "status": "pass_on_retry",
+    "detail": "passes"
+  },
+  {
+    "tool": "MetaboAnalyst_pathway_enrichment",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "Metabolite_get_diseases",
+    "status": "server_error",
+    "detail": "server returns invalid JSON"
+  },
+  {
+    "status": "schema_mismatch",
+    "detail": "API returns TSV string but schema expected object/array; added string to accepted types",
+    "fixed": true,
+    "tool": "MetabolomicsWorkbench_search_by_exact_mass"
+  },
+  {
+    "tool": "MetaCyc_search_pathways",
+    "status": "dead_api",
+    "detail": "BioCyc now requires free account for API access"
+  },
+  {
+    "tool": "MGI_get_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MGI_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MGnify_get_genome",
+    "status": "timeout",
+    "detail": "no response within 25s"
+  },
+  {
+    "tool": "discovery",
+    "status": "discovery",
+    "detail": "PATTERN: data-wrapper schema bug. Total fixed: 64 tools in 16 files. Running count by batch: batch1=4, batch2=5, batch3=15, batch4=15, batch5=13, batch6=11."
+  },
+  {
+    "tool": "discovery",
+    "status": "discovery",
+    "detail": "MetaCyc/BioCyc now requires free account - dead_api for unauthenticated access."
+  },
+  {
+    "tool": "discovery",
+    "status": "discovery",
+    "detail": "MetabolomicsWorkbench_search_by_exact_mass: returns raw TSV text, schema expects JSON object. Different root cause from wrapper bug."
+  },
+  {
+    "tool": "MGnify_get_go_terms",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "MGnify_get_interpro",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "MGnify_get_study_detail",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s"
+  },
+  {
+    "tool": "MGnify_get_taxonomy",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "MGnify_list_analyses",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "MGnify_list_biomes",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s"
+  },
+  {
+    "tool": "MGnify_search_genomes",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s"
+  },
+  {
+    "tool": "MGnify_search_studies",
+    "status": "timeout",
+    "detail": "MGnify API unresponsive >30s"
+  },
+  {
+    "tool": "miRBase_get_mirna",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "miRBase_get_mirna_publications",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "miRBase_get_mirna_xrefs",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MobiDB_get_consensus",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MobiDB_get_protein",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "Mondo_get_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "Mondo_get_disease_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "Mondo_search_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MyDisease_get_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MyDisease_search_diseases",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "MyVariant_get_pathogenicity_scores",
+    "status": "pass_on_retry",
+    "detail": "1/2 test examples passed; chr17:g.43092919G>A returns 404 (stale test example); tool functional"
+  },
+  {
+    "tool": "NCA_calculate_bioavailability",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCA_compute_parameters",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCA_fit_one_compartment",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCBI_search_nucleotide",
+    "status": "pass",
+    "detail": "All tests passed"
+  },
+  {
+    "tool": "NCBIDatasets_get_gene",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_gene_by_symbol",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_orthologs",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCBIDatasets_suggest_taxonomy",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCICACTUS_resolve",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCIThesaurus_get_children",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCIThesaurus_get_concept",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  }
+]
