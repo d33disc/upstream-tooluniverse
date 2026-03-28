@@ -1316,5 +1316,43 @@
     "file": "figshare_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_RAG",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "generic query",
+    "new": "BLAST alignment, PDB structure retrieval"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "RNA-seq DE, ClinVar variant pathogenicity"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder_LLM",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "PubMed TP53 search, AlphaFold structure"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder_Keyword",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "CRISPR gRNA design, GEO datasets"
+  },
+  {
+    "file": "foldseek_tools.json",
+    "tool": "Foldseek_get_result",
+    "action": "added_examples",
+    "count": 2
   }
 ]
