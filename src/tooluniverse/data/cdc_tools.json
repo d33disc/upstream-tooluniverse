@@ -63,7 +63,12 @@
     "test_examples": [
       {
         "search_query": "mortality",
-        "limit": 1
+        "limit": 10
+      },
+      {
+        "search_query": "vaccination coverage",
+        "category": "Public Health",
+        "limit": 5
       }
     ]
   },
@@ -124,8 +129,13 @@
     },
     "test_examples": [
       {
+        "dataset_id": "p5x4-u35c",
+        "limit": 10
+      },
+      {
         "dataset_id": "jkcx-ndu8",
-        "limit": 2
+        "limit": 5,
+        "where_clause": "year = '2020'"
       }
     ]
   }
