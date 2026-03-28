@@ -103,6 +103,7 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {
@@ -382,7 +383,10 @@
     },
     "type": "CPICListGuidelinesTool",
     "test_examples": [
-      {}
+      {},
+      {
+        "gene": "CYP2D6"
+      }
     ],
     "return_schema": {
       "oneOf": [
@@ -708,6 +712,7 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {

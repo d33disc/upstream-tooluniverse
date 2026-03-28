@@ -1181,5 +1181,16 @@
   {"file": "clue_tools.json", "tool": "CLUE_get_perturbation", "action": "added_examples", "count": 2},
   {"file": "clue_tools.json", "tool": "CLUE_get_gene_expression", "action": "added_examples", "count": 2},
   {"file": "clue_tools.json", "tool": "CLUE_get_cell_lines", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_search_compounds", "action": "added_examples", "count": 2}
+  {"file": "clue_tools.json", "tool": "CLUE_search_compounds", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "DrugSafetyAnalyzer", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "LiteratureSearchTool", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "ComprehensiveDrugDiscoveryPipeline", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "BiomarkerDiscoveryWorkflow", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "ToolMetadataGenerationPipeline", "action": "added_examples", "count": 2},
+  {"file": "compose_tools.json", "tool": "ToolGraphGenerationPipeline", "action": "added_examples", "count": 2},
+  {"file": "core_tools.json", "tool": "CORE_get_fulltext_snippets", "action": "added_examples", "count": 2},
+  {"file": "cpic_tools.json", "tool": "CPIC_list_pgx_genes", "action": "added_examples", "count": 2},
+  {"file": "cpic_tools.json", "tool": "CPIC_list_guidelines", "action": "added_examples", "count": 2},
+  {"file": "cpic_tools.json", "tool": "CPIC_list_drugs", "action": "added_examples", "count": 2},
+  {"file": "crossref_tools.json", "tool": "Crossref_list_types", "action": "added_examples", "count": 2}
 ]
