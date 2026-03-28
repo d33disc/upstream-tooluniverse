@@ -1194,5 +1194,240 @@
     "tool": "OpenML_get_dataset",
     "action": "skipped",
     "reason": "good: 3 examples"
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_get_dataset",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_get_dataset_snapshots",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_search_by_modality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_variant_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_variant_credible_sets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_gwas_study",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_search_gwas_studies_by_disease",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_credible_set_detail",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_study_credible_sets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_tools.json",
+    "tool": "ALL_53_TOOLS",
+    "action": "added_examples",
+    "count": 2,
+    "note": "added 2nd examples to 53 tools using BRCA1/hypertension/imatinib as alternates"
+  },
+  {
+    "file": "opentopodata_tools.json",
+    "tool": "OpenTopoData_get_elevation",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_match_names",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_taxon",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_mrca",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_induced_subtree",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "ToolDescriptionOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "TestCaseGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "ArgumentDescriptionOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "DescriptionAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "DescriptionQualityEvaluator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_profile",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_works",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_search_researchers",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_employments",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_search_diseases",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_disease",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_classification",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_search_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_phenotypes",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_epidemiology",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_natural_history",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_gene_diseases",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_icd_mapping",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_search_groups",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_get_group_details",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "osf_preprints_tools.json",
+    "tool": "OSF_search_preprints",
+    "action": "skipped",
+    "reason": "good: 3 examples"
   }
 ]
