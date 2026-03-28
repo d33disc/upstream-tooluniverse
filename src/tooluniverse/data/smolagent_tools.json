@@ -228,7 +228,13 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization"
+        "query": "CRISPR-Cas9 off-target effects in human T cells"
+      },
+      {
+        "query": "TP53 mutations and immunotherapy response in non-small cell lung cancer"
+      },
+      {
+        "query": "mRNA vaccine lipid nanoparticle delivery mechanisms"
       }
     ],
     "return_schema": {
@@ -334,7 +340,13 @@
     },
     "test_examples": [
       {
-        "task": "What are the symptoms of COVID-19?"
+        "task": "What are the symptoms and FDA-approved treatments for type 2 diabetes?"
+      },
+      {
+        "task": "Find the boiling point of water at sea level and convert it to Kelvin"
+      },
+      {
+        "task": "What is the mechanism of action of metformin and what are its common side effects?"
       }
     ],
     "return_schema": {

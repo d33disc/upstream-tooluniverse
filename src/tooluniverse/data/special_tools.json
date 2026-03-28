@@ -14,6 +14,7 @@
       "properties": {}
     },
     "test_examples": [
+      {},
       {}
     ]
   },
@@ -46,7 +47,7 @@
     "test_examples": [
       {},
       {"topic": "running"},
-      {"topic": "all"}
+      {"topic": "searching"}
     ]
   },
   {
@@ -73,6 +74,9 @@
     "test_examples": [
       {
         "solution": "Step 1: Search for gene data. Step 2: Analyze mutations."
+      },
+      {
+        "solution": "Step 1: Identify disease phenotypes. Step 2: Map to HPO terms. Step 3: Search OMIM for candidate genes."
       }
     ]
   }
