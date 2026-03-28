@@ -625,5 +625,500 @@
     "tool": "SIMBAD_advanced_query",
     "action": "skipped",
     "reason": "existing examples already strong"
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:company-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:create-tooluniverse-skill",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-auto-discover-apis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-code-optimization",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-create-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-docs-quality",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-fix-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-github",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-optimize-descriptions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-optimize-skills",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-self-evolve",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:setup-tooluniverse",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-adverse-event-detection",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-antibody-engineering",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-binder-discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-cancer-variant-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-chemical-compound-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-chemical-safety",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-trial-design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-trial-matching",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-crispr-screen-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-custom-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-disease-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-drug-interaction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-repurposing",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-target-validation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-epigenomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-expression-data-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gene-enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-drug-discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-finemapping",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-snp-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-study-explorer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-trait-to-gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-image-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-immune-repertoire-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-immunotherapy-response-prediction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-infectious-disease",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-install-skills",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-literature-deep-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-metabolomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-metabolomics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-multi-omics-integration",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-multiomic-disease-characterization",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-network-pharmacology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-pharmacovigilance",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-phylogenetics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-polygenic-risk-score",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-precision-medicine-stratification",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-precision-oncology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:Protein Interaction Network Analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-protein-structure-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-protein-therapeutic-design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-proteomics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-rare-disease-diagnosis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-rnaseq-deseq2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-sdk",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-sequence-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-single-cell",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-spatial-omics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-spatial-transcriptomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-statistical-modeling",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-structural-variant-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-systems-biology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-target-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-variant-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-variant-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tu-llm",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "smolagent_tools.json",
+    "tool": "advanced_literature_search_agent",
+    "action": "improved_examples",
+    "old": "1 generic example (machine learning optimization)",
+    "new": "3 realistic examples (CRISPR, TP53, mRNA vaccine)"
+  },
+  {
+    "file": "smolagent_tools.json",
+    "tool": "open_deep_research_agent",
+    "action": "improved_examples",
+    "old": "1 generic example (COVID-19 symptoms)",
+    "new": "3 realistic examples (diabetes, metformin, unit conversion)"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "Finish",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "2 empty examples (no-arg tool)"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "ToolUniverse_get_usage_tips",
+    "action": "improved_examples",
+    "old": "3 examples with duplicate 'all'",
+    "new": "3 examples covering default, running, searching topics"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "CallAgent",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "2 examples with gene and phenotype-focused plans"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_predict_splice",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with real variants (chr8, chr17, chr3)"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_get_max_delta",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with BRCA1, TP53 locus variants"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_predict_pangolin",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with masked and unmasked options"
+  },
+  {
+    "file": "sra_tools.json",
+    "tool": "SRA_search_experiments",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "sra_tools.json",
+    "tool": "SRA_get_experiment",
+    "action": "improved_examples",
+    "old": "1 example (SRX accession)",
+    "new": "3 examples covering SRX, SRP, SRS accession types"
   }
 ]
