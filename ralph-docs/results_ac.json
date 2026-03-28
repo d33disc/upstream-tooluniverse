@@ -795,5 +795,194 @@
     "file": "ols_tools.json",
     "tool": "ols_find_similar_terms",
     "action": "improved_description"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_protein",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_hog",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_group",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_search_datasets",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_get_dataset",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_get_statistics",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_search",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_entry",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_gene_map",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_clinical_synopsis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_ligand_receptor_interactions",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_intercell_roles",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_signaling_interactions",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_complexes",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_cell_communication_annotations",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_enzyme_substrate",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_tf_target_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_dorothea_regulon",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_annotate_variant",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_gene_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_cancer_genes",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_levels",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_annotate_copy_number",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_get_type",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_list_tissues",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "open_meteo_airquality_tools.json",
+    "tool": "OpenMeteo_get_air_quality",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_climate_tools.json",
+    "tool": "OpenMeteo_get_historical_climate",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_flood_tools.json",
+    "tool": "OpenMeteo_get_flood_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_marine_tools.json",
+    "tool": "OpenMeteo_get_marine_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
   }
 ]
