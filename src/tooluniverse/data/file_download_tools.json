@@ -62,6 +62,14 @@
         "return_content": false,
         "chunk_size": 8192,
         "follow_redirects": true
+      },
+      {
+        "url": "https://rest.uniprot.org/uniprotkb/P04637.fasta",
+        "output_path": "/tmp/P04637.fasta",
+        "timeout": 30,
+        "return_content": true,
+        "chunk_size": 8192,
+        "follow_redirects": true
       }
     ]
   },
@@ -117,6 +125,12 @@
         "output_path": "./downloads/output.txt",
         "chunk_size": 1048576,
         "timeout": 30
+      },
+      {
+        "url": "https://files.rcsb.org/view/1CRN.pdb.gz",
+        "output_path": "/tmp/1CRN.pdb.gz",
+        "chunk_size": 1048576,
+        "timeout": 30
       }
     ]
   },
@@ -161,6 +175,11 @@
     "test_examples": [
       {
         "url": "https://www.wikipedia.org",
+        "encoding": "utf-8",
+        "timeout": 30
+      },
+      {
+        "url": "https://rest.uniprot.org/uniprotkb/P04637.txt",
         "encoding": "utf-8",
         "timeout": 30
       }

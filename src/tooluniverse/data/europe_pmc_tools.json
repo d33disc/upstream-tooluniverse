@@ -321,8 +321,20 @@
     },
     "test_examples": [
       {
-        "query": "cancer therapy",
+        "query": "TP53 breast cancer",
         "limit": 5
+      },
+      {
+        "query": "EGFR lung adenocarcinoma",
+        "fulltext_terms": [
+          "osimertinib",
+          "resistance"
+        ],
+        "extract_terms_from_fulltext": [
+          "osimertinib",
+          "T790M"
+        ],
+        "limit": 3
       }
     ]
   },
@@ -454,6 +466,12 @@
         "source": "MED",
         "article_id": "25428363",
         "page_size": 10
+      },
+      {
+        "source": "MED",
+        "article_id": "25378148",
+        "page_size": 5,
+        "page": 2
       }
     ]
   },
@@ -585,6 +603,12 @@
         "source": "MED",
         "article_id": "25428363",
         "page_size": 10
+      },
+      {
+        "source": "MED",
+        "article_id": "25378148",
+        "page_size": 5,
+        "page": 2
       }
     ]
   },
@@ -776,6 +800,13 @@
         "pmcid": "PMC5234727",
         "output_format": "text",
         "max_chars": 4000
+      },
+      {
+        "pmcid": "5234727",
+        "output_format": "raw",
+        "include_raw": true,
+        "max_chars": 3000,
+        "max_raw_chars": 1500
       }
     ]
   },
@@ -982,6 +1013,16 @@
           "ciprofloxacin",
           "evolved resistance"
         ]
+      },
+      {
+        "pmcid": "PMC11237425",
+        "keywords": [
+          "ciprofloxacin",
+          "resistance evolution"
+        ],
+        "window_chars": 120,
+        "max_snippets_per_term": 2,
+        "max_total_chars": 3000
       }
     ]
   }

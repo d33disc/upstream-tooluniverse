@@ -45,6 +45,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -150,6 +155,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -270,6 +280,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "abuse_info": "dependence",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -382,6 +397,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -492,6 +512,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "accessory_name": "dose cup",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -603,6 +628,11 @@
         "drug_name": "Ninjacof-D",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -714,6 +744,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "active_ingredient": "metformin hydrochloride",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -833,6 +868,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -977,6 +1017,11 @@
         "application_manufacturer_or_NDC_info": "NDA211733",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "application_manufacturer_or_NDC_info": "NDA020702",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1097,6 +1142,11 @@
         "adverse_reaction": "Headache",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "adverse_reaction": "lactic acidosis",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1200,6 +1250,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1321,6 +1376,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "alarm_type": "liver damage",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1428,6 +1488,11 @@
         "drug_name": "METHENAMINE HIPPURATE",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1535,6 +1600,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "pharmacology_info": "reduces hepatic glucose production",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1644,6 +1714,11 @@
     "test_examples": [
       {
         "drug_name": "ENTRESTO"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1749,6 +1824,11 @@
         "condition": "Diabetes Mellitus",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "condition": "kidney disease",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1854,6 +1934,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -1966,6 +2051,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "interaction_info": "alcohol use",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2081,6 +2171,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2192,6 +2287,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "field_info": "single-use pen injector",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2298,6 +2398,11 @@
         "drug_name": "DOXY 100(TM) DOXYCYCLINE",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2407,6 +2512,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "warning_text": "lactic acidosis",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2519,6 +2629,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2630,6 +2745,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "carcinogenic_info": "fertility impairment",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2742,6 +2862,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2847,6 +2972,11 @@
         "field_info": "030d9bca-a934-6ef9-e063-6394a90a8277",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "field_info": "NDA020702",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -2984,6 +3114,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "clinical_pharmacology": "mechanism of action",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3096,6 +3231,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3207,6 +3347,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "clinical_studies": "cardiovascular outcomes",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3319,6 +3464,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3430,6 +3580,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "contraindication_info": "severe renal impairment",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3542,6 +3697,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3653,6 +3813,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "controlled_substance_schedule": "schedule ii",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3768,6 +3933,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3871,6 +4041,11 @@
         "dependence_info": "Addiction",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "dependence_info": "withdrawal symptoms",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -3974,6 +4149,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4085,6 +4265,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "disposal_info": "flush unused tablets",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4190,6 +4375,11 @@
         "drug_name": "Fortify",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4287,6 +4477,11 @@
     "test_examples": [
       {
         "dosage_info": "Adults- Take 4"
+      },
+      {
+        "dosage_info": "500 mg twice daily",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4397,6 +4592,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "dosage_forms_and_strengths": "tablet, 500 mg",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4509,6 +4709,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4612,6 +4817,11 @@
         "abuse_info": "Addiction",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "abuse_info": "dependence",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4715,6 +4925,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4826,6 +5041,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "lab_test_interference": "false positive glucose",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -4932,6 +5152,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5040,6 +5265,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "interaction_term": "warfarin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5152,6 +5382,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5263,6 +5498,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "effective_time": "20240101",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5369,6 +5609,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5463,6 +5708,11 @@
     "test_examples": [
       {
         "environmental_warning": "Furosemide Tablets are"
+      },
+      {
+        "environmental_warning": "avoid contamination of water sources",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5563,6 +5813,11 @@
         "drug_name": "Furosemide",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5670,6 +5925,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "field_info": "avoid alcohol",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5784,6 +6044,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "precaution_info": "monitor renal function",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -5895,6 +6160,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6006,6 +6276,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "geriatric_use": "elderly patients",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6118,6 +6393,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6224,6 +6504,11 @@
         "drug_name": "DIANEAL LOW CALCIUM WITH DEXTROSE",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6335,6 +6620,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "letter_info": "dear healthcare provider",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6448,6 +6738,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "health_claim": "reduces fever",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6553,6 +6848,11 @@
         "drug_name": "TexaClear All Season Allergy Relief",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6651,6 +6951,11 @@
     "test_examples": [
       {
         "document_id": "ca7bbcc8-2354-375c-e053-2995a90a72a0"
+      },
+      {
+        "document_id": "f3c2a7d1-5b6e-4f21-9d77-2b3a4c5d6e7f",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6748,6 +7053,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6844,6 +7154,11 @@
         "inactive_ingredient": "Ibuprofen",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "inactive_ingredient": "magnesium stearate",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -6946,6 +7261,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7048,6 +7368,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "indication": "type 2 diabetes mellitus",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7151,6 +7476,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7264,6 +7594,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "field_info": "watch for dehydration",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7375,6 +7710,11 @@
         "drug_name": "Aspirin",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7474,6 +7814,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7584,6 +7929,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "instructions_for_use": "inject under the skin once daily",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7689,6 +8039,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7786,6 +8141,11 @@
     "test_examples": [
       {
         "intended_use_of_the_device": "Shrinks Swollen Tissue"
+      },
+      {
+        "intended_use_of_the_device": "continuous glucose monitoring",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7886,6 +8246,11 @@
         "drug_name": "Hemorrhoidal cocoa butter",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -7995,6 +8360,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "child_safety_info": "keep out of reach of children",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8107,6 +8477,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8210,6 +8585,11 @@
         "labor_and_delivery_info": "labor",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "labor_and_delivery_info": "use during labor",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8313,6 +8693,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8423,6 +8808,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "lab_test_info": "monitor HbA1c",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8534,6 +8924,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8637,6 +9032,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8748,6 +9148,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "mechanism_info": "hmg-coa reductase inhibitor",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8860,6 +9265,11 @@
         "microbiology_info": "Bacteria",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "microbiology_info": "susceptible gram-positive organisms",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -8962,6 +9372,11 @@
         "drug_name": "Oseltamivir Phosphate",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9072,6 +9487,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "toxicology_info": "hepatic tumors in mice",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9183,6 +9603,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9293,6 +9718,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "nonteratogenic_effects": "neonatal hypoglycemia",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9399,6 +9829,11 @@
         "drug_name": "Amphetamine Sulfate",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9506,6 +9941,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "nursing_mothers_info": "excreted in breast milk",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9617,6 +10057,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9718,6 +10163,11 @@
     "test_examples": [
       {
         "safety_info": "Tamper Evident Statement SEALED"
+      },
+      {
+        "safety_info": "risk of severe hypoglycemia",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9818,6 +10268,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -9925,6 +10380,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "overdosage_info": "severe hypoglycemia",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10036,6 +10496,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10137,6 +10602,11 @@
     "test_examples": [
       {
         "display_panel_content": "Principal Display Panel"
+      },
+      {
+        "display_panel_content": "metformin hydrochloride tablets 500 mg",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10237,6 +10707,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10335,6 +10810,11 @@
     "test_examples": [
       {
         "patient_info": "Entecavir (en-TEK-a-vir)"
+      },
+      {
+        "patient_info": "read the medication guide before use",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10433,6 +10913,11 @@
     "test_examples": [
       {
         "drug_name": "Entecavir"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10540,6 +11025,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "pediatric_use_info": "children 10 years and older",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10652,6 +11142,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10752,6 +11247,11 @@
     "test_examples": [
       {
         "pharmacodynamics": "Pharmacodynamics In a"
+      },
+      {
+        "pharmacodynamics": "reduces hepatic glucose production",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10852,6 +11352,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -10950,6 +11455,11 @@
     "test_examples": [
       {
         "pharmacogenomics": "CYP2C19 displays"
+      },
+      {
+        "pharmacogenomics": "cyp2c19 poor metabolizers",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11050,6 +11560,11 @@
         "drug_name": "Pantoprazole Sodium",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11158,6 +11673,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "pharmacokinetics_info": "renal clearance",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11270,6 +11790,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11373,6 +11898,11 @@
         "precautions": "Caution",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "precautions": "monitor liver enzymes",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11475,6 +12005,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11586,6 +12121,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "pregnancy_info": "fetal toxicity",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11698,6 +12238,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11800,6 +12345,11 @@
     "test_examples": [
       {
         "pregnancy_info": "As with any drug, if you are pregnant"
+      },
+      {
+        "pregnancy_info": "fetal toxicity",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -11905,6 +12455,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12017,6 +12572,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12119,6 +12679,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12217,6 +12782,11 @@
     "test_examples": [
       {
         "reference": "Brudevoid F"
+      },
+      {
+        "reference": "clinical pharmacology study",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12318,6 +12888,11 @@
     "test_examples": [
       {
         "drug_name": "Tri-Vite Drops with Fluoride"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12428,6 +13003,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "residue_warning": "milk withdrawal period",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12548,6 +13128,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "risk_info": "fetal toxicity",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12652,6 +13237,11 @@
     "test_examples": [
       {
         "drug_name": "Divalproex Sodium"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12761,6 +13351,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "route": "oral",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12877,6 +13472,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -12990,6 +13590,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "safe_handling_warning": "avoid skin contact",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13099,6 +13704,11 @@
     "test_examples": [
       {
         "drug_name": "Dexamethasone"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13202,6 +13812,11 @@
         "set_id": "030d9bca-a934-6ef9-e063-6394a90a8277",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "set_id": "f7d8f9a0-b1c2-43d4-95e6-1a2b3c4d5e6f",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13306,6 +13921,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "spl_indexing_data_elements": "human prescription drug",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13410,6 +14030,11 @@
     "test_examples": [
       {
         "drug_name": "Entecavir"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13519,6 +14144,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "medguide_info": "signs of lactic acidosis",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13632,6 +14262,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13735,6 +14370,11 @@
     "test_examples": [
       {
         "patient_package_insert": "This Patient Information has"
+      },
+      {
+        "patient_package_insert": "patient package insert",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13835,6 +14475,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -13943,6 +14588,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "ingredient_name": "lactose monohydrate",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14055,6 +14705,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14158,6 +14813,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14259,6 +14919,11 @@
     "test_examples": [
       {
         "stop_use_info": "If symptoms do not"
+      },
+      {
+        "stop_use_info": "stop use and ask a doctor if rash occurs",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14361,6 +15026,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14462,6 +15132,11 @@
     "test_examples": [
       {
         "storage_info": "Store in a"
+      },
+      {
+        "storage_info": "store at 20 to 25 c",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14564,6 +15239,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14674,6 +15354,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "summary_text": "improved glycemic control",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14777,6 +15462,11 @@
     "test_examples": [
       {
         "drug_name": "GLOW BODY MIST SPF 50"
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14884,6 +15574,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "teratogenic_effects": "pregnancy category d",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -14990,6 +15685,11 @@
         "drug_name": "Methocarbamol",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15100,6 +15800,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "population_use": "pregnant women",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15212,6 +15917,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15315,6 +16025,11 @@
         "drug_name": "CLEAR GLOW BROAD SPECTRUM SUNCREEN SPF 50",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15423,6 +16138,11 @@
         "indication": "Hypertension",
         "limit": 5,
         "skip": 0
+      },
+      {
+        "safety_warning": "may cause drowsiness",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15529,6 +16249,11 @@
     "test_examples": [
       {
         "warning_text": "This product is"
+      },
+      {
+        "warning_text": "lactic acidosis",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15635,6 +16360,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15747,6 +16477,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15858,6 +16593,11 @@
         "indication": "Hypertension",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "warnings_and_cautions_info": "monitor for lactic acidosis",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -15972,6 +16712,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -16068,6 +16813,10 @@
       {
         "drug_name": "Aspirin",
         "limit": 1
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2
       }
     ],
     "return_schema": {
@@ -16161,6 +16910,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -16263,6 +17017,11 @@
         "drug_name": "Aspirin",
         "limit": 1,
         "skip": 0
+      },
+      {
+        "drug_name": "Metformin",
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
@@ -16355,6 +17114,9 @@
     "test_examples": [
       {
         "drug_name": "Aspirin"
+      },
+      {
+        "drug_name": "Metformin"
       }
     ],
     "return_schema": {
@@ -16419,6 +17181,9 @@
     "test_examples": [
       {
         "indication": "Hypertension"
+      },
+      {
+        "indication": "type 2 diabetes mellitus"
       }
     ],
     "return_schema": {
@@ -16490,6 +17255,9 @@
     "test_examples": [
       {
         "indication": "Hypertension"
+      },
+      {
+        "indication": "type 2 diabetes mellitus"
       }
     ],
     "return_schema": {
@@ -16613,6 +17381,17 @@
         ],
         "limit": 1,
         "skip": 0
+      },
+      {
+        "field": "openfda.brand_name",
+        "field_value": "LIPITOR",
+        "return_fields": [
+          "openfda.brand_name",
+          "openfda.generic_name",
+          "boxed_warning"
+        ],
+        "limit": 2,
+        "skip": 1
       }
     ],
     "return_schema": {
