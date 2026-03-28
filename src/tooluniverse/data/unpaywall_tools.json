@@ -81,6 +81,10 @@
       {
         "doi": "10.1038/nature12345",
         "email": "test@example.com"
+      },
+      {
+        "doi": "10.1016/j.cell.2023.01.001",
+        "email": "user@university.edu"
       }
     ]
   }
