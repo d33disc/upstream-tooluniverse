@@ -88,6 +88,9 @@
     "test_examples": [
       {
         "ensembl_ids": "ENSG00000141510,ENSG00000012048"
+      },
+      {
+        "ensembl_ids": "ENSG00000139618,ENSG00000157764"
       }
     ],
     "return_schema": {

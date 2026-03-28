@@ -60,6 +60,9 @@
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "M15390"
       }
     ]
   },
@@ -88,6 +91,9 @@
     "test_examples": [
       {
         "accession": "SAMEA2620084"
+      },
+      {
+        "accession": "ERX2484999"
       }
     ]
   },
@@ -129,6 +135,9 @@
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "M15390"
       }
     ]
   },
@@ -272,6 +281,9 @@
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "AJ312385"
       }
     ]
   }

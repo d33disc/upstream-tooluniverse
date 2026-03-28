@@ -129,7 +129,8 @@
       }
     },
     "test_examples": [
-      {"file_type": "fastq", "limit": 1}
+      {"file_type": "fastq", "limit": 1},
+      {"file_type": "bam", "limit": 1}
     ],
     "label": ["ENCODE", "File", "Search"],
     "metadata": {
@@ -213,7 +214,8 @@
       }
     },
     "test_examples": [
-      {"accession": "ENCFF001JXO"}
+      {"accession": "ENCFF001JXO"},
+      {"accession": "ENCFF000ABC"}
     ]
   },
   {

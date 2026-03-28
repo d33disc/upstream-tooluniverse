@@ -41,6 +41,15 @@
           "EGFR"
         ],
         "libs": []
+      },
+      {
+        "gene_list": [
+          "AKT1",
+          "MTOR",
+          "PIK3CA",
+          "PTEN"
+        ],
+        "libs": ["KEGG_2021_Human"]
       }
     ],
     "return_schema": {

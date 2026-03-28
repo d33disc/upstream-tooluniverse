@@ -2432,5 +2432,65 @@
     "tool": "Enamine_search_smiles",
     "action": "improved_examples",
     "count": 2
+  },
+  {
+    "file": "ena_browser_tools.json",
+    "tool": "ena_get_sequence_embl",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ena_browser_tools.json",
+    "tool": "ena_get_sequence_xml",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ena_browser_tools.json",
+    "tool": "ena_get_entry",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ena_browser_tools.json",
+    "tool": "ena_get_entry_history",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "encode_tools.json",
+    "tool": "ENCODE_list_files",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "encode_tools.json",
+    "tool": "ENCODE_get_file",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "enrichr_ext_tools.json",
+    "tool": "Enrichr_get_top_enriched",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "enrichr_tools.json",
+    "tool": "enrichr_gene_enrichment_analysis",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_archive_tools.json",
+    "tool": "EnsemblArchive_batch_lookup",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_compara_tools.json",
+    "tool": "EnsemblCompara_get_gene_tree",
+    "action": "improved_examples",
+    "count": 2
   }
 ]
