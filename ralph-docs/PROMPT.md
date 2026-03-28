@@ -33,14 +33,18 @@ For tools that are missing or weak:
    - Include one simple query and one edge case
 4. Write the examples into the JSON config's `test_examples` array
 
-### 4. Validate each example
+### 4. Validate each example (best-effort, don't skip on failure)
 
 ```bash
 python -m tooluniverse.cli test <ToolName>
 ```
 
-If the test fails, adjust the example (wrong param name, bad value) and retry once.
-If it still fails, skip — the tool may be broken (not your problem, that's the health check loop).
+If the test passes, great. If it fails:
+
+- If the failure is a wrong param in YOUR example, fix the example and retry
+- If the tool itself is broken (API down, missing dep, not in registry), STILL write the test_examples and description improvements — the tool may be fixed later and will need good examples
+- NEVER skip writing test_examples just because the tool currently fails CLI validation
+- The goal is improving the JSON config files, not testing the tools
 
 ### 5. Also audit the description
 
