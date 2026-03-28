@@ -796,6 +796,22 @@ class ToolFinderKeyword(BaseTool):
                 tool.pop("tfidf_score", None)
                 tool.pop("exact_match_bonus", None)
 
+            # Annotate with health status (optional — cache may not exist)
+            try:
+                from tooluniverse.tool_health import ToolHealthCache
+
+                _health_cache = ToolHealthCache()
+                for tool in matching_tools:
+                    name = tool.get("name", "")
+                    status = _health_cache.is_live(name)
+                    if status is False:
+                        tool["_health"] = "broken"
+                        tool["_health_warning"] = _health_cache.warn(name)
+                    elif status is True:
+                        tool["_health"] = "live"
+            except Exception:
+                pass
+
             has_more = (
                 total_scored > offset  # limit=0: items exist at this offset
                 if limit == 0
