@@ -6,6 +6,7 @@ from typing import Any, Optional, List
 # modules into the tooluniverse namespace even when the main package is
 # installed in editable mode (pip install -e).
 from pkgutil import extend_path
+
 __path__ = extend_path(__path__, __name__)
 
 from .execute_function import ToolUniverse
@@ -74,7 +75,9 @@ if not _LIGHT_IMPORT:
             search_enabled: bool = True,
             **kwargs: Any,
         ) -> SMCP:
-            raise ImportError("SMCP requires FastMCP. Install with: pip install fastmcp")
+            raise ImportError(
+                "SMCP requires FastMCP. Install with: pip install fastmcp"
+            )
 else:
     _SMCP_AVAILABLE = False
 

@@ -41,8 +41,12 @@ class TaskProgress:
         else:
             await self._update_task(message)
 
-    async def set_progress(self, current: int, total: int, message: Optional[str] = None) -> None:
+    async def set_progress(
+        self, current: int, total: int, message: Optional[str] = None
+    ) -> None:
         """Update progress with numeric values (e.g., 45 of 100)."""
         percentage = int((current / total) * 100) if total > 0 else 0
-        full_message = f"{message} ({percentage}%)" if message else f"{percentage}% complete"
+        full_message = (
+            f"{message} ({percentage}%)" if message else f"{percentage}% complete"
+        )
         await self.set_message(full_message)

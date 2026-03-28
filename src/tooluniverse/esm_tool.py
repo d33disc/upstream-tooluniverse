@@ -22,9 +22,7 @@ def _get_client(model: str):
     try:
         from esm.sdk.forge import ESM3ForgeInferenceClient
     except ImportError:
-        raise ImportError(
-            "esm package is required. Install with: pip install esm"
-        )
+        raise ImportError("esm package is required. Install with: pip install esm")
     token = os.environ.get("ESM_API_KEY", "")
     if not token:
         raise EnvironmentError(
@@ -101,7 +99,11 @@ class ESMTool(BaseTool):
             # mean pool over residue positions (exclude BOS/EOS tokens)
             import numpy as np
 
-            emb_np = embeddings.detach().cpu().numpy() if hasattr(embeddings, "detach") else embeddings
+            emb_np = (
+                embeddings.detach().cpu().numpy()
+                if hasattr(embeddings, "detach")
+                else embeddings
+            )
             mean_emb = emb_np[1:-1].mean(axis=0).tolist()
 
             result = {
@@ -256,6 +258,7 @@ class ESMTool(BaseTool):
             # ESM tokenizer: map each residue to its token id
             try:
                 from esm.utils.constants.esm3 import SEQUENCE_VOCAB
+
                 aa_to_idx = {aa: i for i, aa in enumerate(SEQUENCE_VOCAB)}
             except Exception:
                 aa_to_idx = {}

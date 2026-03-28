@@ -158,7 +158,7 @@ def _download_one(
 
     res = download_from_hf(cfg)
     if not res.get("success"):
-        error_msg = res.get('error', 'Unknown error')
+        error_msg = res.get("error", "Unknown error")
         # Make error message more helpful
         if "Repository Not Found" in error_msg or "404" in error_msg:
             error_msg = f"Repository '{repo}' not found on HuggingFace. Check that the repo exists and the name is correct. Error: {error_msg}"
@@ -173,9 +173,13 @@ def _download_one(
             # If mtime didn't change, HF fell back to cache (repo is unreachable/doesn't exist)
             if mtime_after == mtime_before:
                 if not overwrite:
-                    print(f" {local_target.name} already exists. Skipping (use --overwrite).")
+                    print(
+                        f" {local_target.name} already exists. Skipping (use --overwrite)."
+                    )
                 else:
-                    print(f" [WARNING] Repository '{repo}' is unreachable. Using local cache for {local_target.name}.")
+                    print(
+                        f" [WARNING] Repository '{repo}' is unreachable. Using local cache for {local_target.name}."
+                    )
                 return False, local_target  # file was not downloaded, using local cache
         return True, local_target  # successfully downloaded to correct location
 
@@ -245,7 +249,9 @@ def download(
                     target_path = DATA_DIR / filename
                     target_path.parent.mkdir(parents=True, exist_ok=True)
                     try:
-                        success, _ = _download_one(repo, filename, target_path, overwrite)
+                        success, _ = _download_one(
+                            repo, filename, target_path, overwrite
+                        )
                         if success:
                             print(f" Restored tool file: {filename}")
                         else:
@@ -259,7 +265,9 @@ def download(
     # (2) Download the DB
     # -------------------------------------------------
     try:
-        db_success, db_path = _download_one(repo, f"{collection}.db", dest_db, overwrite)
+        db_success, db_path = _download_one(
+            repo, f"{collection}.db", dest_db, overwrite
+        )
         if db_success:
             print(f" Restored {db_path.name} from {repo}")
             download_succeeded = True
@@ -273,7 +281,9 @@ def download(
     # (3) Download the FAISS index
     # -------------------------------------------------
     try:
-        faiss_success, faiss_path = _download_one(repo, f"{collection}.faiss", dest_faiss, overwrite)
+        faiss_success, faiss_path = _download_one(
+            repo, f"{collection}.faiss", dest_faiss, overwrite
+        )
         if faiss_success:
             print(f" Restored {faiss_path.name} from {repo}")
         else:

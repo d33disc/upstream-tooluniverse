@@ -20,7 +20,9 @@ from .validator import validate_with_schema
 
 def _is_github_repo_url(uri: str) -> bool:
     """Return True if ``uri`` looks like a GitHub repository URL (not a raw file)."""
-    if not (uri.startswith("https://github.com/") or uri.startswith("http://github.com/")):
+    if not (
+        uri.startswith("https://github.com/") or uri.startswith("http://github.com/")
+    ):
         return False
     # A repo URL has 2-3 path segments after the host: /user/repo[/tree/branch]
     # A raw file URL has more: /user/repo/raw/branch/file or /user/repo/blob/...
@@ -73,7 +75,9 @@ class ProfileLoader:
 
         # Validate and fill defaults on the fully merged config
         yaml_content = yaml.dump(config, default_flow_style=False, allow_unicode=True)
-        is_valid, errors, processed = validate_with_schema(yaml_content, fill_defaults_flag=True)
+        is_valid, errors, processed = validate_with_schema(
+            yaml_content, fill_defaults_flag=True
+        )
         if not is_valid:
             error_msg = "Configuration validation failed:\n" + "\n".join(
                 f"  - {e}" for e in errors
@@ -384,7 +388,11 @@ class ProfileLoader:
         """
         result = base.copy()
         for key, value in override.items():
-            if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+            if (
+                key in result
+                and isinstance(result[key], dict)
+                and isinstance(value, dict)
+            ):
                 result[key] = ProfileLoader._deep_merge(result[key], value)
             else:
                 result[key] = value

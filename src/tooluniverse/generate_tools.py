@@ -593,7 +593,9 @@ def main(
     tu = ToolUniverse()
     tu.load_tools()
 
-    output = Path(output_dir) if output_dir is not None else Path(__file__).parent / "tools"
+    output = (
+        Path(output_dir) if output_dir is not None else Path(__file__).parent / "tools"
+    )
     output.mkdir(parents=True, exist_ok=True)
     print(f"   Output → {output}")
 
