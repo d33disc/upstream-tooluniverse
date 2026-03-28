@@ -54,6 +54,13 @@
         "tool_name": "SystemProfiler",
         "focus_areas": "performance_metrics",
         "max_length": 500
+      },
+      {
+        "tool_output": "PubMed search returned 1247 articles. Top results: BRCA1 in triple-negative breast cancer (PMID: 37245789, cited 142 times), BRCA1 germline mutations in ovarian cancer (PMID: 37891234, cited 89 times).",
+        "query_context": "Summarize key PubMed findings on BRCA1 and cancer treatment.",
+        "tool_name": "PubMed_search_articles",
+        "focus_areas": "key_results",
+        "max_length": 300
       }
     ],
     "return_schema": {
@@ -118,6 +125,14 @@
         "chunk_size": 2000,
         "focus_areas": "key_findings_and_results",
         "max_summary_length": 3000
+      },
+      {
+        "tool_output": "Clinical trial NCT04185064 enrolled 342 patients with stage III non-small cell lung cancer. Primary endpoint: overall survival at 24 months was 48.3% (95% CI: 42.1-54.6%). Secondary endpoints included progression-free survival and quality of life scores.",
+        "query_context": "What are the key efficacy outcomes of this lung cancer clinical trial?",
+        "tool_name": "ClinicalTrials_search_studies",
+        "chunk_size": 1000,
+        "focus_areas": "efficacy_endpoints",
+        "max_summary_length": 500
       }
     ],
     "return_schema": {

@@ -1429,5 +1429,173 @@
     "tool": "OSF_search_preprints",
     "action": "skipped",
     "reason": "good: 3 examples"
+  },
+  {
+    "file": "output_summarization_tools.json",
+    "tool": "ToolOutputSummarizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "output_summarization_tools.json",
+    "tool": "OutputSummarizationComposer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oxo_tools.json",
+    "tool": "OxO_get_ontology_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oxo_tools.json",
+    "tool": "OxO_search_ontology_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "package_discovery_tools.json",
+    "tool": "dynamic_package_discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "paleobiology_tools.json",
+    "tool": "Paleobiology_get_fossils",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_search_panels",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_get_panel",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_search_genes",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_gene_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_enrichment",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_ortholog",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pathway_commons_tools.json",
+    "tool": "pc_search_pathways",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathway_commons_tools.json",
+    "tool": "pc_get_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_get_pathway",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_get_neighborhood",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdb_redo_tools.json",
+    "tool": "PDB_REDO_get_structure_quality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_quality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_publications",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_assemblies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_secondary_structure",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_molecules",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_related_publications",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_status",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_experiment",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_observed_residues_ratio",
+    "action": "skipped",
+    "reason": "good: 2 examples"
   }
 ]

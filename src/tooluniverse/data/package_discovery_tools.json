@@ -19,40 +19,74 @@
           "description": "Constraints (python version, license, etc.)"
         }
       },
-      "required": ["requirements"]
+      "required": [
+        "requirements"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "candidates": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "name": {"type": "string"},
-              "version": {"type": "string"},
-              "quality_score": {"type": "number"},
-              "reasoning": {"type": "string"},
-              "description": {"type": "string"},
-              "has_docs": {"type": "boolean"},
-              "is_stable": {"type": "boolean"}
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "quality_score": {
+                "type": "number"
+              },
+              "reasoning": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "has_docs": {
+                "type": "boolean"
+              },
+              "is_stable": {
+                "type": "boolean"
+              }
             }
           }
         },
-        "recommendation": {"type": "object"},
-        "total_evaluated": {"type": "integer"}
+        "recommendation": {
+          "type": "object"
+        },
+        "total_evaluated": {
+          "type": "integer"
+        }
       },
-      "required": ["status", "candidates"]
+      "required": [
+        "status",
+        "candidates"
+      ]
     },
     "test_examples": [
       {
         "requirements": "data analysis and visualization",
         "functionality": "create charts and graphs"
+      },
+      {
+        "requirements": "natural language processing and text classification",
+        "functionality": "train and evaluate text models",
+        "constraints": "must support Python 3.10+"
       }
     ],
     "metadata": {
-      "tags": ["package-discovery", "pypi", "dynamic"],
+      "tags": [
+        "package-discovery",
+        "pypi",
+        "dynamic"
+      ],
       "difficulty_level": "intermediate",
       "estimated_execution_time": "5-15 seconds"
     }
