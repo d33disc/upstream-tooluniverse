@@ -2048,5 +2048,124 @@
     "file": "interpro_entry_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_get_protein_domains",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_search_domains",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_get_domain_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_scan_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_get_job_status",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_get_job_results",
+    "action": "skipped",
+    "reason": "already has 1 example (job-based tool, limited testable examples)"
+  },
+  {
+    "file": "intervar_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "intogen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "iptmnet_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "itis_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "JASPAR_get_transcription_factors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_get_matrix",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_get_matrix_versions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_taxa",
+    "action": "skipped",
+    "reason": "no parameters - only 1 example possible"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_collections",
+    "action": "skipped",
+    "reason": "no parameters - only 1 example possible"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_releases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_search_matrices",
+    "action": "skipped",
+    "reason": "already has 2 examples"
+  },
+  {
+    "file": "jpl_horizons_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_brite_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
   }
 ]
