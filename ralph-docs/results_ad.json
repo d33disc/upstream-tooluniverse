@@ -1182,5 +1182,53 @@
     "action": "improved_examples",
     "old": "placeholder example_session_123456",
     "new": "realistic session IDs (abc123def456, dock_20240615_xyz789)"
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "skipped",
+    "reason": "API returned 403 Forbidden - tool may work when service is restored"
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_search_combos",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_drugs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_list_collections",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_immune_estimation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_gene_correlation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_survival_association",
+    "action": "added_examples",
+    "count": 2
   }
 ]
