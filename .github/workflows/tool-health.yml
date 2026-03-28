@@ -1,0 +1,132 @@
+name: Nightly Tool Health Check
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  health-check:
+    name: Tool Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install project
+        run: uv pip install -e . --system
+
+      - name: Fetch previous health report
+        run: |
+          git fetch origin health-report:refs/remotes/origin/health-report 2>/dev/null || true
+          git show origin/health-report:TOOL_HEALTH_REPORT.json \
+            > TOOL_HEALTH_REPORT.json 2>/dev/null \
+            || echo '{"generated":"","summary":{},"tools":{}}' > TOOL_HEALTH_REPORT.json
+
+      - name: Run health check
+        run: python scripts/tool_health_check.py
+        timeout-minutes: 45
+
+      - name: Write job summary
+        run: |
+          python - >> "$GITHUB_STEP_SUMMARY" <<'PYEOF'
+          import json, pathlib
+          r = json.loads(pathlib.Path("TOOL_HEALTH_REPORT.json").read_text())
+          s = r.get("summary", {})
+          lines = [
+              "## Tool Health Report",
+              f"Generated: `{r.get('generated', 'unknown')}`",
+              "",
+              "| Live | Broken | Tested | Known |",
+              "|------|--------|--------|-------|",
+              f"| {s.get('live','?')} | {s.get('broken','?')} | {s.get('total_tested','?')} | {s.get('total_known','?')} |",
+          ]
+          broken = sorted(
+              n for n, rec in r.get("tools", {}).items() if rec.get("status") == "broken"
+          )
+          if broken:
+              lines += ["", "### Broken tools", ""]
+              for name in broken[:50]:
+                  detail = r["tools"][name].get("detail", "")
+                  lines.append(f"- `{name}`: {detail}")
+              if len(broken) > 50:
+                  lines.append(f"- … and {len(broken) - 50} more")
+          print("\n".join(lines))
+          PYEOF
+
+      - name: Push report to health-report branch
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          cp TOOL_HEALTH_REPORT.json /tmp/health_report.json
+
+          if git show-ref --verify --quiet refs/remotes/origin/health-report; then
+            git checkout -B health-report origin/health-report
+          else
+            git checkout --orphan health-report
+            git rm -rf . --quiet
+          fi
+
+          cp /tmp/health_report.json TOOL_HEALTH_REPORT.json
+          git add TOOL_HEALTH_REPORT.json
+
+          if git diff --cached --quiet; then
+            echo "Report unchanged — nothing to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: tool health report $(date -u +%Y-%m-%d)"
+          git push origin health-report
+
+      - name: Create or update PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - > /tmp/pr_comment.txt <<'PYEOF'
+          import json, pathlib
+          r = json.loads(pathlib.Path("/tmp/health_report.json").read_text())
+          s = r.get("summary", {})
+          print(
+              f"**Health check {r.get('generated','?')}** — "
+              f"Live: {s.get('live','?')}, Broken: {s.get('broken','?')}, "
+              f"Tested: {s.get('total_tested','?')}/{s.get('total_known','?')}"
+          )
+          PYEOF
+
+          PR_URL=$(gh pr list \
+            --base main --head health-report \
+            --json url --jq '.[0].url' 2>/dev/null || true)
+
+          if [ -n "$PR_URL" ]; then
+            gh pr comment "$PR_URL" --body-file /tmp/pr_comment.txt
+            echo "Commented on PR: $PR_URL"
+          else
+            gh pr create \
+              --base main \
+              --head health-report \
+              --title "chore: nightly tool health report" \
+              --body "Automated nightly health check for all ToolUniverse tools with \`test_examples\`.
+
+          Each run tests all broken/unknown tools + a 10% random sample of passing tools.
+          The commit diff shows what changed since the previous run.
+
+          To re-test a specific tool locally: \`tu health <tool_name> --refresh\`"
+            echo "PR created."
+          fi
