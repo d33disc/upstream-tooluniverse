@@ -1244,5 +1244,14 @@
   {"file": "tcia_tools.json", "tool": "TCIA_get_body_part_values", "action": "added_examples", "count": 2},
   {"file": "tcia_tools.json", "tool": "TCIA_get_series_metadata", "action": "added_examples", "count": 2},
   {"file": "tcia_tools.json", "tool": "TCIA_get_series_size", "action": "added_examples", "count": 2},
-  {"file": "therasabdab_tools.json", "tool": "TheraSAbDab_get_all_therapeutics", "action": "added_examples", "count": 2}
+  {"file": "therasabdab_tools.json", "tool": "TheraSAbDab_get_all_therapeutics", "action": "added_examples", "count": 2},
+  {"file": "toolfinderkeyword_defaults.json", "tool": "toolfinderkeyword_defaults", "action": "improved_examples", "old": "empty {}", "new": "realistic search queries"},
+  {"file": "txagent_client_tools.json", "tool": "mcp_auto_loader_txagent", "action": "added_examples", "count": 2},
+  {"file": "umls_tools.json", "tool": "umls_search_concepts", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, hypertension queries"},
+  {"file": "umls_tools.json", "tool": "umls_get_concept_details", "action": "added_examples", "count": 2},
+  {"file": "umls_tools.json", "tool": "icd_search_codes", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, cancer queries"},
+  {"file": "umls_tools.json", "tool": "snomed_search_concepts", "action": "improved_examples", "old": "generic ML query", "new": "myocardial infarction, asthma"},
+  {"file": "umls_tools.json", "tool": "loinc_search_codes", "action": "improved_examples", "old": "generic ML query", "new": "HbA1c, blood pressure"},
+  {"file": "unichem_tools.json", "tool": "UniChem_list_sources", "action": "added_examples", "count": 2},
+  {"file": "tool_composition_tools.json", "tool": "ToolCompatibilityAnalyzer", "action": "added_examples", "count": 2}
 ]
