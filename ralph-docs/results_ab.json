@@ -2167,5 +2167,53 @@
     "file": "kegg_brite_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "l1000fwd_tools.json",
+    "tool": "L1000FWD_sig_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "IntentAnalyzerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR, PD-1 inhibitor research queries"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "KeywordExtractorAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR off-target detection context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "ResultSummarizerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR methods summary context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "QualityCheckerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "genome editing research context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "OverallSummaryAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR off-target detection summary"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "MultiAgentLiteratureSearch",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR, PD-1 inhibitor research queries"
   }
 ]
