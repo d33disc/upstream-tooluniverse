@@ -1860,5 +1860,161 @@
     "tool": "Dataverse_get_dataset",
     "action": "skipped",
     "reason": "already_good"
+  },
+  {
+    "file": "dbfetch_tools.json",
+    "tool": "dbfetch_fetch_entry",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbfetch_tools.json",
+    "tool": "dbfetch_fetch_batch",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbfetch_tools.json",
+    "tool": "dbfetch_list_databases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dbfetch_tools.json",
+    "tool": "dbfetch_list_formats",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dblp_tools.json",
+    "tool": "DBLP_search_publications",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbpedia_tools.json",
+    "tool": "DBpedia_SPARQL_query",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbsnp_tools.json",
+    "tool": "dbsnp_get_variant_by_rsid",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbsnp_tools.json",
+    "tool": "dbsnp_search_by_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dbsnp_tools.json",
+    "tool": "dbsnp_get_frequencies",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "deepgo_tools.json",
+    "tool": "DeepGO_predict_function",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "depmap_tools.json",
+    "tool": "DepMap_get_cell_lines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "depmap_tools.json",
+    "tool": "DepMap_get_cell_line",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "depmap_tools.json",
+    "tool": "DepMap_search_cell_lines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "depmap_tools.json",
+    "tool": "DepMap_get_gene_dependencies",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "depmap_tools.json",
+    "tool": "DepMap_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dfam_tools.json",
+    "tool": "Dfam_search_families",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dfam_tools.json",
+    "tool": "Dfam_get_family",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dfam_tools.json",
+    "tool": "Dfam_get_annotations",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dgidb_tools.json",
+    "tool": "DGIdb_get_drug_gene_interactions",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dgidb_tools.json",
+    "tool": "DGIdb_get_gene_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dgidb_tools.json",
+    "tool": "DGIdb_get_drug_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dgidb_tools.json",
+    "tool": "DGIdb_get_gene_druggability",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "disease_ontology_tools.json",
+    "tool": "DiseaseOntology_get_term",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "disease_ontology_tools.json",
+    "tool": "DiseaseOntology_get_parents",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "disease_sh_ext_tools.json",
+    "tool": "DiseaseSH_get_covid_historical",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "disease_sh_ext_tools.json",
+    "tool": "DiseaseSH_get_vaccine_coverage",
+    "action": "skipped",
+    "reason": "already_good"
   }
 ]
