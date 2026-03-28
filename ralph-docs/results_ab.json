@@ -2215,5 +2215,45 @@
     "action": "improved_examples",
     "old": "placeholder values",
     "new": "CRISPR, PD-1 inhibitor research queries"
+  },
+  {
+    "file": "kegg_conv_link_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_disease_drug_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_network_variant_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "klifs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lincs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lipidmaps_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
   }
 ]
