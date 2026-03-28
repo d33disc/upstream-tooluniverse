@@ -1354,5 +1354,33 @@
     "tool": "Foldseek_get_result",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_search_data",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_file_metadata",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_experiment_metadata",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_download_url",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
   }
 ]
