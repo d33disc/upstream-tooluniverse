@@ -462,5 +462,168 @@
     "tool": "scite_get_tallies",
     "action": "skipped",
     "reason": "existing examples already strong"
+  },
+  {
+    "file": "screen_tools.json",
+    "tool": "SCREEN_get_regulatory_elements",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scxa_tools.json",
+    "tool": "SCXA_list_experiments",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scxa_tools.json",
+    "tool": "SCXA_search_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sdss_tools.json",
+    "tool": "SDSS_sql_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sec_edgar_tools.json",
+    "tool": "SEC_EDGAR_search_filings",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sec_edgar_tools.json",
+    "tool": "SEC_EDGAR_get_company_submissions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_paper",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_search_authors",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_author",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_recommendations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_tools.json",
+    "tool": "SemanticScholar_search_papers",
+    "action": "improved_examples",
+    "old": "1 generic example (machine learning optimization)",
+    "new": "3 realistic examples (CRISPR, TP53, mRNA vaccine)"
+  },
+  {
+    "file": "semantic_scholar_tools.json",
+    "tool": "SemanticScholar_get_pdf_snippets",
+    "action": "skipped",
+    "reason": "no test_examples in tool config"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_go_annotations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_search_drug",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drug_side_effects",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drug_indications",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drugs_for_side_effect",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_search_side_effect",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_get_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_list_pathways",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_get_pathway",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "simbad_tools.json",
+    "tool": "SIMBAD_query_object",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "simbad_tools.json",
+    "tool": "SIMBAD_advanced_query",
+    "action": "skipped",
+    "reason": "existing examples already strong"
   }
 ]
