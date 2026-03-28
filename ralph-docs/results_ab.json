@@ -1551,5 +1551,203 @@
     "file": "gmrepo_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_search_terms",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_term_details",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_term_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_genes_for_term",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_annotations_for_gene",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_protein",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_list_proteins",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_ligands",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_mutations",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_median_gene_expression",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_tissue_sites",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_eqtl_genes",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_single_tissue_eqtls",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_calculate_eqtl",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_top_expressed_genes",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_dataset_info",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_gene_expression",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_sample_info",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_multi_tissue_eqtls",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_sumstats_tools.json",
+    "tool": "GWASSumStats_list_studies",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_associations",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_studies",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_snps",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_association_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_study_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_snp_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_variants_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_snp",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_studies_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_snps_for_gene",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_study",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "GWAS_search_associations_by_gene",
+    "action": "added_examples",
+    "count": "2-3"
   }
 ]
