@@ -53,138 +53,116 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Analysis token for retrieving results later"
-                },
-                "analysis_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "OVERREPRESENTATION or EXPRESSION"
-                },
-                "projection": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ],
-                  "description": "Whether projection was applied"
-                },
-                "identifiers_not_found": {
-                  "type": "integer",
-                  "description": "Count of unmatched identifiers"
-                },
-                "pathways_found": {
-                  "type": "integer",
-                  "description": "Total enriched pathways"
-                },
-                "pathways": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "pathway_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "species": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "is_disease": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
-                      },
-                      "is_lowest_level": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
-                      },
-                      "entities_found": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "entities_total": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "entities_ratio": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "p_value": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "fdr": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "reactions_found": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "reactions_total": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      }
-                    }
+            "token": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Analysis token for retrieving results later"
+            },
+            "analysis_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "OVERREPRESENTATION or EXPRESSION"
+            },
+            "projection": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Whether projection was applied"
+            },
+            "identifiers_not_found": {
+              "type": "integer",
+              "description": "Count of unmatched identifiers"
+            },
+            "pathways_found": {
+              "type": "integer",
+              "description": "Total enriched pathways"
+            },
+            "pathways": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pathway_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "species": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "is_disease": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "is_lowest_level": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "entities_found": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "entities_total": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "entities_ratio": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "p_value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "fdr": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "reactions_found": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "reactions_total": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_pathways": {
-                  "type": "integer"
-                },
-                "returned": {
-                  "type": "integer"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -247,121 +225,99 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "analysis_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "projection": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "identifiers_not_found": {
-                  "type": "integer"
-                },
-                "pathways_found": {
-                  "type": "integer"
-                },
-                "pathways": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "pathway_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "species": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "is_disease": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
-                      },
-                      "entities_found": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "entities_total": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "p_value": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "fdr": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "reactions_found": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "reactions_total": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      }
-                    }
+            "token": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "analysis_type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "projection": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "identifiers_not_found": {
+              "type": "integer"
+            },
+            "pathways_found": {
+              "type": "integer"
+            },
+            "pathways": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pathway_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "species": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "is_disease": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "entities_found": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "entities_total": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "p_value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "fdr": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "reactions_found": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "reactions_total": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_pathways": {
-                  "type": "integer"
-                },
-                "returned": {
-                  "type": "integer"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -418,45 +374,34 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "analysis_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "projection": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "identifiers_not_found": {
-                  "type": "integer"
-                },
-                "pathways_found": {
-                  "type": "integer"
-                },
-                "pathways": {
-                  "type": "array"
-                }
-              }
+            "token": {
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            "metadata": {
-              "type": "object"
+            "analysis_type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "projection": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "identifiers_not_found": {
+              "type": "integer"
+            },
+            "pathways_found": {
+              "type": "integer"
+            },
+            "pathways": {
+              "type": "array"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

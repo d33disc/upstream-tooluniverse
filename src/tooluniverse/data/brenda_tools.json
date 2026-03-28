@@ -33,22 +33,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "ec_number": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "ec_number": {
-              "type": "string"
-            },
-            "km_values": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "km_values": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -99,22 +91,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "ec_number": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "ec_number": {
-              "type": "string"
-            },
-            "kcat_values": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "kcat_values": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -165,19 +149,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "inhibitors": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "inhibitors": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -223,19 +199,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "ec_number": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "ec_number": {
-              "type": "string"
-            },
-            "info": {
-              "type": "array"
-            }
-          }
+        "info": {
+          "type": "array"
         }
       }
     },

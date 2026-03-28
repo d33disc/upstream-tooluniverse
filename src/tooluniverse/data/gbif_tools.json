@@ -15,7 +15,7 @@
           "default": 10,
           "minimum": 1,
           "maximum": 300,
-          "description": "Maximum number of results to return (1–300)."
+          "description": "Maximum number of results to return (1\u2013300)."
         },
         "offset": {
           "type": "integer",
@@ -24,7 +24,9 @@
           "description": "Result offset for pagination (0-based)."
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "https://api.gbif.org/v1/species/search",
@@ -34,40 +36,69 @@
       "type": "object",
       "description": "GBIF species search response",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "count": {"type": "integer"},
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "key": {"type": "integer", "description": "taxonKey"},
-                  "scientificName": {"type": "string"},
-                  "rank": {"type": "string"},
-                  "kingdom": {"type": "string"},
-                  "phylum": {"type": "string"},
-                  "class": {"type": "string"},
-                  "order": {"type": "string"},
-                  "family": {"type": "string"},
-                  "genus": {"type": "string"}
-                }
+        "count": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "integer",
+                "description": "taxonKey"
+              },
+              "scientificName": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "string"
+              },
+              "kingdom": {
+                "type": "string"
+              },
+              "phylum": {
+                "type": "string"
+              },
+              "class": {
+                "type": "string"
+              },
+              "order": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "genus": {
+                "type": "string"
               }
             }
           }
-        },
-        "url": {"type": "string"}
+        }
       }
     },
     "test_examples": [
-      {"query": "Homo", "limit": 1},
-      {"query": "Gadus", "limit": 1}
+      {
+        "query": "Homo",
+        "limit": 1
+      },
+      {
+        "query": "Gadus",
+        "limit": 1
+      }
     ],
-    "label": ["GBIF", "Taxonomy", "Search"],
+    "label": [
+      "GBIF",
+      "Taxonomy",
+      "Search"
+    ],
     "metadata": {
-      "tags": ["biodiversity", "taxonomy", "species", "search"],
+      "tags": [
+        "biodiversity",
+        "taxonomy",
+        "species",
+        "search"
+      ],
       "estimated_execution_time": "< 2 seconds"
     }
   },
@@ -96,7 +127,7 @@
           "default": 10,
           "minimum": 1,
           "maximum": 300,
-          "description": "Maximum number of results to return (1–300)."
+          "description": "Maximum number of results to return (1\u2013300)."
         },
         "offset": {
           "type": "integer",
@@ -114,38 +145,62 @@
       "type": "object",
       "description": "GBIF occurrence search response",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "count": {"type": "integer"},
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "key": {"type": "integer"},
-                  "speciesKey": {"type": "integer"},
-                  "scientificName": {"type": "string"},
-                  "decimalLatitude": {"type": "number"},
-                  "decimalLongitude": {"type": "number"},
-                  "eventDate": {"type": "string"},
-                  "countryCode": {"type": "string"}
-                }
+        "count": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "integer"
+              },
+              "speciesKey": {
+                "type": "integer"
+              },
+              "scientificName": {
+                "type": "string"
+              },
+              "decimalLatitude": {
+                "type": "number"
+              },
+              "decimalLongitude": {
+                "type": "number"
+              },
+              "eventDate": {
+                "type": "string"
+              },
+              "countryCode": {
+                "type": "string"
               }
             }
           }
-        },
-        "url": {"type": "string"}
+        }
       }
     },
     "test_examples": [
-      {"hasCoordinate": true, "limit": 1},
-      {"country": "US", "limit": 1}
+      {
+        "hasCoordinate": true,
+        "limit": 1
+      },
+      {
+        "country": "US",
+        "limit": 1
+      }
     ],
-    "label": ["GBIF", "Occurrence", "Geospatial"],
+    "label": [
+      "GBIF",
+      "Occurrence",
+      "Geospatial"
+    ],
     "metadata": {
-      "tags": ["biodiversity", "occurrence", "distribution", "geospatial"],
+      "tags": [
+        "biodiversity",
+        "occurrence",
+        "distribution",
+        "geospatial"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   }

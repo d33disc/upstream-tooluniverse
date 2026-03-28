@@ -156,88 +156,72 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "description": "iNaturalist taxon ID"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Scientific name"
-                },
-                "common_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Preferred common name"
-                },
-                "rank": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Taxonomic rank"
-                },
-                "observations_count": {
-                  "type": "integer",
-                  "description": "Total observations"
-                },
-                "is_active": {
-                  "type": "boolean",
-                  "description": "Currently accepted taxon"
-                },
-                "conservation_status": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "IUCN status"
-                },
-                "wikipedia_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Wikipedia article URL"
-                },
-                "ancestry": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "rank": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "id": {
-                        "type": "integer"
-                      }
-                    }
-                  },
-                  "description": "Taxonomic lineage from kingdom to species"
-                }
-              }
+            "id": {
+              "type": "integer",
+              "description": "iNaturalist taxon ID"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
+            "name": {
+              "type": "string",
+              "description": "Scientific name"
+            },
+            "common_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Preferred common name"
+            },
+            "rank": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Taxonomic rank"
+            },
+            "observations_count": {
+              "type": "integer",
+              "description": "Total observations"
+            },
+            "is_active": {
+              "type": "boolean",
+              "description": "Currently accepted taxon"
+            },
+            "conservation_status": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "IUCN status"
+            },
+            "wikipedia_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Wikipedia article URL"
+            },
+            "ancestry": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "rank": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
                 }
-              }
+              },
+              "description": "Taxonomic lineage from kingdom to species"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

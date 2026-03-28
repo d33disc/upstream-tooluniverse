@@ -234,136 +234,114 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "comp_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Chemical component identifier"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Chemical name"
-                },
-                "formula": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Molecular formula"
-                },
-                "formula_weight": {
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "description": "Molecular weight in Da"
-                },
-                "type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Component type (non-polymer, peptide-like, etc.)"
-                },
-                "parent_comp_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Parent component if modified residue"
-                },
-                "inchikey": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "InChIKey structural identifier"
-                },
-                "smiles": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "SMILES chemical notation"
-                },
-                "initial_release_date": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Date first released in PDB"
-                },
-                "targets": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Target protein name"
-                      },
-                      "actions": {
-                        "type": [
-                          "array",
-                          "null"
-                        ],
-                        "description": "Target actions (inhibitor, substrate, etc.)"
-                      },
-                      "provenance": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Data source (e.g., DrugBank)"
-                      },
-                      "accession": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Target accession (e.g., UniProt ID)"
-                      },
-                      "database": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Reference database name"
-                      }
-                    }
-                  },
-                  "description": "Known drug targets for this compound"
-                }
-              }
+            "comp_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Chemical component identifier"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "comp_id": {
-                  "type": "string"
-                },
-                "target_count": {
-                  "type": "integer"
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Chemical name"
+            },
+            "formula": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Molecular formula"
+            },
+            "formula_weight": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Molecular weight in Da"
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Component type (non-polymer, peptide-like, etc.)"
+            },
+            "parent_comp_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Parent component if modified residue"
+            },
+            "inchikey": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "InChIKey structural identifier"
+            },
+            "smiles": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "SMILES chemical notation"
+            },
+            "initial_release_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Date first released in PDB"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Target protein name"
+                  },
+                  "actions": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "description": "Target actions (inhibitor, substrate, etc.)"
+                  },
+                  "provenance": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Data source (e.g., DrugBank)"
+                  },
+                  "accession": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Target accession (e.g., UniProt ID)"
+                  },
+                  "database": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Reference database name"
+                  }
                 }
-              }
+              },
+              "description": "Known drug targets for this compound"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

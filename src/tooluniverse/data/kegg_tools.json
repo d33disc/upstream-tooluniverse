@@ -120,31 +120,17 @@
       "type": "object",
       "description": "KEGG pathway information",
       "properties": {
-        "status": {
+        "pathway_id": {
           "type": "string",
-          "description": "Status of the request"
+          "description": "KEGG pathway identifier"
         },
-        "data": {
-          "type": "object",
-          "description": "Pathway information",
-          "properties": {
-            "pathway_id": {
-              "type": "string",
-              "description": "KEGG pathway identifier"
-            },
-            "raw_data": {
-              "type": "string",
-              "description": "Raw pathway data from KEGG"
-            },
-            "line_count": {
-              "type": "integer",
-              "description": "Number of data lines"
-            }
-          }
-        },
-        "url": {
+        "raw_data": {
           "type": "string",
-          "description": "API URL used"
+          "description": "Raw pathway data from KEGG"
+        },
+        "line_count": {
+          "type": "integer",
+          "description": "Number of data lines"
         }
       }
     },
@@ -298,31 +284,17 @@
       "type": "object",
       "description": "KEGG gene information",
       "properties": {
-        "status": {
+        "gene_id": {
           "type": "string",
-          "description": "Status of the request"
+          "description": "KEGG gene identifier"
         },
-        "data": {
-          "type": "object",
-          "description": "Gene information",
-          "properties": {
-            "gene_id": {
-              "type": "string",
-              "description": "KEGG gene identifier"
-            },
-            "raw_data": {
-              "type": "string",
-              "description": "Raw gene data from KEGG"
-            },
-            "line_count": {
-              "type": "integer",
-              "description": "Number of data lines"
-            }
-          }
-        },
-        "url": {
+        "raw_data": {
           "type": "string",
-          "description": "API URL used"
+          "description": "Raw gene data from KEGG"
+        },
+        "line_count": {
+          "type": "integer",
+          "description": "Number of data lines"
         }
       }
     },

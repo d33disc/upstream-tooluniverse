@@ -35,44 +35,39 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "associatedTargets": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "associatedTargets": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "target": {
                         "type": "object",
                         "properties": {
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "score": {
-                            "type": "number"
+                          "approvedSymbol": {
+                            "type": "string"
                           }
                         }
+                      },
+                      "score": {
+                        "type": "number"
                       }
                     }
                   }
@@ -120,52 +115,47 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "associatedDiseases": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "associatedDiseases": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "datasourceScores": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "score": {
-                                  "type": "number"
-                                }
-                              }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "datasourceScores": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "number"
                             }
                           }
                         }
@@ -228,25 +218,20 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "evidences": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "evidences": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    }
-                  }
+                "count": {
+                  "type": "integer"
                 }
               }
             }
@@ -323,42 +308,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "evidences": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "evidences": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "datasourceId": {
-                            "type": "string"
-                          },
-                          "datatypeId": {
-                            "type": "string"
-                          },
-                          "score": {
-                            "type": "number"
-                          },
-                          "literature": {
-                            "type": "array"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "datatypeId": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "number"
+                      },
+                      "literature": {
+                        "type": "array"
                       }
                     }
                   }
@@ -409,19 +389,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
             }
           }
         }
@@ -465,47 +440,42 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "mechanismsOfAction": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "mechanismsOfAction": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "mechanismOfAction": {
-                            "type": "string"
-                          },
-                          "actionType": {
-                            "type": "string"
-                          },
-                          "targetName": {
-                            "type": "string"
-                          },
-                          "targets": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "approvedSymbol": {
-                                  "type": "string"
-                                }
-                              }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "actionType": {
+                        "type": "string"
+                      },
+                      "targetName": {
+                        "type": "string"
+                      },
+                      "targets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "approvedSymbol": {
+                              "type": "string"
                             }
                           }
                         }
@@ -555,71 +525,66 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "drugAndClinicalCandidates": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "drugAndClinicalCandidates": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "drug": {
                         "type": "object",
                         "properties": {
-                          "drug": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "tradeNames": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              },
-                              "maximumClinicalTrialPhase": {
-                                "type": "integer"
-                              },
-                              "isApproved": {
-                                "type": "boolean"
-                              },
-                              "hasBeenWithdrawn": {
-                                "type": "boolean"
-                              }
-                            }
-                          },
-                          "maxClinicalStage": {
-                            "type": "integer"
-                          },
-                          "mechanismOfAction": {
+                          "id": {
                             "type": "string"
                           },
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
+                          "name": {
+                            "type": "string"
+                          },
+                          "tradeNames": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
                             }
+                          },
+                          "maximumClinicalTrialPhase": {
+                            "type": "integer"
+                          },
+                          "isApproved": {
+                            "type": "boolean"
+                          },
+                          "hasBeenWithdrawn": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "maxClinicalStage": {
+                        "type": "integer"
+                      },
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "target": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "approvedSymbol": {
+                            "type": "string"
                           }
                         }
                       }
@@ -683,42 +648,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "similarEntities": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "similarEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "integer"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
                         "type": "string"
                       },
-                      "category": {
+                      "name": {
                         "type": "string"
-                      },
-                      "score": {
-                        "type": "integer"
-                      },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -780,42 +740,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "similarEntities": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "similarEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "integer"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
                         "type": "string"
                       },
-                      "category": {
+                      "name": {
                         "type": "string"
-                      },
-                      "score": {
-                        "type": "integer"
-                      },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -877,42 +832,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "similarEntities": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "similarEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
                         "type": "string"
                       },
-                      "category": {
+                      "approvedSymbol": {
                         "type": "string"
-                      },
-                      "score": {
-                        "type": "number"
-                      },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "approvedSymbol": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -960,39 +910,34 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "phenotypes": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "phenotypes": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "phenotypeHPO": {
                         "type": "object",
                         "properties": {
-                          "phenotypeHPO": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
                           }
                         }
                       }
@@ -1165,19 +1110,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
+            "aggregations": {
               "type": "object",
               "properties": {
-                "aggregations": {
-                  "type": "object",
-                  "properties": {
-                    "total": {
-                      "type": "integer"
-                    }
-                  }
+                "total": {
+                  "type": "integer"
                 }
               }
             }
@@ -1223,27 +1163,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1289,27 +1224,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1355,27 +1285,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1421,49 +1346,44 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "indications": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "indications": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "maxPhaseForIndication": {
-                            "type": "number"
-                          },
-                          "references": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "source": {
-                                  "type": "string"
-                                }
-                              }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "maxPhaseForIndication": {
+                        "type": "number"
+                      },
+                      "references": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string"
                             }
                           }
                         }
@@ -1512,42 +1432,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "geneOntology": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "geneOntology": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "aspect": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "geneProduct": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "term": {
                     "type": "object",
                     "properties": {
-                      "aspect": {
+                      "id": {
                         "type": "string"
-                      },
-                      "evidence": {
-                        "type": "string"
-                      },
-                      "geneProduct": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      },
-                      "term": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -1593,48 +1508,43 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "homologues": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "homologyType": {
-                        "type": "string"
-                      },
-                      "queryPercentageIdentity": {
-                        "type": "number"
-                      },
-                      "speciesId": {
-                        "type": "string"
-                      },
-                      "speciesName": {
-                        "type": "string"
-                      },
-                      "targetGeneId": {
-                        "type": "string"
-                      },
-                      "targetGeneSymbol": {
-                        "type": "string"
-                      },
-                      "targetPercentageIdentity": {
-                        "type": "number"
-                      },
-                      "isHighConfidence": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "homologues": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "homologyType": {
+                    "type": "string"
+                  },
+                  "queryPercentageIdentity": {
+                    "type": "number"
+                  },
+                  "speciesId": {
+                    "type": "string"
+                  },
+                  "speciesName": {
+                    "type": "string"
+                  },
+                  "targetGeneId": {
+                    "type": "string"
+                  },
+                  "targetGeneSymbol": {
+                    "type": "string"
+                  },
+                  "targetPercentageIdentity": {
+                    "type": "number"
+                  },
+                  "isHighConfidence": {
+                    "type": "string"
                   }
                 }
               }
@@ -1680,50 +1590,45 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "safetyLiabilities": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "event": {
-                        "type": "string"
-                      },
-                      "eventId": {
-                        "type": "string"
-                      },
-                      "studies": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "type": "string"
-                            },
-                            "type": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            }
-                          }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "safetyLiabilities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "type": "string"
+                  },
+                  "eventId": {
+                    "type": "string"
+                  },
+                  "studies": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
                         }
-                      },
-                      "datasource": {
-                        "type": "string"
                       }
                     }
+                  },
+                  "datasource": {
+                    "type": "string"
                   }
                 }
               }
@@ -1767,35 +1672,30 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "mousePhenotypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "biologicalModels": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "allelicComposition": {
-                              "type": "string"
-                            },
-                            "geneticBackground": {
-                              "type": "string"
-                            }
-                          }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "mousePhenotypes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "biologicalModels": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "allelicComposition": {
+                          "type": "string"
+                        },
+                        "geneticBackground": {
+                          "type": "string"
                         }
                       }
                     }
@@ -1842,34 +1742,29 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "genomicLocation": {
               "type": "object",
               "properties": {
-                "id": {
+                "chromosome": {
                   "type": "string"
                 },
-                "approvedSymbol": {
-                  "type": "string"
+                "start": {
+                  "type": "integer"
                 },
-                "genomicLocation": {
-                  "type": "object",
-                  "properties": {
-                    "chromosome": {
-                      "type": "string"
-                    },
-                    "start": {
-                      "type": "integer"
-                    },
-                    "end": {
-                      "type": "integer"
-                    },
-                    "strand": {
-                      "type": "integer"
-                    }
-                  }
+                "end": {
+                  "type": "integer"
+                },
+                "strand": {
+                  "type": "integer"
                 }
               }
             }
@@ -1915,36 +1810,31 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "subcellularLocations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "location": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      },
-                      "termSL": {
-                        "type": "string"
-                      },
-                      "labelSL": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "subcellularLocations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "termSL": {
+                    "type": "string"
+                  },
+                  "labelSL": {
+                    "type": "string"
                   }
                 }
               }
@@ -1988,58 +1878,53 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
-                },
-                "symbolSynonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+                }
+              }
+            },
+            "symbolSynonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
-                },
-                "nameSynonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+                }
+              }
+            },
+            "nameSynonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
                 }
               }
@@ -2084,33 +1969,28 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "tractability": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "modality": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "boolean"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "tractability": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "modality": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -2154,33 +2034,28 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "targetClass": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "label": {
-                        "type": "string"
-                      },
-                      "level": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "targetClass": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
                   }
                 }
               }
@@ -2224,19 +2099,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
             }
           }
         }
@@ -2449,36 +2319,31 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "ancestors": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "ancestors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parents": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
                     "type": "string"
-                  }
-                },
-                "parents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -2522,36 +2387,31 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "descendants": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "descendants": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
                     "type": "string"
-                  }
-                },
-                "children": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -2595,19 +2455,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
             }
           }
         }
@@ -2648,32 +2503,27 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "relation": {
-                        "type": "string"
-                      },
-                      "terms": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "relation": {
+                    "type": "string"
+                  },
+                  "terms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
                   }
                 }
@@ -2718,31 +2568,26 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dbXRefs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isTherapeuticArea": {
-                  "type": "boolean"
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dbXRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
+            },
+            "isTherapeuticArea": {
+              "type": "boolean"
             }
           }
         }
@@ -2783,30 +2628,25 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "therapeuticAreas": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "therapeuticAreas": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -3024,123 +2864,118 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "drugAndClinicalCandidates": {
               "type": "object",
               "properties": {
-                "id": {
+                "uniqueDrugs": {
+                  "type": "integer"
+                },
+                "uniqueDiseases": {
+                  "type": "integer"
+                },
+                "uniqueTargets": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "cursor": {
                   "type": "string"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "drugAndClinicalCandidates": {
-                  "type": "object",
-                  "properties": {
-                    "uniqueDrugs": {
-                      "type": "integer"
-                    },
-                    "uniqueDiseases": {
-                      "type": "integer"
-                    },
-                    "uniqueTargets": {
-                      "type": "integer"
-                    },
-                    "count": {
-                      "type": "integer"
-                    },
-                    "cursor": {
-                      "type": "string"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "approvedSymbol": {
-                            "type": "string"
-                          },
-                          "approvedName": {
-                            "type": "string"
-                          },
-                          "label": {
-                            "type": "string"
-                          },
-                          "prefName": {
-                            "type": "string"
-                          },
-                          "drugType": {
-                            "type": "string"
-                          },
-                          "targetId": {
-                            "type": "string"
-                          },
-                          "diseaseId": {
-                            "type": "string"
-                          },
-                          "drugId": {
-                            "type": "string"
-                          },
-                          "maxClinicalStage": {
-                            "type": "integer"
-                          },
-                          "mechanismOfAction": {
-                            "type": "string"
-                          },
-                          "targetClass": {
-                            "type": "array",
-                            "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "approvedSymbol": {
+                        "type": "string"
+                      },
+                      "approvedName": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "prefName": {
+                        "type": "string"
+                      },
+                      "drugType": {
+                        "type": "string"
+                      },
+                      "targetId": {
+                        "type": "string"
+                      },
+                      "diseaseId": {
+                        "type": "string"
+                      },
+                      "drugId": {
+                        "type": "string"
+                      },
+                      "maxClinicalStage": {
+                        "type": "integer"
+                      },
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "targetClass": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "urls": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string"
+                            },
+                            "name": {
                               "type": "string"
                             }
+                          }
+                        }
+                      },
+                      "disease": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "urls": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "url": {
-                                  "type": "string"
-                                },
-                                "name": {
-                                  "type": "string"
-                                }
-                              }
-                            }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "target": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "approvedSymbol": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "drug": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "drug": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -3191,30 +3026,25 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "childMolecules": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "childMolecules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -3258,39 +3088,34 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "indications": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "indications": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -3338,45 +3163,40 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "yearOfFirstApproval": {
-                  "type": "integer"
-                },
-                "drugType": {
-                  "type": "string"
-                },
-                "crossReferences": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "source": {
-                        "type": "string"
-                      },
-                      "ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "yearOfFirstApproval": {
+              "type": "integer"
+            },
+            "drugType": {
+              "type": "string"
+            },
+            "crossReferences": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
                   }
-                },
-                "maximumClinicalTrialPhase": {
-                  "type": "integer"
                 }
               }
+            },
+            "maximumClinicalTrialPhase": {
+              "type": "integer"
             }
           }
         }
@@ -3417,24 +3237,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3476,24 +3291,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "tradeNames": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "tradeNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3521,36 +3331,30 @@
       "type": "object",
       "description": "Drug name information including generic name, trade names, and synonyms",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
-          "description": "GraphQL response data",
+          "description": "Drug information object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "description": "Drug information object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "ChEMBL ID of the drug"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Drug name, typically the generic name or preferred name"
-                },
-                "tradeNames": {
-                  "type": "array",
-                  "description": "List of trade names (brand names) for the drug",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "synonyms": {
-                  "type": "array",
-                  "description": "List of synonyms for the drug, which may include alternative generic names and other identifiers",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string",
+              "description": "ChEMBL ID of the drug"
+            },
+            "name": {
+              "type": "string",
+              "description": "Drug name, typically the generic name or preferred name"
+            },
+            "tradeNames": {
+              "type": "array",
+              "description": "List of trade names (brand names) for the drug",
+              "items": {
+                "type": "string"
+              }
+            },
+            "synonyms": {
+              "type": "array",
+              "description": "List of synonyms for the drug, which may include alternative generic names and other identifiers",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3610,22 +3414,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "isApproved": {
-                  "type": "boolean"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "isApproved": {
+              "type": "boolean"
             }
           }
         }
@@ -3779,58 +3578,50 @@
           "type": "object",
           "description": "GraphQL response with drug pharmacogenomics data",
           "properties": {
-            "data": {
+            "drug": {
               "type": "object",
               "properties": {
-                "drug": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "pharmacogenomics": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "datasourceId": {
-                            "type": "string"
-                          },
-                          "evidenceLevel": {
-                            "type": "string"
-                          },
-                          "genotype": {
-                            "type": "string"
-                          },
-                          "genotypeAnnotationText": {
-                            "type": "string"
-                          },
-                          "pgxCategory": {
-                            "type": "string"
-                          },
-                          "phenotypeText": {
-                            "type": "string"
-                          },
-                          "variantRsId": {
-                            "type": "string"
-                          },
-                          "isDirectTarget": {
-                            "type": "boolean"
-                          }
-                        }
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "pharmacogenomics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "evidenceLevel": {
+                        "type": "string"
+                      },
+                      "genotype": {
+                        "type": "string"
+                      },
+                      "genotypeAnnotationText": {
+                        "type": "string"
+                      },
+                      "pgxCategory": {
+                        "type": "string"
+                      },
+                      "phenotypeText": {
+                        "type": "string"
+                      },
+                      "variantRsId": {
+                        "type": "string"
+                      },
+                      "isDirectTarget": {
+                        "type": "boolean"
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "null",
@@ -3875,65 +3666,60 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "drugAndClinicalCandidates": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "drugAndClinicalCandidates": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "drug": {
                         "type": "object",
                         "properties": {
-                          "drug": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "maximumClinicalTrialPhase": {
-                                "type": "integer"
-                              },
-                              "isApproved": {
-                                "type": "boolean"
-                              },
-                              "hasBeenWithdrawn": {
-                                "type": "boolean"
-                              }
-                            }
-                          },
-                          "maxClinicalStage": {
+                          "id": {
                             "type": "string"
                           },
-                          "mechanismOfAction": {
+                          "name": {
                             "type": "string"
                           },
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "maximumClinicalTrialPhase": {
+                            "type": "integer"
+                          },
+                          "isApproved": {
+                            "type": "boolean"
+                          },
+                          "hasBeenWithdrawn": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "maxClinicalStage": {
+                        "type": "string"
+                      },
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "disease": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -3982,39 +3768,34 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "linkedDiseases": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "linkedDiseases": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": "string"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
                       }
                     }
                   }
@@ -4061,39 +3842,34 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "linkedTargets": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "linkedTargets": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "approvedSymbol": {
-                            "type": "string"
-                          },
-                          "approvedName": {
-                            "type": "string"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "approvedSymbol": {
+                        "type": "string"
+                      },
+                      "approvedName": {
+                        "type": "string"
                       }
                     }
                   }
@@ -4464,45 +4240,40 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "geneticConstraint": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "constraintType": {
-                        "type": "string"
-                      },
-                      "exp": {
-                        "type": "number"
-                      },
-                      "obs": {
-                        "type": "integer"
-                      },
-                      "oe": {
-                        "type": "number"
-                      },
-                      "oeLower": {
-                        "type": "number"
-                      },
-                      "oeUpper": {
-                        "type": "number"
-                      },
-                      "score": {
-                        "type": "number"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "geneticConstraint": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "constraintType": {
+                    "type": "string"
+                  },
+                  "exp": {
+                    "type": "number"
+                  },
+                  "obs": {
+                    "type": "integer"
+                  },
+                  "oe": {
+                    "type": "number"
+                  },
+                  "oeLower": {
+                    "type": "number"
+                  },
+                  "oeUpper": {
+                    "type": "number"
+                  },
+                  "score": {
+                    "type": "number"
                   }
                 }
               }
@@ -5159,27 +4930,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }

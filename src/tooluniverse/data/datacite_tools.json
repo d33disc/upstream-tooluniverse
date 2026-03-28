@@ -35,149 +35,144 @@
           "type": "object",
           "description": "DataCite DOI metadata",
           "properties": {
-            "data": {
+            "id": {
+              "type": "string",
+              "description": "The DOI"
+            },
+            "type": {
+              "type": "string",
+              "description": "Record type (e.g., 'dois')"
+            },
+            "attributes": {
               "type": "object",
               "properties": {
-                "id": {
+                "doi": {
                   "type": "string",
                   "description": "The DOI"
                 },
-                "type": {
-                  "type": "string",
-                  "description": "Record type (e.g., 'dois')"
+                "titles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "description": "Titles of the resource"
                 },
-                "attributes": {
+                "creators": {
+                  "type": "array",
+                  "description": "Creator(s) of the resource",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "givenName": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "familyName": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "affiliation": {
+                        "type": "array"
+                      }
+                    }
+                  }
+                },
+                "publicationYear": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "Year of publication"
+                },
+                "publisher": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Publisher or repository name"
+                },
+                "types": {
                   "type": "object",
                   "properties": {
-                    "doi": {
+                    "resourceTypeGeneral": {
                       "type": "string",
-                      "description": "The DOI"
+                      "description": "General resource type (Dataset, Software, Text, etc.)"
                     },
-                    "titles": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string"
-                          }
-                        }
+                    "resourceType": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Specific resource type"
+                    }
+                  }
+                },
+                "subjects": {
+                  "type": "array",
+                  "description": "Subject keywords",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subject": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Abstract or description"
+                },
+                "fundingReferences": {
+                  "type": "array",
+                  "description": "Funding sources",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "funderName": {
+                        "type": "string"
                       },
-                      "description": "Titles of the resource"
-                    },
-                    "creators": {
-                      "type": "array",
-                      "description": "Creator(s) of the resource",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "givenName": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "familyName": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "affiliation": {
-                            "type": "array"
-                          }
-                        }
+                      "awardNumber": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       }
-                    },
-                    "publicationYear": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ],
-                      "description": "Year of publication"
-                    },
-                    "publisher": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "description": "Publisher or repository name"
-                    },
-                    "types": {
-                      "type": "object",
-                      "properties": {
-                        "resourceTypeGeneral": {
-                          "type": "string",
-                          "description": "General resource type (Dataset, Software, Text, etc.)"
-                        },
-                        "resourceType": {
-                          "type": [
-                            "string",
-                            "null"
-                          ],
-                          "description": "Specific resource type"
-                        }
-                      }
-                    },
-                    "subjects": {
-                      "type": "array",
-                      "description": "Subject keywords",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "subject": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "description": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "description": "Abstract or description"
-                    },
-                    "fundingReferences": {
-                      "type": "array",
-                      "description": "Funding sources",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "funderName": {
-                            "type": "string"
-                          },
-                          "awardNumber": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    "relatedIdentifiers": {
-                      "type": "array",
-                      "description": "Related DOIs and identifiers (e.g., linked publications)",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "relatedIdentifier": {
-                            "type": "string"
-                          },
-                          "relatedIdentifierType": {
-                            "type": "string"
-                          },
-                          "relationType": {
-                            "type": "string"
-                          }
-                        }
+                    }
+                  }
+                },
+                "relatedIdentifiers": {
+                  "type": "array",
+                  "description": "Related DOIs and identifiers (e.g., linked publications)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "relatedIdentifier": {
+                        "type": "string"
+                      },
+                      "relatedIdentifierType": {
+                        "type": "string"
+                      },
+                      "relationType": {
+                        "type": "string"
                       }
                     }
                   }

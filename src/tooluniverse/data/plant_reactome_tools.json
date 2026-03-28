@@ -142,75 +142,56 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "stId": {
-                  "type": "string"
-                },
-                "displayName": {
-                  "type": "string"
-                },
-                "speciesName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "isInDisease": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "isInferred": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "hasEvent": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
-                  "description": "Sub-events (reactions and sub-pathways)"
-                },
-                "compartment": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                },
-                "goBiologicalProcess": {
-                  "type": [
-                    "object",
-                    "null"
-                  ]
-                },
-                "crossReference": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                }
-              }
+            "stId": {
+              "type": "string"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "pathway_id": {
-                  "type": "string"
-                }
-              }
+            "displayName": {
+              "type": "string"
+            },
+            "speciesName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "isInDisease": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "isInferred": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "hasEvent": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Sub-events (reactions and sub-pathways)"
+            },
+            "compartment": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "goBiologicalProcess": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "crossReference": {
+              "type": [
+                "array",
+                "null"
+              ]
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

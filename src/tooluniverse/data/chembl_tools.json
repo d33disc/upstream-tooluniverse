@@ -231,26 +231,15 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "molecules": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": "Molecule objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
-              }
-            },
-            "page_meta": {
-              "type": "object"
-            }
+        "molecules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Molecule objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
           }
         },
-        "count": {
-          "type": "integer"
+        "page_meta": {
+          "type": "object"
         }
       }
     },
@@ -314,22 +303,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "targets": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -457,23 +435,12 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "targets": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": "Target objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
-              }
-            }
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Target objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -566,22 +533,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "assays": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "assays": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -694,22 +650,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "activities": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -835,23 +780,12 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "assays": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": "Assay objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
-              }
-            }
+        "assays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Assay objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -942,22 +876,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "activities": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1037,43 +960,32 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "activities": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "molecule_chembl_id": {
-                    "type": "string"
-                  },
-                  "target_chembl_id": {
-                    "type": "string"
-                  },
-                  "standard_value": {
-                    "type": [
-                      "string",
-                      "number",
-                      "null"
-                    ]
-                  },
-                  "standard_type": {
-                    "type": "string"
-                  },
-                  "standard_units": {
-                    "type": "string"
-                  }
-                }
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "molecule_chembl_id": {
+                "type": "string"
+              },
+              "target_chembl_id": {
+                "type": "string"
+              },
+              "standard_value": {
+                "type": [
+                  "string",
+                  "number",
+                  "null"
+                ]
+              },
+              "standard_type": {
+                "type": "string"
+              },
+              "standard_units": {
+                "type": "string"
               }
             }
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1283,22 +1195,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "drugs": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "drugs": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1350,24 +1251,16 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "mechanisms": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "mechanism_of_action": {
-                    "type": "string"
-                  },
-                  "target_chembl_id": {
-                    "type": "string"
-                  }
-                }
+        "mechanisms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mechanism_of_action": {
+                "type": "string"
+              },
+              "target_chembl_id": {
+                "type": "string"
               }
             }
           }
@@ -1418,22 +1311,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "mechanisms": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "mechanisms": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1477,22 +1359,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "binding_sites": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "binding_sites": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1575,22 +1446,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "molecules": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "molecules": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1642,30 +1502,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "molecules": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "molecule_chembl_id": {
-                    "type": "string"
-                  },
-                  "similarity": {
-                    "type": "number"
-                  }
-                }
+        "molecules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "molecule_chembl_id": {
+                "type": "string"
+              },
+              "similarity": {
+                "type": "number"
               }
             }
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1745,22 +1594,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "activities": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1804,22 +1642,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "protein_classifications": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "protein_classifications": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1859,22 +1686,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "atc_classes": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "atc_classes": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1918,22 +1734,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "documents": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -1977,22 +1782,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "cell_lines": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "cell_lines": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -2036,22 +1830,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "tissues": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "tissues": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },
@@ -2095,22 +1878,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "structural_alerts": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+        "structural_alerts": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
-        },
-        "count": {
-          "type": "integer"
         }
       }
     },

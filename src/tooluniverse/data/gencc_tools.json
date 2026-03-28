@@ -28,54 +28,46 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "gene_symbol": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene_symbol": {
-              "type": "string"
-            },
-            "submissions": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": "string"
-                  },
-                  "gene_curie": {
-                    "type": "string"
-                  },
-                  "disease_title": {
-                    "type": "string"
-                  },
-                  "disease_curie": {
-                    "type": "string"
-                  },
-                  "classification": {
-                    "type": "string"
-                  },
-                  "mode_of_inheritance": {
-                    "type": "string"
-                  },
-                  "submitter": {
-                    "type": "string"
-                  },
-                  "submitted_date": {
-                    "type": "string"
-                  }
-                }
+        "submissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_symbol": {
+                "type": "string"
+              },
+              "gene_curie": {
+                "type": "string"
+              },
+              "disease_title": {
+                "type": "string"
+              },
+              "disease_curie": {
+                "type": "string"
+              },
+              "classification": {
+                "type": "string"
+              },
+              "mode_of_inheritance": {
+                "type": "string"
+              },
+              "submitter": {
+                "type": "string"
+              },
+              "submitted_date": {
+                "type": "string"
               }
-            },
-            "submission_count": {
-              "type": "integer"
-            },
-            "unique_diseases": {
-              "type": "integer"
             }
           }
+        },
+        "submission_count": {
+          "type": "integer"
+        },
+        "unique_diseases": {
+          "type": "integer"
         }
       }
     },
@@ -120,54 +112,46 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "disease": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "disease": {
-              "type": "string"
-            },
-            "submissions": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": "string"
-                  },
-                  "gene_curie": {
-                    "type": "string"
-                  },
-                  "disease_title": {
-                    "type": "string"
-                  },
-                  "disease_curie": {
-                    "type": "string"
-                  },
-                  "classification": {
-                    "type": "string"
-                  },
-                  "mode_of_inheritance": {
-                    "type": "string"
-                  },
-                  "submitter": {
-                    "type": "string"
-                  },
-                  "submitted_date": {
-                    "type": "string"
-                  }
-                }
+        "submissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_symbol": {
+                "type": "string"
+              },
+              "gene_curie": {
+                "type": "string"
+              },
+              "disease_title": {
+                "type": "string"
+              },
+              "disease_curie": {
+                "type": "string"
+              },
+              "classification": {
+                "type": "string"
+              },
+              "mode_of_inheritance": {
+                "type": "string"
+              },
+              "submitter": {
+                "type": "string"
+              },
+              "submitted_date": {
+                "type": "string"
               }
-            },
-            "submission_count": {
-              "type": "integer"
-            },
-            "unique_genes": {
-              "type": "integer"
             }
           }
+        },
+        "submission_count": {
+          "type": "integer"
+        },
+        "unique_genes": {
+          "type": "integer"
         }
       }
     },
@@ -212,50 +196,42 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "classifications": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "classification": {
-                    "type": "string"
-                  },
-                  "count": {
-                    "type": "integer"
-                  },
-                  "rank": {
-                    "type": "integer"
-                  }
-                }
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classification": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
+              },
+              "rank": {
+                "type": "integer"
               }
-            },
-            "total_submissions": {
-              "type": "integer"
-            },
-            "unique_genes": {
-              "type": "integer"
-            },
-            "unique_diseases": {
-              "type": "integer"
-            },
-            "top_submitters": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "count": {
-                    "type": "integer"
-                  }
-                }
+            }
+          }
+        },
+        "total_submissions": {
+          "type": "integer"
+        },
+        "unique_genes": {
+          "type": "integer"
+        },
+        "unique_diseases": {
+          "type": "integer"
+        },
+        "top_submitters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
               }
             }
           }

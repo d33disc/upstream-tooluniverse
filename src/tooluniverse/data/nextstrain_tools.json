@@ -123,77 +123,52 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "dataset": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "updated": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "build_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "num_sequences": {
-                  "type": "integer"
-                },
-                "data_provenance": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "maintainers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "root_attributes": {
-                  "type": "object"
-                },
-                "available_colorings": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "dataset": {
+              "type": "string"
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "updated": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "build_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "num_sequences": {
+              "type": "integer"
+            },
+            "data_provenance": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "version": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
+            "maintainers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "root_attributes": {
+              "type": "object"
+            },
+            "available_colorings": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
