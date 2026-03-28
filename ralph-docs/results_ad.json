@@ -1231,34 +1231,320 @@
     "action": "added_examples",
     "count": 2
   },
-  {"file": "special_tools.json", "tool": "Finish", "action": "improved_examples", "old": "duplicate empty {}", "new": "distinct second example"},
-  {"file": "synbiohub_tools.json", "tool": "SynBioHub_get_collections", "action": "improved_examples", "old": "duplicate empty {}", "new": "context note example"},
-  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_combo_matrix", "action": "added_examples", "count": 2},
-  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_drug", "action": "added_examples", "count": 2},
-  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_list_cell_lines", "action": "added_examples", "count": 2},
-  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_list_datasets", "action": "added_examples", "count": 2},
-  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_combo_stats", "action": "added_examples", "count": 2},
-  {"file": "tcia_tools.json", "tool": "TCIA_list_collections", "action": "improved_examples", "old": "duplicate empty {}", "new": "context note example"},
-  {"file": "tcia_tools.json", "tool": "TCIA_get_patient_studies", "action": "added_examples", "count": 2},
-  {"file": "tcia_tools.json", "tool": "TCIA_get_modality_values", "action": "added_examples", "count": 2},
-  {"file": "tcia_tools.json", "tool": "TCIA_get_body_part_values", "action": "added_examples", "count": 2},
-  {"file": "tcia_tools.json", "tool": "TCIA_get_series_metadata", "action": "added_examples", "count": 2},
-  {"file": "tcia_tools.json", "tool": "TCIA_get_series_size", "action": "added_examples", "count": 2},
-  {"file": "therasabdab_tools.json", "tool": "TheraSAbDab_get_all_therapeutics", "action": "added_examples", "count": 2},
-  {"file": "toolfinderkeyword_defaults.json", "tool": "toolfinderkeyword_defaults", "action": "improved_examples", "old": "empty {}", "new": "realistic search queries"},
-  {"file": "txagent_client_tools.json", "tool": "mcp_auto_loader_txagent", "action": "added_examples", "count": 2},
-  {"file": "umls_tools.json", "tool": "umls_search_concepts", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, hypertension queries"},
-  {"file": "umls_tools.json", "tool": "umls_get_concept_details", "action": "added_examples", "count": 2},
-  {"file": "umls_tools.json", "tool": "icd_search_codes", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, cancer queries"},
-  {"file": "umls_tools.json", "tool": "snomed_search_concepts", "action": "improved_examples", "old": "generic ML query", "new": "myocardial infarction, asthma"},
-  {"file": "umls_tools.json", "tool": "loinc_search_codes", "action": "improved_examples", "old": "generic ML query", "new": "HbA1c, blood pressure"},
-  {"file": "unichem_tools.json", "tool": "UniChem_list_sources", "action": "added_examples", "count": 2},
-  {"file": "tool_composition_tools.json", "tool": "ToolCompatibilityAnalyzer", "action": "added_examples", "count": 2},
-  {"file": "unified_guideline_tools.json", "tool": "NICE_Clinical_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, hypertension queries"},
-  {"file": "unified_guideline_tools.json", "tool": "PubMed_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, asthma queries"},
-  {"file": "unified_guideline_tools.json", "tool": "EuropePMC_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "cardiovascular, cancer queries"},
-  {"file": "unified_guideline_tools.json", "tool": "TRIP_Database_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, antibiotic queries"},
-  {"file": "unified_guideline_tools.json", "tool": "CMA_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, cancer queries"},
-  {"file": "uniprot_idmapping_tools.json", "tool": "UniProtIDMap_list_databases", "action": "added_examples", "count": 2},
-  {"file": "unpaywall_tools.json", "tool": "Unpaywall_check_oa_status", "action": "added_examples", "count": 2}
+  {
+    "file": "special_tools.json",
+    "tool": "Finish",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "distinct second example"
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "context note example"
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_combo_matrix",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_drug",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_cell_lines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_combo_stats",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_list_collections",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "context note example"
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_patient_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_modality_values",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_body_part_values",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_series_metadata",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_series_size",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "therasabdab_tools.json",
+    "tool": "TheraSAbDab_get_all_therapeutics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "toolfinderkeyword_defaults.json",
+    "tool": "toolfinderkeyword_defaults",
+    "action": "improved_examples",
+    "old": "empty {}",
+    "new": "realistic search queries"
+  },
+  {
+    "file": "txagent_client_tools.json",
+    "tool": "mcp_auto_loader_txagent",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "umls_search_concepts",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, hypertension queries"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "umls_get_concept_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "icd_search_codes",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, cancer queries"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "snomed_search_concepts",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "myocardial infarction, asthma"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "loinc_search_codes",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "HbA1c, blood pressure"
+  },
+  {
+    "file": "unichem_tools.json",
+    "tool": "UniChem_list_sources",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tool_composition_tools.json",
+    "tool": "ToolCompatibilityAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "NICE_Clinical_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, hypertension queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "PubMed_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, asthma queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "EuropePMC_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "cardiovascular, cancer queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "TRIP_Database_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, antibiotic queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "CMA_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, cancer queries"
+  },
+  {
+    "file": "uniprot_idmapping_tools.json",
+    "tool": "UniProtIDMap_list_databases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "unpaywall_tools.json",
+    "tool": "Unpaywall_check_oa_status",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "soilgrids_tools.json",
+    "tool": "SoilGrids_get_properties",
+    "action": "improved_description",
+    "old": "Get soil properties for any location on Earth using the ISRIC SoilGrids API. Returns quantitative soil data including pH, organic carbon (SOC), clay/sand/silt content, bulk density, cation exchange capacity, and more at multiple soil depth intervals...",
+    "new": "Query the ISRIC SoilGrids API for quantitative soil properties at any global location. Returns pH, organic carbon (SOC), clay/sand/silt, bulk density, cation exchange capacity, and nitrogen at 6 depth intervals (0-5cm to 100-200cm) using ML models trained on 240K+ soil profiles."
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_get_chemical_protein_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_get_interaction_partners",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_resolve_identifier",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_ext_tools.json",
+    "tool": "STRING_get_functional_annotations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_ext_tools.json",
+    "tool": "STRING_get_enrichment",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_network_tools.json",
+    "tool": "STRING_get_network",
+    "action": "improved_description",
+    "old": "Get the protein-protein interaction network for one or more proteins from STRING database. Returns all interactions (edges) between the query proteins and their neighbors, including confidence scores broken down by evidence type (experiments, co-expression, databases, text-mining, etc.)...",
+    "new": "Get protein-protein interaction networks from STRING database. Returns interaction edges with combined confidence scores and evidence breakdowns (experimental, co-expression, databases, text-mining, gene fusion, phylogenetic profiles). Supports multi-protein queries separated by carriage return."
+  },
+  {
+    "file": "string_network_tools.json",
+    "tool": "STRING_get_interaction_partners",
+    "action": "improved_description",
+    "old": "Get interaction partners for a single protein from STRING database. Returns a ranked list of proteins that interact with the query protein, along with detailed confidence scores by evidence type (experimental, database, text-mining, etc.)...",
+    "new": "Get interaction partners for a single protein from STRING database. Returns ranked partner list with combined confidence scores and evidence breakdowns (experimental, database, text-mining, co-expression, gene fusion, phylogenetic profiles). Use for identifying direct interactors of a query protein."
+  },
+  {
+    "file": "sunrise_sunset_tools.json",
+    "tool": "SunriseSunset_get_times",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "swissmodel_tools.json",
+    "tool": "SwissModel_get_models",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "swissmodel_tools.json",
+    "tool": "SwissModel_get_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "t3db_tools.json",
+    "tool": "T3DB_get_toxin",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "t3db_tools.json",
+    "tool": "T3DB_search_toxins",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "targetmine_tools.json",
+    "tool": "TargetMine_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "targetmine_tools.json",
+    "tool": "TargetMine_search_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_get_transporter",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_search_family",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_search_by_substrate",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "three_d_beacons_tools.json",
+    "tool": "ThreeDBeacons_get_structure_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "three_d_beacons_tools.json",
+    "tool": "ThreeDBeacons_get_structures",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  }
 ]

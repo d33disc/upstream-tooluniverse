@@ -1,7 +1,7 @@
 [
   {
     "name": "SoilGrids_get_properties",
-    "description": "Get soil properties for any location on Earth using the ISRIC SoilGrids API. Returns quantitative soil data including pH, organic carbon (SOC), clay/sand/silt content, bulk density, cation exchange capacity, and more at multiple soil depth intervals (0-5cm, 5-15cm, 15-30cm, 30-60cm, 60-100cm, 100-200cm). Predictions are based on global machine learning models trained on 240K+ soil profiles. Essential for soil science, agriculture, climate modeling, and ecosystem research.",
+    "description": "Query the ISRIC SoilGrids API for quantitative soil properties at any global location. Returns pH, organic carbon (SOC), clay/sand/silt, bulk density, cation exchange capacity, and nitrogen at 6 depth intervals (0-5cm to 100-200cm) using ML models trained on 240K+ soil profiles.",
     "parameter": {
       "type": "object",
       "properties": {
