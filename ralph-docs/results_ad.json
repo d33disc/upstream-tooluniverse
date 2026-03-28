@@ -315,5 +315,152 @@
     "tool": "RGD_get_orthologs",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_reactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_by_ec",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_by_chebi",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rnacentral_tools.json",
+    "tool": "RNAcentral_search",
+    "action": "improved_examples",
+    "old": "let-7, U6 with page_size=1",
+    "new": "let-7 microRNA, TP53 with realistic page sizes"
+  },
+  {
+    "file": "rnacentral_tools.json",
+    "tool": "RNAcentral_get_by_accession",
+    "action": "improved_examples",
+    "old": "URS0000000001 (placeholder)",
+    "new": "URS0000479B66 (real human lncRNA)"
+  },
+  {
+    "file": "ror_tools.json",
+    "tool": "ROR_search_organizations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "ror_tools.json",
+    "tool": "ROR_get_organization",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_get_drug_classes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_get_class_members",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_find_classes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_find_rxcui",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_get_drug_info",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_get_related_drugs",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_tools.json",
+    "tool": "RxNorm_get_drug_names",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_search_structures",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_get_structure",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_get_summary",
+    "action": "fixed_duplicate_examples",
+    "old": "duplicate empty {} examples",
+    "new": "explicit operation parameter in second example"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_search_entries",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entry",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entries_by_uniprot",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_list_instruments",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entries_by_tag",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scanprosite_tools.json",
+    "tool": "ScanProsite_scan_protein",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scite_tools.json",
+    "tool": "scite_get_tallies",
+    "action": "skipped",
+    "reason": "existing examples already strong"
   }
 ]
