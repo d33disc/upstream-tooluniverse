@@ -1820,5 +1820,233 @@
     "action": "improved_examples",
     "old": "1 example (WP254)",
     "new": "2 examples (WP254 apoptosis, WP179 cell cycle)"
+  },
+  {
+    "file": "tooluniverse_page_tools.json",
+    "tool": "get_tool_page_url",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_get_sequence",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_get_track",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_locations_tools.json",
+    "tool": "UniProtLocations_get_location",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_locations_tools.json",
+    "tool": "UniProtLocations_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_proteomes_tools.json",
+    "tool": "UniProt_search_proteomes",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "uniprot_proteomes_tools.json",
+    "tool": "UniProt_get_proteome",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_diseases",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_disease",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_keywords",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_keyword",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_proteome",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_proteomes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_taxonomy_tools.json",
+    "tool": "UniProtTaxonomy_get_taxon",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_taxonomy_tools.json",
+    "tool": "UniProtTaxonomy_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniref_tools.json",
+    "tool": "UniRef_get_cluster",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniref_tools.json",
+    "tool": "UniRef_search_clusters",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uscensus_tools.json",
+    "tool": "USCensus_get_population",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_earthquake_tools.json",
+    "tool": "USGS_get_earthquake_feed",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_earthquake_tools.json",
+    "tool": "USGS_query_earthquakes",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_streamflow",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_water_level",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_water_temperature",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "variant_validator_tools.json",
+    "tool": "VariantValidator_validate_variant",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "variant_validator_tools.json",
+    "tool": "VariantValidator_gene2transcripts",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_search_cdr3",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_get_antigen_specificity",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "waqi_tools.json",
+    "tool": "WAQI_get_air_quality",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "web_search_tools.json",
+    "tool": "web_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "web_search_tools.json",
+    "tool": "web_api_documentation_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "who_gho_tools.json",
+    "tool": "WHOGHO_search_indicators",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "who_gho_tools.json",
+    "tool": "WHOGHO_get_indicator_data",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikidata_entity_tools.json",
+    "tool": "Wikidata_search_entities",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikidata_entity_tools.json",
+    "tool": "Wikidata_get_entity",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipathways_ext_tools.json",
+    "tool": "WikiPathways_get_pathway_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wikipathways_ext_tools.json",
+    "tool": "WikiPathways_find_pathways_by_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wikipathways_tools.json",
+    "tool": "WikiPathways_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
   }
 ]
