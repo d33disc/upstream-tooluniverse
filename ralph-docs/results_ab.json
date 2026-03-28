@@ -1872,5 +1872,56 @@
     "tool": "HPA_get_gene_tsv_data_by_ensembl_id",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "hubmap_tools.json",
+    "tool": "HuBMAP_list_organs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "go_api_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gprofiler_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtex_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtopdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hal_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hgnc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hocomoco_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hpo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
   }
 ]
