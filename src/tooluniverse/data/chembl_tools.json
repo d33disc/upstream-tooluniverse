@@ -32,6 +32,16 @@
         "query": "CC(=O)Oc1ccccc1C(=O)O",
         "similarity_threshold": 70,
         "max_results": 5
+      },
+      {
+        "query": "CHEMBL25",
+        "similarity_threshold": 85,
+        "max_results": 10
+      },
+      {
+        "query": "metformin",
+        "similarity_threshold": 90,
+        "max_results": 3
       }
     ],
     "return_schema": {
@@ -134,6 +144,13 @@
     "test_examples": [
       {
         "chembl_id": "CHEMBL25"
+      },
+      {
+        "chembl_id": "CHEMBL1229517"
+      },
+      {
+        "chembl_id": "CHEMBL6329",
+        "format": "json"
       }
     ]
   },
@@ -320,6 +337,14 @@
       {
         "molecule_chembl_id__exact": "CHEMBL6329",
         "limit": 10
+      },
+      {
+        "molecule_chembl_id__exact": "CHEMBL25",
+        "limit": 50
+      },
+      {
+        "molecule_chembl_id": "CHEMBL1229517",
+        "limit": 100
       }
     ]
   },
@@ -366,6 +391,13 @@
     "test_examples": [
       {
         "target_chembl_id": "CHEMBL2074"
+      },
+      {
+        "target_chembl_id": "CHEMBL213"
+      },
+      {
+        "target_chembl_id": "CHEMBL2095",
+        "format": "json"
       }
     ]
   },
@@ -685,6 +717,14 @@
       {
         "target_chembl_id__exact": "CHEMBL2074",
         "limit": 20
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL213",
+        "limit": 50
+      },
+      {
+        "target_chembl_id": "CHEMBL2095",
+        "limit": 10
       }
     ]
   },
@@ -731,6 +771,13 @@
     "test_examples": [
       {
         "assay_chembl_id": "CHEMBL615117"
+      },
+      {
+        "assay_chembl_id": "CHEMBL1217641"
+      },
+      {
+        "assay_chembl_id": "CHEMBL1197892",
+        "format": "json"
       }
     ]
   },

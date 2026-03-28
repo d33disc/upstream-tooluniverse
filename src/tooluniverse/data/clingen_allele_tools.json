@@ -91,6 +91,12 @@
     "test_examples": [
       {
         "ca_id": "CA000387"
+      },
+      {
+        "ca_id": "CA006116"
+      },
+      {
+        "allele_id": "CA000013"
       }
     ],
     "return_schema": {

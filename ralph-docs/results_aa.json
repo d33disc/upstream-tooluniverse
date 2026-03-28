@@ -1146,5 +1146,19 @@
     "tool": "Chem_sa_score",
     "action": "added_examples",
     "count": 2
-  }
+  },
+  {"file": "chembl_tools.json", "tool": "ChEMBL_search_similar_molecules", "action": "added_examples", "count": 3},
+  {"file": "chembl_tools.json", "tool": "ChEMBL_get_molecule", "action": "added_examples", "count": 3},
+  {"file": "chembl_tools.json", "tool": "ChEMBL_get_molecule_targets", "action": "added_examples", "count": 3},
+  {"file": "chembl_tools.json", "tool": "ChEMBL_get_target", "action": "added_examples", "count": 3},
+  {"file": "chembl_tools.json", "tool": "ChEMBL_get_target_activities", "action": "added_examples", "count": 3},
+  {"file": "chembl_tools.json", "tool": "ChEMBL_get_assay", "action": "added_examples", "count": 3},
+  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_enrichment_analysis", "action": "added_examples", "count": 3},
+  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_get_experiments", "action": "added_examples", "count": 3},
+  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_get_peak_data", "action": "added_examples", "count": 3},
+  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_search_datasets", "action": "added_examples", "count": 3},
+  {"file": "civic_tools.json", "tool": "civic_get_variant", "action": "added_examples", "count": 3},
+  {"file": "civic_tools.json", "tool": "civic_get_evidence_item", "action": "added_examples", "count": 3},
+  {"file": "clingen_allele_tools.json", "tool": "ClinGenAllele_get_allele", "action": "added_examples", "count": 3},
+  {"file": "clingen_ar_tools.json", "tool": "ClinGenAR_get_external_records", "action": "added_examples", "count": 3}
 ]
