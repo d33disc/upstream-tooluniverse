@@ -2255,5 +2255,56 @@
     "file": "lipidmaps_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "litvar_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lncrna_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "loinc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lotus_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lovd_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "marine_regions_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "markitdown_tools.json",
+    "tool": "convert_to_markdown",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "massbank_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "massive_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mavedb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
   }
 ]
