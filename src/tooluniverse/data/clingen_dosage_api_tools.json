@@ -115,6 +115,12 @@
         "start": 43044295,
         "end": 43125370,
         "assembly": "GRCh38"
+      },
+      {
+        "chromosome": "X",
+        "start": 153294077,
+        "end": 153363177,
+        "assembly": "GRCh38"
       }
     ],
     "metadata": {
