@@ -36,6 +36,10 @@
       {
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage"
+      },
+      {
+        "drug_name": "WARFARIN",
+        "adverse_event": "Haemorrhage"
       }
     ]
   },
@@ -96,6 +100,11 @@
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage",
         "stratify_by": "sex"
+      },
+      {
+        "drug_name": "WARFARIN",
+        "adverse_event": "Haemorrhage",
+        "stratify_by": "age"
       }
     ]
   },
@@ -148,6 +157,11 @@
       {
         "drug_name": "IBUPROFEN",
         "seriousness_type": "all"
+      },
+      {
+        "drug_name": "METFORMIN",
+        "seriousness_type": "hospitalization",
+        "adverse_event": "Lactic acidosis"
       }
     ]
   },
@@ -196,6 +210,11 @@
         "drug1": "IBUPROFEN",
         "drug2": "NAPROXEN",
         "adverse_event": "Gastrointestinal haemorrhage"
+      },
+      {
+        "drug1": "WARFARIN",
+        "drug2": "APIXABAN",
+        "adverse_event": "Haemorrhage"
       }
     ]
   },
@@ -236,6 +255,9 @@
       {
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage"
+      },
+      {
+        "drug_name": "METFORMIN"
       }
     ]
   },
@@ -267,6 +289,9 @@
     "test_examples": [
       {
         "drug_name": "IBUPROFEN"
+      },
+      {
+        "drug_name": "WARFARIN"
       }
     ]
   }

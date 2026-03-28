@@ -97,6 +97,9 @@
         "serious": "Yes",
         "seriousnessdeath": "Yes",
         "reactionmeddraverse": "nausea"
+      },
+      {
+        "medicinalproduct": "Metformin"
       }
     ],
     "return_schema": {
@@ -342,6 +345,9 @@
         "patientagegroup": "Neonate",
         "occurcountry": "US",
         "serious": "Yes"
+      },
+      {
+        "patientagegroup": "Adult"
       }
     ],
     "return_schema": {
@@ -546,6 +552,9 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "serious": "Yes"
+      },
+      {
+        "medicinalproduct": "Metformin"
       }
     ],
     "return_schema": {
@@ -632,6 +641,9 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "serious": "Yes"
+      },
+      {
+        "medicinalproduct": "Metformin"
       }
     ],
     "return_schema": {
@@ -721,6 +733,9 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "occurcountry": "US"
+      },
+      {
+        "medicinalproduct": "Warfarin"
       }
     ],
     "return_schema": {
@@ -926,6 +941,9 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "occurcountry": "US"
+      },
+      {
+        "medicinalproduct": "Clopidogrel"
       }
     ],
     "return_schema": {
@@ -1161,6 +1179,10 @@
       {
         "medicinalproduct": "Aspirin",
         "serious": "Yes"
+      },
+      {
+        "medicinalproduct": "Insulin",
+        "serious": "No"
       }
     ],
     "return_schema": {
@@ -1217,6 +1239,9 @@
     "test_examples": [
       {
         "medicinalproduct": "Aspirin"
+      },
+      {
+        "medicinalproduct": "Metformin"
       }
     ],
     "return_schema": {
@@ -1272,6 +1297,9 @@
     "test_examples": [
       {
         "medicinalproduct": "Aspirin"
+      },
+      {
+        "medicinalproduct": "Warfarin"
       }
     ],
     "return_schema": {
@@ -1383,6 +1411,13 @@
         "occurcountry": "US",
         "serious": "Yes",
         "seriousnessdeath": "Yes"
+      },
+      {
+        "medicinalproducts": [
+          "Metformin",
+          "Insulin"
+        ],
+        "patientagegroup": "Adult"
       }
     ],
     "return_schema": {
@@ -1631,6 +1666,12 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "serious": "Yes"
+      },
+      {
+        "medicinalproducts": [
+          "Metformin",
+          "Insulin"
+        ]
       }
     ],
     "return_schema": {
@@ -1721,6 +1762,13 @@
         ],
         "patientsex": "Male",
         "patientagegroup": "Neonate",
+        "serious": "Yes"
+      },
+      {
+        "medicinalproducts": [
+          "Warfarin",
+          "Apixaban"
+        ],
         "serious": "Yes"
       }
     ],
@@ -1815,6 +1863,13 @@
         ],
         "patientsex": "Male",
         "patientagegroup": "Neonate",
+        "occurcountry": "US"
+      },
+      {
+        "medicinalproducts": [
+          "Warfarin",
+          "Apixaban"
+        ],
         "occurcountry": "US"
       }
     ],
@@ -2034,6 +2089,13 @@
         "patientsex": "Male",
         "patientagegroup": "Neonate",
         "occurcountry": "US"
+      },
+      {
+        "medicinalproducts": [
+          "Metformin",
+          "Insulin"
+        ],
+        "patientsex": "Female"
       }
     ],
     "return_schema": {
@@ -2282,6 +2344,13 @@
           "Aspirin"
         ],
         "serious": "Yes"
+      },
+      {
+        "medicinalproducts": [
+          "Insulin",
+          "Semaglutide"
+        ],
+        "serious": "No"
       }
     ],
     "return_schema": {
