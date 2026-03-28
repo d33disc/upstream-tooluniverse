@@ -265,6 +265,12 @@
     "test_examples": [
       {
         "accession": "E-MTAB-2836"
+      },
+      {
+        "accession": "E-GTEX-8"
+      },
+      {
+        "accession": "E-GEOD-26284"
       }
     ],
     "return_schema": {

@@ -3001,6 +3001,19 @@ class ToolUniverse:
         # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
         function_name = self._resolve_tool_name(function_name)
 
+        # Health check warning (non-blocking)
+        _health_warning = None
+        try:
+            from tooluniverse.tool_health import ToolHealthCache
+
+            _health_warning = ToolHealthCache().warn(function_name)
+            if _health_warning:
+                import logging
+
+                logging.getLogger("tooluniverse.health").warning(_health_warning)
+        except Exception:
+            pass
+
         # Handle malformed queries gracefully
         if not function_name:
             return self._create_dual_format_error(
@@ -3167,6 +3180,10 @@ class ToolUniverse:
                 result = self.hook_manager.apply_hooks(
                     result, function_name, tool_arguments, context
                 )
+
+            # Inject health warning into result
+            if _health_warning and isinstance(result, dict):
+                result["_health_warning"] = _health_warning
 
             # Cache result if enabled
             if (

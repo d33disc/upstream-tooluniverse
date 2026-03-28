@@ -1,0 +1,1047 @@
+[
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_list_standards_sections",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_search_standards",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_get_standards_section",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_ACC_search_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_list_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ACC_list_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_list_patient_guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_search_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_get_patient_guideline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_ACC_get_guideline",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_search_plasmids",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_get_plasmid",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_search_depositors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_physicochemical_properties",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_CYP_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_BBB_penetrance",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_toxicity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_bioavailability",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_clearance_distribution",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_nuclear_receptor_activity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_stress_response",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_solubility_lipophilicity_hydration",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventPredictionQuestionGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventICDMapper",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventPredictionQuestionGeneratorWithContext",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ScientificTextSummarizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MedicalLiteratureReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "HypothesisGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ExperimentalDesignScorer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MedicalTermNormalizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "NoveltySignificanceReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "LiteratureContextReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MethodologyRigorReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "DataAnalysisValidityReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ResultsInterpretationReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "WritingPresentationReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ReproducibilityTransparencyReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "EthicalComplianceReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "QuestionRephraser",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ProtocolOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "AdvancedCodeQualityAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "DomainExpertValidator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolQualityEvaluator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "LabelGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "call_agentic_human",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolMetadataGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolMetadataStandardizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolRelationshipDetector",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_search_structures",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_get_expression_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_get_structure",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_gene_phenotypes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_disease_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_disease",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_prediction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_annotations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_protein_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_variant_score",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_residue_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "anaconda_tools.json",
+    "tool": "Anaconda_search_packages",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "anaconda_tools.json",
+    "tool": "Anaconda_get_package",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "aopwiki_tools.json",
+    "tool": "AOPWiki_list_aops",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "aopwiki_tools.json",
+    "tool": "AOPWiki_get_aop",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "appris_tools.json",
+    "tool": "APPRIS_get_isoforms",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "appris_tools.json",
+    "tool": "APPRIS_get_principal_isoform",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "appris_tools.json",
+    "tool": "APPRIS_get_functional_annotations",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "archs4_tools.json",
+    "tool": "ARCHS4_get_gene_expression",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "archs4_tools.json",
+    "tool": "ARCHS4_get_gene_correlations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "arrayexpress_tools.json",
+    "tool": "arrayexpress_search_experiments",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "arrayexpress_tools.json",
+    "tool": "arrayexpress_get_experiment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "arrayexpress_tools.json",
+    "tool": "arrayexpress_get_experiment_files",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "arrayexpress_tools.json",
+    "tool": "arrayexpress_get_experiment_samples",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "artic_tools.json",
+    "tool": "ArtIC_search_artworks",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "artic_tools.json",
+    "tool": "ArtIC_get_artwork",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "arxiv_tools.json",
+    "tool": "ArXiv_search_papers",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "arxiv_tools.json",
+    "tool": "ArXiv_get_pdf_snippets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bgee_tools.json",
+    "tool": "Bgee_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bgee_tools.json",
+    "tool": "Bgee_get_gene_expression",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bgee_tools.json",
+    "tool": "Bgee_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_list_models",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_get_model",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_get_model_reactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_get_reaction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_get_metabolite",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bigg_models_tools.json",
+    "tool": "BiGG_get_database_version",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bindingdb_tools.json",
+    "tool": "BindingDB_get_ligands_by_uniprot",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bindingdb_tools.json",
+    "tool": "BindingDB_get_ligands_by_uniprots",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bindingdb_tools.json",
+    "tool": "BindingDB_get_ligands_by_pdb",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bindingdb_tools.json",
+    "tool": "BindingDB_get_targets_by_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bioconductor_tools.json",
+    "tool": "Bioconductor_search_packages",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioconductor_tools.json",
+    "tool": "Bioconductor_get_package",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biogrid_tools.json",
+    "tool": "BioGRID_get_interactions",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biogrid_tools.json",
+    "tool": "BioGRID_get_chemical_interactions",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biogrid_tools.json",
+    "tool": "BioGRID_search_by_pubmed",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biogrid_tools.json",
+    "tool": "BioGRID_get_ptms",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioimage_archive_tools.json",
+    "tool": "BioImageArchive_search_studies",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioimage_archive_tools.json",
+    "tool": "BioImageArchive_get_study",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioimage_archive_tools.json",
+    "tool": "BioImageArchive_search_bioimages",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biomodels_tools.json",
+    "tool": "biomodels_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biomodels_tools.json",
+    "tool": "BioModels_get_model",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biomodels_tools.json",
+    "tool": "BioModels_list_files",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biomodels_tools.json",
+    "tool": "BioModels_download_model",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biomodels_tools.json",
+    "tool": "BioModels_search_parameters",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioportal_tools.json",
+    "tool": "BioPortal_search_ontology_terms",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioportal_tools.json",
+    "tool": "BioPortal_get_concept",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioportal_tools.json",
+    "tool": "BioPortal_annotate_text",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioportal_tools.json",
+    "tool": "BioPortal_get_hierarchy",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioregistry_tools.json",
+    "tool": "Bioregistry_resolve_reference",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioregistry_tools.json",
+    "tool": "Bioregistry_get_registry",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bioregistry_tools.json",
+    "tool": "Bioregistry_search_registries",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biorxiv_ext_tools.json",
+    "tool": "BioRxiv_list_recent_preprints",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biorxiv_tools.json",
+    "tool": "BioRxiv_get_preprint",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biosamples_tools.json",
+    "tool": "BioSamples_get_sample",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biosamples_tools.json",
+    "tool": "BioSamples_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biosamples_tools.json",
+    "tool": "BioSamples_search_by_filter",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biostudies_tools.json",
+    "tool": "biostudies_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biostudies_tools.json",
+    "tool": "biostudies_search_by_collection",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biostudies_tools.json",
+    "tool": "biostudies_get_study",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biostudies_tools.json",
+    "tool": "biostudies_get_study_files",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyGene_query_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyGene_get_gene_annotation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyGene_batch_query",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyVariant_query_variants",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyVariant_get_variant_annotation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyChem_query_chemicals",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyChem_get_chemical_annotation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biothings_tools.json",
+    "tool": "MyVariant_get_pathogenicity_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biotools_registry_tools.json",
+    "tool": "BioTools_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biotools_registry_tools.json",
+    "tool": "BioTools_get_tool",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biotools_registry_tools.json",
+    "tool": "BioTools_search_by_topic",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biotools_registry_tools.json",
+    "tool": "BioTools_search_by_operation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "biotools_registry_tools.json",
+    "tool": "BioTools_search_by_type",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "blast_tools.json",
+    "tool": "BLAST_nucleotide_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "blast_tools.json",
+    "tool": "BLAST_protein_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bmrb_tools.json",
+    "tool": "BMRB_get_entry",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bmrb_tools.json",
+    "tool": "BMRB_get_entry_citation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bmrb_tools.json",
+    "tool": "BMRB_search_by_keyword",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bmrb_tools.json",
+    "tool": "BMRB_get_entries_by_pdb_id",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bmrb_tools.json",
+    "tool": "BMRB_get_entries_by_uniprot",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "boltz_mcp_loader_tools.json",
+    "tool": "mcp_auto_loader_boltz",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "boltz_mcp_loader_tools.json",
+    "tool": "mcp_auto_loader_boltz",
+    "action": "improved_description",
+    "old": "Run Boltz2 docking and affinity prediction using MCP protocol",
+    "new": "Load the Boltz2 MCP server that exposes protein-ligand docking and affinity prediction tools."
+  },
+  {
+    "file": "brenda_tools.json",
+    "tool": "BRENDA_get_km",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "brenda_tools.json",
+    "tool": "BRENDA_get_kcat",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "brenda_tools.json",
+    "tool": "BRENDA_get_inhibitors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "brenda_tools.json",
+    "tool": "BRENDA_get_enzyme_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "bridgedb_tools.json",
+    "tool": "BridgeDb_xrefs",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bridgedb_tools.json",
+    "tool": "BridgeDb_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bridgedb_tools.json",
+    "tool": "BridgeDb_attributes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_get_genome",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_genomes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_amr",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_genome_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_epitopes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_surveillance",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_specialty_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_get_protein_structure",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_protein_structures",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_get_taxonomy",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_taxonomy",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_pathways",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "bvbrc_tools.json",
+    "tool": "BVBRC_search_subsystems",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cadd_tools.json",
+    "tool": "CADD_get_variant_score",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cadd_tools.json",
+    "tool": "CADD_get_position_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cadd_tools.json",
+    "tool": "CADD_get_range_scores",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cancer_prognosis_tools.json",
+    "tool": "CancerPrognosis_get_survival_data",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cancer_prognosis_tools.json",
+    "tool": "CancerPrognosis_get_gene_expression",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cancer_prognosis_tools.json",
+    "tool": "CancerPrognosis_search_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cancer_prognosis_tools.json",
+    "tool": "CancerPrognosis_get_study_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cancervar_tools.json",
+    "tool": "CancerVar_classify_variant",
+    "action": "skipped",
+    "reason": "already_good"
+  }
+]

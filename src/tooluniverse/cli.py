@@ -1473,6 +1473,45 @@ def cmd_test(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
+def cmd_health(args: argparse.Namespace) -> None:
+    """Check or update tool health status."""
+    from pathlib import Path
+    from tooluniverse.tool_health import ToolHealthCache
+
+    cache = ToolHealthCache()
+
+    if args.import_manifest:
+        cache.import_manifest(Path(args.import_manifest))
+        s = cache.summary()
+        print(f"Imported: {s['live']} live, {s['broken']} broken, {s['total']} total")
+        return
+
+    if args.tool:
+        if args.refresh:
+            results = cache.refresh([args.tool])
+            r = results[args.tool]
+            print(f"{args.tool}: {r['status']} ({r['detail']})")
+        else:
+            record = cache.check(args.tool)
+            if record:
+                print(f"{args.tool}: {record['status']} ({record['detail']})")
+                print(f"  Last tested: {record.get('tested', 'unknown')}")
+                if cache.is_stale(args.tool):
+                    print("  Status is STALE — run with --refresh to re-test")
+            else:
+                print(f"{args.tool}: no health data (run with --refresh to test)")
+    else:
+        s = cache.summary()
+        if s["total"] == 0:
+            print("No health data. Bootstrap with:")
+            print("  tu health --import-manifest TOOL_MANIFEST.json")
+            return
+        pct = 100 * s["live"] // s["total"] if s["total"] else 0
+        print(
+            f"Tool Health: {s['live']} live / {s['broken']} broken / {s['total']} total ({pct}%)"
+        )
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     """Regenerate the static lazy registry and coding-API wrapper files."""
     from pathlib import Path
@@ -1836,6 +1875,18 @@ def main() -> None:
         help="Start the MCP stdio server (identical to `tooluniverse`)",
     )
     p.set_defaults(func=cmd_serve)
+
+    # ── health ────────────────────────────────────────────────────────────────
+    p = sub.add_parser(
+        "health",
+        help="Check tool health (cached at ~/.tooluniverse/health.json)",
+    )
+    p.add_argument("tool", nargs="?", help="Tool name to check (omit for summary)")
+    p.add_argument("--refresh", action="store_true", help="Re-test the tool")
+    p.add_argument(
+        "--import-manifest", metavar="PATH", help="Bootstrap from TOOL_MANIFEST.json"
+    )
+    p.set_defaults(func=cmd_health)
 
     # Quiet is now the default. --verbose/-v opts back in to warnings.
     # We check argv directly because argparse hasn't run yet.

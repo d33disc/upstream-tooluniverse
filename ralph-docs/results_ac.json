@@ -1,0 +1,311 @@
+[
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_search",
+    "action": "improved_description",
+    "old": "Alias for Metabolite_search. Search for metabolites by compound name or molecular formula via PubChem. Accepts common names, synonyms (e.g., 'glucosylceramide', 'glucose', 'ATP').",
+    "new": "PubChem-backed HMDB alias for metabolite name or synonym lookup. Returns candidate compounds with PubChem CID, formula, molecular weight, and SMILES."
+  },
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_get_metabolite",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_get_metabolite",
+    "action": "improved_description",
+    "old": "Alias for Metabolite_get_info. Get compound information by HMDB ID, compound name, or PubChem CID.",
+    "new": "PubChem-backed HMDB alias that resolves an HMDB ID or metabolite name to compound details including formula, molecular weight, SMILES, and InChIKey."
+  },
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_get_diseases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolite_tools.json",
+    "tool": "HMDB_get_diseases",
+    "action": "improved_description",
+    "old": "Alias for Metabolite_get_diseases. Get disease associations for a metabolite via CTD database.",
+    "new": "CTD-backed HMDB alias that resolves a metabolite to curated disease associations with disease IDs, evidence types, and supporting PubMed IDs."
+  },
+  {
+    "file": "metabolomics_workbench_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "metacyc_tools.json",
+    "tool": "MetaCyc_search_pathways",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metacyc_tools.json",
+    "tool": "MetaCyc_get_pathway",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metacyc_tools.json",
+    "tool": "MetaCyc_get_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metacyc_tools.json",
+    "tool": "MetaCyc_get_reaction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metnorway_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mgi_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mgnify_expanded_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mgnify_tools.json",
+    "tool": "MGnify_search_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mgnify_tools.json",
+    "tool": "MGnify_list_analyses",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mgnify_tools.json",
+    "tool": "MGnify_list_analyses",
+    "action": "improved_description",
+    "old": "List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate available processed results for programmatic retrieval.",
+    "new": "List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and links to taxonomy or functional result files."
+  },
+  {
+    "file": "mibig_tools.json",
+    "tool": "MIBiG_get_stats",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mibig_tools.json",
+    "tool": "MIBiG_get_stats",
+    "action": "improved_description",
+    "old": "Get summary statistics from the MIBiG biosynthetic gene cluster repository. Returns total BGC counts by status (active, retired, complete, partial, pending), counts by biosynthetic class (PKS, NRPS, Terpene, Saccharide, Ribosomal, Other), and counts by source organism phylum (Actinomycetota, Ascomycota, Pseudomonadota, etc.). Essential for understanding the landscape of characterized natural product biosynthesis across the tree of life.",
+    "new": "Fetch MIBiG repository statistics: total biosynthetic gene clusters plus counts by status, biosynthetic class, and source-organism phylum."
+  },
+  {
+    "file": "mirna_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mobidb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "modeldb_tools.json",
+    "tool": "ModelDB_list_celltypes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "modeldb_tools.json",
+    "tool": "ModelDB_list_celltypes",
+    "action": "improved_description",
+    "old": "List all neuron/cell type IDs available in ModelDB. Returns an array of cell type IDs that can be used with ModelDB_get_celltype for full details including name and morphology. ModelDB categorizes computational models by the neuron types they simulate, such as hippocampal pyramidal cells, Purkinje cells, cortical interneurons, etc. This is useful for finding what cell types have computational models available.",
+    "new": "List ModelDB neuron and cell type IDs for modeled systems such as CA1/CA3 pyramidal neurons or Purkinje cells. Use ModelDB_get_celltype to resolve an ID to details."
+  },
+  {
+    "file": "modomics_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "molecule_2d_tools.json",
+    "tool": "visualize_molecule_2d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "molecule_2d_tools.json",
+    "tool": "visualize_molecule_2d",
+    "action": "improved_description",
+    "old": "Visualize 2D molecular structures using RDKit. Supports SMILES, InChI, molecule names, and various output formats including PNG, SVG, and interactive HTML. Prerequisites: Requires 'rdkit' package (install: pip install tooluniverse[visualization]).",
+    "new": "Render a 2D molecule with RDKit from SMILES, InChI, and name fields. Returns HTML plus PNG or SVG output and basic molecular properties."
+  },
+  {
+    "file": "molecule_3d_tools.json",
+    "tool": "visualize_molecule_3d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "molecule_3d_tools.json",
+    "tool": "visualize_molecule_3d",
+    "action": "improved_description",
+    "old": "Visualize 3D molecular structures using RDKit and py3Dmol. Supports SMILES, MOL files, SDF content, and various visualization styles with interactive 3D viewing capabilities.",
+    "new": "Render an interactive 3D molecule with RDKit and py3Dmol from SMILES, MOL, or SDF input. Returns HTML plus conformer and display metadata."
+  },
+  {
+    "file": "monarch_new_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_joint_associated_diseases_by_HPO_ID_list",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_joint_associated_diseases_by_HPO_ID_list",
+    "action": "improved_description",
+    "old": "Retrieve diseases associated with a list of phenotypes or symptoms by a list of HPO IDs.",
+    "new": "Query Monarch Initiative for diseases shared across one or more HPO phenotypes. Returns disease labels associated with the supplied phenotype profile."
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_phenotype_by_HPO_ID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_phenotype_by_HPO_ID",
+    "action": "improved_description",
+    "old": "Retrieve a phenotype or symptom by its HPO ID.",
+    "new": "Look up an HPO phenotype entity in Monarch Initiative by HP identifier. Returns the phenotype record and entity metadata."
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_HPO_ID_by_phenotype",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "get_HPO_ID_by_phenotype",
+    "action": "improved_description",
+    "old": "Retrieve the HPO ID of a phenotype or symptom.",
+    "new": "Search Monarch Initiative phenotypes by symptom or phenotype text. Returns matching HPO entities and IDs for the query term."
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "Monarch_get_gene_phenotypes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "Monarch_get_gene_phenotypes",
+    "action": "improved_description",
+    "old": "Get phenotypes associated with a gene from Monarch Initiative (cross-species). Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns human and model organism phenotypes (HP/MP terms). Use Monarch_search_gene first to find the CURIE.",
+    "new": "Fetch Monarch Initiative gene-to-phenotype associations for a gene CURIE. Returns human and model-organism phenotype terms linked to the gene."
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "Monarch_get_gene_diseases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "monarch_tools.json",
+    "tool": "Monarch_get_gene_diseases",
+    "action": "improved_description",
+    "old": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene→disease across species for hypothesis generation.",
+    "new": "Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and evidence-backed associations for the gene."
+  },
+  {
+    "file": "monarch_v3_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mondo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mousemine_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mpd_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "msigdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mutalyzer_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "mydisease_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_cmr_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_donki_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_eonet_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_exoplanet_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_ned_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nasa_sbdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "nca_tools.json",
+    "action": "skipped",
+    "reason": "all tools already had useful test_examples"
+  }
+]

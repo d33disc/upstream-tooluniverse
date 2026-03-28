@@ -51,7 +51,8 @@
       }
     },
     "test_examples": [
-      {"biome": "root:Host-associated", "size": 1}
+      {"biome": "root:Host-associated", "size": 1},
+      {"search": "Tara Oceans", "size": 1}
     ],
     "label": ["MGnify", "Microbiome", "Study"],
     "metadata": {
@@ -62,7 +63,7 @@
   {
     "name": "MGnify_list_analyses",
     "type": "MGnifyAnalysesTool",
-    "description": "List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate available processed results for programmatic retrieval.",
+    "description": "List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and links to taxonomy or functional result files.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -108,7 +109,8 @@
       }
     },
     "test_examples": [
-      {"study_accession": "MGYS00000001", "size": 1}
+      {"study_accession": "MGYS00002008", "size": 1},
+      {"study_accession": "MGYS00005292", "size": 1}
     ],
     "label": ["MGnify", "Microbiome", "Analysis"],
     "metadata": {

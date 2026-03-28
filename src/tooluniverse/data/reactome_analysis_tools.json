@@ -379,7 +379,7 @@
   },
   {
     "name": "ReactomeAnalysis_token_result",
-    "description": "Retrieve previously computed Reactome pathway analysis results using an analysis token. Tokens are returned from pathway_enrichment or species_comparison analyses and can be used to access results without rerunning the analysis. Useful for paginating through large result sets or sharing analysis results. The token contains the full analysis result and is valid for a limited time.",
+    "description": "Fetch cached Reactome Analysis Service results by token from a prior enrichment or species-comparison run and page through saved pathways.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -403,7 +403,16 @@
       "endpoint": "token_result"
     },
     "type": "ReactomeAnalysisTool",
-    "test_examples": [],
+    "test_examples": [
+      {
+        "token": "MjAxNTEwMjAwNjU0MDBfMzMw",
+        "page_size": 5
+      },
+      {
+        "token": "MjAxNTEwMjAwNjU0MDBfMzMw",
+        "page_size": 20
+      }
+    ],
     "return_schema": {
       "oneOf": [
         {

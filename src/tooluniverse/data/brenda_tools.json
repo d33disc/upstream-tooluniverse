@@ -54,7 +54,14 @@
     },
     "test_examples": [
       {
-        "ec_number": "1.1.1.1"
+        "operation": "get_km",
+        "ec_number": "2.7.1.1",
+        "organism": "Homo sapiens"
+      },
+      {
+        "operation": "get_km",
+        "ec_number": "1.1.1.27",
+        "organism": "Mus musculus"
       }
     ]
   },
@@ -113,7 +120,14 @@
     },
     "test_examples": [
       {
-        "ec_number": "1.1.1.1"
+        "operation": "get_kcat",
+        "ec_number": "2.7.1.1",
+        "organism": "Homo sapiens"
+      },
+      {
+        "operation": "get_kcat",
+        "ec_number": "1.1.1.27",
+        "organism": "Escherichia coli"
       }
     ]
   },
@@ -169,7 +183,13 @@
     },
     "test_examples": [
       {
+        "operation": "get_inhibitors",
         "ec_number": "1.1.1.1"
+      },
+      {
+        "operation": "get_inhibitors",
+        "ec_number": "2.7.1.1",
+        "organism": "Homo sapiens"
       }
     ]
   },
@@ -221,7 +241,12 @@
     },
     "test_examples": [
       {
-        "ec_number": "1.1.1.1"
+        "operation": "get_enzyme_info",
+        "ec_number": "2.7.1.1"
+      },
+      {
+        "operation": "get_enzyme_info",
+        "ec_number": "1.1.1.27"
       }
     ]
   }

@@ -50,6 +50,10 @@
       {
         "brand_name": "ADVIL",
         "limit": 5
+      },
+      {
+        "generic_name": "ATORVASTATIN",
+        "limit": 3
       }
     ]
   },
@@ -96,6 +100,9 @@
     "test_examples": [
       {
         "application_number": "NDA020402"
+      },
+      {
+        "application_number": "NDA020702"
       }
     ]
   },
@@ -141,6 +148,9 @@
     "test_examples": [
       {
         "brand_name": "ADVIL"
+      },
+      {
+        "brand_name": "LIPITOR"
       }
     ]
   },
@@ -189,6 +199,9 @@
     "test_examples": [
       {
         "brand_name": "ADVIL"
+      },
+      {
+        "brand_name": "LIPITOR"
       }
     ]
   },
@@ -237,6 +250,9 @@
     "test_examples": [
       {
         "brand_name": "ADVIL"
+      },
+      {
+        "brand_name": "LIPITOR"
       }
     ]
   },
@@ -279,6 +295,9 @@
     "test_examples": [
       {
         "brand_name": "ADVIL"
+      },
+      {
+        "generic_name": "ATORVASTATIN"
       }
     ]
   }

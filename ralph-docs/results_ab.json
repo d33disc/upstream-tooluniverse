@@ -1,0 +1,1320 @@
+[
+  {
+    "file": "ensembl_variation_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "ensembl_vep_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "ensembl_xrefs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "eol_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "epigenomics_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "epigraphdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "epmc_annotations_tools.json",
+    "tool": "EPMC_get_article_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "epmc_annotations_tools.json",
+    "tool": "EPMC_get_article_diseases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "epmc_annotations_tools.json",
+    "tool": "EPMC_get_article_chemicals",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "epmc_annotations_tools.json",
+    "tool": "EPMC_get_article_organisms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "eqtl_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "erddap_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "esm_tools.json",
+    "tool": "ESM_get_protein_embedding",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "esm_tools.json",
+    "tool": "ESM_generate_protein_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "esm_tools.json",
+    "tool": "ESM_fold_protein",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "esm_tools.json",
+    "tool": "ESM_score_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "esmfold_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "euhealth_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "europe_pmc_tools.json",
+    "tool": "EuropePMC_search_articles",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "europe_pmc_tools.json",
+    "tool": "EuropePMC_get_citations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "europe_pmc_tools.json",
+    "tool": "EuropePMC_get_references",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "europe_pmc_tools.json",
+    "tool": "EuropePMC_get_fulltext",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "europe_pmc_tools.json",
+    "tool": "EuropePMC_get_fulltext_snippets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "europepmc_annotations_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "europepmc_citations_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "eurostat_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "eva_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "eve_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "expert_feedback_tools.json",
+    "tool": "mcp_auto_loader_expert_feedback",
+    "action": "improved_description",
+    "old": "Automatically discover and load all tools from Human Expert Feedback MCP Server. Provides tools for consulting human experts on complex medical decisions.",
+    "new": "Load tools exposed by the Human Expert Feedback MCP server for submitting expert consultation requests and reviewing responses."
+  },
+  {
+    "file": "expert_feedback_tools.json",
+    "tool": "mcp_auto_loader_expert_feedback",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "expression_atlas_tools.json",
+    "tool": "ExpressionAtlas_get_experiment",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "expression_atlas_tools.json",
+    "action": "skipped",
+    "reason": "all other tools already have good test_examples"
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_calculate_disproportionality",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_stratify_by_demographics",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_filter_serious_events",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_compare_drugs",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_analyze_temporal_trends",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "faers_analytics_tools.json",
+    "tool": "FAERS_rollup_meddra_hierarchy",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_reactions_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_drugs_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_country_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_reportercountry_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_seriousness_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_outcomes_by_drug_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_drug_routes_by_event",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_patient_age_distribution",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_death_related_by_drug",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_adverse_reactions",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_event_reports_by_country",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_reports_by_reporter_country",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_seriousness_classification",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_reaction_outcomes",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_adverse_event_tools.json",
+    "tool": "FAERS_count_additive_administration_routes",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_search_drug",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_get_approval_history",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_get_patent_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_get_exclusivity",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_check_generic_availability",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_orange_book_tools.json",
+    "tool": "FDA_OrangeBook_get_te_code",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "file_download_tools.json",
+    "tool": "download_file",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "file_download_tools.json",
+    "tool": "download_binary_file",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "file_download_tools.json",
+    "tool": "download_text_content",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_active_ingredient_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_dosage_and_storage_information_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_abuse_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_abuse_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_accessories",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_accessories_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_active_ingredient",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_manufacturer_name_NDC_number_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_application_number_NDC_number",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_adverse_reaction",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_adverse_reactions_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_alarm",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_alarms_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_animal_pharmacology_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_animal_pharmacology_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_conditions_for_doctor_consult",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_conditions_info_for_doctor_consult_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_consulting_doctor_pharmacist_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_consulting_doctor_pharmacist_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_assembly_installation_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_assembly_installation_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_boxed_warning",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_boxed_warning_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drugs_by_carcinogenic_mutagenic_fertility",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_SPL_ID",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_clinical_pharmacology",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_clinical_pharmacology_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_clinical_studies",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_clinical_studies_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_contraindications",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_contraindications_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_controlled_substance_DEA_schedule",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_DEA_schedule_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_dependence_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_dependence_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_disposal_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_disposal_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_dosage_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_dosage_forms_and_strengths_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_dosage_forms_and_strengths_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_abuse_dependence_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_abuse_dependence_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_lab_test_interference",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_lab_test_interference_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_drug_interactions",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_interactions_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_effective_time",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_effective_time_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_environmental_warning",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_environmental_warning_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_food_safety_warnings",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_general_precautions",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_general_precautions_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_geriatric_use",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_geriatric_use_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_dhcp_letter_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_dhcp_letter_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_health_claim",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_health_claims_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_document_id",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_document_id_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_inactive_ingredient",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_inactive_ingredient_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_indication",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_indications_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_info_for_owner_or_caregiver",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_info_for_owner_caregiver_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_info_for_patients_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_instructions_for_use",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_instructions_for_use_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_retrieve_drug_name_by_device_use",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_retrieve_device_use_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_child_safety_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_child_safety_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_labor_and_delivery_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_labor_and_delivery_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_lab_tests",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_lab_tests_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_mechanism_of_action_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_mechanism_of_action",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_microbiology",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_microbiology_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_nonclinical_toxicology_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_nonclinical_toxicology_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_nonteratogenic_effects",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_nonteratogenic_effects_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_info_for_nursing_mothers",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_info_for_nursing_mothers_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_other_safety_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_other_safety_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_overdosage_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_overdosage_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_principal_display_panel",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_principal_display_panel_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_retrieve_drug_names_by_patient_medication_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_retrieve_patient_medication_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_pediatric_use",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pediatric_use_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_pharmacodynamics",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pharmacodynamics_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_pharmacogenomics",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pharmacogenomics_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_pharmacokinetics",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pharmacokinetics_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_precautions",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_precautions_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_pregnancy_effects_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pregnancy_effects_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_pregnancy_or_breastfeeding_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_pregnancy_or_breastfeeding_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_contact_for_questions_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_recent_changes_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_reference",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_reference_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_residue_warning",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_risk",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_risk_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_route",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_route_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_safe_handling_warning",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_safe_handling_warnings_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_set_id",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_spl_indexing_data_elements",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_spl_indexing_data_elements_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_medication_guide",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_medication_guide_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_from_patient_package_insert",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_patient_package_insert_from_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_ingredient",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_ingredients_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_spl_unclassified_section_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_stop_use_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_stop_use_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_storage_and_handling_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_storage_and_handling_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_safety_summary",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_safety_summary_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_teratogenic_effects",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_teratogenic_effects_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_population_use",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_population_use_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_user_safety_warning_by_drug_names",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_user_safety_warning",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_name_by_warnings",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_warnings_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_warnings_and_cautions_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_warnings_and_cautions",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_when_using_info",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_brand_name_generic_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_do_not_use_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_purpose_info_by_drug_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_generic_name",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_indication_aggregated",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_names_by_indication_stats",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fda_drug_labeling_tools.json",
+    "tool": "FDA_get_drug_label_info_by_field_value",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "fatcat_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "fda_drug_adverse_event_detail_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "fda_gsrs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "fda_pharmacogenomic_biomarkers_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "figshare_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  }
+]

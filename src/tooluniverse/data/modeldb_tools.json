@@ -241,7 +241,7 @@
   {
     "name": "ModelDB_list_celltypes",
     "type": "BaseRESTTool",
-    "description": "List all neuron/cell type IDs available in ModelDB. Returns an array of cell type IDs that can be used with ModelDB_get_celltype for full details including name and morphology. ModelDB categorizes computational models by the neuron types they simulate, such as hippocampal pyramidal cells, Purkinje cells, cortical interneurons, etc. This is useful for finding what cell types have computational models available.",
+    "description": "List ModelDB neuron and cell type IDs for modeled systems such as CA1/CA3 pyramidal neurons or Purkinje cells. Use ModelDB_get_celltype to resolve an ID to details.",
     "parameter": {
       "type": "object",
       "properties": {},
@@ -274,6 +274,7 @@
       ]
     },
     "test_examples": [
+      {},
       {}
     ]
   },

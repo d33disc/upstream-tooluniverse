@@ -79,6 +79,9 @@
     "test_examples": [
       {
         "pmid": "33332779"
+      },
+      {
+        "pmcid": "PMC7781101"
       }
     ],
     "return_schema": {
@@ -129,6 +132,9 @@
     "test_examples": [
       {
         "pmid": "33332779"
+      },
+      {
+        "pmcid": "PMC7781101"
       }
     ],
     "return_schema": {
@@ -179,6 +185,9 @@
     "test_examples": [
       {
         "pmid": "33332779"
+      },
+      {
+        "pmcid": "PMC7781101"
       }
     ],
     "return_schema": {
@@ -229,6 +238,9 @@
     "test_examples": [
       {
         "pmid": "33332779"
+      },
+      {
+        "pmcid": "PMC7781101"
       }
     ],
     "return_schema": {

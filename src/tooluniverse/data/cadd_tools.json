@@ -161,6 +161,12 @@
                 "chrom": "7",
                 "start": 140753330,
                 "end": 140753340
+            },
+            {
+                "chrom": "17",
+                "start": 7674218,
+                "end": 7674228,
+                "version": "GRCh38-v1.7"
             }
         ],
         "return_schema": {

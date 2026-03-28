@@ -36,8 +36,13 @@
     },
     "test_examples": [
       {
-        "text": "This study investigates the efficacy of a new drug in treating Alzheimer's disease by conducting a double-blind, placebo-controlled trial involving 200 participants over a 12-month period. The methodology includes patient selection criteria, dosing schedules, and outcome measures.",
+        "text": "In a phase 3 trial of osimertinib for EGFR-mutant non-small cell lung cancer, 682 patients were randomized to osimertinib or comparator EGFR TKI. Progression-free survival improved substantially in the osimertinib arm, with fewer grade 3 adverse events and better CNS control.",
         "summary_length": "100",
+        "focus_area": "results"
+      },
+      {
+        "text": "Researchers performed a CRISPR loss-of-function screen in BRCA1-deficient breast cancer cells and identified ATR pathway dependence as a key vulnerability. Validation experiments showed stronger apoptosis after ATR inhibition in BRCA1-deficient than BRCA1-restored models.",
+        "summary_length": "75",
         "focus_area": "methodology"
       }
     ],
@@ -102,9 +107,17 @@
     },
     "test_examples": [
       {
-        "research_topic": "efficacy of drug X in treating condition Y",
-        "literature_content": "Abstracts and full-texts of relevant randomized controlled trials and cohort studies on drug X.",
+        "research_topic": "SGLT2 inhibitors for heart failure with preserved ejection fraction",
+        "literature_content": "The corpus includes the DELIVER and EMPEROR-Preserved randomized trials plus a recent meta-analysis summarizing cardiovascular death and hospitalization outcomes.",
         "focus_area": "therapeutic efficacy",
+        "study_types": "randomized controlled trials and meta-analyses",
+        "quality_level": "moderate and above",
+        "review_scope": "rapid review"
+      },
+      {
+        "research_topic": "PARP inhibitors in BRCA1/2-mutated metastatic breast cancer",
+        "literature_content": "Included studies summarize OlympiAD, EMBRACA, and follow-up safety reports on olaparib and talazoparib in germline BRCA-mutated disease.",
+        "focus_area": "safety profile",
         "study_types": "randomized controlled trials",
         "quality_level": "high quality only",
         "review_scope": "comprehensive systematic review"
@@ -159,9 +172,15 @@
     },
     "test_examples": [
       {
-        "context": "Recent studies show that chronic sleep deprivation alters hippocampal synaptic plasticity in rodents.",
-        "domain": "neuroscience",
+        "context": "Single-cell RNA-seq of EGFR-mutant lung tumors after osimertinib exposure shows expansion of AXL-high, YAP1-active persister cells.",
+        "domain": "oncology",
         "number_of_hypotheses": "3",
+        "hypothesis_format": "Mechanistic"
+      },
+      {
+        "context": "Longitudinal stool metagenomics in adults with type 2 diabetes shows that responders to metformin develop increased Akkermansia abundance after 12 weeks.",
+        "domain": "microbiome research",
+        "number_of_hypotheses": "2",
         "hypothesis_format": "If-Then Statements"
       }
     ],
@@ -202,8 +221,12 @@
     },
     "test_examples": [
       {
-        "hypothesis": "Increasing daily light exposure will significantly accelerate the growth rate of tomato plants.",
-        "design_description": "Two groups of tomato seedlings (n=30 each) will be grown under 6 hours vs. 12 hours of light daily. Plants will be randomized into groups, height measured weekly using a calibrated ruler, and data analyzed using repeated-measures ANOVA to test for growth rate differences."
+        "hypothesis": "Combining olaparib with ATR inhibition will improve response in BRCA1-deficient triple-negative breast cancer organoids.",
+        "design_description": "Thirty patient-derived organoid lines will be stratified by BRCA1 status, randomized to vehicle, olaparib, ceralasertib, or combination treatment, and assessed for viability, apoptosis, and DNA-damage markers over 14 days with blinded image analysis and mixed-effects modeling."
+      },
+      {
+        "hypothesis": "Time-restricted eating improves HbA1c in adults with type 2 diabetes receiving metformin.",
+        "design_description": "Adults with HbA1c 7.5-10% on stable metformin will be randomized 1:1 to 8-hour eating windows or standard meal timing for 16 weeks. The protocol includes continuous glucose monitoring, dietitian adherence checks, prespecified subgroup analyses, and intention-to-treat linear models."
       }
     ],
     "return_schema": {
@@ -237,7 +260,10 @@
     },
     "test_examples": [
       {
-        "raw_terms": "hypertension, diabetes"
+        "raw_terms": "brak1, egfrr, metformn"
+      },
+      {
+        "raw_terms": "trastuzimab, alzheimers diseaze, semaglutid"
       }
     ],
     "return_schema": {
@@ -283,9 +309,14 @@
     },
     "test_examples": [
       {
-        "paper_title": "Deep Learning for Protein Structure Prediction",
-        "abstract": "We propose a novel deep learning method to predict protein tertiary structures with high accuracy.",
-        "manuscript_text": "Introduction:\nProtein structure prediction remains a key challenge...\nMethods:\nWe developed a convolutional neural network...\nResults:\nOur approach achieves state-of-the-art performance..."
+        "paper_title": "Spatial transcriptomics identifies fibroblast niches driving anti-PD-1 resistance in melanoma",
+        "abstract": "We profiled resistant melanoma biopsies with spatial transcriptomics and identified fibroblast-rich niches associated with T-cell exclusion and poor anti-PD-1 response.",
+        "manuscript_text": "Introduction: Resistance to immune checkpoint blockade remains common in melanoma. Methods: We analyzed paired baseline and progression biopsies from 48 patients using spatial transcriptomics and multiplex imaging. Results: Fibroblast programs marked by TGF-beta signaling co-localized with exhausted T cells and predicted shorter progression-free survival. Discussion: Targeting fibroblast-mediated exclusion may enhance checkpoint sensitivity."
+      },
+      {
+        "paper_title": "Serum neurofilament light improves prediction of conversion from mild cognitive impairment to Alzheimer disease",
+        "abstract": "This multicenter cohort study evaluated whether serum neurofilament light improves prediction of progression from mild cognitive impairment to Alzheimer disease over 3 years.",
+        "manuscript_text": "Introduction: Blood biomarkers may improve risk stratification in prodromal Alzheimer disease. Methods: We enrolled 620 adults with mild cognitive impairment, measured baseline neurofilament light and amyloid markers, and fit Cox models for conversion. Results: Adding neurofilament light improved discrimination beyond age, APOE, and amyloid alone. Discussion: A low-cost blood biomarker panel may support enrollment and counseling decisions."
       }
     ],
     "return_schema": {
@@ -324,8 +355,12 @@
     },
     "test_examples": [
       {
-        "paper_title": "Deep Learning for Bioinformatics",
-        "literature_review": "This literature review covers deep learning applications in genomics and proteomics, highlighting key studies, summarizing methodologies, and identifying research gaps."
+        "paper_title": "KRAS G12C inhibition in metastatic colorectal cancer",
+        "literature_review": "The review summarizes adagrasib and sotorasib studies, compares response rates across tumor types, discusses adaptive EGFR signaling as a resistance mechanism, and notes gaps in first-line combination data."
+      },
+      {
+        "paper_title": "Blood biomarkers for long COVID",
+        "literature_review": "This section covers cytokine profiling, autoantibodies, viral persistence hypotheses, and metabolomics signatures, but gives limited attention to negative studies and cohort heterogeneity."
       }
     ],
     "return_schema": {
@@ -359,7 +394,10 @@
     },
     "test_examples": [
       {
-        "methods_section": "In this study, we conducted a randomized controlled trial with 200 participants to evaluate the effect of intervention X on outcome Y. Participants were randomly assigned to control or treatment groups, and all procedures were standardized and fully documented to ensure replicability."
+        "methods_section": "We conducted a multicenter randomized trial of semaglutide versus insulin glargine in adults with type 2 diabetes and obesity. Allocation was computer-generated, outcome assessors were blinded, HbA1c was measured centrally, and the sample-size calculation targeted 90% power to detect a 0.5% HbA1c difference."
+      },
+      {
+        "methods_section": "Tumor biopsies from 24 patients with EGFR-mutant lung cancer were profiled by single-cell RNA-seq before and after osimertinib. The workflow included prespecified QC thresholds, doublet removal, batch correction, and validation of key markers by immunohistochemistry."
       }
     ],
     "return_schema": {
@@ -392,7 +430,10 @@
     },
     "test_examples": [
       {
-        "analysis_section": "We performed t-tests with p<0.05 significance level"
+        "analysis_section": "Primary analysis used a Cox proportional hazards model adjusted for stage, age, and smoking history. We tested proportional hazards assumptions, controlled false discovery rate across biomarker panels, and reported effect sizes with 95% confidence intervals."
+      },
+      {
+        "analysis_section": "We compared 18 cytokines between treatment arms using separate unadjusted t-tests, reported only p-values below 0.05, and did not describe missing-data handling or prespecified subgroup analyses."
       }
     ],
     "return_schema": {
@@ -430,8 +471,12 @@
     },
     "test_examples": [
       {
-        "results_section": "In the treated group, the average response increased by 15% (p=0.02) compared to baseline, with confidence intervals showing robustness.",
-        "discussion_section": "These findings support the hypothesis that compound X enhances performance; however, variability across subjects suggests alternative factors may also contribute."
+        "results_section": "Patients receiving osimertinib had longer median progression-free survival and lower incidence of CNS progression than those receiving first-generation EGFR inhibitors.",
+        "discussion_section": "These findings support osimertinib as a preferred first-line option in EGFR-mutant disease, although resistance still emerged and the cohort was limited to common sensitizing mutations."
+      },
+      {
+        "results_section": "Metformin users in the observational cohort had lower HbA1c and fewer cardiovascular events than non-users after 12 months.",
+        "discussion_section": "The authors conclude metformin directly prevents cardiovascular disease in all adults with diabetes, despite residual confounding, treatment-selection bias, and incomplete adherence data."
       }
     ],
     "return_schema": {
@@ -464,7 +509,10 @@
     },
     "test_examples": [
       {
-        "manuscript_text": "In this study, we investigate the effects of X on Y. The methodology section outlines the experimental design and analysis."
+        "manuscript_text": "Background: BRCA1-mutated tumors often depend on DNA damage response pathways. Methods: We tested olaparib with ATR inhibition across organoid and xenograft models. Results: Combination therapy increased apoptosis and delayed regrowth. Conclusion: The manuscript is organized but several figure legends omit sample sizes and statistical tests."
+      },
+      {
+        "manuscript_text": "This paper investigates semaglutide and weight loss and it jumps from methods to conclusions without clear transitions. Figure references are inconsistent, abbreviations such as GLP-1RA are not defined at first mention, and several sentences are overly long and repetitive."
       }
     ],
     "return_schema": {
@@ -497,7 +545,10 @@
     },
     "test_examples": [
       {
-        "availability_statement": "Data available upon request from corresponding author"
+        "availability_statement": "Raw FASTQ files are deposited in GEO under accession GSE287451, analysis notebooks are available on GitHub, and the full xenograft protocol is archived on protocols.io."
+      },
+      {
+        "availability_statement": "Data are available from the corresponding author upon reasonable request; custom scripts and preprocessing steps are not provided."
       }
     ],
     "return_schema": {
@@ -530,7 +581,10 @@
     },
     "test_examples": [
       {
-        "ethics_section": "The study received approval from the Institutional Review Board at XYZ University. Participants provided written informed consent. No conflicts of interest were reported. Data were stored securely with encryption."
+        "ethics_section": "The study was approved by the Dana-Farber Cancer Institute IRB, all participants gave written informed consent, genomic data were de-identified before analysis, and conflicts of interest were disclosed."
+      },
+      {
+        "ethics_section": "All mouse experiments were approved by the institutional animal care and use committee, tumor-burden stopping criteria were prespecified, and reporting followed ARRIVE guidelines."
       }
     ],
     "return_schema": {
@@ -569,8 +623,12 @@
     },
     "test_examples": [
       {
-        "question": "What is the capital of France?",
-        "options": "A) Paris B) London C) Rome D) Berlin"
+        "question": "Which gene is most commonly mutated in high-grade serous ovarian cancer?",
+        "options": "A) TP53 B) EGFR C) KRAS D) IDH1"
+      },
+      {
+        "question": "What adverse effects should be monitored after starting trastuzumab?",
+        "options": ""
       }
     ],
     "return_schema": {
@@ -603,7 +661,10 @@
     },
     "test_examples": [
       {
-        "initial_protocol": "This study aims to test the efficacy of drug X in reducing blood pressure. We will recruit 100 participants, administer varying doses over 8 weeks, and measure systolic and diastolic pressure weekly."
+        "initial_protocol": "We will enroll patients with EGFR-mutant lung cancer starting osimertinib, collect plasma every 4 weeks, and measure ctDNA to predict resistance. Progression will be recorded from routine imaging and correlated with emergent EGFR and MET alterations."
+      },
+      {
+        "initial_protocol": "This trial will test whether a 12-week high-fiber diet lowers HbA1c in adults with type 2 diabetes. Participants will track meals in an app, wear continuous glucose monitors, and provide stool samples for microbiome sequencing at baseline and week 12."
       }
     ],
     "return_schema": {
@@ -659,10 +720,16 @@
     },
     "test_examples": [
       {
-        "source_code": "def add(a, b):\n    return a + b",
+        "source_code": "def parse_vcf_line(line):\n    fields = line.split(\"\\t\")\n    if len(fields) < 8:\n        return None\n    return {\"chrom\": fields[0], \"pos\": int(fields[1]), \"ref\": fields[3], \"alt\": fields[4]}",
         "language": "python",
         "analysis_depth": "comprehensive",
-        "domain_context": "web development"
+        "domain_context": "bioinformatics"
+      },
+      {
+        "source_code": "app.post(\"/variants\", async (req, res) => {\n  const rows = await db.query(`SELECT * FROM variants WHERE gene = \"${req.body.gene}\"`);\n  res.json(rows);\n});",
+        "language": "javascript",
+        "analysis_depth": "security-focused",
+        "domain_context": "clinical genomics web API"
       }
     ],
     "return_schema": {
@@ -724,10 +791,15 @@
     },
     "test_examples": [
       {
-        "tool_config": "{\"type\":\"XMLTool\",\"name\":\"SampleXMLParser\",\"description\":\"Parses XML data\"}",
-        "domain": "data-science",
-        "validation_aspects": "[\"accuracy\",\"methodology\",\"best-practices\"]",
-        "implementation_code": "def validate_tool(config):\n    pass"
+        "tool_config": "{\"type\":\"XMLTool\",\"name\":\"ClinVarVariantLookup\",\"description\":\"Retrieves ClinVar assertions for HGVS variants in BRCA1 and TP53.\"}",
+        "domain": "bioinformatics",
+        "validation_aspects": "[\"accuracy\", \"methodology\", \"best-practices\"]",
+        "implementation_code": "def normalize_hgvs(hgvs):\n    return hgvs.strip()"
+      },
+      {
+        "tool_config": "{\"type\":\"DatasetTool\",\"name\":\"TCGAGeneExpressionFetcher\",\"description\":\"Fetches normalized TCGA RNA-seq expression values for genes such as EGFR and KRAS across tumor cohorts.\"}",
+        "domain": "computational-biology",
+        "validation_aspects": "[\"data-quality\", \"scalability\", \"best-practices\"]"
       }
     ],
     "return_schema": {
@@ -873,13 +945,21 @@
     },
     "test_examples": [
       {
-        "tool_config": "{\"type\":\"ExampleTool\",\"name\":\"SampleTool\",\"description\":\"A sample tool for demonstration.\"}",
-        "test_cases": "[{\"input\":{},\"expected_output\":{}}]",
+        "tool_config": "{\"type\":\"DatasetTool\",\"name\":\"TCGAGeneExpressionFetcher\",\"description\":\"Fetches TCGA RNA-seq expression values for genes such as TP53 and BRCA1.\"}",
+        "test_cases": "[{\"input\":{\"gene\":\"TP53\",\"cohort\":\"BRCA\"},\"expected_output\":{\"gene\":\"TP53\"}},{\"input\":{\"gene\":\"BRCA1\",\"cohort\":\"OV\"},\"expected_output\":{\"gene\":\"BRCA1\"}}]",
         "evaluation_aspects": [
           "functionality",
           "usability",
-          "completeness",
-          "best_practices"
+          "completeness"
+        ]
+      },
+      {
+        "tool_config": "{\"type\":\"RESTTool\",\"name\":\"ChEMBLTargetDrugLookup\",\"description\":\"Looks up approved drugs for targets such as EGFR and HMGCR using ChEMBL.\"}",
+        "test_cases": "[{\"input\":{\"target\":\"EGFR\"},\"expected_output\":{\"target\":\"EGFR\"}},{\"input\":{\"target\":\"HMGCR\"},\"expected_output\":{\"target\":\"HMGCR\"}}]",
+        "evaluation_aspects": [
+          "functionality",
+          "best_practices",
+          "usability"
         ]
       }
     ],
@@ -937,10 +1017,17 @@
     },
     "test_examples": [
       {
-        "tool_name": "MoleculeAnalyzer",
-        "tool_description": "Analyzes molecular structures for bioinformatics research",
-        "tool_parameters": "{\"molecule_sequence\": \"string\", \"analysis_type\": \"string\"}",
+        "tool_name": "TP53VariantAnnotator",
+        "tool_description": "Annotates TP53 missense variants with ClinVar significance, protein consequence, and cancer relevance.",
+        "tool_parameters": "{\"variant_hgvs\":\"string\",\"genome_build\":\"string\"}",
         "category": "bioinformatics"
+      },
+      {
+        "tool_name": "MetforminAdverseEventSearcher",
+        "tool_description": "Searches pharmacovigilance records for metformin-associated lactic acidosis, gastrointestinal toxicity, and drug-drug interactions.",
+        "tool_parameters": "{\"drug_name\":\"string\",\"event_term\":\"string\",\"date_range\":\"string\"}",
+        "category": "clinical pharmacology",
+        "existing_labels": "[\"drug safety\", \"pharmacovigilance\"]"
       }
     ],
     "return_schema": {
@@ -974,7 +1061,10 @@
     },
     "test_examples": [
       {
-        "question": "What are the benefits of meditation?"
+        "question": "How would you explain the difference between germline BRCA1 testing and somatic tumor sequencing to a patient with ovarian cancer?"
+      },
+      {
+        "question": "What should a patient know about common side effects and dose-escalation when starting semaglutide for type 2 diabetes?"
       }
     ],
     "return_schema": {
@@ -1014,55 +1104,23 @@
     },
     "test_examples": [
       {
-        "tool_config": "{ \"type\": \"AgenticTool\", \"name\": \"ExampleTool\", \"description\": \"Example description\" }",
+        "tool_config": "{\"type\":\"AlphaFoldRESTTool\",\"name\":\"alphafold_get_summary\",\"description\":\"Returns AlphaFold model confidence and coverage for UniProt accessions such as P04637.\"}"
+      },
+      {
+        "tool_config": "{\"type\":\"AddgeneTool\",\"name\":\"Addgene_search_plasmids\",\"description\":\"Searches Addgene for plasmids by name, vector type, or organism.\"}",
         "tool_type_mappings": {
-          "Embedding Store": [
-            "EmbeddingDatabase"
-          ],
           "Database": [
             "XMLTool",
             "DatasetTool"
+          ],
+          "ML Model": [
+            "AlphaFoldRESTTool"
           ],
           "Scientific Software Package": [
             "PackageTool"
           ],
           "AI Agent": [
             "AgenticTool"
-          ],
-          "ML Model": [
-            "ADMETAITool",
-            "AlphaFoldRESTTool",
-            "boltz2_docking",
-            "compute_depmap24q2_gene_correlations",
-            "run_compass_prediction",
-            "run_pinnacle_ppi_retrieval",
-            "run_transcriptformer_embedding_retrieval",
-            "get_abstract_from_patent_app_number",
-            "get_claims_from_patent_app_number",
-            "get_full_text_from_patent_app_number"
-          ],
-          "Human Expert Feedback": [
-            "mcp_auto_loader_human_expert",
-            "consult_human_expert",
-            "get_expert_response",
-            "get_expert_status",
-            "list_pending_expert_requests",
-            "submit_expert_response"
-          ],
-          "MCP": [
-            "MCPAutoLoaderTool"
-          ],
-          "Compositional Tool": [
-            "ComposeTool"
-          ],
-          "Tool Finder Tool": [
-            "ToolFinderEmbedding",
-            "ToolFinderLLM",
-            "ToolFinderKeyword"
-          ],
-          "Special Tool": [
-            "Finish",
-            "CallAgent"
           ]
         }
       }
@@ -1107,13 +1165,23 @@
     "test_examples": [
       {
         "metadata_list": [
-          "Gene Expression",
-          "gene_expression",
-          "Gene-Expression",
-          "protein analysis",
-          "Protein-Analysis",
-          "NCBI",
-          "national center for biotechnology information"
+          "PubMed",
+          "pub med",
+          "NCBI PubMed",
+          "UniProt",
+          "UniProtKB",
+          "uniprotkb"
+        ],
+        "limit": 3
+      },
+      {
+        "metadata_list": [
+          "single-cell RNA-seq",
+          "scRNA-seq",
+          "scRNAseq",
+          "single cell transcriptomics",
+          "GTEx",
+          "gtex portal"
         ]
       }
     ],
@@ -1154,8 +1222,12 @@
     },
     "test_examples": [
       {
-        "tool_a": "{\"name\": \"SequenceAligner\", \"type\": \"PackageTool\", \"description\": \"Aligns DNA or protein sequences based on optimal scoring.\"}",
-        "other_tools": "[{\"name\": \"PhyloTreeBuilder\", \"type\": \"PackageTool\", \"description\": \"Constructs phylogenetic trees from sequence alignments.\"}, {\"name\": \"StructureVisualizer\", \"type\": \"PackageTool\", \"description\": \"Visualizes 3D molecular structures from coordinate data.\"}]"
+        "tool_a": "{\"name\":\"UniProt_search\",\"type\":\"XMLTool\",\"description\":\"Searches UniProt for proteins by gene symbol, accession, or organism.\"}",
+        "other_tools": "[{\"name\":\"alphafold_get_summary\",\"type\":\"AlphaFoldRESTTool\",\"description\":\"Retrieves AlphaFold model summaries for UniProt accessions.\"},{\"name\":\"ClinVar_search_variants\",\"type\":\"XMLTool\",\"description\":\"Searches ClinVar for clinically interpreted variants by gene or HGVS.\"}]"
+      },
+      {
+        "tool_a": "{\"name\":\"ChEMBL_search_targets\",\"type\":\"XMLTool\",\"description\":\"Searches ChEMBL targets such as EGFR, ALK, and HMGCR.\"}",
+        "other_tools": "[{\"name\":\"DrugBank_get_drug\",\"type\":\"XMLTool\",\"description\":\"Retrieves detailed drug records including indications and interactions.\"},{\"name\":\"ADMETAI_predict_toxicity\",\"type\":\"ADMETAITool\",\"description\":\"Predicts toxicity endpoints from SMILES strings.\"}]"
       }
     ],
     "return_schema": {
