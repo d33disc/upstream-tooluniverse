@@ -493,5 +493,307 @@
     "tool": "NEB_Tm_list_polymerases",
     "action": "skipped",
     "reason": "good: 3 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_neuron",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_search_neurons",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_morphometry",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_field_values",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_list_collections",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_get_collection",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_list_collection_images",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_get_image",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nextstrain_tools.json",
+    "tool": "Nextstrain_list_datasets",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nextstrain_tools.json",
+    "tool": "Nextstrain_get_dataset",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nhanes_tools.json",
+    "tool": "nhanes_get_dataset_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nhanes_tools.json",
+    "tool": "nhanes_search_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nominatim_tools.json",
+    "tool": "Nominatim_geocode",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nominatim_tools.json",
+    "tool": "Nominatim_reverse_geocode",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_alphafold2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_alphafold2_multimer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_esmfold",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_openfold2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_openfold3",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_boltz2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_proteinmpnn",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_rfdiffusion",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_diffdock",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_genmol",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_molmim",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_evo2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_msa_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_esm2_650m",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_maisi",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_vista3d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_point_metadata",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_active_alerts",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "obis_tools.json",
+    "tool": "OBIS_search_taxa",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "obis_tools.json",
+    "tool": "OBIS_search_occurrences",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_myhealthfinder",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_itemlist",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_topicsearch",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_outlink_fetch",
+    "action": "added_examples",
+    "count": 2,
+    "note": "replaced placeholder empty-urls example"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_terms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_ontology_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_ontologies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_children",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_ancestors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_find_similar_terms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_terms",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_ontology_info",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_ontologies",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_info",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_find_similar_terms",
+    "action": "improved_description"
   }
 ]
