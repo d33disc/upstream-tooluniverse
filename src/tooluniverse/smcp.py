@@ -884,14 +884,13 @@ class SMCP(FastMCP):
             tool_name = self._select_search_tool(search_method, use_advanced_search)
 
             # Prepare unified function call - all search tools now use same interface
-            function_call = {
-                "name": tool_name,
-                "arguments": {"description": query, "limit": limit},
-            }
+            call_args: dict[str, Any] = {"description": query, "limit": limit}
 
             # Add categories only if provided to avoid validation issues
             if categories is not None:
-                function_call["arguments"]["categories"] = categories
+                call_args["categories"] = categories
+
+            function_call = {"name": tool_name, "arguments": call_args}
 
             # Execute the search tool
             try:
@@ -918,6 +917,26 @@ class SMCP(FastMCP):
                 serialized = json.dumps(
                     {"tools": [], "result": str(result)}, ensure_ascii=False
                 )
+
+            # Annotate tools with health status (optional — cache may not exist)
+            try:
+                parsed = json.loads(serialized)
+                tools = parsed.get("tools", []) if isinstance(parsed, dict) else []
+                if tools:
+                    from tooluniverse.tool_health import ToolHealthCache
+
+                    _health_cache = ToolHealthCache()
+                    for tool in tools:
+                        name = tool.get("name", "")
+                        status = _health_cache.is_live(name)
+                        if status is False:
+                            tool["_health"] = "broken"
+                            tool["_health_warning"] = _health_cache.warn(name)
+                        elif status is True:
+                            tool["_health"] = "live"
+                    serialized = json.dumps(parsed, ensure_ascii=False)
+            except Exception:
+                pass
 
             # Guard against oversized responses
             max_chars = 100_000
@@ -1721,7 +1740,7 @@ class SMCP(FastMCP):
 
                     if is_required:
                         # Required parameter with description and schema info
-                        annotated_type = Annotated[python_type, pydantic_field]
+                        annotated_type = Annotated[python_type, pydantic_field]  # type: ignore[valid-type]
                         param_annotations[safe_name] = annotated_type
                         func_params.append(
                             inspect.Parameter(
@@ -1732,7 +1751,7 @@ class SMCP(FastMCP):
                         )
                     else:
                         # Optional parameter with description, schema info and default value
-                        annotated_type = Annotated[
+                        annotated_type = Annotated[  # type: ignore[misc]
                             Union[python_type, type(None)], pydantic_field
                         ]
                         param_annotations[safe_name] = annotated_type
@@ -1945,7 +1964,7 @@ class SMCP(FastMCP):
 
             # Set function metadata (use exposed_name for MCP registration)
             dynamic_tool_function.__name__ = exposed_name
-            dynamic_tool_function.__signature__ = inspect.Signature(func_params)
+            dynamic_tool_function.__signature__ = inspect.Signature(func_params)  # type: ignore[attr-defined]
             annotations = param_annotations.copy()
             annotations["return"] = str
             dynamic_tool_function.__annotations__ = annotations
