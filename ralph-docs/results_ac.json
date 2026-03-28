@@ -1597,5 +1597,216 @@
     "tool": "pdbe_get_entry_observed_residues_ratio",
     "action": "skipped",
     "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_compound_tools.json",
+    "tool": "PDBe_get_compound_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_compound_tools.json",
+    "tool": "PDBe_get_compound_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_bound_molecules",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_uniprot_structure_coverage",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_uniprot_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_compound_details",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_funpdbe_annotations",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_summary_stats",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_ligand_sites",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_interface_residues",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_superposition_clusters",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_ligands_tools.json",
+    "tool": "PDBe_get_structure_ligands",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_ligands_tools.json",
+    "tool": "PDBe_get_residue_listing",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_search_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_get_compound",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_search_by_organism",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_best_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_pdb_to_uniprot",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_all_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_validation_tools.json",
+    "tool": "PDBeValidation_get_quality_scores",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_validation_tools.json",
+    "tool": "PDBeValidation_get_outlier_residues",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_interfaces",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_assemblies",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_monomer_analysis",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_search_families",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_detail",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_proteins",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_protein_annotations",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_search_clans",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_proteomes",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_search_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_gene_protein",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_list_programs",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool"
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_study_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_clinical_data",
+    "action": "added_examples",
+    "count": 2
   }
 ]
