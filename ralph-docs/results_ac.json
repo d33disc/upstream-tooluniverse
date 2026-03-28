@@ -984,5 +984,215 @@
     "tool": "OpenMeteo_get_marine_forecast",
     "action": "skipped",
     "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_weather_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_historical_weather",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_geocode_location",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_air_quality",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openaire_tools.json",
+    "tool": "OpenAIRE_search_publications",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_literature_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_works",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_work",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_work_by_doi",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_authors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_author",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_institutions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_institution",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_references",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_citations",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_citation_count",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencravat_tools.json",
+    "tool": "OpenCRAVAT_annotate_variant",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opencravat_tools.json",
+    "tool": "OpenCRAVAT_list_annotators",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_search_drug_approvals",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_get_approval_history",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_get_approved_products",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_search_drug_labels",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_get_drug_label",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_list_drug_classes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_labels",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_events",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_ndc",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_device_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_device_510k",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_food_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfoodfacts_tools.json",
+    "tool": "OpenFoodFacts_search_products",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfoodfacts_tools.json",
+    "tool": "OpenFoodFacts_get_product",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openml_tools.json",
+    "tool": "OpenML_search_datasets",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openml_tools.json",
+    "tool": "OpenML_get_dataset",
+    "action": "skipped",
+    "reason": "good: 3 examples"
   }
 ]
