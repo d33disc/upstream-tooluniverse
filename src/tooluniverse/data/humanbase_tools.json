@@ -68,6 +68,26 @@
         "max_node": 3,
         "interaction": "co-expression",
         "string_mode": true
+      },
+      {
+        "gene_list": [
+          "EGFR",
+          "KRAS",
+          "PIK3CA"
+        ],
+        "tissue": "lung",
+        "max_node": 5,
+        "string_mode": true
+      },
+      {
+        "gene_list": [
+          "APOE",
+          "PSEN1"
+        ],
+        "tissue": "brain-v3",
+        "max_node": 10,
+        "interaction": "tf-binding",
+        "string_mode": false
       }
     ],
     "return_schema": {
