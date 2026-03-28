@@ -235,7 +235,7 @@
     "file": "monarch_tools.json",
     "tool": "Monarch_get_gene_diseases",
     "action": "improved_description",
-    "old": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene→disease across species for hypothesis generation.",
+    "old": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene\u2192disease across species for hypothesis generation.",
     "new": "Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and evidence-backed associations for the gene."
   },
   {
@@ -307,5 +307,191 @@
     "file": "nca_tools.json",
     "action": "skipped",
     "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_gene",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_gene_by_symbol",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_taxonomy",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_suggest_taxonomy",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIGene_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIGene_get_summary",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIProtein_get_summary",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_search_nucleotide",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_fetch_accessions",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_get_sequence",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_search_runs",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_get_run_info",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_get_download_urls",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_link_to_biosample",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_to_hgvs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_hgvs_to_spdi",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_equivalents",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_canonical",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_rsid_lookup",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_cactus_tools.json",
+    "tool": "NCICACTUS_resolve",
+    "action": "skipped",
+    "reason": "good: 4 examples"
+  },
+  {
+    "file": "nci_drugdict_tools.json",
+    "tool": "NCIDrugDict_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nci_drugdict_tools.json",
+    "tool": "NCIDrugDict_get_drug",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_search",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_get_concept",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_get_children",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_search_networks",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_get_network_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_get_network",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "neb_tm_tools.json",
+    "tool": "NEB_Tm_calculate",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neb_tm_tools.json",
+    "tool": "NEB_Tm_list_polymerases",
+    "action": "skipped",
+    "reason": "good: 3 examples"
   }
 ]
