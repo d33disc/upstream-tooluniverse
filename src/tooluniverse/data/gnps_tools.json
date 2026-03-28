@@ -24,6 +24,9 @@
       },
       {
         "usi": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000579622"
+      },
+      {
+        "usi": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000578835"
       }
     ],
     "return_schema": {
@@ -109,6 +112,10 @@
     "test_examples": [
       {
         "usi1": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00005435737",
+        "usi2": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000579622"
+      },
+      {
+        "usi1": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000578835",
         "usi2": "mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000579622"
       }
     ],
