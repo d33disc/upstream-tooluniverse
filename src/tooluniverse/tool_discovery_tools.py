@@ -167,19 +167,20 @@ class GrepToolsTool(BaseTool):
                         }
                     )
 
-        # Annotate with health status, then sort live before broken
+        # Annotate with health status, then sort live before stale before broken
         try:
             from tooluniverse.tool_health import ToolHealthCache
 
             _hc = ToolHealthCache()
             for tool in matching_tools:
-                status = _hc.is_live(tool.get("name", ""))
-                if status is False:
-                    tool["_health"] = "broken"
-                    tool["_health_warning"] = _hc.warn(tool.get("name", ""))
-                elif status is True:
-                    tool["_health"] = "live"
-            matching_tools.sort(key=lambda t: 0 if t.get("_health") != "broken" else 1)
+                name = tool.get("name", "")
+                status = _hc.health_status(name)
+                if status is not None:
+                    tool["_health"] = status
+                    if status in ("broken", "stale"):
+                        tool["_health_warning"] = _hc.warn(name)
+            _SORT_KEY = {"live": 0, "stale": 1, "broken": 2}
+            matching_tools.sort(key=lambda t: _SORT_KEY.get(t.get("_health", ""), 0))
         except Exception:
             pass
 

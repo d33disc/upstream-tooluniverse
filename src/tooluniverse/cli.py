@@ -549,15 +549,18 @@ def _print_result(result: Any, args: argparse.Namespace, render_fn=None) -> None
 
 
 def _apply_health_filter(result: dict) -> dict:
-    """Remove broken tools from result (used when --filter-healthy is active)."""
+    """Remove broken/stale tools from result (used when --filter-healthy is active)."""
+    _UNHEALTHY = {"broken", "stale"}
     if not isinstance(result, dict) or "error" in result:
         return result
     if "tools" in result and isinstance(result["tools"], list):
-        result["tools"] = [t for t in result["tools"] if t.get("_health") != "broken"]
+        result["tools"] = [
+            t for t in result["tools"] if t.get("_health") not in _UNHEALTHY
+        ]
         result["total_matches"] = len(result["tools"])
     if "tools_by_category" in result and isinstance(result["tools_by_category"], dict):
         result["tools_by_category"] = {
-            cat: [t for t in tools if t.get("_health") != "broken"]
+            cat: [t for t in tools if t.get("_health") not in _UNHEALTHY]
             for cat, tools in result["tools_by_category"].items()
         }
     return result

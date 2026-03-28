@@ -928,13 +928,13 @@ class SMCP(FastMCP):
                     _health_cache = ToolHealthCache()
                     for tool in tools:
                         name = tool.get("name", "")
-                        status = _health_cache.is_live(name)
-                        if status is False:
-                            tool["_health"] = "broken"
-                            tool["_health_warning"] = _health_cache.warn(name)
-                        elif status is True:
-                            tool["_health"] = "live"
-                    tools.sort(key=lambda t: 0 if t.get("_health") != "broken" else 1)
+                        status = _health_cache.health_status(name)
+                        if status is not None:
+                            tool["_health"] = status
+                            if status in ("broken", "stale"):
+                                tool["_health_warning"] = _health_cache.warn(name)
+                    _SORT_KEY = {"live": 0, "stale": 1, "broken": 2}
+                    tools.sort(key=lambda t: _SORT_KEY.get(t.get("_health", ""), 0))
                     serialized = json.dumps(parsed, ensure_ascii=False)
             except Exception:
                 pass

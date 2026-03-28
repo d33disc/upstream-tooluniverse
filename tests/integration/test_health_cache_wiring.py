@@ -1,5 +1,5 @@
 """
-Task 6: End-to-end integration test for health cache → tool finder wiring.
+Tasks 6-7: End-to-end integration test for health cache → tool finder wiring.
 
 Uses direct imports (not subprocess) to avoid editable-install conflicts between
 concurrent worktrees sharing the same venv.
@@ -7,11 +7,17 @@ concurrent worktrees sharing the same venv.
 Verifies:
 1. find "adverse event drug safety" returns SIDER annotated as broken, FAERS as live
 2. Live tools sort before broken tools
-3. --filter-healthy (via _apply_health_filter) excludes broken tools
+3. --filter-healthy (via _apply_health_filter) excludes broken/stale tools
 4. grep command also carries health annotations
+5. Stale broken records get _health="stale" instead of "broken" (Task 7)
+6. Stale sort order: live < stale < broken
+7. --filter-healthy also excludes stale tools (Task 7)
 """
 
 import json
+import tempfile
+import time
+from pathlib import Path
 
 import pytest
 
@@ -145,3 +151,100 @@ class TestHealthCacheWiring:
                 assert "_health" not in t, (
                     f"{t['name']}: _health key should be absent for unknown tools, not None"
                 )
+
+
+@pytest.mark.integration
+class TestStaleHealthRecords:
+    """Task 7: stale broken records use _health='stale' instead of 'broken'."""
+
+    @pytest.fixture
+    def stale_cache(self, tmp_path):
+        """Cache with one old-broken, one recent-broken, one live tool."""
+        import json
+        from tooluniverse.tool_health import ToolHealthCache, STALE_DAYS
+
+        p = tmp_path / "health.json"
+        old_epoch = time.time() - (STALE_DAYS + 1) * 86400
+        now_epoch = time.time()
+        p.write_text(
+            json.dumps(
+                {
+                    "OldBroken": {
+                        "status": "broken",
+                        "detail": "timeout",
+                        "tested": "2025-01-01",
+                        "tested_epoch": old_epoch,
+                    },
+                    "RecentBroken": {
+                        "status": "broken",
+                        "detail": "error",
+                        "tested": "2026-03-28",
+                        "tested_epoch": now_epoch,
+                    },
+                    "LiveTool": {
+                        "status": "live",
+                        "detail": "passed",
+                        "tested": "2026-03-28",
+                        "tested_epoch": now_epoch,
+                    },
+                }
+            )
+        )
+        return ToolHealthCache(path=p)
+
+    def test_old_broken_becomes_stale(self, stale_cache):
+        assert stale_cache.health_status("OldBroken") == "stale"
+
+    def test_recent_broken_stays_broken(self, stale_cache):
+        assert stale_cache.health_status("RecentBroken") == "broken"
+
+    def test_live_stays_live(self, stale_cache):
+        assert stale_cache.health_status("LiveTool") == "live"
+
+    def test_unknown_returns_none(self, stale_cache):
+        assert stale_cache.health_status("NonExistent") is None
+
+    def test_stale_warn_message(self, stale_cache):
+        msg = stale_cache.warn("OldBroken")
+        assert msg is not None
+        assert "stale" in msg.lower()
+        assert "--refresh" in msg
+
+    def test_broken_warn_message(self, stale_cache):
+        msg = stale_cache.warn("RecentBroken")
+        assert msg is not None
+        assert "WARNING" in msg
+        assert "failed health check" in msg
+
+    def test_live_warn_is_none(self, stale_cache):
+        assert stale_cache.warn("LiveTool") is None
+
+    def test_stale_sort_order(self):
+        """Sort key: live=0 < stale=1 < broken=2."""
+        tools = [
+            {"name": "A", "_health": "broken"},
+            {"name": "B", "_health": "stale"},
+            {"name": "C", "_health": "live"},
+            {"name": "D"},  # unknown
+        ]
+        _SORT_KEY = {"live": 0, "stale": 1, "broken": 2}
+        tools.sort(key=lambda t: _SORT_KEY.get(t.get("_health", ""), 0))
+        names = [t["name"] for t in tools]
+        # live and unknown first, stale next, broken last
+        assert names.index("C") < names.index("B") < names.index("A")
+
+    def test_filter_healthy_excludes_stale(self):
+        from tooluniverse.cli import _apply_health_filter
+
+        result = {
+            "tools": [
+                {"name": "A", "_health": "live"},
+                {"name": "B", "_health": "stale"},
+                {"name": "C", "_health": "broken"},
+            ]
+        }
+        filtered = _apply_health_filter(result)
+        names = {t["name"] for t in filtered["tools"]}
+        assert "A" in names
+        assert "B" not in names, "stale tools must be excluded by --filter-healthy"
+        assert "C" not in names, "broken tools must be excluded by --filter-healthy"
