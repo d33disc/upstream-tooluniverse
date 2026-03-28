@@ -2216,5 +2216,155 @@
     "action": "improved_examples",
     "old": "1 example",
     "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "wikipedia_ext_tools.json",
+    "tool": "Wikipedia_get_featured_content",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_get_content",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_get_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_get_indicator",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_get_country",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_search_indicators",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_expression",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "worms_tools.json",
+    "tool": "WoRMS_search_species",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xenbase_tools.json",
+    "tool": "Xenbase_search_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xenbase_tools.json",
+    "tool": "Xenbase_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_search_records",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_record",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_record_files",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_list_licenses",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_license",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_orthologs",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_alleles",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_expression",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_allele",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "tool_page_index.json",
+    "tool": "N/A",
+    "action": "skipped",
+    "reason": "mapping file - not tool configs"
   }
 ]
