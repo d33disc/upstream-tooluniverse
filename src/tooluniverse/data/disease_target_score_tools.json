@@ -81,11 +81,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "datasourceId": "chembl",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "datasourceId": "chembl", "pageSize": 100},
+      {"efoId": "EFO_0000401", "datasourceId": "eva", "pageSize": 50},
+      {"efoId": "EFO_0000616", "datasourceId": "cancer_gene_census", "pageSize": 100}
     ]
   },
   {
@@ -166,10 +164,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -242,10 +239,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -318,10 +314,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -394,10 +389,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -470,10 +464,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -546,10 +539,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -622,10 +614,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   },
   {
@@ -774,10 +765,9 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {
-        "efoId": "EFO_0000339",
-        "pageSize": 100
-      }
+      {"efoId": "EFO_0000339", "pageSize": 100},
+      {"efoId": "EFO_0000401", "pageSize": 50},
+      {"efoId": "EFO_0000616", "pageSize": 100}
     ]
   }
 ]

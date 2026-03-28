@@ -46,12 +46,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_bliss",
-        "effect_a": 0.3,
-        "effect_b": 0.4,
-        "effect_combination": 0.58
-      }
+      {"operation": "calculate_bliss", "effect_a": 0.3, "effect_b": 0.4, "effect_combination": 0.58},
+      {"operation": "calculate_bliss", "effect_a": 0.25, "effect_b": 0.35, "effect_combination": 0.50}
     ]
   },
   {
@@ -98,12 +94,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_hsa",
-        "effects_a": [0.1, 0.2, 0.35, 0.5],
-        "effects_b": [0.15, 0.25, 0.4, 0.55],
-        "effects_combo": [0.3, 0.5, 0.65, 0.75]
-      }
+      {"operation": "calculate_hsa", "effects_a": [0.1, 0.2, 0.35, 0.5], "effects_b": [0.15, 0.25, 0.4, 0.55], "effects_combo": [0.3, 0.5, 0.65, 0.75]},
+      {"operation": "calculate_hsa", "effects_a": [0.05, 0.15, 0.30, 0.45], "effects_b": [0.10, 0.20, 0.35, 0.50], "effects_combo": [0.25, 0.40, 0.60, 0.70]}
     ]
   },
   {
@@ -151,17 +143,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_zip",
-        "doses_a": [0, 0.1, 1.0, 10.0],
-        "doses_b": [0, 0.1, 1.0, 10.0],
-        "viability_matrix": [
-          [100, 90, 70, 50],
-          [95, 75, 55, 35],
-          [80, 60, 40, 20],
-          [65, 45, 25, 10]
-        ]
-      }
+      {"operation": "calculate_zip", "doses_a": [0, 0.1, 1.0, 10.0], "doses_b": [0, 0.1, 1.0, 10.0], "viability_matrix": [[100, 90, 70, 50], [95, 75, 55, 35], [80, 60, 40, 20], [65, 45, 25, 10]]},
+      {"operation": "calculate_zip", "doses_a": [0, 1, 10, 100], "doses_b": [0, 1, 10, 100], "viability_matrix": [[100, 85, 60, 40], [90, 70, 45, 25], [75, 55, 30, 15], [55, 35, 18, 8]]}
     ]
   },
   {
@@ -229,16 +212,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_loewe",
-        "doses_a_single": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "effects_a_single": [0.02, 0.08, 0.30, 0.65, 0.85],
-        "doses_b_single": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "effects_b_single": [0.03, 0.10, 0.35, 0.70, 0.90],
-        "dose_a_combo": 1.0,
-        "dose_b_combo": 1.0,
-        "effect_combo": 0.75
-      }
+      {"operation": "calculate_loewe", "doses_a_single": [0.01, 0.1, 1.0, 10.0, 100.0], "effects_a_single": [0.02, 0.08, 0.30, 0.65, 0.85], "doses_b_single": [0.01, 0.1, 1.0, 10.0, 100.0], "effects_b_single": [0.03, 0.10, 0.35, 0.70, 0.90], "dose_a_combo": 1.0, "dose_b_combo": 1.0, "effect_combo": 0.75},
+      {"operation": "calculate_loewe", "doses_a_single": [0.1, 1.0, 10.0, 100.0], "effects_a_single": [0.05, 0.20, 0.50, 0.80], "doses_b_single": [0.1, 1.0, 10.0, 100.0], "effects_b_single": [0.08, 0.25, 0.55, 0.85], "dose_a_combo": 10.0, "dose_b_combo": 10.0, "effect_combo": 0.82}
     ]
   },
   {
@@ -312,17 +287,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_ci",
-        "doses_a_single": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "effects_a_single": [0.02, 0.08, 0.30, 0.65, 0.85],
-        "doses_b_single": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "effects_b_single": [0.03, 0.10, 0.35, 0.70, 0.90],
-        "dose_a_combo": 1.0,
-        "dose_b_combo": 1.0,
-        "effect_combo": 0.75,
-        "assumption": "mutually_exclusive"
-      }
+      {"operation": "calculate_ci", "doses_a_single": [0.01, 0.1, 1.0, 10.0, 100.0], "effects_a_single": [0.02, 0.08, 0.30, 0.65, 0.85], "doses_b_single": [0.01, 0.1, 1.0, 10.0, 100.0], "effects_b_single": [0.03, 0.10, 0.35, 0.70, 0.90], "dose_a_combo": 1.0, "dose_b_combo": 1.0, "effect_combo": 0.75, "assumption": "mutually_exclusive"},
+      {"operation": "calculate_ci", "doses_a_single": [0.1, 1.0, 10.0, 100.0], "effects_a_single": [0.05, 0.20, 0.50, 0.80], "doses_b_single": [0.1, 1.0, 10.0, 100.0], "effects_b_single": [0.08, 0.25, 0.55, 0.85], "dose_a_combo": 10.0, "dose_b_combo": 10.0, "effect_combo": 0.82, "assumption": "mutually_non_exclusive"}
     ]
   }
 ]
