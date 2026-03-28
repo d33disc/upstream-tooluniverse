@@ -19,6 +19,7 @@
       }
     },
     "test_examples": [
+      {},
       {}
     ],
     "label": ["AOPWiki", "Toxicology", "Adverse Outcome Pathway"],

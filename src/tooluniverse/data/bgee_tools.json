@@ -285,6 +285,7 @@
     },
     "type": "BgeeTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {

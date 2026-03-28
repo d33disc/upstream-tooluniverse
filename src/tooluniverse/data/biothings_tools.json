@@ -412,7 +412,12 @@
     "type": "MyVariantTool",
     "test_examples": [
       {
-        "variant_id": "chr1:g.218631822G>A"
+        "variant_id": "chr17:g.43092919G>A",
+        "fields": "clinvar,dbsnp,cadd"
+      },
+      {
+        "variant_id": "chr7:g.140453136A>T",
+        "fields": "clinvar,dbsnp,dbnsfp"
       }
     ],
     "return_schema": {

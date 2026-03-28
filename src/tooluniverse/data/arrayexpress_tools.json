@@ -107,6 +107,9 @@
     "test_examples": [
       {
         "experiment_id": "E-GEOD-26319"
+      },
+      {
+        "experiment_id": "E-MTAB-513"
       }
     ]
   },
@@ -150,6 +153,9 @@
     "test_examples": [
       {
         "experiment_id": "E-GEOD-26319"
+      },
+      {
+        "experiment_id": "E-MTAB-513"
       }
     ]
   },
@@ -183,6 +189,9 @@
     "test_examples": [
       {
         "experiment_id": "E-GEOD-26319"
+      },
+      {
+        "experiment_id": "E-MTAB-513"
       }
     ]
   }

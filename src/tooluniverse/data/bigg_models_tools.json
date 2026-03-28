@@ -38,6 +38,9 @@
     "test_examples": [
       {
         "operation": "list_models"
+      },
+      {
+        "operation": "list_models"
       }
     ]
   },
@@ -84,6 +87,10 @@
       {
         "operation": "get_model",
         "model_id": "iJO1366"
+      },
+      {
+        "operation": "get_model",
+        "model_id": "Recon3D"
       }
     ]
   },
@@ -130,6 +137,10 @@
       {
         "operation": "get_model_reactions",
         "model_id": "e_coli_core"
+      },
+      {
+        "operation": "get_model_reactions",
+        "model_id": "iMM904"
       }
     ]
   },
@@ -181,6 +192,11 @@
         "operation": "get_reaction",
         "reaction_id": "GAPD",
         "model_id": "iJO1366"
+      },
+      {
+        "operation": "get_reaction",
+        "reaction_id": "PGI",
+        "model_id": "universal"
       }
     ]
   },
@@ -230,8 +246,13 @@
     "test_examples": [
       {
         "operation": "get_metabolite",
-        "metabolite_id": "g3p",
+        "metabolite_id": "glc__D",
         "model_id": "universal"
+      },
+      {
+        "operation": "get_metabolite",
+        "metabolite_id": "atp_c",
+        "model_id": "iJO1366"
       }
     ]
   },
@@ -287,6 +308,11 @@
         "operation": "search",
         "query": "glucose",
         "search_type": "metabolites"
+      },
+      {
+        "operation": "search",
+        "query": "gapA",
+        "search_type": "genes"
       }
     ]
   },
@@ -316,6 +342,9 @@
       }
     },
     "test_examples": [
+      {
+        "operation": "get_database_version"
+      },
       {
         "operation": "get_database_version"
       }

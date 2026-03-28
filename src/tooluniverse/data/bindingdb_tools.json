@@ -131,7 +131,11 @@
     "test_examples": [
       {
         "affinity_cutoff": 10000,
-        "uniprot_ids": "P00176,P00183"
+        "uniprot_ids": "P00533,P04626"
+      },
+      {
+        "affinity_cutoff": 100,
+        "uniprot_ids": "P00533,P04626,P15056"
       }
     ]
   },
@@ -274,6 +278,10 @@
       {
         "smiles": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
         "similarity_cutoff": 0.8
+      },
+      {
+        "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+        "similarity_cutoff": 0.95
       }
     ]
   }

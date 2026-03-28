@@ -119,6 +119,11 @@
         "operation": "get_survival_data",
         "cancer": "BRCA",
         "max_patients": 50
+      },
+      {
+        "operation": "get_survival_data",
+        "study_id": "coadread_tcga",
+        "max_patients": 75
       }
     ]
   },
@@ -279,6 +284,12 @@
         "cancer": "BRCA",
         "gene": "TP53",
         "max_samples": 50
+      },
+      {
+        "operation": "get_gene_expression",
+        "study_id": "luad_tcga",
+        "gene": "EGFR",
+        "max_samples": 75
       }
     ]
   },
@@ -381,6 +392,11 @@
         "operation": "search_studies",
         "keyword": "breast",
         "limit": 10
+      },
+      {
+        "operation": "search_studies",
+        "query": "glioblastoma",
+        "limit": 5
       }
     ]
   },
@@ -494,6 +510,10 @@
       {
         "operation": "get_study_summary",
         "cancer": "LUAD"
+      },
+      {
+        "operation": "get_study_summary",
+        "study_id": "brca_tcga"
       }
     ]
   }
