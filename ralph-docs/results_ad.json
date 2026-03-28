@@ -1799,5 +1799,26 @@
     "action": "improved_examples",
     "old": "1 example (RAG hallucination)",
     "new": "3 realistic examples (hallucination, language, irrelevant retrieval)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_get_database_summary",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (no-param API endpoint)"
+  },
+  {
+    "file": "wikidata_sparql_tools.json",
+    "tool": "Wikidata_SPARQL_query",
+    "action": "improved_examples",
+    "old": "1 example (cat example)",
+    "new": "2 examples (cat and gene queries)"
+  },
+  {
+    "file": "wikipathways_tools.json",
+    "tool": "WikiPathways_get_pathway",
+    "action": "improved_examples",
+    "old": "1 example (WP254)",
+    "new": "2 examples (WP254 apoptosis, WP179 cell cycle)"
   }
 ]

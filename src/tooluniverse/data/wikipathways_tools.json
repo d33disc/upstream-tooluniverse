@@ -96,7 +96,8 @@
       }
     },
     "test_examples": [
-      {"wpid": "WP254", "format": "json"}
+      {"wpid": "WP254", "format": "json"},
+      {"wpid": "WP179", "format": "json"}
     ],
     "label": ["WikiPathways", "Pathway", "Content"],
     "metadata": {
