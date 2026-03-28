@@ -269,7 +269,10 @@
     },
     "test_examples": [
       {
-        "qualifier": "P69905"
+        "qualifier": "P04637"
+      },
+      {
+        "uniprot_accession": "P00533"
       }
     ]
   },
@@ -437,7 +440,10 @@
     },
     "test_examples": [
       {
-        "qualifier": "P04637"
+        "qualifier": "P38398"
+      },
+      {
+        "uniprot_id": "P04637"
       }
     ]
   },
@@ -536,6 +542,9 @@
     "test_examples": [
       {
         "qualifier": "P69905"
+      },
+      {
+        "qualifier": "P04637"
       }
     ]
   }

@@ -324,6 +324,7 @@
     },
     "type": "NCCNGuidelineTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {
@@ -420,7 +421,12 @@
     },
     "type": "NCCNGuidelineTool",
     "test_examples": [
-      {"url": "https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients/guidelines-for-patients-details?patientGuidelineId=21"}
+      {
+        "url": "https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients/guidelines-for-patients-details?patientGuidelineId=21"
+      },
+      {
+        "url": "https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients/guidelines-for-patients-details?patientGuidelineId=61"
+      }
     ],
     "return_schema": {
       "oneOf": [

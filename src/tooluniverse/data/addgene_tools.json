@@ -114,8 +114,15 @@
     "test_examples": [
       {
         "operation": "search_plasmids",
-        "query": "pSpCas9",
+        "query": "lentiCRISPR v2",
         "limit": 5
+      },
+      {
+        "operation": "search_plasmids",
+        "query": "EGFP",
+        "organism": "Human",
+        "vector_type": "Mammalian Expression",
+        "limit": 3
       }
     ],
     "required_api_keys": [
@@ -217,6 +224,10 @@
       {
         "operation": "get_plasmid",
         "plasmid_id": 39296
+      },
+      {
+        "operation": "get_plasmid",
+        "plasmid_id": 48138
       }
     ],
     "required_api_keys": [
@@ -311,6 +322,10 @@
       {
         "operation": "search_depositors",
         "name": "Feng Zhang"
+      },
+      {
+        "operation": "search_depositors",
+        "institution": "Broad Institute"
       }
     ],
     "required_api_keys": [

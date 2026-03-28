@@ -31,8 +31,12 @@
     },
     "test_examples": [
       {
-        "disease_name": "mild Alzheimer's disease",
-        "drug_name": "Kisunla"
+        "disease_name": "metastatic HER2-positive breast cancer",
+        "drug_name": "trastuzumab"
+      },
+      {
+        "disease_name": "type 2 diabetes mellitus",
+        "drug_name": "semaglutide"
       }
     ],
     "return_schema": {
@@ -65,7 +69,10 @@
     },
     "test_examples": [
       {
-        "source_text": "Patient experienced headache and nausea after taking the medication."
+        "source_text": "After starting erlotinib, the patient developed acneiform rash, diarrhea, and elevated liver enzymes."
+      },
+      {
+        "source_text": "Following pembrolizumab infusion, the patient reported shortness of breath, fever, and diffuse pruritic rash within 48 hours."
       }
     ],
     "return_schema": {
@@ -110,9 +117,14 @@
     },
     "test_examples": [
       {
-        "disease_name": "Type 2 Diabetes Mellitus",
-        "drug_name": "Metformin",
-        "context_information": "Patient is a 65-year-old male with a 10-year history of poorly controlled type 2 diabetes mellitus, stage 3 chronic kidney disease (eGFR 45 mL/min/1.73m2), and a history of diabetic neuropathy on ACE inhibitors."
+        "disease_name": "metastatic HER2-positive breast cancer",
+        "drug_name": "trastuzumab",
+        "context_information": "Patient is a 58-year-old woman with prior anthracycline exposure, baseline LVEF 52%, hypertension controlled on lisinopril, and mild dyspnea on exertion."
+      },
+      {
+        "disease_name": "type 2 diabetes mellitus",
+        "drug_name": "metformin",
+        "context_information": "Patient is a 72-year-old man with stage 3 chronic kidney disease, heart failure with preserved ejection fraction, and recent unintentional weight loss."
       }
     ],
     "return_schema": {

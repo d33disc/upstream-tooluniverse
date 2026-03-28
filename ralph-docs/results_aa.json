@@ -1,0 +1,392 @@
+[
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_list_standards_sections",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_search_standards",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ADA_get_standards_section",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_ACC_search_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_list_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "ACC_list_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_list_patient_guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_search_guidelines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "NCCN_get_patient_guideline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ada_aha_nccn_tools.json",
+    "tool": "AHA_ACC_get_guideline",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_search_plasmids",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_get_plasmid",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "addgene_tools.json",
+    "tool": "Addgene_search_depositors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_physicochemical_properties",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_CYP_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_BBB_penetrance",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_toxicity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_bioavailability",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_clearance_distribution",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_nuclear_receptor_activity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_stress_response",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "admetai_tools.json",
+    "tool": "ADMETAI_predict_solubility_lipophilicity_hydration",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventPredictionQuestionGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventICDMapper",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "adverse_event_tools.json",
+    "tool": "AdverseEventPredictionQuestionGeneratorWithContext",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ScientificTextSummarizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MedicalLiteratureReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "HypothesisGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ExperimentalDesignScorer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MedicalTermNormalizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "NoveltySignificanceReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "LiteratureContextReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "MethodologyRigorReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "DataAnalysisValidityReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ResultsInterpretationReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "WritingPresentationReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ReproducibilityTransparencyReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "EthicalComplianceReviewer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "QuestionRephraser",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ProtocolOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "AdvancedCodeQualityAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "DomainExpertValidator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolQualityEvaluator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "LabelGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "call_agentic_human",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolMetadataGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolMetadataStandardizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "agentic_tools.json",
+    "tool": "ToolRelationshipDetector",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_search_structures",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_get_expression_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "allen_brain_tools.json",
+    "tool": "AllenBrain_get_structure",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_search_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_gene_phenotypes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_disease_genes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alliance_genome_tools.json",
+    "tool": "Alliance_get_disease",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_prediction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphafold_tools.json",
+    "tool": "alphafold_get_annotations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_protein_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_variant_score",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "alphamissense_tools.json",
+    "tool": "AlphaMissense_get_residue_scores",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "anaconda_tools.json",
+    "tool": "Anaconda_search_packages",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "anaconda_tools.json",
+    "tool": "Anaconda_get_package",
+    "action": "skipped",
+    "reason": "already_good"
+  }
+]
