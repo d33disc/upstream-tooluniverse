@@ -167,6 +167,22 @@ class GrepToolsTool(BaseTool):
                         }
                     )
 
+        # Annotate with health status, then sort live before broken
+        try:
+            from tooluniverse.tool_health import ToolHealthCache
+
+            _hc = ToolHealthCache()
+            for tool in matching_tools:
+                status = _hc.is_live(tool.get("name", ""))
+                if status is False:
+                    tool["_health"] = "broken"
+                    tool["_health_warning"] = _hc.warn(tool.get("name", ""))
+                elif status is True:
+                    tool["_health"] = "live"
+            matching_tools.sort(key=lambda t: 0 if t.get("_health") != "broken" else 1)
+        except Exception:
+            pass
+
         # Apply pagination
         total_matches = len(matching_tools)
         if offset > 0 or limit is not None:

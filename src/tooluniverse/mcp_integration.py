@@ -6,10 +6,10 @@ MCP tools from remote servers, providing seamless integration between local tool
 and remote MCP services.
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
-def load_mcp_tools(self, server_urls: List[str] = None, **kwargs):
+def load_mcp_tools(self, server_urls: Optional[List[str]] = None, **kwargs):
     """
     Load MCP tools from remote servers into this ToolUniverse instance.
 
@@ -101,7 +101,12 @@ def load_mcp_tools(self, server_urls: List[str] = None, **kwargs):
 
     print(f"🔄 Loading MCP tools from {len(server_urls)} servers...")
 
-    results = {"total_tools": 0, "servers_connected": 0, "servers": {}, "errors": []}
+    results: Dict[str, Any] = {
+        "total_tools": 0,
+        "servers_connected": 0,
+        "servers": {},
+        "errors": [],
+    }
 
     for url in server_urls:
         try:
@@ -218,7 +223,9 @@ def _load_tools_from_mcp_server(
         return {"success": False, "error": str(e), "server_url": server_url}
 
 
-def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[str, Any]:
+def discover_mcp_tools(
+    self, server_urls: Optional[List[str]] = None, **kwargs
+) -> Dict[str, Any]:
     """
     Discover available tools from MCP servers without loading them.
 
@@ -273,7 +280,7 @@ def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[st
 
     print(f"🔍 Discovering tools from {len(server_urls)} MCP servers...")
 
-    results = {"servers": {}, "total_tools": 0, "errors": []}
+    results: Dict[str, Any] = {"servers": {}, "total_tools": 0, "errors": []}
 
     for url in server_urls:
         try:
@@ -462,4 +469,3 @@ def _patch_tooluniverse(tool_universe_cls):
 
     except Exception as e:
         print(f"⚠️ Could not patch ToolUniverse: {e}")
-
