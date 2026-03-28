@@ -54,6 +54,10 @@
       {
         "operation": "sa_score",
         "smiles": "CC(=O)Oc1ccccc1C(=O)O"
+      },
+      {
+        "operation": "sa_score",
+        "smiles": "CCNc1ccccc1C(=O)O"
       }
     ]
   }

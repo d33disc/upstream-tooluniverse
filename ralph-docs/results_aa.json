@@ -1073,5 +1073,78 @@
     "tool": "CellPainting_get_well_data",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_census_versions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_cell_metadata",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_gene_metadata",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_expression_data",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_presence_matrix",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_get_embeddings",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_census_tools.json",
+    "tool": "CELLxGENE_download_h5ad",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_discovery_tools.json",
+    "tool": "CxGDisc_list_collections",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_discovery_tools.json",
+    "tool": "CxGDisc_get_collection",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellxgene_discovery_tools.json",
+    "tool": "CxGDisc_search_datasets",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "channelsdb_tools.json",
+    "tool": "ChannelsDB_get_channels_cofactor",
+    "action": "fixed_duplicate_example",
+    "old": "1ymg, 1ymg",
+    "new": "1ymg, 5i6x"
+  },
+  {
+    "file": "chem_compute_tools.json",
+    "tool": "Chem_sa_score",
+    "action": "added_examples",
+    "count": 2
   }
 ]
