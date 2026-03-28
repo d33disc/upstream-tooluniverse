@@ -1779,5 +1779,98 @@
     "tool": "health_disparities_get_county_rankings_info",
     "action": "improved_description_and_examples",
     "count": 2
+  },
+  {
+    "file": "harmonizome_tools.json",
+    "tool": "Harmonizome_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_generic_search",
+    "action": "improved_description_and_examples",
+    "old_query": "machine learning optimization",
+    "new_query": "TP53",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_search_genes_by_query",
+    "action": "skipped",
+    "reason": "already has 2 good examples"
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_comparative_expression_by_gene_and_cellline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_disease_expression_by_gene_tissue_disease",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_biological_processes_by_gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_comprehensive_gene_details_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_cancer_prognostics_by_gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_protein_interactions_by_gene",
+    "action": "added_examples",
+    "count": 2,
+    "note": "tool has API limitation (ppi column removed)"
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_rna_expression_in_specific_tissues",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_contextual_biological_process_analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_rna_expression_by_source",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_subcellular_location",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_gene_basic_info_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_gene_tsv_data_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
   }
 ]
