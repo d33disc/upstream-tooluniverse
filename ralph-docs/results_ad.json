@@ -1120,5 +1120,67 @@
     "action": "improved_examples",
     "old": "1 example (SRX accession)",
     "new": "3 examples covering SRX, SRP, SRS accession types"
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_kaplan_meier",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_log_rank_test",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_cox_regression",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swiss_target_tools.json",
+    "tool": "SwissTargetPrediction_predict",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swiss_target_tools.json",
+    "tool": "SwissTargetPrediction_organisms",
+    "action": "skipped",
+    "reason": "only 1 example but tool is API-based with health warnings"
+  },
+  {
+    "file": "swissadme_tools.json",
+    "tool": "SwissADME_calculate_adme",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swissadme_tools.json",
+    "tool": "SwissADME_check_druglikeness",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_dock_ligand",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_check_job_status",
+    "action": "improved_examples",
+    "old": "placeholder example_session_123456",
+    "new": "realistic session IDs (abc123def456, dock_20240615_xyz789)"
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_retrieve_results",
+    "action": "improved_examples",
+    "old": "placeholder example_session_123456",
+    "new": "realistic session IDs (abc123def456, dock_20240615_xyz789)"
   }
 ]
