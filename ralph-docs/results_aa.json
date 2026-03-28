@@ -2017,62 +2017,372 @@
     "action": "skipped",
     "reason": "already_good"
   },
-  {"file": "disease_target_score_tools.json", "tool": "disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "chembl_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "eva_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "eva_somatic_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "cancer_gene_census_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "cancer_biomarkers_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "europepmc_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "expression_atlas_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "genomics_england_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disease_target_score_tools.json", "tool": "reactome_disease_target_score", "action": "added_examples", "count": 3},
-  {"file": "disgenet_tools.json", "tool": "DisGeNET_search_gene", "action": "added_examples", "count": 3},
-  {"file": "disgenet_tools.json", "tool": "DisGeNET_search_disease", "action": "added_examples", "count": 3},
-  {"file": "disgenet_tools.json", "tool": "DisGeNET_get_gda", "action": "added_examples", "count": 3},
-  {"file": "disgenet_tools.json", "tool": "DisGeNET_get_vda", "action": "added_examples", "count": 3},
-  {"file": "disgenet_tools.json", "tool": "DisGeNET_get_disease_genes", "action": "added_examples", "count": 3},
-  {"file": "dna_tools.json", "tool": "DNA_find_restriction_sites", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_find_orfs", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_calculate_gc_content", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_reverse_complement", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_translate_sequence", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_codon_optimize", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_virtual_digest", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_primer_design", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_gibson_design", "action": "added_examples", "count": 2},
-  {"file": "dna_tools.json", "tool": "DNA_golden_gate_design", "action": "added_examples", "count": 2},
-  {"file": "dose_response_tools.json", "tool": "DoseResponse_fit_curve", "action": "added_examples", "count": 2},
-  {"file": "dose_response_tools.json", "tool": "DoseResponse_calculate_ic50", "action": "added_examples", "count": 2},
-  {"file": "dose_response_tools.json", "tool": "DoseResponse_compare_potency", "action": "added_examples", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "DiseaseAnalyzerAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "CompoundDiscoveryAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "ADMETAnalyzerAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "DrugInteractionAnalyzerAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "LiteratureSynthesisAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "DrugOptimizationAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_discovery_agents.json", "tool": "ClinicalTrialDesignAgent", "action": "improved_examples", "old": "placeholder", "count": 2},
-  {"file": "drug_synergy_tools.json", "tool": "DrugSynergy_calculate_bliss", "action": "added_examples", "count": 2},
-  {"file": "drug_synergy_tools.json", "tool": "DrugSynergy_calculate_hsa", "action": "added_examples", "count": 2},
-  {"file": "drug_synergy_tools.json", "tool": "DrugSynergy_calculate_zip", "action": "added_examples", "count": 2},
-  {"file": "drug_synergy_tools.json", "tool": "DrugSynergy_calculate_loewe", "action": "added_examples", "count": 2},
-  {"file": "drug_synergy_tools.json", "tool": "DrugSynergy_calculate_ci", "action": "added_examples", "count": 2},
-  {"file": "diseasesh_tools.json", "tool": "DiseaseSh_get_global_stats", "action": "added_examples", "count": 2},
-  {"file": "dynamut2_tools.json", "tool": "DynaMut2_predict_stability", "action": "added_examples", "count": 2},
-  {"file": "dynamut2_tools.json", "tool": "DynaMut2_get_job", "action": "added_examples", "count": 2},
-  {"file": "ebi_proteins_interactions_tools.json", "tool": "EBIProteins_get_interaction_details", "action": "added_examples", "count": 2},
-  {"file": "ebi_search_tools.json", "tool": "ebi_search_with_facets", "action": "added_examples", "count": 2},
-  {"file": "ebi_search_tools.json", "tool": "ebi_list_domains", "action": "added_examples", "count": 2},
-  {"file": "ebi_search_tools.json", "tool": "ebi_cross_reference_search", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "OSL_get_efo_id_by_disease_name", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "ols_search_efo_terms", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "ols_get_efo_term", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "ols_get_efo_term_children", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "ols_get_efo_ontology_info", "action": "added_examples", "count": 2},
-  {"file": "efo_tools.json", "tool": "ols_list_ontologies", "action": "added_examples", "count": 2},
-  {"file": "embedding_tools.json", "tool": "embedding_database_create", "action": "added_examples", "count": 2},
-  {"file": "embedding_tools.json", "tool": "embedding_database_add", "action": "added_examples", "count": 2},
-  {"file": "embedding_tools.json", "tool": "embedding_database_search", "action": "added_examples", "count": 2},
-  {"file": "embedding_tools.json", "tool": "embedding_sync_upload", "action": "added_examples", "count": 2},
-  {"file": "embedding_tools.json", "tool": "embedding_sync_download", "action": "added_examples", "count": 2}
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "chembl_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "eva_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "eva_somatic_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "cancer_gene_census_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "cancer_biomarkers_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "europepmc_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "expression_atlas_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "genomics_england_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disease_target_score_tools.json",
+    "tool": "reactome_disease_target_score",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disgenet_tools.json",
+    "tool": "DisGeNET_search_gene",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disgenet_tools.json",
+    "tool": "DisGeNET_search_disease",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disgenet_tools.json",
+    "tool": "DisGeNET_get_gda",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disgenet_tools.json",
+    "tool": "DisGeNET_get_vda",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "disgenet_tools.json",
+    "tool": "DisGeNET_get_disease_genes",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_find_restriction_sites",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_find_orfs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_calculate_gc_content",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_reverse_complement",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_translate_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_codon_optimize",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_virtual_digest",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_primer_design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_gibson_design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dna_tools.json",
+    "tool": "DNA_golden_gate_design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dose_response_tools.json",
+    "tool": "DoseResponse_fit_curve",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dose_response_tools.json",
+    "tool": "DoseResponse_calculate_ic50",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dose_response_tools.json",
+    "tool": "DoseResponse_compare_potency",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "DiseaseAnalyzerAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "CompoundDiscoveryAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "ADMETAnalyzerAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "DrugInteractionAnalyzerAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "LiteratureSynthesisAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "DrugOptimizationAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_discovery_agents.json",
+    "tool": "ClinicalTrialDesignAgent",
+    "action": "improved_examples",
+    "old": "placeholder",
+    "count": 2
+  },
+  {
+    "file": "drug_synergy_tools.json",
+    "tool": "DrugSynergy_calculate_bliss",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "drug_synergy_tools.json",
+    "tool": "DrugSynergy_calculate_hsa",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "drug_synergy_tools.json",
+    "tool": "DrugSynergy_calculate_zip",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "drug_synergy_tools.json",
+    "tool": "DrugSynergy_calculate_loewe",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "drug_synergy_tools.json",
+    "tool": "DrugSynergy_calculate_ci",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "diseasesh_tools.json",
+    "tool": "DiseaseSh_get_global_stats",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dynamut2_tools.json",
+    "tool": "DynaMut2_predict_stability",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dynamut2_tools.json",
+    "tool": "DynaMut2_get_job",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ebi_proteins_interactions_tools.json",
+    "tool": "EBIProteins_get_interaction_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ebi_search_tools.json",
+    "tool": "ebi_search_with_facets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ebi_search_tools.json",
+    "tool": "ebi_list_domains",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ebi_search_tools.json",
+    "tool": "ebi_cross_reference_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "OSL_get_efo_id_by_disease_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "ols_search_efo_terms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "ols_get_efo_term",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "ols_get_efo_term_children",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "ols_get_efo_ontology_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "efo_tools.json",
+    "tool": "ols_list_ontologies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "embedding_tools.json",
+    "tool": "embedding_database_create",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "embedding_tools.json",
+    "tool": "embedding_database_add",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "embedding_tools.json",
+    "tool": "embedding_database_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "embedding_tools.json",
+    "tool": "embedding_sync_upload",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "embedding_tools.json",
+    "tool": "embedding_sync_download",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "doaj_tools.json",
+    "tool": "DOAJ_search_articles",
+    "action": "improved_examples",
+    "old": [
+      "open access",
+      "biology"
+    ],
+    "new": [
+      "CRISPR gene editing",
+      "diabetes"
+    ]
+  }
 ]
