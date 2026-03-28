@@ -22,7 +22,13 @@
     },
     "test_examples": [
       {
-        "query": "gene:TP53"
+        "query": "apoptosis"
+      },
+      {
+        "query": "kinase activity"
+      },
+      {
+        "query": "DNA repair"
       }
     ],
     "return_schema": {
@@ -100,6 +106,12 @@
     "test_examples": [
       {
         "id": "GO:0006915"
+      },
+      {
+        "id": "GO:0005634"
+      },
+      {
+        "id": "GO:0003677"
       }
     ],
     "return_schema": {
@@ -190,6 +202,12 @@
     "test_examples": [
       {
         "id": "GO:0006915"
+      },
+      {
+        "id": "GO:0005634"
+      },
+      {
+        "id": "GO:0003677"
       }
     ],
     "return_schema": {
@@ -364,6 +382,16 @@
         "id": "GO:0006915",
         "taxon": "NCBITaxon:9606",
         "rows": 10
+      },
+      {
+        "id": "GO:0003677",
+        "taxon": "NCBITaxon:9606",
+        "rows": 10
+      },
+      {
+        "id": "GO:0005634",
+        "taxon": "NCBITaxon:10090",
+        "rows": 10
       }
     ],
     "return_schema": {
@@ -403,7 +431,16 @@
     },
     "test_examples": [
       {
-        "gene_id": "TP53"
+        "gene_id": "TP53",
+        "rows": 25
+      },
+      {
+        "gene_id": "BRCA1",
+        "rows": 25
+      },
+      {
+        "gene_id": "EGFR",
+        "rows": 25
       }
     ],
     "return_schema": {

@@ -61,6 +61,12 @@
     "test_examples": [
       {
         "protein": "adrb2_human"
+      },
+      {
+        "protein": "drd2_human"
+      },
+      {
+        "protein": "P07550"
       }
     ]
   },
@@ -107,7 +113,13 @@
       }
     },
     "test_examples": [
-      {}
+      {},
+      {
+        "family": "001"
+      },
+      {
+        "protein_class": "Class A"
+      }
     ]
   },
   {
@@ -258,6 +270,15 @@
       {
         "protein": "adrb2_human",
         "limit": 10
+      },
+      {
+        "protein": "drd2_human",
+        "limit": 10
+      },
+      {
+        "protein": "adrb2_human",
+        "type": "small molecule",
+        "limit": 10
       }
     ]
   },
@@ -317,6 +338,12 @@
     "test_examples": [
       {
         "protein": "adrb2_human"
+      },
+      {
+        "protein": "drd2_human"
+      },
+      {
+        "protein": "agtr1_human"
       }
     ]
   }
