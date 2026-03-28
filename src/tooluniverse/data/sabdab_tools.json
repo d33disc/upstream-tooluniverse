@@ -121,7 +121,7 @@
     },
     "test_examples": [
       {},
-      {}
+      {"operation": "get_summary"}
     ]
   }
 ]

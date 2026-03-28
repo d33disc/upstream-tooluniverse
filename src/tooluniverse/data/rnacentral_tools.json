@@ -51,8 +51,8 @@
       }
     },
     "test_examples": [
-      {"query": "let-7", "page_size": 1},
-      {"query": "U6", "page_size": 1}
+      {"query": "let-7 microRNA", "page_size": 5},
+      {"query": "TP53", "page_size": 3}
     ],
     "label": ["RNAcentral", "ncRNA", "Search"],
     "metadata": {
@@ -89,7 +89,7 @@
     },
     "test_examples": [
       {"accession": "URS000075C808"},
-      {"accession": "URS0000000001"}
+      {"accession": "URS0000479B66"}
     ],
     "label": ["RNAcentral", "ncRNA", "Record"],
     "metadata": {
