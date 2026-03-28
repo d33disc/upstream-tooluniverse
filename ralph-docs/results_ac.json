@@ -1808,5 +1808,383 @@
     "tool": "PDC_get_clinical_data",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_cell_line",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_experiments",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_biomarker_assoc",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_drugs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_drug_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_gene_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_clinical_annotations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_variants",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_dosing_guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmvar_tools.json",
+    "tool": "PharmVar_list_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharos_tools.json",
+    "tool": "Pharos_get_tdl_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "plant_reactome_tools.json",
+    "tool": "PlantReactome_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_get_protein_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_functional_enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_map_identifiers",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_ppi_enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_search_protacs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_get_protac",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_search_targets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protein_structure_3d_tools.json",
+    "tool": "visualize_protein_structure_3d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "proteins_api_tools.json",
+    "tool": "proteins_api_get_variants",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "proteomicsdb_tools.json",
+    "tool": "ProteomicsDB_list_tissues",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protvar_tools.json",
+    "tool": "ProtVar_get_population",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_associated_patents_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_properties_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_CID_by_compound_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_CID_by_SMILES",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_compounds_by_substructure",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_compounds_by_similarity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_2D_image_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_synonyms_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_xrefs_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_targets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_assays_by_type",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_dose_response",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubtator_tools.json",
+    "tool": "PubTator3_EntityAutocomplete",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubtator_tools.json",
+    "tool": "PubTator3_LiteratureSearch",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rcsb_pdb_tools.json",
+    "tool": "ALL_39_TOOLS",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pmc_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pombase_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "powo_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pride_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "progenetix_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "prosite_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "proteinsplus_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "proteomexchange_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "protparam_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubchem_bioassay_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubchem_tox_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubmed_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubtator3_ext_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pypi_package_inspector_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "python_executor_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "quickgo_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_advanced_search_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_chemcomp_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_data_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_graphql_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
   }
 ]

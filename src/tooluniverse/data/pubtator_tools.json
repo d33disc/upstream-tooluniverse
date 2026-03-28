@@ -38,6 +38,11 @@
         "text": "The quick brown fox jumps over the lazy dog.",
         "entity_type": "gene",
         "max_results": 5
+      },
+      {
+        "text": "TP53 mutation in breast cancer patients",
+        "entity_type": "gene",
+        "max_results": 5
       }
     ],
     "return_schema": {
@@ -89,6 +94,11 @@
         "query": "cancer",
         "page": 1,
         "page_size": 1
+      },
+      {
+        "query": "BRCA1 mutation",
+        "page": 1,
+        "page_size": 3
       }
     ],
     "return_schema": {
