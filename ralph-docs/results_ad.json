@@ -1230,5 +1230,19 @@
     "tool": "TIMER2_survival_association",
     "action": "added_examples",
     "count": 2
-  }
+  },
+  {"file": "special_tools.json", "tool": "Finish", "action": "improved_examples", "old": "duplicate empty {}", "new": "distinct second example"},
+  {"file": "synbiohub_tools.json", "tool": "SynBioHub_get_collections", "action": "improved_examples", "old": "duplicate empty {}", "new": "context note example"},
+  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_combo_matrix", "action": "added_examples", "count": 2},
+  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_drug", "action": "added_examples", "count": 2},
+  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_list_cell_lines", "action": "added_examples", "count": 2},
+  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_list_datasets", "action": "added_examples", "count": 2},
+  {"file": "synergxdb_tools.json", "tool": "SYNERGxDB_get_combo_stats", "action": "added_examples", "count": 2},
+  {"file": "tcia_tools.json", "tool": "TCIA_list_collections", "action": "improved_examples", "old": "duplicate empty {}", "new": "context note example"},
+  {"file": "tcia_tools.json", "tool": "TCIA_get_patient_studies", "action": "added_examples", "count": 2},
+  {"file": "tcia_tools.json", "tool": "TCIA_get_modality_values", "action": "added_examples", "count": 2},
+  {"file": "tcia_tools.json", "tool": "TCIA_get_body_part_values", "action": "added_examples", "count": 2},
+  {"file": "tcia_tools.json", "tool": "TCIA_get_series_metadata", "action": "added_examples", "count": 2},
+  {"file": "tcia_tools.json", "tool": "TCIA_get_series_size", "action": "added_examples", "count": 2},
+  {"file": "therasabdab_tools.json", "tool": "TheraSAbDab_get_all_therapeutics", "action": "added_examples", "count": 2}
 ]
