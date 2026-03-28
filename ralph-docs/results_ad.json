@@ -2048,5 +2048,173 @@
     "tool": "WikiPathways_search",
     "action": "skipped",
     "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_pharmacological_action",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_scope_or_definition",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_basic_info_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_indications_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_indication",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_pharmacology_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_desc_pharmacology_by_moa",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_interactions_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_targets_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_target_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_products_by_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_safety_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_references_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_pathways_reactions_by_drug_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_pathway_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_filter_drugs_by_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_compounds",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_get_compound",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_by_smiles",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_get_purchasable",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_by_properties",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
   }
 ]
