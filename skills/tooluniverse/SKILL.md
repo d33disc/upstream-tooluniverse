@@ -42,6 +42,7 @@ Route user questions to specialized skills. If no skill matches, use general str
 | "research", "profile", "**drug**", "medication", "therapeutic agent", "tell me about [drug]" | `Skill(skill="tooluniverse-drug-research")` |
 | "**literature review**", "papers about", "publications on", "research articles", "recent studies" | `Skill(skill="tooluniverse-literature-deep-research")` |
 | "research", "profile", "**target**", "protein target", "gene target", "target validation" | `Skill(skill="tooluniverse-target-research")` |
+| "**deep research**", "**map connections**", "**cross-reference**", "**investigate**", "what connects [X] to [Y]", "comprehensive multi-database", "iterative research" | `Skill(skill="tooluniverse-deep-research")` |
 
 ### 3. Clinical Decision Support
 
@@ -158,7 +159,6 @@ Route user questions to specialized skills. If no skill matches, use general str
 ## When to Use General Strategies
 
 Only when no specialized skill matches:
-
 
 - Meta-questions about ToolUniverse itself (no domain entity)
 - Custom workflows combining multiple skills
