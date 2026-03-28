@@ -1722,5 +1722,82 @@
     "action": "improved_examples",
     "old": "1 generic example (wikipedia.org)",
     "new": "3 realistic examples (wikipedia, NCBI Gene, Ensembl)"
+  },
+  {
+    "file": "uspto_downloader_tools.json",
+    "tool": "mcp_auto_loader_uspto_downloader",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (MCP tool requires no parameters)"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_overview_by_text_query",
+    "action": "improved_examples",
+    "old": "1 example (machine learning)",
+    "new": "3 realistic examples (machine learning, CRISPR, mRNA vaccine)"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_application_metadata",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_term_adjustment_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_continuity_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_foreign_priority_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_associated_documents_metadata",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_record_types",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_gene_searches",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_organism_searches",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "wfgy_promptbundle_tools.json",
+    "tool": "WFGY_triage_llm_rag_failure",
+    "action": "improved_examples",
+    "old": "1 example (RAG hallucination)",
+    "new": "3 realistic examples (hallucination, language, irrelevant retrieval)"
   }
 ]

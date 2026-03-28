@@ -65,6 +65,14 @@
       {
         "bug_description": "RAG chatbot answers with facts not present in retrieved context. Retrieved chunks talk about credit cards only, but model claims Bitcoin is supported.",
         "audience": "engineer"
+      },
+      {
+        "bug_description": "LLM ignores system prompt instructions and responds in wrong language. System says 'respond in Spanish' but model answers in English.",
+        "audience": "infra"
+      },
+      {
+        "bug_description": "Retrieval returns irrelevant documents for query about drug dosage. Context contains PK/PD studies but model cites unrelated mechanism papers.",
+        "audience": "beginner"
       }
     ]
   }
