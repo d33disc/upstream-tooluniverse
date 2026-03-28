@@ -1,7 +1,7 @@
 [
   {
     "name": "visualize_molecule_3d",
-    "description": "Visualize 3D molecular structures using RDKit and py3Dmol. Supports SMILES, MOL files, SDF content, and various visualization styles with interactive 3D viewing capabilities.",
+    "description": "Render an interactive 3D molecule with RDKit and py3Dmol from SMILES, MOL, or SDF input. Returns HTML plus conformer and display metadata.",
     "type": "Molecule3DTool",
     "parameter": {
       "type": "object",
@@ -171,6 +171,17 @@
         "show_surface": false,
         "generate_conformers": true,
         "conformer_count": 1
+      },
+      {
+        "smiles": "Cn1c(=O)c2c(ncn2C)n(C)c1=O",
+        "style": "sphere",
+        "color_scheme": "spectrum",
+        "width": 640,
+        "height": 480,
+        "show_hydrogens": false,
+        "show_surface": true,
+        "generate_conformers": true,
+        "conformer_count": 2
       }
     ]
   }

@@ -33,6 +33,9 @@
     "test_examples": [
       {
         "query": "glycolysis"
+      },
+      {
+        "query": "tricarboxylic acid cycle"
       }
     ]
   },
@@ -70,6 +73,9 @@
     "test_examples": [
       {
         "pathway_id": "GLYCOLYSIS"
+      },
+      {
+        "pathway_id": "PWY-5177"
       }
     ]
   },
@@ -107,6 +113,9 @@
     "test_examples": [
       {
         "compound_id": "PYRUVATE"
+      },
+      {
+        "compound_id": "CPD-1"
       }
     ]
   },
@@ -144,6 +153,9 @@
     "test_examples": [
       {
         "reaction_id": "PEPDEPHOS-RXN"
+      },
+      {
+        "reaction_id": "RXN-14500"
       }
     ]
   }
