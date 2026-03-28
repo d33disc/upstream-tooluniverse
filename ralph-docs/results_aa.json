@@ -1650,5 +1650,215 @@
     "tool": "execute_tool",
     "action": "skipped",
     "reason": "already_good"
+  },
+  {
+    "file": "complex_portal_tools.json",
+    "tool": "ComplexPortal_search_complexes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "complex_portal_tools.json",
+    "tool": "ComplexPortal_get_complex",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cosmic_tools.json",
+    "tool": "COSMIC_search_mutations",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cosmic_tools.json",
+    "tool": "COSMIC_get_mutations_by_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cran_tools.json",
+    "tool": "CRAN_get_package",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cran_tools.json",
+    "tool": "CRAN_get_package_versions",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cryoet_tools.json",
+    "tool": "CryoET_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cryoet_tools.json",
+    "tool": "CryoET_get_dataset",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cryoet_tools.json",
+    "tool": "CryoET_list_runs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cryoet_tools.json",
+    "tool": "CryoET_list_tomograms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cryoet_tools.json",
+    "tool": "CryoET_list_annotations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ctd_tools.json",
+    "tool": "CTD_get_chemical_gene_interactions",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ctd_tools.json",
+    "tool": "CTD_get_chemical_diseases",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ctd_tools.json",
+    "tool": "CTD_get_gene_diseases",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ctd_tools.json",
+    "tool": "CTD_get_gene_chemicals",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ctd_tools.json",
+    "tool": "CTD_get_disease_chemicals",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_search_spls",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_get_spl_by_setid",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_parse_adverse_reactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_parse_dosing",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_parse_contraindications",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_parse_drug_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dailymed_tools.json",
+    "tool": "DailyMed_parse_clinical_pharmacology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "datacite_tools.json",
+    "tool": "DataCite_get_doi",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "datacite_tools.json",
+    "tool": "DataCite_search_dois",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dataone_tools.json",
+    "tool": "DataONE_search_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "drugbank_vocab_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "drugbank_vocab_filter",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "drugbank_full_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "drugbank_links_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "dict_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "dili_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataset_tools.json",
+    "tool": "diqt_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "dataverse_tools.json",
+    "tool": "Dataverse_search_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dataverse_tools.json",
+    "tool": "Dataverse_get_dataset",
+    "action": "skipped",
+    "reason": "already_good"
   }
 ]

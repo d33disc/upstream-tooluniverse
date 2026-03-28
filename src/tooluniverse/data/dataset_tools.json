@@ -146,6 +146,16 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 10
+      },
+      {
+        "query": "metformin",
+        "search_fields": [
+          "Common name",
+          "Synonyms"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
       }
     ]
   },
@@ -285,6 +295,12 @@
       }
     },
     "test_examples": [
+      {
+        "field": "Common name",
+        "condition": "contains",
+        "value": "insulin",
+        "limit": 10
+      },
       {
         "field": "Common name",
         "condition": "contains",
@@ -485,6 +501,17 @@
     "test_examples": [
       {
         "query": "DB00945",
+        "search_fields": [
+          "name",
+          "synonyms",
+          "drugbank_id"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
+      },
+      {
+        "query": "DB00331",
         "search_fields": [
           "name",
           "synonyms",
@@ -741,6 +768,16 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 10
+      },
+      {
+        "query": "DB00002",
+        "search_fields": [
+          "DrugBank ID",
+          "Name"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
       }
     ]
   },
@@ -891,6 +928,16 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 10
+      },
+      {
+        "query": "Quetiapine",
+        "search_fields": [
+          "Trade Name",
+          "Generic/Proper Name(s)"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
       }
     ]
   },
@@ -1014,6 +1061,15 @@
     "test_examples": [
       {
         "query": "acetaminophen",
+        "search_fields": [
+          "Compound Name"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
+      },
+      {
+        "query": "ibuprofen",
         "search_fields": [
           "Compound Name"
         ],
@@ -1156,6 +1212,15 @@
     "test_examples": [
       {
         "query": "Astemizole",
+        "search_fields": [
+          "Generic/Proper Name(s)"
+        ],
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
+      },
+      {
+        "query": "DB00637",
         "search_fields": [
           "Generic/Proper Name(s)"
         ],
