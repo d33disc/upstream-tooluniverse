@@ -1440,5 +1440,215 @@
     "tool": "MAGICapp_list_guidelines",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "cath_tools.json",
+    "tool": "CATH_get_superfamily",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cath_tools.json",
+    "tool": "CATH_get_domain_summary",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cath_tools.json",
+    "tool": "CATH_list_funfams",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cath_tools.json",
+    "tool": "CATH_get_funfam",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ceda_tools.json",
+    "tool": "CEDA_search_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellmarker_tools.json",
+    "tool": "CellMarker_search_by_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellmarker_tools.json",
+    "tool": "CellMarker_search_by_cell_type",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellmarker_tools.json",
+    "tool": "CellMarker_list_cell_types",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellmarker_tools.json",
+    "tool": "CellMarker_search_cancer_markers",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellosaurus_tools.json",
+    "tool": "cellosaurus_search_cell_lines",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellosaurus_tools.json",
+    "tool": "cellosaurus_query_converter",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cellosaurus_tools.json",
+    "tool": "cellosaurus_get_cell_line_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "chebi_tools.json",
+    "tool": "ChEBI_get_compound",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "chebi_tools.json",
+    "tool": "ChEBI_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "chebi_tools.json",
+    "tool": "ChEBI_get_ontology_children",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_search_gene_validity",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_get_gene_validity",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_search_dosage_sensitivity",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_get_dosage_sensitivity",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_get_actionability_adult",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_get_actionability_pediatric",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_search_actionability",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clingen_tools.json",
+    "tool": "ClinGen_get_variant_classifications",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clinvar_tools.json",
+    "tool": "ClinVar_search_variants",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clinvar_tools.json",
+    "tool": "ClinVar_get_variant_details",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "clinvar_tools.json",
+    "tool": "ClinVar_get_clinical_significance",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cod_crystal_tools.json",
+    "tool": "COD_search_structures",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "cod_crystal_tools.json",
+    "tool": "COD_get_structure",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "col_tools.json",
+    "tool": "CoL_search_species",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "col_tools.json",
+    "tool": "CoL_get_taxon",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "col_tools.json",
+    "tool": "CoL_get_children",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "compact_mode_tools.json",
+    "tool": "list_tools",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "compact_mode_tools.json",
+    "tool": "grep_tools",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "compact_mode_tools.json",
+    "tool": "get_tool_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "compact_mode_tools.json",
+    "tool": "execute_tool",
+    "action": "skipped",
+    "reason": "already_good"
   }
 ]
