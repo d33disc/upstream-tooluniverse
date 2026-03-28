@@ -1923,5 +1923,30 @@
     "file": "hpo_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "humanbase_tools.json",
+    "tool": "humanbase_ppi_analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_get_disease_ids_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_get_disease_ids_by_efoId",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_map_any_disease_id_to_all_other_ids",
+    "action": "improved_examples",
+    "old": "placeholder value '1'",
+    "new": "real disease IDs (OMIM:604302, MONDO:0005148, UMLS:C0003873)"
   }
 ]
