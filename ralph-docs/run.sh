@@ -34,7 +34,7 @@ FILE_COUNT=$(wc -l < "$PARTITION_FILE" | tr -d ' ')
 
 # Map CLI
 case "$CLI" in
-  codex)  CLI_CMD="codex --approval-mode full-auto -q" ;;
+  codex)  CLI_CMD="codex exec --full-auto --model gpt-5.4 --search live -q" ;;
   claude) CLI_CMD="claude --model sonnet --dangerously-skip-permissions -p --no-session-persistence" ;;
   *)      CLI_CMD="$CLI" ;;
 esac
