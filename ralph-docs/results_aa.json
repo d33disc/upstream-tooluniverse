@@ -1147,50 +1147,298 @@
     "action": "added_examples",
     "count": 2
   },
-  {"file": "chembl_tools.json", "tool": "ChEMBL_search_similar_molecules", "action": "added_examples", "count": 3},
-  {"file": "chembl_tools.json", "tool": "ChEMBL_get_molecule", "action": "added_examples", "count": 3},
-  {"file": "chembl_tools.json", "tool": "ChEMBL_get_molecule_targets", "action": "added_examples", "count": 3},
-  {"file": "chembl_tools.json", "tool": "ChEMBL_get_target", "action": "added_examples", "count": 3},
-  {"file": "chembl_tools.json", "tool": "ChEMBL_get_target_activities", "action": "added_examples", "count": 3},
-  {"file": "chembl_tools.json", "tool": "ChEMBL_get_assay", "action": "added_examples", "count": 3},
-  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_enrichment_analysis", "action": "added_examples", "count": 3},
-  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_get_experiments", "action": "added_examples", "count": 3},
-  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_get_peak_data", "action": "added_examples", "count": 3},
-  {"file": "chipatlas_tools.json", "tool": "ChIPAtlas_search_datasets", "action": "added_examples", "count": 3},
-  {"file": "civic_tools.json", "tool": "civic_get_variant", "action": "added_examples", "count": 3},
-  {"file": "civic_tools.json", "tool": "civic_get_evidence_item", "action": "added_examples", "count": 3},
-  {"file": "clingen_allele_tools.json", "tool": "ClinGenAllele_get_allele", "action": "added_examples", "count": 3},
-  {"file": "clingen_ar_tools.json", "tool": "ClinGenAR_get_external_records", "action": "added_examples", "count": 3},
-  {"file": "clingen_dosage_api_tools.json", "tool": "ClinGen_dosage_region_search", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "search_clinical_trials", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_descriptions", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_status_and_dates", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_conditions_and_interventions", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_eligibility_criteria", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_locations", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_outcome_measures", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "get_clinical_trial_references", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "extract_clinical_trial_outcomes", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "extract_clinical_trial_adverse_events", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "ClinicalTrials_search_studies", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "ClinicalTrials_get_study", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "ClinicalTrials_search_by_intervention", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "ClinicalTrials_search_by_sponsor", "action": "added_examples", "count": 2},
-  {"file": "clinicaltrials_gov_tools.json", "tool": "ClinicalTrials_get_field_values", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_search_signatures", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_get_perturbation", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_get_gene_expression", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_get_cell_lines", "action": "added_examples", "count": 2},
-  {"file": "clue_tools.json", "tool": "CLUE_search_compounds", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "DrugSafetyAnalyzer", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "LiteratureSearchTool", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "ComprehensiveDrugDiscoveryPipeline", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "BiomarkerDiscoveryWorkflow", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "ToolMetadataGenerationPipeline", "action": "added_examples", "count": 2},
-  {"file": "compose_tools.json", "tool": "ToolGraphGenerationPipeline", "action": "added_examples", "count": 2},
-  {"file": "core_tools.json", "tool": "CORE_get_fulltext_snippets", "action": "added_examples", "count": 2},
-  {"file": "cpic_tools.json", "tool": "CPIC_list_pgx_genes", "action": "added_examples", "count": 2},
-  {"file": "cpic_tools.json", "tool": "CPIC_list_guidelines", "action": "added_examples", "count": 2},
-  {"file": "cpic_tools.json", "tool": "CPIC_list_drugs", "action": "added_examples", "count": 2},
-  {"file": "crossref_tools.json", "tool": "Crossref_list_types", "action": "added_examples", "count": 2}
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_search_similar_molecules",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_get_molecule",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_get_molecule_targets",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_get_target",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_get_target_activities",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chembl_tools.json",
+    "tool": "ChEMBL_get_assay",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chipatlas_tools.json",
+    "tool": "ChIPAtlas_enrichment_analysis",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chipatlas_tools.json",
+    "tool": "ChIPAtlas_get_experiments",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chipatlas_tools.json",
+    "tool": "ChIPAtlas_get_peak_data",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "chipatlas_tools.json",
+    "tool": "ChIPAtlas_search_datasets",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "civic_tools.json",
+    "tool": "civic_get_variant",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "civic_tools.json",
+    "tool": "civic_get_evidence_item",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "clingen_allele_tools.json",
+    "tool": "ClinGenAllele_get_allele",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "clingen_ar_tools.json",
+    "tool": "ClinGenAR_get_external_records",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "clingen_dosage_api_tools.json",
+    "tool": "ClinGen_dosage_region_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "search_clinical_trials",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_descriptions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_status_and_dates",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_conditions_and_interventions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_eligibility_criteria",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_locations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_outcome_measures",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "get_clinical_trial_references",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "extract_clinical_trial_outcomes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "extract_clinical_trial_adverse_events",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "ClinicalTrials_search_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "ClinicalTrials_get_study",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "ClinicalTrials_search_by_intervention",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "ClinicalTrials_search_by_sponsor",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinicaltrials_gov_tools.json",
+    "tool": "ClinicalTrials_get_field_values",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clue_tools.json",
+    "tool": "CLUE_search_signatures",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clue_tools.json",
+    "tool": "CLUE_get_perturbation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clue_tools.json",
+    "tool": "CLUE_get_gene_expression",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clue_tools.json",
+    "tool": "CLUE_get_cell_lines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clue_tools.json",
+    "tool": "CLUE_search_compounds",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "DrugSafetyAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "LiteratureSearchTool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "ComprehensiveDrugDiscoveryPipeline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "BiomarkerDiscoveryWorkflow",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "ToolMetadataGenerationPipeline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "compose_tools.json",
+    "tool": "ToolGraphGenerationPipeline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "core_tools.json",
+    "tool": "CORE_get_fulltext_snippets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cpic_tools.json",
+    "tool": "CPIC_list_pgx_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cpic_tools.json",
+    "tool": "CPIC_list_guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cpic_tools.json",
+    "tool": "CPIC_list_drugs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "crossref_tools.json",
+    "tool": "Crossref_list_types",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cbioportal_tools.json",
+    "tool": "cBioPortal_get_cancer_types",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cbioportal_tools.json",
+    "tool": "cBioPortal_get_gene_panels",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "clinical_guidelines_tools.json",
+    "tool": "MAGICapp_list_guidelines",
+    "action": "added_examples",
+    "count": 2
+  }
 ]
