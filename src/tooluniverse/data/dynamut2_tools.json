@@ -47,6 +47,12 @@
         "pdb_id": "4HHB",
         "chain": "A",
         "mutation": "V1A"
+      },
+      {
+        "operation": "predict_stability",
+        "pdb_id": "1U46",
+        "chain": "A",
+        "mutation": "G12D"
       }
     ]
   },
@@ -95,6 +101,10 @@
       {
         "operation": "get_job",
         "job_id": "177213420956"
+      },
+      {
+        "operation": "get_job",
+        "job_id": "123456789"
       }
     ]
   }

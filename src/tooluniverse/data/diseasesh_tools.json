@@ -12,6 +12,7 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {
