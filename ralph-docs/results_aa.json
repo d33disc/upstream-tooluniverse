@@ -2384,5 +2384,53 @@
       "CRISPR gene editing",
       "diabetes"
     ]
+  },
+  {
+    "file": "emolecules_tools.json",
+    "tool": "eMolecules_search",
+    "action": "improved_examples",
+    "old": [
+      "caffeine"
+    ],
+    "new": [
+      "aspirin",
+      "metformin"
+    ]
+  },
+  {
+    "file": "emolecules_tools.json",
+    "tool": "eMolecules_search_smiles",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "emolecules_tools.json",
+    "tool": "eMolecules_get_vendors",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "enamine_tools.json",
+    "tool": "Enamine_search_catalog",
+    "action": "improved_examples",
+    "old": [
+      "pyridine"
+    ],
+    "new": [
+      "aspirin",
+      "pyridine"
+    ]
+  },
+  {
+    "file": "enamine_tools.json",
+    "tool": "Enamine_get_compound",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "enamine_tools.json",
+    "tool": "Enamine_search_smiles",
+    "action": "improved_examples",
+    "count": 2
   }
 ]
