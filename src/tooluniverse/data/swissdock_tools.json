@@ -178,7 +178,10 @@
     },
     "test_examples": [
       {
-        "session_id": "example_session_123456"
+        "session_id": "abc123def456"
+      },
+      {
+        "session_id": "dock_20240615_xyz789"
       }
     ]
   },
@@ -255,7 +258,10 @@
     },
     "test_examples": [
       {
-        "session_id": "example_session_123456"
+        "session_id": "abc123def456"
+      },
+      {
+        "session_id": "dock_20240615_xyz789"
       }
     ]
   }
