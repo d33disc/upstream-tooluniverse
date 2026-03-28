@@ -809,6 +809,9 @@ class ToolFinderKeyword(BaseTool):
                         tool["_health_warning"] = _health_cache.warn(name)
                     elif status is True:
                         tool["_health"] = "live"
+                matching_tools.sort(
+                    key=lambda t: 0 if t.get("_health") != "broken" else 1
+                )
             except Exception:
                 pass
 

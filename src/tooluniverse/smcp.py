@@ -934,6 +934,7 @@ class SMCP(FastMCP):
                             tool["_health_warning"] = _health_cache.warn(name)
                         elif status is True:
                             tool["_health"] = "live"
+                    tools.sort(key=lambda t: 0 if t.get("_health") != "broken" else 1)
                     serialized = json.dumps(parsed, ensure_ascii=False)
             except Exception:
                 pass
