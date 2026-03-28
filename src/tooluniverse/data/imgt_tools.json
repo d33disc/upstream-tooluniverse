@@ -43,6 +43,10 @@
       {
         "accession": "M12950",
         "format": "fasta"
+      },
+      {
+        "accession": "X54765",
+        "format": "embl"
       }
     ]
   },
@@ -88,6 +92,10 @@
       {
         "gene_type": "IGHV",
         "species": "Homo sapiens"
+      },
+      {
+        "gene_type": "TRBV",
+        "species": "Homo sapiens"
       }
     ]
   },
@@ -117,7 +125,10 @@
       }
     },
     "test_examples": [
-      {}
+      {},
+      {
+        "operation": "get_gene_info"
+      }
     ]
   }
 ]

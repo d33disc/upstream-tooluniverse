@@ -32,8 +32,12 @@
     },
     "test_examples": [
       {
-        "description": "Find tools that can perform sequence alignment",
+        "description": "Find tools for BLAST sequence alignment against NCBI databases",
         "limit": 5
+      },
+      {
+        "description": "Find tools to retrieve protein structures from PDB",
+        "limit": 3
       }
     ],
     "return_schema": {
@@ -45,7 +49,7 @@
   {
     "type": "ToolFinderEmbedding",
     "name": "Tool_Finder",
-    "description": "Retrieve related tools from the toolbox based on the provided description, advanced version with more functionality.",
+    "description": "Retrieve related tools from the toolbox based on the provided description using embedding-based similarity search.",
     "required_packages": ["sentence_transformers", "torch"],
     "parameter": {
       "type": "object",
@@ -89,10 +93,17 @@
     },
     "test_examples": [
       {
-        "description": "Find tools for analyzing gene expression data",
-        "limit": 1,
+        "description": "Find tools for analyzing RNA-seq differential expression",
+        "limit": 5,
         "picked_tool_names": [],
         "return_call_result": true,
+        "categories": []
+      },
+      {
+        "description": "Find tools to query ClinVar for variant pathogenicity",
+        "limit": 3,
+        "picked_tool_names": [],
+        "return_call_result": false,
         "categories": []
       }
     ],
@@ -157,10 +168,17 @@
     },
     "test_examples": [
       {
-        "description": "Find tools for analyzing gene expression data",
-        "limit": 1,
+        "description": "Find tools to search PubMed for articles about TP53 mutations in breast cancer",
+        "limit": 5,
         "picked_tool_names": [],
         "return_call_result": true,
+        "categories": []
+      },
+      {
+        "description": "Find tools for protein structure prediction using AlphaFold",
+        "limit": 3,
+        "picked_tool_names": [],
+        "return_call_result": false,
         "categories": []
       }
     ],
@@ -215,10 +233,17 @@
     },
     "test_examples": [
       {
-        "description": "Find tools for analyzing gene expression data",
-        "limit": 1,
+        "description": "Find tools for CRISPR guide RNA design",
+        "limit": 5,
         "picked_tool_names": [],
         "return_call_result": true,
+        "categories": []
+      },
+      {
+        "description": "Find tools to download GEO microarray datasets",
+        "limit": 3,
+        "picked_tool_names": [],
+        "return_call_result": false,
         "categories": []
       }
     ],

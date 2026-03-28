@@ -96,6 +96,7 @@
     },
     "type": "HuBMAPTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {

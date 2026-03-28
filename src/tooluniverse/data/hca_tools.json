@@ -72,6 +72,12 @@
                 "action": "search_projects",
                 "organ": "heart",
                 "limit": 2
+            },
+            {
+                "action": "search_projects",
+                "organ": "brain",
+                "disease": "normal",
+                "limit": 3
             }
         ]
     },
@@ -144,6 +150,11 @@
             {
                 "action": "get_file_manifest",
                 "project_id": "7027adc6-c9c9-46f3-84ee-9badc3a4f53b"
+            },
+            {
+                "action": "get_file_manifest",
+                "project_id": "c43b1084-653f-44da-a577-7a47e5499218",
+                "limit": 5
             }
         ]
     }

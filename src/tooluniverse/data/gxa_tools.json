@@ -198,6 +198,9 @@
     "test_examples": [
       {
         "experiment_accession": "E-MTAB-2836"
+      },
+      {
+        "experiment_accession": "E-MTAB-2706"
       }
     ],
     "return_schema": {
