@@ -1466,5 +1466,50 @@
     "action": "added_examples",
     "count": 2,
     "old_count": 1
+  },
+  {
+    "file": "finngen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "flybase_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "flymine_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "fooddata_central_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "fpbase_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gbif_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gbif_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gdc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gencc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
   }
 ]
