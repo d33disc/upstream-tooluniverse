@@ -102,6 +102,9 @@
     "test_examples": [
       {
         "accession": "P04637"
+      },
+      {
+        "accession": "P00533"
       }
     ],
     "return_schema": {

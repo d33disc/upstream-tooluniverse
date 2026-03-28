@@ -72,7 +72,20 @@
       {
         "action": "create_from_docs",
         "database_name": "biomedical_tools",
-        "documents": ["Sample document for testing embeddings"],
+        "documents": [
+          "Sample document for testing embeddings"
+        ],
+        "metadata": [],
+        "provider": "openai",
+        "model": "all-MiniLM-L6-v2",
+        "description": "Find tools for analyzing gene expression data"
+      },
+      {
+        "action": "create_from_docs",
+        "database_name": "genomics_tools",
+        "documents": [
+          "Different sample document for embeddings"
+        ],
         "metadata": [],
         "provider": "openai",
         "model": "all-MiniLM-L6-v2",
@@ -153,7 +166,19 @@
       {
         "action": "add_docs",
         "database_name": "biomedical_tools",
-        "documents": ["Sample document to add"],
+        "documents": [
+          "Sample document to add"
+        ],
+        "metadata": [],
+        "provider": "openai",
+        "model": "all-MiniLM-L6-v2"
+      },
+      {
+        "action": "add_docs",
+        "database_name": "genomics_tools",
+        "documents": [
+          "Different sample document for embeddings"
+        ],
         "metadata": [],
         "provider": "openai",
         "model": "all-MiniLM-L6-v2"
@@ -238,6 +263,15 @@
         "filters": {},
         "provider": "openai",
         "model": "all-MiniLM-L6-v2"
+      },
+      {
+        "action": "search",
+        "database_name": "genomics_tools",
+        "query": "different query for testing",
+        "top_k": 5,
+        "filters": {},
+        "provider": "openai",
+        "model": "all-MiniLM-L6-v2"
       }
     ],
     "return_schema": {
@@ -307,6 +341,14 @@
         "description": "Find tools for analyzing gene expression data",
         "private": false,
         "commit_message": "Update embeddings"
+      },
+      {
+        "action": "upload",
+        "database_name": "genomics_tools",
+        "repository": "username/genomics-embeddings",
+        "description": "Find tools for analyzing gene expression data",
+        "private": false,
+        "commit_message": "Update embeddings"
       }
     ],
     "return_schema": {
@@ -362,6 +404,12 @@
         "action": "download",
         "repository": "username/biomedical-embeddings",
         "local_name": "biomedical_tools",
+        "overwrite": false
+      },
+      {
+        "action": "download",
+        "repository": "username/genomics-embeddings",
+        "local_name": "genomics_tools",
         "overwrite": false
       }
     ],

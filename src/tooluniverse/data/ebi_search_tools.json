@@ -154,6 +154,12 @@
         "facets": "TAXONOMY:9606",
         "facetcount": 5,
         "size": 10
+      },
+      {
+        "domain": "ensembl",
+        "query": "BRCA1",
+        "facets": "TAXONOMY:9606",
+        "size": 5
       }
     ]
   },
@@ -246,6 +252,7 @@
       }
     },
     "test_examples": [
+      {},
       {}
     ]
   },
@@ -388,6 +395,11 @@
       {
         "domain": "ensembl",
         "query": "xref_uniprot:P04637",
+        "size": 10
+      },
+      {
+        "domain": "uniprot",
+        "query": "xref_ensembl:ENSG00000141510",
         "size": 10
       }
     ]
