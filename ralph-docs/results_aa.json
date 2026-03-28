@@ -1043,5 +1043,35 @@
     "tool": "CancerVar_classify_variant",
     "action": "skipped",
     "reason": "already_good"
+  },
+  {
+    "file": "cdc_tools.json",
+    "tool": "cdc_data_search_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cdc_tools.json",
+    "tool": "cdc_data_get_dataset",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellpainting_tools.json",
+    "tool": "CellPainting_search_screens",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellpainting_tools.json",
+    "tool": "CellPainting_get_screen_plates",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "cellpainting_tools.json",
+    "tool": "CellPainting_get_well_data",
+    "action": "added_examples",
+    "count": 2
   }
 ]
