@@ -53,7 +53,8 @@
         },
         "type": "TheraSAbDabTool",
         "test_examples": [
-            {}
+            {},
+            {"note": "Returns counts by format (IgG, bispecific, ADC) and clinical phase for 100+ therapeutic antibodies"}
         ],
         "return_schema": {
             "type": "object",

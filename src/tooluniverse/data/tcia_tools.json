@@ -12,7 +12,7 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {},
-      {}
+      {"note": "Returns 100+ cancer imaging collections including TCGA-GBM, LIDC-IDRI, TCGA-LUAD"}
     ],
     "return_schema": {
       "oneOf": [
@@ -189,6 +189,10 @@
       {
         "Collection": "LIDC-IDRI",
         "PatientID": "LIDC-IDRI-0001"
+      },
+      {
+        "Collection": "TCGA-GBM",
+        "PatientID": "TCGA-06-0125"
       }
     ],
     "return_schema": {
@@ -262,6 +266,10 @@
     "test_examples": [
       {
         "Collection": "LIDC-IDRI"
+      },
+      {
+        "Collection": "TCGA-GBM",
+        "Modality": "MR"
       }
     ],
     "return_schema": {
@@ -320,6 +328,9 @@
     "test_examples": [
       {
         "Modality": "CT"
+      },
+      {
+        "Collection": "TCGA-GBM"
       }
     ],
     "return_schema": {
@@ -366,6 +377,9 @@
     "test_examples": [
       {
         "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6834.5010.189721824525842725510380467695"
+      },
+      {
+        "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222365663678666836860"
       }
     ],
     "return_schema": {
@@ -412,6 +426,9 @@
     "test_examples": [
       {
         "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6279.6001.100225287222365663678666836860"
+      },
+      {
+        "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6834.5010.207817783005933376110841871795"
       }
     ],
     "return_schema": {

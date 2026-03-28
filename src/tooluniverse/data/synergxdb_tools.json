@@ -210,6 +210,11 @@
         "operation": "get_combo_matrix",
         "combo_id": 138775,
         "source_id": 2
+      },
+      {
+        "operation": "get_combo_matrix",
+        "combo_id": 100234,
+        "source_id": 1
       }
     ]
   },
@@ -353,6 +358,10 @@
       {
         "operation": "get_drug",
         "drug_id": 11
+      },
+      {
+        "operation": "get_drug",
+        "drug_id": 48
       }
     ]
   },
@@ -428,6 +437,10 @@
     "test_examples": [
       {
         "operation": "list_cell_lines"
+      },
+      {
+        "operation": "list_cell_lines",
+        "note": "Returns 151 cancer cell lines with tissue types including blood, breast, lung, colorectal"
       }
     ]
   },
@@ -496,6 +509,10 @@
     "test_examples": [
       {
         "operation": "list_datasets"
+      },
+      {
+        "operation": "list_datasets",
+        "note": "Returns 9 major datasets including NCI-ALMANAC (101 drugs), MERCK, VISAGE, MIT-MELANOMA"
       }
     ]
   },
@@ -546,6 +563,10 @@
     "test_examples": [
       {
         "operation": "get_combo_stats"
+      },
+      {
+        "operation": "get_combo_stats",
+        "note": "Returns combination statistics for all 9 integrated datasets with experiment counts"
       }
     ]
   }

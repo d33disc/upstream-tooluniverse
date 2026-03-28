@@ -15,7 +15,7 @@
     },
     "test_examples": [
       {},
-      {}
+      {"note": "Signals completion of multi-step reasoning with final answer"}
     ]
   },
   {
