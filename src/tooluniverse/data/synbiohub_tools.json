@@ -139,6 +139,7 @@
     },
     "type": "SynBioHubTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {
