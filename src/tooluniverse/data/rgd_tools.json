@@ -134,7 +134,8 @@
         },
         "type": "RGDTool",
         "test_examples": [
-            {"rgd_id": "2218"}
+            {"rgd_id": "2218"},
+            {"rgd_id": "RGD:3001"}
         ],
         "return_schema": {
             "type": "array",
