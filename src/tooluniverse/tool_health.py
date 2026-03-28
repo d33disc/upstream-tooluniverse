@@ -57,16 +57,37 @@ class ToolHealthCache:
             return None
         return record.get("status") == "live"
 
+    def health_status(self, tool_name: str) -> Optional[str]:
+        """Return 'live', 'broken', 'stale', or None (unknown).
+
+        A broken record older than STALE_DAYS becomes 'stale' — signalling
+        "was broken, might be fixed now; re-test with `tu health <tool> --refresh`".
+        """
+        record = self.check(tool_name)
+        if record is None:
+            return None
+        if record.get("status") == "live":
+            return "live"
+        if record.get("status") == "broken":
+            return "stale" if self.is_stale(tool_name) else "broken"
+        return None
+
     def warn(self, tool_name: str) -> Optional[str]:
         record = self.check(tool_name)
         if record is None:
             return None
-        if record.get("status") == "broken":
-            detail = record.get("detail", "unknown reason")
-            tested = record.get("tested", "unknown date")
+        status = self.health_status(tool_name)
+        detail = record.get("detail", "unknown reason")
+        tested = record.get("tested", "unknown date")
+        if status == "broken":
             return (
                 f"WARNING: {tool_name} failed health check ({detail}). "
                 f"Last tested: {tested}. Results may be unreliable."
+            )
+        if status == "stale":
+            return (
+                f"NOTE: {tool_name} health record is stale (failed {tested}, {detail}). "
+                f"Re-test with: tu health {tool_name} --refresh"
             )
         return None
 

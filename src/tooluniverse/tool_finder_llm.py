@@ -592,6 +592,25 @@ Requirements:
         )
         picked_tools_prompt = self.tooluniverse.prepare_tool_prompts(picked_tools)
 
+        # Annotate with health status (optional — cache may not exist)
+        try:
+            from tooluniverse.tool_health import ToolHealthCache
+
+            _health_cache = ToolHealthCache()
+            for tool in picked_tools_prompt:
+                name = tool.get("name", "")
+                status = _health_cache.health_status(name)
+                if status is not None:
+                    tool["_health"] = status
+                    if status in ("broken", "stale"):
+                        tool["_health_warning"] = _health_cache.warn(name)
+            _SORT_KEY = {"live": 0, "stale": 1, "broken": 2}
+            picked_tools_prompt.sort(
+                key=lambda t: _SORT_KEY.get(t.get("_health", ""), 0)
+            )
+        except Exception:
+            pass
+
         # If only list format is requested, return the tool specifications as a list
         if return_list_only:
             return picked_tools_prompt  # Return list of tool specifications instead of just names

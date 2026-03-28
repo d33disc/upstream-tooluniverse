@@ -545,6 +545,27 @@ def _print_result(result: Any, args: argparse.Namespace, render_fn=None) -> None
             print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
+# ── health filter helper ────────────────────────────────────────────────────────
+
+
+def _apply_health_filter(result: dict) -> dict:
+    """Remove broken/stale tools from result (used when --filter-healthy is active)."""
+    _UNHEALTHY = {"broken", "stale"}
+    if not isinstance(result, dict) or "error" in result:
+        return result
+    if "tools" in result and isinstance(result["tools"], list):
+        result["tools"] = [
+            t for t in result["tools"] if t.get("_health") not in _UNHEALTHY
+        ]
+        result["total_matches"] = len(result["tools"])
+    if "tools_by_category" in result and isinstance(result["tools_by_category"], dict):
+        result["tools_by_category"] = {
+            cat: [t for t in tools if t.get("_health") not in _UNHEALTHY]
+            for cat, tools in result["tools_by_category"].items()
+        }
+    return result
+
+
 # ── category helpers ────────────────────────────────────────────────────────────
 
 
@@ -832,6 +853,8 @@ def cmd_list(args: argparse.Namespace) -> None:
     # with grep and find (which always emit "categories_filtered").
     if isinstance(result, dict) and "error" not in result:
         result["categories_filtered"] = args.categories or None
+    if getattr(args, "filter_healthy", False) and isinstance(result, dict):
+        result = _apply_health_filter(result)
     _print_result(result, args, _render_list)
     # Feature-R13B-06: exit 1 when an unknown category was passed.
     if _cat_unknown:
@@ -924,6 +947,8 @@ def cmd_grep(args: argparse.Namespace) -> None:
             )
         else:
             result["hint"] = None
+    if getattr(args, "filter_healthy", False) and isinstance(result, dict):
+        result = _apply_health_filter(result)
     _print_result(result, args, _render_grep)
     if _cat_unknown:
         sys.exit(1)
@@ -1052,6 +1077,8 @@ def cmd_find(args: argparse.Namespace) -> None:
         result = json.loads(raw_result)
     except (json.JSONDecodeError, TypeError):
         result = {"raw": raw_result}
+    if getattr(args, "filter_healthy", False) and isinstance(result, dict):
+        result = _apply_health_filter(result)
     _print_result(result, args, _render_find)
     if _cat_unknown:
         sys.exit(1)
@@ -1678,6 +1705,12 @@ def main() -> None:
         action="store_true",
         help="Group results by category",
     )
+    p.add_argument(
+        "--filter-healthy",
+        dest="filter_healthy",
+        action="store_true",
+        help="Exclude broken tools (tools with _health='broken' are hidden)",
+    )
     p.set_defaults(func=cmd_list)
 
     # ── grep ──────────────────────────────────────────────────────────────────
@@ -1726,6 +1759,12 @@ def main() -> None:
     )
     p.add_argument(
         "--categories", nargs="+", metavar="CAT", help="Filter by category names"
+    )
+    p.add_argument(
+        "--filter-healthy",
+        dest="filter_healthy",
+        action="store_true",
+        help="Exclude broken tools (tools with _health='broken' are hidden)",
     )
     p.set_defaults(func=cmd_grep)
 
@@ -1785,6 +1824,12 @@ def main() -> None:
     )
     p.add_argument(
         "--categories", nargs="+", metavar="CAT", help="Filter by category names"
+    )
+    p.add_argument(
+        "--filter-healthy",
+        dest="filter_healthy",
+        action="store_true",
+        help="Exclude broken tools (tools with _health='broken' are hidden)",
     )
     p.set_defaults(func=cmd_find)
 
