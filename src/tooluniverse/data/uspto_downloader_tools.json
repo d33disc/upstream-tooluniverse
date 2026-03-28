@@ -8,6 +8,8 @@
       "USPTO_MCP_SERVER_HOST"
     ],
     "test_examples": [
+      {},
+      {},
       {}
     ],
     "return_schema": {

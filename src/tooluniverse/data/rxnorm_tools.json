@@ -27,6 +27,12 @@
     "test_examples": [
       {
         "drug_name": "Aspirin"
+      },
+      {
+        "drug_name": "metformin"
+      },
+      {
+        "drug_name": "atorvastatin"
       }
     ],
     "return_schema": {

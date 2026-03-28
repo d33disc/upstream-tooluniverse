@@ -315,5 +315,2056 @@
     "tool": "RGD_get_orthologs",
     "action": "added_examples",
     "count": 2
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_reactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_by_ec",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rhea_tools.json",
+    "tool": "Rhea_search_by_chebi",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rnacentral_tools.json",
+    "tool": "RNAcentral_search",
+    "action": "improved_examples",
+    "old": "let-7, U6 with page_size=1",
+    "new": "let-7 microRNA, TP53 with realistic page sizes"
+  },
+  {
+    "file": "rnacentral_tools.json",
+    "tool": "RNAcentral_get_by_accession",
+    "action": "improved_examples",
+    "old": "URS0000000001 (placeholder)",
+    "new": "URS0000479B66 (real human lncRNA)"
+  },
+  {
+    "file": "ror_tools.json",
+    "tool": "ROR_search_organizations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "ror_tools.json",
+    "tool": "ROR_get_organization",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_get_drug_classes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_get_class_members",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxclass_tools.json",
+    "tool": "RxClass_find_classes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_find_rxcui",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_get_drug_info",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_extended_tools.json",
+    "tool": "RxNorm_get_related_drugs",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rxnorm_tools.json",
+    "tool": "RxNorm_get_drug_names",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_search_structures",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_get_structure",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sabdab_tools.json",
+    "tool": "SAbDab_get_summary",
+    "action": "fixed_duplicate_examples",
+    "old": "duplicate empty {} examples",
+    "new": "explicit operation parameter in second example"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_search_entries",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entry",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entries_by_uniprot",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_list_instruments",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sasbdb_tools.json",
+    "tool": "SASBDB_get_entries_by_tag",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scanprosite_tools.json",
+    "tool": "ScanProsite_scan_protein",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scite_tools.json",
+    "tool": "scite_get_tallies",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "screen_tools.json",
+    "tool": "SCREEN_get_regulatory_elements",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scxa_tools.json",
+    "tool": "SCXA_list_experiments",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "scxa_tools.json",
+    "tool": "SCXA_search_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sdss_tools.json",
+    "tool": "SDSS_sql_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sec_edgar_tools.json",
+    "tool": "SEC_EDGAR_search_filings",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sec_edgar_tools.json",
+    "tool": "SEC_EDGAR_get_company_submissions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_paper",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_search_authors",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_author",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_ext_tools.json",
+    "tool": "SemanticScholar_get_recommendations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "semantic_scholar_tools.json",
+    "tool": "SemanticScholar_search_papers",
+    "action": "improved_examples",
+    "old": "1 generic example (machine learning optimization)",
+    "new": "3 realistic examples (CRISPR, TP53, mRNA vaccine)"
+  },
+  {
+    "file": "semantic_scholar_tools.json",
+    "tool": "SemanticScholar_get_pdf_snippets",
+    "action": "skipped",
+    "reason": "no test_examples in tool config"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_go_annotations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_get_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sgd_tools.json",
+    "tool": "SGD_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_search_drug",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drug_side_effects",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drug_indications",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_get_drugs_for_side_effect",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "sider_tools.json",
+    "tool": "SIDER_search_side_effect",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_get_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_list_pathways",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "signor_tools.json",
+    "tool": "SIGNOR_get_pathway",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "simbad_tools.json",
+    "tool": "SIMBAD_query_object",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "simbad_tools.json",
+    "tool": "SIMBAD_advanced_query",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:company-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:create-tooluniverse-skill",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-auto-discover-apis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-code-optimization",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-create-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-docs-quality",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-fix-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-github",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-optimize-descriptions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-optimize-skills",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:devtu-self-evolve",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:setup-tooluniverse",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-adverse-event-detection",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-antibody-engineering",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-binder-discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-cancer-variant-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-chemical-compound-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-chemical-safety",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-trial-design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-clinical-trial-matching",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-crispr-screen-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-custom-tool",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-disease-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-drug-interaction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-repurposing",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-drug-target-validation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-epigenomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-expression-data-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gene-enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-drug-discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-finemapping",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-snp-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-study-explorer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-gwas-trait-to-gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-image-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-immune-repertoire-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-immunotherapy-response-prediction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-infectious-disease",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-install-skills",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-literature-deep-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-metabolomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-metabolomics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-multi-omics-integration",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-multiomic-disease-characterization",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-network-pharmacology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-pharmacovigilance",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-phylogenetics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-polygenic-risk-score",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-precision-medicine-stratification",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-precision-oncology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:Protein Interaction Network Analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-protein-structure-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-protein-therapeutic-design",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-proteomics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-rare-disease-diagnosis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-rnaseq-deseq2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-sdk",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-sequence-retrieval",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-single-cell",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-spatial-omics-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-spatial-transcriptomics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-statistical-modeling",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-structural-variant-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-systems-biology",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-target-research",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-variant-analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tooluniverse-variant-interpretation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "skills_catalog.json",
+    "tool": "skill:tu-llm",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "smolagent_tools.json",
+    "tool": "advanced_literature_search_agent",
+    "action": "improved_examples",
+    "old": "1 generic example (machine learning optimization)",
+    "new": "3 realistic examples (CRISPR, TP53, mRNA vaccine)"
+  },
+  {
+    "file": "smolagent_tools.json",
+    "tool": "open_deep_research_agent",
+    "action": "improved_examples",
+    "old": "1 generic example (COVID-19 symptoms)",
+    "new": "3 realistic examples (diabetes, metformin, unit conversion)"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "Finish",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "2 empty examples (no-arg tool)"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "ToolUniverse_get_usage_tips",
+    "action": "improved_examples",
+    "old": "3 examples with duplicate 'all'",
+    "new": "3 examples covering default, running, searching topics"
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "CallAgent",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "2 examples with gene and phenotype-focused plans"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_predict_splice",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with real variants (chr8, chr17, chr3)"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_get_max_delta",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with BRCA1, TP53 locus variants"
+  },
+  {
+    "file": "spliceai_tools.json",
+    "tool": "SpliceAI_predict_pangolin",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with masked and unmasked options"
+  },
+  {
+    "file": "sra_tools.json",
+    "tool": "SRA_search_experiments",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "sra_tools.json",
+    "tool": "SRA_get_experiment",
+    "action": "improved_examples",
+    "old": "1 example (SRX accession)",
+    "new": "3 examples covering SRX, SRP, SRS accession types"
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_kaplan_meier",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_log_rank_test",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "survival_tools.json",
+    "tool": "Survival_cox_regression",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swiss_target_tools.json",
+    "tool": "SwissTargetPrediction_predict",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swiss_target_tools.json",
+    "tool": "SwissTargetPrediction_organisms",
+    "action": "skipped",
+    "reason": "only 1 example but tool is API-based with health warnings"
+  },
+  {
+    "file": "swissadme_tools.json",
+    "tool": "SwissADME_calculate_adme",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swissadme_tools.json",
+    "tool": "SwissADME_check_druglikeness",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_dock_ligand",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_check_job_status",
+    "action": "improved_examples",
+    "old": "placeholder example_session_123456",
+    "new": "realistic session IDs (abc123def456, dock_20240615_xyz789)"
+  },
+  {
+    "file": "swissdock_tools.json",
+    "tool": "SwissDock_retrieve_results",
+    "action": "improved_examples",
+    "old": "placeholder example_session_123456",
+    "new": "realistic session IDs (abc123def456, dock_20240615_xyz789)"
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "skipped",
+    "reason": "API returned 403 Forbidden - tool may work when service is restored"
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_search_combos",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_drugs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_list_collections",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_immune_estimation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_gene_correlation",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "timer_tools.json",
+    "tool": "TIMER2_survival_association",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "special_tools.json",
+    "tool": "Finish",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "distinct second example"
+  },
+  {
+    "file": "synbiohub_tools.json",
+    "tool": "SynBioHub_get_collections",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "context note example"
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_combo_matrix",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_drug",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_cell_lines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "synergxdb_tools.json",
+    "tool": "SYNERGxDB_get_combo_stats",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_list_collections",
+    "action": "improved_examples",
+    "old": "duplicate empty {}",
+    "new": "context note example"
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_patient_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_modality_values",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_body_part_values",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_series_metadata",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tcia_tools.json",
+    "tool": "TCIA_get_series_size",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "therasabdab_tools.json",
+    "tool": "TheraSAbDab_get_all_therapeutics",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "toolfinderkeyword_defaults.json",
+    "tool": "toolfinderkeyword_defaults",
+    "action": "improved_examples",
+    "old": "empty {}",
+    "new": "realistic search queries"
+  },
+  {
+    "file": "txagent_client_tools.json",
+    "tool": "mcp_auto_loader_txagent",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "umls_search_concepts",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, hypertension queries"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "umls_get_concept_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "icd_search_codes",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, cancer queries"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "snomed_search_concepts",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "myocardial infarction, asthma"
+  },
+  {
+    "file": "umls_tools.json",
+    "tool": "loinc_search_codes",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "HbA1c, blood pressure"
+  },
+  {
+    "file": "unichem_tools.json",
+    "tool": "UniChem_list_sources",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "tool_composition_tools.json",
+    "tool": "ToolCompatibilityAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "NICE_Clinical_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, hypertension queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "PubMed_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, asthma queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "EuropePMC_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "cardiovascular, cancer queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "TRIP_Database_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, antibiotic queries"
+  },
+  {
+    "file": "unified_guideline_tools.json",
+    "tool": "CMA_Guidelines_Search",
+    "action": "improved_examples",
+    "old": "generic ML query",
+    "new": "diabetes, cancer queries"
+  },
+  {
+    "file": "uniprot_idmapping_tools.json",
+    "tool": "UniProtIDMap_list_databases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "unpaywall_tools.json",
+    "tool": "Unpaywall_check_oa_status",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "soilgrids_tools.json",
+    "tool": "SoilGrids_get_properties",
+    "action": "improved_description",
+    "old": "Get soil properties for any location on Earth using the ISRIC SoilGrids API. Returns quantitative soil data including pH, organic carbon (SOC), clay/sand/silt content, bulk density, cation exchange capacity, and more at multiple soil depth intervals...",
+    "new": "Query the ISRIC SoilGrids API for quantitative soil properties at any global location. Returns pH, organic carbon (SOC), clay/sand/silt, bulk density, cation exchange capacity, and nitrogen at 6 depth intervals (0-5cm to 100-200cm) using ML models trained on 240K+ soil profiles."
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_get_chemical_protein_interactions",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_get_interaction_partners",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "stitch_tools.json",
+    "tool": "STITCH_resolve_identifier",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_ext_tools.json",
+    "tool": "STRING_get_functional_annotations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_ext_tools.json",
+    "tool": "STRING_get_enrichment",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "string_network_tools.json",
+    "tool": "STRING_get_network",
+    "action": "improved_description",
+    "old": "Get the protein-protein interaction network for one or more proteins from STRING database. Returns all interactions (edges) between the query proteins and their neighbors, including confidence scores broken down by evidence type (experiments, co-expression, databases, text-mining, etc.)...",
+    "new": "Get protein-protein interaction networks from STRING database. Returns interaction edges with combined confidence scores and evidence breakdowns (experimental, co-expression, databases, text-mining, gene fusion, phylogenetic profiles). Supports multi-protein queries separated by carriage return."
+  },
+  {
+    "file": "string_network_tools.json",
+    "tool": "STRING_get_interaction_partners",
+    "action": "improved_description",
+    "old": "Get interaction partners for a single protein from STRING database. Returns a ranked list of proteins that interact with the query protein, along with detailed confidence scores by evidence type (experimental, database, text-mining, etc.)...",
+    "new": "Get interaction partners for a single protein from STRING database. Returns ranked partner list with combined confidence scores and evidence breakdowns (experimental, database, text-mining, co-expression, gene fusion, phylogenetic profiles). Use for identifying direct interactors of a query protein."
+  },
+  {
+    "file": "sunrise_sunset_tools.json",
+    "tool": "SunriseSunset_get_times",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "swissmodel_tools.json",
+    "tool": "SwissModel_get_models",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "swissmodel_tools.json",
+    "tool": "SwissModel_get_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "t3db_tools.json",
+    "tool": "T3DB_get_toxin",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "t3db_tools.json",
+    "tool": "T3DB_search_toxins",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "targetmine_tools.json",
+    "tool": "TargetMine_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "targetmine_tools.json",
+    "tool": "TargetMine_search_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_get_transporter",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_search_family",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tcdb_tools.json",
+    "tool": "TCDB_search_by_substrate",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "three_d_beacons_tools.json",
+    "tool": "ThreeDBeacons_get_structure_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "three_d_beacons_tools.json",
+    "tool": "ThreeDBeacons_get_structures",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "UnifiedToolGenerator",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (DrugBank, GTEx, DeepLoc)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "XMLToolOptimizer",
+    "action": "improved_examples",
+    "old": "1 placeholder example",
+    "new": "3 realistic examples with test context"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "ReferenceInfoAnalyzer",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (STRING, ClinVar, ADMET)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "PackageAnalyzer",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples with package metadata"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "TestResultsAnalyzer",
+    "action": "improved_examples",
+    "old": "1 placeholder example",
+    "new": "3 realistic examples with test failures"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "CodeQualityAnalyzer",
+    "action": "improved_examples",
+    "old": "1 simple example",
+    "new": "2 realistic examples (GTEx, DrugBank)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "ToolDiscover",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (DrugBank, ClinVar, DeepLoc)"
+  },
+  {
+    "file": "uniparc_tools.json",
+    "tool": "UniParc_get_entry",
+    "action": "added_example",
+    "count": 2,
+    "examples": "UPI000002ED67 (TP53), UPI000017A1D5"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_entry_by_accession",
+    "action": "added_example",
+    "count": 2,
+    "examples": "P04637 (TP53), P05067 (APP)"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_function_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_recommended_name_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_alternative_names_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_organism_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_subcellular_location_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_disease_variants_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_ptm_processing_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_sequence_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_isoform_ids_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search",
+    "action": "added_example",
+    "count": 2,
+    "examples": "gene:TP53, gene:BRCA1"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_id_mapping",
+    "action": "added_example",
+    "count": 2,
+    "examples": "P04637, ENSG00000141510"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_proteome",
+    "action": "added_example",
+    "count": 2,
+    "examples": "UP000005640 (human), UP000000589 (mouse)"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_uniref_cluster",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search_uniref",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_uniparc_entry",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search_uniparc",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "url_fetch_tools.json",
+    "tool": "get_webpage_title",
+    "action": "improved_examples",
+    "old": "1 generic example (wikipedia.org)",
+    "new": "3 realistic examples (wikipedia, UniProt KB, PubMed)"
+  },
+  {
+    "file": "url_fetch_tools.json",
+    "tool": "get_webpage_text_from_url",
+    "action": "improved_examples",
+    "old": "1 generic example (wikipedia.org)",
+    "new": "3 realistic examples (wikipedia, NCBI Gene, Ensembl)"
+  },
+  {
+    "file": "uspto_downloader_tools.json",
+    "tool": "mcp_auto_loader_uspto_downloader",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (MCP tool requires no parameters)"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_overview_by_text_query",
+    "action": "improved_examples",
+    "old": "1 example (machine learning)",
+    "new": "3 realistic examples (machine learning, CRISPR, mRNA vaccine)"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_application_metadata",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "3 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_term_adjustment_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_continuity_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_patent_foreign_priority_data",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "uspto_tools.json",
+    "tool": "get_associated_documents_metadata",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples with different application numbers"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_record_types",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_gene_searches",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "veupathdb_tools.json",
+    "tool": "VEuPathDB_list_organism_searches",
+    "action": "improved_examples",
+    "old": "1 empty example",
+    "new": "3 examples (no-param API endpoint)"
+  },
+  {
+    "file": "wfgy_promptbundle_tools.json",
+    "tool": "WFGY_triage_llm_rag_failure",
+    "action": "improved_examples",
+    "old": "1 example (RAG hallucination)",
+    "new": "3 realistic examples (hallucination, language, irrelevant retrieval)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_get_database_summary",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (no-param API endpoint)"
+  },
+  {
+    "file": "wikidata_sparql_tools.json",
+    "tool": "Wikidata_SPARQL_query",
+    "action": "improved_examples",
+    "old": "1 example (cat example)",
+    "new": "2 examples (cat and gene queries)"
+  },
+  {
+    "file": "wikipathways_tools.json",
+    "tool": "WikiPathways_get_pathway",
+    "action": "improved_examples",
+    "old": "1 example (WP254)",
+    "new": "2 examples (WP254 apoptosis, WP179 cell cycle)"
+  },
+  {
+    "file": "tooluniverse_page_tools.json",
+    "tool": "get_tool_page_url",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_get_sequence",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "ucsc_genome_tools.json",
+    "tool": "UCSC_get_track",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_locations_tools.json",
+    "tool": "UniProtLocations_get_location",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_locations_tools.json",
+    "tool": "UniProtLocations_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_proteomes_tools.json",
+    "tool": "UniProt_search_proteomes",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "uniprot_proteomes_tools.json",
+    "tool": "UniProt_get_proteome",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_diseases",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_disease",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_keywords",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_keyword",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_get_proteome",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_ref_tools.json",
+    "tool": "UniProtRef_search_proteomes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_taxonomy_tools.json",
+    "tool": "UniProtTaxonomy_get_taxon",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniprot_taxonomy_tools.json",
+    "tool": "UniProtTaxonomy_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniref_tools.json",
+    "tool": "UniRef_get_cluster",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uniref_tools.json",
+    "tool": "UniRef_search_clusters",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "uscensus_tools.json",
+    "tool": "USCensus_get_population",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_earthquake_tools.json",
+    "tool": "USGS_get_earthquake_feed",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_earthquake_tools.json",
+    "tool": "USGS_query_earthquakes",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_streamflow",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_water_level",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "usgs_water_tools.json",
+    "tool": "USGSWater_get_water_temperature",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "variant_validator_tools.json",
+    "tool": "VariantValidator_validate_variant",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "variant_validator_tools.json",
+    "tool": "VariantValidator_gene2transcripts",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_search_cdr3",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "vdjdb_tools.json",
+    "tool": "VDJDB_get_antigen_specificity",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "waqi_tools.json",
+    "tool": "WAQI_get_air_quality",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "web_search_tools.json",
+    "tool": "web_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "web_search_tools.json",
+    "tool": "web_api_documentation_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "who_gho_tools.json",
+    "tool": "WHOGHO_search_indicators",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "who_gho_tools.json",
+    "tool": "WHOGHO_get_indicator_data",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikidata_entity_tools.json",
+    "tool": "Wikidata_search_entities",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikidata_entity_tools.json",
+    "tool": "Wikidata_get_entity",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipathways_ext_tools.json",
+    "tool": "WikiPathways_get_pathway_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wikipathways_ext_tools.json",
+    "tool": "WikiPathways_find_pathways_by_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wikipathways_tools.json",
+    "tool": "WikiPathways_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_pharmacological_action",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_scope_or_definition",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "mesh_get_subjects_by_subject_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_basic_info_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_indications_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_indication",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_pharmacology_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_desc_pharmacology_by_moa",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_interactions_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_targets_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_target_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_products_by_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_safety_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_references_by_drug_name_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_pathways_reactions_by_drug_or_id",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_get_drug_name_and_description_by_pathway_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "xml_tools.json",
+    "tool": "drugbank_filter_drugs_by_name",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different query terms)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_compounds",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_get_compound",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_by_smiles",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_get_purchasable",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "zinc_tools.json",
+    "tool": "ZINC_search_by_properties",
+    "action": "improved_examples",
+    "old": "1 example",
+    "new": "2 examples (different compounds/parameters)"
+  },
+  {
+    "file": "wikipedia_ext_tools.json",
+    "tool": "Wikipedia_get_featured_content",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_search",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_get_content",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wikipedia_tools.json",
+    "tool": "Wikipedia_get_summary",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_get_indicator",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_get_country",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "worldbank_tools.json",
+    "tool": "WorldBank_search_indicators",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "wormbase_tools.json",
+    "tool": "WormBase_get_expression",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "worms_tools.json",
+    "tool": "WoRMS_search_species",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xenbase_tools.json",
+    "tool": "Xenbase_search_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "xenbase_tools.json",
+    "tool": "Xenbase_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_search_records",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_record",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_record_files",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_list_licenses",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zenodo_tools.json",
+    "tool": "Zenodo_get_license",
+    "action": "skipped",
+    "reason": "existing examples already strong (3 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_phenotypes",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_orthologs",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_alleles",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_gene_expression",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "zfin_tools.json",
+    "tool": "ZFIN_get_allele",
+    "action": "skipped",
+    "reason": "existing examples already strong (2 examples)"
+  },
+  {
+    "file": "tool_page_index.json",
+    "tool": "N/A",
+    "action": "skipped",
+    "reason": "mapping file - not tool configs"
   }
 ]

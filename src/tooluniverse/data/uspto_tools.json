@@ -235,6 +235,19 @@
         "sort": "filingDate desc",
         "offset": 0,
         "limit": 1
+      },
+      {
+        "query": "CRISPR gene editing",
+        "exact_match": false,
+        "sort": "grantDate desc",
+        "offset": 0,
+        "limit": 5
+      },
+      {
+        "query": "mRNA vaccine",
+        "exact_match": true,
+        "rangeFilters": "grantDate 2020-01-01:2023-12-31",
+        "limit": 3
       }
     ]
   },
@@ -442,6 +455,12 @@
     "test_examples": [
       {
         "applicationNumberText": "16123456"
+      },
+      {
+        "applicationNumberText": "17456789"
+      },
+      {
+        "applicationNumberText": "15987654"
       }
     ]
   },
@@ -526,6 +545,9 @@
     "test_examples": [
       {
         "applicationNumberText": "16123456"
+      },
+      {
+        "applicationNumberText": "17456789"
       }
     ]
   },
@@ -676,6 +698,9 @@
     "test_examples": [
       {
         "applicationNumberText": "16123456"
+      },
+      {
+        "applicationNumberText": "17456789"
       }
     ]
   },
@@ -758,6 +783,9 @@
     "test_examples": [
       {
         "applicationNumberText": "16123456"
+      },
+      {
+        "applicationNumberText": "17456789"
       }
     ]
   },
@@ -858,6 +886,9 @@
     "test_examples": [
       {
         "applicationNumberText": "16123456"
+      },
+      {
+        "applicationNumberText": "17456789"
       }
     ]
   }

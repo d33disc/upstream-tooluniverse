@@ -66,8 +66,13 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
+        "query": "diabetes mellitus type 2",
         "sabs": "SNOMEDCT_US",
+        "pageNumber": 1,
+        "pageSize": 10
+      },
+      {
+        "query": "hypertension",
         "pageNumber": 1,
         "pageSize": 25
       }
@@ -131,6 +136,10 @@
         "cui": "C0011849",
         "pageNumber": 1,
         "pageSize": 25
+      },
+      {
+        "cui": "C0003123",
+        "pageNumber": 1
       }
     ]
   },
@@ -208,10 +217,15 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
+        "query": "type 2 diabetes",
         "version": "ICD10CM",
         "pageNumber": 1,
-        "pageSize": 25
+        "pageSize": 10
+      },
+      {
+        "query": "breast cancer",
+        "version": "ICD10",
+        "pageNumber": 1
       }
     ]
   },
@@ -279,9 +293,13 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
+        "query": "myocardial infarction",
         "pageNumber": 1,
-        "pageSize": 25
+        "pageSize": 10
+      },
+      {
+        "query": "asthma",
+        "pageNumber": 1
       }
     ]
   },
@@ -349,9 +367,13 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
+        "query": "hemoglobin A1c",
         "pageNumber": 1,
-        "pageSize": 25
+        "pageSize": 10
+      },
+      {
+        "query": "blood pressure",
+        "pageNumber": 1
       }
     ]
   }

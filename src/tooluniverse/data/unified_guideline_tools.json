@@ -45,8 +45,12 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "diabetes type 2 management",
+        "limit": 5
+      },
+      {
+        "query": "hypertension treatment",
+        "limit": 3
       }
     ]
   },
@@ -103,9 +107,13 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1,
+        "query": "diabetes management",
+        "limit": 5,
         "api_key": ""
+      },
+      {
+        "query": "asthma treatment guidelines",
+        "limit": 3
       }
     ]
   },
@@ -155,8 +163,12 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "cardiovascular disease prevention",
+        "limit": 5
+      },
+      {
+        "query": "cancer screening guidelines",
+        "limit": 3
       }
     ]
   },
@@ -212,9 +224,14 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1,
-        "search_type": "guidelines"
+        "query": "diabetes management",
+        "limit": 5,
+        "search_type": "guideline"
+      },
+      {
+        "query": "antibiotic stewardship",
+        "limit": 3,
+        "search_type": "guideline"
       }
     ]
   },
@@ -591,8 +608,12 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "diabetes management",
+        "limit": 5
+      },
+      {
+        "query": "hypertension treatment",
+        "limit": 3
       }
     ]
   },
@@ -669,8 +690,12 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "diabetes management",
+        "limit": 5
+      },
+      {
+        "query": "cancer screening",
+        "limit": 3
       }
     ]
   },
