@@ -1749,5 +1749,35 @@
     "tool": "GWAS_search_associations_by_gene",
     "action": "added_examples",
     "count": "2-3"
+  },
+  {
+    "file": "gxa_tools.json",
+    "tool": "GxA_get_experiment_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hca_tools.json",
+    "tool": "hca_search_projects",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hca_tools.json",
+    "tool": "hca_get_file_manifest",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "health_disparities_tools.json",
+    "tool": "health_disparities_get_svi_info",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "health_disparities_tools.json",
+    "tool": "health_disparities_get_county_rankings_info",
+    "action": "improved_description_and_examples",
+    "count": 2
   }
 ]
