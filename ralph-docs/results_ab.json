@@ -1511,5 +1511,45 @@
     "file": "gencc_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gene2phenotype_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genenetwork_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genenetwork_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genome_nexus_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "geo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "github_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "glygen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gmrepo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
   }
 ]
