@@ -1,7 +1,7 @@
 [
   {
     "name": "get_joint_associated_diseases_by_HPO_ID_list",
-    "description": "Retrieve diseases associated with a list of phenotypes or symptoms by a list of HPO IDs.",
+    "description": "Query Monarch Initiative for diseases shared across one or more HPO phenotypes. Returns disease labels associated with the supplied phenotype profile.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -51,7 +51,12 @@
       {
         "HPO_ID_list": ["HP:0001250"],
         "limit": 5,
-        "offset": 1
+        "offset": 0
+      },
+      {
+        "HPO_ID_list": ["HP:0001250", "HP:0001249", "HP:0002353"],
+        "limit": 10,
+        "offset": 0
       }
     ],
     "return_schema": {
@@ -64,7 +69,7 @@
   },
   {
     "name": "get_phenotype_by_HPO_ID",
-    "description": "Retrieve a phenotype or symptom by its HPO ID.",
+    "description": "Look up an HPO phenotype entity in Monarch Initiative by HP identifier. Returns the phenotype record and entity metadata.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -92,6 +97,9 @@
     "test_examples": [
       {
         "id": "HP:0001250"
+      },
+      {
+        "id": "HP:0001249"
       }
     ],
     "return_schema": {
@@ -105,7 +113,7 @@
   },
   {
     "name": "get_HPO_ID_by_phenotype",
-    "description": "Retrieve the HPO ID of a phenotype or symptom.",
+    "description": "Search Monarch Initiative phenotypes by symptom or phenotype text. Returns matching HPO entities and IDs for the query term.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -144,9 +152,14 @@
     "tool_url": "/search",
     "test_examples": [
       {
-        "query": "epilepsy",
+        "query": "seizure",
         "limit": 5,
-        "offset": 1
+        "offset": 0
+      },
+      {
+        "query": "global developmental delay",
+        "limit": 5,
+        "offset": 0
       }
     ],
     "return_schema": {
@@ -209,7 +222,7 @@
   },
   {
     "name": "Monarch_get_gene_phenotypes",
-    "description": "Get phenotypes associated with a gene from Monarch Initiative (cross-species). Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns human and model organism phenotypes (HP/MP terms). Use Monarch_search_gene first to find the CURIE.",
+    "description": "Fetch Monarch Initiative gene-to-phenotype associations for a gene CURIE. Returns human and model-organism phenotype terms linked to the gene.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -240,7 +253,8 @@
     "type": "Monarch",
     "tool_url": "/association",
     "test_examples": [
-      {"subject": "HGNC:11998", "limit": 20}
+      {"subject": "HGNC:11998", "limit": 20},
+      {"subject": "HGNC:1100", "limit": 10, "offset": 5}
     ],
     "return_schema": {
       "type": "object",
@@ -257,7 +271,7 @@
   },
   {
     "name": "Monarch_get_gene_diseases",
-    "description": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene→disease across species for hypothesis generation.",
+    "description": "Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and evidence-backed associations for the gene.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -288,7 +302,8 @@
     "type": "Monarch",
     "tool_url": "/association",
     "test_examples": [
-      {"subject": "HGNC:11998", "limit": 20}
+      {"subject": "HGNC:11998", "limit": 20},
+      {"subject": "HGNC:1100", "limit": 10, "offset": 5}
     ],
     "return_schema": {
       "type": "object",
