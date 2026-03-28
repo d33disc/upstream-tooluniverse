@@ -235,7 +235,7 @@
     "file": "monarch_tools.json",
     "tool": "Monarch_get_gene_diseases",
     "action": "improved_description",
-    "old": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene→disease across species for hypothesis generation.",
+    "old": "Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:11998' for TP53). Returns disease associations with evidence. Bridges gene\u2192disease across species for hypothesis generation.",
     "new": "Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and evidence-backed associations for the gene."
   },
   {
@@ -307,5 +307,1884 @@
     "file": "nca_tools.json",
     "action": "skipped",
     "reason": "all tools already had useful test_examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_gene",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_gene_by_symbol",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_get_taxonomy",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_datasets_tools.json",
+    "tool": "NCBIDatasets_suggest_taxonomy",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIGene_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIGene_get_summary",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_gene_tools.json",
+    "tool": "NCBIProtein_get_summary",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_search_nucleotide",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_fetch_accessions",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_nucleotide_tools.json",
+    "tool": "NCBI_get_sequence",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_search_runs",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_get_run_info",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_get_download_urls",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_sra_tools.json",
+    "tool": "NCBI_SRA_link_to_biosample",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_to_hgvs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_hgvs_to_spdi",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_equivalents",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_spdi_canonical",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ncbi_variation_tools.json",
+    "tool": "NCBIVariation_rsid_lookup",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_cactus_tools.json",
+    "tool": "NCICACTUS_resolve",
+    "action": "skipped",
+    "reason": "good: 4 examples"
+  },
+  {
+    "file": "nci_drugdict_tools.json",
+    "tool": "NCIDrugDict_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nci_drugdict_tools.json",
+    "tool": "NCIDrugDict_get_drug",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_search",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_get_concept",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nci_thesaurus_tools.json",
+    "tool": "NCIThesaurus_get_children",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_search_networks",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_get_network_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "ndex_tools.json",
+    "tool": "NDEx_get_network",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "neb_tm_tools.json",
+    "tool": "NEB_Tm_calculate",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neb_tm_tools.json",
+    "tool": "NEB_Tm_list_polymerases",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_neuron",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_search_neurons",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_morphometry",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neuromorpho_tools.json",
+    "tool": "NeuroMorpho_get_field_values",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_list_collections",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_get_collection",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_list_collection_images",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "neurovault_tools.json",
+    "tool": "NeuroVault_get_image",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nextstrain_tools.json",
+    "tool": "Nextstrain_list_datasets",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nextstrain_tools.json",
+    "tool": "Nextstrain_get_dataset",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "nhanes_tools.json",
+    "tool": "nhanes_get_dataset_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nhanes_tools.json",
+    "tool": "nhanes_search_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nominatim_tools.json",
+    "tool": "Nominatim_geocode",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nominatim_tools.json",
+    "tool": "Nominatim_reverse_geocode",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_alphafold2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_alphafold2_multimer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_esmfold",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_openfold2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_openfold3",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_boltz2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_proteinmpnn",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_rfdiffusion",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_diffdock",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_genmol",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_molmim",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_evo2",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_msa_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_esm2_650m",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_maisi",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nvidia_nim_tools.json",
+    "tool": "NvidiaNIM_vista3d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_point_metadata",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "nws_tools.json",
+    "tool": "NWS_get_active_alerts",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "obis_tools.json",
+    "tool": "OBIS_search_taxa",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "obis_tools.json",
+    "tool": "OBIS_search_occurrences",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_myhealthfinder",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_itemlist",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_topicsearch",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "odphp_tools.json",
+    "tool": "odphp_outlink_fetch",
+    "action": "added_examples",
+    "count": 2,
+    "note": "replaced placeholder empty-urls example"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_terms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_ontology_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_ontologies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_children",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_ancestors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_find_similar_terms",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_terms",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_ontology_info",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_search_ontologies",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_get_term_info",
+    "action": "improved_description"
+  },
+  {
+    "file": "ols_tools.json",
+    "tool": "ols_find_similar_terms",
+    "action": "improved_description"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_protein",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_hog",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oma_tools.json",
+    "tool": "OMA_get_group",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_search_datasets",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_get_dataset",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omicsdi_tools.json",
+    "tool": "OmicsDI_get_statistics",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_search",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_entry",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_gene_map",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "omim_tools.json",
+    "tool": "OMIM_get_clinical_synopsis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_ligand_receptor_interactions",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_intercell_roles",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_signaling_interactions",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_complexes",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_cell_communication_annotations",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_enzyme_substrate",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_tf_target_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "omnipath_tools.json",
+    "tool": "OmniPath_get_dorothea_regulon",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_annotate_variant",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_gene_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_cancer_genes",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_get_levels",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "oncokb_tools.json",
+    "tool": "OncoKB_annotate_copy_number",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_search",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_get_type",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "oncotree_tools.json",
+    "tool": "OncoTree_list_tissues",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool, duplicate {}"
+  },
+  {
+    "file": "open_meteo_airquality_tools.json",
+    "tool": "OpenMeteo_get_air_quality",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_climate_tools.json",
+    "tool": "OpenMeteo_get_historical_climate",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_flood_tools.json",
+    "tool": "OpenMeteo_get_flood_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_marine_tools.json",
+    "tool": "OpenMeteo_get_marine_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_weather_forecast",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_historical_weather",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_geocode_location",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "open_meteo_tools.json",
+    "tool": "OpenMeteo_get_air_quality",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openaire_tools.json",
+    "tool": "OpenAIRE_search_publications",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_literature_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_works",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_work",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_work_by_doi",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_authors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_author",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_search_institutions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openalex_tools.json",
+    "tool": "openalex_get_institution",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_references",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_citations",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencitations_tools.json",
+    "tool": "OpenCitations_get_citation_count",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opencravat_tools.json",
+    "tool": "OpenCRAVAT_annotate_variant",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opencravat_tools.json",
+    "tool": "OpenCRAVAT_list_annotators",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_search_drug_approvals",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_get_approval_history",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_approval_tools.json",
+    "tool": "OpenFDA_get_approved_products",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_search_drug_labels",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_get_drug_label",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_label_tools.json",
+    "tool": "FDA_list_drug_classes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_labels",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_events",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_ndc",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_drug_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_device_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_device_510k",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfda_tools.json",
+    "tool": "OpenFDA_search_food_enforcement",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfoodfacts_tools.json",
+    "tool": "OpenFoodFacts_search_products",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openfoodfacts_tools.json",
+    "tool": "OpenFoodFacts_get_product",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openml_tools.json",
+    "tool": "OpenML_search_datasets",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openml_tools.json",
+    "tool": "OpenML_get_dataset",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_get_dataset",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_get_dataset_snapshots",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "openneuro_tools.json",
+    "tool": "OpenNeuro_search_by_modality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_variant_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_variant_credible_sets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_gwas_study",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_search_gwas_studies_by_disease",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_credible_set_detail",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_genetics_tools.json",
+    "tool": "OpenTargets_get_study_credible_sets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "opentarget_tools.json",
+    "tool": "ALL_53_TOOLS",
+    "action": "added_examples",
+    "count": 2,
+    "note": "added 2nd examples to 53 tools using BRCA1/hypertension/imatinib as alternates"
+  },
+  {
+    "file": "opentopodata_tools.json",
+    "tool": "OpenTopoData_get_elevation",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_match_names",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_taxon",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_mrca",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "opentree_tools.json",
+    "tool": "OpenTree_get_induced_subtree",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "ToolDescriptionOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "TestCaseGenerator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "ArgumentDescriptionOptimizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "DescriptionAnalyzer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "optimizer_tools.json",
+    "tool": "DescriptionQualityEvaluator",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_profile",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_works",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_search_researchers",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orcid_tools.json",
+    "tool": "ORCID_get_employments",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_search_diseases",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_disease",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_classification",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_search_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_phenotypes",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_epidemiology",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_natural_history",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_gene_diseases",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "orphanet_tools.json",
+    "tool": "Orphanet_get_icd_mapping",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_search_groups",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_get_group_details",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "orthodb_tools.json",
+    "tool": "OrthoDB_get_orthologs",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "osf_preprints_tools.json",
+    "tool": "OSF_search_preprints",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "output_summarization_tools.json",
+    "tool": "ToolOutputSummarizer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "output_summarization_tools.json",
+    "tool": "OutputSummarizationComposer",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "oxo_tools.json",
+    "tool": "OxO_get_ontology_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "oxo_tools.json",
+    "tool": "OxO_search_ontology_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "package_discovery_tools.json",
+    "tool": "dynamic_package_discovery",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "paleobiology_tools.json",
+    "tool": "Paleobiology_get_fossils",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_search_panels",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_get_panel",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panelapp_tools.json",
+    "tool": "PanelApp_search_genes",
+    "action": "skipped",
+    "reason": "good: 3 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_gene_info",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_enrichment",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "panther_tools.json",
+    "tool": "PANTHER_ortholog",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pathway_commons_tools.json",
+    "tool": "pc_search_pathways",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathway_commons_tools.json",
+    "tool": "pc_get_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_get_pathway",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pathwaycommons_tools.json",
+    "tool": "PathwayCommons_get_neighborhood",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdb_redo_tools.json",
+    "tool": "PDB_REDO_get_structure_quality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_quality",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_publications",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_assemblies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_secondary_structure",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_molecules",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_related_publications",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_status",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_experiment",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_api_tools.json",
+    "tool": "pdbe_get_entry_observed_residues_ratio",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_compound_tools.json",
+    "tool": "PDBe_get_compound_summary",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_compound_tools.json",
+    "tool": "PDBe_get_compound_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_bound_molecules",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_uniprot_structure_coverage",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_uniprot_mappings",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_compound_details",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_graph_tools.json",
+    "tool": "PDBe_get_funpdbe_annotations",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_summary_stats",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_ligand_sites",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_interface_residues",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_kb_tools.json",
+    "tool": "PDBe_KB_get_superposition_clusters",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_ligands_tools.json",
+    "tool": "PDBe_get_structure_ligands",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_ligands_tools.json",
+    "tool": "PDBe_get_residue_listing",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_search_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_get_compound",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_search_tools.json",
+    "tool": "PDBeSearch_search_by_organism",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_best_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_pdb_to_uniprot",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_sifts_tools.json",
+    "tool": "PDBeSIFTS_get_all_structures",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_validation_tools.json",
+    "tool": "PDBeValidation_get_quality_scores",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbe_validation_tools.json",
+    "tool": "PDBeValidation_get_outlier_residues",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_interfaces",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_assemblies",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdbepisa_tools.json",
+    "tool": "PDBePISA_get_monomer_analysis",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_search_families",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_detail",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_proteins",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_protein_annotations",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_search_clans",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pfam_tools.json",
+    "tool": "Pfam_get_family_proteomes",
+    "action": "skipped",
+    "reason": "good: 2 examples"
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_search_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_gene_protein",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_list_programs",
+    "action": "added_examples",
+    "count": 2,
+    "note": "no-param tool"
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_study_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pdc_tools.json",
+    "tool": "PDC_get_clinical_data",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_cell_line",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_experiments",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmacodb_tools.json",
+    "tool": "PharmacoDB_get_biomarker_assoc",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_drugs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_drug_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_gene_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_clinical_annotations",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_search_variants",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmgkb_tools.json",
+    "tool": "PharmGKB_get_dosing_guidelines",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharmvar_tools.json",
+    "tool": "PharmVar_list_genes",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pharos_tools.json",
+    "tool": "Pharos_get_tdl_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "plant_reactome_tools.json",
+    "tool": "PlantReactome_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_get_protein_interactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_functional_enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_map_identifiers",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "ppi_tools.json",
+    "tool": "STRING_ppi_enrichment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_search_protacs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_get_protac",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protacdb_tools.json",
+    "tool": "ProtacDB_search_targets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protein_structure_3d_tools.json",
+    "tool": "visualize_protein_structure_3d",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "proteins_api_tools.json",
+    "tool": "proteins_api_get_variants",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "proteomicsdb_tools.json",
+    "tool": "ProteomicsDB_list_tissues",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "protvar_tools.json",
+    "tool": "ProtVar_get_population",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_associated_patents_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_properties_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_CID_by_compound_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_CID_by_SMILES",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_compounds_by_substructure",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_compounds_by_similarity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_2D_image_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_synonyms_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_compound_xrefs_by_CID",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_summary",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_targets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_search_assays_by_type",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubchem_tools.json",
+    "tool": "PubChem_get_assay_dose_response",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubtator_tools.json",
+    "tool": "PubTator3_EntityAutocomplete",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pubtator_tools.json",
+    "tool": "PubTator3_LiteratureSearch",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rcsb_pdb_tools.json",
+    "tool": "ALL_39_TOOLS",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "pmc_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pombase_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "powo_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pride_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "progenetix_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "prosite_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "proteinsplus_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "proteomexchange_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "protparam_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubchem_bioassay_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubchem_tox_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubmed_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pubtator3_ext_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "pypi_package_inspector_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "python_executor_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "quickgo_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_advanced_search_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_chemcomp_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_data_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
+  },
+  {
+    "file": "rcsb_graphql_tools.json",
+    "tool": "ALL",
+    "action": "skipped",
+    "reason": "good: 2+ examples"
   }
 ]

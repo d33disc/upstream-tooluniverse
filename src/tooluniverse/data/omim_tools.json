@@ -254,6 +254,9 @@
     "test_examples": [
       {
         "mim_number": "219700"
+      },
+      {
+        "mim_number": "147920"
       }
     ]
   }

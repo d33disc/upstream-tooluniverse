@@ -103,6 +103,9 @@
     "test_examples": [
       {
         "pdb_id": "4HHB"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -177,6 +180,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ]
   },
@@ -259,6 +265,9 @@
     "test_examples": [
       {
         "entity_id": "1A8M_1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ]
   },
@@ -341,6 +350,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ]
   },
@@ -388,6 +400,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -486,6 +501,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -602,6 +620,9 @@
     "test_examples": [
       {
         "pdb_id": "4HHB"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -644,6 +665,9 @@
     "test_examples": [
       {
         "pdb_id": "2JIV"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
@@ -745,6 +769,9 @@
     "test_examples": [
       {
         "pdb_id": "7BV2"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
@@ -819,6 +846,9 @@
     "test_examples": [
       {
         "assembly_id": "1A8M-1"
+      },
+      {
+        "assembly_id": "4HHB-1"
       }
     ],
     "return_schema": {
@@ -873,6 +903,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -962,6 +995,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1054,6 +1090,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1127,6 +1166,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1212,6 +1254,9 @@
     "test_examples": [
       {
         "entity_id": "5FMB_2"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -1266,6 +1311,9 @@
     "test_examples": [
       {
         "entity_id": "1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -1318,6 +1366,9 @@
     "test_examples": [
       {
         "entity_id": "1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -1371,6 +1422,9 @@
     "test_examples": [
       {
         "pdb_id": "1IEP"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
@@ -1388,21 +1442,32 @@
                     "type": "string"
                   },
                   "nonpolymer_entities": {
-                    "type": ["array", "null"],
+                    "type": [
+                      "array",
+                      "null"
+                    ],
                     "items": {
                       "type": "object",
                       "properties": {
                         "nonpolymer_entity_instances": {
-                          "type": ["array", "null"],
+                          "type": [
+                            "array",
+                            "null"
+                          ],
                           "items": {
                             "type": "object",
                             "properties": {
                               "rcsb_nonpolymer_instance_feature_summary": {
-                                "type": ["array", "null"],
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
                                 "items": {
                                   "type": "object",
                                   "properties": {
-                                    "comp_id": {"type": "string"}
+                                    "comp_id": {
+                                      "type": "string"
+                                    }
                                   }
                                 }
                               }
@@ -1413,12 +1478,18 @@
                     }
                   },
                   "assemblies": {
-                    "type": ["array", "null"],
+                    "type": [
+                      "array",
+                      "null"
+                    ],
                     "items": {
                       "type": "object",
                       "properties": {
                         "nonpolymer_entity_instances": {
-                          "type": ["array", "null"],
+                          "type": [
+                            "array",
+                            "null"
+                          ],
                           "items": {
                             "type": "object",
                             "properties": {
@@ -1431,7 +1502,9 @@
                                       "rcsb_chem_comp_info": {
                                         "type": "object",
                                         "properties": {
-                                          "bond_count": {"type": "integer"}
+                                          "bond_count": {
+                                            "type": "integer"
+                                          }
                                         }
                                       }
                                     }
@@ -1493,6 +1566,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1560,6 +1636,9 @@
     "test_examples": [
       {
         "entity_id": "1IEP_1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -1614,6 +1693,9 @@
     "test_examples": [
       {
         "entity_id": "1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -1668,6 +1750,9 @@
     "test_examples": [
       {
         "instance_id": "1NDO.A"
+      },
+      {
+        "instance_id": "4HHB.A"
       }
     ],
     "return_schema": {
@@ -1726,6 +1811,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1819,6 +1907,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1903,6 +1994,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -1970,6 +2064,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2037,6 +2134,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2104,6 +2204,9 @@
     "test_examples": [
       {
         "entity_id": "1"
+      },
+      {
+        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
@@ -2155,6 +2258,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2217,6 +2323,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2284,6 +2393,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2353,6 +2465,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2429,6 +2544,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2502,6 +2620,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2565,6 +2686,9 @@
     "test_examples": [
       {
         "chem_comp_id": "ATP"
+      },
+      {
+        "chem_comp_id": "HEM"
       }
     ],
     "return_schema": {
@@ -2624,6 +2748,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2721,6 +2848,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2798,6 +2928,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
@@ -2862,6 +2995,9 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
+      },
+      {
+        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {

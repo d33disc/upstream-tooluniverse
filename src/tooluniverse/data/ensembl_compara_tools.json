@@ -209,6 +209,10 @@
       {
         "gene": "BRCA1",
         "species": "human"
+      },
+      {
+        "gene": "TP53",
+        "species": "human"
       }
     ],
     "return_schema": {

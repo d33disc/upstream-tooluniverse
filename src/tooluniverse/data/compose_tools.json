@@ -44,6 +44,11 @@
         "drug_name": "Aspirin",
         "patient_sex": "Female",
         "serious_events_only": true
+      },
+      {
+        "drug_name": "Metformin",
+        "patient_sex": "Male",
+        "serious_events_only": false
       }
     ],
     "return_schema": {
@@ -81,6 +86,9 @@
     "test_examples": [
       {
         "research_topic": "cancer immunotherapy"
+      },
+      {
+        "research_topic": "CRISPR gene editing"
       }
     ],
     "return_schema": {
@@ -122,6 +130,9 @@
     "test_examples": [
       {
         "disease_efo_id": "EFO_0001074"
+      },
+      {
+        "disease_efo_id": "EFO_0000618"
       }
     ],
     "return_schema": {
@@ -170,6 +181,10 @@
       {
         "disease_condition": "breast cancer",
         "sample_type": "tissue"
+      },
+      {
+        "disease_condition": "Alzheimer's disease",
+        "sample_type": "blood"
       }
     ],
     "return_schema": {
@@ -236,6 +251,23 @@
             "XMLTool"
           ]
         }
+      },
+      {
+        "tool_configs": [
+          {
+            "type": "BaseRESTTool",
+            "name": "UniProt_get_entry",
+            "description": "Get UniProt entry by accession",
+            "parameter": {}
+          }
+        ],
+        "tool_type_mappings": {
+          "Database": [
+            "BaseRESTTool"
+          ]
+        },
+        "add_existing_tooluniverse_labels": true,
+        "max_new_tooluniverse_labels": 5
       }
     ],
     "return_schema": {
@@ -296,6 +328,22 @@
         "max_tools": 10,
         "output_path": "./tool_relationship_graph.json",
         "save_intermediate_every": 5000
+      },
+      {
+        "tool_configs": [
+          {
+            "type": "BaseRESTTool",
+            "name": "ChEMBL_search",
+            "description": "Search ChEMBL compounds"
+          },
+          {
+            "type": "BaseRESTTool",
+            "name": "UniProt_search",
+            "description": "Search UniProt proteins"
+          }
+        ],
+        "max_tools": 50,
+        "output_path": "./drug_target_graph.json"
       }
     ],
     "return_schema": {

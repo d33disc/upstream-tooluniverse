@@ -92,6 +92,13 @@
         "output_file": "output.json",
         "max_iterations": 3,
         "satisfaction_threshold": 8
+      },
+      {
+        "tool_config": {},
+        "save_to_file": true,
+        "output_file": "optimized.json",
+        "max_iterations": 5,
+        "satisfaction_threshold": 9
       }
     ]
   },
@@ -169,6 +176,29 @@
             ]
           }
         }
+      },
+      {
+        "tool_config": {
+          "type": "AgenticTool",
+          "name": "SearchTool",
+          "description": "Searches PubMed for articles.",
+          "parameter": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "Search query"
+              },
+              "max_results": {
+                "type": "integer",
+                "description": "Max results"
+              }
+            },
+            "required": [
+              "query"
+            ]
+          }
+        }
       }
     ]
   },
@@ -223,6 +253,10 @@
       {
         "parameter_schema": "{\"username\": {\"type\": \"string\", \"description\": \"User login name\"}}",
         "test_results": "[{\"input\": {\"username\": \"jdoe\"}, \"output\": \"success\"}]"
+      },
+      {
+        "parameter_schema": "{\"gene\": {\"type\": \"string\", \"description\": \"Gene symbol\"}, \"organism\": {\"type\": \"string\", \"description\": \"Organism name\"}}",
+        "test_results": "[{\"input\": {\"gene\": \"TP53\", \"organism\": \"human\"}, \"output\": \"found 3 entries\"}]"
       }
     ]
   },
@@ -259,6 +293,10 @@
       {
         "original_description": "Extracts keywords from text and returns a ranked list of terms.",
         "test_results": "[{\"input\":\"Analyze this sentence\",\"output\":\"[{\\\"keyword\\\": \\\"sentence\\\", \\\"score\\\": 0.95}]\"}]"
+      },
+      {
+        "original_description": "Searches a gene database by symbol and returns gene metadata.",
+        "test_results": "[{\"input\":\"TP53\",\"output\":\"{\\\"gene\\\":\\\"TP53\\\",\\\"name\\\":\\\"tumor protein p53\\\",\\\"id\\\":7157}\"}]"
       }
     ],
     "return_schema": {
@@ -307,6 +345,11 @@
         "tool_description": "A tool that converts temperatures between Celsius and Fahrenheit scales.",
         "parameter_descriptions": "{\"temperature\": \"Numerical value representing the temperature to convert.\", \"scale\": \"Target scale for conversion, either 'C' or 'F'.\"}",
         "test_results": "{\"test1\": \"passed\", \"test2\": \"failed\"}"
+      },
+      {
+        "tool_description": "Searches PubMed for biomedical articles by keyword query.",
+        "parameter_descriptions": "{\"query\": \"Search terms for PubMed query\", \"max_results\": \"Maximum number of results to return (1-100)\"}",
+        "test_results": "{\"test1\": \"passed\", \"test2\": \"passed\"}"
       }
     ],
     "return_schema": {

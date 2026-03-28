@@ -106,7 +106,9 @@
     },
     "type": "SRATool",
     "test_examples": [
-      {"accession": "SRX515811"}
+      {"accession": "SRX515811"},
+      {"accession": "SRP000001"},
+      {"accession": "SRS000001"}
     ],
     "return_schema": {
       "oneOf": [

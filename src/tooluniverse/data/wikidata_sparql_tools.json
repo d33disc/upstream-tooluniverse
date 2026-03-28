@@ -39,6 +39,10 @@
       {
         "sparql": "SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q146 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } } LIMIT 5",
         "max_results": 1
+      },
+      {
+        "sparql": "SELECT ?gene ?geneLabel WHERE { ?gene wdt:P31 wd:Q7187 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } } LIMIT 10",
+        "max_results": 5
       }
     ]
   }

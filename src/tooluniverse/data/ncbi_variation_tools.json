@@ -85,7 +85,8 @@
     },
     "type": "NCBIVariationTool",
     "test_examples": [
-      {"spdi": "NC_000001.11:230710047:A:G"}
+      {"spdi": "NC_000001.11:230710047:A:G"},
+      {"spdi": "NM_000546.6:214:C:G"}
     ],
     "return_schema": {
       "type": "object",

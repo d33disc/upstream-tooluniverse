@@ -54,7 +54,10 @@
       "endpoint": "list_datasets"
     },
     "type": "HarmonizomeTool",
-    "test_examples": [{}],
+    "test_examples": [
+      {},
+      {}
+    ],
     "return_schema": {
       "type": "array",
       "items": {

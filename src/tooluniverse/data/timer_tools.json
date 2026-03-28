@@ -69,6 +69,11 @@
       {
         "operation": "immune_estimation",
         "cancer": "BRCA"
+      },
+      {
+        "operation": "immune_estimation",
+        "cancer": "LUAD",
+        "gene": "CD8A"
       }
     ]
   },
@@ -157,6 +162,12 @@
         "cancer": "BRCA",
         "gene1": "CD8A",
         "gene2": "PDCD1"
+      },
+      {
+        "operation": "gene_correlation",
+        "cancer": "LUAD",
+        "gene1": "CD274",
+        "gene2": "IFNG"
       }
     ]
   },
@@ -239,6 +250,11 @@
         "operation": "survival_association",
         "cancer": "BRCA",
         "gene": "CD8A"
+      },
+      {
+        "operation": "survival_association",
+        "cancer": "LUAD",
+        "gene": "TP53"
       }
     ]
   }

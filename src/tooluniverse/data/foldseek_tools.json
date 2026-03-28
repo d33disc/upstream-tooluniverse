@@ -172,7 +172,16 @@
       "operation": "get_result"
     },
     "type": "FoldseekTool",
-    "test_examples": [],
+    "test_examples": [
+      {
+        "ticket_id": "abc123def456",
+        "max_results": 10
+      },
+      {
+        "ticket_id": "xyz789ghi012",
+        "max_results": 20
+      }
+    ],
     "return_schema": {
       "oneOf": [
         {

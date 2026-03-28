@@ -2,7 +2,7 @@
   {
     "type": "CBioPortalRESTTool",
     "name": "cBioPortal_get_cancer_studies",
-    "description": "Get list of cancer studies from cBioPortal",
+    "description": "Get list of cancer studies from cBioPortal including TCGA, Pan-Cancer Atlas, and other studies. Returns study metadata including studyId, name, description, cancer type, sample count, and publication info. Use to discover available cancer genomics datasets before querying mutations or clinical data.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -127,7 +127,7 @@
   {
     "type": "CBioPortalRESTTool",
     "name": "cBioPortal_get_samples",
-    "description": "Get all samples in a cancer study",
+    "description": "Get all samples in a cancer study. Returns sampleId, sampleType, patientId, and studyId for each sample. Use to enumerate available samples before querying mutation or clinical data. Sample types include 'Primary Tumor', 'Metastatic', 'Normal', 'Xenograft'.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -160,7 +160,7 @@
   {
     "type": "CBioPortalRESTTool",
     "name": "cBioPortal_get_patients",
-    "description": "Get all patients in a cancer study",
+    "description": "Get all patients in a cancer study. Returns patientId and studyId for each patient. Use to enumerate patients before querying clinical data or sample-level analyses. Patients may have multiple samples (e.g., primary tumor, metastasis).",
     "parameter": {
       "type": "object",
       "properties": {
@@ -184,7 +184,8 @@
       }
     },
     "test_examples": [
-      {"study_id": "brca_tcga", "page_size": 10}
+      {"study_id": "brca_tcga", "page_size": 10},
+      {"study_id": "luad_tcga", "page_size": 10}
     ]
   },
   {
@@ -243,7 +244,7 @@
         }
       }
     },
-    "test_examples": [{}]
+    "test_examples": [{}, {}]
   },
   {
     "type": "CBioPortalRESTTool",
@@ -269,7 +270,7 @@
         }
       }
     },
-    "test_examples": [{"page_size": 10}]
+    "test_examples": [{"page_size": 10}, {"page_size": 20}]
   },
   {
     "type": "CBioPortalRESTTool",

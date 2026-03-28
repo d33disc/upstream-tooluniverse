@@ -139,6 +139,12 @@
           "TP53",
           "BRCA1"
         ]
+      },
+      {
+        "genes": [
+          "KRAS",
+          "BRAF"
+        ]
       }
     ],
     "return_schema": {

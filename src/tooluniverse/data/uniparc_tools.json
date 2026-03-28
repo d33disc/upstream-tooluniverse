@@ -19,6 +19,9 @@
         "test_examples": [
             {
                 "upi": "UPI000002ED67"
+            },
+            {
+                "upi": "UPI000017A1D5"
             }
         ],
         "return_schema": {

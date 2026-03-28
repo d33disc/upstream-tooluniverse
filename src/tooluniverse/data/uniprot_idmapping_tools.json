@@ -325,7 +325,8 @@
     },
     "type": "UniProtIDMappingTool",
     "test_examples": [
-      {}
+      {},
+      {"note": "Returns 100+ databases including UniProtKB, Gene_Name, Ensembl, RefSeq, PDB, ChEMBL"}
     ],
     "return_schema": {
       "oneOf": [

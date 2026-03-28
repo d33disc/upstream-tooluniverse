@@ -18,6 +18,9 @@
     "test_examples": [
       {
         "disease": "Diabetes Mellitus"
+      },
+      {
+        "disease": "Alzheimer's disease"
       }
     ],
     "return_schema": {
@@ -58,7 +61,8 @@
       "required": ["query"]
     },
     "test_examples": [
-      {"query": "diabetes mellitus", "rows": 2}
+      {"query": "diabetes mellitus", "rows": 2},
+      {"query": "cancer", "rows": 3}
     ],
     "return_schema": {
       "type": "object",
@@ -104,7 +108,8 @@
       "oneOf": [{"required": ["iri"]}, {"required": ["obo_id"]}]
     },
     "test_examples": [
-      {"obo_id": "EFO:0000400"}
+      {"obo_id": "EFO:0000400"},
+      {"obo_id": "EFO:0000616"}
     ],
     "return_schema": {
       "type": "object",
@@ -149,7 +154,8 @@
       "oneOf": [{"required": ["iri"]}, {"required": ["obo_id"]}]
     },
     "test_examples": [
-      {"obo_id": "EFO:0000400", "size": 2}
+      {"obo_id": "EFO:0000400", "size": 2},
+      {"obo_id": "EFO:0000616", "size": 5}
     ],
     "return_schema": {
       "type": "object",
@@ -183,7 +189,7 @@
     "name": "ols_get_efo_ontology_info",
     "description": "Get metadata about the EFO ontology itself (version, status, number of terms, title/description).",
     "parameter": {"type": "object", "properties": {}, "required": []},
-    "test_examples": [{}],
+    "test_examples": [{}, {}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -222,7 +228,7 @@
       },
       "required": []
     },
-    "test_examples": [{"size": 2}],
+    "test_examples": [{"size": 2}, {"size": 5}],
     "return_schema": {
       "type": "object",
       "properties": {

@@ -32,8 +32,13 @@
     "output_description": "Returns a list of matching entries from the Human Protein Atlas.",
     "test_examples": [
       {
-        "search_query": "machine learning optimization",
+        "search_query": "TP53",
         "columns": "g,gs,gd",
+        "format": "json"
+      },
+      {
+        "search_query": "EGFR",
+        "columns": "g,e,u,pe,s",
         "format": "json"
       }
     ],
@@ -113,6 +118,10 @@
       {
         "gene_name": "TP53",
         "cell_line": "HeLa"
+      },
+      {
+        "gene_name": "EGFR",
+        "cell_line": "A549"
       }
     ],
     "return_schema": {
@@ -162,6 +171,11 @@
         "gene_name": "TP53",
         "tissue_type": "colon",
         "disease_name": "colon_cancer"
+      },
+      {
+        "gene_name": "BRCA1",
+        "tissue_type": "breast",
+        "disease_name": "breast_cancer"
       }
     ],
     "return_schema": {
@@ -204,6 +218,10 @@
     "test_examples": [
       {
         "gene_name": "TP53",
+        "filter_processes": true
+      },
+      {
+        "gene_name": "BRCA1",
         "filter_processes": true
       }
     ],
@@ -298,6 +316,12 @@
     "test_examples": [
       {
         "ensembl_id": "ENSG00000141510",
+        "include_images": true,
+        "include_antibodies": true,
+        "include_expression": true
+      },
+      {
+        "ensembl_id": "ENSG00000012048",
         "include_images": true,
         "include_antibodies": true,
         "include_expression": true
@@ -480,6 +504,9 @@
     "test_examples": [
       {
         "ensembl_id": "ENSG00000141510"
+      },
+      {
+        "ensembl_id": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -552,6 +579,9 @@
     "test_examples": [
       {
         "gene_name": "TP53"
+      },
+      {
+        "gene_name": "EGFR"
       }
     ],
     "return_schema": {
@@ -616,6 +646,13 @@
           "liver",
           "brain"
         ]
+      },
+      {
+        "ensembl_id": "ENSG00000141510",
+        "tissue_names": [
+          "heart",
+          "kidney"
+        ]
       }
     ],
     "return_schema": {
@@ -659,6 +696,10 @@
       {
         "gene_name": "TP53",
         "context_name": "liver"
+      },
+      {
+        "gene_name": "EGFR",
+        "context_name": "lung"
       }
     ],
     "return_schema": {
@@ -708,6 +749,11 @@
         "gene_name": "TP53",
         "source_type": "tissue",
         "source_name": "liver"
+      },
+      {
+        "gene_name": "BRCA1",
+        "source_type": "tissue",
+        "source_name": "breast"
       }
     ],
     "return_schema": {
@@ -745,6 +791,9 @@
     "test_examples": [
       {
         "gene_name": "TP53"
+      },
+      {
+        "gene_name": "EGFR"
       }
     ],
     "return_schema": {
@@ -806,6 +855,9 @@
     "test_examples": [
       {
         "ensembl_id": "ENSG00000141510"
+      },
+      {
+        "ensembl_id": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -867,6 +919,9 @@
     "test_examples": [
       {
         "ensembl_id": "ENSG00000141510"
+      },
+      {
+        "ensembl_id": "ENSG00000012048"
       }
     ],
     "return_schema": {

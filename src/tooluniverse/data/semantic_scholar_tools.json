@@ -167,8 +167,19 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "CRISPR Cas9 gene editing",
+        "limit": 5,
+        "year": "2020-2024"
+      },
+      {
+        "query": "TP53 tumor suppressor cancer",
+        "limit": 3,
+        "sort": "citationCount:desc"
+      },
+      {
+        "query": "mRNA vaccine immunology",
+        "limit": 5,
+        "include_abstract": true
       }
     ]
   },

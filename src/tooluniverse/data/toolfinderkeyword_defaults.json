@@ -36,7 +36,8 @@
     }
   },
   "test_examples": [
-    {}
+    {"query": "search PubMed for gene-disease associations", "limit": 5},
+    {"query": "find protein structure prediction tools", "categories": ["protein", "structure"], "limit": 10}
   ],
   "return_schema": {
     "type": "object",

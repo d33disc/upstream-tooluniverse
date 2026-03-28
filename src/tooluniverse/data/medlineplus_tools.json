@@ -46,9 +46,14 @@
     "type": "MedlinePlusRESTTool",
     "test_examples": [
       {
-        "term": "cancer",
+        "term": "diabetes",
         "db": "healthTopics",
         "rettype": "topic"
+      },
+      {
+        "term": "hypertension",
+        "db": "healthTopics",
+        "rettype": "brief"
       }
     ],
     "return_schema": {
@@ -151,6 +156,12 @@
         "dn": "Type 2 diabetes mellitus without complications",
         "language": "en",
         "format": "application/json"
+      },
+      {
+        "cs": "2.16.840.1.113883.6.88",
+        "c": "637188",
+        "language": "en",
+        "format": "application/json"
       }
     ],
     "return_schema": {
@@ -216,6 +227,10 @@
     "test_examples": [
       {
         "condition": "alzheimer-disease",
+        "format": "json"
+      },
+      {
+        "condition": "cystic-fibrosis",
         "format": "json"
       }
     ],
@@ -288,6 +303,10 @@
     "test_examples": [
       {
         "gene": "BRCA1",
+        "format": "json"
+      },
+      {
+        "gene": "TP53",
         "format": "json"
       }
     ],

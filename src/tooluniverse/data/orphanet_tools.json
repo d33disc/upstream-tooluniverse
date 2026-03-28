@@ -227,6 +227,9 @@
     "test_examples": [
       {
         "orpha_code": "558"
+      },
+      {
+        "orpha_code": "586"
       }
     ]
   },
@@ -294,6 +297,9 @@
     "test_examples": [
       {
         "orpha_code": "558"
+      },
+      {
+        "orpha_code": "166024"
       }
     ]
   },
@@ -360,6 +366,10 @@
       {
         "name": "Marfan syndrome",
         "exact": true
+      },
+      {
+        "name": "cystic fibrosis",
+        "exact": false
       }
     ]
   },

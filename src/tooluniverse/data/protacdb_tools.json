@@ -63,6 +63,11 @@
         "operation": "search_protacs",
         "target": "BRD4",
         "e3_ligase": "CRBN"
+      },
+      {
+        "operation": "search_protacs",
+        "target": "BRD4",
+        "e3_ligase": "VHL"
       }
     ]
   },
@@ -115,6 +120,10 @@
       {
         "operation": "get_protac",
         "protac_id": "1"
+      },
+      {
+        "operation": "get_protac",
+        "protac_id": "2"
       }
     ]
   },
@@ -176,6 +185,10 @@
       {
         "operation": "search_targets",
         "target_name": "BRD4"
+      },
+      {
+        "operation": "search_targets",
+        "target_name": "SMARCA2"
       }
     ]
   }

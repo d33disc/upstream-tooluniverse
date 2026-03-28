@@ -67,6 +67,10 @@
       {
         "year": "2017-2018",
         "component": "Demographics"
+      },
+      {
+        "year": "2015-2016",
+        "component": "Laboratory"
       }
     ]
   },
@@ -124,6 +128,10 @@
         "search_term": "diabetes",
         "year": "2017-2018",
         "limit": 1
+      },
+      {
+        "search_term": "blood pressure",
+        "limit": 5
       }
     ]
   }

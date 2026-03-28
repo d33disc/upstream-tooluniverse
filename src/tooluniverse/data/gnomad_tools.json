@@ -76,6 +76,14 @@
       {
         "gene_symbol": "BRCA1",
         "reference_genome": "GRCh38"
+      },
+      {
+        "gene_symbol": "TP53",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "gene_symbol": "SCN1A",
+        "reference_genome": "GRCh37"
       }
     ],
     "metadata": {
@@ -165,6 +173,14 @@
       {
         "query": "BRCA1",
         "reference_genome": "GRCh38"
+      },
+      {
+        "query": "TP53",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "query": "EGFR",
+        "reference_genome": "GRCh37"
       }
     ]
   },
@@ -284,6 +300,14 @@
       {
         "gene_symbol": "BRCA1",
         "reference_genome": "GRCh38"
+      },
+      {
+        "gene_symbol": "TP53",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "gene_id": "ENSG00000141510",
+        "reference_genome": "GRCh38"
       }
     ]
   },
@@ -401,6 +425,14 @@
       {
         "transcript_id": "ENST00000357654",
         "reference_genome": "GRCh38"
+      },
+      {
+        "transcript_id": "ENST00000269392",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "transcript_id": "ENST00000361324",
+        "reference_genome": "GRCh37"
       }
     ]
   },
@@ -462,6 +494,14 @@
       {
         "query": "rs7412",
         "dataset": "gnomad_r3"
+      },
+      {
+        "query": "rs429358",
+        "dataset": "gnomad_r3"
+      },
+      {
+        "query": "rs121908704",
+        "dataset": "gnomad_r2_1"
       }
     ]
   },
@@ -605,6 +645,14 @@
       {
         "variant_id": "19-44908822-C-T",
         "dataset": "gnomad_r3"
+      },
+      {
+        "variant_id": "17-7577120-C-T",
+        "dataset": "gnomad_r3"
+      },
+      {
+        "variant_id": "12-25398284-C-T",
+        "dataset": "gnomad_r2_1"
       }
     ]
   },
@@ -743,6 +791,20 @@
         "stop": 44908950,
         "reference_genome": "GRCh38",
         "dataset": "gnomad_r3"
+      },
+      {
+        "chrom": "17",
+        "start": 7577000,
+        "stop": 7577200,
+        "reference_genome": "GRCh38",
+        "dataset": "gnomad_r3"
+      },
+      {
+        "chrom": "10",
+        "start": 112900000,
+        "stop": 113100000,
+        "reference_genome": "GRCh37",
+        "dataset": "gnomad_r2_1"
       }
     ]
   },
@@ -902,6 +964,14 @@
       {
         "gene_symbol": "BRCA1",
         "reference_genome": "GRCh38"
+      },
+      {
+        "gene_symbol": "TP53",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "gene_symbol": "MECP2",
+        "reference_genome": "GRCh37"
       }
     ],
     "metadata": {
@@ -1090,10 +1160,25 @@
     },
     "test_examples": [
       {
+        "chrom": "19",
+        "start": 44900000,
+        "stop": 45000000,
+        "reference_genome": "GRCh38",
+        "dataset": "gnomad_sv_r4"
+      },
+      {
         "chrom": "17",
-        "start": 43044295,
-        "stop": 43070295,
-        "reference_genome": "GRCh38"
+        "start": 7570000,
+        "stop": 7580000,
+        "reference_genome": "GRCh38",
+        "dataset": "gnomad_sv_r4"
+      },
+      {
+        "chrom": "X",
+        "start": 153000000,
+        "stop": 153500000,
+        "reference_genome": "GRCh37",
+        "dataset": "gnomad_sv_r2_1"
       }
     ],
     "metadata": {
@@ -1257,7 +1342,16 @@
     },
     "test_examples": [
       {
-        "variant_id": "DEL_chr17_24e4872b"
+        "variant_id": "DEL_chr17_24e4872b",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "variant_id": "DUP_chr17_6f8c3d1a",
+        "reference_genome": "GRCh38"
+      },
+      {
+        "variant_id": "DEL_chr22_8b7a9e4f",
+        "reference_genome": "GRCh37"
       }
     ],
     "metadata": {

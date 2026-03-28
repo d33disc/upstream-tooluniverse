@@ -52,10 +52,9 @@
       }
     },
     "test_examples": [
-      {
-        "gene": "BRCA1",
-        "limit": 10
-      }
+      {"gene": "BRCA1", "limit": 10},
+      {"gene": "TP53", "limit": 15},
+      {"gene": "EGFR", "limit": 20}
     ]
   },
   {
@@ -110,10 +109,9 @@
       }
     },
     "test_examples": [
-      {
-        "disease": "C0006142",
-        "limit": 10
-      }
+      {"disease": "C0006142", "limit": 10},
+      {"disease": "C0011849", "limit": 15},
+      {"disease": "diabetes mellitus", "limit": 20}
     ]
   },
   {
@@ -183,11 +181,9 @@
       }
     },
     "test_examples": [
-      {
-        "gene": "TP53",
-        "min_score": 0.3,
-        "limit": 20
-      }
+      {"gene": "TP53", "min_score": 0.3, "limit": 20},
+      {"gene": "BRCA1", "source": "CURATED", "min_score": 0.5, "limit": 15},
+      {"disease": "C0006142", "min_score": 0.3, "limit": 25}
     ]
   },
   {
@@ -241,10 +237,9 @@
       }
     },
     "test_examples": [
-      {
-        "gene": "BRCA1",
-        "limit": 20
-      }
+      {"gene": "BRCA1", "limit": 20},
+      {"variant": "rs1234", "limit": 15},
+      {"gene": "APOE", "limit": 25}
     ]
   },
   {
@@ -319,11 +314,9 @@
       }
     },
     "test_examples": [
-      {
-        "disease": "C0006142",
-        "min_score": 0.3,
-        "limit": 30
-      }
+      {"disease": "C0006142", "min_score": 0.3, "limit": 30},
+      {"disease": "C0011849", "min_score": 0.5, "limit": 20},
+      {"disease": "diabetes mellitus", "limit": 50}
     ]
   }
 ]

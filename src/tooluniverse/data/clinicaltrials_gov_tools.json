@@ -81,6 +81,12 @@
         "condition": "diabetes mellitus",
         "intervention": "metformin",
         "pageSize": 1
+      },
+      {
+        "condition": "non-small cell lung cancer",
+        "intervention": "pembrolizumab",
+        "overall_status": ["RECRUITING"],
+        "pageSize": 3
       }
     ],
     "return_schema": {
@@ -182,6 +188,13 @@
           "NCT01158625"
         ],
         "description_type": "brief"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705",
+          "NCT04852770"
+        ],
+        "description_type": "full"
       }
     ],
     "return_schema": {
@@ -246,6 +259,13 @@
           "NCT01158625"
         ],
         "status_and_date": "recruiting"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705",
+          "NCT04852770"
+        ],
+        "status_and_date": "completed"
       }
     ],
     "return_schema": {
@@ -311,6 +331,12 @@
           "NCT01158625"
         ],
         "condition_and_intervention": "diabetes-mellitus"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "condition_and_intervention": "COVID-19"
       }
     ],
     "return_schema": {
@@ -399,6 +425,12 @@
           "NCT01158625"
         ],
         "eligibility_criteria": "E11.9"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "eligibility_criteria": "SARS-CoV-2"
       }
     ],
     "return_schema": {
@@ -465,6 +497,12 @@
           "NCT01158625"
         ],
         "location": "E11.9"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "location": "United States"
       }
     ],
     "return_schema": {
@@ -540,6 +578,12 @@
           "NCT01158625"
         ],
         "outcome_measures": "primary"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "outcome_measures": "secondary"
       }
     ],
     "return_schema": {
@@ -605,6 +649,13 @@
           "NCT01158625"
         ],
         "references": "Study"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705",
+          "NCT04852770"
+        ],
+        "references": "Publication"
       }
     ],
     "return_schema": {
@@ -653,6 +704,12 @@
           "NCT04852770"
         ],
         "outcome_measure": "primary"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "outcome_measure": "overall survival"
       }
     ],
     "return_schema": {
@@ -750,6 +807,12 @@
           "Cardiac Disorders"
         ],
         "adverse_event_type": "serious"
+      },
+      {
+        "nct_ids": [
+          "NCT04280705"
+        ],
+        "adverse_event_type": "all"
       }
     ],
     "return_schema": {
@@ -859,6 +922,12 @@
         "query_cond": "breast cancer",
         "query_intr": "pembrolizumab",
         "filter_status": "RECRUITING",
+        "page_size": 5
+      },
+      {
+        "query_cond": "type 2 diabetes",
+        "query_intr": "insulin",
+        "filter_phase": "PHASE3",
         "page_size": 5
       }
     ],
@@ -974,6 +1043,9 @@
     "test_examples": [
       {
         "nct_id": "NCT04280705"
+      },
+      {
+        "nct_id": "NCT04852770"
       }
     ],
     "return_schema": {
@@ -1119,6 +1191,11 @@
         "intervention": "nivolumab",
         "filter_phase": "PHASE3",
         "page_size": 5
+      },
+      {
+        "intervention": "CAR-T cells",
+        "condition": "lymphoma",
+        "page_size": 5
       }
     ],
     "return_schema": {
@@ -1200,6 +1277,11 @@
       {
         "sponsor": "National Cancer Institute",
         "filter_phase": "PHASE3",
+        "page_size": 5
+      },
+      {
+        "sponsor": "Pfizer",
+        "query_cond": "cancer",
         "page_size": 5
       }
     ],
@@ -1311,6 +1393,10 @@
       {
         "field": "Phase",
         "page_size": 20
+      },
+      {
+        "field": "OverallStatus",
+        "page_size": 10
       }
     ],
     "return_schema": {

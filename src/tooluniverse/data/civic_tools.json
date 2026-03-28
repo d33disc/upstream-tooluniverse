@@ -260,6 +260,12 @@
     "test_examples": [
       {
         "variant_id": 2
+      },
+      {
+        "variant_id": 4170
+      },
+      {
+        "variant_id": 12
       }
     ]
   },
@@ -389,6 +395,12 @@
     "test_examples": [
       {
         "evidence_id": 116
+      },
+      {
+        "evidence_id": 1
+      },
+      {
+        "evidence_id": 500
       }
     ]
   },

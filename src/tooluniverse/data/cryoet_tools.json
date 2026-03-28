@@ -84,6 +84,11 @@
         "operation": "list_datasets",
         "organism_name": "Homo sapiens",
         "limit": 3
+      },
+      {
+        "operation": "list_datasets",
+        "organism_name": "Saccharomyces cerevisiae",
+        "limit": 5
       }
     ]
   },
@@ -159,6 +164,10 @@
       {
         "operation": "get_dataset",
         "dataset_id": 10053
+      },
+      {
+        "operation": "get_dataset",
+        "dataset_id": 10174
       }
     ]
   },
@@ -237,6 +246,11 @@
         "operation": "list_runs",
         "dataset_id": 10053,
         "limit": 5
+      },
+      {
+        "operation": "list_runs",
+        "dataset_id": 10174,
+        "limit": 3
       }
     ]
   },
@@ -322,6 +336,10 @@
       {
         "operation": "list_tomograms",
         "run_id": 3430
+      },
+      {
+        "operation": "list_tomograms",
+        "run_id": 3431
       }
     ]
   },
@@ -412,6 +430,11 @@
       {
         "operation": "list_annotations",
         "run_id": 3430
+      },
+      {
+        "operation": "list_annotations",
+        "run_id": 3430,
+        "curator_recommended_only": true
       }
     ]
   }

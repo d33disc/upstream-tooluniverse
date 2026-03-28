@@ -32,17 +32,10 @@ fi
 PARTITION_FILE="ralph-docs/partition_$PARTITION"
 FILE_COUNT=$(wc -l < "$PARTITION_FILE" | tr -d ' ')
 
-# Map CLI
-case "$CLI" in
-  codex)  CLI_CMD="codex exec --full-auto --model gpt-5.4 --search live -q" ;;
-  claude) CLI_CMD="claude --model sonnet --dangerously-skip-permissions -p --no-session-persistence" ;;
-  *)      CLI_CMD="$CLI" ;;
-esac
-
 echo "Ralph docs: partition $PARTITION ($FILE_COUNT files)"
 echo "Worktree: $WORKTREE_DIR"
 echo "Branch: $TARGET_BRANCH"
-echo "CLI: $CLI_CMD"
+echo "CLI: $CLI"
 echo "---"
 
 # Activate venv
@@ -88,7 +81,28 @@ print(len(files_done))
     echo "Iteration $iteration/$MAX_ITERATIONS (0/$FILE_COUNT files audited)"
   fi
 
-  echo "$PROMPT" | eval "$CLI_CMD"
+  # Run the LLM
+  case "$CLI" in
+    codex)
+      echo "$PROMPT" | codex exec --full-auto --model gpt-5.4 --json -
+      ;;
+    claude)
+      echo "$PROMPT" | claude --model sonnet --dangerously-skip-permissions -p --no-session-persistence
+      ;;
+    qwen)
+      echo "$PROMPT" | qwen -y --model qwen3-coder-plus --chat-recording false
+      ;;
+    *)
+      echo "$PROMPT" | eval "$CLI"
+      ;;
+  esac
+
+  # Auto-commit any changes the LLM made but didn't commit
+  if [[ -n "$(git diff --name-only src/tooluniverse/data/ 2>/dev/null)" ]]; then
+    echo "Auto-committing LLM changes..."
+    git add src/tooluniverse/data/*.json ralph-docs/results_*.json 2>/dev/null
+    git commit -m "docs($PARTITION): batch $iteration — add test_examples + improve descriptions" 2>/dev/null || true
+  fi
 
   # prek hooks
   if command -v prek >/dev/null 2>&1 && [[ -f .pre-commit-config.yaml ]]; then

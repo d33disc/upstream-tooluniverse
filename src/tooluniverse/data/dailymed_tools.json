@@ -49,11 +49,12 @@
     "test_examples": [
       {
         "drug_name": "Aspirin",
-        "ndc": "0002-3228-30",
-        "rxcui": "1191",
-        "setid": "030d9bca-a934-6ef9-e063-6394a90a8277",
-        "pagesize": 1,
+        "pagesize": 5,
         "page": 1
+      },
+      {
+        "drug_name": "Metformin",
+        "pagesize": 3
       }
     ],
     "return_schema": {
@@ -128,6 +129,10 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277",
+        "format": "xml"
+      },
+      {
+        "setid": "b4f7a1e8-7e6d-4d5e-9c3a-1f2e3d4c5b6a",
         "format": "xml"
       }
     ],
@@ -273,6 +278,9 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
+      },
+      {
+        "drug_name": "Aspirin"
       }
     ]
   },
@@ -316,6 +324,9 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
+      },
+      {
+        "drug_name": "Metformin"
       }
     ]
   },
@@ -359,6 +370,9 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
+      },
+      {
+        "drug_name": "Lisinopril"
       }
     ]
   },
@@ -402,6 +416,9 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
+      },
+      {
+        "drug_name": "Warfarin"
       }
     ]
   },
@@ -445,6 +462,9 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
+      },
+      {
+        "drug_name": "Atorvastatin"
       }
     ]
   }

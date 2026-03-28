@@ -139,7 +139,8 @@
     },
     "type": "SynBioHubTool",
     "test_examples": [
-      {}
+      {},
+      {"note": "Returns all public collections including iGEM Parts Registry and CIDAR Lab parts"}
     ],
     "return_schema": {
       "oneOf": [

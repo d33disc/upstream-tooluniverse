@@ -363,7 +363,11 @@
       }
     },
     "test_examples": [
-      {}
+      {},
+      {
+        "query": "European Research Council",
+        "limit": 10
+      }
     ]
   }
 ]

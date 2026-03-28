@@ -101,7 +101,11 @@
       "description": "List of available databases"
     },
     "test_examples": [
-      {}
+      {},
+      {
+        "db": "embl",
+        "id": "X00001"
+      }
     ]
   },
   {
@@ -129,6 +133,9 @@
     "test_examples": [
       {
         "db": "uniprotkb"
+      },
+      {
+        "db": "pdb"
       }
     ]
   }

@@ -19,6 +19,9 @@
     "test_examples": [
       {
         "limit": 5
+      },
+      {
+        "limit": 10
       }
     ],
     "return_schema": {
@@ -84,6 +87,9 @@
     "test_examples": [
       {
         "collection_id": "48259aa8-f168-4bf5-b797-af8e88da6637"
+      },
+      {
+        "collection_id": "f1905b8a-8629-4f6a-b169-54a1f3d01d59"
       }
     ],
     "return_schema": {
@@ -205,6 +211,11 @@
       },
       {
         "disease": "cancer",
+        "limit": 5
+      },
+      {
+        "cell_type": "T cell",
+        "organism": "Homo sapiens",
         "limit": 5
       }
     ],

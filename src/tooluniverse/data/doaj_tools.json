@@ -128,13 +128,13 @@
     },
     "test_examples": [
       {
-        "query": "open access",
-        "max_results": 2,
+        "query": "CRISPR gene editing",
+        "max_results": 3,
         "type": "articles"
       },
       {
-        "query": "biology",
-        "max_results": 1,
+        "query": "diabetes",
+        "max_results": 2,
         "type": "journals"
       }
     ]

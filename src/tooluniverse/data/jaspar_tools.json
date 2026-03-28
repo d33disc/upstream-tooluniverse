@@ -90,6 +90,11 @@
         "collection": "CORE",
         "page": 1,
         "page_size": 5
+      },
+      {
+        "collection": "CORE",
+        "page": 2,
+        "page_size": 10
       }
     ]
   },
@@ -223,6 +228,9 @@
     "test_examples": [
       {
         "matrix_id": "MA0002.2"
+      },
+      {
+        "matrix_id": "MA0136.2"
       }
     ]
   },
@@ -318,6 +326,11 @@
         "base_id": "MA0002",
         "page": 1,
         "page_size": 5
+      },
+      {
+        "base_id": "MA0136",
+        "page": 1,
+        "page_size": 3
       }
     ]
   },
@@ -396,6 +409,10 @@
       {
         "page": 1,
         "page_size": 5
+      },
+      {
+        "page": 2,
+        "page_size": 10
       }
     ]
   },
@@ -569,6 +586,10 @@
       {
         "page": 1,
         "page_size": 3
+      },
+      {
+        "page": 2,
+        "page_size": 5
       }
     ]
   },

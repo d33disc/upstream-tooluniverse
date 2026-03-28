@@ -9,7 +9,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='company-research')"
+    "invocation": "Skill(skill='company-research')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -21,7 +25,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='create-tooluniverse-skill')"
+    "invocation": "Skill(skill='create-tooluniverse-skill')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -33,7 +41,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-auto-discover-apis')"
+    "invocation": "Skill(skill='devtu-auto-discover-apis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -45,7 +57,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-code-optimization')"
+    "invocation": "Skill(skill='devtu-code-optimization')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -57,7 +73,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-create-tool')"
+    "invocation": "Skill(skill='devtu-create-tool')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -69,7 +89,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-docs-quality')"
+    "invocation": "Skill(skill='devtu-docs-quality')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -81,7 +105,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-fix-tool')"
+    "invocation": "Skill(skill='devtu-fix-tool')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -93,7 +121,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-github')"
+    "invocation": "Skill(skill='devtu-github')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -105,7 +137,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-optimize-descriptions')"
+    "invocation": "Skill(skill='devtu-optimize-descriptions')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -117,7 +153,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-optimize-skills')"
+    "invocation": "Skill(skill='devtu-optimize-skills')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -129,7 +169,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='devtu-self-evolve')"
+    "invocation": "Skill(skill='devtu-self-evolve')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -141,7 +185,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='setup-tooluniverse')"
+    "invocation": "Skill(skill='setup-tooluniverse')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -153,7 +201,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse')"
+    "invocation": "Skill(skill='tooluniverse')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -165,7 +217,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-adverse-event-detection')"
+    "invocation": "Skill(skill='tooluniverse-adverse-event-detection')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -177,7 +233,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-antibody-engineering')"
+    "invocation": "Skill(skill='tooluniverse-antibody-engineering')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -189,7 +249,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-binder-discovery')"
+    "invocation": "Skill(skill='tooluniverse-binder-discovery')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -201,7 +265,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-cancer-variant-interpretation')"
+    "invocation": "Skill(skill='tooluniverse-cancer-variant-interpretation')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -213,7 +281,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-chemical-compound-retrieval')"
+    "invocation": "Skill(skill='tooluniverse-chemical-compound-retrieval')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -225,7 +297,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-chemical-safety')"
+    "invocation": "Skill(skill='tooluniverse-chemical-safety')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -237,7 +313,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-clinical-guidelines')"
+    "invocation": "Skill(skill='tooluniverse-clinical-guidelines')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -249,7 +329,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-clinical-trial-design')"
+    "invocation": "Skill(skill='tooluniverse-clinical-trial-design')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -261,7 +345,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-clinical-trial-matching')"
+    "invocation": "Skill(skill='tooluniverse-clinical-trial-matching')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -273,7 +361,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-crispr-screen-analysis')"
+    "invocation": "Skill(skill='tooluniverse-crispr-screen-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -285,7 +377,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-custom-tool')"
+    "invocation": "Skill(skill='tooluniverse-custom-tool')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -297,7 +393,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-disease-research')"
+    "invocation": "Skill(skill='tooluniverse-disease-research')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -309,7 +409,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-drug-drug-interaction')"
+    "invocation": "Skill(skill='tooluniverse-drug-drug-interaction')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -321,7 +425,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-drug-repurposing')"
+    "invocation": "Skill(skill='tooluniverse-drug-repurposing')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -333,7 +441,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-drug-research')"
+    "invocation": "Skill(skill='tooluniverse-drug-research')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -345,7 +457,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-drug-target-validation')"
+    "invocation": "Skill(skill='tooluniverse-drug-target-validation')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -357,7 +473,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-epigenomics')"
+    "invocation": "Skill(skill='tooluniverse-epigenomics')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -369,7 +489,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-expression-data-retrieval')"
+    "invocation": "Skill(skill='tooluniverse-expression-data-retrieval')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -381,7 +505,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gene-enrichment')"
+    "invocation": "Skill(skill='tooluniverse-gene-enrichment')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -393,7 +521,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gwas-drug-discovery')"
+    "invocation": "Skill(skill='tooluniverse-gwas-drug-discovery')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -405,7 +537,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gwas-finemapping')"
+    "invocation": "Skill(skill='tooluniverse-gwas-finemapping')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -417,7 +553,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gwas-snp-interpretation')"
+    "invocation": "Skill(skill='tooluniverse-gwas-snp-interpretation')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -429,7 +569,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gwas-study-explorer')"
+    "invocation": "Skill(skill='tooluniverse-gwas-study-explorer')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -441,7 +585,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-gwas-trait-to-gene')"
+    "invocation": "Skill(skill='tooluniverse-gwas-trait-to-gene')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -453,7 +601,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-image-analysis')"
+    "invocation": "Skill(skill='tooluniverse-image-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -465,7 +617,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-immune-repertoire-analysis')"
+    "invocation": "Skill(skill='tooluniverse-immune-repertoire-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -477,7 +633,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-immunotherapy-response-prediction')"
+    "invocation": "Skill(skill='tooluniverse-immunotherapy-response-prediction')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -489,7 +649,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-infectious-disease')"
+    "invocation": "Skill(skill='tooluniverse-infectious-disease')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -501,7 +665,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-install-skills')"
+    "invocation": "Skill(skill='tooluniverse-install-skills')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -513,7 +681,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-literature-deep-research')"
+    "invocation": "Skill(skill='tooluniverse-literature-deep-research')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -525,7 +697,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-metabolomics')"
+    "invocation": "Skill(skill='tooluniverse-metabolomics')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -537,7 +713,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-metabolomics-analysis')"
+    "invocation": "Skill(skill='tooluniverse-metabolomics-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -549,7 +729,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-multi-omics-integration')"
+    "invocation": "Skill(skill='tooluniverse-multi-omics-integration')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -561,7 +745,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-multiomic-disease-characterization')"
+    "invocation": "Skill(skill='tooluniverse-multiomic-disease-characterization')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -573,7 +761,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-network-pharmacology')"
+    "invocation": "Skill(skill='tooluniverse-network-pharmacology')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -585,7 +777,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-pharmacovigilance')"
+    "invocation": "Skill(skill='tooluniverse-pharmacovigilance')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -597,7 +793,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-phylogenetics')"
+    "invocation": "Skill(skill='tooluniverse-phylogenetics')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -609,7 +809,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-polygenic-risk-score')"
+    "invocation": "Skill(skill='tooluniverse-polygenic-risk-score')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -621,7 +825,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-precision-medicine-stratification')"
+    "invocation": "Skill(skill='tooluniverse-precision-medicine-stratification')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -633,7 +841,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-precision-oncology')"
+    "invocation": "Skill(skill='tooluniverse-precision-oncology')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -645,7 +857,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='Protein Interaction Network Analysis')"
+    "invocation": "Skill(skill='Protein Interaction Network Analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -657,7 +873,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-protein-structure-retrieval')"
+    "invocation": "Skill(skill='tooluniverse-protein-structure-retrieval')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -669,7 +889,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-protein-therapeutic-design')"
+    "invocation": "Skill(skill='tooluniverse-protein-therapeutic-design')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -681,7 +905,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-proteomics-analysis')"
+    "invocation": "Skill(skill='tooluniverse-proteomics-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -693,7 +921,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-rare-disease-diagnosis')"
+    "invocation": "Skill(skill='tooluniverse-rare-disease-diagnosis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -705,7 +937,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-rnaseq-deseq2')"
+    "invocation": "Skill(skill='tooluniverse-rnaseq-deseq2')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -717,7 +953,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-sdk')"
+    "invocation": "Skill(skill='tooluniverse-sdk')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -729,7 +969,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-sequence-retrieval')"
+    "invocation": "Skill(skill='tooluniverse-sequence-retrieval')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -741,7 +985,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-single-cell')"
+    "invocation": "Skill(skill='tooluniverse-single-cell')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -753,7 +1001,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-spatial-omics-analysis')"
+    "invocation": "Skill(skill='tooluniverse-spatial-omics-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -765,7 +1017,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-spatial-transcriptomics')"
+    "invocation": "Skill(skill='tooluniverse-spatial-transcriptomics')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -777,7 +1033,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-statistical-modeling')"
+    "invocation": "Skill(skill='tooluniverse-statistical-modeling')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -789,7 +1049,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-structural-variant-analysis')"
+    "invocation": "Skill(skill='tooluniverse-structural-variant-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -801,7 +1065,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-systems-biology')"
+    "invocation": "Skill(skill='tooluniverse-systems-biology')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -813,7 +1081,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-target-research')"
+    "invocation": "Skill(skill='tooluniverse-target-research')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -825,7 +1097,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-variant-analysis')"
+    "invocation": "Skill(skill='tooluniverse-variant-analysis')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -837,7 +1113,11 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tooluniverse-variant-interpretation')"
+    "invocation": "Skill(skill='tooluniverse-variant-interpretation')",
+    "test_examples": [
+      {},
+      {}
+    ]
   },
   {
     "type": "ClaudeCodeSkill",
@@ -849,6 +1129,10 @@
       "properties": {},
       "required": []
     },
-    "invocation": "Skill(skill='tu-llm')"
+    "invocation": "Skill(skill='tu-llm')",
+    "test_examples": [
+      {},
+      {}
+    ]
   }
 ]

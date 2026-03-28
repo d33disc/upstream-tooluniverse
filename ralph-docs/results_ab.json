@@ -1316,5 +1316,1153 @@
     "file": "figshare_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_RAG",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "generic query",
+    "new": "BLAST alignment, PDB structure retrieval"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "RNA-seq DE, ClinVar variant pathogenicity"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder_LLM",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "PubMed TP53 search, AlphaFold structure"
+  },
+  {
+    "file": "finder_tools.json",
+    "tool": "Tool_Finder_Keyword",
+    "action": "improved_examples",
+    "count": 2,
+    "old": "gene expression data",
+    "new": "CRISPR gRNA design, GEO datasets"
+  },
+  {
+    "file": "foldseek_tools.json",
+    "tool": "Foldseek_get_result",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_search_data",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_file_metadata",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_experiment_metadata",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "fourdn_tools.json",
+    "tool": "FourDN_get_download_url",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_gene_constraints",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_search_genes",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_gene",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_transcript",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_search_variants",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_variant",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_region",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_by_gene",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_by_region",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_detail",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnps_tools.json",
+    "tool": "GNPS_get_spectrum",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 2
+  },
+  {
+    "file": "gnps_tools.json",
+    "tool": "GNPS_compare_spectra",
+    "action": "added_examples",
+    "count": 2,
+    "old_count": 1
+  },
+  {
+    "file": "finngen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "flybase_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "flymine_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "fooddata_central_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "fpbase_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gbif_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gbif_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gdc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gencc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gene2phenotype_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genenetwork_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genenetwork_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "genome_nexus_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "geo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "github_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "glygen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gmrepo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples (2-3 each)"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_search_terms",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_term_details",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_term_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_genes_for_term",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gene_ontology_tools.json",
+    "tool": "GO_get_annotations_for_gene",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_protein",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_list_proteins",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_ligands",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gpcrdb_tools.json",
+    "tool": "GPCRdb_get_mutations",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_median_gene_expression",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_tissue_sites",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_eqtl_genes",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_single_tissue_eqtls",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_calculate_eqtl",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_top_expressed_genes",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_dataset_info",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_gene_expression",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_sample_info",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gtex_v2_tools.json",
+    "tool": "GTEx_get_multi_tissue_eqtls",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_sumstats_tools.json",
+    "tool": "GWASSumStats_list_studies",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_associations",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_studies",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_search_snps",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_association_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_study_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_snp_by_id",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_variants_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_snp",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_studies_for_trait",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_snps_for_gene",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "gwas_get_associations_for_study",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gwas_tools.json",
+    "tool": "GWAS_search_associations_by_gene",
+    "action": "added_examples",
+    "count": "2-3"
+  },
+  {
+    "file": "gxa_tools.json",
+    "tool": "GxA_get_experiment_info",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hca_tools.json",
+    "tool": "hca_search_projects",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hca_tools.json",
+    "tool": "hca_get_file_manifest",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "health_disparities_tools.json",
+    "tool": "health_disparities_get_svi_info",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "health_disparities_tools.json",
+    "tool": "health_disparities_get_county_rankings_info",
+    "action": "improved_description_and_examples",
+    "count": 2
+  },
+  {
+    "file": "harmonizome_tools.json",
+    "tool": "Harmonizome_list_datasets",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_generic_search",
+    "action": "improved_description_and_examples",
+    "old_query": "machine learning optimization",
+    "new_query": "TP53",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_search_genes_by_query",
+    "action": "skipped",
+    "reason": "already has 2 good examples"
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_comparative_expression_by_gene_and_cellline",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_disease_expression_by_gene_tissue_disease",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_biological_processes_by_gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_comprehensive_gene_details_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_cancer_prognostics_by_gene",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_protein_interactions_by_gene",
+    "action": "added_examples",
+    "count": 2,
+    "note": "tool has API limitation (ppi column removed)"
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_rna_expression_in_specific_tissues",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_contextual_biological_process_analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_rna_expression_by_source",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_subcellular_location",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_gene_basic_info_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hpa_tools.json",
+    "tool": "HPA_get_gene_tsv_data_by_ensembl_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "hubmap_tools.json",
+    "tool": "HuBMAP_list_organs",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "go_api_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gprofiler_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtex_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "gtopdb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hal_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hgnc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hocomoco_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "hpo_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "humanbase_tools.json",
+    "tool": "humanbase_ppi_analysis",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_get_disease_ids_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_get_disease_ids_by_efoId",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "idmap_tools.json",
+    "tool": "OpenTargets_map_any_disease_id_to_all_other_ids",
+    "action": "improved_examples",
+    "old": "placeholder value '1'",
+    "new": "real disease IDs (OMIM:604302, MONDO:0005148, UMLS:C0003873)"
+  },
+  {
+    "file": "huggingface_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "humanmine_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "icd_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "icite_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "identifiers_org_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "idigbio_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "idr_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "idt_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "iedb_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "iedb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "igsr_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "imgt_tools.json",
+    "action": "improved_test_examples",
+    "reason": "IMGT_get_sequence: 1->2, IMGT_search_genes: 1->2, IMGT_get_gene_info: 1->2"
+  },
+  {
+    "file": "immport_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "impc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "inaturalist_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "indra_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "inspirehep_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "intact_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_domain_arch_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_entry_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_get_protein_domains",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_search_domains",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interpro_tools.json",
+    "tool": "InterPro_get_domain_details",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_scan_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_get_job_status",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "interproscan_tools.json",
+    "tool": "InterProScan_get_job_results",
+    "action": "skipped",
+    "reason": "already has 1 example (job-based tool, limited testable examples)"
+  },
+  {
+    "file": "intervar_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "intogen_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "iptmnet_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "itis_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "JASPAR_get_transcription_factors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_get_matrix",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_get_matrix_versions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_taxa",
+    "action": "skipped",
+    "reason": "no parameters - only 1 example possible"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_collections",
+    "action": "skipped",
+    "reason": "no parameters - only 1 example possible"
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_list_releases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "jaspar_tools.json",
+    "tool": "jaspar_search_matrices",
+    "action": "skipped",
+    "reason": "already has 2 examples"
+  },
+  {
+    "file": "jpl_horizons_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_brite_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "l1000fwd_tools.json",
+    "tool": "L1000FWD_sig_search",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "IntentAnalyzerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR, PD-1 inhibitor research queries"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "KeywordExtractorAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR off-target detection context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "ResultSummarizerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR methods summary context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "QualityCheckerAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "genome editing research context"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "OverallSummaryAgent",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR off-target detection summary"
+  },
+  {
+    "file": "literature_search_tools.json",
+    "tool": "MultiAgentLiteratureSearch",
+    "action": "improved_examples",
+    "old": "placeholder values",
+    "new": "CRISPR, PD-1 inhibitor research queries"
+  },
+  {
+    "file": "kegg_conv_link_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_disease_drug_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_ext_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_network_variant_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "kegg_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "klifs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lincs_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lipidmaps_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "litvar_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lncrna_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "loinc_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lotus_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "lovd_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "marine_regions_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "markitdown_tools.json",
+    "tool": "convert_to_markdown",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "massbank_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "massive_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mavedb_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mcp_auto_loader_esm.json",
+    "tool": "mcp_auto_loader_esm",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "mcpautoloadertool_defaults.json",
+    "action": "skipped",
+    "reason": "has test_examples (defaults config file)"
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_lookup_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_get_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_list_databases",
+    "action": "skipped",
+    "reason": "already has good test_examples"
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_get_database",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_search_conditions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_get_condition",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_get_clinical_features",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_search_topics_by_keyword",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_connect_lookup_by_code",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_condition_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_gene_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_index",
+    "action": "skipped",
+    "reason": "already has good test_examples"
+  },
+  {
+    "file": "medrxiv_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "meme_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mesh_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "metaboanalyst_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_list_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_search_studies",
+    "action": "improved_examples",
+    "old": "cancer, E. coli",
+    "new": "cancer, diabetes"
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_assays",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_samples",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_files",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_protocols",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_factors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_data_files",
+    "action": "added_examples",
+    "count": 2
   }
 ]

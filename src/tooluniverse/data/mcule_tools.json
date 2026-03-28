@@ -47,6 +47,10 @@
       {
         "operation": "lookup_compound",
         "query": "CC(=O)Oc1ccccc1C(=O)O"
+      },
+      {
+        "operation": "lookup_compound",
+        "query": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
       }
     ],
     "optional_api_keys": [
@@ -212,6 +216,10 @@
       {
         "operation": "get_compound",
         "mcule_id": "MCULE-3199019536"
+      },
+      {
+        "operation": "get_compound",
+        "mcule_id": "MCULE-9475454445"
       }
     ],
     "optional_api_keys": [
@@ -401,6 +409,10 @@
       {
         "operation": "get_database",
         "database_id": 1
+      },
+      {
+        "operation": "get_database",
+        "database_id": 2
       }
     ],
     "optional_api_keys": [
