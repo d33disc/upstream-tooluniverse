@@ -27,6 +27,10 @@
       {
         "query": "cystic fibrosis",
         "max_results": 3
+      },
+      {
+        "query": "Marfan syndrome",
+        "max_results": 5
       }
     ],
     "return_schema": {
@@ -143,6 +147,9 @@
     "test_examples": [
       {
         "uid": "41393"
+      },
+      {
+        "cui": "C0017205"
       }
     ],
     "return_schema": {
@@ -252,6 +259,9 @@
     "test_examples": [
       {
         "uid": "41393"
+      },
+      {
+        "cui": "C0010674"
       }
     ],
     "return_schema": {

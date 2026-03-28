@@ -36,6 +36,10 @@
     "test_examples": [
       {
         "size": 10
+      },
+      {
+        "size": 20,
+        "page": 1
       }
     ]
   },
@@ -81,7 +85,7 @@
         "size": 10
       },
       {
-        "query": "E. coli",
+        "query": "diabetes",
         "size": 20
       }
     ]
@@ -119,6 +123,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -150,6 +157,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -181,6 +191,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -223,6 +236,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -256,6 +272,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -289,6 +308,9 @@
     "test_examples": [
       {
         "study_id": "MTBLS1"
+      },
+      {
+        "study_id": "MTBLS2"
       }
     ]
   },
@@ -337,6 +359,11 @@
     "test_examples": [
       {
         "study_id": "MTBLS1",
+        "file_match": true
+      },
+      {
+        "study_id": "MTBLS2",
+        "search_pattern": "*.mzML",
         "file_match": true
       }
     ]
