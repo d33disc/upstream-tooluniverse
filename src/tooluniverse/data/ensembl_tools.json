@@ -62,6 +62,10 @@
       {
         "gene_id": "ENSG00000012048",
         "species": "homo_sapiens"
+      },
+      {
+        "gene_id": "ENSG00000139618",
+        "species": "homo_sapiens"
       }
     ]
   },
@@ -134,6 +138,10 @@
       {
         "id": "ENSG00000012048",
         "type": "genomic"
+      },
+      {
+        "id": "ENST00000380152",
+        "type": "cdna"
       }
     ]
   },
@@ -201,6 +209,9 @@
       {
         "region": "13:32315086-32400268",
         "species": "human"
+      },
+      {
+        "region": "17:41196312-41277500"
       }
     ]
   },
@@ -276,6 +287,9 @@
         "id": "rs699",
         "species": "human",
         "phenotypes": 1
+      },
+      {
+        "id": "rs1800566"
       }
     ]
   },
@@ -342,6 +356,9 @@
         "id": "rs699",
         "species": "human",
         "phenotypes": 1
+      },
+      {
+        "id": "rs1800566"
       }
     ]
   },
@@ -409,6 +426,9 @@
     "test_examples": [
       {
         "id": "ENSG00000139618"
+      },
+      {
+        "id": "ENSG00000139618"
       }
     ]
   },
@@ -462,6 +482,10 @@
     "test_examples": [
       {
         "name": "BRCA1",
+        "species": "homo_sapiens"
+      },
+      {
+        "name": "BRCA2",
         "species": "homo_sapiens"
       }
     ]
@@ -535,6 +559,9 @@
         "region": "1:1000000-2000000",
         "species": "human",
         "feature": "regulatory"
+      },
+      {
+        "region": "17:41196312-41277500"
       }
     ]
   },
@@ -607,6 +634,9 @@
     "test_examples": [
       {
         "id": "ENSGT00390000003602"
+      },
+      {
+        "id": "ENSG00000139618"
       }
     ]
   },
@@ -708,6 +738,9 @@
         "symbol": "BRCA2",
         "target_species": "mouse",
         "type": "orthologues"
+      },
+      {
+        "id": "ENSG00000139618"
       }
     ]
   },
@@ -777,6 +810,9 @@
         "region": "2:106000000-106100000",
         "species_set_group": "mammals",
         "method": "EPO"
+      },
+      {
+        "id": "ENSFM00500000000012"
       }
     ]
   },
@@ -817,6 +853,9 @@
     "test_examples": [
       {
         "id": "9606"
+      },
+      {
+        "id": "ENSG00000139618"
       }
     ]
   },
@@ -867,7 +906,8 @@
     "test_examples": [
       {
         "division": "EnsemblVertebrates"
-      }
+      },
+      {}
     ]
   },
   {
@@ -916,6 +956,9 @@
     "test_examples": [
       {
         "id": "ENSG00000139618"
+      },
+      {
+        "id": "ENSG00000139618"
       }
     ]
   },
@@ -956,6 +999,9 @@
     "test_examples": [
       {
         "id": "GO:0005737"
+      },
+      {
+        "id": "GO:0005634"
       }
     ]
   },
@@ -1002,6 +1048,9 @@
       {
         "id": "GO:0005737",
         "closest_term": false
+      },
+      {
+        "id": "GO:0005634"
       }
     ]
   },
@@ -1049,6 +1098,9 @@
     "test_examples": [
       {
         "id": "GO:0005737"
+      },
+      {
+        "id": "GO:0005634"
       }
     ]
   },
@@ -1121,6 +1173,9 @@
         "species": "human",
         "region": "7:140424943-140624564",
         "feature": "gene"
+      },
+      {
+        "region": "17:41196312-41277500"
       }
     ]
   },
@@ -1245,6 +1300,10 @@
         "species": "human",
         "region": "21:25891796-25891796",
         "allele": "T"
+      },
+      {
+        "region": "17:41196312-41277500",
+        "species": "homo_sapiens"
       }
     ]
   },
@@ -1319,6 +1378,9 @@
       {
         "species": "human",
         "region": "22:27000000-27050000"
+      },
+      {
+        "region": "17:41196312-41277500"
       }
     ],
     "metadata": {
@@ -1498,6 +1560,9 @@
       {
         "species": "human",
         "id": "esv3647486"
+      },
+      {
+        "id": "nsv123456"
       }
     ],
     "metadata": {

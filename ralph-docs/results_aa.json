@@ -2492,5 +2492,131 @@
     "tool": "EnsemblCompara_get_gene_tree",
     "action": "improved_examples",
     "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_lookup_gene",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_sequence",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_variants",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_variation",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_variation_phenotypes",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_xrefs",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_xrefs_by_name",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_regulatory_features",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_genetree",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_homology",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_alignment",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_taxonomy",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_species",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_archive",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_ontology_ancestors",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_ontology_descendants",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_ontology_term",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_overlap_features",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_vep_region",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_structural_variants",
+    "action": "improved_examples",
+    "count": 2
+  },
+  {
+    "file": "ensembl_tools.json",
+    "tool": "ensembl_get_sv_detail",
+    "action": "improved_examples",
+    "count": 2
   }
 ]
