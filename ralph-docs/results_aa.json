@@ -2618,5 +2618,371 @@
     "tool": "ensembl_get_sv_detail",
     "action": "improved_examples",
     "count": 2
+  },
+  {
+    "file": "disprot_tools.json",
+    "tool": "DisProt_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "disprot_tools.json",
+    "tool": "DisProt_get_entry",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drug_properties_tools.json",
+    "tool": "DrugProps_lipinski_filter",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drug_properties_tools.json",
+    "tool": "DrugProps_calculate_qed",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drug_properties_tools.json",
+    "tool": "DrugProps_pains_filter",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drugcentral_tools.json",
+    "tool": "DrugCentral_search",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drugcentral_tools.json",
+    "tool": "DrugCentral_get_drug",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "drugcentral_tools.json",
+    "tool": "DrugCentral_get_targets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dryad_tools.json",
+    "tool": "Dryad_search_datasets",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dryad_tools.json",
+    "tool": "Dryad_get_dataset",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "dryad_tools.json",
+    "tool": "Dryad_get_dataset_files",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_coordinates_tools.json",
+    "tool": "EBIProteins_get_coordinate_mapping",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_epitope_tools.json",
+    "tool": "EBIProteins_get_epitopes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_mutagenesis",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_proteomics_ptm",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_variation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_antigen",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_coordinates",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_ext_tools.json",
+    "tool": "EBIProteins_get_proteomics_peptides",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_features_tools.json",
+    "tool": "EBIProteins_get_domains_sites",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_features_tools.json",
+    "tool": "EBIProteins_get_molecule_processing",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_proteins_features_tools.json",
+    "tool": "EBIProteins_get_structural_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_taxonomy_tools.json",
+    "tool": "EBITaxonomy_get_by_id",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_taxonomy_tools.json",
+    "tool": "EBITaxonomy_get_by_scientific_name",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_taxonomy_tools.json",
+    "tool": "EBITaxonomy_search_by_name",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebi_taxonomy_tools.json",
+    "tool": "EBITaxonomy_suggest",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebird_taxonomy_tools.json",
+    "tool": "eBird_get_taxonomy",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ebird_taxonomy_tools.json",
+    "tool": "eBird_get_taxon_groups",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "elixir_tess_tools.json",
+    "tool": "ELIXIRTeSS_search_materials",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "elixir_tess_tools.json",
+    "tool": "ELIXIRTeSS_search_events",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "elm_tools.json",
+    "tool": "ELM_get_instances",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "elm_tools.json",
+    "tool": "ELM_list_classes",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_structure",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_search_structures",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_publications",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_map_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_sample_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_imaging_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "emdb_tools.json",
+    "tool": "EMDB_get_validation",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "empiar_tools.json",
+    "tool": "EMPIAR_search_entries",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "empiar_tools.json",
+    "tool": "EMPIAR_get_entry",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ena_portal_tools.json",
+    "tool": "ENAPortal_search_studies",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ena_portal_tools.json",
+    "tool": "ENAPortal_search_samples",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ena_portal_tools.json",
+    "tool": "ENAPortal_count_records",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_info_tools.json",
+    "tool": "Ensembl_get_assembly_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_info_tools.json",
+    "tool": "Ensembl_get_species_info",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_ld_tools.json",
+    "tool": "EnsemblLD_get_ld_variants",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_ld_tools.json",
+    "tool": "EnsemblLD_get_ld_pairwise",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_map_tools.json",
+    "tool": "EnsemblMap_convert_coordinates",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_map_tools.json",
+    "tool": "EnsemblMap_translate_coordinates",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_overlap_tools.json",
+    "tool": "Ensembl_get_region_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_overlap_tools.json",
+    "tool": "Ensembl_get_gene_overlapping_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_phenotype_tools.json",
+    "tool": "EnsemblPheno_get_by_gene",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_phenotype_tools.json",
+    "tool": "EnsemblPheno_get_by_region",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_phenotype_tools.json",
+    "tool": "EnsemblPheno_get_by_variant",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_regulation_tools.json",
+    "tool": "EnsemblReg_get_motif_features",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_regulation_tools.json",
+    "tool": "EnsemblReg_get_constrained_elements",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_regulation_tools.json",
+    "tool": "EnsemblReg_get_binding_matrix",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_sequence_tools.json",
+    "tool": "EnsemblSeq_get_region_sequence",
+    "action": "skipped",
+    "reason": "already_good"
+  },
+  {
+    "file": "ensembl_sequence_tools.json",
+    "tool": "EnsemblSeq_get_id_sequence",
+    "action": "skipped",
+    "reason": "already_good"
   }
 ]
