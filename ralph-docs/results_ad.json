@@ -1546,5 +1546,167 @@
     "tool": "ThreeDBeacons_get_structures",
     "action": "skipped",
     "reason": "existing examples already strong"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "UnifiedToolGenerator",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (DrugBank, GTEx, DeepLoc)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "XMLToolOptimizer",
+    "action": "improved_examples",
+    "old": "1 placeholder example",
+    "new": "3 realistic examples with test context"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "ReferenceInfoAnalyzer",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (STRING, ClinVar, ADMET)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "PackageAnalyzer",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples with package metadata"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "TestResultsAnalyzer",
+    "action": "improved_examples",
+    "old": "1 placeholder example",
+    "new": "3 realistic examples with test failures"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "CodeQualityAnalyzer",
+    "action": "improved_examples",
+    "old": "1 simple example",
+    "new": "2 realistic examples (GTEx, DrugBank)"
+  },
+  {
+    "file": "tool_discovery_agents.json",
+    "tool": "ToolDiscover",
+    "action": "improved_examples",
+    "old": "1 generic example",
+    "new": "3 realistic examples (DrugBank, ClinVar, DeepLoc)"
+  },
+  {
+    "file": "uniparc_tools.json",
+    "tool": "UniParc_get_entry",
+    "action": "added_example",
+    "count": 2,
+    "examples": "UPI000002ED67 (TP53), UPI000017A1D5"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_entry_by_accession",
+    "action": "added_example",
+    "count": 2,
+    "examples": "P04637 (TP53), P05067 (APP)"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_function_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_recommended_name_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_alternative_names_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_organism_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_subcellular_location_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_disease_variants_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_ptm_processing_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_sequence_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_isoform_ids_by_accession",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search",
+    "action": "added_example",
+    "count": 2,
+    "examples": "gene:TP53, gene:BRCA1"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_id_mapping",
+    "action": "added_example",
+    "count": 2,
+    "examples": "P04637, ENSG00000141510"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_proteome",
+    "action": "added_example",
+    "count": 2,
+    "examples": "UP000005640 (human), UP000000589 (mouse)"
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_uniref_cluster",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search_uniref",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_get_uniparc_entry",
+    "action": "added_example",
+    "count": 2
+  },
+  {
+    "file": "uniprot_tools.json",
+    "tool": "UniProt_search_uniparc",
+    "action": "added_example",
+    "count": 2
   }
 ]
