@@ -2306,5 +2306,163 @@
     "file": "mavedb_tools.json",
     "action": "skipped",
     "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mcp_auto_loader_esm.json",
+    "tool": "mcp_auto_loader_esm",
+    "action": "added_examples",
+    "count": 1
+  },
+  {
+    "file": "mcpautoloadertool_defaults.json",
+    "action": "skipped",
+    "reason": "has test_examples (defaults config file)"
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_lookup_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_get_compound",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_list_databases",
+    "action": "skipped",
+    "reason": "already has good test_examples"
+  },
+  {
+    "file": "mcule_tools.json",
+    "tool": "Mcule_get_database",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_search_conditions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_get_condition",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medgen_tools.json",
+    "tool": "MedGen_get_clinical_features",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_search_topics_by_keyword",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_connect_lookup_by_code",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_condition_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_gene_by_name",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "medlineplus_tools.json",
+    "tool": "MedlinePlus_get_genetics_index",
+    "action": "skipped",
+    "reason": "already has good test_examples"
+  },
+  {
+    "file": "medrxiv_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "meme_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "mesh_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "metaboanalyst_tools.json",
+    "action": "skipped",
+    "reason": "all tools already have good test_examples"
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_list_studies",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_search_studies",
+    "action": "improved_examples",
+    "old": "cancer, E. coli",
+    "new": "cancer, diabetes"
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_assays",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_samples",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_files",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_protocols",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_factors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "metabolights_tools.json",
+    "tool": "metabolights_get_study_data_files",
+    "action": "added_examples",
+    "count": 2
   }
 ]
