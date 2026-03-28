@@ -140,7 +140,8 @@
     },
     "type": "UniChemTool",
     "test_examples": [
-      {}
+      {},
+      {"note": "Returns 40+ chemical database sources including ChEMBL, DrugBank, PubChem, ChEBI"}
     ],
     "return_schema": {
       "oneOf": [

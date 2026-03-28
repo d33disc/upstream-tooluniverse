@@ -45,6 +45,11 @@
         "source_tool": "{\"name\": \"get_gene_info\", \"output\": \"gene_data\"}",
         "target_tool": "{\"name\": \"analyze_mutations\", \"input\": \"gene_data\"}",
         "analysis_depth": "quick"
+      },
+      {
+        "source_tool": "{\"name\": \"UniProt_search\", \"output\": \"protein_info\"}",
+        "target_tool": "{\"name\": \"AlphaFold_get_prediction\", \"input\": \"uniprot_id\"}",
+        "analysis_depth": "detailed"
       }
     ],
     "return_schema": {
