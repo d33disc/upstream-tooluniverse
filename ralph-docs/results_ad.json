@@ -1708,5 +1708,19 @@
     "tool": "UniProt_search_uniparc",
     "action": "added_example",
     "count": 2
+  },
+  {
+    "file": "url_fetch_tools.json",
+    "tool": "get_webpage_title",
+    "action": "improved_examples",
+    "old": "1 generic example (wikipedia.org)",
+    "new": "3 realistic examples (wikipedia, UniProt KB, PubMed)"
+  },
+  {
+    "file": "url_fetch_tools.json",
+    "tool": "get_webpage_text_from_url",
+    "action": "improved_examples",
+    "old": "1 generic example (wikipedia.org)",
+    "new": "3 realistic examples (wikipedia, NCBI Gene, Ensembl)"
   }
 ]
