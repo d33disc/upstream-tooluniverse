@@ -1253,5 +1253,12 @@
   {"file": "umls_tools.json", "tool": "snomed_search_concepts", "action": "improved_examples", "old": "generic ML query", "new": "myocardial infarction, asthma"},
   {"file": "umls_tools.json", "tool": "loinc_search_codes", "action": "improved_examples", "old": "generic ML query", "new": "HbA1c, blood pressure"},
   {"file": "unichem_tools.json", "tool": "UniChem_list_sources", "action": "added_examples", "count": 2},
-  {"file": "tool_composition_tools.json", "tool": "ToolCompatibilityAnalyzer", "action": "added_examples", "count": 2}
+  {"file": "tool_composition_tools.json", "tool": "ToolCompatibilityAnalyzer", "action": "added_examples", "count": 2},
+  {"file": "unified_guideline_tools.json", "tool": "NICE_Clinical_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, hypertension queries"},
+  {"file": "unified_guideline_tools.json", "tool": "PubMed_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, asthma queries"},
+  {"file": "unified_guideline_tools.json", "tool": "EuropePMC_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "cardiovascular, cancer queries"},
+  {"file": "unified_guideline_tools.json", "tool": "TRIP_Database_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, antibiotic queries"},
+  {"file": "unified_guideline_tools.json", "tool": "CMA_Guidelines_Search", "action": "improved_examples", "old": "generic ML query", "new": "diabetes, cancer queries"},
+  {"file": "uniprot_idmapping_tools.json", "tool": "UniProtIDMap_list_databases", "action": "added_examples", "count": 2},
+  {"file": "unpaywall_tools.json", "tool": "Unpaywall_check_oa_status", "action": "added_examples", "count": 2}
 ]
