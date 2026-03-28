@@ -1382,5 +1382,89 @@
     "action": "added_examples",
     "count": 3,
     "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_gene_constraints",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_search_genes",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_gene",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_transcript",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_search_variants",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_variant",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_region",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_by_gene",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_by_region",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnomad_tools.json",
+    "tool": "gnomad_get_sv_detail",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 1
+  },
+  {
+    "file": "gnps_tools.json",
+    "tool": "GNPS_get_spectrum",
+    "action": "added_examples",
+    "count": 3,
+    "old_count": 2
+  },
+  {
+    "file": "gnps_tools.json",
+    "tool": "GNPS_compare_spectra",
+    "action": "added_examples",
+    "count": 2,
+    "old_count": 1
   }
 ]
