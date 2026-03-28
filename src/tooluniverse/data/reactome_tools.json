@@ -18,6 +18,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-73817"
+      },
+      {
+        "stId": "R-HSA-109581"
       }
     ],
     "return_schema": {
@@ -69,6 +72,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-73817"
+      },
+      {
+        "stId": "R-HSA-168256"
       }
     ],
     "return_schema": {
@@ -97,7 +103,7 @@
   },
   {
     "name": "Reactome_get_pathway_hierarchy",
-    "description": "Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.",
+    "description": "Get parent Reactome pathways for a pathway stable ID, returning ancestor branches from the queried pathway up to top-level pathways.",
     "endpoint": "/data/event/{stId}/ancestors",
     "method": "GET",
     "parameter": {
@@ -114,6 +120,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-73817"
+      },
+      {
+        "stId": "R-HSA-6804757"
       }
     ],
     "return_schema": {
@@ -194,6 +203,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-111289"
+      },
+      {
+        "stId": "R-HSA-111448"
       }
     ],
     "return_schema": {
@@ -236,7 +248,10 @@
     "type": "ReactomeRESTTool",
     "test_examples": [
       {
-        "stId": "R-HSA-73817"
+        "stId": "R-HSA-69541"
+      },
+      {
+        "stId": "R-HSA-6800276"
       }
     ],
     "return_schema": {
@@ -274,7 +289,10 @@
     "type": "ReactomeRESTTool",
     "test_examples": [
       {
-        "stId": "R-HSA-73817"
+        "stId": "R-HSA-8869337"
+      },
+      {
+        "stId": "R-HSA-199420"
       }
     ],
     "return_schema": {
@@ -296,7 +314,7 @@
   },
   {
     "name": "Reactome_list_species",
-    "description": "List all species available in Reactome database.",
+    "description": "List Reactome species with scientific names and taxonomy IDs for valid species filters in pathway, ancestor, and hierarchy queries.",
     "endpoint": "/data/species/all",
     "method": "GET",
     "parameter": {
@@ -305,7 +323,7 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}],
+    "test_examples": [{}, {}],
     "return_schema": {
       "type": "array",
       "items": {
@@ -352,6 +370,11 @@
     "test_examples": [
       {
         "ids": ["R-HSA-73817", "R-HSA-111289"]
+      },
+      {
+        "ids": ["R-HSA-109581", "R-HSA-111448"],
+        "species": "Homo sapiens",
+        "types": ["Pathway", "Reaction"]
       }
     ],
     "return_schema": {
@@ -384,7 +407,7 @@
   },
   {
     "name": "Reactome_get_database_version",
-    "description": "Get Reactome database version information. Returns version number as integer.",
+    "description": "Get the current Reactome Content Service release number for provenance when comparing pathway, reaction, or disease annotations across runs.",
     "endpoint": "/data/database/version",
     "method": "GET",
     "parameter": {
@@ -393,7 +416,7 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}],
+    "test_examples": [{}, {}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -420,6 +443,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-73817"
+      },
+      {
+        "stId": "R-HSA-111448"
       }
     ],
     "return_schema": {
@@ -452,6 +478,9 @@
     "test_examples": [
       {
         "uniprot_id": "P04637"
+      },
+      {
+        "uniprot_id": "P00533"
       }
     ],
     "return_schema": {
@@ -498,6 +527,9 @@
     "test_examples": [
       {
         "uniprot_id": "P04637"
+      },
+      {
+        "uniprot_id": "P00533"
       }
     ],
     "return_schema": {
@@ -541,6 +573,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-111289"
+      },
+      {
+        "stId": "R-HSA-111448"
       }
     ],
     "return_schema": {
@@ -576,6 +611,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-111289"
+      },
+      {
+        "stId": "R-HSA-111448"
       }
     ],
     "return_schema": {
@@ -615,7 +653,10 @@
     "type": "ReactomeRESTTool",
     "test_examples": [
       {
-        "id": "R-HSA-73817"
+        "id": "R-HSA-199420"
+      },
+      {
+        "id": "R-HSA-8869337"
       }
     ],
     "return_schema": {
@@ -645,6 +686,9 @@
     "test_examples": [
       {
         "stId": "R-HSA-73817"
+      },
+      {
+        "stId": "R-HSA-109581"
       }
     ],
     "return_schema": {
@@ -679,7 +723,10 @@
     "type": "ReactomeRESTTool",
     "test_examples": [
       {
-        "stId": "R-HSA-73817"
+        "stId": "R-HSA-8869337"
+      },
+      {
+        "stId": "R-HSA-199420"
       }
     ],
     "return_schema": {
@@ -712,6 +759,9 @@
     "test_examples": [
       {
         "species": "9606"
+      },
+      {
+        "species": "Homo sapiens"
       }
     ],
     "return_schema": {
@@ -734,7 +784,7 @@
   },
   {
     "name": "Reactome_get_diseases",
-    "description": "Get list of disease pathways or DOIDs (Disease Ontology IDs) annotated in Reactome. Returns disease-related pathway information including database identifiers, definitions, and names.",
+    "description": "List Reactome disease annotations and Disease Ontology IDs curated for disease-associated pathways and entities.",
     "endpoint": "/data/diseases",
     "method": "GET",
     "parameter": {
@@ -743,7 +793,7 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}],
+    "test_examples": [{}, {}],
     "return_schema": {
       "type": "array",
       "items": {

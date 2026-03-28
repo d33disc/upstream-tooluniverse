@@ -1,0 +1,319 @@
+[
+  {
+    "file": "rcsb_search_tools.json",
+    "tool": "PDB_search_similar_structures",
+    "action": "added_examples",
+    "count": 3
+  },
+  {
+    "file": "rdkit_cheminfo_tools.json",
+    "tool": "RDKit_pharmacophore_features",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rdkit_cheminfo_tools.json",
+    "tool": "RDKit_matched_molecular_pair",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_analysis_tools.json",
+    "tool": "ReactomeAnalysis_pathway_enrichment",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_analysis_tools.json",
+    "tool": "ReactomeAnalysis_species_comparison",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_analysis_tools.json",
+    "tool": "ReactomeAnalysis_token_result",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_analysis_tools.json",
+    "tool": "ReactomeAnalysis_token_result",
+    "action": "improved_description",
+    "old": "Retrieve previously computed Reactome pathway analysis results using an analysis token. Tokens are returned from pathway_enrichment or species_comparison analyses and can be used to access results without rerunning the analysis. Useful for paginating through large result sets or sharing analysis results. The token contains the full analysis result and is valid for a limited time.",
+    "new": "Fetch cached Reactome Analysis Service results by token from a prior enrichment or species-comparison run and page through saved pathways."
+  },
+  {
+    "file": "reactome_content_tools.json",
+    "tool": "ReactomeContent_search",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_content_tools.json",
+    "tool": "ReactomeContent_get_contained_events",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_content_tools.json",
+    "tool": "ReactomeContent_get_enhanced_pathway",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_interactors_tools.json",
+    "tool": "ReactomeInteractors_get_protein_interactors",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_interactors_tools.json",
+    "tool": "ReactomeInteractors_get_entity_pathways",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_interactors_tools.json",
+    "tool": "ReactomeInteractors_search_entity",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_pathway_reactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_pathway",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_pathway_hierarchy",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_pathway_hierarchy",
+    "action": "improved_description",
+    "old": "Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.",
+    "new": "Get parent Reactome pathways for a pathway stable ID, returning ancestor branches from the queried pathway up to top-level pathways."
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_list_top_pathways",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_reaction",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_complex",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_interactor",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_list_species",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_list_species",
+    "action": "improved_description",
+    "old": "List all species available in Reactome database.",
+    "new": "List Reactome species with scientific names and taxonomy IDs for valid species filters in pathway, ancestor, and hierarchy queries."
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_query_by_ids",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_database_version",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_database_version",
+    "action": "improved_description",
+    "old": "Get Reactome database version information. Returns version number as integer.",
+    "new": "Get the current Reactome Content Service release number for provenance when comparing pathway, reaction, or disease annotations across runs."
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_event_ancestors",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_map_uniprot_to_pathways",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_map_uniprot_to_reactions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_participants",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_participant_reference_entities",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_pathways_low_entity",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_entity_events",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_entity_compartment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_events_hierarchy",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_diseases",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "reactome_tools.json",
+    "tool": "Reactome_get_diseases",
+    "action": "improved_description",
+    "old": "Get list of disease pathways or DOIDs (Disease Ontology IDs) annotated in Reactome. Returns disease-related pathway information including database identifiers, definitions, and names.",
+    "new": "List Reactome disease annotations and Disease Ontology IDs curated for disease-associated pathways and entities."
+  },
+  {
+    "file": "regulomedb_tools.json",
+    "tool": "RegulomeDB_query_variant",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "remap_tools.json",
+    "tool": "ReMap_get_transcription_factor_binding",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_family",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_alignment",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_covariance_model",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_search_sequence",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_tree_data",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_sequence_regions",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_get_structure_mapping",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_accession_to_id",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rfam_tools.json",
+    "tool": "Rfam_id_to_accession",
+    "action": "added_examples",
+    "count": 2
+  },
+  {
+    "file": "rgd_tools.json",
+    "tool": "RGD_get_gene",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rgd_tools.json",
+    "tool": "RGD_search_genes",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rgd_tools.json",
+    "tool": "RGD_get_annotations",
+    "action": "skipped",
+    "reason": "existing examples already strong"
+  },
+  {
+    "file": "rgd_tools.json",
+    "tool": "RGD_get_orthologs",
+    "action": "added_examples",
+    "count": 2
+  }
+]
