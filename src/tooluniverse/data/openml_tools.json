@@ -35,54 +35,49 @@
           "type": "object",
           "description": "OpenML dataset list response",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "dataset": {
-                  "type": "array",
-                  "description": "Array of dataset summary objects",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "did": {
-                        "type": "integer",
-                        "description": "OpenML dataset ID (use with OpenML_get_dataset)"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Dataset name (e.g., 'iris', 'mnist_784', 'credit-g')"
-                      },
-                      "version": {
-                        "type": "integer",
-                        "description": "Dataset version number"
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "Dataset status (active, deactivated, in_preparation)"
-                      },
-                      "format": {
-                        "type": "string",
-                        "description": "Data file format (ARFF, CSV, Sparse_ARFF)"
-                      },
-                      "file_id": {
-                        "type": "integer",
-                        "description": "Internal file ID for downloading"
-                      },
-                      "quality": {
-                        "type": "array",
-                        "description": "Dataset quality metrics (NumberOfInstances, NumberOfFeatures, NumberOfClasses, etc.)",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "type": "string",
-                              "description": "Quality metric name"
-                            },
-                            "value": {
-                              "type": "string",
-                              "description": "Quality metric value (as string)"
-                            }
-                          }
+            "dataset": {
+              "type": "array",
+              "description": "Array of dataset summary objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "did": {
+                    "type": "integer",
+                    "description": "OpenML dataset ID (use with OpenML_get_dataset)"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Dataset name (e.g., 'iris', 'mnist_784', 'credit-g')"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "description": "Dataset version number"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Dataset status (active, deactivated, in_preparation)"
+                  },
+                  "format": {
+                    "type": "string",
+                    "description": "Data file format (ARFF, CSV, Sparse_ARFF)"
+                  },
+                  "file_id": {
+                    "type": "integer",
+                    "description": "Internal file ID for downloading"
+                  },
+                  "quality": {
+                    "type": "array",
+                    "description": "Dataset quality metrics (NumberOfInstances, NumberOfFeatures, NumberOfClasses, etc.)",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Quality metric name"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Quality metric value (as string)"
                         }
                       }
                     }

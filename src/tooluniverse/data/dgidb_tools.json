@@ -60,38 +60,33 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "genes": {
           "type": "object",
           "properties": {
-            "genes": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "longName": {
-                        "type": "string"
-                      },
-                      "interactions": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "drug": {
-                              "type": "object"
-                            },
-                            "interactionTypes": {
-                              "type": "array"
-                            },
-                            "sources": {
-                              "type": "array"
-                            }
-                          }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "longName": {
+                    "type": "string"
+                  },
+                  "interactions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "drug": {
+                          "type": "object"
+                        },
+                        "interactionTypes": {
+                          "type": "array"
+                        },
+                        "sources": {
+                          "type": "array"
                         }
                       }
                     }
@@ -150,24 +145,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "genes": {
           "type": "object",
           "properties": {
-            "genes": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "geneCategories": {
-                        "type": "array"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "geneCategories": {
+                    "type": "array"
                   }
                 }
               }
@@ -221,27 +211,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "genes": {
           "type": "object",
           "properties": {
-            "genes": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "longName": {
-                        "type": "string"
-                      },
-                      "geneCategories": {
-                        "type": "array"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "longName": {
+                    "type": "string"
+                  },
+                  "geneCategories": {
+                    "type": "array"
                   }
                 }
               }
@@ -298,27 +283,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drugs": {
           "type": "object",
           "properties": {
-            "drugs": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "conceptId": {
-                        "type": "string"
-                      },
-                      "approved": {
-                        "type": "boolean"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "conceptId": {
+                    "type": "string"
+                  },
+                  "approved": {
+                    "type": "boolean"
                   }
                 }
               }

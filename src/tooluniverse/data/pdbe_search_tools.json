@@ -158,80 +158,58 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "compound_id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "formula": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "weight": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "compound_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "inchi": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "inchi_key": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "smiles": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "systematic_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
+            "compound_id": {
+              "type": "string"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "formula": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "weight": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "compound_type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "inchi": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "inchi_key": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "smiles": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "systematic_name": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

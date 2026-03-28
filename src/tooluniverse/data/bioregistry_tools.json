@@ -20,30 +20,25 @@
           "description": "Database identifier (e.g., 'P04637' for UniProt, '17234' for ChEBI, '0006915' for GO)"
         }
       },
-      "required": ["prefix", "identifier"]
+      "required": [
+        "prefix",
+        "identifier"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "prefix": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "prefix": {
-              "type": "string"
-            },
-            "identifier": {
-              "type": "string"
-            },
-            "providers": {
-              "type": "object"
-            },
-            "provider_count": {
-              "type": "integer"
-            }
-          }
+        "identifier": {
+          "type": "string"
+        },
+        "providers": {
+          "type": "object"
+        },
+        "provider_count": {
+          "type": "integer"
         }
       }
     },
@@ -75,39 +70,33 @@
           "description": "Bioregistry prefix (e.g., 'uniprot', 'chebi', 'go', 'pdb', 'ensembl', 'hgnc', 'pubmed')"
         }
       },
-      "required": ["prefix"]
+      "required": [
+        "prefix"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "prefix": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "prefix": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "homepage": {
-              "type": "string"
-            },
-            "pattern": {
-              "type": "string"
-            },
-            "uri_format": {
-              "type": "string"
-            },
-            "example": {
-              "type": "string"
-            }
-          }
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "homepage": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "uri_format": {
+          "type": "string"
+        },
+        "example": {
+          "type": "string"
         }
       }
     },
@@ -142,41 +131,35 @@
           "default": 10
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "query": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string"
-            },
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "prefix": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                }
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prefix": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
               }
-            },
-            "total": {
-              "type": "integer"
             }
           }
+        },
+        "total": {
+          "type": "integer"
         }
       }
     },

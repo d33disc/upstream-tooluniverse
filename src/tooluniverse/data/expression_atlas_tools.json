@@ -35,35 +35,20 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene": {
-              "type": "string"
-            },
-            "species": {
-              "type": "string"
-            },
-            "baseline_experiments": {
-              "type": "array"
-            },
-            "total_baseline": {
-              "type": "integer"
-            },
-            "gene_specific_count": {
-              "type": "integer"
-            }
-          }
-        },
-        "error": {
+        "gene": {
           "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "baseline_experiments": {
+          "type": "array"
+        },
+        "total_baseline": {
+          "type": "integer"
+        },
+        "gene_specific_count": {
+          "type": "integer"
         }
       }
     },
@@ -121,32 +106,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene": {
-              "type": "string"
-            },
-            "condition": {
-              "type": "string"
-            },
-            "experiments": {
-              "type": "array"
-            },
-            "experiment_count": {
-              "type": "integer"
-            }
-          }
-        },
-        "error": {
+        "gene": {
           "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "experiments": {
+          "type": "array"
+        },
+        "experiment_count": {
+          "type": "integer"
         }
       }
     },
@@ -201,32 +171,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene": {
-              "type": "string"
-            },
-            "condition": {
-              "type": "string"
-            },
-            "experiments": {
-              "type": "array"
-            },
-            "total_count": {
-              "type": "integer"
-            }
-          }
-        },
-        "error": {
+        "gene": {
           "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "experiments": {
+          "type": "array"
+        },
+        "total_count": {
+          "type": "integer"
         }
       }
     },

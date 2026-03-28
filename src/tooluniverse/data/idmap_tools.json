@@ -38,15 +38,21 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
@@ -55,21 +61,10 @@
                       "name": {
                         "type": "string"
                       },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "dbXRefs": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
+                      "dbXRefs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -121,24 +116,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "dbXRefs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dbXRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -185,21 +175,16 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "mapIds": {
           "type": "object",
           "properties": {
-            "mapIds": {
-              "type": "object",
-              "properties": {
-                "mappings": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "term": {
-                        "type": "string"
-                      }
-                    }
+            "mappings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "term": {
+                    "type": "string"
                   }
                 }
               }

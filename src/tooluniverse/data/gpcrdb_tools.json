@@ -33,28 +33,20 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "entry_name": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "entry_name": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "family": {
-              "type": "string"
-            },
-            "species": {
-              "type": "string"
-            },
-            "accession": {
-              "type": "string"
-            }
-          }
+        "name": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "accession": {
+          "type": "string"
         }
       }
     },
@@ -96,19 +88,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "proteins": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "proteins": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -169,19 +153,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "structures": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "structures": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -244,25 +220,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "protein": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "protein": {
-              "type": "string"
-            },
-            "ligands": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            },
-            "total_count": {
-              "type": "integer"
-            }
-          }
+        "ligands": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "total_count": {
+          "type": "integer"
         }
       }
     },
@@ -316,22 +284,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "protein": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "protein": {
-              "type": "string"
-            },
-            "mutations": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "mutations": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },

@@ -35,79 +35,71 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "variant": {
               "type": "object",
               "properties": {
-                "variant": {
+                "id": {
+                  "type": "string",
+                  "description": "Variant identifier in chr_pos_ref_alt format"
+                },
+                "rsIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "dbSNP rs identifiers"
+                },
+                "chromosome": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "referenceAllele": {
+                  "type": "string"
+                },
+                "alternateAllele": {
+                  "type": "string"
+                },
+                "hgvsId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "HGVS notation"
+                },
+                "variantDescription": {
+                  "type": "string",
+                  "description": "Human-readable variant description"
+                },
+                "mostSevereConsequence": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string",
-                      "description": "Variant identifier in chr_pos_ref_alt format"
+                      "type": "string"
                     },
-                    "rsIds": {
-                      "type": "array",
-                      "items": {
+                    "label": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "alleleFrequencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "populationName": {
                         "type": "string"
                       },
-                      "description": "dbSNP rs identifiers"
-                    },
-                    "chromosome": {
-                      "type": "string"
-                    },
-                    "position": {
-                      "type": "integer"
-                    },
-                    "referenceAllele": {
-                      "type": "string"
-                    },
-                    "alternateAllele": {
-                      "type": "string"
-                    },
-                    "hgvsId": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "description": "HGVS notation"
-                    },
-                    "variantDescription": {
-                      "type": "string",
-                      "description": "Human-readable variant description"
-                    },
-                    "mostSevereConsequence": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "label": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "alleleFrequencies": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "populationName": {
-                            "type": "string"
-                          },
-                          "alleleFrequency": {
-                            "type": "number"
-                          }
-                        }
+                      "alleleFrequency": {
+                        "type": "number"
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -167,137 +159,132 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "variant": {
               "type": "object",
               "properties": {
-                "variant": {
+                "id": {
+                  "type": "string"
+                },
+                "rsIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "credibleSets": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string"
+                    "count": {
+                      "type": "integer"
                     },
-                    "rsIds": {
+                    "rows": {
                       "type": "array",
                       "items": {
-                        "type": "string"
-                      }
-                    },
-                    "credibleSets": {
-                      "type": "object",
-                      "properties": {
-                        "count": {
-                          "type": "integer"
-                        },
-                        "rows": {
-                          "type": "array",
-                          "items": {
+                        "type": "object",
+                        "properties": {
+                          "studyLocusId": {
+                            "type": "string"
+                          },
+                          "studyId": {
+                            "type": "string"
+                          },
+                          "region": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "finemappingMethod": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "pValueMantissa": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "pValueExponent": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "beta": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "confidence": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "study": {
                             "type": "object",
                             "properties": {
-                              "studyLocusId": {
+                              "id": {
                                 "type": "string"
                               },
-                              "studyId": {
-                                "type": "string"
-                              },
-                              "region": {
+                              "traitFromSource": {
                                 "type": [
                                   "string",
                                   "null"
                                 ]
                               },
-                              "finemappingMethod": {
+                              "publicationFirstAuthor": {
                                 "type": [
                                   "string",
                                   "null"
                                 ]
                               },
-                              "pValueMantissa": {
-                                "type": [
-                                  "number",
-                                  "null"
-                                ]
-                              },
-                              "pValueExponent": {
-                                "type": [
-                                  "integer",
-                                  "null"
-                                ]
-                              },
-                              "beta": {
-                                "type": [
-                                  "number",
-                                  "null"
-                                ]
-                              },
-                              "confidence": {
+                              "pubmedId": {
                                 "type": [
                                   "string",
                                   "null"
                                 ]
                               },
-                              "study": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "traitFromSource": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
-                                  },
-                                  "publicationFirstAuthor": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
-                                  },
-                                  "pubmedId": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
-                                  },
-                                  "diseases": {
-                                    "type": "array",
-                                    "items": {
+                              "diseases": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "l2GPredictions": {
+                            "type": "object",
+                            "properties": {
+                              "rows": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "target": {
                                       "type": "object",
                                       "properties": {
                                         "id": {
                                           "type": "string"
                                         },
-                                        "name": {
+                                        "approvedSymbol": {
                                           "type": "string"
                                         }
                                       }
-                                    }
-                                  }
-                                }
-                              },
-                              "l2GPredictions": {
-                                "type": "object",
-                                "properties": {
-                                  "rows": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "target": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "approvedSymbol": {
-                                              "type": "string"
-                                            }
-                                          }
-                                        },
-                                        "score": {
-                                          "type": "number"
-                                        }
-                                      }
+                                    },
+                                    "score": {
+                                      "type": "number"
                                     }
                                   }
                                 }
@@ -311,10 +298,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -366,141 +350,133 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "study": {
               "type": "object",
               "properties": {
-                "study": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "studyType": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "traitFromSource": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "publicationFirstAuthor": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "publicationTitle": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "publicationDate": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "publicationJournal": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "pubmedId": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "nSamples": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "nCases": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "nControls": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "initialSampleSize": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "hasSumstats": {
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
-                    },
-                    "summarystatsLocation": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "cohorts": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
-                      "items": {
+                "id": {
+                  "type": "string"
+                },
+                "studyType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "traitFromSource": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "publicationFirstAuthor": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "publicationTitle": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "publicationDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "publicationJournal": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "pubmedId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "nSamples": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "nCases": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "nControls": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "initialSampleSize": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "hasSumstats": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "summarystatsLocation": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "cohorts": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
                         "type": "string"
                       }
-                    },
-                    "diseases": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "ldPopulationStructure": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "ldPopulation": {
-                            "type": "string"
-                          },
-                          "relativeSampleSize": {
-                            "type": "number"
-                          }
-                        }
+                    }
+                  }
+                },
+                "ldPopulationStructure": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ldPopulation": {
+                        "type": "string"
+                      },
+                      "relativeSampleSize": {
+                        "type": "number"
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -578,95 +554,90 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "studies": {
               "type": "object",
               "properties": {
-                "studies": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "studyType": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "traitFromSource": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "publicationFirstAuthor": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "publicationTitle": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "publicationDate": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "pubmedId": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "nSamples": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "nCases": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "nControls": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "hasSumstats": {
-                            "type": [
-                              "boolean",
-                              "null"
-                            ]
-                          },
-                          "diseases": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "name": {
-                                  "type": "string"
-                                }
-                              }
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "studyType": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "traitFromSource": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "publicationFirstAuthor": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "publicationTitle": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "publicationDate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "pubmedId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "nSamples": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "nCases": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "nControls": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "hasSumstats": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "diseases": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
                             }
                           }
                         }
@@ -676,10 +647,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -732,199 +700,194 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "credibleSet": {
               "type": "object",
               "properties": {
-                "credibleSet": {
+                "studyLocusId": {
+                  "type": "string"
+                },
+                "studyId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "region": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "chromosome": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "position": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "finemappingMethod": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "pValueMantissa": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pValueExponent": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "beta": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "standardError": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "confidence": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "credibleSetlog10BF": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sampleSize": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "variant": {
                   "type": "object",
                   "properties": {
-                    "studyLocusId": {
+                    "id": {
                       "type": "string"
                     },
-                    "studyId": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "region": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "rsIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "chromosome": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                      "type": "string"
                     },
                     "position": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
+                      "type": "integer"
                     },
-                    "finemappingMethod": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "referenceAllele": {
+                      "type": "string"
                     },
-                    "pValueMantissa": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
+                    "alternateAllele": {
+                      "type": "string"
                     },
-                    "pValueExponent": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "beta": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "standardError": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "confidence": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "credibleSetlog10BF": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "sampleSize": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "variant": {
+                    "mostSevereConsequence": {
                       "type": "object",
                       "properties": {
                         "id": {
                           "type": "string"
                         },
-                        "rsIds": {
-                          "type": "array",
-                          "items": {
+                        "label": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "study": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "traitFromSource": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "publicationFirstAuthor": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "publicationTitle": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "pubmedId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "nSamples": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    },
+                    "diseases": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
                             "type": "string"
-                          }
-                        },
-                        "chromosome": {
-                          "type": "string"
-                        },
-                        "position": {
-                          "type": "integer"
-                        },
-                        "referenceAllele": {
-                          "type": "string"
-                        },
-                        "alternateAllele": {
-                          "type": "string"
-                        },
-                        "mostSevereConsequence": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "label": {
-                              "type": "string"
-                            }
+                          },
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
-                    },
-                    "study": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "traitFromSource": {
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "publicationFirstAuthor": {
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "publicationTitle": {
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "pubmedId": {
-                          "type": [
-                            "string",
-                            "null"
-                          ]
-                        },
-                        "nSamples": {
-                          "type": [
-                            "integer",
-                            "null"
-                          ]
-                        },
-                        "diseases": {
-                          "type": "array",
-                          "items": {
+                    }
+                  }
+                },
+                "l2GPredictions": {
+                  "type": "object",
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "target": {
                             "type": "object",
                             "properties": {
                               "id": {
                                 "type": "string"
                               },
-                              "name": {
+                              "approvedSymbol": {
                                 "type": "string"
                               }
                             }
-                          }
-                        }
-                      }
-                    },
-                    "l2GPredictions": {
-                      "type": "object",
-                      "properties": {
-                        "rows": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "target": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "approvedSymbol": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "score": {
-                                "type": "number"
-                              }
-                            }
+                          },
+                          "score": {
+                            "type": "number"
                           }
                         }
                       }
@@ -933,10 +896,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -1008,136 +968,131 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "credibleSets": {
               "type": "object",
               "properties": {
-                "credibleSets": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "count": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "studyLocusId": {
+                        "type": "string"
+                      },
+                      "studyId": {
+                        "type": "string"
+                      },
+                      "region": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "chromosome": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "position": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "finemappingMethod": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "pValueMantissa": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "pValueExponent": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "beta": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "confidence": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "variant": {
                         "type": "object",
                         "properties": {
-                          "studyLocusId": {
+                          "id": {
                             "type": "string"
                           },
-                          "studyId": {
-                            "type": "string"
-                          },
-                          "region": {
+                          "rsIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "study": {
+                        "type": "object",
+                        "properties": {
+                          "traitFromSource": {
                             "type": [
                               "string",
                               "null"
                             ]
                           },
-                          "chromosome": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "position": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "finemappingMethod": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "pValueMantissa": {
-                            "type": [
-                              "number",
-                              "null"
-                            ]
-                          },
-                          "pValueExponent": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "beta": {
-                            "type": [
-                              "number",
-                              "null"
-                            ]
-                          },
-                          "confidence": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "variant": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "rsIds": {
-                                "type": "array",
-                                "items": {
+                          "diseases": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
                                   "type": "string"
                                 }
                               }
                             }
-                          },
-                          "study": {
-                            "type": "object",
-                            "properties": {
-                              "traitFromSource": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
-                              },
-                              "diseases": {
-                                "type": "array",
-                                "items": {
+                          }
+                        }
+                      },
+                      "l2GPredictions": {
+                        "type": "object",
+                        "properties": {
+                          "rows": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "target": {
                                   "type": "object",
                                   "properties": {
                                     "id": {
                                       "type": "string"
                                     },
-                                    "name": {
+                                    "approvedSymbol": {
                                       "type": "string"
                                     }
                                   }
-                                }
-                              }
-                            }
-                          },
-                          "l2GPredictions": {
-                            "type": "object",
-                            "properties": {
-                              "rows": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "target": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "approvedSymbol": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "score": {
-                                      "type": "number"
-                                    }
-                                  }
+                                },
+                                "score": {
+                                  "type": "number"
                                 }
                               }
                             }
@@ -1149,10 +1104,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

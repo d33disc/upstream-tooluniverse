@@ -132,33 +132,27 @@
       "oneOf": [
         {
           "type": "object",
-          "description": "Study details",
+          "description": "Study/project data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Study/project data",
-              "properties": {
-                "@id": {
-                  "type": "integer",
-                  "description": "Project ID"
-                },
-                "Name": {
-                  "type": "string",
-                  "description": "Study name"
-                },
-                "Description": {
-                  "type": "string",
-                  "description": "Study description"
-                },
-                "url:datasets": {
-                  "type": "string",
-                  "description": "URL to list datasets"
-                },
-                "url:project": {
-                  "type": "string",
-                  "description": "URL to this project"
-                }
-              }
+            "@id": {
+              "type": "integer",
+              "description": "Project ID"
+            },
+            "Name": {
+              "type": "string",
+              "description": "Study name"
+            },
+            "Description": {
+              "type": "string",
+              "description": "Study description"
+            },
+            "url:datasets": {
+              "type": "string",
+              "description": "URL to list datasets"
+            },
+            "url:project": {
+              "type": "string",
+              "description": "URL to this project"
             }
           }
         },

@@ -179,104 +179,88 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "uuid": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Network UUID"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Network name"
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Full description"
-                },
-                "owner": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Owner username"
-                },
-                "node_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Number of nodes"
-                },
-                "edge_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Number of edges"
-                },
-                "visibility": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "PUBLIC or PRIVATE"
-                },
-                "doi": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Digital Object Identifier"
-                },
-                "version": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Network version"
-                },
-                "creation_time": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Creation timestamp (ms)"
-                },
-                "modification_time": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Last modification timestamp (ms)"
-                },
-                "properties": {
-                  "type": "object",
-                  "description": "Custom network properties (key-value pairs)"
-                }
-              }
+            "uuid": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Network UUID"
             },
-            "metadata": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Network name"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Full description"
+            },
+            "owner": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Owner username"
+            },
+            "node_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of nodes"
+            },
+            "edge_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of edges"
+            },
+            "visibility": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "PUBLIC or PRIVATE"
+            },
+            "doi": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Digital Object Identifier"
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Network version"
+            },
+            "creation_time": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Creation timestamp (ms)"
+            },
+            "modification_time": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Last modification timestamp (ms)"
+            },
+            "properties": {
               "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                }
-              }
+              "description": "Custom network properties (key-value pairs)"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -324,63 +308,41 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "network_name": {
-                  "type": "string",
-                  "description": "Network name"
-                },
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  },
-                  "description": "Network nodes (id, name, represents)"
-                },
-                "edges": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  },
-                  "description": "Network edges (source, target, interaction)"
-                },
-                "total_nodes": {
-                  "type": "integer",
-                  "description": "Total nodes in network"
-                },
-                "total_edges": {
-                  "type": "integer",
-                  "description": "Total edges in network"
-                },
-                "truncated_nodes": {
-                  "type": "boolean",
-                  "description": "Whether node list was truncated"
-                },
-                "truncated_edges": {
-                  "type": "boolean",
-                  "description": "Whether edge list was truncated"
-                }
-              }
+            "network_name": {
+              "type": "string",
+              "description": "Network name"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "uuid": {
-                  "type": "string"
-                },
-                "format": {
-                  "type": "string"
-                }
-              }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "description": "Network nodes (id, name, represents)"
+            },
+            "edges": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "description": "Network edges (source, target, interaction)"
+            },
+            "total_nodes": {
+              "type": "integer",
+              "description": "Total nodes in network"
+            },
+            "total_edges": {
+              "type": "integer",
+              "description": "Total edges in network"
+            },
+            "truncated_nodes": {
+              "type": "boolean",
+              "description": "Whether node list was truncated"
+            },
+            "truncated_edges": {
+              "type": "boolean",
+              "description": "Whether edge list was truncated"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

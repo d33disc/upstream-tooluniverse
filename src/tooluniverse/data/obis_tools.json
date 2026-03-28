@@ -15,10 +15,12 @@
           "default": 10,
           "minimum": 1,
           "maximum": 100,
-          "description": "Number of records to return (1–100)."
+          "description": "Number of records to return (1\u2013100)."
         }
       },
-      "required": ["scientificname"]
+      "required": [
+        "scientificname"
+      ]
     },
     "fields": {
       "endpoint": "https://api.obis.org/v3/taxon",
@@ -28,33 +30,46 @@
       "type": "object",
       "description": "OBIS taxon search response",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "scientificName": {"type": "string"},
-                  "aphiaID": {"type": "integer"},
-                  "rank": {"type": "string"}
-                }
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scientificName": {
+                "type": "string"
+              },
+              "aphiaID": {
+                "type": "integer"
+              },
+              "rank": {
+                "type": "string"
               }
             }
           }
-        },
-        "url": {"type": "string"}
+        }
       }
     },
     "test_examples": [
-      {"scientificname": "Gadus", "size": 1},
-      {"scientificname": "Thunnus albacares", "size": 5}
+      {
+        "scientificname": "Gadus",
+        "size": 1
+      },
+      {
+        "scientificname": "Thunnus albacares",
+        "size": 5
+      }
     ],
-    "label": ["OBIS", "Taxonomy", "Marine"],
+    "label": [
+      "OBIS",
+      "Taxonomy",
+      "Marine"
+    ],
     "metadata": {
-      "tags": ["marine", "taxonomy", "aphia"],
+      "tags": [
+        "marine",
+        "taxonomy",
+        "aphia"
+      ],
       "estimated_execution_time": "< 2 seconds"
     }
   },
@@ -78,7 +93,7 @@
           "default": 10,
           "minimum": 1,
           "maximum": 100,
-          "description": "Number of records to return (1–100)."
+          "description": "Number of records to return (1\u2013100)."
         }
       }
     },
@@ -90,34 +105,48 @@
       "type": "object",
       "description": "OBIS occurrence search response",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "scientificName": {"type": "string"},
-                  "decimalLatitude": {"type": "number"},
-                  "decimalLongitude": {"type": "number"},
-                  "eventDate": {"type": "string"}
-                }
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scientificName": {
+                "type": "string"
+              },
+              "decimalLatitude": {
+                "type": "number"
+              },
+              "decimalLongitude": {
+                "type": "number"
+              },
+              "eventDate": {
+                "type": "string"
               }
             }
           }
-        },
-        "url": {"type": "string"}
+        }
       }
     },
     "test_examples": [
-      {"size": 1},
-      {"scientificname": "Gadus morhua", "size": 5}
+      {
+        "size": 1
+      },
+      {
+        "scientificname": "Gadus morhua",
+        "size": 5
+      }
     ],
-    "label": ["OBIS", "Occurrence", "Marine"],
+    "label": [
+      "OBIS",
+      "Occurrence",
+      "Marine"
+    ],
     "metadata": {
-      "tags": ["marine", "occurrence", "geospatial"],
+      "tags": [
+        "marine",
+        "occurrence",
+        "geospatial"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   }

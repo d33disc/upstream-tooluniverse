@@ -31,87 +31,65 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "px_id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "species": {
-                  "type": "array",
-                  "items": {
+            "px_id": {
+              "type": "string"
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "species": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "identifiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
                     "type": "string"
                   }
-                },
-                "identifiers": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "instruments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "publications": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "pubmed_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "doi": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "file_count": {
-                  "type": "integer"
                 }
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
+            "instruments": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "publications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pubmed_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "doi": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
               }
+            },
+            "file_count": {
+              "type": "integer"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

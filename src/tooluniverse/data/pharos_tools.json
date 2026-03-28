@@ -30,44 +30,29 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "gene": {
-              "type": "string"
-            },
-            "accession": {
-              "type": "string"
-            },
-            "idgFamily": {
-              "type": "string"
-            },
-            "idgTDL": {
-              "type": "string"
-            },
-            "novelty": {
-              "type": "number"
-            },
-            "diseases": {
-              "type": "array"
-            },
-            "ligands": {
-              "type": "array"
-            }
-          }
-        },
-        "error": {
+        "name": {
           "type": "string"
+        },
+        "gene": {
+          "type": "string"
+        },
+        "accession": {
+          "type": "string"
+        },
+        "idgFamily": {
+          "type": "string"
+        },
+        "idgTDL": {
+          "type": "string"
+        },
+        "novelty": {
+          "type": "number"
+        },
+        "diseases": {
+          "type": "array"
+        },
+        "ligands": {
+          "type": "array"
         }
       }
     },
@@ -136,26 +121,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
+        "count": {
+          "type": "integer"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "count": {
-              "type": "integer"
-            },
-            "targets": {
-              "type": "array"
-            }
-          }
-        },
-        "error": {
-          "type": "string"
+        "targets": {
+          "type": "array"
         }
       }
     },
@@ -191,29 +161,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
+        "tdl_summary": {
+          "type": "object"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "tdl_summary": {
-              "type": "object"
-            },
-            "total_targets": {
-              "type": "integer"
-            },
-            "description": {
-              "type": "object"
-            }
-          }
+        "total_targets": {
+          "type": "integer"
         },
-        "error": {
-          "type": "string"
+        "description": {
+          "type": "object"
         }
       }
     },
@@ -280,29 +235,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "disease": {
-              "type": "string"
-            },
-            "count": {
-              "type": "integer"
-            },
-            "targets": {
-              "type": "array"
-            }
-          }
-        },
-        "error": {
+        "disease": {
           "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "targets": {
+          "type": "array"
         }
       }
     },
