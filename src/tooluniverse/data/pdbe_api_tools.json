@@ -11,7 +11,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/summary/{pdb_id}",
@@ -59,7 +61,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/validation/summary_quality_scores/entry/{pdb_id}",
@@ -111,7 +115,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/publications/{pdb_id}",
@@ -141,6 +147,9 @@
     "test_examples": [
       {
         "pdb_id": "1A2B"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -156,7 +165,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/assemblies/{pdb_id}",
@@ -190,6 +201,9 @@
     "test_examples": [
       {
         "pdb_id": "1A2B"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -205,7 +219,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/secondary_structure/{pdb_id}",
@@ -235,6 +251,9 @@
     "test_examples": [
       {
         "pdb_id": "1A2B"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -250,7 +269,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/molecules/{pdb_id}",
@@ -298,7 +319,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/related_publications/{pdb_id}",
@@ -328,6 +351,9 @@
     "test_examples": [
       {
         "pdb_id": "1A2B"
+      },
+      {
+        "pdb_id": "4HHB"
       }
     ]
   },
@@ -343,7 +369,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/status/{pdb_id}",
@@ -391,7 +419,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/experiment/{pdb_id}",
@@ -439,7 +469,9 @@
           "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/observed_residues_ratio/{pdb_id}",

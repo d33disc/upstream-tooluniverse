@@ -27,6 +27,9 @@
     "test_examples": [
       {
         "first": 5
+      },
+      {
+        "first": 10
       }
     ],
     "return_schema": {
@@ -53,16 +56,28 @@
                                 "type": "string"
                               },
                               "name": {
-                                "type": ["string", "null"]
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               },
                               "public": {
-                                "type": ["boolean", "null"]
+                                "type": [
+                                  "boolean",
+                                  "null"
+                                ]
                               },
                               "analytics": {
-                                "type": ["object", "null"]
+                                "type": [
+                                  "object",
+                                  "null"
+                                ]
                               },
                               "latestSnapshot": {
-                                "type": ["object", "null"]
+                                "type": [
+                                  "object",
+                                  "null"
+                                ]
                               }
                             }
                           }
@@ -70,14 +85,20 @@
                       }
                     },
                     "pageInfo": {
-                      "type": ["object", "null"]
+                      "type": [
+                        "object",
+                        "null"
+                      ]
                     }
                   }
                 }
               }
             },
             "extensions": {
-              "type": ["object", "null"]
+              "type": [
+                "object",
+                "null"
+              ]
             }
           }
         },
@@ -89,7 +110,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -115,6 +138,9 @@
     "test_examples": [
       {
         "datasetId": "ds000114"
+      },
+      {
+        "datasetId": "ds000117"
       }
     ],
     "return_schema": {
@@ -133,28 +159,52 @@
                       "type": "string"
                     },
                     "name": {
-                      "type": ["string", "null"]
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "public": {
-                      "type": ["boolean", "null"]
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
                     },
                     "publishDate": {
-                      "type": ["string", "null"]
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "analytics": {
-                      "type": ["object", "null"]
+                      "type": [
+                        "object",
+                        "null"
+                      ]
                     },
                     "latestSnapshot": {
-                      "type": ["object", "null"],
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "properties": {
                         "summary": {
-                          "type": ["object", "null"]
+                          "type": [
+                            "object",
+                            "null"
+                          ]
                         },
                         "description": {
-                          "type": ["object", "null"]
+                          "type": [
+                            "object",
+                            "null"
+                          ]
                         },
                         "readme": {
-                          "type": ["string", "null"]
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       }
                     }
@@ -163,7 +213,10 @@
               }
             },
             "extensions": {
-              "type": ["object", "null"]
+              "type": [
+                "object",
+                "null"
+              ]
             }
           }
         },
@@ -175,7 +228,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -201,6 +256,9 @@
     "test_examples": [
       {
         "datasetId": "ds000114"
+      },
+      {
+        "datasetId": "ds000117"
       }
     ],
     "return_schema": {
@@ -219,10 +277,16 @@
                       "type": "string"
                     },
                     "name": {
-                      "type": ["string", "null"]
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     },
                     "snapshots": {
-                      "type": ["array", "null"],
+                      "type": [
+                        "array",
+                        "null"
+                      ],
                       "items": {
                         "type": "object",
                         "properties": {
@@ -233,10 +297,16 @@
                             "type": "string"
                           },
                           "created": {
-                            "type": ["string", "null"]
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           },
                           "summary": {
-                            "type": ["object", "null"]
+                            "type": [
+                              "object",
+                              "null"
+                            ]
                           }
                         }
                       }
@@ -246,7 +316,10 @@
               }
             },
             "extensions": {
-              "type": ["object", "null"]
+              "type": [
+                "object",
+                "null"
+              ]
             }
           }
         },
@@ -258,7 +331,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -322,13 +397,22 @@
                                 "type": "string"
                               },
                               "name": {
-                                "type": ["string", "null"]
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               },
                               "created": {
-                                "type": ["string", "null"]
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               },
                               "public": {
-                                "type": ["boolean", "null"]
+                                "type": [
+                                  "boolean",
+                                  "null"
+                                ]
                               }
                             }
                           }
@@ -336,10 +420,16 @@
                       }
                     },
                     "pageInfo": {
-                      "type": ["object", "null"],
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "properties": {
                         "count": {
-                          "type": ["integer", "null"],
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
                           "description": "Total matching datasets"
                         }
                       }
@@ -349,7 +439,10 @@
               }
             },
             "extensions": {
-              "type": ["object", "null"]
+              "type": [
+                "object",
+                "null"
+              ]
             }
           }
         },
@@ -361,7 +454,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

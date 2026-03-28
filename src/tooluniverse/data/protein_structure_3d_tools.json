@@ -147,6 +147,16 @@
         "height": 600,
         "show_sidechains": false,
         "show_surface": false
+      },
+      {
+        "pdb_id": "4HHB",
+        "pdb_content": "",
+        "style": "stick",
+        "color_scheme": "chain",
+        "width": 800,
+        "height": 600,
+        "show_sidechains": true,
+        "show_surface": false
       }
     ]
   }

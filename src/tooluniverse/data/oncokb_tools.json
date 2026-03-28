@@ -190,6 +190,7 @@
       }
     },
     "test_examples": [
+      {},
       {}
     ],
     "optional_api_keys": [
@@ -236,6 +237,7 @@
       }
     },
     "test_examples": [
+      {},
       {}
     ],
     "optional_api_keys": [
@@ -309,6 +311,11 @@
       {
         "gene": "ERBB2",
         "copy_number_type": "AMPLIFICATION"
+      },
+      {
+        "gene": "BRCA1",
+        "copy_number_type": "DELETION",
+        "tumor_type": "BRCA"
       }
     ],
     "optional_api_keys": [

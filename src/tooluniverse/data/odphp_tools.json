@@ -314,6 +314,13 @@
         "sex": "female",
         "pregnant": "false",
         "strip_html": true
+      },
+      {
+        "lang": "en",
+        "age": 45,
+        "sex": "Male",
+        "pregnant": "No",
+        "strip_html": true
       }
     ]
   },
@@ -391,6 +398,10 @@
       {
         "lang": "en",
         "type": "topic"
+      },
+      {
+        "lang": "en",
+        "type": "category"
       }
     ]
   },
@@ -574,6 +585,13 @@
         "categoryId": "15",
         "keyword": "diabetes",
         "strip_html": true
+      },
+      {
+        "lang": "en",
+        "topicId": "",
+        "categoryId": "",
+        "keyword": "blood pressure",
+        "strip_html": true
       }
     ]
   },
@@ -646,9 +664,14 @@
     },
     "test_examples": [
       {
-        "urls": [],
-        "max_chars": 1,
-        "return_html": true
+        "urls": ["https://health.gov/myhealthfinder/topics/health-conditions/heart-health/manage-high-blood-pressure"],
+        "max_chars": 2000,
+        "return_html": false
+      },
+      {
+        "urls": ["https://health.gov/myhealthfinder/topics/health-conditions/diabetes/get-tested-prediabetes"],
+        "max_chars": 1000,
+        "return_html": false
       }
     ]
   }

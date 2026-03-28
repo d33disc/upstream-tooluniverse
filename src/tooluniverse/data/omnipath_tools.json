@@ -1052,6 +1052,10 @@
       {
         "tf_gene": "TP53",
         "confidence_level": "A"
+      },
+      {
+        "target_gene": "CDKN1A",
+        "confidence_level": "A"
       }
     ]
   },
@@ -1138,6 +1142,10 @@
       {
         "operation": "get_dorothea_regulon",
         "tf_gene": "TP53"
+      },
+      {
+        "tf_gene": "MYC",
+        "confidence_levels": "A"
       }
     ]
   }

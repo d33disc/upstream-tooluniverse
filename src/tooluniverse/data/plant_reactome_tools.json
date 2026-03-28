@@ -239,6 +239,7 @@
     },
     "type": "PlantReactomeTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {

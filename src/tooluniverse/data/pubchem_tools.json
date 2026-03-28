@@ -26,6 +26,9 @@
     "test_examples": [
       {
         "cid": 2244
+      },
+      {
+        "cid": 4091
       }
     ],
     "return_schema": {
@@ -212,6 +215,9 @@
     "test_examples": [
       {
         "cid": 2244
+      },
+      {
+        "cid": 4091
       }
     ],
     "return_schema": {
@@ -273,6 +279,9 @@
     "test_examples": [
       {
         "name": "aspirin"
+      },
+      {
+        "name": "metformin"
       }
     ],
     "return_schema": {
@@ -318,6 +327,9 @@
     "test_examples": [
       {
         "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      },
+      {
+        "smiles": "CN(C)C(=N)NC(N)=N"
       }
     ],
     "return_schema": {
@@ -368,6 +380,9 @@
     "test_examples": [
       {
         "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      },
+      {
+        "smiles": "c1ccccc1"
       }
     ],
     "return_schema": {
@@ -425,6 +440,10 @@
       {
         "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
         "threshold": 0.9
+      },
+      {
+        "smiles": "CC(=O)Nc1ccc(O)cc1",
+        "threshold": 0.8
       }
     ],
     "return_schema": {
@@ -477,6 +496,10 @@
       {
         "cid": 2244,
         "image_size": "large"
+      },
+      {
+        "cid": 4091,
+        "image_size": "small"
       }
     ],
     "return_schema": null
@@ -506,6 +529,9 @@
     "test_examples": [
       {
         "cid": 2244
+      },
+      {
+        "cid": 4091
       }
     ],
     "return_schema": {
@@ -569,6 +595,10 @@
     "test_examples": [
       {
         "cid": 2244,
+        "xref_types": []
+      },
+      {
+        "cid": 4091,
         "xref_types": []
       }
     ],
@@ -644,6 +674,9 @@
     "test_examples": [
       {
         "aid": 1000
+      },
+      {
+        "aid": 2551
       }
     ],
     "return_schema": {
@@ -706,6 +739,9 @@
     "test_examples": [
       {
         "aid": 1000
+      },
+      {
+        "aid": 2551
       }
     ],
     "return_schema": {
@@ -800,6 +836,9 @@
     "test_examples": [
       {
         "assay_type": "doseresponse"
+      },
+      {
+        "assay_type": "confirmatory"
       }
     ],
     "return_schema": {
@@ -921,6 +960,9 @@
     "test_examples": [
       {
         "aid": 504526
+      },
+      {
+        "aid": 1259395
       }
     ],
     "return_schema": {

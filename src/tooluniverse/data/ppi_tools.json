@@ -146,6 +146,16 @@
         "confidence_score": 0.4,
         "limit": 50,
         "network_type": "full"
+      },
+      {
+        "protein_ids": [
+          "EGFR",
+          "KRAS",
+          "BRAF"
+        ],
+        "species": 9606,
+        "confidence_score": 0.7,
+        "limit": 20
       }
     ]
   },
@@ -251,6 +261,17 @@
         ],
         "species": 9606,
         "category": "Process"
+      },
+      {
+        "protein_ids": [
+          "EGFR",
+          "KRAS",
+          "PIK3CA",
+          "AKT1",
+          "MTOR"
+        ],
+        "species": 9606,
+        "category": "Function"
       }
     ]
   },
@@ -334,6 +355,16 @@
           "TP53",
           "BRCA1",
           "P04637"
+        ],
+        "species": 9606,
+        "limit": 1,
+        "echo_query": 1
+      },
+      {
+        "protein_ids": [
+          "EGFR",
+          "KRAS",
+          "P01133"
         ],
         "species": 9606,
         "limit": 1,
@@ -442,6 +473,17 @@
         ],
         "species": 9606,
         "confidence_score": 0.4
+      },
+      {
+        "protein_ids": [
+          "EGFR",
+          "ERBB2",
+          "ERBB3",
+          "KRAS",
+          "PIK3CA"
+        ],
+        "species": 9606,
+        "confidence_score": 0.7
       }
     ]
   }

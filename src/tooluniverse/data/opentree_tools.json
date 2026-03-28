@@ -37,11 +37,17 @@
             "description": "Original query name"
           },
           "matched_name": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Name matched in taxonomy"
           },
           "ott_id": {
-            "type": ["integer", "null"],
+            "type": [
+              "integer",
+              "null"
+            ],
             "description": "Open Tree Taxonomy identifier"
           },
           "is_synonym": {
@@ -53,7 +59,10 @@
             "description": "Match confidence score (0-1)"
           },
           "nomenclature_code": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Nomenclature code (ICZN, ICN, etc.)"
           }
         }
@@ -100,22 +109,31 @@
           "description": "Taxon name"
         },
         "rank": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Taxonomic rank (species, genus, family, etc.)"
         },
         "synonyms": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "Known synonyms"
         },
         "tax_sources": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "Source databases (e.g., ncbi:9606, gbif:2436436)"
         },
         "flags": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "Taxonomic flags (extinct, incertae_sedis, etc.)"
         },
         "is_suppressed": {
@@ -157,23 +175,38 @@
       "description": "Most recent common ancestor information",
       "properties": {
         "mrca_name": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Name of the MRCA taxon"
         },
         "mrca_ott_id": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "OTT ID of the MRCA taxon"
         },
         "mrca_rank": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Taxonomic rank of the MRCA"
         },
         "mrca_node_id": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Node ID in the synthetic tree"
         },
         "num_tips": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of descendant tips in the synthetic tree"
         }
       }
@@ -201,6 +234,9 @@
     "test_examples": [
       {
         "ott_ids": "770315,417950,158484"
+      },
+      {
+        "ott_ids": "81461,913935,158484"
       }
     ],
     "return_schema": {
@@ -213,7 +249,9 @@
         },
         "supporting_studies": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "Study IDs supporting the topology"
         }
       }

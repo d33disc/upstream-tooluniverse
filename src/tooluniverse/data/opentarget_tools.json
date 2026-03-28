@@ -27,6 +27,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -109,6 +112,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -213,6 +219,10 @@
       {
         "efoId": "EFO_0000384",
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "efoId": "EFO_0000537",
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -391,6 +401,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -444,6 +457,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -531,6 +547,9 @@
     "test_examples": [
       {
         "efoId": "MONDO_0004975"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -654,6 +673,11 @@
         "efoId": "EFO_0000384",
         "threshold": 1.0,
         "size": 1
+      },
+      {
+        "efoId": "MONDO_0005148",
+        "threshold": 1.0,
+        "size": 1
       }
     ],
     "return_schema": {
@@ -744,6 +768,11 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25",
+        "threshold": 1.0,
+        "size": 1
+      },
+      {
+        "chemblId": "CHEMBL941",
         "threshold": 1.0,
         "size": 1
       }
@@ -838,6 +867,11 @@
         "ensemblId": "ENSG00000141510",
         "threshold": 1.0,
         "size": 1
+      },
+      {
+        "ensemblId": "ENSG00000012048",
+        "threshold": 1.0,
+        "size": 1
       }
     ],
     "return_schema": {
@@ -918,6 +952,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -999,6 +1036,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -1117,6 +1157,9 @@
     "test_examples": [
       {
         "queryString": "machine learning optimization"
+      },
+      {
+        "queryString": "BRCA1 breast cancer"
       }
     ],
     "return_schema": {
@@ -1172,6 +1215,9 @@
     "test_examples": [
       {
         "diseaseName": "Diabetes Mellitus"
+      },
+      {
+        "diseaseName": "Breast Cancer"
       }
     ],
     "return_schema": {
@@ -1235,6 +1281,9 @@
     "test_examples": [
       {
         "drugName": "Aspirin"
+      },
+      {
+        "drugName": "Metformin"
       }
     ],
     "return_schema": {
@@ -1298,6 +1347,9 @@
     "test_examples": [
       {
         "drugName": "Aspirin"
+      },
+      {
+        "drugName": "Metformin"
       }
     ],
     "return_schema": {
@@ -1361,6 +1413,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -1449,6 +1504,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1527,6 +1585,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1611,6 +1672,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1695,6 +1759,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1767,6 +1834,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1837,6 +1907,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -1907,6 +1980,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -2000,6 +2076,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -2067,6 +2146,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -2134,6 +2216,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -2200,6 +2285,13 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510",
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "ensemblId": "ENSG00000012048",
         "page": {
           "index": 0,
           "size": 10
@@ -2349,6 +2441,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2419,6 +2514,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2489,6 +2587,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2539,6 +2640,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2606,6 +2710,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2668,6 +2775,9 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
@@ -2750,6 +2860,13 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25",
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "chemblId": "CHEMBL941",
         "page": {
           "index": 0,
           "size": 10
@@ -2899,6 +3016,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3063,6 +3183,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3127,6 +3250,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3204,6 +3330,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3280,6 +3409,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3336,6 +3468,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3467,6 +3602,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3520,6 +3658,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000157764"
+      },
+      {
+        "ensemblId": "ENSG00000141510"
       }
     ],
     "return_schema": {
@@ -3627,6 +3768,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3723,6 +3867,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000121879"
+      },
+      {
+        "ensemblId": "ENSG00000141510"
       }
     ],
     "return_schema": {
@@ -3827,6 +3974,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3903,6 +4053,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -4000,6 +4153,14 @@
     "test_examples": [
       {
         "queryString": "gene:TP53",
+        "entityNames": [],
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "queryString": "BRCA1 breast cancer",
         "entityNames": [],
         "page": {
           "index": 0,
@@ -4174,6 +4335,11 @@
         "goIds": [
           "GO:0005515"
         ]
+      },
+      {
+        "goIds": [
+          "GO:0006915"
+        ]
       }
     ],
     "return_schema": {
@@ -4290,6 +4456,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
@@ -4392,6 +4561,13 @@
     "test_examples": [
       {
         "entityId": "EFO_0000384",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
+      },
+      {
+        "entityId": "EFO_0000537",
         "startYear": 2023,
         "startMonth": 0,
         "endYear": 2023,
@@ -4593,6 +4769,13 @@
         "startMonth": 0,
         "endYear": 2023,
         "endMonth": 1
+      },
+      {
+        "entityId": "ENSG00000012048",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
       }
     ],
     "return_schema": {
@@ -4790,6 +4973,13 @@
         "startMonth": 0,
         "endYear": 2023,
         "endMonth": 1
+      },
+      {
+        "entityId": "CHEMBL941",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
       }
     ],
     "return_schema": {
@@ -4961,6 +5151,9 @@
     "test_examples": [
       {
         "targetName": "BRAF"
+      },
+      {
+        "targetName": "BRCA1"
       }
     ],
     "return_schema": {
