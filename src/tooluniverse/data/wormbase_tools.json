@@ -25,7 +25,66 @@
       {
         "gene_id": "WBGene00000898"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "wormbase_id": {
+              "type": "string",
+              "description": "WormBase gene identifier"
+            },
+            "gene_name": {
+              "type": "string",
+              "description": "Gene name"
+            },
+            "sequence_name": {
+              "type": "string",
+              "description": "Sequence/cosmid name"
+            },
+            "species": {
+              "type": "string",
+              "description": "Species name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Gene description and functional summary"
+            },
+            "gene_type": {
+              "type": "string",
+              "description": "Gene type (e.g. protein coding)"
+            },
+            "status": {
+              "type": "string",
+              "description": "Gene status (e.g. Live)"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "query": {
+              "type": "string",
+              "description": "Query gene ID"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "WormBase_get_phenotypes",

@@ -361,7 +361,74 @@
         "biosample_type": "cell line",
         "limit": 1
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "source": {
+          "type": "string",
+          "description": "Data source (ENCODE)"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "API endpoint used"
+        },
+        "query": {
+          "type": "object",
+          "description": "Query parameters sent to ENCODE API"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "@graph": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "accession": {
+                    "type": "string",
+                    "description": "Biosample accession (ENCBS format)"
+                  },
+                  "biosample_ontology": {
+                    "type": ["object", "string"],
+                    "description": "Biosample ontology classification"
+                  },
+                  "organism": {
+                    "type": ["object", "string"],
+                    "description": "Organism information"
+                  },
+                  "summary": {
+                    "type": "string",
+                    "description": "Biosample summary"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Record status"
+                  }
+                }
+              },
+              "description": "Array of matching biosample records"
+            },
+            "total": {
+              "type": "integer",
+              "description": "Total matching results"
+            },
+            "columns": {
+              "type": "object",
+              "description": "Available data columns"
+            },
+            "facets": {
+              "type": "array",
+              "description": "Search facets for filtering"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "type": "ENCODERESTTool",

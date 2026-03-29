@@ -1,0 +1,23 @@
+[SKIP] OmniPath_get_ligand_receptor_interactions — schema already exists (10 fields)
+[SKIP] OmniPath_get_intercell_roles — schema already exists (12 fields)
+[SKIP] OmniPath_get_signaling_interactions — schema already exists (11 fields)
+[SKIP] OmniPath_get_complexes — schema already exists (7 fields)
+[SKIP] OmniPath_get_cell_communication_annotations — schema already exists (7 fields)
+[SKIP] OmniPath_get_enzyme_substrate — schema already exists (8 fields)
+[SKIP] OmniPath_get_tf_target_interactions — schema already exists (9 fields)
+[SKIP] OmniPath_get_dorothea_regulon — schema already exists (9 fields)
+[SKIP] TCIA_get_patient_studies — schema already exists
+[SKIP] TCIA_get_modality_values — schema already exists
+[SKIP] TCIA_get_body_part_values — schema already exists
+[SKIP] odphp_myhealthfinder — schema already exists
+[SKIP] odphp_topicsearch — schema already exists
+[SKIP] Bgee_search_genes — schema already exists
+[SKIP] Bgee_get_gene_expression — schema already exists
+[SKIP] RCSBGraphQL_get_structure_summary — schema already exists
+[DONE] RCSBGraphQL_get_polymer_entity — schema written (8 fields)
+[DONE] PubTator3_LiteratureSearch — schema written (9 fields)
+[DONE] health_disparities_get_county_rankings_info — schema written (6 fields)
+[DONE] ENCODE_search_biosamples — schema written (8 fields)
+[DONE] IMPC_get_gene_summary — schema written (12 fields)
+[DONE] WormBase_get_gene — schema written (7 fields)
+[DONE] UniProtTaxonomy_search — schema written (7 fields)

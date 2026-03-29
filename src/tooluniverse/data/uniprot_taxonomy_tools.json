@@ -138,6 +138,68 @@
       {
         "query": "homo sapiens"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taxon_id": {
+                "type": "integer",
+                "description": "NCBI taxonomy identifier"
+              },
+              "scientific_name": {
+                "type": "string",
+                "description": "Scientific name of the taxon"
+              },
+              "common_name": {
+                "type": ["string", "null"],
+                "description": "Common name"
+              },
+              "mnemonic": {
+                "type": "string",
+                "description": "UniProt mnemonic code"
+              },
+              "rank": {
+                "type": "string",
+                "description": "Taxonomic rank (species, genus, etc.)"
+              },
+              "reviewed_protein_count": {
+                "type": "integer",
+                "description": "Number of Swiss-Prot reviewed proteins"
+              },
+              "unreviewed_protein_count": {
+                "type": "integer",
+                "description": "Number of TrEMBL unreviewed proteins"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Total matching results"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            }
+          }
+        }
+      }
+    }
   }
 ]

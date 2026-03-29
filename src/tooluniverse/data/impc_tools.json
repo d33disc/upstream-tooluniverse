@@ -43,6 +43,78 @@
         "target_validation"
       ],
       "estimated_execution_time": "< 5 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "mgi_id": {
+              "type": "string",
+              "description": "MGI accession identifier"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Mouse gene symbol"
+            },
+            "name": {
+              "type": "string",
+              "description": "Full gene name"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Gene synonyms"
+            },
+            "human_ortholog": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Human ortholog gene symbols"
+            },
+            "marker_type": {
+              "type": "string",
+              "description": "Marker type (e.g. Gene)"
+            },
+            "phenotype_status": {
+              "type": ["string", "null"],
+              "description": "IMPC phenotyping status"
+            },
+            "production_status": {
+              "type": ["string", "null"],
+              "description": "IMPC production status"
+            },
+            "has_phenotype_data": {
+              "type": "boolean",
+              "description": "Whether IMPC phenotype data is available"
+            },
+            "mp_terms": {
+              "type": "array",
+              "description": "Mammalian Phenotype ontology terms"
+            },
+            "hp_terms": {
+              "type": "array",
+              "description": "Human Phenotype Ontology terms"
+            },
+            "disease_associations": {
+              "type": "array",
+              "description": "Associated diseases"
+            }
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Data source attribution"
+        }
+      }
     }
   },
   {

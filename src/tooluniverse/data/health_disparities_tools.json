@@ -100,6 +100,61 @@
       {
         "state": "NY"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "data_sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "type": "integer",
+                    "description": "Data year"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State abbreviation"
+                  },
+                  "access_url": {
+                    "type": "string",
+                    "description": "URL to access the data"
+                  }
+                }
+              }
+            },
+            "note": {
+              "type": "string",
+              "description": "Information about data format and access"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source name"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            },
+            "query": {
+              "type": "object",
+              "description": "Query parameters used"
+            }
+          }
+        }
+      }
+    }
   }
 ]
