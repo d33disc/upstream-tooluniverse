@@ -250,7 +250,33 @@
         "identifier": "P04637",
         "depth": 1
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (e.g., 'success')"
+        },
+        "data": {
+          "type": "array",
+          "description": "Interactions in the network",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "description": "IntAct interaction ID (e.g., 'EBI-366083-EBI-375077')" },
+              "source": { "type": "string", "description": "Data source (e.g., 'intact-interactions')" },
+              "interaction_name": { "type": "string", "description": "Gene symbol pair (e.g., 'TP53-CDKN1A')" },
+              "interactor_descriptions": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Protein descriptions for each interactor"
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "type": "IntActRESTTool",
