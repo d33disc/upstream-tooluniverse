@@ -53,7 +53,56 @@
         "rxcui": "1191",
         "rela_source": "ATC"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classId": {
+                "type": "string",
+                "description": "Drug class identifier"
+              },
+              "className": {
+                "type": "string",
+                "description": "Drug class name"
+              },
+              "classType": {
+                "type": "string",
+                "description": "Classification type"
+              },
+              "rxcui": {
+                "type": "string",
+                "description": "RxNorm concept unique identifier"
+              },
+              "drugName": {
+                "type": "string",
+                "description": "Drug name"
+              },
+              "tty": {
+                "type": "string",
+                "description": "Term type"
+              },
+              "rela": {
+                "type": "string",
+                "description": "Relationship attribute"
+              },
+              "relaSource": {
+                "type": "string",
+                "description": "Relationship source"
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "RxClass_get_class_members",
@@ -106,7 +155,57 @@
         "rela_source": "ATC",
         "ttys": "IN"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rxcui": {
+                "type": "string",
+                "description": "RxNorm concept unique identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "Drug name"
+              },
+              "tty": {
+                "type": "string",
+                "description": "Term type"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "class_id": {
+              "type": "string",
+              "description": "Class identifier queried"
+            },
+            "rela_source": {
+              "type": "string",
+              "description": "Relationship source used"
+            },
+            "ttys": {
+              "type": "string",
+              "description": "Term types filtered"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of members returned"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "RxClass_find_classes",

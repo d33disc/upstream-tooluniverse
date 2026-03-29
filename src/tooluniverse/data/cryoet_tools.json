@@ -57,7 +57,91 @@
         "organism_name": "Saccharomyces cerevisiae",
         "limit": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "Number of datasets returned"
+            },
+            "datasets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Dataset identifier"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Dataset title"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Dataset description"
+                  },
+                  "organismName": {
+                    "type": "string",
+                    "description": "Organism name"
+                  },
+                  "tissueName": {
+                    "type": "string",
+                    "description": "Tissue name"
+                  },
+                  "cellName": {
+                    "type": "string",
+                    "description": "Cell name"
+                  },
+                  "sampleType": {
+                    "type": "string",
+                    "description": "Sample type"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date in ISO format"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date in ISO format"
+                  },
+                  "relatedDatabaseEntries": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Related database entries"
+                  },
+                  "datasetPublications": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Associated publication DOIs"
+                  },
+                  "s3Prefix": {
+                    "type": "string",
+                    "description": "S3 bucket path prefix"
+                  },
+                  "httpsPrefix": {
+                    "type": "string",
+                    "description": "HTTPS download path prefix"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_get_dataset",
@@ -230,7 +314,57 @@
         "dataset_id": 10174,
         "limit": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "type": "integer",
+              "description": "Parent dataset identifier"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of runs returned"
+            },
+            "runs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Run identifier"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Run name"
+                  },
+                  "datasetId": {
+                    "type": "integer",
+                    "description": "Parent dataset ID"
+                  },
+                  "s3Prefix": {
+                    "type": "string",
+                    "description": "S3 bucket path prefix"
+                  },
+                  "httpsPrefix": {
+                    "type": "string",
+                    "description": "HTTPS download path prefix"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_list_tomograms",
@@ -279,7 +413,120 @@
         "operation": "list_tomograms",
         "run_id": 3431
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "integer",
+              "description": "Parent run identifier"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of tomograms returned"
+            },
+            "tomograms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Tomogram identifier"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Tomogram name"
+                  },
+                  "runId": {
+                    "type": "integer",
+                    "description": "Parent run ID"
+                  },
+                  "voxelSpacing": {
+                    "type": "number",
+                    "description": "Voxel spacing in angstroms"
+                  },
+                  "sizeX": {
+                    "type": "integer",
+                    "description": "Tomogram X dimension"
+                  },
+                  "sizeY": {
+                    "type": "integer",
+                    "description": "Tomogram Y dimension"
+                  },
+                  "sizeZ": {
+                    "type": "integer",
+                    "description": "Tomogram Z dimension"
+                  },
+                  "reconstructionMethod": {
+                    "type": "string",
+                    "description": "Reconstruction method used"
+                  },
+                  "processing": {
+                    "type": "string",
+                    "description": "Processing status"
+                  },
+                  "processingSoftware": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Processing software used"
+                  },
+                  "reconstructionSoftware": {
+                    "type": "string",
+                    "description": "Reconstruction software used"
+                  },
+                  "isPortalStandard": {
+                    "type": "boolean",
+                    "description": "Whether this is portal standard"
+                  },
+                  "isAuthorSubmitted": {
+                    "type": "boolean",
+                    "description": "Whether submitted by author"
+                  },
+                  "isVisualizationDefault": {
+                    "type": "boolean",
+                    "description": "Whether this is the default visualization"
+                  },
+                  "ctfCorrected": {
+                    "type": "boolean",
+                    "description": "Whether CTF correction was applied"
+                  },
+                  "s3OmezarrDir": {
+                    "type": "string",
+                    "description": "S3 path to OME-Zarr directory"
+                  },
+                  "httpsMrcFile": {
+                    "type": "string",
+                    "description": "HTTPS path to MRC file"
+                  },
+                  "s3MrcFile": {
+                    "type": "string",
+                    "description": "S3 path to MRC file"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date in ISO format"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date in ISO format"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_list_annotations",
@@ -334,6 +581,109 @@
         "run_id": 3430,
         "curator_recommended_only": true
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "integer",
+              "description": "Parent run identifier"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of annotations returned"
+            },
+            "annotations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Annotation identifier"
+                  },
+                  "objectName": {
+                    "type": "string",
+                    "description": "Name of annotated object"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "description": "Ontology ID for annotated object"
+                  },
+                  "objectDescription": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Description of annotated object"
+                  },
+                  "objectState": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "State of annotated object"
+                  },
+                  "objectCount": {
+                    "type": "integer",
+                    "description": "Number of annotated instances"
+                  },
+                  "annotationMethod": {
+                    "type": "string",
+                    "description": "Method used for annotation"
+                  },
+                  "annotationSoftware": {
+                    "type": "string",
+                    "description": "Software used for annotation"
+                  },
+                  "groundTruthStatus": {
+                    "type": "boolean",
+                    "description": "Whether annotation is ground truth"
+                  },
+                  "isCuratorRecommended": {
+                    "type": "boolean",
+                    "description": "Whether curator recommended"
+                  },
+                  "methodType": {
+                    "type": "string",
+                    "description": "Type of annotation method"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date in ISO format"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date in ISO format"
+                  },
+                  "annotationPublication": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "DOI of associated publication"
+                  },
+                  "s3MetadataPath": {
+                    "type": "string",
+                    "description": "S3 path to annotation metadata"
+                  },
+                  "httpsMetadataPath": {
+                    "type": "string",
+                    "description": "HTTPS path to annotation metadata"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 ]
