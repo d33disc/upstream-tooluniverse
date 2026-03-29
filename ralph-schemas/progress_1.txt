@@ -1,0 +1,6 @@
+[DONE] ols_search_terms — schema written (6 fields)
+[DONE] ols_get_ontology_info — schema written (11 fields)
+[DONE] ols_search_ontologies — schema written (4 fields)
+[DONE] ols_get_term_info — schema written (9 fields)
+[DONE] ols_get_term_children — schema written (9 fields)
+[DONE] ols_get_term_ancestors — schema written (9 fields)
