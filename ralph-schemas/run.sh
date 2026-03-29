@@ -82,18 +82,20 @@ for i in $(seq 0 $((NUM_PARTITIONS - 1))); do
     export VIRTUAL_ENV="${REPO_ROOT}/.venv"
 
     for iter in $(seq 1 "$MAX_ITERATIONS"); do
-      echo "=== [worker-$i] iteration $iter/$MAX_ITERATIONS ===" | tee -a "$LOG"
+      echo "=== [worker-$i] iteration $iter/$MAX_ITERATIONS ===" >> "$LOG"
 
-      # Check completion
-      TOTAL=$("$VENV_PYTHON" -c "import json; print(len(json.load(open('ralph-schemas/partition_${i}.json'))))")
-      DONE=$(grep -cE '^\[(DONE|SKIP)\]' "ralph-schemas/progress_${i}.txt" 2>/dev/null || echo 0)
+      # Check completion (grep -c exits 1 on zero matches; capture separately)
+      TOTAL=$("$VENV_PYTHON" -c "import json; print(len(json.load(open('ralph-schemas/partition_${i}.json'))))" 2>/dev/null)
+      TOTAL="${TOTAL:-0}"
+      DONE=$(grep -cE '^\[(DONE|SKIP)\]' "ralph-schemas/progress_${i}.txt" 2>/dev/null) || true
+      DONE="${DONE:-0}"
 
       if [ "$DONE" -ge "$TOTAL" ]; then
-        echo "[worker-$i] COMPLETE ($DONE/$TOTAL)" | tee -a "$LOG"
+        echo "[worker-$i] COMPLETE ($DONE/$TOTAL)" >> "$LOG"
         break
       fi
 
-      echo "[worker-$i] progress: $DONE/$TOTAL" | tee -a "$LOG"
+      echo "[worker-$i] progress: $DONE/$TOTAL" >> "$LOG"
 
       $CLI --print \
         --dangerously-skip-permissions \
@@ -103,13 +105,13 @@ Your partition: ralph-schemas/partition_${i}.json
 Your progress: ralph-schemas/progress_${i}.txt
 Process the next 5-8 unprocessed tools. Validate JSON after each edit. Commit when done. Then exit." \
         >> "$LOG" 2>&1 || {
-          echo "[worker-$i] iteration $iter exited with error" | tee -a "$LOG"
+          echo "[worker-$i] iteration $iter exited with error" >> "$LOG"
         }
 
       sleep 2
     done
 
-    echo "[worker-$i] finished all iterations" | tee -a "$LOG"
+    echo "[worker-$i] finished all iterations" >> "$LOG"
   ) &
 
   PIDS+=($!)
