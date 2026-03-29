@@ -168,7 +168,39 @@
       {
         "query": "insulin"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (e.g., 'success')"
+        },
+        "data": {
+          "type": "array",
+          "description": "Matching PROSITE entries",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": { "type": "string", "description": "PROSITE accession (e.g., 'PS00028')" },
+              "name": { "type": "string", "description": "Entry name/description" },
+              "short_name": { "type": "string", "description": "Short name" },
+              "type": { "type": "string", "description": "Entry type (e.g., 'conserved_site')" },
+              "source_database": { "type": "string", "description": "Source database (prosite)" },
+              "integrated_into": { "type": "string", "description": "InterPro accession (e.g., 'IPR013087')" }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string", "description": "API source" },
+            "query": { "type": "string", "description": "Original search query" },
+            "total_results": { "type": "integer", "description": "Total number of matches" }
+          }
+        }
+      }
+    }
   },
   {
     "name": "PROSITE_scan_sequence",
@@ -202,6 +234,38 @@
         "sequence": "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWSTPSELGHAGLNGDILVWNPVLEDAFELSSMGIRVDADTLKHQLALTGDEDRLELEWHQALLRGEMPQTIGGGIGQSRLTMLLLQLPHIGQVQAGVWPAAVRESVPSLL",
         "skip_frequent": false
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (e.g., 'success')"
+        },
+        "data": {
+          "type": "array",
+          "description": "Matching PROSITE signatures",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signature_accession": { "type": "string", "description": "PROSITE accession of the matching signature (e.g., 'PS50862')" },
+              "start": { "type": "integer", "description": "Start position of the match in the sequence" },
+              "end": { "type": "integer", "description": "End position of the match in the sequence" },
+              "score": { "type": "number", "description": "Match confidence score" },
+              "level": { "type": "integer", "description": "Match level (0 = strong)" }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string", "description": "API source (ScanProsite)" },
+            "sequence_length": { "type": "integer", "description": "Length of input sequence" },
+            "total_matches": { "type": "integer", "description": "Number of signature matches found" },
+            "skip_frequent_patterns": { "type": "boolean", "description": "Whether frequent patterns were skipped" }
+          }
+        }
+      }
+    }
   }
 ]

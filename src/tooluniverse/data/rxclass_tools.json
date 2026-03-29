@@ -59,7 +59,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "array",
@@ -68,7 +68,7 @@
             "properties": {
               "classId": {
                 "type": "string",
-                "description": "Drug class identifier"
+                "description": "Drug class identifier (e.g. ATC code)"
               },
               "className": {
                 "type": "string",
@@ -76,7 +76,7 @@
               },
               "classType": {
                 "type": "string",
-                "description": "Classification type"
+                "description": "Classification type (e.g. ATC1-4)"
               },
               "rxcui": {
                 "type": "string",
@@ -88,7 +88,7 @@
               },
               "tty": {
                 "type": "string",
-                "description": "Term type"
+                "description": "Term type (e.g. IN, MIN, PIN)"
               },
               "rela": {
                 "type": "string",
@@ -96,7 +96,7 @@
               },
               "relaSource": {
                 "type": "string",
-                "description": "Relationship source"
+                "description": "Source of the relationship"
               }
             }
           }
@@ -161,7 +161,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "array",
@@ -178,7 +178,7 @@
               },
               "tty": {
                 "type": "string",
-                "description": "Term type"
+                "description": "Term type (e.g. IN, MIN, PIN)"
               }
             }
           }
@@ -188,7 +188,7 @@
           "properties": {
             "class_id": {
               "type": "string",
-              "description": "Class identifier queried"
+              "description": "Class ID queried"
             },
             "rela_source": {
               "type": "string",
@@ -196,7 +196,7 @@
             },
             "ttys": {
               "type": "string",
-              "description": "Term types filtered"
+              "description": "Term types filter applied"
             },
             "count": {
               "type": "integer",
@@ -251,6 +251,52 @@
       {
         "query": "propionic acid"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classId": {
+                "type": "string",
+                "description": "Drug class identifier"
+              },
+              "className": {
+                "type": "string",
+                "description": "Drug class name"
+              },
+              "classType": {
+                "type": "string",
+                "description": "Classification system type (e.g. VA, ATC1-4)"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "class_type": {
+              "type": "string",
+              "description": "Class type filter applied"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of results returned"
+            }
+          }
+        }
+      }
+    }
   }
 ]

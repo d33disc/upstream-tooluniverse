@@ -659,7 +659,48 @@
         ],
         "references": "Publication"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "NCT ID": {
+                "type": "string",
+                "description": "ClinicalTrials.gov NCT identifier"
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pmid": {
+                      "type": "string",
+                      "description": "PubMed ID"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Reference type (BACKGROUND/RESULT/DERIVED)"
+                    },
+                    "citation": {
+                      "type": "string",
+                      "description": "Full citation text"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "extract_clinical_trial_outcomes",
@@ -813,7 +854,68 @@
         ],
         "adverse_event_type": "all"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "NCT ID": {
+                "type": "string",
+                "description": "ClinicalTrials.gov NCT identifier"
+              },
+              "freq_threshold": {
+                "type": "string",
+                "description": "Frequency threshold for reporting"
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Event group ID"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Group/cohort title"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Group description"
+                    },
+                    "seriousNumAffected": {
+                      "type": "integer",
+                      "description": "Number with serious adverse events"
+                    },
+                    "seriousNumAtRisk": {
+                      "type": "integer",
+                      "description": "Number at risk for serious events"
+                    },
+                    "otherNumAffected": {
+                      "type": "integer",
+                      "description": "Number with other adverse events"
+                    },
+                    "otherNumAtRisk": {
+                      "type": "integer",
+                      "description": "Number at risk for other events"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "ClinicalTrials_search_studies",
