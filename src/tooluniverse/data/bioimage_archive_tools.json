@@ -177,6 +177,61 @@
         "query": "neuron morphology",
         "page_size": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "BioImage Archive accession ID"
+              },
+              "title": {
+                "type": "string",
+                "description": "Study or image title"
+              },
+              "author": {
+                "type": "string",
+                "description": "Author names"
+              },
+              "release_date": {
+                "type": "string",
+                "description": "Release date (YYYY-MM-DD)"
+              },
+              "type": {
+                "type": "string",
+                "description": "Entry type (e.g. study)"
+              }
+            }
+          },
+          "description": "Matching bioimage entries"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "total_hits": {
+              "type": "integer",
+              "description": "Total matching results"
+            },
+            "query": {
+              "type": "string",
+              "description": "Original search query"
+            }
+          }
+        }
+      }
+    }
   }
 ]

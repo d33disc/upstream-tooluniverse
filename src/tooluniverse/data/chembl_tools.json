@@ -1505,7 +1505,122 @@
         "threshold": 70,
         "limit": 10
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "molecules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "molecule_chembl_id": {
+                    "type": "string",
+                    "description": "ChEMBL molecule identifier"
+                  },
+                  "pref_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Preferred compound name"
+                  },
+                  "molecule_type": {
+                    "type": "string",
+                    "description": "Molecule type (e.g. Small molecule)"
+                  },
+                  "similarity": {
+                    "type": "string",
+                    "description": "Tanimoto similarity percentage"
+                  },
+                  "max_phase": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Maximum clinical trial phase"
+                  },
+                  "first_approval": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "Year of first approval"
+                  },
+                  "molecule_properties": {
+                    "type": "object",
+                    "properties": {
+                      "full_molformula": {
+                        "type": "string",
+                        "description": "Molecular formula"
+                      },
+                      "full_mwt": {
+                        "type": "string",
+                        "description": "Molecular weight"
+                      },
+                      "alogp": {
+                        "type": "string",
+                        "description": "Calculated LogP"
+                      },
+                      "num_ro5_violations": {
+                        "type": "integer",
+                        "description": "Lipinski rule of 5 violations"
+                      },
+                      "psa": {
+                        "type": "string",
+                        "description": "Polar surface area"
+                      },
+                      "hba": {
+                        "type": "integer",
+                        "description": "Hydrogen bond acceptors"
+                      },
+                      "hbd": {
+                        "type": "integer",
+                        "description": "Hydrogen bond donors"
+                      }
+                    }
+                  },
+                  "molecule_structures": {
+                    "type": "object",
+                    "properties": {
+                      "canonical_smiles": {
+                        "type": "string",
+                        "description": "Canonical SMILES string"
+                      },
+                      "standard_inchi_key": {
+                        "type": "string",
+                        "description": "Standard InChIKey"
+                      }
+                    }
+                  },
+                  "molecule_hierarchy": {
+                    "type": "object",
+                    "properties": {
+                      "parent_chembl_id": {
+                        "type": "string",
+                        "description": "Parent molecule ChEMBL ID"
+                      },
+                      "active_chembl_id": {
+                        "type": "string",
+                        "description": "Active form ChEMBL ID"
+                      }
+                    }
+                  }
+                }
+              },
+              "description": "Similar molecules sorted by similarity"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "type": "ChEMBLRESTTool",

@@ -34,7 +34,65 @@
         "gene_list": "TP53,BRCA1,EGFR,KRAS,PTEN",
         "sources": "KEGG,REAC,WP"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Annotation source (e.g. KEGG, WP, HP)"
+              },
+              "native": {
+                "type": "string",
+                "description": "Native term ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Pathway or term name"
+              },
+              "p_value": {
+                "type": "number",
+                "description": "Enrichment p-value"
+              },
+              "significant": {
+                "type": "boolean",
+                "description": "Whether result is statistically significant"
+              },
+              "term_size": {
+                "type": "integer",
+                "description": "Total genes in term"
+              },
+              "query_size": {
+                "type": "integer",
+                "description": "Number of query genes"
+              },
+              "intersection_size": {
+                "type": "integer",
+                "description": "Overlap between query and term"
+              },
+              "precision": {
+                "type": "number",
+                "description": "Fraction of query genes in term"
+              },
+              "recall": {
+                "type": "number",
+                "description": "Fraction of term genes in query"
+              }
+            }
+          },
+          "description": "Enrichment results sorted by significance"
+        }
+      }
+    }
   },
   {
     "name": "gProfiler_convert_ids",
@@ -72,7 +130,62 @@
         "gene_list": "ENSG00000141510,ENSG00000012048",
         "target_namespace": "UNIPROTSWISSPROT"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "incoming": {
+                "type": "string",
+                "description": "Original input gene identifier"
+              },
+              "converted": {
+                "type": "string",
+                "description": "Converted identifier in target namespace"
+              },
+              "name": {
+                "type": "string",
+                "description": "Gene symbol"
+              },
+              "description": {
+                "type": "string",
+                "description": "Gene description"
+              },
+              "namespaces": {
+                "type": "string",
+                "description": "Comma-separated namespaces where gene was found"
+              }
+            }
+          },
+          "description": "Converted gene identifiers"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Service source attribution"
+            },
+            "organism": {
+              "type": "string",
+              "description": "Organism used for conversion"
+            },
+            "target_namespace": {
+              "type": "string",
+              "description": "Target namespace for conversion"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "gProfiler_find_orthologs",
@@ -110,7 +223,58 @@
         "gene_list": "TP53,BRCA1",
         "target_organism": "drerio"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "incoming": {
+                "type": "string",
+                "description": "Original input gene symbol"
+              },
+              "name": {
+                "type": "string",
+                "description": "Ortholog gene symbol in target organism"
+              },
+              "ortholog_ensg": {
+                "type": "string",
+                "description": "Ensembl gene ID of ortholog"
+              },
+              "description": {
+                "type": "string",
+                "description": "Ortholog gene description"
+              }
+            }
+          },
+          "description": "Ortholog mapping results"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Service source attribution"
+            },
+            "source_organism": {
+              "type": "string",
+              "description": "Source organism"
+            },
+            "target_organism": {
+              "type": "string",
+              "description": "Target organism for ortholog lookup"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "gProfiler_annotate_snps",
@@ -142,6 +306,96 @@
       {
         "snp_list": "rs7903146,rs1042779"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rs_id": {
+                "type": "string",
+                "description": "dbSNP rs identifier"
+              },
+              "chromosome": {
+                "type": "string",
+                "description": "Chromosome location"
+              },
+              "start": {
+                "type": "integer",
+                "description": "Genomic start position"
+              },
+              "end": {
+                "type": "integer",
+                "description": "Genomic end position"
+              },
+              "strand": {
+                "type": "string",
+                "description": "Strand orientation (+ or -)"
+              },
+              "ensembl_gene_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Ensembl gene IDs overlapping the SNP"
+              },
+              "gene_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Gene symbols overlapping the SNP"
+              },
+              "variant_consequences": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "consequence": {
+                      "type": "string",
+                      "description": "Variant consequence type"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "Number of transcripts with this consequence"
+                    }
+                  }
+                },
+                "description": "Predicted variant consequences"
+              }
+            }
+          },
+          "description": "SNP annotation results"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Service source attribution"
+            },
+            "organism": {
+              "type": "string",
+              "description": "Organism used for annotation"
+            },
+            "total_snps_queried": {
+              "type": "integer",
+              "description": "Number of SNPs submitted"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Number of annotated SNPs returned"
+            }
+          }
+        }
+      }
+    }
   }
 ]
