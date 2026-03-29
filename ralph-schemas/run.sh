@@ -104,7 +104,7 @@ for i in $(seq 0 $((NUM_PARTITIONS - 1))); do
 Your partition: ralph-schemas/partition_${i}.json
 Your progress: ralph-schemas/progress_${i}.txt
 Process the next 5-8 unprocessed tools. Validate JSON after each edit. Commit when done. Then exit." \
-        >> "$LOG" 2>&1 || {
+        < /dev/null >> "$LOG" 2>&1 || {
           echo "[worker-$i] iteration $iter exited with error" >> "$LOG"
         }
 
