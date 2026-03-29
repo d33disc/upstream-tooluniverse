@@ -131,6 +131,146 @@
         "complex_detail"
       ],
       "estimated_execution_time": "< 3 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status of the request"
+        },
+        "data": {
+          "type": "object",
+          "description": "Complex portal entry data",
+          "properties": {
+            "complex_id": {
+              "type": "string",
+              "description": "Complex Portal identifier"
+            },
+            "name": {
+              "type": "string",
+              "description": "Common name of the complex"
+            },
+            "systematic_name": {
+              "type": "string",
+              "description": "Systematic name listing subunit composition"
+            },
+            "species": {
+              "type": "string",
+              "description": "Species of origin"
+            },
+            "taxonomy_id": {
+              "type": "string",
+              "description": "NCBI taxonomy ID"
+            },
+            "description": {
+              "type": "string",
+              "description": "Functional description of the complex"
+            },
+            "properties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Biophysical or functional properties"
+            },
+            "complex_type": {
+              "type": "string",
+              "description": "Type classification of the complex"
+            },
+            "evidence_type": {
+              "type": "object",
+              "description": "Evidence supporting complex existence",
+              "properties": {
+                "identifier": {
+                  "type": "string",
+                  "description": "ECO ontology identifier"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Evidence type description"
+                },
+                "searchURL": {
+                  "type": "string",
+                  "description": "OLS URL for the evidence term"
+                },
+                "confidenceScore": {
+                  "type": "number",
+                  "description": "Confidence score for the evidence"
+                }
+              }
+            },
+            "subunits": {
+              "type": "array",
+              "description": "Protein subunits of the complex",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "string",
+                    "description": "UniProt accession of the subunit"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Gene/protein name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Full protein name"
+                  },
+                  "stoichiometry": {
+                    "type": "string",
+                    "description": "Min/max stoichiometry"
+                  },
+                  "interactor_type": {
+                    "type": "string",
+                    "description": "Type of interactor (e.g. protein)"
+                  }
+                }
+              }
+            },
+            "cross_references": {
+              "type": "array",
+              "description": "External database cross-references",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "database": {
+                    "type": "string",
+                    "description": "Source database name"
+                  },
+                  "identifier": {
+                    "type": "string",
+                    "description": "External identifier"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the reference"
+                  }
+                }
+              }
+            },
+            "diseases": {
+              "type": "array",
+              "description": "Associated diseases",
+              "items": {
+                "type": "object"
+              }
+            },
+            "go_annotations": {
+              "type": "array",
+              "description": "Gene Ontology annotations",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Data source identifier"
+        }
+      }
     }
   }
 ]

@@ -29,6 +29,48 @@
       {
         "biomarker": "CYP2C9"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of matching biomarker entries"
+        },
+        "shown": {
+          "type": "integer",
+          "description": "Number of entries shown"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Drug": {
+                "type": "string",
+                "description": "Drug name with entry number"
+              },
+              "TherapeuticArea": {
+                "type": "string",
+                "description": "Therapeutic area (e.g. Hematology)"
+              },
+              "Biomarker": {
+                "type": "string",
+                "description": "Pharmacogenomic biomarker gene (e.g. CYP2C9)"
+              },
+              "LabelingSection": {
+                "type": "string",
+                "description": "FDA labeling sections mentioning the biomarker"
+              }
+            }
+          },
+          "description": "Pharmacogenomic biomarker entries for the drug"
+        }
+      }
+    }
   }
 ]

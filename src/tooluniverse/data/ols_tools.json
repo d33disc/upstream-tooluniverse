@@ -92,7 +92,79 @@
         "ontology": "mondo",
         "exact_match": false
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Internationalized Resource Identifier for the term"
+              },
+              "ontologyName": {
+                "type": "string",
+                "description": "Name of the ontology containing this term"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier (e.g. GO_0006915)"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable term label"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier (e.g. GO:0006915)"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
+              }
+            }
+          },
+          "description": "Array of matching ontology terms"
+        },
+        "total_items": {
+          "type": "integer",
+          "description": "Total number of matching terms"
+        },
+        "showing": {
+          "type": "integer",
+          "description": "Number of terms returned in this response"
+        },
+        "query": {
+          "type": "string",
+          "description": "The search query used"
+        },
+        "filters": {
+          "type": "object",
+          "properties": {
+            "ontology": {
+              "type": "string",
+              "description": "Ontology filter applied"
+            },
+            "exact_match": {
+              "type": "boolean",
+              "description": "Whether exact matching was used"
+            },
+            "include_obsolete": {
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
+            }
+          },
+          "description": "Filters applied to the search"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -141,7 +213,68 @@
       {
         "ontology_id": "hp"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "ontologyId": {
+          "type": "string",
+          "description": "Ontology identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Full title of the ontology"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Ontology version"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the ontology"
+        },
+        "domain": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Domain of the ontology"
+        },
+        "homepage": {
+          "type": "string",
+          "description": "Homepage URL"
+        },
+        "preferredPrefix": {
+          "type": "string",
+          "description": "Preferred namespace prefix"
+        },
+        "number_of_terms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of terms in the ontology"
+        },
+        "numberOfClasses": {
+          "type": "integer",
+          "description": "Number of classes in the ontology"
+        },
+        "repository": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Source repository URL"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -207,7 +340,49 @@
         "page": 0,
         "size": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Array of matching ontologies"
+        },
+        "pagination": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "integer",
+              "description": "Current page number"
+            },
+            "size": {
+              "type": "integer",
+              "description": "Page size"
+            },
+            "total_pages": {
+              "type": "integer",
+              "description": "Total number of pages"
+            },
+            "total_items": {
+              "type": "integer",
+              "description": "Total matching ontologies"
+            }
+          },
+          "description": "Pagination metadata"
+        },
+        "search": {
+          "type": "string",
+          "description": "The search query used"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -261,7 +436,54 @@
       {
         "id": "GO:0006915"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "iri": {
+          "type": "string",
+          "description": "Internationalized Resource Identifier for the term"
+        },
+        "ontologyName": {
+          "type": "string",
+          "description": "Name of the ontology containing this term"
+        },
+        "shortForm": {
+          "type": "string",
+          "description": "Short form identifier"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable term label"
+        },
+        "oboId": {
+          "type": "string",
+          "description": "OBO-format identifier"
+        },
+        "isObsolete": {
+          "type": "boolean",
+          "description": "Whether the term is obsolete"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Term descriptions"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Alternative names for the term"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -331,7 +553,79 @@
         "term_id": "HP:0000118",
         "size": 10
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "page": {
+          "type": "integer",
+          "description": "Current page number"
+        },
+        "numElements": {
+          "type": "integer",
+          "description": "Number of elements on this page"
+        },
+        "totalPages": {
+          "type": "integer",
+          "description": "Total number of pages"
+        },
+        "totalElements": {
+          "type": "integer",
+          "description": "Total number of child terms"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Term IRI"
+              },
+              "label": {
+                "type": "string",
+                "description": "Term label"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
+              }
+            }
+          },
+          "description": "Array of child terms"
+        },
+        "term_iri": {
+          "type": "string",
+          "description": "IRI of the parent term"
+        },
+        "ontology": {
+          "type": "string",
+          "description": "Ontology queried"
+        },
+        "filters": {
+          "type": "object",
+          "properties": {
+            "include_obsolete": {
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
+            }
+          },
+          "description": "Filters applied"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -400,7 +694,79 @@
         "term_id": "HP:0000118",
         "size": 10
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
+        "page": {
+          "type": "integer",
+          "description": "Current page number"
+        },
+        "numElements": {
+          "type": "integer",
+          "description": "Number of elements on this page"
+        },
+        "totalPages": {
+          "type": "integer",
+          "description": "Total number of pages"
+        },
+        "totalElements": {
+          "type": "integer",
+          "description": "Total number of ancestor terms"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Term IRI"
+              },
+              "label": {
+                "type": "string",
+                "description": "Term label"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
+              }
+            }
+          },
+          "description": "Array of ancestor terms"
+        },
+        "term_iri": {
+          "type": "string",
+          "description": "IRI of the queried term"
+        },
+        "ontology": {
+          "type": "string",
+          "description": "Ontology queried"
+        },
+        "filters": {
+          "type": "object",
+          "properties": {
+            "include_obsolete": {
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
+            }
+          },
+          "description": "Filters applied"
+        }
+      }
+    }
   },
   {
     "type": "OLSTool",
@@ -467,6 +833,89 @@
         "ontology": "mondo",
         "size": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "term_iri": {
+          "type": "string",
+          "description": "IRI of the query term"
+        },
+        "source_label": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Labels of the source term"
+        },
+        "ontology": {
+          "type": "string",
+          "description": "Ontology searched"
+        },
+        "similar_terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "IRI of the similar term"
+              },
+              "ontology_name": {
+                "type": "string",
+                "description": "Ontology name"
+              },
+              "ontology_prefix": {
+                "type": "string",
+                "description": "Ontology prefix"
+              },
+              "short_form": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "description": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Term descriptions"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable label"
+              },
+              "obo_id": {
+                "type": "string",
+                "description": "OBO identifier"
+              },
+              "type": {
+                "type": "string",
+                "description": "Term type (e.g. class)"
+              },
+              "exact_synonyms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Exact synonym list"
+              }
+            }
+          },
+          "description": "List of similar terms found"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Total number of similar terms found"
+        },
+        "note": {
+          "type": "string",
+          "description": "Additional information about the search method"
+        }
+      }
+    }
   }
 ]

@@ -521,7 +521,76 @@
       {
         "efoId": "EFO_0000537"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "disease": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Disease EFO/MONDO ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Disease name"
+                },
+                "drugAndClinicalCandidates": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Total number of associated drugs"
+                    },
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "drug": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "ChEMBL drug ID"
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "Drug name"
+                              },
+                              "maximumClinicalStage": {
+                                "type": "string",
+                                "description": "Max clinical stage across all indications"
+                              }
+                            }
+                          },
+                          "maxClinicalStage": {
+                            "type": "string",
+                            "description": "Max clinical stage for this disease"
+                          }
+                        }
+                      },
+                      "description": "List of drug-disease associations"
+                    }
+                  },
+                  "description": "Drug and clinical candidate data"
+                }
+              },
+              "description": "Disease information with associated drugs"
+            }
+          },
+          "description": "Response data object"
+        }
+      }
+    }
   },
   {
     "name": "OpenTargets_get_similar_entities_by_disease_efoId",
@@ -569,7 +638,70 @@
         "threshold": 1.0,
         "size": 1
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "disease": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Disease EFO ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Disease name"
+                },
+                "similarEntities": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Entity ID"
+                      },
+                      "category": {
+                        "type": "string",
+                        "description": "Entity category (e.g. disease)"
+                      },
+                      "score": {
+                        "type": "number",
+                        "description": "Similarity score"
+                      },
+                      "object": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Entity ID"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Entity name"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "List of similar disease entities"
+                }
+              },
+              "description": "Disease with similar entities"
+            }
+          },
+          "description": "Response data object"
+        }
+      }
+    }
   },
   {
     "name": "OpenTargets_get_similar_entities_by_drug_chemblId",

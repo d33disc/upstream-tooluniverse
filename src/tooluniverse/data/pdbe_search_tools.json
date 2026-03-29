@@ -34,7 +34,87 @@
         "query": "BRCA1",
         "limit": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "title": {
+                "type": "string",
+                "description": "Structure title"
+              },
+              "resolution": {
+                "type": "number",
+                "description": "Resolution in angstroms"
+              },
+              "experimental_method": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Experimental methods used"
+              },
+              "deposition_date": {
+                "type": "string",
+                "description": "Date deposited (ISO 8601)"
+              },
+              "number_of_entities": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Number of entities in structure"
+              },
+              "organism": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Source organisms"
+              }
+            }
+          },
+          "description": "List of matching PDB structures"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source identifier"
+            },
+            "total_found": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number returned in this response"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint called"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "PDBeSearch_get_compound",
@@ -178,6 +258,83 @@
         "organism": "Saccharomyces cerevisiae",
         "limit": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "title": {
+                "type": "string",
+                "description": "Structure title"
+              },
+              "resolution": {
+                "type": "number",
+                "description": "Resolution in angstroms"
+              },
+              "experimental_method": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Experimental methods used"
+              },
+              "deposition_date": {
+                "type": "string",
+                "description": "Date deposited (ISO 8601)"
+              },
+              "organism": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Source organisms"
+              }
+            }
+          },
+          "description": "List of matching PDB structures"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source identifier"
+            },
+            "total_found": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number returned in this response"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "organism_filter": {
+              "type": "string",
+              "description": "Organism filter applied"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint called"
+            }
+          }
+        }
+      }
+    }
   }
 ]
