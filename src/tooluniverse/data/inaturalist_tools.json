@@ -33,7 +33,82 @@
         "query": "monarch butterfly",
         "per_page": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common name"
+              },
+              "rank": {
+                "type": "string",
+                "description": "Taxonomic rank (species, genus, etc.)"
+              },
+              "observations_count": {
+                "type": "integer",
+                "description": "Number of observations"
+              },
+              "is_active": {
+                "type": "boolean",
+                "description": "Whether the taxon is active"
+              },
+              "conservation_status": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "IUCN conservation status code"
+              },
+              "wikipedia_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Wikipedia URL"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Total number of matching taxa"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "iNaturalist_get_taxon",
@@ -206,7 +281,81 @@
         "query": "Panthera tigris",
         "per_page": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Observation ID"
+              },
+              "species_name": {
+                "type": "string",
+                "description": "Scientific name of observed species"
+              },
+              "common_name": {
+                "type": "string",
+                "description": "Common name of observed species"
+              },
+              "observed_on": {
+                "type": "string",
+                "description": "Date of observation (YYYY-MM-DD)"
+              },
+              "place_guess": {
+                "type": "string",
+                "description": "Location description"
+              },
+              "latitude": {
+                "type": "number",
+                "description": "Latitude coordinate"
+              },
+              "longitude": {
+                "type": "number",
+                "description": "Longitude coordinate"
+              },
+              "quality_grade": {
+                "type": "string",
+                "description": "Quality grade (research/needs_id/casual)"
+              },
+              "user": {
+                "type": "string",
+                "description": "Observer username"
+              },
+              "photo_url": {
+                "type": "string",
+                "description": "URL to observation photo"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Total matching observations"
+            },
+            "per_page": {
+              "type": "integer",
+              "description": "Results per page"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "iNaturalist_get_species_counts",
@@ -259,6 +408,56 @@
         "taxon_id": 41944,
         "per_page": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taxon_id": {
+                "type": "integer",
+                "description": "Taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": "string",
+                "description": "Common name"
+              },
+              "rank": {
+                "type": "string",
+                "description": "Taxonomic rank"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Number of observations"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_species": {
+              "type": "integer",
+              "description": "Total number of species"
+            }
+          }
+        }
+      }
+    }
   }
 ]

@@ -63,7 +63,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "object",
@@ -79,7 +79,7 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Dataset identifier"
+                    "description": "Dataset ID"
                   },
                   "title": {
                     "type": "string",
@@ -107,11 +107,11 @@
                   },
                   "depositionDate": {
                     "type": "string",
-                    "description": "Deposition date in ISO format"
+                    "description": "Deposition date (ISO 8601)"
                   },
                   "releaseDate": {
                     "type": "string",
-                    "description": "Release date in ISO format"
+                    "description": "Release date (ISO 8601)"
                   },
                   "relatedDatabaseEntries": {
                     "type": [
@@ -129,11 +129,11 @@
                   },
                   "s3Prefix": {
                     "type": "string",
-                    "description": "S3 bucket path prefix"
+                    "description": "S3 URI prefix"
                   },
                   "httpsPrefix": {
                     "type": "string",
-                    "description": "HTTPS download path prefix"
+                    "description": "HTTPS URL prefix"
                   }
                 }
               }
@@ -320,14 +320,14 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "object",
           "properties": {
             "dataset_id": {
               "type": "integer",
-              "description": "Parent dataset identifier"
+              "description": "Parent dataset ID"
             },
             "count": {
               "type": "integer",
@@ -340,7 +340,7 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Run identifier"
+                    "description": "Run ID"
                   },
                   "name": {
                     "type": "string",
@@ -352,11 +352,11 @@
                   },
                   "s3Prefix": {
                     "type": "string",
-                    "description": "S3 bucket path prefix"
+                    "description": "S3 URI prefix for run data"
                   },
                   "httpsPrefix": {
                     "type": "string",
-                    "description": "HTTPS download path prefix"
+                    "description": "HTTPS URL prefix for run data"
                   }
                 }
               }
@@ -419,14 +419,14 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "object",
           "properties": {
             "run_id": {
               "type": "integer",
-              "description": "Parent run identifier"
+              "description": "Parent run ID"
             },
             "count": {
               "type": "integer",
@@ -439,7 +439,7 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Tomogram identifier"
+                    "description": "Tomogram ID"
                   },
                   "name": {
                     "type": "string",
@@ -455,23 +455,23 @@
                   },
                   "sizeX": {
                     "type": "integer",
-                    "description": "Tomogram X dimension"
+                    "description": "X dimension in voxels"
                   },
                   "sizeY": {
                     "type": "integer",
-                    "description": "Tomogram Y dimension"
+                    "description": "Y dimension in voxels"
                   },
                   "sizeZ": {
                     "type": "integer",
-                    "description": "Tomogram Z dimension"
+                    "description": "Z dimension in voxels"
                   },
                   "reconstructionMethod": {
                     "type": "string",
-                    "description": "Reconstruction method used"
+                    "description": "Reconstruction method (e.g. WBP)"
                   },
                   "processing": {
                     "type": "string",
-                    "description": "Processing status"
+                    "description": "Processing state (raw/filtered)"
                   },
                   "processingSoftware": {
                     "type": [
@@ -486,19 +486,19 @@
                   },
                   "isPortalStandard": {
                     "type": "boolean",
-                    "description": "Whether this is portal standard"
+                    "description": "Whether this is the portal standard tomogram"
                   },
                   "isAuthorSubmitted": {
                     "type": "boolean",
-                    "description": "Whether submitted by author"
+                    "description": "Whether author submitted"
                   },
                   "isVisualizationDefault": {
                     "type": "boolean",
-                    "description": "Whether this is the default visualization"
+                    "description": "Whether this is the default for visualization"
                   },
                   "ctfCorrected": {
                     "type": "boolean",
-                    "description": "Whether CTF correction was applied"
+                    "description": "Whether CTF corrected"
                   },
                   "s3OmezarrDir": {
                     "type": "string",
@@ -506,7 +506,7 @@
                   },
                   "httpsMrcFile": {
                     "type": "string",
-                    "description": "HTTPS path to MRC file"
+                    "description": "HTTPS URL for MRC file"
                   },
                   "s3MrcFile": {
                     "type": "string",
@@ -514,11 +514,11 @@
                   },
                   "depositionDate": {
                     "type": "string",
-                    "description": "Deposition date in ISO format"
+                    "description": "Deposition date (ISO 8601)"
                   },
                   "releaseDate": {
                     "type": "string",
-                    "description": "Release date in ISO format"
+                    "description": "Release date (ISO 8601)"
                   }
                 }
               }
@@ -587,14 +587,14 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Success or error status"
+          "description": "Operation status (success/error)"
         },
         "data": {
           "type": "object",
           "properties": {
             "run_id": {
               "type": "integer",
-              "description": "Parent run identifier"
+              "description": "Parent run ID"
             },
             "count": {
               "type": "integer",
@@ -607,33 +607,33 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Annotation identifier"
+                    "description": "Annotation ID"
                   },
                   "objectName": {
                     "type": "string",
-                    "description": "Name of annotated object"
+                    "description": "Annotated object name"
                   },
                   "objectId": {
                     "type": "string",
-                    "description": "Ontology ID for annotated object"
+                    "description": "Object identifier (e.g. GO term)"
                   },
                   "objectDescription": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "description": "Description of annotated object"
+                    "description": "Object description"
                   },
                   "objectState": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "description": "State of annotated object"
+                    "description": "Object state"
                   },
                   "objectCount": {
                     "type": "integer",
-                    "description": "Number of annotated instances"
+                    "description": "Number of annotated objects"
                   },
                   "annotationMethod": {
                     "type": "string",
@@ -645,7 +645,7 @@
                   },
                   "groundTruthStatus": {
                     "type": "boolean",
-                    "description": "Whether annotation is ground truth"
+                    "description": "Whether this is ground truth"
                   },
                   "isCuratorRecommended": {
                     "type": "boolean",
@@ -653,22 +653,22 @@
                   },
                   "methodType": {
                     "type": "string",
-                    "description": "Type of annotation method"
+                    "description": "Method type (automated/manual/hybrid)"
                   },
                   "depositionDate": {
                     "type": "string",
-                    "description": "Deposition date in ISO format"
+                    "description": "Deposition date (ISO 8601)"
                   },
                   "releaseDate": {
                     "type": "string",
-                    "description": "Release date in ISO format"
+                    "description": "Release date (ISO 8601)"
                   },
                   "annotationPublication": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "description": "DOI of associated publication"
+                    "description": "Associated publication DOI"
                   },
                   "s3MetadataPath": {
                     "type": "string",
@@ -676,7 +676,7 @@
                   },
                   "httpsMetadataPath": {
                     "type": "string",
-                    "description": "HTTPS path to annotation metadata"
+                    "description": "HTTPS URL for annotation metadata"
                   }
                 }
               }
