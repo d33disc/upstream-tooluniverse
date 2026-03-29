@@ -1,0 +1,140 @@
+[
+  {
+    "name": "CryoET_list_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cryoet_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_datasets\", \"organism_name\": \"Homo sapiens\", \"limit\": 3}"
+  },
+  {
+    "name": "CryoET_list_runs",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cryoet_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_runs\", \"dataset_id\": 10053, \"limit\": 5}"
+  },
+  {
+    "name": "CryoET_list_tomograms",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cryoet_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_tomograms\", \"run_id\": 3430}"
+  },
+  {
+    "name": "CryoET_list_annotations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cryoet_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_annotations\", \"run_id\": 3430}"
+  },
+  {
+    "name": "RxClass_get_drug_classes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rxclass_tools.json",
+    "has_example": true,
+    "example": "{\"drug_name\": \"metformin\", \"rela_source\": \"ATC\"}"
+  },
+  {
+    "name": "RxClass_get_class_members",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rxclass_tools.json",
+    "has_example": true,
+    "example": "{\"class_id\": \"M01AE\", \"rela_source\": \"ATC\", \"ttys\": \"IN\"}"
+  },
+  {
+    "name": "RxClass_find_classes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rxclass_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"beta blocker\"}"
+  },
+  {
+    "name": "iNaturalist_search_taxa",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/inaturalist_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"Panthera tigris\"}"
+  },
+  {
+    "name": "iNaturalist_search_observations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/inaturalist_tools.json",
+    "has_example": true,
+    "example": "{\"taxon_id\": 41482, \"quality_grade\": \"research\", \"per_page\": 5}"
+  },
+  {
+    "name": "iNaturalist_get_species_counts",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/inaturalist_tools.json",
+    "has_example": true,
+    "example": "{\"taxon_id\": 41479, \"quality_grade\": \"research\", \"per_page\": 10}"
+  },
+  {
+    "name": "get_clinical_trial_references",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/clinicaltrials_gov_tools.json",
+    "has_example": true,
+    "example": "{\"nct_ids\": [\"NCT01158625\"], \"references\": \"Study\"}"
+  },
+  {
+    "name": "extract_clinical_trial_adverse_events",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/clinicaltrials_gov_tools.json",
+    "has_example": true,
+    "example": "{\"nct_ids\": [\"NCT01158625\"], \"organ_systems\": [\"Cardiac Disorders\"], \"adverse_event_type\": \"serious\"}"
+  },
+  {
+    "name": "NeuroMorpho_search_neurons",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/neuromorpho_tools.json",
+    "has_example": true,
+    "example": "{\"query_field\": \"species\", \"query_value\": \"human\", \"size\": 5}"
+  },
+  {
+    "name": "NeuroMorpho_get_field_values",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/neuromorpho_tools.json",
+    "has_example": true,
+    "example": "{\"field_name\": \"species\"}"
+  },
+  {
+    "name": "OncoTree_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/oncotree_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"breast cancer\", \"field\": \"name\"}"
+  },
+  {
+    "name": "OncoTree_get_type",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/oncotree_tools.json",
+    "has_example": true,
+    "example": "{\"code\": \"BRCA\"}"
+  },
+  {
+    "name": "PROSITE_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/prosite_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"zinc finger\", \"limit\": 5}"
+  },
+  {
+    "name": "PROSITE_scan_sequence",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/prosite_tools.json",
+    "has_example": true,
+    "example": "{\"sequence\": \"MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWSTPSELGHAGLNGDILVWNPVLEDAFELSSMGIRVDADTLKHQLALTGDEDRLELEWHQALLRGEMPQTIGGGIGQSRLTMLLLQLPHIGQVQAGVWPAAVRESVPSLL\", \"skip_frequent\": true}"
+  },
+  {
+    "name": "intact_get_interaction_network",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/intact_tools.json",
+    "has_example": true,
+    "example": "{\"identifier\": \"P04637\", \"depth\": 1}"
+  },
+  {
+    "name": "OncoKB_annotate_copy_number",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/oncokb_tools.json",
+    "has_example": true,
+    "example": "{\"gene\": \"ERBB2\", \"copy_number_type\": \"AMPLIFICATION\"}"
+  },
+  {
+    "name": "PlantReactome_search_pathways",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/plant_reactome_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"photosynthesis\"}"
+  },
+  {
+    "name": "NDEx_search_networks",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ndex_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"BRCA1\"}"
+  },
+  {
+    "name": "CPIC_get_recommendations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cpic_tools.json",
+    "has_example": true,
+    "example": "{\"drug\": \"codeine\", \"limit\": 10}"
+  }
+]

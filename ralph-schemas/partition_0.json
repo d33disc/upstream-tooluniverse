@@ -1,0 +1,140 @@
+[
+  {
+    "name": "OmniPath_get_ligand_receptor_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"partners\": \"TGFB1\"}"
+  },
+  {
+    "name": "OmniPath_get_intercell_roles",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"EGFR\"}"
+  },
+  {
+    "name": "OmniPath_get_signaling_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"partners\": \"NOTCH1\", \"directed\": true}"
+  },
+  {
+    "name": "OmniPath_get_complexes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"P01137\"}"
+  },
+  {
+    "name": "OmniPath_get_cell_communication_annotations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"P01137,P37173\"}"
+  },
+  {
+    "name": "OmniPath_get_enzyme_substrate",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"enzymes\": \"SRC\", \"limit\": 20}"
+  },
+  {
+    "name": "OmniPath_get_tf_target_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"tf_gene\": \"TP53\", \"confidence_level\": \"A\"}"
+  },
+  {
+    "name": "OmniPath_get_dorothea_regulon",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"get_dorothea_regulon\", \"tf_gene\": \"TP53\"}"
+  },
+  {
+    "name": "TCIA_get_patient_studies",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/tcia_tools.json",
+    "has_example": true,
+    "example": "{\"Collection\": \"LIDC-IDRI\", \"PatientID\": \"LIDC-IDRI-0001\"}"
+  },
+  {
+    "name": "TCIA_get_modality_values",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/tcia_tools.json",
+    "has_example": true,
+    "example": "{\"Collection\": \"LIDC-IDRI\"}"
+  },
+  {
+    "name": "TCIA_get_body_part_values",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/tcia_tools.json",
+    "has_example": true,
+    "example": "{\"Modality\": \"CT\"}"
+  },
+  {
+    "name": "odphp_myhealthfinder",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/odphp_tools.json",
+    "has_example": true,
+    "example": "{\"lang\": \"en\", \"age\": 1, \"sex\": \"female\", \"pregnant\": \"false\", \"strip_html\": true}"
+  },
+  {
+    "name": "odphp_topicsearch",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/odphp_tools.json",
+    "has_example": true,
+    "example": "{\"lang\": \"en\", \"topicId\": \"30544\", \"categoryId\": \"15\", \"keyword\": \"diabetes\", \"strip_html\": true}"
+  },
+  {
+    "name": "Bgee_search_genes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bgee_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"TP53\"}"
+  },
+  {
+    "name": "Bgee_get_gene_expression",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bgee_tools.json",
+    "has_example": true,
+    "example": "{\"gene_id\": \"ENSG00000141510\", \"species_id\": \"9606\"}"
+  },
+  {
+    "name": "RCSBGraphQL_get_structure_summary",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rcsb_graphql_tools.json",
+    "has_example": true,
+    "example": "{\"pdb_id\": \"4HHB\"}"
+  },
+  {
+    "name": "RCSBGraphQL_get_polymer_entity",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rcsb_graphql_tools.json",
+    "has_example": true,
+    "example": "{\"pdb_id\": \"4HHB\", \"entity_num\": 1}"
+  },
+  {
+    "name": "PubTator3_LiteratureSearch",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pubtator_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"cancer\", \"page\": 1, \"page_size\": 1}"
+  },
+  {
+    "name": "health_disparities_get_county_rankings_info",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/health_disparities_tools.json",
+    "has_example": true,
+    "example": "{\"year\": 2023, \"state\": \"CA\"}"
+  },
+  {
+    "name": "ENCODE_search_biosamples",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/encode_tools.json",
+    "has_example": true,
+    "example": "{\"organism\": \"Homo sapiens\", \"limit\": 1}"
+  },
+  {
+    "name": "IMPC_get_gene_summary",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/impc_tools.json",
+    "has_example": true,
+    "example": "{\"gene_symbol\": \"Trp53\"}"
+  },
+  {
+    "name": "WormBase_get_gene",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/wormbase_tools.json",
+    "has_example": true,
+    "example": "{\"gene_id\": \"WBGene00006763\"}"
+  },
+  {
+    "name": "UniProtTaxonomy_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/uniprot_taxonomy_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"arabidopsis\", \"size\": 5}"
+  }
+]

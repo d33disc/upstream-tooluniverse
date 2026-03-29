@@ -1,0 +1,140 @@
+[
+  {
+    "name": "gProfiler_enrichment",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/gprofiler_tools.json",
+    "has_example": true,
+    "example": "{\"gene_list\": \"TP53,BRCA1,EGFR,KRAS,PTEN\"}"
+  },
+  {
+    "name": "gProfiler_convert_ids",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/gprofiler_tools.json",
+    "has_example": true,
+    "example": "{\"gene_list\": \"TP53,BRCA1,EGFR\", \"target_namespace\": \"ENSG\"}"
+  },
+  {
+    "name": "gProfiler_find_orthologs",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/gprofiler_tools.json",
+    "has_example": true,
+    "example": "{\"gene_list\": \"TP53,BRCA1,EGFR\", \"target_organism\": \"mmusculus\"}"
+  },
+  {
+    "name": "gProfiler_annotate_snps",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/gprofiler_tools.json",
+    "has_example": true,
+    "example": "{\"snp_list\": \"rs11540652,rs429358\"}"
+  },
+  {
+    "name": "HMDB_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/metabolite_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"glucose\"}"
+  },
+  {
+    "name": "HMDB_get_metabolite",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/metabolite_tools.json",
+    "has_example": true,
+    "example": "{\"hmdb_id\": \"HMDB0000122\"}"
+  },
+  {
+    "name": "HMDB_get_diseases",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/metabolite_tools.json",
+    "has_example": true,
+    "example": "{\"hmdb_id\": \"HMDB0000122\"}"
+  },
+  {
+    "name": "GEO_search_rnaseq_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"breast cancer BRCA1\", \"organism\": \"Homo sapiens\", \"limit\": 5}"
+  },
+  {
+    "name": "GEO_search_atacseq_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"T cell differentiation\", \"organism\": \"Homo sapiens\", \"limit\": 5}"
+  },
+  {
+    "name": "ENCODE_search_rnaseq_experiments",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"biosample_term_name\": \"K562\", \"assay_type\": \"total RNA-seq\", \"limit\": 3}"
+  },
+  {
+    "name": "alphafold_get_prediction",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/alphafold_tools.json",
+    "has_example": true,
+    "example": "{\"qualifier\": \"P04637\"}"
+  },
+  {
+    "name": "alphafold_get_summary",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/alphafold_tools.json",
+    "has_example": true,
+    "example": "{\"qualifier\": \"P38398\"}"
+  },
+  {
+    "name": "BioImageArchive_search_studies",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bioimage_archive_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"fluorescence microscopy cell\", \"page_size\": 5}"
+  },
+  {
+    "name": "BioImageArchive_search_bioimages",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bioimage_archive_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"cell division\", \"page_size\": 5}"
+  },
+  {
+    "name": "RCSBAdvSearch_search_structures",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rcsb_advanced_search_tools.json",
+    "has_example": true,
+    "example": "{\"organism\": \"Homo sapiens\", \"max_resolution\": 1.5, \"rows\": 5}"
+  },
+  {
+    "name": "RCSBAdvSearch_search_by_motif",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rcsb_advanced_search_tools.json",
+    "has_example": true,
+    "example": "{\"pattern\": \"C-x(2,4)-C-x(3)-[LIVMFYWC]-x(8)-H-x(3,5)-H\", \"pattern_type\": \"prosite\", \"rows\": 5}"
+  },
+  {
+    "name": "ChEMBL_search_similarity",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/chembl_tools.json",
+    "has_example": true,
+    "example": "{\"smiles\": \"CC(=O)Oc1ccccc1C(=O)O\", \"threshold\": 70, \"limit\": 10}"
+  },
+  {
+    "name": "dynamic_package_discovery",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/package_discovery_tools.json",
+    "has_example": true,
+    "example": "{\"requirements\": \"data analysis and visualization\", \"functionality\": \"create charts and graphs\"}"
+  },
+  {
+    "name": "OBIS_search_taxa",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/obis_tools.json",
+    "has_example": true,
+    "example": "{\"scientificname\": \"Gadus\", \"size\": 1}"
+  },
+  {
+    "name": "DepMap_get_cell_line",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/depmap_tools.json",
+    "has_example": true,
+    "example": "{\"model_name\": \"A549\"}"
+  },
+  {
+    "name": "PomBase_search_genes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pombase_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"cdc2\", \"limit\": 5}"
+  },
+  {
+    "name": "UniParc_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/uniparc_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"gene:TP53 AND organism_id:9606\", \"size\": 3}"
+  },
+  {
+    "name": "ProteomicsDB_list_tissues",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/proteomicsdb_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_tissues\", \"tissue_category\": \"fluid\"}"
+  }
+]

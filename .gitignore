@@ -181,5 +181,8 @@ ralph.log
 ralph-health/logs/
 ralph-health/results_*.json
 
+# Ralph schema loop logs
+ralph-schemas/worker_*.log
+
 # Ralph loop tracked files (override IMPLEMENTATION_*.md exclusion)
 !IMPLEMENTATION_PLAN.md

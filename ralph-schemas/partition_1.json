@@ -1,0 +1,140 @@
+[
+  {
+    "name": "ols_search_terms",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"apoptosis\", \"rows\": 5, \"ontology\": \"go\", \"exact_match\": false, \"include_obsolete\": false}"
+  },
+  {
+    "name": "ols_get_ontology_info",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"ontology_id\": \"efo\"}"
+  },
+  {
+    "name": "ols_search_ontologies",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"search\": \"cancer\", \"page\": 0, \"size\": 5}"
+  },
+  {
+    "name": "ols_get_term_info",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"id\": \"HP:0001903\"}"
+  },
+  {
+    "name": "ols_get_term_children",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"term_iri\": \"http://www.ebi.ac.uk/efo/EFO_0000384\", \"ontology\": \"efo\", \"include_obsolete\": false, \"size\": 10}"
+  },
+  {
+    "name": "ols_get_term_ancestors",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"term_iri\": \"http://www.ebi.ac.uk/efo/EFO_0000384\", \"ontology\": \"efo\", \"include_obsolete\": false, \"size\": 10}"
+  },
+  {
+    "name": "ols_find_similar_terms",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ols_tools.json",
+    "has_example": true,
+    "example": "{\"term_iri\": \"http://www.ebi.ac.uk/efo/EFO_0000384\", \"ontology\": \"efo\", \"size\": 5}"
+  },
+  {
+    "name": "BioSamples_get_sample",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/biosamples_tools.json",
+    "has_example": true,
+    "example": "{\"accession\": \"SAMEA104228123\"}"
+  },
+  {
+    "name": "BioSamples_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/biosamples_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"breast cancer\", \"limit\": 5}"
+  },
+  {
+    "name": "BioSamples_search_by_filter",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/biosamples_tools.json",
+    "has_example": true,
+    "example": "{\"attribute\": \"organism\", \"value\": \"Homo sapiens\", \"limit\": 5}"
+  },
+  {
+    "name": "OpenTargets_get_associated_drugs_by_disease_efoId",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/opentarget_tools.json",
+    "has_example": true,
+    "example": "{\"efoId\": \"MONDO_0004975\"}"
+  },
+  {
+    "name": "OpenTargets_get_similar_entities_by_disease_efoId",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/opentarget_tools.json",
+    "has_example": true,
+    "example": "{\"efoId\": \"EFO_0000384\", \"threshold\": 1.0, \"size\": 1}"
+  },
+  {
+    "name": "kegg_search_pathway",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/kegg_tools.json",
+    "has_example": true,
+    "example": "{\"keyword\": \"diabetes\"}"
+  },
+  {
+    "name": "kegg_find_genes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/kegg_tools.json",
+    "has_example": true,
+    "example": "{\"keyword\": \"insulin\"}"
+  },
+  {
+    "name": "PDBeSearch_search_structures",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pdbe_search_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"insulin\", \"limit\": 5}"
+  },
+  {
+    "name": "PDBeSearch_search_by_organism",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pdbe_search_tools.json",
+    "has_example": true,
+    "example": "{\"organism\": \"Escherichia coli\", \"query\": \"ribosome\", \"limit\": 5}"
+  },
+  {
+    "name": "ReactomeInteractors_get_entity_pathways",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/reactome_interactors_tools.json",
+    "has_example": true,
+    "example": "{\"entity_id\": \"R-HSA-199420\"}"
+  },
+  {
+    "name": "ReactomeInteractors_search_entity",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/reactome_interactors_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"TP53\", \"types\": \"Protein\"}"
+  },
+  {
+    "name": "PubChem_get_compound_2D_image_by_CID",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pubchem_tools.json",
+    "has_example": true,
+    "example": "{\"cid\": 2244, \"image_size\": \"large\"}"
+  },
+  {
+    "name": "fda_pharmacogenomic_biomarkers",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/fda_pharmacogenomic_biomarkers_tools.json",
+    "has_example": true,
+    "example": "{\"drug_name\": \"Warfarin\"}"
+  },
+  {
+    "name": "ComplexPortal_get_complex",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/complex_portal_tools.json",
+    "has_example": true,
+    "example": "{\"complex_id\": \"CPX-1\"}"
+  },
+  {
+    "name": "Nextstrain_list_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/nextstrain_tools.json",
+    "has_example": true,
+    "example": "{\"pathogen\": \"flu\"}"
+  },
+  {
+    "name": "UniRef_search_clusters",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/uniref_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"p53\", \"cluster_type\": \"UniRef90\", \"size\": 5}"
+  }
+]
