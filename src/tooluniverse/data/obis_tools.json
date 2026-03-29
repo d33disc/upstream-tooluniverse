@@ -48,6 +48,100 @@
         "aphia"
       ],
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "source": {
+          "type": "string",
+          "description": "Data source (OBIS)"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "API endpoint used"
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "scientificname": {
+              "type": "string",
+              "description": "Scientific name queried"
+            },
+            "size": {
+              "type": "integer",
+              "description": "Requested result size"
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scientificName": {
+                    "type": "string",
+                    "description": "Full scientific name"
+                  },
+                  "aphiaID": {
+                    "type": "integer",
+                    "description": "WoRMS AphiaID"
+                  },
+                  "rank": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxonomic rank"
+                  },
+                  "kingdom": {
+                    "type": "string",
+                    "description": "Taxonomic kingdom"
+                  },
+                  "phylum": {
+                    "type": "string",
+                    "description": "Taxonomic phylum"
+                  },
+                  "class": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxonomic class"
+                  },
+                  "order": {
+                    "type": "string",
+                    "description": "Taxonomic order"
+                  },
+                  "family": {
+                    "type": "string",
+                    "description": "Taxonomic family"
+                  },
+                  "genus": {
+                    "type": "string",
+                    "description": "Taxonomic genus"
+                  }
+                }
+              },
+              "description": "Matching taxa"
+            },
+            "total": {
+              "type": "integer",
+              "description": "Total matching records"
+            }
+          }
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Whether the request succeeded"
+        }
+      }
     }
   },
   {

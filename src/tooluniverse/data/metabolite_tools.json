@@ -215,7 +215,9 @@
           "description": "Compound name or molecular formula to search"
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "test_examples": [
       {
@@ -224,7 +226,67 @@
       {
         "query": "glucosylceramide"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Original search query"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pubchem_cid": {
+                    "type": "integer",
+                    "description": "PubChem compound ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Metabolite name"
+                  },
+                  "formula": {
+                    "type": "string",
+                    "description": "Molecular formula"
+                  },
+                  "molecular_weight": {
+                    "type": "string",
+                    "description": "Molecular weight"
+                  },
+                  "smiles": {
+                    "type": "string",
+                    "description": "SMILES string"
+                  }
+                }
+              },
+              "description": "Matching metabolite results"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of results"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "HMDB_get_metabolite",
@@ -255,7 +317,62 @@
       {
         "compound_name": "caffeine"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "pubchem_cid": {
+              "type": "integer",
+              "description": "PubChem compound ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Metabolite name"
+            },
+            "iupac_name": {
+              "type": "string",
+              "description": "IUPAC systematic name"
+            },
+            "formula": {
+              "type": "string",
+              "description": "Molecular formula"
+            },
+            "molecular_weight": {
+              "type": "string",
+              "description": "Molecular weight"
+            },
+            "smiles": {
+              "type": "string",
+              "description": "SMILES string"
+            },
+            "inchikey": {
+              "type": "string",
+              "description": "InChIKey identifier"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "pubchem_url": {
+              "type": "string",
+              "description": "URL to PubChem compound page"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "HMDB_get_diseases",

@@ -78,7 +78,50 @@
         "max_resolution": 3.0,
         "rows": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "score": {
+                "type": "number",
+                "description": "Search relevance score"
+              }
+            }
+          },
+          "description": "Matching PDB structures"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "total_count": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "RCSBAdvSearch_search_by_motif",
@@ -122,6 +165,65 @@
         "pattern_type": "prosite",
         "rows": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "entity_id": {
+                "type": "string",
+                "description": "Entity ID within the structure"
+              },
+              "identifier": {
+                "type": "string",
+                "description": "Combined PDB_entity identifier"
+              },
+              "score": {
+                "type": "number",
+                "description": "Search relevance score"
+              }
+            }
+          },
+          "description": "Structures matching the sequence motif"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "total_count": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "pattern": {
+              "type": "string",
+              "description": "Motif pattern used for search"
+            },
+            "pattern_type": {
+              "type": "string",
+              "description": "Pattern format (e.g. prosite, regex)"
+            }
+          }
+        }
+      }
+    }
   }
 ]

@@ -42,6 +42,52 @@
       ],
       "difficulty_level": "intermediate",
       "estimated_execution_time": "5-15 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Search result status"
+            },
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Package name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Package description"
+                  }
+                }
+              },
+              "description": "Matching package candidates"
+            },
+            "recommendation": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Recommended package if available"
+            },
+            "message": {
+              "type": "string",
+              "description": "Status message"
+            }
+          }
+        }
+      }
     }
   }
 ]
