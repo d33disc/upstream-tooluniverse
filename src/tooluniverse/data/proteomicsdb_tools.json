@@ -387,50 +387,6 @@
         "operation"
       ]
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "filter_category": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Category filter applied (null if none)"
-        },
-        "total_sources": {
-          "type": "integer",
-          "description": "Total number of sources returned"
-        },
-        "category_counts": {
-          "type": "object",
-          "description": "Count of sources per category"
-        },
-        "tissues": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "tissue_id": {
-                "type": "string",
-                "description": "BTO tissue ontology ID"
-              },
-              "name": {
-                "type": "string",
-                "description": "Tissue/cell line/fluid name"
-              },
-              "category": {
-                "type": "string",
-                "description": "Category: tissue, cell line, or fluid"
-              },
-              "group": {
-                "type": "string",
-                "description": "Anatomical grouping (e.g., brain, liver)"
-              }
-            }
-          }
-        }
-      }
-    },
     "test_examples": [
       {
         "operation": "list_tissues",

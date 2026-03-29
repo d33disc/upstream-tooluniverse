@@ -85,7 +85,9 @@
       {
         "condition": "non-small cell lung cancer",
         "intervention": "pembrolizumab",
-        "overall_status": ["RECRUITING"],
+        "overall_status": [
+          "RECRUITING"
+        ],
         "pageSize": 3
       }
     ],
@@ -657,10 +659,7 @@
         ],
         "references": "Publication"
       }
-    ],
-    "return_schema": {
-      "type": "string"
-    }
+    ]
   },
   {
     "name": "extract_clinical_trial_outcomes",
@@ -814,10 +813,7 @@
         ],
         "adverse_event_type": "all"
       }
-    ],
-    "return_schema": {
-      "type": "string"
-    }
+    ]
   },
   {
     "name": "ClinicalTrials_search_studies",

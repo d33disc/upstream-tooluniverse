@@ -245,50 +245,6 @@
       "endpoint": "https://www.ebi.ac.uk/intact/ws/interaction/network/{identifier}",
       "return_format": "JSON"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "success"
-              ]
-            },
-            "data": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            },
-            "hitCount": {
-              "type": "integer"
-            },
-            "interaction_ids": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "error"
-              ]
-            },
-            "error": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
     "test_examples": [
       {
         "identifier": "P04637",

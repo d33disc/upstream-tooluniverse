@@ -91,29 +91,6 @@
         "model_name": "MCF7"
       }
     ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "model_id": {
-          "type": "string"
-        },
-        "model_name": {
-          "type": "string"
-        },
-        "tissue": {
-          "type": "string"
-        },
-        "cancer_type": {
-          "type": "string"
-        },
-        "msi_status": {
-          "type": "string"
-        },
-        "ploidy": {
-          "type": "number"
-        }
-      }
-    },
     "label": [
       "DepMap",
       "Cell Line",

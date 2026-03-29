@@ -26,29 +26,6 @@
       "endpoint": "https://api.obis.org/v3/taxon",
       "format": "json"
     },
-    "return_schema": {
-      "type": "object",
-      "description": "OBIS taxon search response",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "scientificName": {
-                "type": "string"
-              },
-              "aphiaID": {
-                "type": "integer"
-              },
-              "rank": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
     "test_examples": [
       {
         "scientificname": "Gadus",

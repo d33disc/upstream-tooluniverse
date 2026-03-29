@@ -23,53 +23,6 @@
         "requirements"
       ]
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "candidates": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "version": {
-                "type": "string"
-              },
-              "quality_score": {
-                "type": "number"
-              },
-              "reasoning": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "has_docs": {
-                "type": "boolean"
-              },
-              "is_stable": {
-                "type": "boolean"
-              }
-            }
-          }
-        },
-        "recommendation": {
-          "type": "object"
-        },
-        "total_evaluated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "status",
-        "candidates"
-      ]
-    },
     "test_examples": [
       {
         "requirements": "data analysis and visualization",

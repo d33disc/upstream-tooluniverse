@@ -92,100 +92,7 @@
         "ontology": "mondo",
         "exact_match": false
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "response": {
-          "type": "object",
-          "properties": {
-            "docs": {
-              "type": "array"
-            },
-            "numFound": {
-              "type": "integer"
-            },
-            "start": {
-              "type": "integer"
-            }
-          }
-        },
-        "responseHeader": {
-          "type": "object",
-          "properties": {
-            "QTime": {
-              "type": "integer"
-            },
-            "status": {
-              "type": "integer"
-            }
-          }
-        },
-        "facet_counts": {
-          "type": "object",
-          "properties": {
-            "facet_fields": {
-              "type": "object",
-              "properties": {
-                "ontologyPreferredPrefix": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isDefiningOntology": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "ontologyId": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "ontologyIri": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isObsolete": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "query": {
-          "type": "string"
-        },
-        "filters": {
-          "type": "object",
-          "properties": {
-            "ontology": {
-              "type": "string"
-            },
-            "exact_match": {
-              "type": "boolean"
-            },
-            "include_obsolete": {
-              "type": "boolean"
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -234,42 +141,7 @@
       {
         "ontology_id": "hp"
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "ontologyId": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "version": {
-          "type": "null"
-        },
-        "description": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "null"
-        },
-        "homepage": {
-          "type": "string"
-        },
-        "preferredPrefix": {
-          "type": "string"
-        },
-        "number_of_terms": {
-          "type": "null"
-        },
-        "numberOfClasses": {
-          "type": "integer"
-        },
-        "repository": {
-          "type": "null"
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -335,39 +207,7 @@
         "page": 0,
         "size": 5
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "string"
-        },
-        "error_details": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
-            },
-            "retriable": {
-              "type": "boolean"
-            },
-            "next_steps": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "details": {
-              "type": "object",
-              "properties": {}
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -421,36 +261,7 @@
       {
         "id": "GO:0006915"
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "iri": {
-          "type": "string"
-        },
-        "ontologyName": {
-          "type": "string"
-        },
-        "shortForm": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "oboId": {
-          "type": "string"
-        },
-        "isObsolete": {
-          "type": "boolean"
-        },
-        "description": {
-          "type": "array"
-        },
-        "synonyms": {
-          "type": "array"
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -520,41 +331,7 @@
         "term_id": "HP:0000118",
         "size": 10
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer"
-        },
-        "numElements": {
-          "type": "integer"
-        },
-        "totalPages": {
-          "type": "integer"
-        },
-        "totalElements": {
-          "type": "integer"
-        },
-        "elements": {
-          "type": "array"
-        },
-        "term_iri": {
-          "type": "string"
-        },
-        "ontology": {
-          "type": "string"
-        },
-        "filters": {
-          "type": "object",
-          "properties": {
-            "include_obsolete": {
-              "type": "boolean"
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -623,41 +400,7 @@
         "term_id": "HP:0000118",
         "size": 10
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer"
-        },
-        "numElements": {
-          "type": "integer"
-        },
-        "totalPages": {
-          "type": "integer"
-        },
-        "totalElements": {
-          "type": "integer"
-        },
-        "elements": {
-          "type": "array"
-        },
-        "term_iri": {
-          "type": "string"
-        },
-        "ontology": {
-          "type": "string"
-        },
-        "filters": {
-          "type": "object",
-          "properties": {
-            "include_obsolete": {
-              "type": "boolean"
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "type": "OLSTool",
@@ -724,49 +467,6 @@
         "ontology": "mondo",
         "size": 5
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "terms": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "iri": {
-                "type": "string"
-              },
-              "ontologyName": {
-                "type": "string"
-              },
-              "shortForm": {
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "oboId": {
-                "type": "null"
-              },
-              "isObsolete": {
-                "type": "boolean"
-              }
-            }
-          }
-        },
-        "total_items": {
-          "type": "integer"
-        },
-        "showing": {
-          "type": "integer"
-        },
-        "term_iri": {
-          "type": "string"
-        },
-        "ontology": {
-          "type": "string"
-        }
-      }
-    }
+    ]
   }
 ]

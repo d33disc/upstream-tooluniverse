@@ -100,26 +100,6 @@
         "page": 1,
         "page_size": 3
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array"
-        },
-        "page_size": {
-          "type": "integer"
-        },
-        "current": {
-          "type": "integer"
-        },
-        "count": {
-          "type": "integer"
-        },
-        "total_pages": {
-          "type": "integer"
-        }
-      }
-    }
+    ]
   }
 ]

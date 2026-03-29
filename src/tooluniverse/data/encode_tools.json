@@ -352,41 +352,6 @@
       "format": "json",
       "search_type": "Biosample"
     },
-    "return_schema": {
-      "type": "object",
-      "description": "ENCODE biosamples search response",
-      "properties": {
-        "total": {
-          "type": "integer"
-        },
-        "@graph": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "accession": {
-                "type": "string"
-              },
-              "biosample_ontology": {
-                "type": [
-                  "object",
-                  "string"
-                ]
-              },
-              "organism": {
-                "type": "string"
-              },
-              "life_stage": {
-                "type": "string"
-              },
-              "summary": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
     "test_examples": [
       {
         "organism": "Homo sapiens",

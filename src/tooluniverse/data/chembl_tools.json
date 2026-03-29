@@ -1499,25 +1499,6 @@
         "threshold"
       ]
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "molecules": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "molecule_chembl_id": {
-                "type": "string"
-              },
-              "similarity": {
-                "type": "number"
-              }
-            }
-          }
-        }
-      }
-    },
     "test_examples": [
       {
         "smiles": "CC(=O)Oc1ccccc1C(=O)O",

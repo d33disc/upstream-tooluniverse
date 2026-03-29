@@ -170,6 +170,9 @@
                         "chain_id": {
                           "type": "string"
                         },
+                        "struct_asym_id": {
+                          "type": "string"
+                        },
                         "total_residues": {
                           "type": "integer"
                         },

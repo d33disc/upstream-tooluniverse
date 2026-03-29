@@ -254,20 +254,6 @@
         "gene"
       ]
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "oncogenic": {
-          "type": "string"
-        },
-        "highestSensitiveLevel": {
-          "type": "string"
-        },
-        "treatments": {
-          "type": "array"
-        }
-      }
-    },
     "test_examples": [
       {
         "gene": "ERBB2",
