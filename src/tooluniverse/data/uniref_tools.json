@@ -206,6 +206,86 @@
         "query": "insulin",
         "size": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status of the request"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of UniRef cluster results",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cluster_id": {
+                "type": "string",
+                "description": "UniRef cluster identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "Cluster name/label"
+              },
+              "entry_type": {
+                "type": "string",
+                "description": "Cluster type (UniRef50, UniRef90, UniRef100)"
+              },
+              "member_count": {
+                "type": "integer",
+                "description": "Number of members in the cluster"
+              },
+              "updated": {
+                "type": "string",
+                "description": "Date of last update (YYYY-MM-DD)"
+              },
+              "representative_member_id": {
+                "type": "string",
+                "description": "Accession of the representative member"
+              },
+              "representative_organism": {
+                "type": "string",
+                "description": "Organism of the representative member"
+              },
+              "representative_protein": {
+                "type": "string",
+                "description": "Protein name of the representative member"
+              },
+              "representative_sequence_length": {
+                "type": "integer",
+                "description": "Sequence length of the representative member"
+              },
+              "common_taxon": {
+                "type": "string",
+                "description": "Common taxonomic classification"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Response metadata",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source (UniProt UniRef)"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "cluster_type": {
+              "type": "string",
+              "description": "Cluster type requested"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            }
+          }
+        }
+      }
+    }
   }
 ]

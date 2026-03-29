@@ -18,3 +18,6 @@
 [DONE] ReactomeInteractors_search_entity — schema written (2 fields: status, data)
 [SKIP] PubChem_get_compound_2D_image_by_CID — already has return_schema
 [DONE] fda_pharmacogenomic_biomarkers — schema written (4 fields)
+[DONE] ComplexPortal_get_complex — schema written (3 fields: status, data, source)
+[DONE] Nextstrain_list_datasets — schema written (3 fields: status, data, metadata)
+[DONE] UniRef_search_clusters — schema written (3 fields: status, data, metadata)

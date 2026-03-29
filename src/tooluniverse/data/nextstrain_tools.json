@@ -26,7 +26,66 @@
       {
         "pathogen": "ebola"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status of the request"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of pathogen dataset groups",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathogen": {
+                "type": "string",
+                "description": "Pathogen name (e.g. avian-flu, seasonal-flu)"
+              },
+              "dataset_count": {
+                "type": "integer",
+                "description": "Total number of datasets for this pathogen"
+              },
+              "datasets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of dataset path identifiers"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Response metadata",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source (Nextstrain)"
+            },
+            "total_pathogens": {
+              "type": "integer",
+              "description": "Number of pathogen groups returned"
+            },
+            "total_datasets": {
+              "type": "integer",
+              "description": "Total datasets across all pathogens"
+            },
+            "filter": {
+              "type": "string",
+              "description": "Applied pathogen filter"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "Nextstrain_get_dataset",

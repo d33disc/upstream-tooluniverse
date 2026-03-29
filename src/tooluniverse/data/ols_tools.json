@@ -833,6 +833,89 @@
         "ontology": "mondo",
         "size": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "term_iri": {
+          "type": "string",
+          "description": "IRI of the query term"
+        },
+        "source_label": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Labels of the source term"
+        },
+        "ontology": {
+          "type": "string",
+          "description": "Ontology searched"
+        },
+        "similar_terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "IRI of the similar term"
+              },
+              "ontology_name": {
+                "type": "string",
+                "description": "Ontology name"
+              },
+              "ontology_prefix": {
+                "type": "string",
+                "description": "Ontology prefix"
+              },
+              "short_form": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "description": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Term descriptions"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable label"
+              },
+              "obo_id": {
+                "type": "string",
+                "description": "OBO identifier"
+              },
+              "type": {
+                "type": "string",
+                "description": "Term type (e.g. class)"
+              },
+              "exact_synonyms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Exact synonym list"
+              }
+            }
+          },
+          "description": "List of similar terms found"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Total number of similar terms found"
+        },
+        "note": {
+          "type": "string",
+          "description": "Additional information about the search method"
+        }
+      }
+    }
   }
 ]
