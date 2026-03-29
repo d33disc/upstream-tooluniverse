@@ -25,7 +25,88 @@
       {
         "accession": "SAMD00000603"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "accession": {
+              "type": "string",
+              "description": "BioSample accession ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Sample name"
+            },
+            "taxon_id": {
+              "type": "integer",
+              "description": "NCBI taxonomy ID"
+            },
+            "status": {
+              "type": "string",
+              "description": "Sample status (e.g. PUBLIC)"
+            },
+            "release_date": {
+              "type": "string",
+              "description": "ISO 8601 release date"
+            },
+            "update_date": {
+              "type": "string",
+              "description": "ISO 8601 last update date"
+            },
+            "characteristics": {
+              "type": "object",
+              "description": "Key-value pairs of sample attributes",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "external_references": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL of external reference"
+                  },
+                  "duo": {
+                    "type": "array",
+                    "description": "Data use ontology terms"
+                  }
+                }
+              },
+              "description": "Links to external databases"
+            }
+          },
+          "description": "Sample data object"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "query": {
+              "type": "string",
+              "description": "Query accession"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          },
+          "description": "Query metadata"
+        }
+      }
+    }
   },
   {
     "name": "BioSamples_search",
@@ -69,7 +150,82 @@
         "query": "Arabidopsis thaliana root",
         "limit": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "BioSample accession ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Sample name"
+              },
+              "taxon_id": {
+                "type": "integer",
+                "description": "NCBI taxonomy ID"
+              },
+              "status": {
+                "type": "string",
+                "description": "Sample status"
+              },
+              "key_characteristics": {
+                "type": "object",
+                "description": "Key sample attributes",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "description": "List of matching samples"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_elements": {
+              "type": "integer",
+              "description": "Total matching samples"
+            },
+            "total_pages": {
+              "type": "integer",
+              "description": "Total pages available"
+            },
+            "current_page": {
+              "type": "integer",
+              "description": "Current page number"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          },
+          "description": "Query metadata and pagination"
+        }
+      }
+    }
   },
   {
     "name": "BioSamples_search_by_filter",
@@ -113,6 +269,72 @@
         "value": "Mus musculus",
         "limit": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "BioSample accession ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Sample name"
+              },
+              "taxon_id": {
+                "type": "integer",
+                "description": "NCBI taxonomy ID"
+              },
+              "key_characteristics": {
+                "type": "object",
+                "description": "Key sample attributes",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "description": "List of matching samples"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_elements": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Total matching samples or null"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "filter": {
+              "type": "string",
+              "description": "Filter expression used"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          },
+          "description": "Query metadata"
+        }
+      }
+    }
   }
 ]

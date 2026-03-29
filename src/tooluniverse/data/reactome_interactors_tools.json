@@ -182,6 +182,54 @@
       {
         "query": "apoptosis"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stable_id": {
+                "type": "string",
+                "description": "Reactome stable identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "Entity name"
+              },
+              "type": {
+                "type": "string",
+                "description": "Entity type (e.g. Protein)"
+              },
+              "species": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Species names"
+              },
+              "exact_type": {
+                "type": "string",
+                "description": "Specific entity type (e.g. ReferenceGeneProduct)"
+              },
+              "compartment_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Cellular compartments where entity is found"
+              }
+            }
+          },
+          "description": "List of matching entities"
+        }
+      }
+    }
   }
 ]

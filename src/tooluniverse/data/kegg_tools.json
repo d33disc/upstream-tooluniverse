@@ -40,6 +40,44 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathway_id": {
+                "type": "string",
+                "description": "KEGG pathway identifier (e.g. path:map04930)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Pathway name/description"
+              }
+            }
+          },
+          "description": "List of matching pathways"
+        },
+        "url": {
+          "type": "string",
+          "description": "KEGG REST API URL used"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Response content type"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results returned"
+        }
+      }
     }
   },
   {
@@ -150,6 +188,44 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_id": {
+                "type": "string",
+                "description": "KEGG gene identifier (e.g. hsa:3667)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Gene symbols, aliases, and full name"
+              }
+            }
+          },
+          "description": "List of matching genes"
+        },
+        "url": {
+          "type": "string",
+          "description": "KEGG REST API URL used"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Response content type"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results returned"
+        }
+      }
     }
   },
   {

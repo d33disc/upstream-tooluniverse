@@ -4,3 +4,17 @@
 [DONE] ols_get_term_info — schema written (9 fields)
 [DONE] ols_get_term_children — schema written (9 fields)
 [DONE] ols_get_term_ancestors — schema written (9 fields)
+[DONE] ols_find_similar_terms — schema written (6 fields)
+[SKIP] BioSamples_get_sample — already has return_schema
+[SKIP] BioSamples_search — already has return_schema
+[SKIP] BioSamples_search_by_filter — already has return_schema
+[SKIP] OpenTargets_get_associated_drugs_by_disease_efoId — already has return_schema
+[SKIP] OpenTargets_get_similar_entities_by_disease_efoId — already has return_schema
+[DONE] kegg_search_pathway — schema written (5 fields)
+[DONE] kegg_find_genes — schema written (5 fields)
+[DONE] PDBeSearch_search_structures — schema written (3 fields: status, data, metadata)
+[DONE] PDBeSearch_search_by_organism — schema written (3 fields: status, data, metadata)
+[SKIP] ReactomeInteractors_get_entity_pathways — error: Failed to connect to Reactome API
+[DONE] ReactomeInteractors_search_entity — schema written (2 fields: status, data)
+[SKIP] PubChem_get_compound_2D_image_by_CID — already has return_schema
+[DONE] fda_pharmacogenomic_biomarkers — schema written (4 fields)
