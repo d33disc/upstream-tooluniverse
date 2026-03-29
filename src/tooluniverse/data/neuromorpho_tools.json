@@ -177,79 +177,7 @@
         "filter_value": "hippocampus",
         "size": 5
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "neuron_id": {
-                    "type": "integer"
-                  },
-                  "neuron_name": {
-                    "type": "string"
-                  },
-                  "species": {
-                    "type": "string"
-                  },
-                  "brain_region": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "cell_type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "archive": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                },
-                "total_pages": {
-                  "type": "integer"
-                },
-                "current_page": {
-                  "type": "integer"
-                },
-                "page_size": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "NeuroMorpho_get_morphometry",
@@ -419,53 +347,6 @@
       {
         "field_name": "cell_type"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of available values for the specified field"
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "field_name": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                },
-                "total_pages": {
-                  "type": "integer"
-                },
-                "current_page": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
-    }
+    ]
   }
 ]

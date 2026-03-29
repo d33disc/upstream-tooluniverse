@@ -92,33 +92,6 @@
       "endpoint": "county_rankings",
       "return_format": "JSON"
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "data_sources": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "year": {
-                "type": "integer"
-              },
-              "state": {
-                "type": "string"
-              },
-              "access_url": {
-                "type": "string",
-                "description": "URL to access County Health Rankings data"
-              }
-            }
-          }
-        },
-        "note": {
-          "type": "string",
-          "description": "Information about data access"
-        }
-      }
-    },
     "test_examples": [
       {
         "year": 2023,

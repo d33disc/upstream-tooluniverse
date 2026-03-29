@@ -521,82 +521,7 @@
       {
         "efoId": "EFO_0000537"
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "disease": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "drugAndClinicalCandidates": {
-              "type": "object",
-              "properties": {
-                "count": {
-                  "type": "integer"
-                },
-                "rows": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "drug": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "tradeNames": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "maximumClinicalTrialPhase": {
-                            "type": "integer"
-                          },
-                          "isApproved": {
-                            "type": "boolean"
-                          },
-                          "hasBeenWithdrawn": {
-                            "type": "boolean"
-                          }
-                        }
-                      },
-                      "maxClinicalStage": {
-                        "type": "integer"
-                      },
-                      "mechanismOfAction": {
-                        "type": "string"
-                      },
-                      "target": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "approvedSymbol": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "name": "OpenTargets_get_similar_entities_by_disease_efoId",
@@ -644,51 +569,7 @@
         "threshold": 1.0,
         "size": 1
       }
-    ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "disease": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "similarEntities": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "category": {
-                    "type": "string"
-                  },
-                  "score": {
-                    "type": "integer"
-                  },
-                  "object": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "name": "OpenTargets_get_similar_entities_by_drug_chemblId",

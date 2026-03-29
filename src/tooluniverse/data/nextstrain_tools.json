@@ -26,70 +26,7 @@
       {
         "pathogen": "ebola"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pathogen": {
-                    "type": "string"
-                  },
-                  "dataset_count": {
-                    "type": "integer"
-                  },
-                  "datasets": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_pathogens": {
-                  "type": "integer"
-                },
-                "total_datasets": {
-                  "type": "integer"
-                },
-                "filter": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Nextstrain_get_dataset",

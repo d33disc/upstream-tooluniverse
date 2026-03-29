@@ -1348,66 +1348,6 @@
     "fields": {
       "endpoint": "geo_rnaseq_search"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "total": {
-              "type": "integer"
-            },
-            "datasets": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "accession": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "summary": {
-                    "type": "string"
-                  },
-                  "organism": {
-                    "type": "string"
-                  },
-                  "n_samples": {
-                    "type": "integer"
-                  },
-                  "date_published": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
-    },
     "test_examples": [
       {
         "query": "breast cancer BRCA1",
@@ -1466,66 +1406,6 @@
     },
     "fields": {
       "endpoint": "geo_atacseq_search"
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "total": {
-              "type": "integer"
-            },
-            "datasets": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "accession": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "summary": {
-                    "type": "string"
-                  },
-                  "organism": {
-                    "type": "string"
-                  },
-                  "n_samples": {
-                    "type": "integer"
-                  },
-                  "date_published": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
     },
     "test_examples": [
       {
@@ -1612,66 +1492,6 @@
     },
     "fields": {
       "endpoint": "encode_rnaseq"
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "total": {
-              "type": "integer"
-            },
-            "experiments": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "accession": {
-                    "type": "string"
-                  },
-                  "assay_title": {
-                    "type": "string"
-                  },
-                  "biosample_summary": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  },
-                  "lab": {
-                    "type": "string"
-                  },
-                  "date_released": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
     },
     "test_examples": [
       {

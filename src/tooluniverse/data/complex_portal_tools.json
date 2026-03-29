@@ -119,35 +119,6 @@
         "complex_id": "CPX-100"
       }
     ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "complex_id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "species": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "subunits": {
-          "type": "array"
-        },
-        "diseases": {
-          "type": "array"
-        },
-        "go_annotations": {
-          "type": "array"
-        },
-        "cross_references": {
-          "type": "array"
-        }
-      }
-    },
     "label": [
       "Complex Portal",
       "CORUM",

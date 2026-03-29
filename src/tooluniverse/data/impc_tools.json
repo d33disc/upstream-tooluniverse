@@ -27,32 +27,6 @@
         "mgi_id": "MGI:98834"
       }
     ],
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "mgi_id": {
-          "type": "string"
-        },
-        "symbol": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "human_ortholog": {
-          "type": "array"
-        },
-        "phenotype_status": {
-          "type": "string"
-        },
-        "mp_terms": {
-          "type": "array"
-        },
-        "disease_associations": {
-          "type": "array"
-        }
-      }
-    },
     "label": [
       "IMPC",
       "MGI",

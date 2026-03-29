@@ -12,7 +12,9 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {},
-      {"note": "Returns 100+ cancer imaging collections including TCGA-GBM, LIDC-IDRI, TCGA-LUAD"}
+      {
+        "note": "Returns 100+ cancer imaging collections including TCGA-GBM, LIDC-IDRI, TCGA-LUAD"
+      }
     ],
     "return_schema": {
       "oneOf": [
@@ -37,7 +39,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -147,7 +151,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -194,48 +200,7 @@
         "Collection": "TCGA-GBM",
         "PatientID": "TCGA-06-0125"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "array",
-          "description": "List of patient studies",
-          "items": {
-            "type": "object",
-            "properties": {
-              "StudyInstanceUID": {
-                "type": "string"
-              },
-              "StudyDate": {
-                "type": "string"
-              },
-              "StudyDescription": {
-                "type": "string"
-              },
-              "PatientAge": {
-                "type": "string"
-              },
-              "PatientID": {
-                "type": "string"
-              },
-              "PatientSex": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message if the request failed"
-            }
-          },
-          "required": ["error"]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "TCIA_get_modality_values",
@@ -271,33 +236,7 @@
         "Collection": "TCGA-GBM",
         "Modality": "MR"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "array",
-          "description": "List of modality objects",
-          "items": {
-            "type": "object",
-            "properties": {
-              "Modality": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message if the request failed"
-            }
-          },
-          "required": ["error"]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "TCIA_get_body_part_values",
@@ -332,28 +271,7 @@
       {
         "Collection": "TCGA-GBM"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "array",
-          "description": "List of body part objects",
-          "items": {
-            "type": "object"
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message if the request failed"
-            }
-          },
-          "required": ["error"]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "TCIA_get_series_metadata",
@@ -399,7 +317,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -458,7 +378,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
