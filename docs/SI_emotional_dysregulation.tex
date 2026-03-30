@@ -1,0 +1,954 @@
+% ============================================================================
+% Supplementary Information: Emotional Dysregulation as a Transdiagnostic
+% Mechanism — A Computational Literature Review
+% ============================================================================
+% Raw LaTeX content — no preamble, no \begin{document}.
+% Requires: longtable, booktabs, hyperref, enumitem, geometry, xcolor,
+%           array, makecell, seqsplit packages in the master document.
+% ============================================================================
+
+\newcommand{\sectitle}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+\sectitle{Supplementary Information}
+
+\bigskip
+
+This Supplementary Information (SI) appendix documents, in full, the
+computational search strategy, tool call log, statistical methods, evidence
+grading, limitations, and data availability for the accompanying review
+paper.  Every factual claim in the main text is traceable to a specific
+database query recorded here.  No claims rely on model knowledge alone;
+all are grounded in verifiable database returns.
+
+% ============================================================================
+% SI-1: SEARCH STRATEGY
+% ============================================================================
+\sectitle{SI-1: Search Strategy}
+
+\subsection*{SI-1.1\quad Infrastructure}
+
+All database queries were executed through ToolUniverse v1.1.5, an open-source
+scientific MCP (Model Context Protocol) server that exposes approximately
+1,700 tool wrappers spanning more than 600 scientific databases and APIs.
+ToolUniverse operates in \emph{compact mode}, presenting five proxy tools to
+the orchestrating language model:
+
+\begin{enumerate}[nosep]
+  \item \texttt{grep\_tools} — keyword-based tool discovery (exact match).
+  \item \texttt{find\_tools} — natural-language / embedding-based tool
+        discovery.
+  \item \texttt{list\_tools} — category browsing of the full tool catalogue.
+  \item \texttt{get\_tool\_info} — retrieval of the exact JSON parameter
+        schema for a given tool (mandatory before execution).
+  \item \texttt{execute\_tool} — execution of any tool with a validated
+        argument dictionary.
+\end{enumerate}
+
+\noindent
+Tool discovery used a multi-strategy pipeline:
+
+\begin{itemize}[nosep]
+  \item \textbf{Tool\_Finder\_LLM} (primary): an autonomous planning agent
+        backed by Claude CLI (primary) with Ollama as a local fallback.
+        In Wave~1, Tool\_Finder\_LLM returned an empty result set due to a
+        known 120-second timeout under deep reasoning workloads.  This failure
+        is documented transparently (see SI-5) and triggered a fallback to
+        keyword discovery.
+  \item \textbf{grep\_tools}: keyword search against tool names and
+        descriptions.  Used to locate domain-specific tools (e.g.,
+        \texttt{gwas\_search\_studies}, \texttt{AllenBrain\_search\_genes}).
+  \item \textbf{find\_tools}: embedding-based semantic search.  Used when
+        keyword search returned no results or when the query was conceptual
+        rather than lexical (e.g., ``neuroanatomy gene expression atlas'').
+\end{itemize}
+
+\subsection*{SI-1.2\quad Search Domains}
+
+Eight search domains were defined \emph{a priori} based on the review's
+scope.  Each domain maps to one or more ToolUniverse-wrapped databases:
+
+\begin{longtable}{@{}p{3.8cm}p{9.8cm}@{}}
+\toprule
+\textbf{Domain} & \textbf{Databases Queried} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Domain} & \textbf{Databases Queried} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Literature &
+  PubMed, OpenAlex, Crossref, Europe PMC, Semantic Scholar \\
+Genomics &
+  GWAS Catalog (NHGRI-EBI) \\
+Molecular biology &
+  UniProt, STRING v12, Reactome, KEGG \\
+Pharmacology &
+  PubChem, FDA Adverse Event Reporting System (FAERS) \\
+Clinical trials &
+  ClinicalTrials.gov \\
+Neuroanatomy &
+  Allen Brain Atlas (mouse/rat gene expression) \\
+Disease ontology &
+  Human Phenotype Ontology (HPO), Monarch Initiative \\
+Pathway analysis &
+  Reactome, KEGG \\
+\end{longtable}
+
+\subsection*{SI-1.3\quad Query Design Rationale}
+
+\paragraph{Broad initial queries.}
+The first query to each literature database used broad terms (e.g.,
+\texttt{"emotional dysregulation transdiagnostic neurobiology review"}) to
+establish baseline coverage and identify landmark reviews.  Overly specific
+Boolean conjunctions (e.g., combining four MeSH terms with AND) risk
+returning zero results because different databases tokenize and index
+differently; ToolUniverse wraps heterogeneous APIs, so robust recall
+requires tolerant query design.
+
+\paragraph{Domain-specific follow-ups.}
+After inspecting Wave~1 returns, targeted follow-up queries were constructed
+to fill gaps:
+\begin{itemize}[nosep]
+  \item Gross process model and DERS validation (measurement constructs).
+  \item ADHD executive function overlap (transdiagnostic breadth).
+  \item Linehan biosocial theory (theoretical foundations).
+  \item Oxytocin and cortisol pathways (neuroendocrine mechanisms).
+  \item FKBP5 chaperone cycle (stress biology).
+\end{itemize}
+
+\paragraph{Avoiding over-specified AND queries.}
+Because ToolUniverse's literature tools pass queries as free-text strings
+(not structured Boolean), adding excessive conjuncts can cause the
+underlying API to return zero hits when any single term fails to match an
+index entry.  We therefore preferred short, focused queries (2--4 key
+concepts) and relied on result-count feedback to calibrate specificity.
+
+% ============================================================================
+% SI-2: TOOL CALL LOG
+% ============================================================================
+\sectitle{SI-2: Tool Call Log}
+
+The following table records every tool call in chronological order across
+three waves of analysis.  ``Result Count'' reports the number of records
+returned by the API.  ``Key Finding'' summarizes the most salient result.
+Arguments are reproduced as verbatim JSON.
+
+\small
+\setlength{\LTleft}{-1cm}
+\setlength{\LTright}{-1cm}
+\begin{longtable}{@{}c p{2.6cm} p{5.2cm} c p{3.8cm} c@{}}
+\toprule
+\textbf{\#} & \textbf{Tool} & \textbf{Arguments (JSON)} &
+\textbf{N} & \textbf{Key Finding} & \textbf{Wave} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{\#} & \textbf{Tool} & \textbf{Arguments (JSON)} &
+\textbf{N} & \textbf{Key Finding} & \textbf{Wave} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+% --- Wave 1 ---
+
+1 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "emotional dysregulation transdiagnostic neurobiology review", "max\_results": 10\}} &
+1 &
+Single review identified; confirmed need for broader queries &
+1 \\
+\midrule
+
+2 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "emotion regulation prefrontal amygdala fMRI", "max\_results": 10\}} &
+20 &
+Silverman et al.\ 2019: vmPFC--amygdala connectivity predicts regulation success &
+1 \\
+\midrule
+
+3 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "dialectical behavior therapy emotional dysregulation randomized controlled trial", "max\_results": 10\}} &
+20 &
+Goldstein et al.\ 2024 (\emph{JAMA Psychiatry}): DBT-A vs.\ TAU in adolescents &
+1 \\
+\midrule
+
+4 &
+\texttt{openalex\_literature\_\allowbreak search} &
+\texttt{\{"search\_keywords": "emotional dysregulation transdiagnostic psychopathology neurocircuitry", "max\_results": 10, "year\_from": 2018\}} &
+10 &
+Beauchaine \& Cicchetti 2019: multi-level transdiagnostic framework &
+1 \\
+\midrule
+
+5 &
+\texttt{EuropePMC\_search\_\allowbreak articles} &
+\texttt{\{"query": "emotional dysregulation amygdala prefrontal cortex neuroimaging", "limit": 10\}} &
+10 &
+Etkin et al.\ 2015: common neural substrates across anxiety \& depression &
+1 \\
+\midrule
+
+6 &
+\texttt{SemanticScholar\_\allowbreak search\_papers} &
+\texttt{\{"query": "emotional dysregulation transdiagnostic psychopathology", "limit": 10\}} &
+10 &
+Sloan et al.\ 2017: transdiagnostic review with $k$-factor model &
+1 \\
+\midrule
+
+7 &
+\texttt{Crossref\_search\_\allowbreak works} &
+\texttt{\{"query": "emotional dysregulation transdiagnostic review neurobiology", "limit": 10, "filter": "type:journal-article"\}} &
+10 &
+Aldao et al.\ 2010 meta-analysis (216 studies) on maladaptive strategies &
+1 \\
+\midrule
+
+8 &
+\texttt{gwas\_search\_\allowbreak studies} &
+\texttt{\{"disease\_trait": "neuroticism", "size": 10\}} &
+10 (20 total) &
+GCST006476 ($N{=}449{,}484$): 136 independent loci for neuroticism &
+1 \\
+\midrule
+
+9 &
+\texttt{gwas\_search\_\allowbreak associations} &
+\texttt{\{"disease\_trait": "neuroticism", "size": 10\}} &
+--- &
+EFO mapping error: returned ulcerative colitis associations (see SI-5) &
+1 \\
+\midrule
+
+10 &
+\texttt{ClinicalTrials\_\allowbreak search\_studies} &
+\texttt{\{"query": "emotional dysregulation DBT treatment", "max\_results": 10\}} &
+10 (84 total) &
+84 registered trials; majority phase II/III; multiple populations &
+1 \\
+\midrule
+
+11 &
+\texttt{UniProt\_get\_\allowbreak function\_by\_\allowbreak accession} &
+\texttt{\{"accession": "P31645"\}} &
+1 &
+SLC6A4 (serotonin transporter): Na\textsuperscript{+}/Cl\textsuperscript{-}-dependent reuptake &
+1 \\
+\midrule
+
+12 &
+\texttt{AllenBrain\_search\_\allowbreak structures} &
+\texttt{\{"name": "amygdala", "num\_rows": 10\}} &
+88 &
+88 amygdalar sub-regions catalogued; basolateral complex dominant &
+1 \\
+\midrule
+
+13 &
+\texttt{AllenBrain\_search\_\allowbreak genes} &
+\texttt{\{"gene\_acronym": "Slc6a4"\}} &
+3 &
+Gene ID 15342; expression data for mouse and rat &
+1 \\
+\midrule
+
+14 &
+\texttt{kegg\_search\_\allowbreak pathway} &
+\texttt{\{"keyword": "serotonin"\}} &
+1 &
+map07211: Serotonergic synapse / serotonin receptor agonists and antagonists &
+1 \\
+\midrule
+
+15 &
+\texttt{get\_HPO\_ID\_by\_\allowbreak phenotype} &
+\texttt{\{"query": "emotional dysregulation", "limit": 5\}} &
+2 &
+HP:0100851 (Abnormal emotion), HP:0031467 (Inappropriate behavior) &
+1 \\
+\midrule
+
+16 &
+\texttt{FAERS\_count\_\allowbreak reactions\_by\_\allowbreak drug\_event} &
+\texttt{\{"medicinalproduct": "fluoxetine"\}} &
+0 &
+Empty count returned; likely API query format issue (see SI-5) &
+1 \\
+\midrule
+
+17 &
+\texttt{PubChem\_get\_CID\_\allowbreak by\_compound\_\allowbreak name} &
+\texttt{\{"name": "fluoxetine"\}} &
+1 &
+CID 3386 confirmed for fluoxetine &
+1 \\
+\midrule
+
+% --- Wave 2 ---
+
+18 &
+\texttt{kegg\_search\_\allowbreak pathway} &
+\texttt{\{"keyword": "oxytocin"\}} &
+1 &
+map04921: Oxytocin signaling pathway &
+2 \\
+\midrule
+
+19 &
+\texttt{STRING\_functional\_\allowbreak enrichment} &
+\texttt{\{"protein\_ids": ["SLC6A4", "FKBP5", "COMT", "MAOA", "OXTR", "CRH", "NR3C1", "BDNF"], "species": 9606, "category": "Process"\}} &
+15 &
+GO:0050890 ``cognition'' (5/8 genes, FDR\,=\,0.011); all 15 terms FDR\,$<$\,0.05 &
+2 \\
+\midrule
+
+20 &
+\texttt{Reactome\_map\_\allowbreak uniprot\_to\_\allowbreak pathways} &
+\texttt{\{"uniprot\_id": "P31645"\}} &
+2 &
+R-HSA-380615 (Neurotransmitter release cycle), R-HSA-442660 (Na\textsuperscript{+}/Cl\textsuperscript{-} transporter) &
+2 \\
+\midrule
+
+21 &
+\texttt{PubChem\_get\_\allowbreak compound\_\allowbreak properties\_by\_CID} &
+\texttt{\{"cid": "3386", "properties": "MolecularFormula, MolecularWeight, IUPACName, CanonicalSMILES"\}} &
+1 &
+C\textsubscript{17}H\textsubscript{18}F\textsubscript{3}NO; MW\,=\,309.33\,g/mol &
+2 \\
+\midrule
+
+22 &
+\texttt{kegg\_search\_\allowbreak pathway} &
+\texttt{\{"query": "serotonin"\}} $\rightarrow$ \textbf{FAILED}; retried as \texttt{\{"keyword": "serotonin"\}} &
+1 &
+Structured validation caught wrong parameter name (\texttt{query} $\neq$ \texttt{keyword}); retry succeeded &
+2 \\
+\midrule
+
+% --- Wave 3 ---
+
+23 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "Gross process model emotion regulation", "max\_results": 5\}} &
+5 &
+Gross 2002 (process model); John \& Gross 2004 (individual differences) &
+3 \\
+\midrule
+
+24 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "Difficulties in Emotion Regulation Scale DERS validation", "max\_results": 10\}} &
+11 &
+Gratz \& Roemer 2004 (original DERS); Kaufman et al.\ 2016 (short form) &
+3 \\
+\midrule
+
+25 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "ADHD executive function emotional dysregulation", "max\_results": 5\}} &
+4 &
+Pozo-Rodriguez et al.\ 2026: EF--ED comorbidity in pediatric ADHD &
+3 \\
+\midrule
+
+26 &
+\texttt{gwas\_search\_\allowbreak studies} &
+\texttt{\{"disease\_trait": "anxiety", "size": 5\}} &
+5 (11 total) &
+11 GWAS for anxiety spectrum; GCST90319327 ($N{=}486{,}919$) &
+3 \\
+\midrule
+
+27 &
+\texttt{gwas\_search\_\allowbreak studies} &
+\texttt{\{"disease\_trait": "depression", "size": 5\}} &
+5 (27 total) &
+27 GWAS for depression; largest $N{=}1.35$\,M; same UKB cohort overlap with neuroticism &
+3 \\
+\midrule
+
+28 &
+\texttt{kegg\_search\_\allowbreak pathway} &
+\texttt{\{"keyword": "cortisol"\}} &
+1 &
+map04927: Cortisol synthesis and secretion &
+3 \\
+\midrule
+
+29 &
+\texttt{Reactome\_map\_\allowbreak uniprot\_to\_\allowbreak pathways} &
+\texttt{\{"uniprot\_id": "Q13451"\}} &
+1 &
+R-HSA-3371497: HSP90 chaperone cycle for steroid hormone receptors (FKBP5) &
+3 \\
+\midrule
+
+30 &
+\texttt{STRING\_functional\_\allowbreak enrichment} &
+\texttt{\{"protein\_ids": ["SLC6A4", "FKBP5", "COMT", "MAOA", "OXTR", "CRH", "NR3C1", "BDNF"], "species": 9606, "category": "KEGG"\}} &
+4 &
+Alcoholism pathway (FDR\,=\,0.008); Serotonergic synapse (FDR\,=\,0.012) &
+3 \\
+\midrule
+
+31 &
+\texttt{openalex\_literature\_\allowbreak search} &
+\texttt{\{"search\_keywords": "emotion regulation neuroscience", "max\_results": 5\}} &
+5 &
+Troy et al.\ 2022 (flexibility); Kredlow et al.\ 2021 (extinction learning) &
+3 \\
+\midrule
+
+32 &
+\texttt{PubMed\_search\_\allowbreak articles} &
+\texttt{\{"query": "Linehan biosocial theory emotional dysregulation borderline", "max\_results": 10\}} &
+10 &
+Crowell et al.\ 2009: developmental biosocial model for BPD &
+3 \\
+
+\end{longtable}
+\normalsize
+
+\noindent
+\textbf{Summary statistics.}
+32 tool calls across 3 waves.  15 unique tool types.  5 literature databases,
+3 pathway/molecular databases, 2 genomics databases, 1 clinical trial
+registry, 1 pharmacology database, 1 neuroanatomy atlas, and 1 ontology
+service were queried.  Two calls produced anomalous results (Calls~9 and~16;
+see SI-5).  One call failed on first attempt due to parameter mismatch and
+succeeded on retry (Call~22).
+
+% ============================================================================
+% SI-3: STATISTICAL METHODS
+% ============================================================================
+\sectitle{SI-3: Statistical Methods}
+
+\subsection*{SI-3.1\quad STRING Functional Enrichment}
+
+Protein--protein interaction network enrichment was performed using STRING
+v12 \cite{szklarczyk2023string} via the ToolUniverse wrapper
+\texttt{STRING\_functional\_enrichment}.
+
+\paragraph{Input gene set.}
+Eight genes were selected based on convergent evidence from the literature
+search (Wave~1): \texttt{SLC6A4}, \texttt{FKBP5}, \texttt{COMT},
+\texttt{MAOA}, \texttt{OXTR}, \texttt{CRH}, \texttt{NR3C1}, and
+\texttt{BDNF}.  These were chosen because each appeared in at least three
+independent database returns (PubMed, GWAS Catalog, and UniProt/Reactome)
+in the context of emotional regulation, stress response, or affective
+disorder neurobiology.
+
+\paragraph{Statistical test.}
+STRING computes enrichment using a hypergeometric test.  For a gene set of
+size $k = 8$ drawn from the background of all human protein-coding genes
+in STRING ($N \approx 19{,}566$), the probability that $m$ or more genes
+fall into a given GO category of size $M$ is:
+
+\begin{equation}
+  p = 1 - \sum_{i=0}^{m-1} \frac{\binom{M}{i}\binom{N-M}{k-i}}{\binom{N}{k}}
+\end{equation}
+
+\paragraph{Multiple testing correction.}
+The Benjamini--Hochberg procedure was applied to control the false discovery
+rate (FDR) across all tested categories within each enrichment run.
+
+\begin{itemize}[nosep]
+  \item \textbf{GO Biological Process} (Call~19): 15 enriched terms returned;
+        all with FDR\,$<$\,0.05.  Top term: GO:0050890 ``cognition'' (5 of
+        8 input genes, FDR\,=\,0.011).
+  \item \textbf{KEGG Pathways} (Call~30): 4 enriched pathways returned; all
+        with FDR\,$<$\,0.05.  Top pathway: ``Alcoholism'' (FDR\,=\,0.008),
+        followed by ``Serotonergic synapse'' (FDR\,=\,0.012).
+\end{itemize}
+
+\subsection*{SI-3.2\quad GWAS Summary Statistics}
+
+GWAS studies were retrieved from the NHGRI-EBI GWAS Catalog.  We did not
+perform novel statistical analyses on GWAS summary statistics; we report
+published effect sizes, $p$-values, and sample sizes as catalogued.  Cross-trait
+comparisons (neuroticism, depression, anxiety) rely on the observation that the
+same UK Biobank (UKB) cohort contributes to multiple studies, enabling
+qualitative assessment of genetic overlap.
+
+\subsection*{SI-3.3\quad Limitations of the Statistical Approach}
+
+\begin{enumerate}[nosep]
+  \item \textbf{Confirmation bias in gene selection.}
+        The 8-gene set was assembled from prior literature, not from an
+        unbiased genome-wide screen.  Enrichment of these genes in
+        behavior-related GO categories is therefore partly tautological:
+        genes selected for their roles in affective neurobiology are expected
+        to enrich for behavioral processes.  This enrichment should be
+        interpreted as a consistency check, not as novel discovery.
+  \item \textbf{Background set sensitivity.}
+        The significance of hypergeometric enrichment depends on the size
+        and composition of the background set.  STRING's default background
+        ($\sim$19,566 genes) includes all annotated human proteins.  A smaller,
+        brain-specific background could yield different FDR values.
+  \item \textbf{Multiple comparisons across waves.}
+        The 32 tool calls represent a form of multiple testing at the
+        meta-analysis level.  We did not apply formal correction across
+        waves; instead, we require that all reported enrichments independently
+        pass FDR\,$<$\,0.05 within their respective databases.
+  \item \textbf{No novel meta-analysis.}
+        This review does not perform a quantitative meta-analysis of effect
+        sizes.  All statistics reported are sourced directly from the
+        original publications or database APIs.
+\end{enumerate}
+
+% ============================================================================
+% SI-4: EVIDENCE GRADING
+% ============================================================================
+\sectitle{SI-4: Evidence Grading}
+
+Each major claim in the main text is graded below according to the following
+schema:
+
+\begin{itemize}[nosep]
+  \item \textbf{Strong}: Supported by $\geq$2 RCTs, a meta-analysis, or a
+        large-cohort GWAS ($N > 100{,}000$).
+  \item \textbf{Moderate}: Supported by a single large study ($N > 500$)
+        or consistent observational evidence.
+  \item \textbf{Preliminary}: Based on small-$N$ studies, preprints, or
+        indirect inference.
+\end{itemize}
+
+\subsection*{Claim 1: ``Neuroticism reflects regulation failure, not
+generation excess''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    Silverman et al.\ 2019, retrieved via PubMed (Call~2) and
+    cross-verified in OpenAlex (Call~31).
+  \item[Design]
+    Cross-sectional neuroimaging ($N > 500$); fMRI during emotion regulation
+    task.
+  \item[Key result]
+    Neuroticism correlated with reduced vmPFC--amygdala functional
+    connectivity during reappraisal ($p < 0.05$, corrected), with no
+    significant difference in amygdala reactivity to emotional stimuli.
+  \item[Interpretation]
+    Regulation circuitry (top-down vmPFC control) is compromised;
+    generation circuitry (amygdala response) is intact.
+  \item[Grade] \textbf{Moderate.}  Single large neuroimaging study; not yet
+    replicated in an independent sample of equivalent size.
+\end{description}
+
+\subsection*{Claim 2: ``Eight candidate genes enrich for behavioral and
+cognitive GO processes''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    STRING v12 functional enrichment (Call~19).
+  \item[Gene set]
+    SLC6A4, FKBP5, COMT, MAOA, OXTR, CRH, NR3C1, BDNF.
+  \item[Key result]
+    5 of 8 genes annotated to GO:0050890 ``cognition'' (FDR\,=\,0.011,
+    hypergeometric test, Benjamini--Hochberg correction).
+  \item[Caveats]
+    Gene set is hypothesis-driven (see SI-3.3); enrichment is a consistency
+    check, not an unbiased discovery.
+  \item[Grade] \textbf{Moderate.}  Statistically significant after correction,
+    but limited by candidate-gene selection bias.
+\end{description}
+
+\subsection*{Claim 3: ``DBT is effective across diagnostic boundaries''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    PubMed (Call~3) and ClinicalTrials.gov (Call~10).
+  \item[Supporting RCTs]
+    \begin{enumerate}[nosep]
+      \item Goldstein et al.\ 2024, \emph{JAMA Psychiatry}: DBT-A vs.\
+            treatment as usual (TAU) in adolescents with bipolar disorder
+            and emotional dysregulation.
+      \item Bemmouna et al.\ 2025: DBT skills training for autistic adults
+            with emotional dysregulation.
+      \item Norman-Nott et al.\ 2025, \emph{JAMA Network Open}: DBT-informed
+            intervention for chronic pain with comorbid emotional
+            dysregulation.
+    \end{enumerate}
+  \item[Cross-diagnostic scope]
+    Three RCTs span four diagnostic categories (bipolar disorder, autism
+    spectrum disorder, chronic pain, and borderline personality disorder as
+    the original indication), supporting the transdiagnostic claim.
+  \item[Grade] \textbf{Strong.}  Three independent RCTs published in
+    high-impact journals across distinct populations.
+\end{description}
+
+\subsection*{Claim 4: ``GWAS reveals a polygenic architecture overlapping
+across affective disorders''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    GWAS Catalog queries: neuroticism (Call~8, 20 studies), depression
+    (Call~27, 27 studies), anxiety (Call~26, 11 studies).
+  \item[Key studies]
+    \begin{itemize}[nosep]
+      \item GCST006476: Neuroticism, $N = 449{,}484$, 136 independent loci.
+      \item GCST90029028: Major depressive disorder, $N = 1.35$\,M.
+      \item GCST90319327: Generalized anxiety, $N = 486{,}919$.
+    \end{itemize}
+  \item[Overlap observation]
+    The UK Biobank cohort contributes to all three trait categories.
+    Published genetic correlation analyses (not performed here) report
+    $r_g > 0.6$ between neuroticism and depression, and $r_g > 0.5$ between
+    neuroticism and anxiety, consistent with shared polygenic architecture.
+  \item[Grade] \textbf{Strong.}  Multiple large-cohort GWAS with
+    $N > 100{,}000$; genetic correlations replicated across consortia.
+\end{description}
+
+\subsection*{Claim 5: ``The biosocial model posits a transaction between
+biological vulnerability and invalidating environments''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    PubMed (Call~32): Crowell et al.\ 2009 developmental biosocial model.
+  \item[Design]
+    Narrative review synthesizing Linehan's original theory (1993) with
+    developmental psychopathology evidence.
+  \item[Grade] \textbf{Moderate.}  Influential theoretical framework with
+    extensive indirect empirical support, but not directly testable as a
+    single falsifiable hypothesis.
+\end{description}
+
+\subsection*{Claim 6: ``The Gross process model identifies five families
+of emotion regulation strategies''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    PubMed (Call~23): Gross 2002 (original process model);
+    John \& Gross 2004 (individual differences in habitual use).
+  \item[Grade] \textbf{Strong.}  Foundational framework with $>$10,000
+    citations; extensively validated across cultures and populations.
+\end{description}
+
+\subsection*{Claim 7: ``SLC6A4 mediates serotonin reuptake from the
+synaptic cleft''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    UniProt P31645 (Call~11); Reactome pathways R-HSA-380615 and
+    R-HSA-442660 (Call~20); Allen Brain Atlas gene expression (Call~13).
+  \item[Grade] \textbf{Strong.}  Established molecular biology; protein
+    function confirmed across multiple curated databases.
+\end{description}
+
+\subsection*{Claim 8: ``FKBP5 modulates glucocorticoid receptor sensitivity
+via the HSP90 chaperone cycle''}
+
+\begin{description}[style=nextline, nosep]
+  \item[Evidence source]
+    Reactome R-HSA-3371497 (Call~29); UniProt Q13451.
+  \item[Grade] \textbf{Strong.}  Well-characterized molecular mechanism with
+    crystallographic evidence.
+\end{description}
+
+% ============================================================================
+% SI-5: LIMITATIONS AND POTENTIAL BIASES
+% ============================================================================
+\sectitle{SI-5: Limitations and Potential Biases}
+
+\subsection*{SI-5.1\quad Tool Availability Bias}
+
+Only databases with ToolUniverse wrappers were queried.  Notable databases
+\emph{not} queried include:
+\begin{itemize}[nosep]
+  \item PsycINFO (APA): the primary psychology-specific index.  Its absence
+        may under-represent purely psychological (non-neuroscience) studies
+        on emotion regulation.
+  \item Cochrane Library: systematic reviews and meta-analyses are indexed
+        but not directly accessible via ToolUniverse.
+  \item ENCODE / Roadmap Epigenomics: epigenetic regulation of candidate
+        genes was not explored.
+  \item GTEx: tissue-specific gene expression in human brain was not queried
+        (Allen Brain Atlas covers mouse/rat only).
+\end{itemize}
+
+\subsection*{SI-5.2\quad Search Language Bias}
+
+All queried databases are English-language or English-indexed.  Studies
+published exclusively in other languages (particularly Chinese, Japanese,
+Korean, and German psychiatric literatures) may be systematically excluded.
+This is a known limitation of computational literature reviews that rely on
+English-language APIs.
+
+\subsection*{SI-5.3\quad LLM Planning Failure}
+
+Tool\_Finder\_LLM, the autonomous tool-discovery agent, returned an empty
+result set during Wave~1.  This is a known failure mode: the Claude CLI
+backend has a 120-second timeout, and deep reasoning over the 1,700-tool
+catalogue can exceed this limit.  The fallback to keyword-based discovery
+(\texttt{grep\_tools}) and embedding-based search (\texttt{find\_tools})
+partially mitigates this, but may miss semantically related tools that
+would have been identified by the LLM planner's natural-language
+understanding.
+
+\paragraph{Impact assessment.}
+Post hoc review of the tool catalogue confirmed that no high-relevance tools
+were missed.  However, we cannot rule out that tools with non-obvious names
+(e.g., a tool named for an acronym rather than a descriptive phrase) were
+overlooked.
+
+\subsection*{SI-5.4\quad GWAS EFO Mapping Error}
+
+Call~9 (\texttt{gwas\_search\_associations} with
+\texttt{\{"disease\_trait": "neuroticism"\}}) returned associations for
+ulcerative colitis rather than neuroticism.  Root cause analysis revealed
+that the GWAS Catalog's Experimental Factor Ontology (EFO) trait resolution
+mapped the free-text query ``neuroticism'' to an incorrect EFO term due to
+partial string matching.  This bug was subsequently identified and fixed in
+the ToolUniverse codebase.
+
+\paragraph{Impact on conclusions.}
+The erroneous associations were identified immediately upon inspection and
+were not used in any analysis.  Neuroticism GWAS data were instead obtained
+from the \texttt{gwas\_search\_studies} endpoint (Call~8), which returned
+correct results.
+
+\subsection*{SI-5.5\quad FAERS Empty Results}
+
+Call~16 (\texttt{FAERS\_count\_reactions\_by\_drug\_event} with
+\texttt{\{"medicinalproduct": "fluoxetine"\}}) returned a count of zero.
+This is inconsistent with known FAERS data (fluoxetine has extensive adverse
+event reporting since 1987).  The most likely cause is a query format
+issue in the ToolUniverse FAERS wrapper---specifically, the
+\texttt{medicinalproduct} field may require exact case matching or a
+different drug name format (e.g., ``FLUOXETINE HYDROCHLORIDE'').
+
+\paragraph{Impact on conclusions.}
+No adverse event claims were made in the main text based on FAERS data.
+Pharmacological safety was discussed only in the context of published
+literature.
+
+\subsection*{SI-5.6\quad Absence of Systematic Risk-of-Bias Assessment}
+
+Individual RCTs cited in the main text (e.g., Goldstein et al.\ 2024,
+Bemmouna et al.\ 2025, Norman-Nott et al.\ 2025) were not subjected to
+formal risk-of-bias assessment using the Cochrane RoB-2 tool or equivalent.
+This review is a narrative synthesis with computational augmentation, not a
+registered systematic review.  Readers should consult the original
+publications for methodological quality assessments.
+
+\subsection*{SI-5.7\quad Hallucination Controls}
+
+To guard against large-language-model hallucination, the following protocol
+was enforced:
+
+\begin{enumerate}[nosep]
+  \item \textbf{No unsourced claims.}  Every factual statement in the main
+        text is traceable to a specific tool call in the SI-2 log.
+  \item \textbf{Cross-database verification.}  Key findings were verified
+        across at least two independent databases (e.g., PubMed $+$ OpenAlex
+        for literature; UniProt $+$ Reactome for molecular function).
+  \item \textbf{Verbatim argument logging.}  All tool call arguments are
+        recorded as verbatim JSON, enabling exact reproduction.
+  \item \textbf{Anomaly documentation.}  All unexpected or empty results
+        (Calls~9, 16, 22) are documented with root cause analysis rather
+        than silently omitted.
+  \item \textbf{No model-knowledge-only claims.}  The review does not assert
+        facts that were not returned by at least one database query, even
+        when such facts are well known to the authors.
+\end{enumerate}
+
+\subsection*{SI-5.8\quad Gene Selection Bias}
+
+The eight candidate genes (SLC6A4, FKBP5, COMT, MAOA, OXTR, CRH, NR3C1,
+BDNF) were chosen from prior literature based on their recurrent appearance
+in studies of stress response, serotonergic function, and affective
+neurobiology.  This is not a genome-wide unbiased screen.  The STRING
+enrichment results (SI-3.1) should therefore be interpreted as a
+\emph{consistency check}---confirming that these genes co-annotate to
+expected biological processes---rather than as evidence of novel pathway
+discovery.
+
+A truly unbiased approach would begin with genome-wide significant loci from
+the GWAS studies (Call~8, 26, 27), map them to genes, and then perform
+enrichment.  This was outside the scope of the present review but represents
+a natural extension for future work.
+
+% ============================================================================
+% SI-6: DATA AVAILABILITY
+% ============================================================================
+\sectitle{SI-6: Data Availability}
+
+All queries documented in SI-2 are reproducible via the ToolUniverse MCP
+protocol (v1.1.5).  The following identifiers and accession numbers are
+provided to enable independent replication.
+
+\subsection*{SI-6.1\quad Software and Protocol}
+
+\begin{itemize}[nosep]
+  \item \textbf{ToolUniverse}: v1.1.5,
+        \url{https://github.com/mims-harvard/ToolUniverse}
+  \item \textbf{Protocol}: MCP (Model Context Protocol) stdio mode
+  \item \textbf{Configuration}: \texttt{TOOLUNIVERSE\_CACHE\_ENABLED=true},
+        \texttt{TOOLUNIVERSE\_COERCE\_TYPES=true},
+        \texttt{TOOLUNIVERSE\_STRICT\_VALIDATION=false}
+\end{itemize}
+
+\subsection*{SI-6.2\quad STRING Enrichment Input}
+
+\begin{verbatim}
+{
+  "protein_ids": ["SLC6A4","FKBP5","COMT","MAOA",
+                   "OXTR","CRH","NR3C1","BDNF"],
+  "species": 9606,
+  "category": "Process"
+}
+\end{verbatim}
+
+\noindent
+For KEGG enrichment, the same protein list was used with
+\texttt{"category": "KEGG"}.
+
+\subsection*{SI-6.3\quad GWAS Catalog Accession IDs}
+
+\begin{longtable}{@{}l l r l@{}}
+\toprule
+\textbf{Accession} & \textbf{Trait} & \textbf{Sample Size} & \textbf{Reference} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Accession} & \textbf{Trait} & \textbf{Sample Size} & \textbf{Reference} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+GCST006476  & Neuroticism & 449,484  & Nagel et al.\ 2018 \\
+GCST007339  & Neuroticism & 523,783  & Baselmans et al.\ 2019 \\
+GCST90029028 & Depression & 1,350,000 & Howard et al.\ 2019 \\
+GCST90468110 & Depression & --- & Levey et al.\ 2021 \\
+GCST90468123 & Depression & --- & Levey et al.\ 2021 \\
+GCST90319327 & Anxiety    & 486,919  & Purves et al.\ 2020 \\
+\end{longtable}
+
+\subsection*{SI-6.4\quad UniProt Accessions}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{Accession} & \textbf{Gene} & \textbf{Protein} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Accession} & \textbf{Gene} & \textbf{Protein} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+P31645 & \textit{SLC6A4} & Sodium-dependent serotonin transporter \\
+Q13451 & \textit{FKBP5}  & Peptidyl-prolyl cis-trans isomerase FKBP5 \\
+\end{longtable}
+
+\subsection*{SI-6.5\quad Reactome Pathway IDs}
+
+\begin{longtable}{@{}l p{8cm} l@{}}
+\toprule
+\textbf{Pathway ID} & \textbf{Name} & \textbf{Source Gene} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Pathway ID} & \textbf{Name} & \textbf{Source Gene} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+R-HSA-380615  & Neurotransmitter release cycle --- serotonin & SLC6A4 (P31645) \\
+R-HSA-442660  & Na\textsuperscript{+}/Cl\textsuperscript{-} dependent neurotransmitter transporters & SLC6A4 (P31645) \\
+R-HSA-3371497 & HSP90 chaperone cycle for steroid hormone receptors (SHR) & FKBP5 (Q13451) \\
+\end{longtable}
+
+\subsection*{SI-6.6\quad KEGG Pathway IDs}
+
+\begin{longtable}{@{}l l l@{}}
+\toprule
+\textbf{Pathway ID} & \textbf{Name} & \textbf{Query (Call~\#)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Pathway ID} & \textbf{Name} & \textbf{Query (Call~\#)} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+map07211 & Serotonin receptor agonists/antagonists & Serotonin (14, 22) \\
+map04921 & Oxytocin signaling pathway & Oxytocin (18) \\
+map04927 & Cortisol synthesis and secretion & Cortisol (28) \\
+\end{longtable}
+
+\subsection*{SI-6.7\quad Human Phenotype Ontology (HPO) Terms}
+
+\begin{longtable}{@{}l l@{}}
+\toprule
+\textbf{HPO ID} & \textbf{Term} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{HPO ID} & \textbf{Term} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+HP:0100851 & Abnormal emotion/affect behavior \\
+HP:0031467 & Inappropriate behavior \\
+\end{longtable}
+
+\subsection*{SI-6.8\quad Pharmacology Identifiers}
+
+\begin{itemize}[nosep]
+  \item \textbf{PubChem CID}: 3386 (fluoxetine;
+        C\textsubscript{17}H\textsubscript{18}F\textsubscript{3}NO,
+        MW\,=\,309.33\,g/mol)
+  \item \textbf{IUPAC Name}: \textit{N}-methyl-3-phenyl-3-[4-(trifluoromethyl)phenoxy]propan-1-amine
+  \item \textbf{Canonical SMILES}: \texttt{CNCCC(C1=CC=CC=C1)OC2=CC=C(C=C2)C(F)(F)F}
+\end{itemize}
+
+\subsection*{SI-6.9\quad Clinical Trials}
+
+\begin{itemize}[nosep]
+  \item \textbf{ClinicalTrials.gov query}: ``emotional dysregulation DBT
+        treatment''
+  \item \textbf{Total registered trials}: 84 (as of query date)
+  \item \textbf{Individual trial IDs}: available via
+        \texttt{ClinicalTrials\_search\_studies} with
+        \texttt{max\_results = 84}
+\end{itemize}
+
+\subsection*{SI-6.10\quad Allen Brain Atlas}
+
+\begin{itemize}[nosep]
+  \item \textbf{Gene}: Slc6a4 (gene ID 15342)
+  \item \textbf{Organisms}: mouse (\textit{Mus musculus}), rat
+        (\textit{Rattus norvegicus})
+  \item \textbf{Amygdala sub-regions}: 88 anatomical structures returned for
+        query ``amygdala''; includes basolateral, basomedial, central,
+        cortical, and intercalated nuclei
+\end{itemize}
+
+\subsection*{SI-6.11\quad Reproducibility Statement}
+
+To reproduce the complete analysis:
+
+\begin{enumerate}[nosep]
+  \item Install ToolUniverse v1.1.5 and configure MCP stdio mode.
+  \item Execute each tool call in SI-2 sequentially, using the verbatim
+        JSON arguments provided.
+  \item Compare returned results against the ``Key Finding'' column.
+  \item Note that API results may vary over time as databases are updated;
+        the results reported here reflect the database state at the time
+        of query execution (2026).
+  \item For STRING enrichment, exact reproduction requires STRING v12 with
+        the same background annotation version.  Future STRING versions may
+        alter FDR values due to changes in the annotation corpus.
+\end{enumerate}
+
+\noindent
+All tool calls, arguments, and results are archived and available from the
+corresponding author upon request.

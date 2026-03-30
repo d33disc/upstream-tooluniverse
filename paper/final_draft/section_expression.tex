@@ -1,0 +1,118 @@
+\subsection*{Expression Topography: Where Risk Genes Meet Regulatory Circuits}
+
+The genome-wide association catalog and candidate gene literature converge on a
+handful of loci implicated in emotional dysregulation, yet a gene's name on a
+Manhattan plot tells us almost nothing about \emph{where} it acts. Two risk
+genes may sit adjacent on a chromosome and operate in entirely different neural
+circuits; conversely, genes on separate chromosomes may converge on the same
+synapse. To move from statistical association to mechanistic explanation, we
+must ask a deceptively simple question: in which cells, in which brain regions,
+is each risk gene actually expressed? The answer, as we shall see, reorganizes
+the prevailing circuit model of emotional dysregulation in ways that no amount
+of functional MRI alone could achieve.
+
+Consider \gene{SLC6A4}, encoding the serotonin transporter, arguably the most
+studied gene in psychiatric genetics. The standard narrative places it at the
+center of the prefrontal--amygdala circuit: variation in \gene{SLC6A4}
+modulates amygdala reactivity to threat \cite{hariri2002serotonin}, alters
+prefrontal--amygdala functional connectivity
+\cite{pezawas2005slc6a4connectivity}, and interacts with early adversity to
+predict depressive episodes \cite{caspi2003influence}. One might reasonably
+assume that the transporter is expressed in amygdala neurons, clearing serotonin
+from local synapses. The expression data say otherwise.
+
+Queries to the Human Protein Atlas for \gene{SLC6A4} messenger RNA in the
+amygdala return no detected expression \cite{uhlen2015tissue}. The same null
+result emerges from the Genotype-Tissue Expression (GTEx) consortium: across
+thirteen brain subregions profiled by GTEx, \gene{SLC6A4}
+(ENSG00000108576.14) yields effectively empty returns
+\cite{gtex2020gtex}. These are not failures of detection. They are informative
+absences. The Allen Human Brain Atlas and its mouse homolog confirm that
+\gene{Slc6a4} expression is overwhelmingly concentrated in the dorsal and
+median raphe nuclei of the brainstem, with modest expression in select cortical
+and limbic territories in mouse \cite{lein2007genome, hawrylycz2012anatomically}.
+The raphe nuclei---small, phylogenetically ancient cell clusters---are the
+principal source of serotonergic innervation throughout the forebrain. They are
+also, notably, absent from the standard GTEx tissue panel, which explains the
+consortium-wide silence.
+
+The mechanistic implication is fundamental. \gene{SLC6A4} does not modulate
+amygdala function from within the amygdala. It does so \emph{remotely}, from
+serotonergic cell bodies in the raphe nuclei whose axonal projections terminate
+in the amygdala, the medial prefrontal cortex, and the hippocampus
+\cite{hale2012functional}. The transporter protein is synthesized in the raphe
+soma, trafficked down the axon, and inserted into presynaptic membranes at
+distant terminal fields, where it clears serotonin from the synaptic cleft.
+Genetic variation that alters transcription, splicing, or protein folding of
+\gene{SLC6A4} therefore acts at the \emph{source}---the raphe---but manifests
+functionally at the \emph{target}: the amygdala terminal, the prefrontal
+terminal, and every other serotonergic synapse in the brain simultaneously.
+
+This three-node architecture---raphe to prefrontal cortex, raphe to
+amygdala---reframes how we understand the transdiagnostic reach of
+\gene{SLC6A4} variation. The prefrontal--amygdala model of emotional
+dysregulation typically emphasizes a single dyadic relationship: top-down
+prefrontal regulation of amygdala reactivity. But if the serotonin transporter
+gene is expressed in neither node of that dyad, then its influence must be
+understood as a simultaneous modulation of \emph{both} arms of the circuit from
+a common upstream source. A low-expressing \gene{SLC6A4} allele does not
+selectively disinhibit the amygdala; it alters serotonergic tone at every
+terminal field the raphe innervates, including prefrontal regions responsible
+for reappraisal, hippocampal circuits supporting contextual fear conditioning,
+and striatal pathways mediating reward sensitivity
+\cite{murphy2008serotonin, canli2006long}. This \emph{broadcast}
+architecture---one gene, one cell group, many targets---explains why
+\gene{SLC6A4} polymorphisms surface in studies of depression, anxiety,
+impulsivity, aggression, and borderline personality features with roughly
+comparable, if modest, effect sizes \cite{karg2011serotonin}. The gene is not
+pleiotropic in the classical sense of acting through multiple molecular
+pathways; it is pleiotropic by \emph{projection geometry}.
+
+The selective serotonin reuptake inhibitors (SSRIs) exploit exactly this
+geometry, though the pharmacological framing rarely makes the point explicit.
+The drug acts at the synaptic terminal---blocking the transporter protein at
+the amygdala synapse, the prefrontal synapse, the hippocampal synapse---yet the
+protein it targets is encoded by a gene expressed in the raphe. The therapeutic
+and the genetic thus operate at opposite ends of the same axon. This has
+practical consequences for pharmacogenomics: a functional polymorphism that
+reduces \gene{SLC6A4} transcription in raphe neurons will lower transporter
+density at \emph{all} terminal fields, potentially altering SSRI binding
+kinetics across the entire serotonergic projection system rather than at any
+single circuit node \cite{murphy2004pharmacogenomics}.
+
+The contrast with the glucocorticoid-signaling genes is instructive.
+\gene{NR3C1}, encoding the glucocorticoid receptor, and \gene{FKBP5}, encoding
+its cochaperone FK506-binding protein 51, show robust expression in the
+hippocampus and prefrontal cortex---the very structures whose function they are
+proposed to modulate \cite{perlman2007glucocorticoid, binder2009association}.
+Variation in these genes alters the stress response \emph{locally}, within the
+neurons that integrate hypothalamic--pituitary--adrenal (HPA) axis feedback.
+Hippocampal neurons expressing \gene{NR3C1} bind circulating cortisol and
+adjust their own firing, synaptic plasticity, and gene expression in direct
+response \cite{deangelis2019glucocorticoids}. There is no obligatory relay
+through a distant cell group. The gene and the circuit are coextensive.
+
+These two expression architectures---distal projection modulation by
+\gene{SLC6A4} versus local circuit action by \gene{NR3C1} and
+\gene{FKBP5}---are not merely neuroanatomical curiosities. They generate
+distinct predictions for gene--environment interaction, pharmacological
+response, and the developmental timing of risk. A gene expressed at the circuit
+node can be regulated by local epigenetic signals: childhood adversity alters
+\gene{NR3C1} methylation in hippocampal neurons, directly silencing the
+receptor in the cells that need it \cite{mcgowan2009epigenetic}. A gene
+expressed at a distal projection source, by contrast, is subject to the
+epigenetic environment of the \emph{raphe}, a region whose developmental
+programming and chromatin landscape remain poorly characterized in humans.
+Until brainstem-resolution epigenomic atlases become available, the
+environmental regulation of \gene{SLC6A4} will remain substantially opaque.
+
+The expression topography of risk genes thus reveals a deeper structure beneath
+the familiar circuit diagrams. Emotional dysregulation is not simply a matter
+of weakened prefrontal control over amygdala reactivity. It is a network
+phenomenon shaped by genes that act at different spatial scales: some from
+within the circuit, tuning local synapses; others from distant brainstem nuclei,
+simultaneously adjusting the neurochemical milieu across multiple forebrain
+targets. Integrating transcriptomic atlases with connectomic and epigenomic
+data will be essential for building genetic models of emotional dysregulation
+that honor this spatial complexity---models in which the locus of expression,
+not merely the locus on the chromosome, determines the architecture of risk.

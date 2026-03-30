@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    {
+      "id": "ChEMBL_search",
+      "name": "ChEMBL_search",
+      "type": "BaseRESTTool"
+    },
+    {
+      "id": "UniProt_search",
+      "name": "UniProt_search",
+      "type": "BaseRESTTool"
+    }
+  ],
+  "edges": [],
+  "stats": {
+    "tools": 2,
+    "pairs_evaluated": 1,
+    "edges": 0,
+    "llm_calls": 5,
+    "runtime_sec": 0.31
+  }
+}

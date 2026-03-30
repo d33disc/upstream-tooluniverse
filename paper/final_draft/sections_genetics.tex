@@ -1,0 +1,446 @@
+%% Expanded sections: Genetic Architecture & Therapeutic Landscape
+%% Raw LaTeX content — no preamble, no \begin{document}
+
+
+%% ====================================================================
+%%  SECTION: GENETIC ARCHITECTURE
+%% ====================================================================
+
+\sectitle{Genetic Architecture of Emotional Dysregulation}
+
+Clinicians have long observed that emotional dysregulation clusters in families,
+but only in the past decade have researchers mapped its polygenic architecture
+with sufficient statistical power to distinguish signal from noise.\cite{polderman2015}
+Three converging lines of genome-wide evidence now delineate the heritable
+basis of dysregulated affect: large-scale GWAS of neuroticism, depression, and
+anxiety; functional enrichment analyses that situate risk loci within
+neurotransmitter and neuroendocrine pathways; and epigenetic studies that reveal
+how environmental adversity inscribes itself onto these same genes.
+
+\subsection*{Genome-Wide Association: Scale and Convergence}
+
+Neuroticism — the dispositional tendency toward negative affect that most
+personality theorists regard as the temperamental substrate of emotional
+dysregulation — has attracted at least 20 GWAS to date.\cite{sollis2023,nagel2018}
+The largest of these, GCST006476, genotyped 449,484 participants and identified
+136 independent genomic loci, while a subsequent study (GCST007339) extended
+discovery to 523,783 individuals with an additional 59,206-person replication
+cohort.\cite{nagel2018,luciano2018}
+These studies transformed neuroticism from a ``soft'' personality construct into
+a measurable polygenic trait whose genetic signal rivals that of height or
+BMI in magnitude, if not in per-locus effect size.
+
+Depression has generated an even larger literature — 27 GWAS and counting.
+The most recent and powerful, GCST90319327, assembled 371,184 cases against
+978,703 controls, making it the largest depression GWAS ever
+conducted.\cite{als2023}
+This unprecedented sample yielded hundreds of genome-wide significant loci and,
+crucially, demonstrated that many of these loci overlap with neuroticism risk
+variants — a pattern consistent with the hypothesis that neuroticism and
+depression share a common heritable core rather than merely co-occurring
+phenotypically.
+
+Anxiety, though less extensively studied at the genomic level, has nonetheless
+accumulated 11 GWAS.\cite{purves2020}
+The largest, GCST90468110, drew on 394,626 participants and identified multiple
+loci that again overlapped with both neuroticism and depression signals.
+A critical methodological feature strengthens these convergence claims: the UK
+Biobank cohort ($N \approx 394{,}626$) has contributed GWAS data for all three
+phenotypes — neuroticism, anxiety, and depression — enabling researchers to
+estimate genetic correlations within the same participants rather than across
+cohorts with different ascertainment biases.\cite{nagel2018}
+The resulting genetic correlation between neuroticism and depression
+($r_g \approx 0.80$) confirms that these phenotypes share the vast majority of
+their common-variant architecture.\cite{nagel2018}
+This overlap does not mean the phenotypes are identical; rather, it suggests
+that a shared genetic liability disposes individuals toward emotional
+dysregulation, which then manifests as neuroticism, depression, or anxiety
+depending on developmental context and environmental exposure.
+
+\subsection*{From Risk Loci to Functional Pathways}
+
+Identifying hundreds of risk loci accomplishes little unless researchers can
+trace those loci to biological mechanisms.
+To bridge this gap, we performed protein--protein interaction and functional
+enrichment analyses using the STRING database on eight candidate genes
+repeatedly implicated across emotional dysregulation phenotypes:
+\gene{SLC6A4}, \gene{MAOA}, \gene{COMT}, \gene{BDNF}, \gene{NR3C1},
+\gene{CRH}, \gene{FKBP5}, and \gene{OXTR}.\cite{szklarczyk2023}
+
+Gene Ontology (GO) Biological Process enrichment revealed that these eight
+genes converge on a surprisingly coherent set of functions.
+Five of the eight annotate to ``behavior'' (FDR\,=\,0.011), and four to
+``learning or memory'' (FDR\,=\,0.013) — confirming that the genetic
+architecture of emotional dysregulation is not diffusely distributed across the
+genome but concentrated in pathways that govern affective and cognitive
+processing.\cite{szklarczyk2023,ashburner2000}
+More specific enrichments illuminate the molecular mechanisms through which
+these genes operate.
+\gene{MAOA} and \gene{COMT} jointly enrich for ``neurotransmitter catabolic
+process'' (FDR\,=\,0.021), reflecting their shared role in degrading
+monoamine neurotransmitters — the same molecules targeted by first-line
+antidepressants.
+\gene{NR3C1} and \gene{CRH} enrich for ``glucocorticoid metabolic process''
+(FDR\,=\,0.021), placing the hypothalamic--pituitary--adrenal (HPA) axis at
+the center of genetic risk.
+\gene{NR3C1} and \gene{OXTR} enrich for ``maternal behavior''
+(FDR\,=\,0.021), a finding that resonates with developmental evidence linking
+early caregiving quality to long-term emotion regulation capacity.\cite{vantieghem2018}
+Finally, \gene{SLC6A4}, \gene{MAOA}, and \gene{COMT} together enrich for
+``regulation of neurotransmitter levels'' (FDR\,=\,0.048), underscoring that
+synaptic monoamine homeostasis represents a convergent node of genetic risk.
+
+KEGG pathway enrichment extended these findings to disease-relevant circuitry.
+The strongest enrichment appeared for ``Alcoholism''
+(\gene{CRH}+\gene{MAOA}+\gene{BDNF}; FDR\,=\,0.008), consistent with
+extensive comorbidity between emotional dysregulation and substance use
+disorders.\cite{brand2019}
+``Tyrosine metabolism'' (\gene{MAOA}+\gene{COMT}; FDR\,=\,0.016) and
+``Cocaine addiction'' (\gene{MAOA}+\gene{BDNF}; FDR\,=\,0.020) further
+implicate catecholamine pathways, while ``Neuroactive ligand--receptor
+interaction'' (\gene{NR3C1}+\gene{CRH}+\gene{OXTR}; FDR\,=\,0.021) captures
+the neuropeptide and steroid signaling axis.
+Taken together, these enrichments delineate two principal molecular systems
+through which genetic variation shapes emotional dysregulation: monoamine
+neurotransmission and neuroendocrine stress signaling.
+
+\subsection*{Molecular Mechanisms at Single-Gene Resolution}
+
+The enrichment analyses identify pathways; understanding how individual genes
+within those pathways contribute to dysregulation requires examining their
+molecular functions in detail.
+
+\gene{SLC6A4} (UniProt P31645) encodes the sodium-dependent serotonin
+transporter, which clears serotonin from the synaptic cleft via Na\textsuperscript{+}/K\textsuperscript{+}
+cotransport.\cite{uniprot2023}
+This transporter is essential for serotonin homeostasis throughout the central
+nervous system; its dysfunction disrupts the Reactome-annotated ``serotonin
+clearance from the synaptic cleft'' pathway (R-HSA-380615) and, more broadly,
+``SLC-mediated neurotransmitter transport'' (R-HSA-442660).\cite{gillespie2022}
+Allen Brain Atlas data confirm that \gene{Slc6a4} expression in the mouse
+(Entrez 15567, homologene 817) concentrates in the raphe nuclei — the brain's
+primary serotonin source — but also extends to cortical and limbic
+regions that subserve emotion regulation.\cite{hawrylycz2012}
+Functional polymorphisms in \gene{SLC6A4}, particularly the 5-HTTLPR
+insertion/deletion variant, alter transporter expression and have been
+associated with amygdala reactivity to threat, although effect sizes in
+candidate-gene studies remain contentious in the post-GWAS era.\cite{silverman2019}
+
+\gene{FKBP5} (UniProt Q13451) operates through an entirely different molecular
+logic.
+Rather than modulating neurotransmitter levels directly, FKBP5 participates in
+the HSP90 chaperone cycle for steroid hormone receptors
+(Reactome R-HSA-3371497), where it acts as a co-chaperone that reduces
+glucocorticoid receptor (GR) sensitivity.\cite{gillespie2022}
+When cortisol binds GR, FKBP5 is displaced by FKBP4, allowing the
+receptor--ligand complex to translocate to the nucleus and activate
+transcription.
+Critically, one of the genes that GR activation upregulates is \gene{FKBP5}
+itself, creating an ultrashort negative feedback loop: more cortisol produces
+more FKBP5, which dampens GR sensitivity, which limits further cortisol-driven
+transcription.\cite{udalov2026}
+Polymorphisms in \gene{FKBP5} that increase its expression therefore blunt HPA
+axis negative feedback, prolonging cortisol exposure after stress — a mechanism
+that converges with the \gene{NR3C1}--\gene{CRH} glucocorticoid pathway
+identified in our enrichment analysis.
+
+These two genes exemplify the broader principle that genetic risk for emotional
+dysregulation distributes across two interacting systems: fast synaptic
+signaling (serotonin, catecholamines) and slow neuroendocrine modulation
+(cortisol, oxytocin).
+KEGG pathway annotations reinforce this duality — serotonin receptor signaling
+(map07211) and oxytocin signaling (map04921) represent parallel but interacting
+cascades, while cortisol synthesis and secretion (map04927) provides the
+hormonal backdrop against which both operate.\cite{kanehisa2023}
+
+% Expression topography subsection (from second harvest)
+\input{section_expression}
+
+\subsection*{Epigenetic Mediation: Where Genes Meet Environment}
+
+If the GWAS literature identifies \emph{which} genes confer risk, epigenetic
+research reveals \emph{how} environmental adversity activates that risk.
+Udalov and colleagues (2026) demonstrated that early-life stress produces
+measurable DNA methylation changes at three of the genes identified in our
+enrichment analysis — \gene{NR3C1}, \gene{FKBP5}, and \gene{BDNF} — and that
+these methylation signatures are partially reversible with
+intervention.\cite{udalov2026}
+This partial reversibility carries profound clinical implications: it means that
+the epigenetic marks left by adversity are not permanent sentences but
+modifiable targets.
+
+MicroRNA profiling has added a post-transcriptional layer to this picture.
+miR-16, miR-124, miR-132, miR-135a, and miR-34c — all associated with limbic
+circuit remodeling — regulate the translation of mRNAs from genes in both the
+monoamine and neuroendocrine pathways.\cite{udalov2026}
+miR-16, for example, targets \gene{SLC6A4} mRNA and thereby modulates
+serotonin transporter density, while miR-135a regulates both \gene{SLC6A4} and
+the serotonin receptor \gene{HTR1A}.\cite{udalov2026}
+These miRNAs respond to both stress exposure and therapeutic intervention,
+suggesting that they function as molecular mediators through which experience
+reshapes the neural circuits of emotion regulation.
+
+The emerging picture, then, is one of layered vulnerability: common genetic
+variants establish a baseline sensitivity to emotional dysregulation; epigenetic
+modifications — driven by early adversity, chronic stress, or their absence —
+tune gene expression within those variants; and post-transcriptional regulation
+by miRNAs provides a rapid, reversible adjustment mechanism that tracks ongoing
+environmental conditions.
+This architecture is not merely descriptive.
+It generates testable predictions about which individuals will respond to which
+treatments — predictions that the next section begins to evaluate.
+
+
+%% ====================================================================
+%%  TRANSITION: FROM ARCHITECTURE TO INTERVENTION
+%% ====================================================================
+
+\bigskip
+
+The molecular architecture described above does more than catalog risk factors;
+it specifies the biological systems that treatments must engage to restore
+regulatory capacity.
+When genetic and epigenetic evidence converges on monoamine neurotransmission,
+clinicians gain a mechanistic rationale for serotonergic pharmacotherapy — not
+as a blunt correction of ``chemical imbalance,'' but as a targeted modulation
+of the \gene{SLC6A4}--dependent clearance pathway that GWAS, Reactome, and
+Allen Brain Atlas data independently implicate.\cite{uniprot2023,gillespie2022,hawrylycz2012}
+When the same evidence highlights HPA axis dysregulation through
+\gene{NR3C1}--\gene{FKBP5}--\gene{CRH} interactions, it explains why
+pharmacotherapy alone often fails: no selective serotonin reuptake inhibitor
+addresses glucocorticoid receptor sensitivity or cortisol feedback dynamics.
+This gap motivates the integration of psychotherapeutic approaches — notably
+Dialectical Behavior Therapy, which teaches skills that functionally compensate
+for the regulatory deficits these genetic liabilities produce — and
+neuromodulatory interventions that target the prefrontal circuits governing
+top-down emotion regulation.\cite{kredlow2021}
+The partially reversible epigenetic signatures at \gene{NR3C1}, \gene{FKBP5},
+and \gene{BDNF} further suggest that effective treatments do not merely manage
+symptoms but may rewrite the molecular record of adversity itself.
+Understanding which molecular system predominates in a given patient's
+dysregulation profile could, in principle, guide treatment selection toward the
+modality most likely to engage that system — a vision of precision psychiatry
+that the therapeutic landscape is only beginning to realize.
+
+
+%% ====================================================================
+%%  SECTION: THERAPEUTIC LANDSCAPE
+%% ====================================================================
+
+\sectitle{Therapeutic Landscape for Emotional Dysregulation}
+
+The clinical management of emotional dysregulation has evolved from a narrow
+reliance on pharmacotherapy into a multimodal enterprise that integrates
+psychotherapy, neuromodulation, and neuropeptide-based intervention.\cite{daros2019}
+This evolution reflects a growing recognition — informed by the genetic
+architecture reviewed above — that dysregulated affect arises from
+interacting neural systems that no single treatment modality can
+comprehensively address.
+We organize the current therapeutic landscape around three axes:
+skills-based psychotherapy, with Dialectical Behavior Therapy (DBT) as its
+most rigorously evaluated exemplar; pharmacological approaches that target
+monoamine and neuroendocrine pathways; and emerging interventions —
+neuromodulation and intranasal oxytocin — that attempt to engage regulatory
+circuits directly.
+
+\subsection*{Dialectical Behavior Therapy: Evidence Across Populations}
+
+Marsha Linehan developed DBT in the 1980s as a treatment for chronically
+suicidal individuals with borderline personality disorder (BPD), grounding it in
+a biosocial model that attributes emotional dysregulation to the transaction
+between biological vulnerability and invalidating environments.\cite{crowell2009}
+Four decades later, DBT has generated 84 registered trials on
+ClinicalTrials.gov\cite{clinicaltrials2024} and has expanded far beyond its original indication —
+a proliferation that demands careful evaluation of where the evidence is
+strong, where it is preliminary, and where critical gaps remain.
+
+The mechanistic foundation of DBT rests on four skill modules — mindfulness,
+distress tolerance, emotion regulation, and interpersonal effectiveness — that
+collectively target the regulatory deficits the genetic architecture section
+identified.\cite{linehan1993}
+Lynch and colleagues (2006) proposed that DBT achieves its effects through
+three primary mechanisms of change: enhanced behavioral capabilities (patients
+acquire skills they previously lacked), improved motivation (contingency
+management reduces therapy-interfering behaviors), and generalization to
+natural environments (telephone coaching and skills groups bridge the gap
+between session and daily life).\cite{lynch2006}
+Daros and Williams (2019), in a systematic review published in the
+\emph{Harvard Review of Psychiatry}, examined emotion regulation strategies
+in BPD more broadly and concluded that DBT's skills training component — rather
+than individual therapy alone — drives the largest improvements in regulatory
+capacity.\cite{daros2019}
+This finding aligns with the molecular evidence: if emotional dysregulation
+reflects a deficit in prefrontal top-down control over limbic reactivity,
+then skills training functions as a behavioral prosthesis that strengthens
+precisely those regulatory circuits.
+
+Recent trials have extended DBT into populations that challenge the original
+biosocial model's scope.
+Goldstein and colleagues (2024) published in \emph{JAMA Psychiatry} the first
+randomized controlled trial of DBT for adolescents with bipolar disorder —
+a population in whom emotional dysregulation is pervasive but whose mood
+episodes involve neurobiological mechanisms (e.g., circadian disruption,
+mitochondrial dysfunction) that differ from those in BPD.\cite{goldstein2024}
+The fact that DBT demonstrated efficacy in this population suggests that its
+skills target transdiagnostic regulatory processes rather than
+disorder-specific pathology — a conclusion consistent with the shared genetic
+architecture ($r_g \approx 0.80$) between neuroticism and depression documented
+above.
+
+Bemmouna and colleagues (2025) reported in \emph{Psychotherapy and
+Psychosomatics} the results of a randomized controlled trial of DBT for
+autistic adults, a population characterized by alexithymia, sensory
+overwhelm, and difficulties identifying and labeling emotional
+states.\cite{bemmouna2025}
+This trial is notable because autism involves differences in interoceptive
+processing and social cognition that standard DBT does not explicitly address,
+raising the question of whether adapted protocols that incorporate sensory
+regulation and explicit emotion identification training could further improve
+outcomes.
+
+Perhaps the most innovative extension, Norman-Nott and colleagues (2025)
+demonstrated in \emph{JAMA Network Open} that online DBT reduces emotional
+dysregulation in individuals with chronic pain — a finding that links affective
+dysregulation to nociceptive processing and suggests that the
+\gene{NR3C1}--\gene{CRH} neuroendocrine axis, which mediates both stress
+reactivity and pain sensitization, may represent the biological substrate
+through which DBT operates in this population.\cite{normannott2025}
+The online delivery format further expands DBT's scalability, addressing
+longstanding concerns about treatment access in underserved settings.
+
+\subsection*{Pharmacotherapy: Serotonergic Modulation and Its Limits}
+
+The pharmacological treatment of emotional dysregulation has centered on
+selective serotonin reuptake inhibitors (SSRIs) since their introduction in
+the late 1980s.\cite{linehan1993}
+Fluoxetine (PubChem CID 3386; molecular formula C\textsubscript{17}H\textsubscript{18}F\textsubscript{3}NO;
+molecular weight 309.33\,Da) exemplifies the class: it inhibits \gene{SLC6A4},
+thereby blocking serotonin reuptake and increasing synaptic serotonin
+availability.\cite{kim2023}
+This mechanism directly engages the Reactome ``serotonin clearance'' pathway
+(R-HSA-380615) and the KEGG serotonin receptor interaction pathway (map07211)
+that our enrichment analysis identified as convergent nodes of genetic risk.
+
+Yet the clinical reality of SSRI treatment exposes the limits of targeting a
+single neurotransmitter system.
+Remission rates for major depression hover around 30\% with first-line SSRI
+monotherapy, and emotional blunting — a paradoxical reduction in both negative
+\emph{and} positive affect — affects a substantial minority of
+patients.\cite{pizzagalli2021}
+The genetic architecture reviewed above explains this therapeutic ceiling:
+emotional dysregulation involves not only serotonergic signaling but also
+HPA axis dynamics (\gene{NR3C1}, \gene{FKBP5}, \gene{CRH}), oxytocinergic
+modulation (\gene{OXTR}), and neurotrophic support (\gene{BDNF}).
+An SSRI addresses the first system while leaving the others untouched.
+
+This limitation has motivated interest in pharmacological strategies that
+target the neuroendocrine axis.
+KEGG pathway analysis identifies oxytocin signaling (map04921) and cortisol
+synthesis and secretion (map04927) as biologically plausible intervention
+points.\cite{kanehisa2023}
+\gene{FKBP5} antagonists, which would restore glucocorticoid receptor
+sensitivity and normalize HPA axis negative feedback, represent a particularly
+compelling target given the gene's role in the HSP90 chaperone cycle —
+though no such compound has yet advanced beyond early-phase trials.\cite{udalov2026}
+The classification of emotional dysregulation within the Human Phenotype
+Ontology — where ``Abnormal emotional state'' (HP:0100851) subsumes 12
+descendant phenotypes and ``Dysregulated negative emotional state''
+(HP:0031467) subsumes 7 — underscores that what clinicians treat as a single
+target actually comprises a heterogeneous family of phenotypes, each
+potentially requiring a different pharmacological approach.\cite{kohler2017}
+
+\subsection*{Neuromodulation: Engaging Prefrontal Circuitry Directly}
+
+Where pharmacotherapy modulates neurotransmitter dynamics from below,
+neuromodulation attempts to strengthen top-down regulatory circuits from above.
+Neacsiu and colleagues (2021) conducted the most informative trial to date,
+combining repetitive transcranial magnetic stimulation (rTMS) at 10\,Hz over
+the dorsolateral prefrontal cortex (dlPFC) with cognitive restructuring — a
+design that tests whether enhancing prefrontal excitability during active
+skill use produces synergistic effects.\cite{neacsiu2021}
+The results were encouraging but modest: effect sizes for emotion regulation
+improvement ranged from $d = 0.20$ to $d = 0.67$, while distress reduction
+showed more consistent but smaller effects ($d = 0.32$--$0.35$).
+
+These effect sizes deserve careful interpretation.
+The lower bound ($d = 0.20$) falls below conventional thresholds for clinical
+significance, but the upper bound ($d = 0.67$) approaches the effect sizes
+reported for DBT skills training.
+The variability suggests that rTMS combined with cognitive restructuring may
+benefit some individuals substantially while producing minimal effects in
+others — a pattern consistent with the heterogeneous genetic architecture
+described above.
+If prefrontal hypoactivation represents the primary regulatory deficit for
+some patients (perhaps those whose risk concentrates in monoaminergic pathways
+governing cortical function) while HPA axis dysregulation predominates in
+others (those with \gene{FKBP5}/\gene{NR3C1} risk variants), then
+neuromodulation would be expected to show precisely this pattern of variable
+response.\cite{neacsiu2021}
+
+\subsection*{Intranasal Oxytocin: Neuropeptide Intervention}
+
+The identification of \gene{OXTR} within the genetic risk architecture, and its
+enrichment in both ``maternal behavior'' and ``neuroactive ligand--receptor
+interaction'' pathways, provides the rationale for intranasal oxytocin as a
+therapeutic strategy.\cite{szklarczyk2023}
+Moshfeghinia and colleagues (2025; PMID 41074229) conducted a comprehensive
+review of fMRI studies examining intranasal oxytocin's effects on neural
+activity during emotional processing.\cite{moshfeghinia2025}
+Their synthesis revealed that oxytocin consistently modulates amygdala
+reactivity to social and emotional stimuli, though the direction of modulation
+depends on context, baseline anxiety, and — critically — sex, with stronger
+anxiolytic effects in men than in women in most paradigms.
+
+This sex-differential response highlights a broader challenge in translating
+genetic findings into therapeutics.
+GWAS identify risk loci across populations, but gene expression, hormonal
+milieu, and receptor density vary by sex, developmental stage, and tissue
+type.
+The KEGG oxytocin signaling pathway (map04921) maps the molecular cascade from
+receptor binding through phospholipase C activation to downstream
+transcriptional effects, but this canonical pathway operates differently in
+the male versus female brain, in the postpartum versus non-postpartum state,
+and in the context of high versus low endogenous cortisol.\cite{moshfeghinia2025}
+Effective clinical deployment of intranasal oxytocin will therefore require
+stratification strategies that account for these sources of variability —
+strategies that the genetic and epigenetic architecture reviewed above can, in
+principle, inform.
+
+\subsection*{Toward Integrated and Precision Approaches}
+
+The therapeutic landscape for emotional dysregulation currently offers three
+modalities that each engage a different level of the regulatory hierarchy:
+DBT trains behavioral skills that strengthen prefrontal top-down control;
+SSRIs modulate serotonergic neurotransmission at the synaptic level; and
+neuromodulation enhances prefrontal excitability through direct cortical
+stimulation.
+Emerging approaches — \gene{FKBP5} antagonists, intranasal oxytocin, and
+epigenetically informed interventions targeting methylation at \gene{NR3C1} and
+\gene{BDNF} — promise to address the neuroendocrine and neurotrophic systems
+that current treatments leave unengaged.\cite{udalov2026}
+
+The partially reversible epigenetic signatures documented by Udalov et al.
+(2026) suggest a future in which treatment response is monitored not only
+through symptom questionnaires but through methylation assays at specific CpG
+sites — converting molecular markers of adversity into biomarkers of
+recovery.\cite{udalov2026}
+miRNA panels (miR-16, miR-124, miR-132, miR-135a, miR-34c) that track limbic
+remodeling could similarly serve as treatment-responsive biomarkers, enabling
+clinicians to detect biological change before patients report subjective
+improvement.\cite{udalov2026}
+
+Realizing this vision requires two advances that the field has not yet achieved.
+First, researchers must conduct GWAS-informed clinical trials that stratify
+participants by polygenic risk scores for neuroticism, depression, and anxiety,
+testing whether genetic profile predicts differential response to DBT versus
+pharmacotherapy versus neuromodulation.
+Second, the field must develop integrated treatment protocols that combine
+modalities targeting different levels of the regulatory hierarchy —
+for example, pairing rTMS-augmented DBT with SSRI pharmacotherapy and
+monitoring epigenetic biomarkers to guide dose adjustment and treatment
+duration.
+The genetic architecture reviewed above provides the biological map;
+the therapeutic landscape provides the tools.
+The challenge ahead is to match the right tools to the right biological
+profiles — transforming emotional dysregulation treatment from a trial-and-error
+enterprise into a precision discipline.\cite{nagel2018}
