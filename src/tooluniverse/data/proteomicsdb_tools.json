@@ -396,6 +396,37 @@
         "operation": "list_tissues",
         "tissue_category": "cell line"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "filter_category": {
+          "type": "string"
+        },
+        "total_sources": {
+          "type": "integer"
+        },
+        "category_counts": {
+          "type": "object",
+          "properties": {
+            "fluid": {
+              "type": "integer"
+            }
+          }
+        },
+        "tissues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tissue_id": {},
+              "name": {},
+              "category": {},
+              "group": {}
+            }
+          }
+        }
+      }
+    }
   }
 ]

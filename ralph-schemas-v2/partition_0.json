@@ -1,0 +1,56 @@
+[
+  {
+    "name": "OmniPath_get_ligand_receptor_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"partners\": \"TGFB1\"}"
+  },
+  {
+    "name": "OmniPath_get_intercell_roles",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"EGFR\"}"
+  },
+  {
+    "name": "OmniPath_get_signaling_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"partners\": \"NOTCH1\", \"directed\": true}"
+  },
+  {
+    "name": "OmniPath_get_complexes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"P01137\"}"
+  },
+  {
+    "name": "OmniPath_get_cell_communication_annotations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"proteins\": \"P01137,P37173\"}"
+  },
+  {
+    "name": "OmniPath_get_enzyme_substrate",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"enzymes\": \"SRC\", \"limit\": 20}"
+  },
+  {
+    "name": "OmniPath_get_tf_target_interactions",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"tf_gene\": \"TP53\", \"confidence_level\": \"A\"}"
+  },
+  {
+    "name": "OmniPath_get_dorothea_regulon",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/omnipath_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"get_dorothea_regulon\", \"tf_gene\": \"TP53\"}"
+  },
+  {
+    "name": "ReactomeInteractors_get_entity_pathways",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/reactome_interactors_tools.json",
+    "has_example": true,
+    "example": "{\"entity_id\": \"R-HSA-199420\"}"
+  }
+]

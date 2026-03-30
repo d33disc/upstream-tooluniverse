@@ -186,3 +186,4 @@ ralph-schemas/worker_*.log
 
 # Ralph loop tracked files (override IMPLEMENTATION_*.md exclusion)
 !IMPLEMENTATION_PLAN.md
+ralph-schemas-v2/worker_*.log

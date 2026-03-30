@@ -156,7 +156,27 @@
         "query": "kinase",
         "limit": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "systematic_id": {
+            "type": "string"
+          },
+          "gene_name": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string"
+          },
+          "uniprot_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "PomBase_get_gene_phenotypes",

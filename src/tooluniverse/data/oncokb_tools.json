@@ -88,7 +88,7 @@
         },
         "gene_symbol": {
           "type": "string",
-          "description": "Gene symbol alias \u2014 alternative to gene parameter"
+          "description": "Gene symbol alias — alternative to gene parameter"
         }
       },
       "required": []
@@ -267,6 +267,153 @@
     ],
     "optional_api_keys": [
       "ONCOKB_API_TOKEN"
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "null"
+            },
+            "referenceGenome": {
+              "type": "string"
+            },
+            "hugoSymbol": {
+              "type": "string"
+            },
+            "entrezGeneId": {
+              "type": "integer"
+            },
+            "alteration": {
+              "type": "string"
+            },
+            "alterationType": {
+              "type": "null"
+            },
+            "svType": {
+              "type": "null"
+            },
+            "tumorType": {
+              "type": "null"
+            },
+            "consequence": {
+              "type": "null"
+            },
+            "proteinStart": {
+              "type": "null"
+            },
+            "proteinEnd": {
+              "type": "null"
+            },
+            "hgvs": {
+              "type": "null"
+            },
+            "hgvsInfo": {
+              "type": "null"
+            },
+            "canonicalTranscript": {
+              "type": "null"
+            }
+          }
+        },
+        "geneExist": {
+          "type": "boolean"
+        },
+        "variantExist": {
+          "type": "boolean"
+        },
+        "alleleExist": {
+          "type": "boolean"
+        },
+        "oncogenic": {
+          "type": "string"
+        },
+        "mutationEffect": {
+          "type": "object",
+          "properties": {
+            "knownEffect": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "citations": {
+              "type": "object",
+              "properties": {
+                "pmids": {},
+                "abstracts": {}
+              }
+            }
+          }
+        },
+        "highestSensitiveLevel": {
+          "type": "null"
+        },
+        "highestResistanceLevel": {
+          "type": "null"
+        },
+        "highestDiagnosticImplicationLevel": {
+          "type": "null"
+        },
+        "highestPrognosticImplicationLevel": {
+          "type": "null"
+        },
+        "highestFdaLevel": {
+          "type": "null"
+        },
+        "otherSignificantSensitiveLevels": {
+          "type": "array",
+          "items": {}
+        },
+        "otherSignificantResistanceLevels": {
+          "type": "array",
+          "items": {}
+        },
+        "VUS": {
+          "type": "boolean"
+        },
+        "hotspot": {
+          "type": "boolean"
+        },
+        "exon": {
+          "type": "null"
+        },
+        "geneSummary": {
+          "type": "string"
+        },
+        "variantSummary": {
+          "type": "string"
+        },
+        "tumorTypeSummary": {
+          "type": "string"
+        },
+        "prognosticSummary": {
+          "type": "string"
+        },
+        "diagnosticSummary": {
+          "type": "string"
+        },
+        "diagnosticImplications": {
+          "type": "array",
+          "items": {}
+        },
+        "prognosticImplications": {
+          "type": "array",
+          "items": {}
+        },
+        "treatments": {
+          "type": "array",
+          "items": {}
+        },
+        "dataVersion": {
+          "type": "string"
+        },
+        "lastUpdate": {
+          "type": "string"
+        }
+      }
+    }
   }
 ]

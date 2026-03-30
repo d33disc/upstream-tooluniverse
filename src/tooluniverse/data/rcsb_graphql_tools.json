@@ -33,7 +33,66 @@
       {
         "pdb_ids": "4HHB,1TUP,6LU7"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pdb_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "number"
+          },
+          "molecular_weight_kda": {
+            "type": "number"
+          },
+          "atom_count": {
+            "type": "integer"
+          },
+          "polymer_entity_count": {
+            "type": "integer"
+          },
+          "nonpolymer_entity_count": {
+            "type": "integer"
+          },
+          "experimental_method": {
+            "type": "string"
+          },
+          "deposit_date": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "citation_pubmed_id": {
+            "type": "integer"
+          },
+          "citation_title": {
+            "type": "string"
+          },
+          "citation_journal": {
+            "type": "string"
+          },
+          "citation_year": {
+            "type": "integer"
+          },
+          "unit_cell_a": {
+            "type": "number"
+          },
+          "unit_cell_b": {
+            "type": "number"
+          },
+          "unit_cell_c": {
+            "type": "number"
+          }
+        }
+      }
+    }
   },
   {
     "name": "RCSBGraphQL_get_ligand_info",
@@ -287,7 +346,10 @@
                       "description": "Annotation type (Pfam, GO, InterPro)"
                     },
                     "description": {
-                      "type": ["string", "null"],
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "description": "Annotation description"
                     }
                   }
