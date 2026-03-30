@@ -78,7 +78,72 @@
         "max_resolution": 3.0,
         "rows": 5
       }
+<<<<<<< HEAD
     ]
+=======
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pdb_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "4-character PDB identifier"
+                  },
+                  "score": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Search relevance score"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "total_count": {
+                  "type": "integer",
+                  "description": "Total matching structures in PDB"
+                },
+                "returned": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
+    "aliases": ["RCSB_search"]
+>>>>>>> upstream/main
   },
   {
     "name": "RCSBAdvSearch_search_by_motif",
