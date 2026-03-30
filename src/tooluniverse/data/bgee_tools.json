@@ -25,7 +25,39 @@
       {
         "query": "insulin"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "gene_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "species_id": {
+            "type": "integer"
+          },
+          "species_name": {
+            "type": "string"
+          },
+          "common_name": {
+            "type": "string"
+          },
+          "gene_biotype": {
+            "type": "string"
+          },
+          "match_source": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "Bgee_get_gene_expression",
@@ -60,7 +92,37 @@
         "gene_id": "ENSMUSG00000059552",
         "species_id": "10090"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tissue_id": {
+            "type": "string"
+          },
+          "tissue_name": {
+            "type": "string"
+          },
+          "expression_score": {
+            "type": "string"
+          },
+          "score_confidence": {
+            "type": "string"
+          },
+          "expression_state": {
+            "type": "string"
+          },
+          "quality": {
+            "type": "string"
+          },
+          "data_types": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    }
   },
   {
     "name": "Bgee_list_species",
@@ -77,6 +139,32 @@
     "test_examples": [
       {},
       {}
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "species_id": {
+            "type": "integer"
+          },
+          "genus": {
+            "type": "string"
+          },
+          "species_name": {
+            "type": "string"
+          },
+          "common_name": {
+            "type": "string"
+          },
+          "genome_version": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 ]

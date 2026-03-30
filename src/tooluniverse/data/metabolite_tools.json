@@ -403,6 +403,33 @@
       {
         "compound_name": "cholesterol"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "disease_name": {
+            "type": "string",
+            "description": "Disease name"
+          },
+          "disease_id": {
+            "type": "string",
+            "description": "Disease identifier (MESH/OMIM)"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Evidence type"
+          },
+          "pubmed_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Supporting PubMed IDs"
+          }
+        }
+      }
+    }
   }
 ]

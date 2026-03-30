@@ -177,7 +177,160 @@
         "filter_value": "hippocampus",
         "size": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "neuron_id": {
+            "type": "integer"
+          },
+          "neuron_name": {
+            "type": "string"
+          },
+          "archive": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "age_scale": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "age_classification": {
+            "type": "string"
+          },
+          "brain_region": {
+            "type": "array",
+            "items": {}
+          },
+          "cell_type": {
+            "type": "array",
+            "items": {}
+          },
+          "species": {
+            "type": "string"
+          },
+          "strain": {
+            "type": "string"
+          },
+          "scientific_name": {
+            "type": "null"
+          },
+          "stain": {
+            "type": "string"
+          },
+          "experiment_condition": {
+            "type": "array",
+            "items": {}
+          },
+          "protocol": {
+            "type": "string"
+          },
+          "slicing_direction": {
+            "type": "string"
+          },
+          "reconstruction_software": {
+            "type": "string"
+          },
+          "objective_type": {
+            "type": "string"
+          },
+          "original_format": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "string"
+          },
+          "magnification": {
+            "type": "string"
+          },
+          "upload_date": {
+            "type": "string"
+          },
+          "deposition_date": {
+            "type": "string"
+          },
+          "shrinkage_reported": {
+            "type": "string"
+          },
+          "shrinkage_corrected": {
+            "type": "string"
+          },
+          "reported_value": {
+            "type": "null"
+          },
+          "reported_xy": {
+            "type": "null"
+          },
+          "reported_z": {
+            "type": "null"
+          },
+          "corrected_value": {
+            "type": "null"
+          },
+          "corrected_xy": {
+            "type": "null"
+          },
+          "corrected_z": {
+            "type": "null"
+          },
+          "soma_surface": {
+            "type": "string"
+          },
+          "surface": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "string"
+          },
+          "slicing_thickness": {
+            "type": "string"
+          },
+          "min_age": {
+            "type": "string"
+          },
+          "max_age": {
+            "type": "string"
+          },
+          "min_weight": {
+            "type": "string"
+          },
+          "max_weight": {
+            "type": "string"
+          },
+          "png_url": {
+            "type": "string"
+          },
+          "reference_pmid": {
+            "type": "array",
+            "items": {}
+          },
+          "reference_doi": {
+            "type": "array",
+            "items": {}
+          },
+          "physical_Integrity": {
+            "type": "string"
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {},
+              "measurements": {},
+              "persistence_vector": {}
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "NeuroMorpho_get_morphometry",
@@ -347,6 +500,12 @@
       {
         "field_name": "cell_type"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
   }
 ]

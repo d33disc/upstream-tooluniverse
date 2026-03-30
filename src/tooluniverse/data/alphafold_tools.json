@@ -36,7 +36,145 @@
       {
         "uniprot_accession": "P00533"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "toolUsed": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "isUniProt": {
+            "type": "boolean"
+          },
+          "modelEntityId": {
+            "type": "string"
+          },
+          "modelCreatedDate": {
+            "type": "string"
+          },
+          "sequenceVersionDate": {
+            "type": "string"
+          },
+          "globalMetricValue": {
+            "type": "number"
+          },
+          "fractionPlddtVeryLow": {
+            "type": "number"
+          },
+          "fractionPlddtLow": {
+            "type": "number"
+          },
+          "fractionPlddtConfident": {
+            "type": "number"
+          },
+          "fractionPlddtVeryHigh": {
+            "type": "number"
+          },
+          "latestVersion": {
+            "type": "integer"
+          },
+          "allVersions": {
+            "type": "array",
+            "items": {}
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "sequenceStart": {
+            "type": "integer"
+          },
+          "sequenceEnd": {
+            "type": "integer"
+          },
+          "sequenceChecksum": {
+            "type": "string"
+          },
+          "isUniProtReviewed": {
+            "type": "boolean"
+          },
+          "gene": {
+            "type": "string"
+          },
+          "uniprotAccession": {
+            "type": "string"
+          },
+          "uniprotId": {
+            "type": "string"
+          },
+          "uniprotDescription": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "integer"
+          },
+          "organismScientificName": {
+            "type": "string"
+          },
+          "isUniProtReferenceProteome": {
+            "type": "boolean"
+          },
+          "bcifUrl": {
+            "type": "string"
+          },
+          "cifUrl": {
+            "type": "string"
+          },
+          "pdbUrl": {
+            "type": "string"
+          },
+          "paeImageUrl": {
+            "type": "string"
+          },
+          "msaUrl": {
+            "type": "string"
+          },
+          "plddtDocUrl": {
+            "type": "string"
+          },
+          "paeDocUrl": {
+            "type": "string"
+          },
+          "amAnnotationsUrl": {
+            "type": "string"
+          },
+          "amAnnotationsHg19Url": {
+            "type": "string"
+          },
+          "amAnnotationsHg38Url": {
+            "type": "string"
+          },
+          "isComplex": {
+            "type": "boolean"
+          },
+          "entryId": {
+            "type": "string"
+          },
+          "uniprotSequence": {
+            "type": "string"
+          },
+          "uniprotStart": {
+            "type": "integer"
+          },
+          "uniprotEnd": {
+            "type": "integer"
+          },
+          "isReferenceProteome": {
+            "type": "boolean"
+          },
+          "isReviewed": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
   },
   {
     "name": "alphafold_get_summary",
@@ -71,7 +209,44 @@
       {
         "uniprot_id": "P04637"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "uniprot_entry": {
+          "type": "object",
+          "properties": {
+            "ac": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "uniprot_checksum": {
+              "type": "string"
+            },
+            "sequence_length": {
+              "type": "integer"
+            },
+            "segment_start": {
+              "type": "integer"
+            },
+            "segment_end": {
+              "type": "integer"
+            }
+          }
+        },
+        "structures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "summary": {}
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "alphafold_get_annotations",

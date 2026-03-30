@@ -41,7 +41,36 @@
         "query": "cryo-EM",
         "page_size": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accession": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "links": {
+            "type": "integer"
+          },
+          "files": {
+            "type": "integer"
+          }
+        }
+      }
+    }
   },
   {
     "name": "BioImageArchive_get_study",

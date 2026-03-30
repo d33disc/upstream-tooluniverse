@@ -503,7 +503,43 @@
         "guideline_id": 100421,
         "limit": 10
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "guideline_id": {
+          "type": "integer"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {},
+              "guidelineid": {},
+              "drugid": {},
+              "implications": {},
+              "drugrecommendation": {},
+              "classification": {},
+              "phenotypes": {},
+              "activityscore": {},
+              "allelestatus": {},
+              "lookupkey": {},
+              "population": {},
+              "comments": {},
+              "version": {},
+              "dosinginformation": {},
+              "alternatedrugavailable": {},
+              "otherprescribingguidance": {},
+              "drug": {}
+            }
+          }
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    }
   },
   {
     "name": "CPIC_search_gene_drug_pairs",
@@ -537,14 +573,14 @@
             "string",
             "null"
           ],
-          "description": "Gene symbol alias (e.g., 'CYP2D6', 'VKORC1') \u2014 alternative to genesymbol"
+          "description": "Gene symbol alias (e.g., 'CYP2D6', 'VKORC1') — alternative to genesymbol"
         },
         "gene": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Gene symbol alias (e.g., 'CYP2D6') \u2014 alternative to genesymbol"
+          "description": "Gene symbol alias (e.g., 'CYP2D6') — alternative to genesymbol"
         }
       },
       "required": [],

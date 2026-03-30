@@ -64,7 +64,46 @@
       {
         "sources": "EGFR"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_uniprot": {
+            "type": "string"
+          },
+          "target_uniprot": {
+            "type": "string"
+          },
+          "source_genesymbol": {
+            "type": "string"
+          },
+          "target_genesymbol": {
+            "type": "string"
+          },
+          "is_directed": {
+            "type": "boolean"
+          },
+          "is_stimulation": {
+            "type": "boolean"
+          },
+          "is_inhibition": {
+            "type": "boolean"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          },
+          "curation_effort": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_intercell_roles",
@@ -141,7 +180,51 @@
         "proteins": "PDCD1",
         "categories": "receptor"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uniprot": {
+            "type": "string"
+          },
+          "genesymbol": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "database": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "aspect": {
+            "type": "string"
+          },
+          "consensus_score": {
+            "type": "integer"
+          },
+          "transmitter": {
+            "type": "boolean"
+          },
+          "receiver": {
+            "type": "boolean"
+          },
+          "secreted": {
+            "type": "boolean"
+          },
+          "plasma_membrane_transmembrane": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_signaling_interactions",
@@ -226,7 +309,55 @@
         "partners": "STAT3",
         "datasets": "omnipath,pathwayextra"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_uniprot": {
+            "type": "string"
+          },
+          "target_uniprot": {
+            "type": "string"
+          },
+          "source_genesymbol": {
+            "type": "string"
+          },
+          "target_genesymbol": {
+            "type": "string"
+          },
+          "is_directed": {
+            "type": "boolean"
+          },
+          "is_stimulation": {
+            "type": "boolean"
+          },
+          "is_inhibition": {
+            "type": "boolean"
+          },
+          "consensus_direction": {
+            "type": "boolean"
+          },
+          "consensus_stimulation": {
+            "type": "boolean"
+          },
+          "consensus_inhibition": {
+            "type": "boolean"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          },
+          "curation_effort": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_complexes",
@@ -265,7 +396,39 @@
         "proteins": "Q15116",
         "databases": "CellPhoneDB,CORUM"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "components": {
+            "type": "array",
+            "items": {}
+          },
+          "components_genesymbols": {
+            "type": "array",
+            "items": {}
+          },
+          "stoichiometry": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          },
+          "references": {
+            "type": "string"
+          },
+          "identifiers": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_cell_communication_annotations",
@@ -312,7 +475,36 @@
         "proteins": "P04637",
         "databases": "CellPhoneDB,CellChatDB,ICELLNET,iTALK"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uniprot": {
+            "type": "string"
+          },
+          "genesymbol": {
+            "type": "string"
+          },
+          "entity_type": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "record_id": {
+            "type": "integer"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_enzyme_substrate",
@@ -376,7 +568,40 @@
         "types": "phosphorylation",
         "limit": 15
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "enzyme_uniprot": {
+            "type": "string"
+          },
+          "substrate_uniprot": {
+            "type": "string"
+          },
+          "enzyme_genesymbol": {
+            "type": "string"
+          },
+          "substrate_genesymbol": {
+            "type": "string"
+          },
+          "residue_type": {
+            "type": "string"
+          },
+          "residue_offset": {
+            "type": "integer"
+          },
+          "modification": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_tf_target_interactions",
@@ -429,7 +654,43 @@
         "target_gene": "CDKN1A",
         "confidence_level": "A"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tf_uniprot": {
+            "type": "string"
+          },
+          "target_uniprot": {
+            "type": "string"
+          },
+          "tf_genesymbol": {
+            "type": "string"
+          },
+          "target_genesymbol": {
+            "type": "string"
+          },
+          "is_stimulation": {
+            "type": "boolean"
+          },
+          "is_inhibition": {
+            "type": "boolean"
+          },
+          "dorothea_level": {
+            "type": "null"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          },
+          "curation_effort": {
+            "type": "integer"
+          }
+        }
+      }
+    }
   },
   {
     "name": "OmniPath_get_dorothea_regulon",
@@ -466,6 +727,42 @@
         "tf_gene": "MYC",
         "confidence_levels": "A"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tf_genesymbol": {
+            "type": "string"
+          },
+          "target_genesymbol": {
+            "type": "string"
+          },
+          "target_uniprot": {
+            "type": "string"
+          },
+          "mor": {
+            "type": "integer"
+          },
+          "is_stimulation": {
+            "type": "boolean"
+          },
+          "is_inhibition": {
+            "type": "boolean"
+          },
+          "dorothea_level": {
+            "type": "null"
+          },
+          "sources": {
+            "type": "array",
+            "items": {}
+          },
+          "curation_effort": {
+            "type": "integer"
+          }
+        }
+      }
+    }
   }
 ]

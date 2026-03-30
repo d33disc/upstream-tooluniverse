@@ -431,7 +431,7 @@
     "fields": {
       "endpoint": "/compound/fastsimilarity_2d/smiles/{smiles}/cids/JSON",
       "use_pugview": false,
-      "input_description": "Input is:\n- smiles: SMILES for similarity comparison;\n- threshold: specify similarity threshold, PubChem will return all CIDs with similarity \u2265 threshold.",
+      "input_description": "Input is:\n- smiles: SMILES for similarity comparison;\n- threshold: specify similarity threshold, PubChem will return all CIDs with similarity ≥ threshold.",
       "output_description": "Returns a JSON object with structure example:\n{\n  \"IdentifierList\": {\n    \"CID\": [2244, 2245, ...]\n  }\n}\n\nWhere: CID array contains compound IDs with similarity above specified threshold to target molecule. LLM can use this for chemical similarity analysis.",
       "property_list": []
     },
@@ -502,7 +502,24 @@
         "image_size": "small"
       }
     ],
-    "return_schema": null
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "format": "base64",
+          "description": "PNG image data encoded as base64"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "MIME type (image/png)"
+        },
+        "cid": {
+          "type": "integer",
+          "description": "PubChem Compound ID"
+        }
+      }
+    }
   },
   {
     "name": "PubChem_get_compound_synonyms_by_CID",

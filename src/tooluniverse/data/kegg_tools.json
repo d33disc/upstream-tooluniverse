@@ -318,6 +318,23 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organism_code": {
+            "type": "string"
+          },
+          "organism_name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 ]

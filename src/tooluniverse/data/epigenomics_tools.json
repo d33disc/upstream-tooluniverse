@@ -1373,6 +1373,47 @@
         "geo"
       ],
       "estimated_execution_time": "< 5 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of matching RNA-seq datasets in GEO"
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "GEO dataset accession (GSE ID)"
+              },
+              "title": {
+                "type": "string",
+                "description": "Dataset title"
+              },
+              "summary": {
+                "type": "string",
+                "description": "Dataset summary text"
+              },
+              "organism": {
+                "type": "string",
+                "description": "Organism scientific name"
+              },
+              "n_samples": {
+                "type": "integer",
+                "description": "Number of samples in the dataset"
+              },
+              "date_published": {
+                "type": ["string", "null"],
+                "description": "Publication date (YYYY/MM/DD)"
+              }
+            }
+          }
+        }
+      }
     }
   },
   {
@@ -1433,6 +1474,47 @@
         "epigenomics"
       ],
       "estimated_execution_time": "< 5 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of matching ATAC-seq datasets in GEO"
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "GEO dataset accession (GSE ID)"
+              },
+              "title": {
+                "type": "string",
+                "description": "Dataset title"
+              },
+              "summary": {
+                "type": "string",
+                "description": "Dataset summary text"
+              },
+              "organism": {
+                "type": "string",
+                "description": "Organism scientific name"
+              },
+              "n_samples": {
+                "type": "integer",
+                "description": "Number of samples in the dataset"
+              },
+              "date_published": {
+                "type": ["string", "null"],
+                "description": "Publication date (YYYY/MM/DD)"
+              }
+            }
+          }
+        }
+      }
     }
   },
   {
@@ -1519,6 +1601,47 @@
         "gene-expression"
       ],
       "estimated_execution_time": "< 5 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of matching ENCODE RNA-seq experiments"
+        },
+        "experiments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string",
+                "description": "ENCODE experiment accession"
+              },
+              "assay_title": {
+                "type": "string",
+                "description": "RNA-seq assay type (e.g., total RNA-seq, polyA plus RNA-seq)"
+              },
+              "biosample_summary": {
+                "type": "string",
+                "description": "Biosample description including organism, cell type, and treatment"
+              },
+              "status": {
+                "type": "string",
+                "description": "Experiment status (e.g., released)"
+              },
+              "lab": {
+                "type": "string",
+                "description": "Lab name and institution"
+              },
+              "date_released": {
+                "type": ["string", "null"],
+                "description": "Release date"
+              }
+            }
+          }
+        }
+      }
     }
   },
   {

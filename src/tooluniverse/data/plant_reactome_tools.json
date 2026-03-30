@@ -33,7 +33,41 @@
         "query": "flavonoid biosynthesis",
         "species": "Oryza sativa"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stId": {
+            "type": "string",
+            "description": "Plant Reactome stable identifier (e.g., R-OSA-1119312)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pathway or reaction name"
+          },
+          "species": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Species names for this pathway"
+          },
+          "exact_type": {
+            "type": "string",
+            "description": "Entity type (Pathway or Reaction)"
+          },
+          "compartment_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Cellular compartments (e.g., chloroplast, cytosol)"
+          }
+        }
+      }
+    }
   },
   {
     "name": "PlantReactome_get_pathway",
@@ -147,6 +181,26 @@
     "test_examples": [
       {},
       {}
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dbId": {
+            "type": "integer"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "string"
+          },
+          "abbreviation": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 ]

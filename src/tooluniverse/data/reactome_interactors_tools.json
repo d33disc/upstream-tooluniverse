@@ -139,7 +139,30 @@
       {
         "entity_id": "R-HSA-8869337"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stable_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "species": {
+            "type": "string"
+          },
+          "is_disease": {
+            "type": "boolean"
+          },
+          "has_diagram": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
   },
   {
     "name": "ReactomeInteractors_search_entity",
