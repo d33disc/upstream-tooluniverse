@@ -1,0 +1,56 @@
+[
+  {
+    "name": "alphafold_get_prediction",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/alphafold_tools.json",
+    "has_example": true,
+    "example": "{\"qualifier\": \"P04637\"}"
+  },
+  {
+    "name": "alphafold_get_summary",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/alphafold_tools.json",
+    "has_example": true,
+    "example": "{\"qualifier\": \"P38398\"}"
+  },
+  {
+    "name": "odphp_myhealthfinder",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/odphp_tools.json",
+    "has_example": true,
+    "example": "{\"lang\": \"en\", \"age\": 1, \"sex\": \"female\", \"pregnant\": \"false\", \"strip_html\": true}"
+  },
+  {
+    "name": "odphp_topicsearch",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/odphp_tools.json",
+    "has_example": true,
+    "example": "{\"lang\": \"en\", \"topicId\": \"30544\", \"categoryId\": \"15\", \"keyword\": \"diabetes\", \"strip_html\": true}"
+  },
+  {
+    "name": "PubChem_get_compound_2D_image_by_CID",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pubchem_tools.json",
+    "has_example": true,
+    "example": "{\"cid\": 2244, \"image_size\": \"large\"}"
+  },
+  {
+    "name": "HMDB_get_diseases",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/metabolite_tools.json",
+    "has_example": true,
+    "example": "{\"hmdb_id\": \"HMDB0000122\"}"
+  },
+  {
+    "name": "PomBase_search_genes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/pombase_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"cdc2\", \"limit\": 5}"
+  },
+  {
+    "name": "RCSBGraphQL_get_structure_summary",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/rcsb_graphql_tools.json",
+    "has_example": true,
+    "example": "{\"pdb_id\": \"4HHB\"}"
+  },
+  {
+    "name": "ProteomicsDB_list_tissues",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/proteomicsdb_tools.json",
+    "has_example": true,
+    "example": "{\"operation\": \"list_tissues\", \"tissue_category\": \"fluid\"}"
+  }
+]

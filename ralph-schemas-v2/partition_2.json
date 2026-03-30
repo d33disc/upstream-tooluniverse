@@ -1,0 +1,56 @@
+[
+  {
+    "name": "GEO_search_rnaseq_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"breast cancer BRCA1\", \"organism\": \"Homo sapiens\", \"limit\": 5}"
+  },
+  {
+    "name": "GEO_search_atacseq_datasets",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"T cell differentiation\", \"organism\": \"Homo sapiens\", \"limit\": 5}"
+  },
+  {
+    "name": "ENCODE_search_rnaseq_experiments",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/epigenomics_tools.json",
+    "has_example": true,
+    "example": "{\"biosample_term_name\": \"K562\", \"assay_type\": \"total RNA-seq\", \"limit\": 3}"
+  },
+  {
+    "name": "PlantReactome_search_pathways",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/plant_reactome_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"photosynthesis\"}"
+  },
+  {
+    "name": "PlantReactome_list_species",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/plant_reactome_tools.json",
+    "has_example": true,
+    "example": "{}"
+  },
+  {
+    "name": "OncoKB_annotate_copy_number",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/oncokb_tools.json",
+    "has_example": true,
+    "example": "{\"gene\": \"ERBB2\", \"copy_number_type\": \"AMPLIFICATION\"}"
+  },
+  {
+    "name": "BioImageArchive_search_studies",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bioimage_archive_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"fluorescence microscopy cell\", \"page_size\": 5}"
+  },
+  {
+    "name": "NDEx_search_networks",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/ndex_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"BRCA1\"}"
+  },
+  {
+    "name": "CPIC_get_recommendations",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/cpic_tools.json",
+    "has_example": true,
+    "example": "{\"drug\": \"codeine\", \"limit\": 10}"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Bgee_search_genes",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bgee_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"TP53\"}"
+  },
+  {
+    "name": "Bgee_get_gene_expression",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bgee_tools.json",
+    "has_example": true,
+    "example": "{\"gene_id\": \"ENSG00000141510\", \"species_id\": \"9606\"}"
+  },
+  {
+    "name": "Bgee_list_species",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/bgee_tools.json",
+    "has_example": true,
+    "example": "{}"
+  },
+  {
+    "name": "NeuroMorpho_search_neurons",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/neuromorpho_tools.json",
+    "has_example": true,
+    "example": "{\"query_field\": \"species\", \"query_value\": \"human\", \"size\": 5}"
+  },
+  {
+    "name": "NeuroMorpho_get_field_values",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/neuromorpho_tools.json",
+    "has_example": true,
+    "example": "{\"field_name\": \"species\"}"
+  },
+  {
+    "name": "kegg_list_organisms",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/kegg_tools.json",
+    "has_example": true,
+    "example": "{\"keyword\": \"human\"}"
+  },
+  {
+    "name": "DepMap_get_cell_line",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/depmap_tools.json",
+    "has_example": true,
+    "example": "{\"model_name\": \"A549\"}"
+  },
+  {
+    "name": "OncoTree_list_tissues",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/oncotree_tools.json",
+    "has_example": true,
+    "example": "{}"
+  },
+  {
+    "name": "UniParc_search",
+    "source_file": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/uniparc_tools.json",
+    "has_example": true,
+    "example": "{\"query\": \"gene:TP53 AND organism_id:9606\", \"size\": 3}"
+  }
+]
