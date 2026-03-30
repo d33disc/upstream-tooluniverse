@@ -94,12 +94,11 @@ class ICDTool(BaseTool):
         access_token = self._get_access_token()
         if not access_token:
             return {
-                "status": "error",
                 "error": (
                     "ICD API authentication required. "
                     "Set ICD_CLIENT_ID and ICD_CLIENT_SECRET environment variables. "
                     "Register at: https://icd.who.int/icdapi"
-                ),
+                )
             }
 
         url = self._build_url(arguments)
@@ -119,7 +118,6 @@ class ICDTool(BaseTool):
             resp = requests.get(url, headers=headers, params=params, timeout=30)
             resp.raise_for_status()
             return {
-                "status": "success",
                 "data": resp.json(),
                 "metadata": {
                     "source": "WHO ICD-11 API",
@@ -129,9 +127,9 @@ class ICDTool(BaseTool):
                 },
             }
         except requests.exceptions.RequestException as e:
-            return {"status": "error", "error": f"Request failed: {e}"}
+            return {"error": f"Request failed: {e}"}
         except ValueError as e:
-            return {"status": "error", "error": f"Failed to parse JSON: {e}"}
+            return {"error": f"Failed to parse JSON: {e}"}
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the tool with given arguments."""
@@ -187,7 +185,6 @@ class ICD10Tool(BaseTool):
                         formatted_results.append({"code": item[0], "name": item[1]})
 
                 return {
-                    "status": "success",
                     "data": {"total": total, "results": formatted_results},
                     "metadata": {
                         "source": "NLM Clinical Tables - ICD-10-CM",
@@ -199,7 +196,6 @@ class ICD10Tool(BaseTool):
 
             # Direct code lookup
             return {
-                "status": "success",
                 "data": data,
                 "metadata": {
                     "source": "NLM Clinical Tables - ICD-10-CM",
@@ -208,9 +204,9 @@ class ICD10Tool(BaseTool):
             }
 
         except requests.exceptions.RequestException as e:
-            return {"status": "error", "error": f"Request failed: {str(e)}"}
+            return {"error": f"Request failed: {str(e)}"}
         except (ValueError, IndexError) as e:
-            return {"status": "error", "error": f"Failed to parse response: {str(e)}"}
+            return {"error": f"Failed to parse response: {str(e)}"}
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the tool with given arguments."""
