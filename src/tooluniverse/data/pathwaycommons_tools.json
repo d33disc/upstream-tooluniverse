@@ -119,6 +119,12 @@
         "query": "BRCA1",
         "type": "Pathway",
         "datasource": "reactome"
+      },
+      {
+        "operation": "search",
+        "query": "apoptosis",
+        "type": "Pathway",
+        "datasource": "kegg"
       }
     ],
     "fields": {
@@ -199,6 +205,10 @@
       {
         "operation": "get_pathway",
         "uri": "http://bioregistry.io/reactome:R-HSA-69473"
+      },
+      {
+        "operation": "get_pathway",
+        "uri": "http://bioregistry.io/reactome:R-HSA-5633007"
       }
     ],
     "fields": {
@@ -305,6 +315,11 @@
         "operation": "get_neighborhood",
         "gene": "CDK2",
         "datasource": "reactome",
+        "max_results": 20
+      },
+      {
+        "operation": "get_neighborhood",
+        "gene": "TP53",
         "max_results": 20
       }
     ],

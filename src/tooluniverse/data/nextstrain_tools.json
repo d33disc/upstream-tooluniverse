@@ -28,67 +28,63 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pathogen": {
-                    "type": "string"
-                  },
-                  "dataset_count": {
-                    "type": "integer"
-                  },
-                  "datasets": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_pathogens": {
-                  "type": "integer"
-                },
-                "total_datasets": {
-                  "type": "integer"
-                },
-                "filter": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status of the request"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "data": {
+          "type": "array",
+          "description": "List of pathogen dataset groups",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathogen": {
+                "type": "string",
+                "description": "Pathogen name (e.g. avian-flu, seasonal-flu)"
+              },
+              "dataset_count": {
+                "type": "integer",
+                "description": "Total number of datasets for this pathogen"
+              },
+              "datasets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of dataset path identifiers"
+              }
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Response metadata",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source (Nextstrain)"
+            },
+            "total_pathogens": {
+              "type": "integer",
+              "description": "Number of pathogen groups returned"
+            },
+            "total_datasets": {
+              "type": "integer",
+              "description": "Total datasets across all pathogens"
+            },
+            "filter": {
+              "type": "string",
+              "description": "Applied pathogen filter"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -123,77 +119,52 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "dataset": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "updated": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "build_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "num_sequences": {
-                  "type": "integer"
-                },
-                "data_provenance": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "maintainers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "root_attributes": {
-                  "type": "object"
-                },
-                "available_colorings": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "dataset": {
+              "type": "string"
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "updated": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "build_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "num_sequences": {
+              "type": "integer"
+            },
+            "data_provenance": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "version": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
+            "maintainers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "root_attributes": {
+              "type": "object"
+            },
+            "available_colorings": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

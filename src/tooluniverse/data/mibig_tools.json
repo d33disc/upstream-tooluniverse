@@ -93,7 +93,7 @@
   },
   {
     "name": "MIBiG_get_stats",
-    "description": "Get summary statistics from the MIBiG biosynthetic gene cluster repository. Returns total BGC counts by status (active, retired, complete, partial, pending), counts by biosynthetic class (PKS, NRPS, Terpene, Saccharide, Ribosomal, Other), and counts by source organism phylum (Actinomycetota, Ascomycota, Pseudomonadota, etc.). Essential for understanding the landscape of characterized natural product biosynthesis across the tree of life.",
+    "description": "Fetch MIBiG repository statistics: total biosynthetic gene clusters plus counts by status, biosynthetic class, and source-organism phylum.",
     "parameter": {
       "type": "object",
       "properties": {},
@@ -104,6 +104,7 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
+      {},
       {}
     ],
     "return_schema": {

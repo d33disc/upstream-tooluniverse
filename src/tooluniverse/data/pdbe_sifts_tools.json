@@ -31,99 +31,80 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "uniprot_accession": {
-                  "type": "string",
-                  "description": "UniProt accession queried"
-                },
-                "structures": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "pdb_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "PDB entry ID (4 characters)"
-                      },
-                      "chain_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Chain ID in PDB entry"
-                      },
-                      "uniprot_start": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ],
-                        "description": "UniProt sequence start covered"
-                      },
-                      "uniprot_end": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ],
-                        "description": "UniProt sequence end covered"
-                      },
-                      "resolution": {
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "description": "Structure resolution in Angstroms"
-                      },
-                      "experimental_method": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Method (X-ray diffraction, Electron Microscopy, NMR)"
-                      },
-                      "coverage": {
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "description": "Fraction of UniProt sequence covered"
-                      },
-                      "tax_id": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ],
-                        "description": "Taxonomy ID of source organism"
-                      }
-                    }
-                  },
-                  "description": "Ranked PDB structures (max 50)"
-                },
-                "total_structures": {
-                  "type": "integer",
-                  "description": "Total available structure-chain entries"
-                }
-              }
+            "uniprot_accession": {
+              "type": "string",
+              "description": "UniProt accession queried"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "accession": {
-                  "type": "string"
+            "structures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pdb_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "PDB entry ID (4 characters)"
+                  },
+                  "chain_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Chain ID in PDB entry"
+                  },
+                  "uniprot_start": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "UniProt sequence start covered"
+                  },
+                  "uniprot_end": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "UniProt sequence end covered"
+                  },
+                  "resolution": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Structure resolution in Angstroms"
+                  },
+                  "experimental_method": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Method (X-ray diffraction, Electron Microscopy, NMR)"
+                  },
+                  "coverage": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Fraction of UniProt sequence covered"
+                  },
+                  "tax_id": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "Taxonomy ID of source organism"
+                  }
                 }
-              }
+              },
+              "description": "Ranked PDB structures (max 50)"
+            },
+            "total_structures": {
+              "type": "integer",
+              "description": "Total available structure-chain entries"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -171,101 +152,82 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "pdb_id": {
-                  "type": "string",
-                  "description": "PDB entry ID"
-                },
-                "proteins": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "uniprot_accession": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "UniProt accession"
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Protein identifier"
-                      },
-                      "chain_mappings": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "chain_id": {
-                              "type": [
-                                "string",
-                                "null"
-                              ],
-                              "description": "Chain ID"
-                            },
-                            "pdb_start": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ],
-                              "description": "PDB residue start"
-                            },
-                            "pdb_end": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ],
-                              "description": "PDB residue end"
-                            },
-                            "uniprot_start": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ],
-                              "description": "UniProt residue start"
-                            },
-                            "uniprot_end": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ],
-                              "description": "UniProt residue end"
-                            }
-                          }
-                        },
-                        "description": "Chain-to-UniProt residue mappings"
-                      }
-                    }
-                  },
-                  "description": "UniProt proteins found in PDB entry"
-                },
-                "total_proteins": {
-                  "type": "integer",
-                  "description": "Number of distinct UniProt proteins"
-                }
-              }
+            "pdb_id": {
+              "type": "string",
+              "description": "PDB entry ID"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "pdb_id": {
-                  "type": "string"
+            "proteins": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uniprot_accession": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "UniProt accession"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Protein identifier"
+                  },
+                  "chain_mappings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "chain_id": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "Chain ID"
+                        },
+                        "pdb_start": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "PDB residue start"
+                        },
+                        "pdb_end": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "PDB residue end"
+                        },
+                        "uniprot_start": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "UniProt residue start"
+                        },
+                        "uniprot_end": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "UniProt residue end"
+                        }
+                      }
+                    },
+                    "description": "Chain-to-UniProt residue mappings"
+                  }
                 }
-              }
+              },
+              "description": "UniProt proteins found in PDB entry"
+            },
+            "total_proteins": {
+              "type": "integer",
+              "description": "Number of distinct UniProt proteins"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -313,101 +275,82 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "uniprot_accession": {
-                  "type": "string",
-                  "description": "UniProt accession queried"
-                },
-                "pdb_entries": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "pdb_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "PDB entry ID"
-                      },
-                      "resolution": {
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "description": "Resolution in Angstroms"
-                      },
-                      "experimental_method": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Experimental method"
-                      },
-                      "chains": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "chain_id": {
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
-                            "uniprot_start": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ]
-                            },
-                            "uniprot_end": {
-                              "type": [
-                                "integer",
-                                "null"
-                              ]
-                            },
-                            "coverage": {
-                              "type": [
-                                "number",
-                                "null"
-                              ]
-                            }
-                          }
-                        },
-                        "description": "Chains in this PDB entry"
-                      }
-                    }
-                  },
-                  "description": "PDB entries sorted by resolution (max 50)"
-                },
-                "total_pdb_entries": {
-                  "type": "integer",
-                  "description": "Total unique PDB entries"
-                },
-                "total_chain_mappings": {
-                  "type": "integer",
-                  "description": "Total chain-level mappings"
-                }
-              }
+            "uniprot_accession": {
+              "type": "string",
+              "description": "UniProt accession queried"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "accession": {
-                  "type": "string"
+            "pdb_entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pdb_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "PDB entry ID"
+                  },
+                  "resolution": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Resolution in Angstroms"
+                  },
+                  "experimental_method": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Experimental method"
+                  },
+                  "chains": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "chain_id": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "uniprot_start": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "uniprot_end": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "coverage": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "description": "Chains in this PDB entry"
+                  }
                 }
-              }
+              },
+              "description": "PDB entries sorted by resolution (max 50)"
+            },
+            "total_pdb_entries": {
+              "type": "integer",
+              "description": "Total unique PDB entries"
+            },
+            "total_chain_mappings": {
+              "type": "integer",
+              "description": "Total chain-level mappings"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

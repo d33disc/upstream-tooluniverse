@@ -47,12 +47,22 @@
         "fulltext_terms": {
           "type": "array",
           "description": "Optional list of terms that must occur in OpenAlex full-text index (adds fulltext.search:<term> filters and implicitly enables require_has_fulltext).",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "anyOf": [
-        {"required": ["search_keywords"]},
-        {"required": ["query"]}
+        {
+          "required": [
+            "search_keywords"
+          ]
+        },
+        {
+          "required": [
+            "query"
+          ]
+        }
       ]
     },
     "return_schema": {
@@ -180,6 +190,12 @@
         "year_from": 2020,
         "year_to": 2023,
         "open_access": true
+      },
+      {
+        "search_keywords": "CRISPR gene editing cancer",
+        "max_results": 5,
+        "year_from": 2021,
+        "open_access": true
       }
     ]
   },
@@ -210,7 +226,9 @@
         "fulltext_terms": {
           "type": "array",
           "description": "Optional list of terms to match in OpenAlex full-text index. Adds one or more fulltext.search:<term> filters and implicitly enables require_has_fulltext.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "per_page": {
           "type": "integer",
@@ -241,32 +259,65 @@
         }
       },
       "anyOf": [
-        {"required": ["search"]},
-        {"required": ["query"]}
+        {
+          "required": [
+            "search"
+          ]
+        },
+        {
+          "required": [
+            "query"
+          ]
+        }
       ]
     },
     "fields": {
       "path": "/works",
       "path_params": [],
-      "param_map": {"per_page": "per-page"},
+      "param_map": {
+        "per_page": "per-page"
+      },
       "default_params": {}
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex /works search response data.",
       "additionalProperties": true,
       "properties": {
-        "meta": {"type": "object", "additionalProperties": true},
+        "meta": {
+          "type": "object",
+          "additionalProperties": true
+        },
         "results": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": true,
             "properties": {
-              "id": {"type": "string"},
-              "title": {"type": ["string", "null"]},
-              "doi": {"type": ["string", "null"]},
-              "publication_year": {"type": ["integer", "null"]}
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "doi": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "publication_year": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
             }
           }
         }
@@ -276,6 +327,11 @@
       {
         "search": "attention is all you need",
         "per_page": 3,
+        "page": 1
+      },
+      {
+        "search": "BRCA1 breast cancer mutations",
+        "per_page": 5,
         "page": 1
       }
     ]
@@ -296,25 +352,54 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["openalex_id"]
+      "required": [
+        "openalex_id"
+      ]
     },
     "fields": {
       "path": "/works/{openalex_id}",
-      "path_params": ["openalex_id"]
+      "path_params": [
+        "openalex_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex work (paper) data.",
       "additionalProperties": true,
       "properties": {
-        "id": {"type": "string"},
-        "title": {"type": ["string", "null"]},
-        "doi": {"type": ["string", "null"]},
-        "publication_year": {"type": ["integer", "null"]}
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publication_year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
       }
     },
     "test_examples": [
-      {"openalex_id": "W2626778328"}
+      {
+        "openalex_id": "W2626778328"
+      },
+      {
+        "openalex_id": "W2741809807"
+      }
     ]
   },
   {
@@ -333,19 +418,31 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["doi"]
+      "required": [
+        "doi"
+      ]
     },
     "fields": {
       "path": "/works/https://doi.org/{doi}",
-      "path_params": ["doi"]
+      "path_params": [
+        "doi"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex work data from DOI lookup.",
       "additionalProperties": true
     },
     "test_examples": [
-      {"doi": "10.1145/3065386"}
+      {
+        "doi": "10.1145/3065386"
+      },
+      {
+        "doi": "10.1038/nature14539"
+      }
     ]
   },
   {
@@ -377,20 +474,34 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["search"]
+      "required": [
+        "search"
+      ]
     },
     "fields": {
       "path": "/authors",
       "path_params": [],
-      "param_map": {"per_page": "per-page"}
+      "param_map": {
+        "per_page": "per-page"
+      }
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex authors search response data.",
       "additionalProperties": true
     },
     "test_examples": [
-      {"search": "Yann LeCun", "per_page": 3}
+      {
+        "search": "Yann LeCun",
+        "per_page": 3
+      },
+      {
+        "search": "Yoshua Bengio",
+        "per_page": 3
+      }
     ]
   },
   {
@@ -409,19 +520,31 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["author_id"]
+      "required": [
+        "author_id"
+      ]
     },
     "fields": {
       "path": "/authors/{author_id}",
-      "path_params": ["author_id"]
+      "path_params": [
+        "author_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex author data.",
       "additionalProperties": true
     },
     "test_examples": [
-      {"author_id": "A5001226970"}
+      {
+        "author_id": "A5001226970"
+      },
+      {
+        "author_id": "A5025759028"
+      }
     ]
   },
   {
@@ -453,20 +576,34 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["search"]
+      "required": [
+        "search"
+      ]
     },
     "fields": {
       "path": "/institutions",
       "path_params": [],
-      "param_map": {"per_page": "per-page"}
+      "param_map": {
+        "per_page": "per-page"
+      }
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex institutions search response data.",
       "additionalProperties": true
     },
     "test_examples": [
-      {"search": "Harvard University", "per_page": 3}
+      {
+        "search": "Harvard University",
+        "per_page": 3
+      },
+      {
+        "search": "MIT",
+        "per_page": 3
+      }
     ]
   },
   {
@@ -485,19 +622,31 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["institution_id"]
+      "required": [
+        "institution_id"
+      ]
     },
     "fields": {
       "path": "/institutions/{institution_id}",
-      "path_params": ["institution_id"]
+      "path_params": [
+        "institution_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "OpenAlex institution data.",
       "additionalProperties": true
     },
     "test_examples": [
-      {"institution_id": "I136199984"}
+      {
+        "institution_id": "I136199984"
+      },
+      {
+        "institution_id": "I63966007"
+      }
     ]
   }
 ]

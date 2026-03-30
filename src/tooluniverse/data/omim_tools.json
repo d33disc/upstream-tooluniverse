@@ -38,28 +38,13 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "success",
-            "error"
-          ]
+        "total_results": {
+          "type": "integer",
+          "description": "Total matching entries"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "total_results": {
-              "type": "integer",
-              "description": "Total matching entries"
-            },
-            "entries": {
-              "type": "array",
-              "description": "List of matching OMIM entries"
-            }
-          }
-        },
-        "error": {
-          "type": "string"
+        "entries": {
+          "type": "array",
+          "description": "List of matching OMIM entries"
         }
       }
     },
@@ -106,25 +91,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "mimNumber": {
+          "type": "integer",
+          "description": "OMIM MIM number"
         },
-        "data": {
+        "titles": {
           "type": "object",
-          "properties": {
-            "mimNumber": {
-              "type": "integer",
-              "description": "OMIM MIM number"
-            },
-            "titles": {
-              "type": "object",
-              "description": "Entry titles"
-            },
-            "textSectionList": {
-              "type": "array",
-              "description": "Text sections with descriptions"
-            }
-          }
+          "description": "Entry titles"
+        },
+        "textSectionList": {
+          "type": "array",
+          "description": "Text sections with descriptions"
         }
       }
     },
@@ -171,20 +148,12 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "gene_maps": {
+          "type": "array",
+          "description": "List of gene-disease mappings"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene_maps": {
-              "type": "array",
-              "description": "List of gene-disease mappings"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -225,35 +194,29 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "mimNumber": {
+          "type": "integer"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "mimNumber": {
-              "type": "integer"
-            },
-            "inheritance": {
-              "type": "string",
-              "description": "Inheritance pattern"
-            },
-            "neurologicCentralNervousSystem": {
-              "type": "array",
-              "description": "CNS features"
-            },
-            "cardiovascular": {
-              "type": "array",
-              "description": "Cardiovascular features"
-            }
-          },
-          "description": "Clinical features organized by organ system"
+        "inheritance": {
+          "type": "string",
+          "description": "Inheritance pattern"
+        },
+        "neurologicCentralNervousSystem": {
+          "type": "array",
+          "description": "CNS features"
+        },
+        "cardiovascular": {
+          "type": "array",
+          "description": "Cardiovascular features"
         }
       }
     },
     "test_examples": [
       {
         "mim_number": "219700"
+      },
+      {
+        "mim_number": "147920"
       }
     ]
   }

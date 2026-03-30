@@ -53,58 +53,36 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "from_db": {
-                  "type": "string"
-                },
-                "to_db": {
-                  "type": "string"
-                },
-                "result_count": {
-                  "type": "integer"
-                },
-                "results": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "from": {
-                        "type": "string"
-                      },
-                      "to": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "failed_ids": {
-                  "type": "array",
-                  "items": {
+            "from_db": {
+              "type": "string"
+            },
+            "to_db": {
+              "type": "string"
+            },
+            "result_count": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
                     "type": "string"
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "job_id": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
+            "failed_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -152,46 +130,27 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "query_ids": {
-                  "type": "string"
-                },
-                "result_count": {
-                  "type": "integer"
-                },
-                "results": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "from": {
-                        "type": "string"
-                      },
-                      "to": {
-                        "type": "string"
-                      }
-                    }
+            "query_ids": {
+              "type": "string"
+            },
+            "result_count": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -254,49 +213,30 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "gene_names": {
-                  "type": "string"
-                },
-                "species_taxid": {
-                  "type": "integer"
-                },
-                "result_count": {
-                  "type": "integer"
-                },
-                "results": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "from": {
-                        "type": "string"
-                      },
-                      "to": {
-                        "type": "string"
-                      }
-                    }
+            "gene_names": {
+              "type": "string"
+            },
+            "species_taxid": {
+              "type": "integer"
+            },
+            "result_count": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -325,64 +265,48 @@
     },
     "type": "UniProtIDMappingTool",
     "test_examples": [
-      {}
+      {},
+      {
+        "note": "Returns 100+ databases including UniProtKB, Gene_Name, Ensembl, RefSeq, PDB, ChEMBL"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "group_count": {
-                  "type": "integer"
-                },
-                "groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "group_name": {
-                        "type": "string"
-                      },
-                      "databases": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "type": "string"
-                            },
-                            "display_name": {
-                              "type": "string"
-                            },
-                            "from_supported": {
-                              "type": "boolean"
-                            }
-                          }
+            "group_count": {
+              "type": "integer"
+            },
+            "groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "group_name": {
+                    "type": "string"
+                  },
+                  "databases": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "display_name": {
+                          "type": "string"
+                        },
+                        "from_supported": {
+                          "type": "boolean"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

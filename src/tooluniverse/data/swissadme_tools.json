@@ -117,6 +117,11 @@
         "operation": "calculate_adme",
         "smiles": "CC(=O)Oc1ccccc1C(=O)O",
         "molecule_name": "aspirin"
+      },
+      {
+        "operation": "calculate_adme",
+        "smiles": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+        "molecule_name": "ibuprofen"
       }
     ]
   },
@@ -178,6 +183,10 @@
       {
         "operation": "check_druglikeness",
         "smiles": "CC(=O)Oc1ccccc1C(=O)O"
+      },
+      {
+        "operation": "check_druglikeness",
+        "smiles": "CC(C)Cc1ccc(cc1)C(C)C(=O)O"
       }
     ]
   }

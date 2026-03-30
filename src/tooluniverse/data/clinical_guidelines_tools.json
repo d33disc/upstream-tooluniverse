@@ -11,9 +11,7 @@
       "endpoint": "https://api.magicapp.org/api/v1/guidelines"
     },
     "type": "BaseRESTTool",
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}, {}],
     "return_schema": {
       "oneOf": [
         {

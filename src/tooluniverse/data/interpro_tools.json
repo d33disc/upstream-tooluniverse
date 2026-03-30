@@ -40,6 +40,9 @@
     "test_examples": [
       {
         "protein_id": "P04637"
+      },
+      {
+        "protein_id": "P00533"
       }
     ]
   },
@@ -88,6 +91,10 @@
       {
         "query": "kinase",
         "page_size": 20
+      },
+      {
+        "query": "IPR000719",
+        "page_size": 5
       }
     ]
   },
@@ -184,6 +191,9 @@
     "test_examples": [
       {
         "accession": "IPR000719"
+      },
+      {
+        "accession": "IPR002117"
       }
     ]
   }

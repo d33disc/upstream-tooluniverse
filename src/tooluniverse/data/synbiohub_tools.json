@@ -139,7 +139,10 @@
     },
     "type": "SynBioHubTool",
     "test_examples": [
-      {}
+      {},
+      {
+        "note": "Returns all public collections including iGEM Parts Registry and CIDAR Lab parts"
+      }
     ],
     "return_schema": {
       "oneOf": [
@@ -258,91 +261,80 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "display_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Part display identifier"
-                },
-                "title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Human-readable part title"
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Part description"
-                },
-                "type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "SBOL biological type (e.g., DnaRegion)"
-                },
-                "role": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Functional roles (SO terms and iGEM part types)"
-                },
-                "sequence": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "DNA sequence (first 500 characters)"
-                },
-                "sequence_length": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Full sequence length in base pairs"
-                },
-                "created": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Creation date"
-                },
-                "modified": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Last modification date"
-                },
-                "derived_from": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Original source URI (e.g., iGEM registry URL)"
-                }
-              }
+            "display_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Part display identifier"
             },
-            "metadata": {
-              "type": "object"
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Human-readable part title"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Part description"
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "SBOL biological type (e.g., DnaRegion)"
+            },
+            "role": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              },
+              "description": "Functional roles (SO terms and iGEM part types)"
+            },
+            "sequence": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "DNA sequence (first 500 characters)"
+            },
+            "sequence_length": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Full sequence length in base pairs"
+            },
+            "created": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Creation date"
+            },
+            "modified": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Last modification date"
+            },
+            "derived_from": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Original source URI (e.g., iGEM registry URL)"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

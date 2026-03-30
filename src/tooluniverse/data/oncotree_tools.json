@@ -13,7 +13,12 @@
         "field": {
           "type": "string",
           "description": "Field to search in. One of: 'name' (cancer type name), 'code' (OncoTree code), 'main_type' (main cancer category), 'tissue' (tissue of origin). Default: 'name'.",
-          "enum": ["name", "code", "main_type", "tissue"],
+          "enum": [
+            "name",
+            "code",
+            "main_type",
+            "tissue"
+          ],
           "default": "name"
         },
         "exact_match": {
@@ -27,52 +32,107 @@
           "default": "oncotree_latest_stable"
         }
       },
-      "required": ["query"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "code": {"type": ["string", "null"]},
-                  "name": {"type": ["string", "null"]},
-                  "main_type": {"type": ["string", "null"]},
-                  "tissue": {"type": ["string", "null"]},
-                  "parent": {"type": ["string", "null"]},
-                  "level": {"type": ["integer", "null"]},
-                  "external_references": {"type": "object"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"},
-            "retryable": {"type": "boolean"}
-          },
-          "required": ["status", "error"]
-        }
+      "required": [
+        "query"
       ]
     },
     "test_examples": [
-      {"query": "breast cancer", "field": "name"},
-      {"query": "LUAD", "field": "code", "exact_match": true},
-      {"query": "Lung", "field": "tissue"}
+      {
+        "query": "breast cancer",
+        "field": "name"
+      },
+      {
+        "query": "LUAD",
+        "field": "code",
+        "exact_match": true
+      },
+      {
+        "query": "Lung",
+        "field": "tissue"
+      }
     ],
-    "label": ["OncoTree", "Cancer", "Oncology", "Classification"],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (e.g., 'success')"
+        },
+        "data": {
+          "type": "array",
+          "description": "Matching cancer types",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "OncoTree code (e.g., 'IBC', 'MBC')"
+              },
+              "name": {
+                "type": "string",
+                "description": "Cancer type name"
+              },
+              "main_type": {
+                "type": "string",
+                "description": "Main cancer category (e.g., 'Breast Cancer')"
+              },
+              "tissue": {
+                "type": "string",
+                "description": "Tissue of origin (e.g., 'Breast')"
+              },
+              "parent": {
+                "type": "string",
+                "description": "Parent node code in hierarchy"
+              },
+              "level": {
+                "type": "integer",
+                "description": "Hierarchy level (1=tissue, 2=main type, 3+=subtypes)"
+              },
+              "external_references": {
+                "type": "object",
+                "description": "Cross-references to UMLS and NCI Thesaurus",
+                "properties": {
+                  "UMLS": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "NCI": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "Original search query" },
+            "field": { "type": "string", "description": "Field that was searched" },
+            "exact_match": { "type": "boolean", "description": "Whether exact matching was used" },
+            "count": { "type": "integer", "description": "Number of results" },
+            "version": { "type": "string", "description": "OncoTree version used" }
+          }
+        }
+      }
+    },
+    "label": [
+      "OncoTree",
+      "Cancer",
+      "Oncology",
+      "Classification"
+    ],
     "metadata": {
-      "tags": ["cancer", "oncology", "tumor type", "classification", "MSK", "UMLS", "NCI"],
+      "tags": [
+        "cancer",
+        "oncology",
+        "tumor type",
+        "classification",
+        "MSK",
+        "UMLS",
+        "NCI"
+      ],
       "estimated_execution_time": "1-2 seconds"
     }
   },
@@ -93,51 +153,79 @@
           "default": "oncotree_latest_stable"
         }
       },
-      "required": ["code"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "code": {"type": ["string", "null"]},
-                "name": {"type": ["string", "null"]},
-                "main_type": {"type": ["string", "null"]},
-                "tissue": {"type": ["string", "null"]},
-                "color": {"type": ["string", "null"]},
-                "parent": {"type": ["string", "null"]},
-                "level": {"type": ["integer", "null"]},
-                "history": {"type": "array"},
-                "external_references": {"type": "object"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"},
-            "retryable": {"type": "boolean"}
-          },
-          "required": ["status", "error"]
-        }
+      "required": [
+        "code"
       ]
     },
     "test_examples": [
-      {"code": "BRCA"},
-      {"code": "LUAD"},
-      {"code": "GBM"}
+      {
+        "code": "BRCA"
+      },
+      {
+        "code": "LUAD"
+      },
+      {
+        "code": "GBM"
+      }
     ],
-    "label": ["OncoTree", "Cancer", "Oncology", "Classification"],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (e.g., 'success')"
+        },
+        "data": {
+          "type": "object",
+          "description": "Cancer type details",
+          "properties": {
+            "code": { "type": "string", "description": "OncoTree code" },
+            "name": { "type": "string", "description": "Cancer type name" },
+            "main_type": { "type": "string", "description": "Main cancer category" },
+            "tissue": { "type": "string", "description": "Tissue of origin" },
+            "color": { "type": "string", "description": "Color used in MSK visualizations" },
+            "parent": { "type": "string", "description": "Parent node code" },
+            "level": { "type": "integer", "description": "Hierarchy level" },
+            "history": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Revision history entries"
+            },
+            "external_references": {
+              "type": "object",
+              "description": "Cross-references to UMLS and NCI Thesaurus",
+              "properties": {
+                "UMLS": { "type": "array", "items": { "type": "string" } },
+                "NCI": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string", "description": "Data source (e.g., 'OncoTree MSK')" },
+            "version": { "type": "string", "description": "OncoTree version used" }
+          }
+        }
+      }
+    },
+    "label": [
+      "OncoTree",
+      "Cancer",
+      "Oncology",
+      "Classification"
+    ],
     "metadata": {
-      "tags": ["cancer", "oncology", "tumor type", "code lookup", "MSK", "UMLS", "NCI"],
+      "tags": [
+        "cancer",
+        "oncology",
+        "tumor type",
+        "code lookup",
+        "MSK",
+        "UMLS",
+        "NCI"
+      ],
       "estimated_execution_time": "1-2 seconds"
     }
   },
@@ -155,37 +243,23 @@
         }
       }
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "array",
-              "items": {"type": "string"}
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"},
-            "retryable": {"type": "boolean"}
-          },
-          "required": ["status", "error"]
-        }
-      ]
-    },
     "test_examples": [
+      {},
       {}
     ],
-    "label": ["OncoTree", "Cancer", "Oncology", "Classification"],
+    "label": [
+      "OncoTree",
+      "Cancer",
+      "Oncology",
+      "Classification"
+    ],
     "metadata": {
-      "tags": ["cancer", "tissue", "oncology", "MSK"],
+      "tags": [
+        "cancer",
+        "tissue",
+        "oncology",
+        "MSK"
+      ],
       "estimated_execution_time": "2-3 seconds"
     }
   }

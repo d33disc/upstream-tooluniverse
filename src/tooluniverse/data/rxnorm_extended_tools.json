@@ -11,7 +11,9 @@
           "description": "Drug name to look up (generic, brand, or synonym). Examples: 'metformin', 'Lipitor', 'acetaminophen', 'warfarin sodium'."
         }
       },
-      "required": ["drug_name"]
+      "required": [
+        "drug_name"
+      ]
     },
     "fields": {
       "operation": "find_rxcui",
@@ -20,27 +22,51 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "drug_name": {"type": "string"},
-            "rxcuis": {"type": "array", "items": {"type": "string"}},
-            "primary_rxcui": {"type": ["string", "null"]},
-            "found": {"type": "boolean"}
+        "drug_name": {
+          "type": "string"
+        },
+        "rxcuis": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "metadata": {"type": "object", "additionalProperties": true}
+        "primary_rxcui": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "found": {
+          "type": "boolean"
+        }
       }
     },
     "test_examples": [
-      {"drug_name": "metformin"},
-      {"drug_name": "warfarin"},
-      {"drug_name": "atorvastatin"}
+      {
+        "drug_name": "metformin"
+      },
+      {
+        "drug_name": "warfarin"
+      },
+      {
+        "drug_name": "atorvastatin"
+      }
     ],
-    "label": ["RxNorm", "RXCUI", "drug", "NLM", "standardization"],
+    "label": [
+      "RxNorm",
+      "RXCUI",
+      "drug",
+      "NLM",
+      "standardization"
+    ],
     "metadata": {
-      "tags": ["drug_standardization", "drug_identifier", "NLM", "rxnorm"],
+      "tags": [
+        "drug_standardization",
+        "drug_identifier",
+        "NLM",
+        "rxnorm"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   },
@@ -68,29 +94,66 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "rxcui": {"type": "string"},
-            "name": {"type": ["string", "null"]},
-            "synonym": {"type": ["string", "null"]},
-            "term_type": {"type": ["string", "null"]},
-            "term_type_label": {"type": ["string", "null"]},
-            "language": {"type": ["string", "null"]}
-          }
+        "rxcui": {
+          "type": "string"
         },
-        "metadata": {"type": "object", "additionalProperties": true}
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "synonym": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "term_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "term_type_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "language": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "test_examples": [
-      {"rxcui": "6809"},
-      {"drug_name": "warfarin"},
-      {"rxcui": "860975"}
+      {
+        "rxcui": "6809"
+      },
+      {
+        "drug_name": "warfarin"
+      },
+      {
+        "rxcui": "860975"
+      }
     ],
-    "label": ["RxNorm", "drug", "properties", "NLM", "terminology"],
+    "label": [
+      "RxNorm",
+      "drug",
+      "properties",
+      "NLM",
+      "terminology"
+    ],
     "metadata": {
-      "tags": ["drug_information", "drug_properties", "NLM", "rxnorm"],
+      "tags": [
+        "drug_information",
+        "drug_properties",
+        "NLM",
+        "rxnorm"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   },
@@ -123,40 +186,72 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
+        "rxcui": {
+          "type": "string"
+        },
+        "related_drugs": {
           "type": "object",
-          "properties": {
-            "rxcui": {"type": "string"},
-            "related_drugs": {
+          "description": "Grouped by term-type label. Keys are human-readable type labels.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
               "type": "object",
-              "description": "Grouped by term-type label. Keys are human-readable type labels.",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "rxcui": {"type": ["string", "null"]},
-                    "name": {"type": ["string", "null"]},
-                    "synonym": {"type": ["string", "null"]}
-                  }
+              "properties": {
+                "rxcui": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "synonym": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
-            },
-            "total_related": {"type": "integer"}
+            }
           }
         },
-        "metadata": {"type": "object", "additionalProperties": true}
+        "total_related": {
+          "type": "integer"
+        }
       }
     },
     "test_examples": [
-      {"rxcui": "6809"},
-      {"drug_name": "atorvastatin"},
-      {"rxcui": "11289", "tty": "BN+SBD"}
+      {
+        "rxcui": "6809"
+      },
+      {
+        "drug_name": "atorvastatin"
+      },
+      {
+        "rxcui": "11289",
+        "tty": "BN+SBD"
+      }
     ],
-    "label": ["RxNorm", "drug", "brand", "generic", "related", "NLM"],
+    "label": [
+      "RxNorm",
+      "drug",
+      "brand",
+      "generic",
+      "related",
+      "NLM"
+    ],
     "metadata": {
-      "tags": ["drug_products", "brand_generic", "drug_lookup", "NLM", "rxnorm"],
+      "tags": [
+        "drug_products",
+        "brand_generic",
+        "drug_lookup",
+        "NLM",
+        "rxnorm"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   }

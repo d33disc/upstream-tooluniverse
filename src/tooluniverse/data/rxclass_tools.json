@@ -7,19 +7,31 @@
       "type": "object",
       "properties": {
         "drug_name": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Drug name to classify. Examples: 'metformin', 'aspirin', 'ibuprofen', 'metoprolol'."
         },
         "rxcui": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "RxNorm RXCUI identifier (alternative to drug_name). Examples: '6809' (metformin), '1191' (aspirin)."
         },
         "rela_source": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Classification source. Options: 'ATC' (WHO Anatomical Therapeutic Chemical, default), 'FDASPL' (FDA pharmacologic classes including EPC/MoA/PE), 'MESH', 'VA', 'DAILYMED', 'ALL'. Default: 'ATC'."
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum results to return (default 20)."
         }
       },
@@ -28,47 +40,69 @@
     "fields": {
       "operation": "get_drug_classes"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "success"},
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "classId": {"type": "string"},
-                  "className": {"type": "string"},
-                  "classType": {"type": "string"},
-                  "rxcui": {"type": "string"},
-                  "drugName": {"type": "string"},
-                  "tty": {"type": "string"},
-                  "rela": {"type": "string"},
-                  "relaSource": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "error"},
-            "error": {"type": "string"}
-          },
-          "required": ["status", "error"]
-        }
-      ]
-    },
     "test_examples": [
-      {"drug_name": "metformin", "rela_source": "ATC"},
-      {"drug_name": "ibuprofen", "rela_source": "FDASPL"},
-      {"rxcui": "1191", "rela_source": "ATC"}
-    ]
+      {
+        "drug_name": "metformin",
+        "rela_source": "ATC"
+      },
+      {
+        "drug_name": "ibuprofen",
+        "rela_source": "FDASPL"
+      },
+      {
+        "rxcui": "1191",
+        "rela_source": "ATC"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classId": {
+                "type": "string",
+                "description": "Drug class identifier (e.g. ATC code)"
+              },
+              "className": {
+                "type": "string",
+                "description": "Drug class name"
+              },
+              "classType": {
+                "type": "string",
+                "description": "Classification type (e.g. ATC1-4)"
+              },
+              "rxcui": {
+                "type": "string",
+                "description": "RxNorm concept unique identifier"
+              },
+              "drugName": {
+                "type": "string",
+                "description": "Drug name"
+              },
+              "tty": {
+                "type": "string",
+                "description": "Term type (e.g. IN, MIN, PIN)"
+              },
+              "rela": {
+                "type": "string",
+                "description": "Relationship attribute"
+              },
+              "relaSource": {
+                "type": "string",
+                "description": "Source of the relationship"
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "RxClass_get_class_members",
@@ -82,58 +116,96 @@
           "description": "Drug class identifier. ATC class codes: 'M01AE' (propionic acid derivatives), 'N02BA' (salicylic acid derivatives), 'A10BA' (biguanides). FDA EPC IDs are long numeric strings."
         },
         "rela_source": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Classification source system. Options: 'ATC' (default), 'FDASPL', 'MESH', 'VA', 'DAILYMED'."
         },
         "ttys": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "RxNorm term types to include. Options: 'IN' (ingredients, default), 'PIN' (precise ingredients), 'MIN' (multi-ingredients), 'SCD' (semantic clinical drugs). Default: 'IN'."
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of drugs to return (default 50)."
         }
       },
-      "required": ["class_id"]
+      "required": [
+        "class_id"
+      ]
     },
     "fields": {
       "operation": "get_class_members"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "success"},
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rxcui": {"type": "string"},
-                  "name": {"type": "string"},
-                  "tty": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "error"},
-            "error": {"type": "string"}
-          },
-          "required": ["status", "error"]
-        }
-      ]
-    },
     "test_examples": [
-      {"class_id": "M01AE", "rela_source": "ATC", "ttys": "IN"},
-      {"class_id": "N02BA", "rela_source": "ATC", "ttys": "IN"}
-    ]
+      {
+        "class_id": "M01AE",
+        "rela_source": "ATC",
+        "ttys": "IN"
+      },
+      {
+        "class_id": "N02BA",
+        "rela_source": "ATC",
+        "ttys": "IN"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rxcui": {
+                "type": "string",
+                "description": "RxNorm concept unique identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "Drug name"
+              },
+              "tty": {
+                "type": "string",
+                "description": "Term type (e.g. IN, MIN, PIN)"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "class_id": {
+              "type": "string",
+              "description": "Class ID queried"
+            },
+            "rela_source": {
+              "type": "string",
+              "description": "Relationship source used"
+            },
+            "ttys": {
+              "type": "string",
+              "description": "Term types filter applied"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of members returned"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "RxClass_find_classes",
@@ -147,54 +219,84 @@
           "description": "Keyword to search in class names. Examples: 'analgesic', 'beta blocker', 'antidiabetic', 'statin', 'NSAID', 'ACE inhibitor'."
         },
         "class_type": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by class type. Options: 'ATC1-4' (ATC codes), 'EPC' (Established Pharmacologic Class), 'MOA' (Mechanism of Action), 'PE' (Physiologic Effect), 'DISEASE', 'VA', 'SCHEDULE'."
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum results to return (default 20)."
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "operation": "find_classes"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "success"},
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "classId": {"type": "string"},
-                  "className": {"type": "string"},
-                  "classType": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "const": "error"},
-            "error": {"type": "string"}
-          },
-          "required": ["status", "error"]
-        }
-      ]
-    },
     "test_examples": [
-      {"query": "beta blocker"},
-      {"query": "statin", "class_type": "EPC"},
-      {"query": "propionic acid"}
-    ]
+      {
+        "query": "beta blocker"
+      },
+      {
+        "query": "statin",
+        "class_type": "EPC"
+      },
+      {
+        "query": "propionic acid"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classId": {
+                "type": "string",
+                "description": "Drug class identifier"
+              },
+              "className": {
+                "type": "string",
+                "description": "Drug class name"
+              },
+              "classType": {
+                "type": "string",
+                "description": "Classification system type (e.g. VA, ATC1-4)"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query used"
+            },
+            "class_type": {
+              "type": "string",
+              "description": "Class type filter applied"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of results returned"
+            }
+          }
+        }
+      }
+    }
   }
 ]

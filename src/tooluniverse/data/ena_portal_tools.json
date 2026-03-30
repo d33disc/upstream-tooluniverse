@@ -43,71 +43,28 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "study_accession": {
-                    "type": "string"
-                  },
-                  "study_title": {
-                    "type": "string"
-                  },
-                  "center_name": {
-                    "type": "string"
-                  },
-                  "first_public": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "returned": {
-                  "type": "integer"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "study_accession": {
+            "type": "string"
           },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
+          "study_title": {
+            "type": "string"
           },
-          "required": [
-            "error"
-          ]
+          "center_name": {
+            "type": "string"
+          },
+          "first_public": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
         }
-      ]
-    },
-    "aliases": [
-      "ENA_search"
-    ]
+      }
+    }
   },
   {
     "name": "ENAPortal_search_samples",
@@ -153,70 +110,30 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "sample_accession": {
-                    "type": "string"
-                  },
-                  "sample_alias": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "tax_id": {
-                    "type": "string"
-                  },
-                  "scientific_name": {
-                    "type": "string"
-                  },
-                  "first_public": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "returned": {
-                  "type": "integer"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sample_accession": {
+            "type": "string"
           },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
+          "sample_alias": {
+            "type": "string"
           },
-          "required": [
-            "error"
-          ]
+          "description": {
+            "type": "string"
+          },
+          "tax_id": {
+            "type": "string"
+          },
+          "scientific_name": {
+            "type": "string"
+          },
+          "first_public": {
+            "type": "string"
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -255,53 +172,19 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "count": {
-                  "type": "integer",
-                  "description": "Number of matching records"
-                },
-                "result_type": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Number of matching records"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+        "result_type": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
         }
-      ]
+      }
     }
   }
 ]

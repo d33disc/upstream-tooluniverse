@@ -34,53 +34,50 @@
           "default": 2
         }
       },
-      "required": ["agent"]
+      "required": [
+        "agent"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "agent": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "agent": {
-              "type": "string"
-            },
-            "type_filter": {
-              "type": ["string", "null"]
-            },
-            "statements": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "hash": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "subject": {
-                    "type": "string"
-                  },
-                  "object": {
-                    "type": "string"
-                  },
-                  "evidence": {
-                    "type": "array"
-                  }
-                }
+        "type_filter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hash": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "subject": {
+                "type": "string"
+              },
+              "object": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "array"
               }
-            },
-            "statements_returned": {
-              "type": "integer"
-            },
-            "total_evidence": {
-              "type": "integer"
             }
           }
+        },
+        "statements_returned": {
+          "type": "integer"
+        },
+        "total_evidence": {
+          "type": "integer"
         }
       }
     },
@@ -118,30 +115,27 @@
           "description": "Optional: filter by statement type (e.g., 'Activation', 'Inhibition', 'Phosphorylation')"
         }
       },
-      "required": ["agent"]
+      "required": [
+        "agent"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "agent": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "agent": {
-              "type": "string"
-            },
-            "type_filter": {
-              "type": ["string", "null"]
-            },
-            "total_evidence": {
-              "type": "integer"
-            },
-            "statements_returned": {
-              "type": "integer"
-            }
-          }
+        "type_filter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "total_evidence": {
+          "type": "integer"
+        },
+        "statements_returned": {
+          "type": "integer"
         }
       }
     },
@@ -177,36 +171,30 @@
           "default": 10
         }
       },
-      "required": ["hash"]
+      "required": [
+        "hash"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "hash": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "hash": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "total_evidence": {
-              "type": "integer"
-            },
-            "subject": {
-              "type": "object"
-            },
-            "object": {
-              "type": "object"
-            },
-            "evidence": {
-              "type": "array"
-            }
-          }
+        "type": {
+          "type": "string"
+        },
+        "total_evidence": {
+          "type": "integer"
+        },
+        "subject": {
+          "type": "object"
+        },
+        "object": {
+          "type": "object"
+        },
+        "evidence": {
+          "type": "array"
         }
       }
     },

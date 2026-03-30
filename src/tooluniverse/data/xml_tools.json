@@ -171,6 +171,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 10
+      },
+      {
+        "query": "cancer",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 10
       }
     ]
   },
@@ -343,6 +349,12 @@
     "test_examples": [
       {
         "query": "cancer",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 50
+      },
+      {
+        "query": "diabetes",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
@@ -523,6 +535,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
+      },
+      {
+        "query": "diabetes",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 50
       }
     ]
   },
@@ -695,6 +713,12 @@
     "test_examples": [
       {
         "query": "D012345",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 50
+      },
+      {
+        "query": "cancer",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
@@ -891,6 +915,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "metformin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -1075,6 +1105,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "metformin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -1220,6 +1256,12 @@
     "test_examples": [
       {
         "query": "hypertension",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
+      },
+      {
+        "query": "aspirin",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
@@ -1410,6 +1452,12 @@
     "test_examples": [
       {
         "query": "Aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
+      },
+      {
+        "query": "metformin",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
@@ -1604,6 +1652,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 1
+      },
+      {
+        "query": "aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 1
       }
     ]
   },
@@ -1777,6 +1831,12 @@
     "test_examples": [
       {
         "query": "aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
+      },
+      {
+        "query": "metformin",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
@@ -2061,6 +2121,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "metformin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -2224,6 +2290,12 @@
     "test_examples": [
       {
         "query": "EGFR",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
+      },
+      {
+        "query": "aspirin",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
@@ -2470,6 +2542,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "metformin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -2627,6 +2705,12 @@
     "test_examples": [
       {
         "query": "Aspirin",
+        "case_sensitive": false,
+        "exact_match": true,
+        "limit": 5
+      },
+      {
+        "query": "metformin",
         "case_sensitive": false,
         "exact_match": true,
         "limit": 5
@@ -2837,6 +2921,12 @@
     "test_examples": [
       {
         "query": "Aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
+      },
+      {
+        "query": "metformin",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
@@ -3056,6 +3146,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "metformin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -3262,6 +3358,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 1
+      },
+      {
+        "query": "aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 1
       }
     ]
   },
@@ -3458,6 +3560,12 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
+      },
+      {
+        "query": "aspirin",
+        "case_sensitive": false,
+        "exact_match": false,
+        "limit": 5
       }
     ]
   },
@@ -3592,6 +3700,11 @@
       }
     },
     "test_examples": [
+      {
+        "condition": "ends_with",
+        "value": "cillin",
+        "limit": 10
+      },
       {
         "condition": "ends_with",
         "value": "cillin",

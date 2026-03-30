@@ -148,6 +148,15 @@
           "VHL"
         ],
         "top_n": 3
+      },
+      {
+        "gene_list": [
+          "SOD1",
+          "SOD2",
+          "CAT",
+          "GPX1"
+        ],
+        "top_n": 5
       }
     ]
   }

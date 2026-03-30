@@ -52,6 +52,10 @@
     "test_examples": [
       {
         "operation": "search_screens"
+      },
+      {
+        "operation": "search_screens",
+        "query": "JUMP"
       }
     ]
   },
@@ -112,6 +116,10 @@
       {
         "operation": "get_screen_plates",
         "screen_id": 1251
+      },
+      {
+        "operation": "get_screen_plates",
+        "screen_id": 1252
       }
     ]
   },
@@ -182,6 +190,11 @@
         "operation": "get_well_data",
         "plate_id": 5104,
         "limit": 5
+      },
+      {
+        "operation": "get_well_data",
+        "plate_id": 5105,
+        "limit": 10
       }
     ]
   }

@@ -1,7 +1,7 @@
 [
   {
     "name": "STRING_get_network",
-    "description": "Get the protein-protein interaction network for one or more proteins from STRING database. Returns all interactions (edges) between the query proteins and their neighbors, including confidence scores broken down by evidence type (experiments, co-expression, databases, text-mining, etc.). Different from STRING_get_functional_annotations (which returns GO/pathway annotations) and STRING_get_enrichment (which tests enrichment of a set). Use this to build or visualize PPI networks. Multiple proteins can be separated by carriage return characters (\\r).",
+    "description": "Get protein-protein interaction networks from STRING database. Returns interaction edges with combined confidence scores and evidence breakdowns (experimental, co-expression, databases, text-mining, gene fusion, phylogenetic profiles). Supports multi-protein queries separated by carriage return.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -135,7 +135,7 @@
   },
   {
     "name": "STRING_get_interaction_partners",
-    "description": "Get interaction partners for a single protein from STRING database. Returns a ranked list of proteins that interact with the query protein, along with detailed confidence scores by evidence type (experimental, database, text-mining, etc.). Different from STRING_get_network which returns all edges in a network - this returns a simple partner list focused on one protein. Useful for finding what proteins a given protein interacts with.",
+    "description": "Get interaction partners for a single protein from STRING database. Returns ranked partner list with combined confidence scores and evidence breakdowns (experimental, database, text-mining, co-expression, gene fusion, phylogenetic profiles). Use for identifying direct interactors of a query protein.",
     "parameter": {
       "type": "object",
       "properties": {

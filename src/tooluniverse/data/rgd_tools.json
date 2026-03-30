@@ -21,21 +21,17 @@
             {"rgd_id": "RGD:3001"}
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {"type": "object"},
-                        "metadata": {"type": "object"}
-                    }
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    }
-                }
-            ]
+            "type": "object",
+            "properties": {
+                "rgd_id": {"type": ["integer", "string"], "description": "RGD gene identifier"},
+                "symbol": {"type": "string", "description": "Gene symbol"},
+                "name": {"type": "string", "description": "Gene full name"},
+                "description": {"type": ["string", "null"], "description": "Functional description"},
+                "type": {"type": ["string", "null"], "description": "Gene type (e.g., protein-coding)"},
+                "ensembl_symbol": {"type": ["string", "null"]},
+                "refseq_status": {"type": ["string", "null"]}
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -65,21 +61,18 @@
             {"query": "Tp53", "species": "rat"}
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {"type": "array"},
-                        "metadata": {"type": "object"}
-                    }
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "rgd_id": {"type": ["integer", "string"]},
+                    "symbol": {"type": ["string", "null"]},
+                    "name": {"type": ["string", "null"]},
+                    "type": {"type": ["string", "null"]},
+                    "description": {"type": ["string", "null"]}
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    }
-                }
-            ]
+                "additionalProperties": true
+            }
         }
     },
     {
@@ -109,21 +102,18 @@
             {"rgd_id": "3001"}
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {"type": "array"},
-                        "metadata": {"type": "object"}
-                    }
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "term": {"type": ["string", "null"], "description": "Ontology term name"},
+                    "term_id": {"type": ["string", "null"], "description": "Ontology term identifier"},
+                    "aspect": {"type": ["string", "null"]},
+                    "evidence_code": {"type": ["string", "null"]},
+                    "qualifier": {"type": ["string", "null"]}
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    }
-                }
-            ]
+                "additionalProperties": true
+            }
         }
     },
     {
@@ -144,24 +134,21 @@
         },
         "type": "RGDTool",
         "test_examples": [
-            {"rgd_id": "2218"}
+            {"rgd_id": "2218"},
+            {"rgd_id": "RGD:3001"}
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {"type": "array"},
-                        "metadata": {"type": "object"}
-                    }
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "symbol": {"type": ["string", "null"]},
+                    "rgd_id": {"type": ["integer", "string", "null"]},
+                    "name": {"type": ["string", "null"]},
+                    "species": {"type": ["string", "null"]}
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    }
-                }
-            ]
+                "additionalProperties": true
+            }
         }
     }
 ]

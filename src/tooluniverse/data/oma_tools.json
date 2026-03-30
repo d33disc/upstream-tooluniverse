@@ -31,131 +31,112 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "entry_nr": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "OMA internal entry number"
-                },
-                "oma_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "OMA identifier (species code + number)"
-                },
-                "canonical_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "UniProt canonical ID"
-                },
-                "sequence_length": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Protein sequence length"
-                },
-                "species_code": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "OMA 5-letter species code"
-                },
-                "species_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Full species name"
-                },
-                "taxon_id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "NCBI taxonomy ID"
-                },
-                "oma_group": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "OMA Group number (strict 1:1 orthologs)"
-                },
-                "oma_hog_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Hierarchical Orthologous Group ID"
-                },
-                "chromosome": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Chromosome/scaffold"
-                },
-                "locus_start": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Genomic start position"
-                },
-                "locus_end": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Genomic end position"
-                },
-                "locus_strand": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Strand (1 or -1)"
-                },
-                "is_main_isoform": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ],
-                  "description": "Whether this is the main isoform"
-                },
-                "roothog_id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Root HOG identifier"
-                }
-              }
+            "entry_nr": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "OMA internal entry number"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                }
-              }
+            "oma_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "OMA identifier (species code + number)"
+            },
+            "canonical_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "UniProt canonical ID"
+            },
+            "sequence_length": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Protein sequence length"
+            },
+            "species_code": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "OMA 5-letter species code"
+            },
+            "species_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Full species name"
+            },
+            "taxon_id": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "NCBI taxonomy ID"
+            },
+            "oma_group": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "OMA Group number (strict 1:1 orthologs)"
+            },
+            "oma_hog_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Hierarchical Orthologous Group ID"
+            },
+            "chromosome": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Chromosome/scaffold"
+            },
+            "locus_start": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Genomic start position"
+            },
+            "locus_end": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Genomic end position"
+            },
+            "locus_strand": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Strand (1 or -1)"
+            },
+            "is_main_isoform": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Whether this is the main isoform"
+            },
+            "roothog_id": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Root HOG identifier"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -486,103 +467,78 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "group_nr": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "OMA Group number"
-                },
-                "fingerprint": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Group fingerprint (conserved sequence motif)"
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Group description"
-                },
-                "members": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "oma_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "canonical_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "species_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "species_code": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "taxon_id": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "sequence_length": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "chromosome": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
+            "group_nr": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "OMA Group number"
+            },
+            "fingerprint": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Group fingerprint (conserved sequence motif)"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Group description"
+            },
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "oma_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "canonical_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "species_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "species_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "taxon_id": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "sequence_length": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "chromosome": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "total_members": {
-                  "type": "integer"
-                },
-                "returned_members": {
-                  "type": "integer"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

@@ -40,6 +40,12 @@
     "test_examples": [
       {
         "query": "anti-CD20"
+      },
+      {
+        "query": "HER2"
+      },
+      {
+        "antigen": "EGFR"
       }
     ]
   },
@@ -79,6 +85,12 @@
     "test_examples": [
       {
         "pdb_id": "1AHW"
+      },
+      {
+        "pdb_id": "1IGT"
+      },
+      {
+        "pdb_code": "6W41"
       }
     ]
   },
@@ -108,7 +120,8 @@
       }
     },
     "test_examples": [
-      {}
+      {},
+      {"operation": "get_summary"}
     ]
   }
 ]

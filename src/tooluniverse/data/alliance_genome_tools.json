@@ -31,158 +31,133 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "symbol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "species": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "symbol": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
                 "name": {
                   "type": [
                     "string",
                     "null"
                   ]
                 },
-                "species": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "short_name": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "taxon_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "data_provider": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "gene_synopsis": {
+                "short_name": {
                   "type": [
                     "string",
                     "null"
                   ]
                 },
-                "automated_gene_synopsis": {
+                "taxon_id": {
                   "type": [
                     "string",
                     "null"
                   ]
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "so_term": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "genomic_location": {
-                  "type": "object",
-                  "properties": {
-                    "chromosome": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "start": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "end": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "assembly": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "strand": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "cross_references": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "url": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "query_gene_id": {
-                  "type": "string"
                 },
                 "data_provider": {
                   "type": [
                     "string",
                     "null"
                   ]
+                }
+              }
+            },
+            "gene_synopsis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "automated_gene_synopsis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "so_term": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "genomic_location": {
+              "type": "object",
+              "properties": {
+                "chromosome": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "source": {
-                  "type": "string"
+                "start": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "end": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "assembly": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "strand": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "cross_references": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -233,64 +208,42 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "symbol": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "primary_key": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "name_key": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "category": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "source": {
-                  "type": "string"
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "primary_key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name_key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "category": {
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -345,58 +298,30 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "gene_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "phenotype_statement": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                },
-                "returned": {
-                  "type": "integer"
-                },
-                "query_gene_id": {
-                  "type": "string"
-                },
-                "page": {
-                  "type": "integer"
-                },
-                "source": {
-                  "type": "string"
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_symbol": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "gene_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "phenotype_statement": {
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -452,76 +377,48 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "gene_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "species": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "disease_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "disease_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "association_type": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                },
-                "returned": {
-                  "type": "integer"
-                },
-                "query_disease_id": {
-                  "type": "string"
-                },
-                "page": {
-                  "type": "integer"
-                },
-                "source": {
-                  "type": "string"
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_symbol": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "gene_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "species": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "disease_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "disease_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "association_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -569,56 +466,37 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "disease_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "definition": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "category": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
+            "disease_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "definition": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "query_disease_id": {
-                  "type": "string"
-                },
-                "source": {
-                  "type": "string"
-                }
-              }
+            "category": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

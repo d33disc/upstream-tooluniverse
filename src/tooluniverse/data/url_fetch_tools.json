@@ -39,6 +39,14 @@
       {
         "url": "https://www.wikipedia.org",
         "timeout": 20
+      },
+      {
+        "url": "https://www.uniprot.org/uniprotkb/P04637",
+        "timeout": 30
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12345678/",
+        "timeout": 25
       }
     ]
   },
@@ -79,6 +87,14 @@
       {
         "url": "https://www.wikipedia.org",
         "timeout": 30
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/gene/7157",
+        "timeout": 45
+      },
+      {
+        "url": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000141510",
+        "timeout": 60
       }
     ]
   }

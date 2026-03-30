@@ -22,51 +22,52 @@
       "format": "json"
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "geneExpression": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "tissueSiteDetailId": {"type": "string"},
-                      "median": {"type": "number"},
-                      "geneSymbol": {"type": "string"},
-                      "gencodeId": {"type": "string"},
-                      "unit": {"type": "string"}
-                    }
-                  }
-                }
+      "type": "object",
+      "properties": {
+        "geneExpression": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tissueSiteDetailId": {
+                "type": "string"
+              },
+              "median": {
+                "type": "number"
+              },
+              "geneSymbol": {
+                "type": "string"
+              },
+              "gencodeId": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
               }
-            },
-            "url": {"type": "string"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"},
-            "retryable": {"type": "boolean"}
-          },
-          "required": ["status", "error"]
+            }
+          }
         }
-      ]
+      }
     },
     "test_examples": [
-      {"gene_symbol": "TP53"},
-      {"ensembl_gene_id": "ENSG00000141510"}
+      {
+        "gene_symbol": "TP53"
+      },
+      {
+        "ensembl_gene_id": "ENSG00000141510"
+      }
     ],
-    "label": ["GTEx", "Expression", "Summary"],
+    "label": [
+      "GTEx",
+      "Expression",
+      "Summary"
+    ],
     "metadata": {
-      "tags": ["expression", "tissue", "baseline"],
+      "tags": [
+        "expression",
+        "tissue",
+        "baseline"
+      ],
       "estimated_execution_time": "< 2 seconds"
     }
   },
@@ -89,10 +90,6 @@
           "type": "string",
           "description": "Alias for ensembl_gene_id. Ensembl gene ID (e.g., 'ENSG00000141510')."
         },
-        "gene_input": {
-          "type": "string",
-          "description": "Alias for gene_symbol. Gene symbol or Ensembl ID (e.g., 'TP53', 'ENSG00000141510')."
-        },
         "tissue_id": {
           "type": "string",
           "description": "GTEx tissue ID to filter eQTL results (e.g., 'Brain_Cortex', 'Whole_Blood', 'Liver'). Case-sensitive."
@@ -112,7 +109,7 @@
           "default": 10,
           "minimum": 1,
           "maximum": 100,
-          "description": "Number of records per page (1–100)."
+          "description": "Number of records per page (1\u2013100)."
         }
       },
       "required": []
@@ -122,51 +119,56 @@
       "format": "json"
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "singleTissueEqtl": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "variantId": {"type": "string"},
-                      "pValue": {"type": "number"},
-                      "slope": {"type": "number"},
-                      "tissueSiteDetailId": {"type": "string"},
-                      "geneSymbol": {"type": "string"}
-                    }
-                  }
-                }
+      "type": "object",
+      "properties": {
+        "singleTissueEqtl": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "variantId": {
+                "type": "string"
+              },
+              "pValue": {
+                "type": "number"
+              },
+              "slope": {
+                "type": "number"
+              },
+              "tissueSiteDetailId": {
+                "type": "string"
+              },
+              "geneSymbol": {
+                "type": "string"
               }
-            },
-            "url": {"type": "string"}
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"},
-            "retryable": {"type": "boolean"}
-          },
-          "required": ["status", "error"]
+            }
+          }
         }
-      ]
+      }
     },
     "test_examples": [
-      {"gene_symbol": "TP53", "page": 1, "size": 5},
-      {"ensembl_gene_id": "ENSG00000141510", "page": 1, "size": 5}
+      {
+        "gene_symbol": "TP53",
+        "page": 1,
+        "size": 5
+      },
+      {
+        "ensembl_gene_id": "ENSG00000141510",
+        "page": 1,
+        "size": 5
+      }
     ],
-    "label": ["GTEx", "eQTL", "Association"],
+    "label": [
+      "GTEx",
+      "eQTL",
+      "Association"
+    ],
     "metadata": {
-      "tags": ["eqtl", "variant", "regulation"],
+      "tags": [
+        "eqtl",
+        "variant",
+        "regulation"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   }

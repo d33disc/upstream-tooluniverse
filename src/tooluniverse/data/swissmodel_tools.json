@@ -31,112 +31,87 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "uniprot_id": {
-                  "type": "string"
-                },
-                "sequence_length": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "crc64": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "model_count": {
-                  "type": "integer"
-                },
-                "models": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "template": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "method": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "coverage": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "from_residue": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "to_residue": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "created_date": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "provider": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "qmean_global": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "qmean_z_score": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      }
-                    }
+            "uniprot_id": {
+              "type": "string"
+            },
+            "sequence_length": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "crc64": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "model_count": {
+              "type": "integer"
+            },
+            "models": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "template": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "method": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "coverage": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "from_residue": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "to_residue": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "created_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "qmean_global": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "qmean_z_score": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "api_version": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -184,88 +159,66 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
+            "uniprot_id": {
+              "type": "string"
+            },
+            "sequence_length": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "total_models": {
+              "type": "integer"
+            },
+            "best_model": {
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
-                "uniprot_id": {
+                "template": {
                   "type": "string"
                 },
-                "sequence_length": {
+                "method": {
+                  "type": "string"
+                },
+                "coverage": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "from_residue": {
                   "type": [
                     "integer",
                     "null"
                   ]
                 },
-                "total_models": {
-                  "type": "integer"
-                },
-                "best_model": {
+                "to_residue": {
                   "type": [
-                    "object",
+                    "integer",
                     "null"
-                  ],
-                  "properties": {
-                    "template": {
-                      "type": "string"
-                    },
-                    "method": {
-                      "type": "string"
-                    },
-                    "coverage": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "from_residue": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "to_residue": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    },
-                    "created_date": {
-                      "type": "string"
-                    },
-                    "coordinates_url": {
-                      "type": "string"
-                    },
-                    "qmean_global": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    }
-                  }
+                  ]
                 },
-                "methods_distribution": {
-                  "type": "object"
+                "created_date": {
+                  "type": "string"
+                },
+                "coordinates_url": {
+                  "type": "string"
+                },
+                "qmean_global": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 }
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
+            "methods_distribution": {
+              "type": "object"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

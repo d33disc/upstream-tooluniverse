@@ -240,6 +240,9 @@
     "test_examples": [
       {
         "operation": "get_database_summary"
+      },
+      {
+        "operation": "get_database_summary"
       }
     ]
   }

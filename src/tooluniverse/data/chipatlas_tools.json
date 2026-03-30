@@ -50,7 +50,7 @@
           "default": "5000"
         }
       },
-      "required": []
+      "required": ["operation"]
     },
     "return_schema": {
       "type": "object",
@@ -70,6 +70,17 @@
         "gene_list": ["TP53", "MDM2", "CDKN1A"],
         "genome": "hg38",
         "distance": "5000"
+      },
+      {
+        "operation": "enrichment_analysis",
+        "gene_list": ["EGFR", "BRCA1", "MYC"],
+        "genome": "hg38",
+        "threshold": "10"
+      },
+      {
+        "operation": "enrichment_analysis",
+        "motif": "CANNTG",
+        "genome": "hg38"
       }
     ]
   },
@@ -106,7 +117,7 @@
           "maximum": 1000
         }
       },
-      "required": []
+      "required": ["operation"]
     },
     "return_schema": {
       "type": "object",
@@ -128,6 +139,17 @@
         "genome": "hg38",
         "antigen": "CTCF",
         "limit": 10
+      },
+      {
+        "operation": "get_experiment_list",
+        "genome": "hg38",
+        "cell_type": "K-562",
+        "limit": 20
+      },
+      {
+        "operation": "get_experiment_list",
+        "antigen": "H3K4me3",
+        "limit": 15
       }
     ]
   },
@@ -166,7 +188,7 @@
           "default": "05"
         }
       },
-      "required": ["experiment_id"]
+      "required": ["operation", "experiment_id"]
     },
     "return_schema": {
       "type": "object",
@@ -186,6 +208,18 @@
         "experiment_id": "SRX097088",
         "genome": "hg19",
         "format": "bigwig"
+      },
+      {
+        "operation": "get_peak_data",
+        "experiment_id": "SRX002453",
+        "genome": "hg38",
+        "format": "bed",
+        "threshold": "10"
+      },
+      {
+        "operation": "get_peak_data",
+        "experiment_id": "SRX123456",
+        "format": "bigbed"
       }
     ]
   },
@@ -216,7 +250,7 @@
           "default": "hg38"
         }
       },
-      "required": []
+      "required": ["operation"]
     },
     "return_schema": {
       "type": "object",
@@ -247,6 +281,16 @@
         "operation": "search_datasets",
         "antigen": "CTCF",
         "genome": "hg38"
+      },
+      {
+        "operation": "search_datasets",
+        "cell_type": "HepG2",
+        "genome": "hg38"
+      },
+      {
+        "operation": "search_datasets",
+        "antigen": "H3K27ac",
+        "genome": "mm10"
       }
     ]
   }

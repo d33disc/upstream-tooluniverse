@@ -38,51 +38,35 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "genes": {
           "type": "object",
           "properties": {
-            "genes": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "description": "CIViC gene ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Gene symbol/name"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Gene description"
-                      },
-                      "entrezId": {
-                        "type": [
-                          "string",
-                          "integer"
-                        ],
-                        "description": "Entrez Gene ID"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "CIViC gene ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Gene symbol/name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Gene description"
+                  },
+                  "entrezId": {
+                    "type": [
+                      "string",
+                      "integer"
+                    ],
+                    "description": "Entrez Gene ID"
                   }
                 }
               }
-            }
-          }
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "source": {
-              "type": "string"
-            },
-            "format": {
-              "type": "string"
             }
           }
         }
@@ -136,46 +120,41 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "gene": {
           "type": "object",
           "properties": {
-            "gene": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "variants": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "variants": {
-                  "type": "object",
-                  "properties": {
-                    "nodes": {
-                      "type": "array",
-                      "items": {
+                "nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "CIViC variant ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Variant name (e.g., 'G12C', 'L858R', 'V600E')"
+                      },
+                      "feature": {
                         "type": "object",
+                        "description": "Parent gene feature",
                         "properties": {
                           "id": {
-                            "type": "integer",
-                            "description": "CIViC variant ID"
+                            "type": "integer"
                           },
                           "name": {
                             "type": "string",
-                            "description": "Variant name (e.g., 'G12C', 'L858R', 'V600E')"
-                          },
-                          "feature": {
-                            "type": "object",
-                            "description": "Parent gene feature",
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "Gene name"
-                              }
-                            }
+                            "description": "Gene name"
                           }
                         }
                       }
@@ -183,21 +162,6 @@
                   }
                 }
               }
-            }
-          }
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "source": {
-              "type": "string"
-            },
-            "format": {
-              "type": "string"
-            },
-            "note": {
-              "type": "string",
-              "description": "Optional note about duplicate variant names or other data quality observations"
             }
           }
         }
@@ -237,21 +201,16 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "variant": {
           "type": "object",
           "properties": {
-            "variant": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "description": "CIViC variant ID"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Variant name"
-                }
-              }
+            "id": {
+              "type": "integer",
+              "description": "CIViC variant ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Variant name"
             }
           }
         }
@@ -260,12 +219,18 @@
     "test_examples": [
       {
         "variant_id": 2
+      },
+      {
+        "variant_id": 4170
+      },
+      {
+        "variant_id": 12
       }
     ]
   },
   {
     "name": "civic_search_variants",
-    "description": "Search for variants in CIViC database. Returns a list of variants with their IDs and names. Use 'query' to search by variant name (e.g., 'V600E'), or 'gene'/'gene_name' to get all variants for a specific gene (e.g., 'EGFR'). To find a specific variant in a gene, combine gene_name + variant_name (e.g., gene_name='EGFR', variant_name='L858R'). Note: CIViC stores variants without gene prefix — do not combine gene and variant in a single string.",
+    "description": "Search for variants in CIViC database. Returns a list of variants with their IDs and names. Use 'query' to search by variant name (e.g., 'V600E'), or 'gene'/'gene_name' to get all variants for a specific gene (e.g., 'EGFR'). To find a specific variant in a gene, combine gene_name + variant_name (e.g., gene_name='EGFR', variant_name='L858R'). Note: CIViC stores variants without gene prefix \u2014 do not combine gene and variant in a single string.",
     "type": "CIViCTool",
     "parameter": {
       "type": "object",
@@ -289,7 +254,7 @@
         },
         "variant_name": {
           "type": "string",
-          "description": "Specific variant name to filter within a gene (e.g., 'L858R', 'V600E', 'T790M'). Use together with gene_name — CIViC stores variants without the gene prefix (use 'L858R' not 'EGFR L858R')."
+          "description": "Specific variant name to filter within a gene (e.g., 'L858R', 'V600E', 'T790M'). Use together with gene_name \u2014 CIViC stores variants without the gene prefix (use 'L858R' not 'EGFR L858R')."
         }
       },
       "required": []
@@ -301,24 +266,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "variants": {
           "type": "object",
           "properties": {
-            "variants": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -335,8 +295,7 @@
         "query": "V600E",
         "limit": 5
       }
-    ],
-    "aliases": ["CIViC_search_variants"]
+    ]
   },
   {
     "name": "civic_get_evidence_item",
@@ -361,27 +320,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "evidenceItem": {
           "type": "object",
           "properties": {
-            "evidenceItem": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "evidenceLevel": {
-                  "type": "string",
-                  "description": "Evidence level (A, B, C, D, E)"
-                },
-                "evidenceType": {
-                  "type": "string",
-                  "description": "Evidence type (PREDICTIVE, DIAGNOSTIC, PROGNOSTIC, etc.)"
-                }
-              }
+            "id": {
+              "type": "integer"
+            },
+            "description": {
+              "type": "string"
+            },
+            "evidenceLevel": {
+              "type": "string",
+              "description": "Evidence level (A, B, C, D, E)"
+            },
+            "evidenceType": {
+              "type": "string",
+              "description": "Evidence type (PREDICTIVE, DIAGNOSTIC, PROGNOSTIC, etc.)"
             }
           }
         }
@@ -390,6 +344,12 @@
     "test_examples": [
       {
         "evidence_id": 116
+      },
+      {
+        "evidence_id": 1
+      },
+      {
+        "evidence_id": 500
       }
     ]
   },
@@ -414,7 +374,7 @@
         },
         "therapy": {
           "type": "string",
-          "description": "Filter by therapy/drug name (e.g., 'imatinib', 'pembrolizumab'). Alias: therapy_name. Note: matches any evidence item where the therapy appears, including combination regimens — results may include multi-drug combinations."
+          "description": "Filter by therapy/drug name (e.g., 'imatinib', 'pembrolizumab'). Alias: therapy_name. Note: matches any evidence item where the therapy appears, including combination regimens \u2014 results may include multi-drug combinations."
         },
         "therapy_name": {
           "type": "string",
@@ -430,7 +390,7 @@
         },
         "molecular_profile": {
           "type": "string",
-          "description": "Filter by molecular profile name (e.g., 'BRAF V600E', 'EGFR T790M', 'KRAS G12C'). Uses substring matching — 'FLT3 ITD' will also match 'FLT3 ITD AND FLT3 D835Y'. For gene fusions, CIViC uses double-colon notation: 'GENE::PARTNER Fusion' (e.g., 'FGFR2::BICC1 Fusion', 'ALK::EML4 Fusion'). Use civic_search_molecular_profiles to discover exact profile names."
+          "description": "Filter by molecular profile name (e.g., 'BRAF V600E', 'EGFR T790M', 'KRAS G12C'). Uses substring matching \u2014 'FLT3 ITD' will also match 'FLT3 ITD AND FLT3 D835Y'. For gene fusions, CIViC uses double-colon notation: 'GENE::PARTNER Fusion' (e.g., 'FGFR2::BICC1 Fusion', 'ALK::EML4 Fusion'). Use civic_search_molecular_profiles to discover exact profile names."
         },
         "evidence_type": {
           "type": [
@@ -460,30 +420,25 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "evidenceItems": {
           "type": "object",
           "properties": {
-            "evidenceItems": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "evidenceLevel": {
-                        "type": "string"
-                      },
-                      "evidenceType": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "evidenceLevel": {
+                    "type": "string"
+                  },
+                  "evidenceType": {
+                    "type": "string"
                   }
                 }
               }
@@ -523,23 +478,18 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "assertion": {
           "type": "object",
           "properties": {
-            "assertion": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string",
-                  "description": "Assertion status (ACCEPTED, SUBMITTED, etc.)"
-                }
-              }
+            "id": {
+              "type": "integer"
+            },
+            "description": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "description": "Assertion status (ACCEPTED, SUBMITTED, etc.)"
             }
           }
         }
@@ -600,27 +550,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "assertions": {
           "type": "object",
           "properties": {
-            "assertions": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "status": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
                   }
                 }
               }
@@ -665,70 +610,65 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "molecularProfile": {
           "type": "object",
           "properties": {
-            "molecularProfile": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "molecularProfileScore": {
+              "type": "number",
+              "description": "CIViC clinical actionability score"
+            },
+            "description": {
+              "type": "string",
+              "description": "Clinical description of the molecular profile"
+            },
+            "evidenceItems": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "molecularProfileScore": {
-                  "type": "number",
-                  "description": "CIViC clinical actionability score"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Clinical description of the molecular profile"
-                },
-                "evidenceItems": {
-                  "type": "object",
-                  "properties": {
-                    "nodes": {
-                      "type": "array",
-                      "items": {
+                "nodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "evidenceLevel": {
+                        "type": "string",
+                        "description": "A-E evidence level"
+                      },
+                      "evidenceDirection": {
+                        "type": "string"
+                      },
+                      "significance": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
                           "name": {
                             "type": "string"
-                          },
-                          "evidenceLevel": {
-                            "type": "string",
-                            "description": "A-E evidence level"
-                          },
-                          "evidenceDirection": {
-                            "type": "string"
-                          },
-                          "significance": {
-                            "type": "string"
-                          },
-                          "status": {
-                            "type": "string"
-                          },
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "name": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "therapies": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string"
-                                }
-                              }
+                          }
+                        }
+                      },
+                      "therapies": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
                             }
                           }
                         }
@@ -782,24 +722,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "molecularProfiles": {
           "type": "object",
           "properties": {
-            "molecularProfiles": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -851,24 +786,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "browseDiseases": {
           "type": "object",
           "properties": {
-            "browseDiseases": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -917,24 +847,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "browseTherapies": {
           "type": "object",
           "properties": {
-            "browseTherapies": {
-              "type": "object",
-              "properties": {
-                "nodes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }

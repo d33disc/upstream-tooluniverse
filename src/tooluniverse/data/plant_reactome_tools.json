@@ -33,82 +33,7 @@
         "query": "flavonoid biosynthesis",
         "species": "Oryza sativa"
       }
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stId": {
-                    "type": "string",
-                    "description": "Stable identifier (e.g., R-OSA-1119312)"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "species": {
-                    "type": [
-                      "string",
-                      "array",
-                      "null"
-                    ]
-                  },
-                  "exact_type": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Entity type (Pathway, Reaction, etc.)"
-                  },
-                  "compartment_names": {
-                    "type": [
-                      "array",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                },
-                "total_groups": {
-                  "type": "integer"
-                },
-                "query": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "PlantReactome_get_pathway",
@@ -142,75 +67,56 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "stId": {
-                  "type": "string"
-                },
-                "displayName": {
-                  "type": "string"
-                },
-                "speciesName": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "isInDisease": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "isInferred": {
-                  "type": [
-                    "boolean",
-                    "null"
-                  ]
-                },
-                "hasEvent": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
-                  "description": "Sub-events (reactions and sub-pathways)"
-                },
-                "compartment": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                },
-                "goBiologicalProcess": {
-                  "type": [
-                    "object",
-                    "null"
-                  ]
-                },
-                "crossReference": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                }
-              }
+            "stId": {
+              "type": "string"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "pathway_id": {
-                  "type": "string"
-                }
-              }
+            "displayName": {
+              "type": "string"
+            },
+            "speciesName": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "isInDisease": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "isInferred": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "hasEvent": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Sub-events (reactions and sub-pathways)"
+            },
+            "compartment": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "goBiologicalProcess": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "crossReference": {
+              "type": [
+                "array",
+                "null"
+              ]
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -239,68 +145,8 @@
     },
     "type": "PlantReactomeTool",
     "test_examples": [
+      {},
       {}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "dbId": {
-                    "type": "integer"
-                  },
-                  "displayName": {
-                    "type": "string",
-                    "description": "Species name"
-                  },
-                  "taxId": {
-                    "type": [
-                      "string",
-                      "integer"
-                    ]
-                  },
-                  "abbreviation": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_species": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
-    }
+    ]
   }
 ]

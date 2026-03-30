@@ -31,43 +31,39 @@
     "test_examples": [
       {
         "query": "warfarin"
+      },
+      {
+        "query": "clopidogrel"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "objCls": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "inChi": {
-                "type": "string"
-              },
-              "smiles": {
-                "type": "string"
-              },
-              "types": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objCls": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "inChi": {
+            "type": "string"
+          },
+          "smiles": {
+            "type": "string"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
-        }
+        },
+        "additionalProperties": true
       }
     }
   },
@@ -93,6 +89,9 @@
     "test_examples": [
       {
         "drug_id": "PA452637"
+      },
+      {
+        "drug_id": "PA449053"
       }
     ],
     "return_schema": {
@@ -142,39 +141,34 @@
     "test_examples": [
       {
         "query": "CYP2D6"
+      },
+      {
+        "query": "CYP3A4"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objCls": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "chr": {
             "type": "object",
-            "properties": {
-              "objCls": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "symbol": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "chr": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            },
             "additionalProperties": true
           }
-        }
+        },
+        "additionalProperties": true
       }
     }
   },
@@ -200,6 +194,9 @@
     "test_examples": [
       {
         "gene_id": "PA128"
+      },
+      {
+        "gene_id": "PA130"
       }
     ],
     "return_schema": {
@@ -266,6 +263,9 @@
     "test_examples": [
       {
         "annotation_id": "1183618159"
+      },
+      {
+        "gene_id": "PA128"
       }
     ],
     "return_schema": {
@@ -328,38 +328,33 @@
     "test_examples": [
       {
         "query": "rs1799853"
+      },
+      {
+        "query": "rs4244285"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "objCls": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "location": {
-                "type": "object"
-              },
-              "gene": {
-                "type": "object"
-              }
-            },
-            "additionalProperties": true
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objCls": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "object"
+          },
+          "gene": {
+            "type": "object"
           }
-        }
+        },
+        "additionalProperties": true
       }
     }
   },
@@ -389,6 +384,9 @@
     "test_examples": [
       {
         "guideline_id": "PA166251465"
+      },
+      {
+        "guideline_id": "PA166104949"
       }
     ],
     "return_schema": {

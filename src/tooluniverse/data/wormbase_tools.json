@@ -27,85 +27,63 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "wormbase_id": {
-                  "type": "string"
-                },
-                "gene_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "sequence_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "species": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "gene_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "status": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
         },
-        {
+        "data": {
           "type": "object",
           "properties": {
-            "error": {
-              "type": "string"
+            "wormbase_id": {
+              "type": "string",
+              "description": "WormBase gene identifier"
+            },
+            "gene_name": {
+              "type": "string",
+              "description": "Gene name"
+            },
+            "sequence_name": {
+              "type": "string",
+              "description": "Sequence/cosmid name"
+            },
+            "species": {
+              "type": "string",
+              "description": "Species name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Gene description and functional summary"
+            },
+            "gene_type": {
+              "type": "string",
+              "description": "Gene type (e.g. protein coding)"
+            },
+            "status": {
+              "type": "string",
+              "description": "Gene status (e.g. Live)"
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "query": {
+              "type": "string",
+              "description": "Query gene ID"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            }
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -140,90 +118,68 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "wormbase_id": {
-                  "type": "string"
-                },
-                "gene_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "phenotype_count": {
-                  "type": "integer"
-                },
-                "phenotypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "phenotype_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "phenotype_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "evidence_type": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "not_observed_count": {
-                  "type": "integer"
-                },
-                "phenotypes_not_observed": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "phenotype_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "phenotype_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
+            "wormbase_id": {
+              "type": "string"
+            },
+            "gene_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "phenotype_count": {
+              "type": "integer"
+            },
+            "phenotypes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phenotype_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "phenotype_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "evidence_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
+            "not_observed_count": {
+              "type": "integer"
+            },
+            "phenotypes_not_observed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phenotype_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "phenotype_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -271,124 +227,102 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "wormbase_id": {
-                  "type": "string"
-                },
-                "gene_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "expressed_in_count": {
-                  "type": "integer"
-                },
-                "expressed_in": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "term_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "term_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "expressed_during": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "term_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "term_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "subcellular_localization": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "term_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "term_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "expression_clusters_count": {
-                  "type": "integer"
-                },
-                "expression_clusters": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "cluster_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "cluster_label": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
+            "wormbase_id": {
+              "type": "string"
+            },
+            "gene_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "expressed_in_count": {
+              "type": "integer"
+            },
+            "expressed_in": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "term_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "term_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
+            "expressed_during": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "term_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "term_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "subcellular_localization": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "term_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "term_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "expression_clusters_count": {
+              "type": "integer"
+            },
+            "expression_clusters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cluster_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "cluster_label": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

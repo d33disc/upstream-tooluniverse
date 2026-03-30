@@ -19,60 +19,6 @@
       "endpoint": "/find/pathway",
       "return_format": "TEXT"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Wrapped response with status, data (pathway list), url, count",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pathway_id": {
-                    "type": "string",
-                    "description": "KEGG pathway identifier"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "Pathway description"
-                  }
-                }
-              }
-            },
-            "url": {
-              "type": "string"
-            },
-            "count": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
-    },
     "test_examples": [
       {
         "keyword": "diabetes"
@@ -94,6 +40,44 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathway_id": {
+                "type": "string",
+                "description": "KEGG pathway identifier (e.g. path:map04930)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Pathway name/description"
+              }
+            }
+          },
+          "description": "List of matching pathways"
+        },
+        "url": {
+          "type": "string",
+          "description": "KEGG REST API URL used"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Response content type"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results returned"
+        }
+      }
     }
   },
   {
@@ -120,31 +104,17 @@
       "type": "object",
       "description": "KEGG pathway information",
       "properties": {
-        "status": {
+        "pathway_id": {
           "type": "string",
-          "description": "Status of the request"
+          "description": "KEGG pathway identifier"
         },
-        "data": {
-          "type": "object",
-          "description": "Pathway information",
-          "properties": {
-            "pathway_id": {
-              "type": "string",
-              "description": "KEGG pathway identifier"
-            },
-            "raw_data": {
-              "type": "string",
-              "description": "Raw pathway data from KEGG"
-            },
-            "line_count": {
-              "type": "integer",
-              "description": "Number of data lines"
-            }
-          }
-        },
-        "url": {
+        "raw_data": {
           "type": "string",
-          "description": "API URL used"
+          "description": "Raw pathway data from KEGG"
+        },
+        "line_count": {
+          "type": "integer",
+          "description": "Number of data lines"
         }
       }
     },
@@ -196,60 +166,6 @@
       "endpoint": "/find/genes",
       "return_format": "TEXT"
     },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Wrapped response with status, data (gene list), url, count",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_id": {
-                    "type": "string",
-                    "description": "KEGG gene identifier"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "Gene description"
-                  }
-                }
-              }
-            },
-            "url": {
-              "type": "string"
-            },
-            "count": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
-    },
     "test_examples": [
       {
         "keyword": "insulin"
@@ -272,6 +188,44 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_id": {
+                "type": "string",
+                "description": "KEGG gene identifier (e.g. hsa:3667)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Gene symbols, aliases, and full name"
+              }
+            }
+          },
+          "description": "List of matching genes"
+        },
+        "url": {
+          "type": "string",
+          "description": "KEGG REST API URL used"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Response content type"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results returned"
+        }
+      }
     }
   },
   {
@@ -298,31 +252,17 @@
       "type": "object",
       "description": "KEGG gene information",
       "properties": {
-        "status": {
+        "gene_id": {
           "type": "string",
-          "description": "Status of the request"
+          "description": "KEGG gene identifier"
         },
-        "data": {
-          "type": "object",
-          "description": "Gene information",
-          "properties": {
-            "gene_id": {
-              "type": "string",
-              "description": "KEGG gene identifier"
-            },
-            "raw_data": {
-              "type": "string",
-              "description": "Raw gene data from KEGG"
-            },
-            "line_count": {
-              "type": "integer",
-              "description": "Number of data lines"
-            }
-          }
-        },
-        "url": {
+        "raw_data": {
           "type": "string",
-          "description": "API URL used"
+          "description": "Raw gene data from KEGG"
+        },
+        "line_count": {
+          "type": "integer",
+          "description": "Number of data lines"
         }
       }
     },
@@ -361,64 +301,6 @@
     "fields": {
       "endpoint": "/list/organism",
       "return_format": "TEXT"
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Wrapped response with status, data (organism list), url, count",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "organism_code": {
-                    "type": "string",
-                    "description": "KEGG organism code (e.g., 'hsa', 'mmu')"
-                  },
-                  "organism_name": {
-                    "type": "string",
-                    "description": "Organism scientific name"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "Organism description"
-                  }
-                }
-              }
-            },
-            "url": {
-              "type": "string"
-            },
-            "count": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
-      ]
     },
     "test_examples": [
       {}

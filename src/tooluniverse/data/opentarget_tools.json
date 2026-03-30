@@ -27,49 +27,47 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "associatedTargets": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "associatedTargets": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "target": {
                         "type": "object",
                         "properties": {
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "score": {
-                            "type": "number"
+                          "approvedSymbol": {
+                            "type": "string"
                           }
                         }
+                      },
+                      "score": {
+                        "type": "number"
                       }
                     }
                   }
@@ -109,57 +107,55 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "associatedDiseases": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "associatedDiseases": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "datasourceScores": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "score": {
-                                  "type": "number"
-                                }
-                              }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "datasourceScores": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "number"
                             }
                           }
                         }
@@ -176,7 +172,7 @@
   },
   {
     "name": "OpenTargets_target_disease_evidence",
-    "description": "Explore IntOGen somatic driver evidence for a target-disease association. IMPORTANT: IntOGen only covers somatic tumor driver mutations — this tool returns empty data ({}) for non-cancer diseases (e.g., type 2 diabetes, hypertension). Empty results are expected and normal when querying non-oncology phenotypes. For non-cancer diseases or to query other data sources, use OpenTargets_get_evidence_by_datasource instead. Accepts gene_symbol (e.g. 'TP53') and disease_name (e.g. 'Crohn disease') as alternatives to ensemblId/efoId — IDs are auto-resolved via OpenTargets search.",
+    "description": "Explore IntOGen somatic driver evidence for a target-disease association. IMPORTANT: IntOGen only covers somatic tumor driver mutations \u2014 this tool returns empty data ({}) for non-cancer diseases (e.g., type 2 diabetes, hypertension). Empty results are expected and normal when querying non-oncology phenotypes. For non-cancer diseases or to query other data sources, use OpenTargets_get_evidence_by_datasource instead. Accepts gene_symbol (e.g. 'TP53') and disease_name (e.g. 'Crohn disease') as alternatives to ensemblId/efoId \u2014 IDs are auto-resolved via OpenTargets search.",
     "label": [
       "Target",
       "Disease",
@@ -213,30 +209,29 @@
       {
         "efoId": "EFO_0000384",
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "efoId": "EFO_0000537",
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "evidences": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "evidences": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    }
-                  }
+                "count": {
+                  "type": "integer"
                 }
               }
             }
@@ -313,42 +308,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "evidences": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "evidences": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "datasourceId": {
-                            "type": "string"
-                          },
-                          "datatypeId": {
-                            "type": "string"
-                          },
-                          "score": {
-                            "type": "number"
-                          },
-                          "literature": {
-                            "type": "array"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "datatypeId": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "number"
+                      },
+                      "literature": {
+                        "type": "array"
                       }
                     }
                   }
@@ -391,24 +381,22 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
             }
           }
         }
@@ -444,52 +432,50 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "mechanismsOfAction": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "mechanismsOfAction": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "mechanismOfAction": {
-                            "type": "string"
-                          },
-                          "actionType": {
-                            "type": "string"
-                          },
-                          "targetName": {
-                            "type": "string"
-                          },
-                          "targets": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "approvedSymbol": {
-                                  "type": "string"
-                                }
-                              }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "actionType": {
+                        "type": "string"
+                      },
+                      "targetName": {
+                        "type": "string"
+                      },
+                      "targets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "approvedSymbol": {
+                              "type": "string"
                             }
                           }
                         }
@@ -531,11 +517,18 @@
     "test_examples": [
       {
         "efoId": "MONDO_0004975"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -543,16 +536,19 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Disease EFO/MONDO ID"
                 },
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Disease name"
                 },
                 "drugAndClinicalCandidates": {
                   "type": "object",
                   "properties": {
                     "count": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "Total number of associated drugs"
                     },
                     "rows": {
                       "type": "array",
@@ -563,53 +559,35 @@
                             "type": "object",
                             "properties": {
                               "id": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "ChEMBL drug ID"
                               },
                               "name": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Drug name"
                               },
-                              "tradeNames": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              },
-                              "maximumClinicalTrialPhase": {
-                                "type": "integer"
-                              },
-                              "isApproved": {
-                                "type": "boolean"
-                              },
-                              "hasBeenWithdrawn": {
-                                "type": "boolean"
+                              "maximumClinicalStage": {
+                                "type": "string",
+                                "description": "Max clinical stage across all indications"
                               }
                             }
                           },
                           "maxClinicalStage": {
-                            "type": "integer"
-                          },
-                          "mechanismOfAction": {
-                            "type": "string"
-                          },
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
-                            }
+                            "type": "string",
+                            "description": "Max clinical stage for this disease"
                           }
                         }
-                      }
+                      },
+                      "description": "List of drug-disease associations"
                     }
-                  }
+                  },
+                  "description": "Drug and clinical candidate data"
                 }
-              }
+              },
+              "description": "Disease information with associated drugs"
             }
-          }
+          },
+          "description": "Response data object"
         }
       }
     }
@@ -654,11 +632,20 @@
         "efoId": "EFO_0000384",
         "threshold": 1.0,
         "size": 1
+      },
+      {
+        "efoId": "MONDO_0005148",
+        "threshold": 1.0,
+        "size": 1
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -666,10 +653,12 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Disease EFO ID"
                 },
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Disease name"
                 },
                 "similarEntities": {
                   "type": "array",
@@ -677,31 +666,39 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Entity ID"
                       },
                       "category": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Entity category (e.g. disease)"
                       },
                       "score": {
-                        "type": "integer"
+                        "type": "number",
+                        "description": "Similarity score"
                       },
                       "object": {
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Entity ID"
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Entity name"
                           }
                         }
                       }
                     }
-                  }
+                  },
+                  "description": "List of similar disease entities"
                 }
-              }
+              },
+              "description": "Disease with similar entities"
             }
-          }
+          },
+          "description": "Response data object"
         }
       }
     }
@@ -746,47 +743,47 @@
         "chemblId": "CHEMBL25",
         "threshold": 1.0,
         "size": 1
+      },
+      {
+        "chemblId": "CHEMBL941",
+        "threshold": 1.0,
+        "size": 1
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "similarEntities": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "similarEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "integer"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
                         "type": "string"
                       },
-                      "category": {
+                      "name": {
                         "type": "string"
-                      },
-                      "score": {
-                        "type": "integer"
-                      },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -838,47 +835,47 @@
         "ensemblId": "ENSG00000141510",
         "threshold": 1.0,
         "size": 1
+      },
+      {
+        "ensemblId": "ENSG00000012048",
+        "threshold": 1.0,
+        "size": 1
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "similarEntities": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "similarEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
                         "type": "string"
                       },
-                      "category": {
+                      "approvedSymbol": {
                         "type": "string"
-                      },
-                      "score": {
-                        "type": "number"
-                      },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "approvedSymbol": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -918,44 +915,42 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "phenotypes": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "phenotypes": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "phenotypeHPO": {
                         "type": "object",
                         "properties": {
-                          "phenotypeHPO": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
                           }
                         }
                       }
@@ -987,7 +982,7 @@
         "chemblId"
       ]
     },
-    "query_schema": "\n  query drugWithdrawnWarningData($chemblId: String!) {\n    drug(chemblId: $chemblId) {\n      name\n      id\n      blackBoxWarning\n    }\n  }\n  ",
+    "query_schema": "\n  query drugWithdrawnWarningData($chemblId: String!) {\n    drug(chemblId: $chemblId) {\n      name\n      id\n      drugWarnings {\n        warningType\n        year\n        country\n        description\n        toxicityClass\n      }\n    }\n  }\n  ",
     "label": [
       "Drug",
       "SafetyWarnings",
@@ -999,6 +994,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -1117,24 +1115,22 @@
     "test_examples": [
       {
         "queryString": "machine learning optimization"
+      },
+      {
+        "queryString": "BRCA1 breast cancer"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
+            "aggregations": {
               "type": "object",
               "properties": {
-                "aggregations": {
-                  "type": "object",
-                  "properties": {
-                    "total": {
-                      "type": "integer"
-                    }
-                  }
+                "total": {
+                  "type": "integer"
                 }
               }
             }
@@ -1172,32 +1168,30 @@
     "test_examples": [
       {
         "diseaseName": "Diabetes Mellitus"
+      },
+      {
+        "diseaseName": "Breast Cancer"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1235,32 +1229,30 @@
     "test_examples": [
       {
         "drugName": "Aspirin"
+      },
+      {
+        "drugName": "Metformin"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1298,32 +1290,30 @@
     "test_examples": [
       {
         "drugName": "Aspirin"
+      },
+      {
+        "drugName": "Metformin"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }
@@ -1361,54 +1351,52 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "indications": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "indications": {
-                  "type": "object",
-                  "properties": {
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "disease": {
                         "type": "object",
                         "properties": {
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "id": {
+                            "type": "string"
                           },
-                          "maxPhaseForIndication": {
-                            "type": "number"
-                          },
-                          "references": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "source": {
-                                  "type": "string"
-                                }
-                              }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "maxPhaseForIndication": {
+                        "type": "number"
+                      },
+                      "references": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string"
                             }
                           }
                         }
@@ -1438,7 +1426,7 @@
         "ensemblId"
       ]
     },
-    "query_schema": "\n      query targetGeneOntology($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneOntology {\n            aspect\n            evidence\n            geneProduct\n            source\n            term {\n              id\n              name\n            }\n          }\n        }\n      }\n    ",
+    "query_schema": "\n      query targetGeneOntology($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneOntology {\n            aspect\n            evidence\n            geneProduct\n            source\n            term {\n              id\n            }\n          }\n        }\n      }\n    ",
     "label": [
       "Target",
       "GeneOntology",
@@ -1449,50 +1437,45 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "geneOntology": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "geneOntology": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "aspect": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "string"
+                  },
+                  "geneProduct": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "term": {
                     "type": "object",
                     "properties": {
-                      "aspect": {
+                      "id": {
                         "type": "string"
-                      },
-                      "evidence": {
-                        "type": "string"
-                      },
-                      "geneProduct": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      },
-                      "term": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        }
                       }
                     }
                   }
@@ -1530,53 +1513,51 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "homologues": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "homologyType": {
-                        "type": "string"
-                      },
-                      "queryPercentageIdentity": {
-                        "type": "number"
-                      },
-                      "speciesId": {
-                        "type": "string"
-                      },
-                      "speciesName": {
-                        "type": "string"
-                      },
-                      "targetGeneId": {
-                        "type": "string"
-                      },
-                      "targetGeneSymbol": {
-                        "type": "string"
-                      },
-                      "targetPercentageIdentity": {
-                        "type": "number"
-                      },
-                      "isHighConfidence": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "homologues": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "homologyType": {
+                    "type": "string"
+                  },
+                  "queryPercentageIdentity": {
+                    "type": "number"
+                  },
+                  "speciesId": {
+                    "type": "string"
+                  },
+                  "speciesName": {
+                    "type": "string"
+                  },
+                  "targetGeneId": {
+                    "type": "string"
+                  },
+                  "targetGeneSymbol": {
+                    "type": "string"
+                  },
+                  "targetPercentageIdentity": {
+                    "type": "number"
+                  },
+                  "isHighConfidence": {
+                    "type": "string"
                   }
                 }
               }
@@ -1614,55 +1595,53 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "safetyLiabilities": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "event": {
-                        "type": "string"
-                      },
-                      "eventId": {
-                        "type": "string"
-                      },
-                      "studies": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "type": "string"
-                            },
-                            "type": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            }
-                          }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "safetyLiabilities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "type": "string"
+                  },
+                  "eventId": {
+                    "type": "string"
+                  },
+                  "studies": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
                         }
-                      },
-                      "datasource": {
-                        "type": "string"
                       }
                     }
+                  },
+                  "datasource": {
+                    "type": "string"
                   }
                 }
               }
@@ -1698,40 +1677,38 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "mousePhenotypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "biologicalModels": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "allelicComposition": {
-                              "type": "string"
-                            },
-                            "geneticBackground": {
-                              "type": "string"
-                            }
-                          }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "mousePhenotypes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "biologicalModels": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "allelicComposition": {
+                          "type": "string"
+                        },
+                        "geneticBackground": {
+                          "type": "string"
                         }
                       }
                     }
@@ -1770,39 +1747,37 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "genomicLocation": {
               "type": "object",
               "properties": {
-                "id": {
+                "chromosome": {
                   "type": "string"
                 },
-                "approvedSymbol": {
-                  "type": "string"
+                "start": {
+                  "type": "integer"
                 },
-                "genomicLocation": {
-                  "type": "object",
-                  "properties": {
-                    "chromosome": {
-                      "type": "string"
-                    },
-                    "start": {
-                      "type": "integer"
-                    },
-                    "end": {
-                      "type": "integer"
-                    },
-                    "strand": {
-                      "type": "integer"
-                    }
-                  }
+                "end": {
+                  "type": "integer"
+                },
+                "strand": {
+                  "type": "integer"
                 }
               }
             }
@@ -1840,41 +1815,39 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "subcellularLocations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "location": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      },
-                      "termSL": {
-                        "type": "string"
-                      },
-                      "labelSL": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "subcellularLocations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "termSL": {
+                    "type": "string"
+                  },
+                  "labelSL": {
+                    "type": "string"
                   }
                 }
               }
@@ -1910,63 +1883,61 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
-                },
-                "symbolSynonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+                }
+              }
+            },
+            "symbolSynonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
-                },
-                "nameSynonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "source": {
-                        "type": "string"
-                      }
-                    }
+                }
+              }
+            },
+            "nameSynonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
                 }
               }
@@ -2003,38 +1974,36 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "tractability": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "type": "string"
-                      },
-                      "modality": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "boolean"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "tractability": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "modality": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -2070,38 +2039,36 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "targetClass": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "label": {
-                        "type": "string"
-                      },
-                      "level": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "targetClass": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
                   }
                 }
               }
@@ -2137,24 +2104,22 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
             }
           }
         }
@@ -2203,6 +2168,13 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510",
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "ensemblId": "ENSG00000012048",
         "page": {
           "index": 0,
           "size": 10
@@ -2352,41 +2324,39 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "ancestors": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "ancestors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parents": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
                     "type": "string"
-                  }
-                },
-                "parents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -2422,41 +2392,39 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "descendants": {
-                  "type": "array",
-                  "items": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "descendants": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
                     "type": "string"
-                  }
-                },
-                "children": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -2492,24 +2460,22 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
             }
           }
         }
@@ -2542,37 +2508,35 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "relation": {
-                        "type": "string"
-                      },
-                      "terms": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "relation": {
+                    "type": "string"
+                  },
+                  "terms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
                   }
                 }
@@ -2609,36 +2573,34 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dbXRefs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isTherapeuticArea": {
-                  "type": "boolean"
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dbXRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
+            },
+            "isTherapeuticArea": {
+              "type": "boolean"
             }
           }
         }
@@ -2671,35 +2633,33 @@
     "test_examples": [
       {
         "efoId": "EFO_0000384"
+      },
+      {
+        "efoId": "EFO_0000537"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "therapeuticAreas": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "therapeuticAreas": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -2753,6 +2713,13 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25",
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "chemblId": "CHEMBL941",
         "page": {
           "index": 0,
           "size": 10
@@ -2902,128 +2869,126 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "drugAndClinicalCandidates": {
               "type": "object",
               "properties": {
-                "id": {
+                "uniqueDrugs": {
+                  "type": "integer"
+                },
+                "uniqueDiseases": {
+                  "type": "integer"
+                },
+                "uniqueTargets": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "cursor": {
                   "type": "string"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "drugAndClinicalCandidates": {
-                  "type": "object",
-                  "properties": {
-                    "uniqueDrugs": {
-                      "type": "integer"
-                    },
-                    "uniqueDiseases": {
-                      "type": "integer"
-                    },
-                    "uniqueTargets": {
-                      "type": "integer"
-                    },
-                    "count": {
-                      "type": "integer"
-                    },
-                    "cursor": {
-                      "type": "string"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "approvedSymbol": {
-                            "type": "string"
-                          },
-                          "approvedName": {
-                            "type": "string"
-                          },
-                          "label": {
-                            "type": "string"
-                          },
-                          "prefName": {
-                            "type": "string"
-                          },
-                          "drugType": {
-                            "type": "string"
-                          },
-                          "targetId": {
-                            "type": "string"
-                          },
-                          "diseaseId": {
-                            "type": "string"
-                          },
-                          "drugId": {
-                            "type": "string"
-                          },
-                          "maxClinicalStage": {
-                            "type": "integer"
-                          },
-                          "mechanismOfAction": {
-                            "type": "string"
-                          },
-                          "targetClass": {
-                            "type": "array",
-                            "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "approvedSymbol": {
+                        "type": "string"
+                      },
+                      "approvedName": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "prefName": {
+                        "type": "string"
+                      },
+                      "drugType": {
+                        "type": "string"
+                      },
+                      "targetId": {
+                        "type": "string"
+                      },
+                      "diseaseId": {
+                        "type": "string"
+                      },
+                      "drugId": {
+                        "type": "string"
+                      },
+                      "maxClinicalStage": {
+                        "type": "integer"
+                      },
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "targetClass": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "urls": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string"
+                            },
+                            "name": {
                               "type": "string"
                             }
+                          }
+                        }
+                      },
+                      "disease": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "urls": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "url": {
-                                  "type": "string"
-                                },
-                                "name": {
-                                  "type": "string"
-                                }
-                              }
-                            }
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "target": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "approvedSymbol": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "drug": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "target": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "approvedSymbol": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "drug": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -3066,35 +3031,33 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "childMolecules": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "childMolecules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
                   }
                 }
               }
@@ -3119,7 +3082,7 @@
         "chemblId"
       ]
     },
-    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          approvedIndications\n          }\n      }\n    ",
+    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          indications {\n            count\n            rows {\n              disease { id name }\n            }\n          }\n          }\n      }\n    ",
     "label": [
       "OpenTarget",
       "Drug",
@@ -3130,27 +3093,46 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "indications": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "approvedIndications": {
+                "rows": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "disease": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -3186,50 +3168,48 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "yearOfFirstApproval": {
-                  "type": "integer"
-                },
-                "drugType": {
-                  "type": "string"
-                },
-                "crossReferences": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "source": {
-                        "type": "string"
-                      },
-                      "ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "yearOfFirstApproval": {
+              "type": "integer"
+            },
+            "drugType": {
+              "type": "string"
+            },
+            "crossReferences": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
                   }
-                },
-                "maximumClinicalTrialPhase": {
-                  "type": "integer"
                 }
               }
+            },
+            "maximumClinicalTrialPhase": {
+              "type": "integer"
             }
           }
         }
@@ -3262,29 +3242,27 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3318,29 +3296,27 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "tradeNames": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "tradeNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3368,36 +3344,30 @@
       "type": "object",
       "description": "Drug name information including generic name, trade names, and synonyms",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
-          "description": "GraphQL response data",
+          "description": "Drug information object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "description": "Drug information object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "ChEMBL ID of the drug"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Drug name, typically the generic name or preferred name"
-                },
-                "tradeNames": {
-                  "type": "array",
-                  "description": "List of trade names (brand names) for the drug",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "synonyms": {
-                  "type": "array",
-                  "description": "List of synonyms for the drug, which may include alternative generic names and other identifiers",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string",
+              "description": "ChEMBL ID of the drug"
+            },
+            "name": {
+              "type": "string",
+              "description": "Drug name, typically the generic name or preferred name"
+            },
+            "tradeNames": {
+              "type": "array",
+              "description": "List of trade names (brand names) for the drug",
+              "items": {
+                "type": "string"
+              }
+            },
+            "synonyms": {
+              "type": "array",
+              "description": "List of synonyms for the drug, which may include alternative generic names and other identifiers",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -3449,27 +3419,25 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "isApproved": {
-                  "type": "boolean"
-                }
-              }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "isApproved": {
+              "type": "boolean"
             }
           }
         }
@@ -3502,6 +3470,9 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000157764"
+      },
+      {
+        "ensemblId": "ENSG00000141510"
       }
     ],
     "return_schema": {
@@ -3609,6 +3580,9 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
@@ -3617,58 +3591,50 @@
           "type": "object",
           "description": "GraphQL response with drug pharmacogenomics data",
           "properties": {
-            "data": {
+            "drug": {
               "type": "object",
               "properties": {
-                "drug": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "pharmacogenomics": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "datasourceId": {
-                            "type": "string"
-                          },
-                          "evidenceLevel": {
-                            "type": "string"
-                          },
-                          "genotype": {
-                            "type": "string"
-                          },
-                          "genotypeAnnotationText": {
-                            "type": "string"
-                          },
-                          "pgxCategory": {
-                            "type": "string"
-                          },
-                          "phenotypeText": {
-                            "type": "string"
-                          },
-                          "variantRsId": {
-                            "type": "string"
-                          },
-                          "isDirectTarget": {
-                            "type": "boolean"
-                          }
-                        }
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "pharmacogenomics": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "datasourceId": {
+                        "type": "string"
+                      },
+                      "evidenceLevel": {
+                        "type": "string"
+                      },
+                      "genotype": {
+                        "type": "string"
+                      },
+                      "genotypeAnnotationText": {
+                        "type": "string"
+                      },
+                      "pgxCategory": {
+                        "type": "string"
+                      },
+                      "phenotypeText": {
+                        "type": "string"
+                      },
+                      "variantRsId": {
+                        "type": "string"
+                      },
+                      "isDirectTarget": {
+                        "type": "boolean"
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "null",
@@ -3705,70 +3671,68 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000121879"
+      },
+      {
+        "ensemblId": "ENSG00000141510"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "drugAndClinicalCandidates": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "drugAndClinicalCandidates": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "drug": {
                         "type": "object",
                         "properties": {
-                          "drug": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "maximumClinicalTrialPhase": {
-                                "type": "integer"
-                              },
-                              "isApproved": {
-                                "type": "boolean"
-                              },
-                              "hasBeenWithdrawn": {
-                                "type": "boolean"
-                              }
-                            }
-                          },
-                          "maxClinicalStage": {
+                          "id": {
                             "type": "string"
                           },
-                          "mechanismOfAction": {
+                          "name": {
                             "type": "string"
                           },
-                          "disease": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            }
+                          "maximumClinicalTrialPhase": {
+                            "type": "integer"
+                          },
+                          "isApproved": {
+                            "type": "boolean"
+                          },
+                          "hasBeenWithdrawn": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "maxClinicalStage": {
+                        "type": "string"
+                      },
+                      "mechanismOfAction": {
+                        "type": "string"
+                      },
+                      "disease": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -3809,44 +3773,42 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "linkedDiseases": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "linkedDiseases": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": "string"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
                       }
                     }
                   }
@@ -3885,44 +3847,42 @@
     "test_examples": [
       {
         "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL941"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "drug": {
           "type": "object",
           "properties": {
-            "drug": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "linkedTargets": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string"
+                "count": {
+                  "type": "integer"
                 },
-                "name": {
-                  "type": "string"
-                },
-                "linkedTargets": {
-                  "type": "object",
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "approvedSymbol": {
-                            "type": "string"
-                          },
-                          "approvedName": {
-                            "type": "string"
-                          }
-                        }
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "approvedSymbol": {
+                        "type": "string"
+                      },
+                      "approvedName": {
+                        "type": "string"
                       }
                     }
                   }
@@ -3982,6 +3942,14 @@
     "test_examples": [
       {
         "queryString": "gene:TP53",
+        "entityNames": [],
+        "page": {
+          "index": 0,
+          "size": 10
+        }
+      },
+      {
+        "queryString": "BRCA1 breast cancer",
         "entityNames": [],
         "page": {
           "index": 0,
@@ -4143,7 +4111,7 @@
         "goIds"
       ]
     },
-    "query_schema": "\n      query fetchGeneOntologyTerms($goIds: [String!]!) {\n        geneOntologyTerms(goIds: $goIds) {\n          id\n          name\n        }\n      }\n    ",
+    "query_schema": "\n      query fetchGeneOntologyTerms($goIds: [String!]!) {\n        geneOntologyTerms(goIds: $goIds) {\n          id\n        }\n      }\n    ",
     "label": [
       "GeneOntology",
       "Data Retrieval and Aggregation",
@@ -4155,6 +4123,11 @@
       {
         "goIds": [
           "GO:0005515"
+        ]
+      },
+      {
+        "goIds": [
+          "GO:0006915"
         ]
       }
     ],
@@ -4272,50 +4245,48 @@
     "test_examples": [
       {
         "ensemblId": "ENSG00000141510"
+      },
+      {
+        "ensemblId": "ENSG00000012048"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "target": {
           "type": "object",
           "properties": {
-            "target": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "approvedSymbol": {
-                  "type": "string"
-                },
-                "geneticConstraint": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "constraintType": {
-                        "type": "string"
-                      },
-                      "exp": {
-                        "type": "number"
-                      },
-                      "obs": {
-                        "type": "integer"
-                      },
-                      "oe": {
-                        "type": "number"
-                      },
-                      "oeLower": {
-                        "type": "number"
-                      },
-                      "oeUpper": {
-                        "type": "number"
-                      },
-                      "score": {
-                        "type": "number"
-                      }
-                    }
+            "id": {
+              "type": "string"
+            },
+            "approvedSymbol": {
+              "type": "string"
+            },
+            "geneticConstraint": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "constraintType": {
+                    "type": "string"
+                  },
+                  "exp": {
+                    "type": "number"
+                  },
+                  "obs": {
+                    "type": "integer"
+                  },
+                  "oe": {
+                    "type": "number"
+                  },
+                  "oeLower": {
+                    "type": "number"
+                  },
+                  "oeUpper": {
+                    "type": "number"
+                  },
+                  "score": {
+                    "type": "number"
                   }
                 }
               }
@@ -4374,6 +4345,13 @@
     "test_examples": [
       {
         "entityId": "EFO_0000384",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
+      },
+      {
+        "entityId": "EFO_0000537",
         "startYear": 2023,
         "startMonth": 0,
         "endYear": 2023,
@@ -4575,6 +4553,13 @@
         "startMonth": 0,
         "endYear": 2023,
         "endMonth": 1
+      },
+      {
+        "entityId": "ENSG00000012048",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
       }
     ],
     "return_schema": {
@@ -4772,6 +4757,13 @@
         "startMonth": 0,
         "endYear": 2023,
         "endMonth": 1
+      },
+      {
+        "entityId": "CHEMBL941",
+        "startYear": 2023,
+        "startMonth": 0,
+        "endYear": 2023,
+        "endMonth": 1
       }
     ],
     "return_schema": {
@@ -4943,32 +4935,30 @@
     "test_examples": [
       {
         "targetName": "BRAF"
+      },
+      {
+        "targetName": "BRCA1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
                   }
                 }
               }

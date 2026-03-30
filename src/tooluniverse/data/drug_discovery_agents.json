@@ -29,10 +29,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "disease_name": "Diabetes Mellitus",
-        "context": "The quick brown fox jumps over the lazy dog."
-      }
+      {"disease_name": "Diabetes Mellitus", "context": "Focus on insulin resistance and beta-cell dysfunction"},
+      {"disease_name": "Alzheimer's Disease", "context": "Emphasis on amyloid-beta and tau pathology"}
     ],
     "return_schema": {
       "type": "object",
@@ -76,11 +74,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "disease_name": "Diabetes Mellitus",
-        "targets": "EGFR, BRAF, ALK",
-        "context": "The quick brown fox jumps over the lazy dog."
-      }
+      {"disease_name": "Diabetes Mellitus", "targets": "EGFR, BRAF, ALK", "context": "Focus on kinase inhibitors for cancer therapy"},
+      {"disease_name": "Breast Cancer", "targets": "ERBB2, ESR1, PIK3CA", "context": "Targeted therapy for HER2-positive breast cancer"}
     ],
     "return_schema": {
       "type": "object",
@@ -124,11 +119,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "compounds": "Aspirin",
-        "admet_data": "{\"compound\": \"aspirin\", \"solubility\": \"high\", \"toxicity\": \"low\"}",
-        "disease_context": "Diabetes Mellitus"
-      }
+      {"compounds": "Aspirin, Metformin", "admet_data": "{\"compound\": \"aspirin\", \"solubility\": \"high\", \"toxicity\": \"low\"}", "disease_context": "Diabetes Mellitus"},
+      {"compounds": "Atorvastatin, Simvastatin", "admet_data": "{\"compound\": \"atorvastatin\", \"caco2_permeability\": \"high\", \"cyp3a4_substrate\": true}", "disease_context": "Cardiovascular disease"}
     ],
     "return_schema": {
       "type": "object",
@@ -166,10 +158,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "compounds": "Aspirin",
-        "patient_context": "The quick brown fox jumps over the lazy dog."
-      }
+      {"compounds": "Aspirin, Warfarin", "patient_context": "Elderly patient with atrial fibrillation and history of GI bleeding"},
+      {"compounds": "Metformin, Glipizide", "patient_context": "Type 2 diabetes patient with chronic kidney disease stage 3"}
     ],
     "return_schema": {
       "type": "object",
@@ -213,11 +203,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "topic": "BRCA1 mutations and breast cancer treatment",
-        "literature_data": "{\"pmids\": [12345678], \"summary\": \"Review of cancer treatments\"}",
-        "focus_area": "targeted therapy"
-      }
+      {"topic": "BRCA1 mutations and breast cancer treatment", "literature_data": "{\"pmids\": [12345678, 87654321], \"summary\": \"PARP inhibitors improve progression-free survival in BRCA-mutated breast cancer\"}", "focus_area": "targeted therapy"},
+      {"topic": "GLP-1 receptor agonists for type 2 diabetes", "literature_data": "{\"pmids\": [11223344, 44332211], \"summary\": \"GLP-1 RAs show cardiovascular benefits beyond glycemic control\"}", "focus_area": "cardiovascular outcomes"}
     ],
     "return_schema": {
       "type": "object",
@@ -267,12 +254,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "compounds": "Aspirin",
-        "admet_data": "{\"compound\": \"aspirin\", \"solubility\": \"high\", \"toxicity\": \"low\"}",
-        "efficacy_data": "{\"IC50\": 25, \"selectivity\": 100}",
-        "target_profile": "{\"selectivity\": \"high\", \"potency\": \"nanomolar\"}"
-      }
+      {"compounds": "Aspirin, Ibuprofen", "admet_data": "{\"aspirin\": {\"solubility\": \"high\", \"toxicity\": \"low\"}, \"ibuprofen\": {\"caco2_permeability\": \"high\"}}", "efficacy_data": "{\"aspirin_IC50\": 25, \"ibuprofen_IC50\": 50}", "target_profile": "{\"selectivity\": \"high\", \"potency\": \"nanomolar\"}"},
+      {"compounds": "Imatinib, Dasatinib", "admet_data": "{\"imatinib\": {\"bioavailability\": \"high\", \"half_life\": \"18h\"}, \"dasatinib\": {\"bioavailability\": \"moderate\", \"half_life\": \"5h\"}}", "efficacy_data": "{\"imatinib_IC50\": 0.1, \"dasatinib_IC50\": 0.05}", "target_profile": "{\"target\": \"BCR-ABL\", \"resistance_profile\": \"T315I_sensitive\"}"}
     ],
     "return_schema": {
       "type": "object",
@@ -322,12 +305,8 @@
       "return_json": true
     },
     "test_examples": [
-      {
-        "drug_name": "Aspirin",
-        "indication": "type 2 diabetes",
-        "preclinical_data": "{\"efficacy\": \"positive\", \"safety\": \"acceptable\"}",
-        "target_population": "adults with advanced solid tumors"
-      }
+      {"drug_name": "Metformin", "indication": "type 2 diabetes", "preclinical_data": "{\"efficacy\": \"positive\", \"safety\": \"acceptable\"}", "target_population": "adults with insulin resistance"},
+      {"drug_name": "Pembrolizumab", "indication": "non-small cell lung cancer", "preclinical_data": "{\"tumor_response\": \"durable\", \"immune_activation\": \"strong\"}", "target_population": "adults with PD-L1 positive tumors"}
     ],
     "return_schema": {
       "type": "object",

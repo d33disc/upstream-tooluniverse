@@ -36,35 +36,39 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "pockets": {
-                  "type": "array",
-                  "description": "Array of predicted binding pockets (URLs or objects)",
-                  "items": {
-                    "oneOf": [
-                      {"type": "string"},
-                      {"type": "object"}
-                    ]
+            "pockets": {
+              "type": "array",
+              "description": "Array of predicted binding pockets (URLs or objects)",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object"
                   }
-                }
+                ]
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
           "properties": {
             "error": {
-              "oneOf": [{"type": "string"}, {"type": "object"}]
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -104,15 +108,23 @@
         "analysis_detail": {
           "type": "string",
           "description": "Analysis level: '0' for pockets only (faster), '1' for pockets and subpockets (comprehensive). Default: '1'. Example: Use '1' for detailed analysis, '0' for quick screening.",
-          "enum": ["0", "1"]
+          "enum": [
+            "0",
+            "1"
+          ]
         },
         "druggability": {
           "type": "string",
           "description": "Prediction granularity: '0' for geometric properties only, '1' for properties and druggability scores. Default: '1'. Example: Use '1' for drug discovery (includes druggability), '0' for structure analysis only.",
-          "enum": ["0", "1"]
+          "enum": [
+            "0",
+            "1"
+          ]
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "/dogsite3_rest",
@@ -129,45 +141,50 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "result_table": {
-                  "type": "string",
-                  "description": "CSV formatted table with pocket predictions"
-                },
-                "pockets": {
-                  "type": "array",
-                  "description": "Array of predicted pockets with subpocket information",
-                  "items": {
-                    "oneOf": [
-                      {"type": "string"},
-                      {"type": "object"}
-                    ]
+            "result_table": {
+              "type": "string",
+              "description": "CSV formatted table with pocket predictions"
+            },
+            "pockets": {
+              "type": "array",
+              "description": "Array of predicted pockets with subpocket information",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object"
                   }
-                },
-                "residues": {
-                  "oneOf": [
-                    {"type": "object"},
-                    {"type": "array", "items": {"type": "string"}}
-                  ],
-                  "description": "Mapping of pockets to constituent residues, or array of URL strings"
-                },
-                "descriptor_explanation": {
-                  "type": ["string", "null"],
-                  "description": "URL or explanations of calculated descriptors"
-                },
-                "parameters": {
-                  "type": "object",
-                  "description": "Parameters used for the analysis"
-                }
+                ]
               }
             },
-            "metadata": {
-              "type": "object"
+            "residues": {
+              "oneOf": [
+                {
+                  "type": "object"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "description": "Mapping of pockets to constituent residues, or array of URL strings"
+            },
+            "descriptor_explanation": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "URL or explanations of calculated descriptors"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters used for the analysis"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -176,7 +193,9 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -213,7 +232,10 @@
           "description": "Ligand identifier in format 'residue_name_residue_chain_residue_number' (e.g., 'JE2_A_701'). Required."
         }
       },
-      "required": ["pdb_id", "ligand"]
+      "required": [
+        "pdb_id",
+        "ligand"
+      ]
     },
     "fields": {
       "endpoint": "/poseview_rest",
@@ -230,37 +252,37 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "result_png_picture": {
-                  "type": "string",
-                  "description": "URL or base64-encoded PNG interaction diagram"
-                },
-                "result_pdf_picture": {
-                  "type": "string",
-                  "description": "URL or base64-encoded PDF interaction diagram"
-                },
-                "result_svg_picture": {
-                  "type": "string",
-                  "description": "URL or base64-encoded SVG interaction diagram"
-                }
-              }
+            "result_png_picture": {
+              "type": "string",
+              "description": "URL or base64-encoded PNG interaction diagram"
             },
-            "metadata": {
-              "type": "object"
+            "result_pdf_picture": {
+              "type": "string",
+              "description": "URL or base64-encoded PDF interaction diagram"
+            },
+            "result_svg_picture": {
+              "type": "string",
+              "description": "URL or base64-encoded SVG interaction diagram"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
           "properties": {
             "error": {
-              "oneOf": [{"type": "string"}, {"type": "object"}]
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -289,7 +311,13 @@
         "mode": {
           "type": "string",
           "description": "Analysis mode: 'flexibility_analysis' (compare protein conformations), 'docking' (prepare ensemble for docking), 'screening' (find similar binding sites for virtual screening), 'mutation_analysis' (assess mutation tolerance), or 'ligand_pose_comparison' (compare binding poses). Required. Example: Use 'screening' for hit discovery across protein families.",
-          "enum": ["flexibility_analysis", "docking", "screening", "mutation_analysis", "ligand_pose_comparison"]
+          "enum": [
+            "flexibility_analysis",
+            "docking",
+            "screening",
+            "mutation_analysis",
+            "ligand_pose_comparison"
+          ]
         },
         "ligand": {
           "type": "string",
@@ -336,7 +364,10 @@
           "maximum": 10
         }
       },
-      "required": ["pdb_id", "mode"]
+      "required": [
+        "pdb_id",
+        "mode"
+      ]
     },
     "fields": {
       "endpoint": "/siena_rest",
@@ -353,51 +384,58 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "result_table": {
-                  "type": "string",
-                  "description": "CSV table with binding site similarity analysis results"
+            "result_table": {
+              "type": "string",
+              "description": "CSV table with binding site similarity analysis results"
+            },
+            "pdb_files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Aligned PDB structures in the ensemble"
+            },
+            "ligands": {
+              "oneOf": [
+                {
+                  "type": "string"
                 },
-                "pdb_files": {
+                {
                   "type": "array",
                   "items": {
                     "type": "string"
-                  },
-                  "description": "Aligned PDB structures in the ensemble"
-                },
-                "ligands": {
-                  "oneOf": [
-                    {"type": "string"},
-                    {"type": "array", "items": {"type": "string"}}
-                  ],
-                  "description": "SDF file URL(s) with aligned ligands"
-                },
-                "alignment": {
-                  "type": "string",
-                  "description": "Text file with sequence alignment"
-                },
-                "parameters": {
-                  "type": "object",
-                  "description": "Parameters used for the analysis"
+                  }
                 }
-              }
+              ],
+              "description": "SDF file URL(s) with aligned ligands"
             },
-            "metadata": {
-              "type": "object"
+            "alignment": {
+              "type": "string",
+              "description": "Text file with sequence alignment"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters used for the analysis"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
           "properties": {
             "error": {
-              "oneOf": [{"type": "string"}, {"type": "object"}]
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -434,10 +472,17 @@
         "setting": {
           "type": "string",
           "description": "Validation setting: 'astex' (Astex diverse set criteria), 'iridium' (Iridium validation rules), 'platinum' (PlatinumQuality standards), or 'combined' (all checks). Default: 'combined'. Example: Use 'combined' for thorough validation, 'astex' for docking benchmark standards.",
-          "enum": ["astex", "iridium", "platinum", "combined"]
+          "enum": [
+            "astex",
+            "iridium",
+            "platinum",
+            "combined"
+          ]
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "/structurechecker_rest",
@@ -454,40 +499,31 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "complex": {
-                  "type": "string",
-                  "description": "URL to overall protein-ligand complex quality metrics"
-                },
-                "activesite": {
-                  "type": "string",
-                  "description": "URL to active site geometry and quality assessment"
-                },
-                "ligands": {
-                  "type": "string",
-                  "description": "URL to individual ligand quality assessments"
-                },
-                "smarts": {
-                  "type": "string",
-                  "description": "URL to SMARTS patterns for chemical validation"
-                },
-                "hetcode": {
-                  "type": "string",
-                  "description": "Heteroatom residue codes found"
-                },
-                "config": {
-                  "type": "string",
-                  "description": "URL to configuration and parameters used"
-                }
-              }
+            "complex": {
+              "type": "string",
+              "description": "URL to overall protein-ligand complex quality metrics"
             },
-            "metadata": {
-              "type": "object"
+            "activesite": {
+              "type": "string",
+              "description": "URL to active site geometry and quality assessment"
+            },
+            "ligands": {
+              "type": "string",
+              "description": "URL to individual ligand quality assessments"
+            },
+            "smarts": {
+              "type": "string",
+              "description": "URL to SMARTS patterns for chemical validation"
+            },
+            "hetcode": {
+              "type": "string",
+              "description": "Heteroatom residue codes found"
+            },
+            "config": {
+              "type": "string",
+              "description": "URL to configuration and parameters used"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -496,7 +532,9 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },

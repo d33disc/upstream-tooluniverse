@@ -256,6 +256,11 @@
         "url": "https://arxiv.org/pdf/1706.03762.pdf",
         "terms": ["transformer", "attention"],
         "window_chars": 200
+      },
+      {
+        "pdf_url": "https://www.biorxiv.org/content/10.1101/2021.03.12.435116v1.full.pdf",
+        "terms": ["CRISPR", "Cas9"],
+        "max_snippets_per_term": 5
       }
     ]
   }

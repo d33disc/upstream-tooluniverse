@@ -33,87 +33,27 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "genome": {
-                  "type": "string"
-                },
-                "search_term": {
-                  "type": "string"
-                },
-                "match_count": {
-                  "type": "integer"
-                },
-                "matches": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "track": {
-                        "type": "string"
-                      },
-                      "track_description": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "position": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "transcript_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
+      "type": "object",
+      "properties": {
+        "genome": {"type": "string"},
+        "search_term": {"type": "string"},
+        "match_count": {"type": "integer"},
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "track": {"type": "string"},
+              "track_description": {"type": ["string", "null"]},
+              "position": {"type": "string"},
+              "name": {"type": ["string", "null"]},
+              "transcript_id": {"type": ["string", "null"]}
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+            "additionalProperties": true
+          }
         }
-      ]
+      },
+      "additionalProperties": true
     }
   },
   {
@@ -165,64 +105,16 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "genome": {
-                  "type": "string"
-                },
-                "chrom": {
-                  "type": "string"
-                },
-                "start": {
-                  "type": "integer"
-                },
-                "end": {
-                  "type": "integer"
-                },
-                "length": {
-                  "type": "integer"
-                },
-                "dna": {
-                  "type": "string"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
+      "type": "object",
+      "properties": {
+        "genome": {"type": "string"},
+        "chrom": {"type": "string"},
+        "start": {"type": "integer"},
+        "end": {"type": "integer"},
+        "length": {"type": "integer"},
+        "dna": {"type": "string"}
+      },
+      "additionalProperties": true
     }
   },
   {
@@ -252,10 +144,7 @@
           "description": "End position (exclusive). Must be > start."
         },
         "maxItemsOutput": {
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "description": "Maximum number of items to return. Default: 100. Set to limit large result sets."
         }
       },
@@ -290,76 +179,21 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "genome": {
-                  "type": "string"
-                },
-                "track": {
-                  "type": "string"
-                },
-                "track_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "chrom": {
-                  "type": "string"
-                },
-                "start": {
-                  "type": "integer"
-                },
-                "end": {
-                  "type": "integer"
-                },
-                "item_count": {
-                  "type": "integer"
-                },
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+      "type": "object",
+      "properties": {
+        "genome": {"type": "string"},
+        "track": {"type": "string"},
+        "track_type": {"type": ["string", "null"]},
+        "chrom": {"type": "string"},
+        "start": {"type": "integer"},
+        "end": {"type": "integer"},
+        "item_count": {"type": "integer"},
+        "items": {
+          "type": "array",
+          "items": {"type": "object", "additionalProperties": true}
         }
-      ]
+      },
+      "additionalProperties": true
     }
   }
 ]

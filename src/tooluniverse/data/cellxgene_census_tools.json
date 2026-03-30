@@ -51,6 +51,9 @@
     "test_examples": [
       {
         "operation": "get_census_versions"
+      },
+      {
+        "operation": "get_census_versions"
       }
     ]
   },
@@ -146,6 +149,12 @@
         "organism": "Homo sapiens",
         "obs_value_filter": "tissue_general == 'brain' and disease == 'normal'",
         "census_version": "stable"
+      },
+      {
+        "operation": "get_obs_metadata",
+        "organism": "Homo sapiens",
+        "obs_value_filter": "tissue_general == 'lung' and cell_type == 'T cell'",
+        "census_version": "stable"
       }
     ]
   },
@@ -232,6 +241,12 @@
         "operation": "get_var_metadata",
         "organism": "Homo sapiens",
         "var_value_filter": "feature_name == 'TP53'",
+        "census_version": "stable"
+      },
+      {
+        "operation": "get_var_metadata",
+        "organism": "Homo sapiens",
+        "var_value_filter": "feature_name in ['CD4', 'CD8A']",
         "census_version": "stable"
       }
     ]
@@ -327,6 +342,13 @@
         "obs_value_filter": "tissue_general == 'brain' and disease == 'normal'",
         "var_value_filter": "feature_name in ['SOX2', 'GFAP', 'OLIG2']",
         "census_version": "stable"
+      },
+      {
+        "operation": "get_anndata",
+        "organism": "Homo sapiens",
+        "obs_value_filter": "tissue_general == 'blood' and cell_type == 'B cell'",
+        "var_value_filter": "feature_name in ['CD19', 'CD79A', 'MS4A1']",
+        "census_version": "stable"
       }
     ]
   },
@@ -414,6 +436,11 @@
       {
         "operation": "get_presence_matrix",
         "organism": "Homo sapiens",
+        "census_version": "stable"
+      },
+      {
+        "operation": "get_presence_matrix",
+        "organism": "Mus musculus",
         "census_version": "stable"
       }
     ]
@@ -504,6 +531,12 @@
         "operation": "get_embeddings",
         "organism": "Homo sapiens",
         "census_version": "stable"
+      },
+      {
+        "operation": "get_embeddings",
+        "organism": "Mus musculus",
+        "embedding_name": "scVI",
+        "census_version": "stable"
       }
     ]
   },
@@ -576,6 +609,11 @@
       {
         "operation": "download_h5ad",
         "dataset_id": "4eb29386-de81-452f-b3c0-e00844e8c7fd",
+        "census_version": "stable"
+      },
+      {
+        "operation": "download_h5ad",
+        "dataset_id": "e935ab59-5706-43c4-a19d-0e24c2b1f83c",
         "census_version": "stable"
       }
     ]

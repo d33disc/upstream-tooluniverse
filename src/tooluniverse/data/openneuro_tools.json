@@ -27,6 +27,9 @@
     "test_examples": [
       {
         "first": 5
+      },
+      {
+        "first": 10
       }
     ],
     "return_schema": {
@@ -35,49 +38,56 @@
           "type": "object",
           "description": "GraphQL response with datasets list and pagination info",
           "properties": {
-            "data": {
+            "datasets": {
               "type": "object",
               "properties": {
-                "datasets": {
-                  "type": "object",
-                  "properties": {
-                    "edges": {
-                      "type": "array",
-                      "items": {
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "node": {
                         "type": "object",
                         "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": ["string", "null"]
-                              },
-                              "public": {
-                                "type": ["boolean", "null"]
-                              },
-                              "analytics": {
-                                "type": ["object", "null"]
-                              },
-                              "latestSnapshot": {
-                                "type": ["object", "null"]
-                              }
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "public": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "analytics": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          "latestSnapshot": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
                           }
                         }
                       }
-                    },
-                    "pageInfo": {
-                      "type": ["object", "null"]
                     }
                   }
+                },
+                "pageInfo": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
                 }
               }
-            },
-            "extensions": {
-              "type": ["object", "null"]
             }
           }
         },
@@ -89,7 +99,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -115,6 +127,9 @@
     "test_examples": [
       {
         "datasetId": "ds000114"
+      },
+      {
+        "datasetId": "ds000117"
       }
     ],
     "return_schema": {
@@ -123,47 +138,63 @@
           "type": "object",
           "description": "GraphQL response with dataset details",
           "properties": {
-            "data": {
+            "dataset": {
               "type": "object",
               "properties": {
-                "dataset": {
-                  "type": "object",
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "public": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "publishDate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "analytics": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "latestSnapshot": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
-                    "id": {
-                      "type": "string"
+                    "summary": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
                     },
-                    "name": {
-                      "type": ["string", "null"]
+                    "description": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
                     },
-                    "public": {
-                      "type": ["boolean", "null"]
-                    },
-                    "publishDate": {
-                      "type": ["string", "null"]
-                    },
-                    "analytics": {
-                      "type": ["object", "null"]
-                    },
-                    "latestSnapshot": {
-                      "type": ["object", "null"],
-                      "properties": {
-                        "summary": {
-                          "type": ["object", "null"]
-                        },
-                        "description": {
-                          "type": ["object", "null"]
-                        },
-                        "readme": {
-                          "type": ["string", "null"]
-                        }
-                      }
+                    "readme": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   }
                 }
               }
-            },
-            "extensions": {
-              "type": ["object", "null"]
             }
           }
         },
@@ -175,7 +206,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -201,6 +234,9 @@
     "test_examples": [
       {
         "datasetId": "ds000114"
+      },
+      {
+        "datasetId": "ds000117"
       }
     ],
     "return_schema": {
@@ -209,44 +245,48 @@
           "type": "object",
           "description": "GraphQL response with dataset snapshots",
           "properties": {
-            "data": {
+            "dataset": {
               "type": "object",
               "properties": {
-                "dataset": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": ["string", "null"]
-                    },
-                    "snapshots": {
-                      "type": ["array", "null"],
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "tag": {
-                            "type": "string"
-                          },
-                          "created": {
-                            "type": ["string", "null"]
-                          },
-                          "summary": {
-                            "type": ["object", "null"]
-                          }
-                        }
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "snapshots": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "tag": {
+                        "type": "string"
+                      },
+                      "created": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "summary": {
+                        "type": [
+                          "object",
+                          "null"
+                        ]
                       }
                     }
                   }
                 }
               }
-            },
-            "extensions": {
-              "type": ["object", "null"]
             }
           }
         },
@@ -258,7 +298,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -304,52 +346,59 @@
           "type": "object",
           "description": "GraphQL response with filtered datasets",
           "properties": {
-            "data": {
+            "datasets": {
               "type": "object",
               "properties": {
-                "datasets": {
-                  "type": "object",
-                  "properties": {
-                    "edges": {
-                      "type": "array",
-                      "items": {
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "node": {
                         "type": "object",
                         "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": ["string", "null"]
-                              },
-                              "created": {
-                                "type": ["string", "null"]
-                              },
-                              "public": {
-                                "type": ["boolean", "null"]
-                              }
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "created": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "public": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
                           }
-                        }
-                      }
-                    },
-                    "pageInfo": {
-                      "type": ["object", "null"],
-                      "properties": {
-                        "count": {
-                          "type": ["integer", "null"],
-                          "description": "Total matching datasets"
                         }
                       }
                     }
                   }
+                },
+                "pageInfo": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "count": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "description": "Total matching datasets"
+                    }
+                  }
                 }
               }
-            },
-            "extensions": {
-              "type": ["object", "null"]
             }
           }
         },
@@ -361,7 +410,9 @@
               "description": "Error message if the request failed"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

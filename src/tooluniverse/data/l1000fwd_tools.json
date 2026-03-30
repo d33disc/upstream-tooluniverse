@@ -64,6 +64,13 @@
         "down_genes": ["CDKN1A"],
         "n_results": 5,
         "mode": "similar"
+      },
+      {
+        "operation": "sig_search",
+        "up_genes": ["EGFR", "ERBB2"],
+        "down_genes": ["PTEN", "TP53"],
+        "n_results": 10,
+        "mode": "opposite"
       }
     ]
   }

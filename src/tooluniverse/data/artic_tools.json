@@ -10,26 +10,42 @@
           "description": "Search query. Examples: 'monet water lilies', 'picasso cubism', 'ancient egypt', 'japanese woodblock', 'american landscape'"
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results (1-100). Default: 10"
         },
         "fields": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Comma-separated fields to return. Default: 'id,title,artist_display,date_display,medium_display'. Other options: image_id, dimensions, artwork_type_title, style_title, classification_title"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://api.artic.edu/api/v1/artworks/search",
       "params": {}
-
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "monet water lilies", "limit": 5},
-      {"q": "picasso cubism", "limit": 5},
-      {"q": "ancient egypt", "limit": 5}
+      {
+        "q": "monet water lilies",
+        "limit": 5
+      },
+      {
+        "q": "picasso cubism",
+        "limit": 5
+      },
+      {
+        "q": "ancient egypt",
+        "limit": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
@@ -40,9 +56,16 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {"type": "integer", "description": "Total matching artworks"},
-                "limit": {"type": "integer"},
-                "offset": {"type": "integer"}
+                "total": {
+                  "type": "integer",
+                  "description": "Total matching artworks"
+                },
+                "limit": {
+                  "type": "integer"
+                },
+                "offset": {
+                  "type": "integer"
+                }
               }
             },
             "data": {
@@ -51,12 +74,41 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "id": {"type": "integer", "description": "Artwork ID for use with ArtIC_get_artwork"},
-                  "title": {"type": "string"},
-                  "artist_display": {"type": ["string", "null"], "description": "Artist name with nationality and dates"},
-                  "date_display": {"type": ["string", "null"], "description": "Date or date range of creation"},
-                  "medium_display": {"type": ["string", "null"], "description": "Medium (e.g., Oil on canvas, Woodblock print)"},
-                  "image_id": {"type": ["string", "null"], "description": "Image identifier for IIIF image URL"}
+                  "id": {
+                    "type": "integer",
+                    "description": "Artwork ID for use with ArtIC_get_artwork"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "artist_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Artist name with nationality and dates"
+                  },
+                  "date_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Date or date range of creation"
+                  },
+                  "medium_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Medium (e.g., Oil on canvas, Woodblock print)"
+                  },
+                  "image_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Image identifier for IIIF image URL"
+                  }
                 }
               }
             }
@@ -64,8 +116,14 @@
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -81,17 +139,27 @@
           "description": "Artwork ID from Art Institute of Chicago. Examples: 27992 (A Sunday on La Grande Jatte), 16568 (The Bedroom by Van Gogh), 20684 (American Gothic)"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.artic.edu/api/v1/artworks/{id}",
-      "params": {"fields": "id,title,artist_display,date_display,medium_display,dimensions,image_id,description,place_of_origin,style_title,artwork_type_title,credit_line,is_public_domain"}
+      "params": {
+        "fields": "id,title,artist_display,date_display,medium_display,dimensions,image_id,description,place_of_origin,style_title,artwork_type_title,credit_line,is_public_domain"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"id": 27992},
-      {"id": 16568},
-      {"id": 20684}
+      {
+        "id": 27992
+      },
+      {
+        "id": 16568
+      },
+      {
+        "id": 20684
+      }
     ],
     "return_schema": {
       "oneOf": [
@@ -100,36 +168,92 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Detailed artwork record",
               "properties": {
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {"type": "integer"},
-                    "title": {"type": "string"},
-                    "artist_display": {"type": ["string", "null"]},
-                    "date_display": {"type": ["string", "null"]},
-                    "medium_display": {"type": ["string", "null"]},
-                    "dimensions": {"type": ["string", "null"]},
-                    "description": {"type": ["string", "null"]},
-                    "place_of_origin": {"type": ["string", "null"]},
-                    "style_title": {"type": ["string", "null"]},
-                    "artwork_type_title": {"type": ["string", "null"]},
-                    "credit_line": {"type": ["string", "null"]},
-                    "is_public_domain": {"type": "boolean"},
-                    "image_id": {"type": ["string", "null"], "description": "Use with https://www.artic.edu/iiif/2/{image_id}/full/843,/0/default.jpg for image URL"}
-                  }
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "artist_display": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "date_display": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "medium_display": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "dimensions": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "place_of_origin": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "style_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "artwork_type_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "credit_line": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "is_public_domain": {
+                  "type": "boolean"
+                },
+                "image_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Use with https://www.artic.edu/iiif/2/{image_id}/full/843,/0/default.jpg for image URL"
                 }
               }
-            },
-            "metadata": {"type": "object"}
+            }
           },
-          "required": ["data"]
+          "description": "Detailed artwork record"
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

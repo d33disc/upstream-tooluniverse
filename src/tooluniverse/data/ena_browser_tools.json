@@ -16,7 +16,9 @@
           "default": false
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/fasta/{accession}",
@@ -47,7 +49,9 @@
           "description": "EMBL/GenBank accession number. NOT RefSeq (NC_*, NM_*, NP_*). Examples: 'U00096', 'AJ312385', 'M15390'"
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/embl/{accession}",
@@ -60,6 +64,9 @@
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "M15390"
       }
     ]
   },
@@ -75,7 +82,9 @@
           "description": "ENA metadata record accession. Supported types: Study (ERP*, SRP*, PRJ*), Sample (ERS*, SRS*, SAM*), Run (ERR*, SRR*), Experiment (ERX*, SRX*), Analysis (ERZ*, SRZ*), Taxon (numeric ID). NOT for sequence accessions (U#####, M#####, etc.). Examples: 'SAMEA2620084' (sample), 'ERX2484999' (experiment), '562' (taxon)"
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/xml/{accession}",
@@ -88,6 +97,9 @@
     "test_examples": [
       {
         "accession": "SAMEA2620084"
+      },
+      {
+        "accession": "ERX2484999"
       }
     ]
   },
@@ -108,7 +120,9 @@
           "default": false
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/fasta/{accession}",
@@ -129,6 +143,9 @@
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "M15390"
       }
     ]
   },
@@ -144,7 +161,9 @@
           "description": "EMBL/GenBank accession number. NOT RefSeq (NC_*, NM_*, NP_*). Examples: 'U00096', 'AJ312385', 'M15390'"
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/summary/{accession}",
@@ -153,52 +172,43 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object",
-          "properties": {
-            "summaries": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "accession": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "version": {
-                    "type": "integer"
-                  },
-                  "project": {
-                    "type": "string"
-                  },
-                  "sample": {
-                    "type": "string"
-                  },
-                  "moleculeType": {
-                    "type": "string"
-                  },
-                  "taxon": {
-                    "type": "integer"
-                  },
-                  "sequenceLength": {
-                    "type": "integer"
-                  },
-                  "publications": {
-                    "type": "array"
-                  }
-                }
+        "summaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "version": {
+                "type": "integer"
+              },
+              "project": {
+                "type": "string"
+              },
+              "sample": {
+                "type": "string"
+              },
+              "moleculeType": {
+                "type": "string"
+              },
+              "taxon": {
+                "type": "integer"
+              },
+              "sequenceLength": {
+                "type": "integer"
+              },
+              "publications": {
+                "type": "array"
               }
-            },
-            "total": {
-              "type": "string"
             }
-          },
-          "description": "Comprehensive entry summary"
+          }
+        },
+        "total": {
+          "type": "string"
         }
       }
     },
@@ -223,7 +233,9 @@
           "description": "EMBL/GenBank accession number. NOT RefSeq (NC_*, NM_*, NP_*). Examples: 'U00096', 'AJ312385'"
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/ena/browser/api/versions/{accession}",
@@ -232,46 +244,40 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "accession": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "accession": {
-              "type": "string"
-            },
-            "versions": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "accession": {
-                    "type": "string"
-                  },
-                  "sequenceVersion": {
-                    "type": "integer"
-                  },
-                  "firstPublic": {
-                    "type": "string"
-                  },
-                  "lastUpdated": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string"
-                  }
-                }
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string"
+              },
+              "sequenceVersion": {
+                "type": "integer"
+              },
+              "firstPublic": {
+                "type": "string"
+              },
+              "lastUpdated": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
               }
             }
-          },
-          "description": "Version history with details for each version"
+          }
         }
       }
     },
     "test_examples": [
       {
         "accession": "U00096"
+      },
+      {
+        "accession": "AJ312385"
       }
     ]
   }

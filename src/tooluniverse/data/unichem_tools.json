@@ -45,73 +45,51 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "inchi": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "inchikey": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "formula": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "source_count": {
-                  "type": "integer"
-                },
-                "sources": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "source_name": {
-                        "type": "string"
-                      },
-                      "source_long_name": {
-                        "type": "string"
-                      },
-                      "compound_id": {
-                        "type": "string"
-                      },
-                      "url": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
+            "inchi": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "inchikey": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "formula": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_count": {
+              "type": "integer"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_name": {
+                    "type": "string"
+                  },
+                  "source_long_name": {
+                    "type": "string"
+                  },
+                  "compound_id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -140,74 +118,55 @@
     },
     "type": "UniChemTool",
     "test_examples": [
-      {}
+      {},
+      {
+        "note": "Returns 40+ chemical database sources including ChEMBL, DrugBank, PubChem, ChEBI"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "source_count": {
-                  "type": "integer"
-                },
-                "sources": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "source_id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "long_name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "compound_count": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "last_updated": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
+            "source_count": {
+              "type": "integer"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "long_name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "compound_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "last_updated": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

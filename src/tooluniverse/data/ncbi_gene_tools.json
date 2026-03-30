@@ -94,10 +94,7 @@
           ]
         }
       ]
-    },
-    "aliases": [
-      "NCBI_search_gene"
-    ]
+    }
   },
   {
     "name": "NCBIGene_get_summary",

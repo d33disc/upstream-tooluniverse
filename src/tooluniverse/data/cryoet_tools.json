@@ -2,7 +2,9 @@
   {
     "name": "CryoET_list_datasets",
     "type": "CryoETTool",
-    "required_packages": ["requests"],
+    "required_packages": [
+      "requests"
+    ],
     "description": "Search and list cryo-electron tomography (cryo-ET) datasets from the CZ BioHub CryoET Data Portal (cryoetdataportal.czscience.com). Returns dataset metadata including title, description, organism, tissue/cell type, sample type, and S3/HTTPS data access paths. Supports filtering by organism name or tissue name. Use for: discovering available cryo-ET datasets, finding datasets by organism (e.g. 'Homo sapiens', 'Saccharomyces cerevisiae'), filtering by tissue or cell type. Returns up to `limit` datasets per call; use `offset` for pagination.",
     "parameter": {
       "type": "object",
@@ -10,15 +12,23 @@
         "operation": {
           "type": "string",
           "description": "Operation type",
-          "enum": ["list_datasets"],
+          "enum": [
+            "list_datasets"
+          ],
           "default": "list_datasets"
         },
         "organism_name": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by organism name (case-insensitive substring match). Examples: 'Homo sapiens', 'Saccharomyces cerevisiae', 'Coxiella burnetii'."
         },
         "tissue_name": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by tissue or cell type name (case-insensitive substring match). Examples: 'kidney', 'endothelial', 'prokaryotic cell'."
         },
         "limit": {
@@ -32,51 +42,8 @@
           "default": 0
         }
       },
-      "required": ["operation"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "count": {"type": "integer"},
-                "datasets": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "title": {"type": "string"},
-                      "description": {"type": "string"},
-                      "organismName": {"type": "string"},
-                      "tissueName": {"type": "string"},
-                      "cellName": {"type": "string"},
-                      "sampleType": {"type": "string"},
-                      "depositionDate": {"type": "string"},
-                      "releaseDate": {"type": "string"},
-                      "s3Prefix": {"type": "string"},
-                      "httpsPrefix": {"type": "string"}
-                    },
-                    "additionalProperties": true
-                  }
-                }
-              },
-              "required": ["count", "datasets"]
-            }
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"}
-          }
-        }
+      "required": [
+        "operation"
       ]
     },
     "test_examples": [
@@ -84,13 +51,104 @@
         "operation": "list_datasets",
         "organism_name": "Homo sapiens",
         "limit": 3
+      },
+      {
+        "operation": "list_datasets",
+        "organism_name": "Saccharomyces cerevisiae",
+        "limit": 5
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "Number of datasets returned"
+            },
+            "datasets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Dataset ID"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Dataset title"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Dataset description"
+                  },
+                  "organismName": {
+                    "type": "string",
+                    "description": "Organism name"
+                  },
+                  "tissueName": {
+                    "type": "string",
+                    "description": "Tissue name"
+                  },
+                  "cellName": {
+                    "type": "string",
+                    "description": "Cell name"
+                  },
+                  "sampleType": {
+                    "type": "string",
+                    "description": "Sample type"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date (ISO 8601)"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date (ISO 8601)"
+                  },
+                  "relatedDatabaseEntries": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Related database entries"
+                  },
+                  "datasetPublications": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Associated publication DOIs"
+                  },
+                  "s3Prefix": {
+                    "type": "string",
+                    "description": "S3 URI prefix"
+                  },
+                  "httpsPrefix": {
+                    "type": "string",
+                    "description": "HTTPS URL prefix"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_get_dataset",
     "type": "CryoETTool",
-    "required_packages": ["requests"],
+    "required_packages": [
+      "requests"
+    ],
     "description": "Get full metadata for a specific CryoET Data Portal dataset by its numeric ID. Returns complete dataset information including organism taxonomy, tissue/cell identifiers, sample preparation details, publication references, data access paths (S3 and HTTPS), and file size. Use this after `CryoET_list_datasets` to retrieve detailed information for a specific dataset. The dataset ID is an integer (e.g. 10053, 10174).",
     "parameter": {
       "type": "object",
@@ -98,7 +156,9 @@
         "operation": {
           "type": "string",
           "description": "Operation type",
-          "enum": ["get_dataset"],
+          "enum": [
+            "get_dataset"
+          ],
           "default": "get_dataset"
         },
         "dataset_id": {
@@ -106,51 +166,90 @@
           "description": "Numeric dataset ID from the CryoET Data Portal (e.g. 10053, 10174, 10460)."
         }
       },
-      "required": ["operation", "dataset_id"]
+      "required": [
+        "operation",
+        "dataset_id"
+      ]
     },
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
           "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
+            "dataset": {
               "type": "object",
               "properties": {
-                "dataset": {
-                  "type": "object",
-                  "properties": {
-                    "id": {"type": "integer"},
-                    "title": {"type": "string"},
-                    "description": {"type": "string"},
-                    "organismName": {"type": "string"},
-                    "organismTaxid": {"type": "integer"},
-                    "tissueName": {"type": "string"},
-                    "cellName": {"type": "string"},
-                    "sampleType": {"type": "string"},
-                    "samplePreparation": {"type": "string"},
-                    "gridPreparation": {"type": "string"},
-                    "depositionDate": {"type": "string"},
-                    "releaseDate": {"type": "string"},
-                    "datasetPublications": {"type": "string"},
-                    "relatedDatabaseEntries": {"type": "string"},
-                    "s3Prefix": {"type": "string"},
-                    "httpsPrefix": {"type": "string"},
-                    "fileSize": {"type": "number"}
-                  },
-                  "additionalProperties": true
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "organismName": {
+                  "type": "string"
+                },
+                "organismTaxid": {
+                  "type": "integer"
+                },
+                "tissueName": {
+                  "type": "string"
+                },
+                "cellName": {
+                  "type": "string"
+                },
+                "sampleType": {
+                  "type": "string"
+                },
+                "samplePreparation": {
+                  "type": "string"
+                },
+                "gridPreparation": {
+                  "type": "string"
+                },
+                "depositionDate": {
+                  "type": "string"
+                },
+                "releaseDate": {
+                  "type": "string"
+                },
+                "datasetPublications": {
+                  "type": "string"
+                },
+                "relatedDatabaseEntries": {
+                  "type": "string"
+                },
+                "s3Prefix": {
+                  "type": "string"
+                },
+                "httpsPrefix": {
+                  "type": "string"
+                },
+                "fileSize": {
+                  "type": "number"
                 }
               },
-              "required": ["dataset"]
+              "additionalProperties": true
             }
           },
-          "required": ["status", "data"]
+          "required": [
+            "dataset"
+          ]
         },
         {
           "type": "object",
           "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"}
+            "status": {
+              "type": "string",
+              "enum": [
+                "error"
+              ]
+            },
+            "error": {
+              "type": "string"
+            }
           }
         }
       ]
@@ -159,13 +258,19 @@
       {
         "operation": "get_dataset",
         "dataset_id": 10053
+      },
+      {
+        "operation": "get_dataset",
+        "dataset_id": 10174
       }
     ]
   },
   {
     "name": "CryoET_list_runs",
     "type": "CryoETTool",
-    "required_packages": ["requests"],
+    "required_packages": [
+      "requests"
+    ],
     "description": "List the experimental tilt-series acquisition runs within a specific CryoET Data Portal dataset. Each run corresponds to one sample grid position with its own tilt series, tomograms, and annotations. Returns run names and data access paths. Use this after `CryoET_get_dataset` to enumerate the runs for a dataset before fetching tomograms or annotations.",
     "parameter": {
       "type": "object",
@@ -173,7 +278,9 @@
         "operation": {
           "type": "string",
           "description": "Operation type",
-          "enum": ["list_runs"],
+          "enum": [
+            "list_runs"
+          ],
           "default": "list_runs"
         },
         "dataset_id": {
@@ -191,45 +298,9 @@
           "default": 0
         }
       },
-      "required": ["operation", "dataset_id"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "dataset_id": {"type": "integer"},
-                "count": {"type": "integer"},
-                "runs": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "name": {"type": "string"},
-                      "datasetId": {"type": "integer"},
-                      "s3Prefix": {"type": "string"},
-                      "httpsPrefix": {"type": "string"}
-                    }
-                  }
-                }
-              },
-              "required": ["dataset_id", "count", "runs"]
-            }
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"}
-          }
-        }
+      "required": [
+        "operation",
+        "dataset_id"
       ]
     },
     "test_examples": [
@@ -237,13 +308,70 @@
         "operation": "list_runs",
         "dataset_id": 10053,
         "limit": 5
+      },
+      {
+        "operation": "list_runs",
+        "dataset_id": 10174,
+        "limit": 3
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "dataset_id": {
+              "type": "integer",
+              "description": "Parent dataset ID"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of runs returned"
+            },
+            "runs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Run ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Run name"
+                  },
+                  "datasetId": {
+                    "type": "integer",
+                    "description": "Parent dataset ID"
+                  },
+                  "s3Prefix": {
+                    "type": "string",
+                    "description": "S3 URI prefix for run data"
+                  },
+                  "httpsPrefix": {
+                    "type": "string",
+                    "description": "HTTPS URL prefix for run data"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_list_tomograms",
     "type": "CryoETTool",
-    "required_packages": ["requests"],
+    "required_packages": [
+      "requests"
+    ],
     "description": "List tomographic reconstructions for a specific experimental run from the CryoET Data Portal. Returns voxel spacing (Angstroms), tomogram dimensions (sizeX/Y/Z voxels), reconstruction method (WBP = Weighted Back Projection, SIRT, etc.), processing pipeline, and download URLs for OME-Zarr (cloud-native) and MRC (traditional) formats. Use after `CryoET_list_runs` to find tomograms; use `isPortalStandard` flag to identify quality-controlled tomograms.",
     "parameter": {
       "type": "object",
@@ -251,7 +379,9 @@
         "operation": {
           "type": "string",
           "description": "Operation type",
-          "enum": ["list_tomograms"],
+          "enum": [
+            "list_tomograms"
+          ],
           "default": "list_tomograms"
         },
         "run_id": {
@@ -269,66 +399,141 @@
           "default": 0
         }
       },
-      "required": ["operation", "run_id"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "run_id": {"type": "integer"},
-                "count": {"type": "integer"},
-                "tomograms": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "name": {"type": "string"},
-                      "runId": {"type": "integer"},
-                      "voxelSpacing": {"type": "number"},
-                      "sizeX": {"type": "integer"},
-                      "sizeY": {"type": "integer"},
-                      "sizeZ": {"type": "integer"},
-                      "reconstructionMethod": {"type": "string"},
-                      "processing": {"type": "string"},
-                      "isPortalStandard": {"type": "boolean"},
-                      "s3OmezarrDir": {"type": "string"},
-                      "httpsMrcFile": {"type": "string"}
-                    },
-                    "additionalProperties": true
-                  }
-                }
-              },
-              "required": ["run_id", "count", "tomograms"]
-            }
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"}
-          }
-        }
+      "required": [
+        "operation",
+        "run_id"
       ]
     },
     "test_examples": [
       {
         "operation": "list_tomograms",
         "run_id": 3430
+      },
+      {
+        "operation": "list_tomograms",
+        "run_id": 3431
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "integer",
+              "description": "Parent run ID"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of tomograms returned"
+            },
+            "tomograms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Tomogram ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Tomogram name"
+                  },
+                  "runId": {
+                    "type": "integer",
+                    "description": "Parent run ID"
+                  },
+                  "voxelSpacing": {
+                    "type": "number",
+                    "description": "Voxel spacing in angstroms"
+                  },
+                  "sizeX": {
+                    "type": "integer",
+                    "description": "X dimension in voxels"
+                  },
+                  "sizeY": {
+                    "type": "integer",
+                    "description": "Y dimension in voxels"
+                  },
+                  "sizeZ": {
+                    "type": "integer",
+                    "description": "Z dimension in voxels"
+                  },
+                  "reconstructionMethod": {
+                    "type": "string",
+                    "description": "Reconstruction method (e.g. WBP)"
+                  },
+                  "processing": {
+                    "type": "string",
+                    "description": "Processing state (raw/filtered)"
+                  },
+                  "processingSoftware": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Processing software used"
+                  },
+                  "reconstructionSoftware": {
+                    "type": "string",
+                    "description": "Reconstruction software used"
+                  },
+                  "isPortalStandard": {
+                    "type": "boolean",
+                    "description": "Whether this is the portal standard tomogram"
+                  },
+                  "isAuthorSubmitted": {
+                    "type": "boolean",
+                    "description": "Whether author submitted"
+                  },
+                  "isVisualizationDefault": {
+                    "type": "boolean",
+                    "description": "Whether this is the default for visualization"
+                  },
+                  "ctfCorrected": {
+                    "type": "boolean",
+                    "description": "Whether CTF corrected"
+                  },
+                  "s3OmezarrDir": {
+                    "type": "string",
+                    "description": "S3 path to OME-Zarr directory"
+                  },
+                  "httpsMrcFile": {
+                    "type": "string",
+                    "description": "HTTPS URL for MRC file"
+                  },
+                  "s3MrcFile": {
+                    "type": "string",
+                    "description": "S3 path to MRC file"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date (ISO 8601)"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date (ISO 8601)"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "CryoET_list_annotations",
     "type": "CryoETTool",
-    "required_packages": ["requests"],
+    "required_packages": [
+      "requests"
+    ],
     "description": "List biological annotations (segmentations, point annotations, surface meshes) for a specific cryo-ET run from the CryoET Data Portal. Annotations label cellular structures such as membranes, ribosomes, and organelles. Returns object name (e.g. 'membrane', 'ribosome'), GO/EMDB ontology ID, annotation method description, count of annotated instances, software used, and metadata paths. Filter by `curator_recommended_only=true` to get curated high-quality annotations.",
     "parameter": {
       "type": "object",
@@ -336,7 +541,9 @@
         "operation": {
           "type": "string",
           "description": "Operation type",
-          "enum": ["list_annotations"],
+          "enum": [
+            "list_annotations"
+          ],
           "default": "list_annotations"
         },
         "run_id": {
@@ -359,60 +566,124 @@
           "default": 0
         }
       },
-      "required": ["operation", "run_id"]
-    },
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["success"]},
-            "data": {
-              "type": "object",
-              "properties": {
-                "run_id": {"type": "integer"},
-                "count": {"type": "integer"},
-                "annotations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "objectName": {"type": "string"},
-                      "objectId": {"type": "string"},
-                      "objectDescription": {"type": "string"},
-                      "objectCount": {"type": "integer"},
-                      "annotationMethod": {"type": "string"},
-                      "annotationSoftware": {"type": "string"},
-                      "isCuratorRecommended": {"type": "boolean"},
-                      "methodType": {"type": "string"},
-                      "depositionDate": {"type": "string"},
-                      "s3MetadataPath": {"type": "string"},
-                      "httpsMetadataPath": {"type": "string"}
-                    },
-                    "additionalProperties": true
-                  }
-                }
-              },
-              "required": ["run_id", "count", "annotations"]
-            }
-          },
-          "required": ["status", "data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"type": "string", "enum": ["error"]},
-            "error": {"type": "string"}
-          }
-        }
+      "required": [
+        "operation",
+        "run_id"
       ]
     },
     "test_examples": [
       {
         "operation": "list_annotations",
         "run_id": 3430
+      },
+      {
+        "operation": "list_annotations",
+        "run_id": 3430,
+        "curator_recommended_only": true
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "integer",
+              "description": "Parent run ID"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of annotations returned"
+            },
+            "annotations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Annotation ID"
+                  },
+                  "objectName": {
+                    "type": "string",
+                    "description": "Annotated object name"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "description": "Object identifier (e.g. GO term)"
+                  },
+                  "objectDescription": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Object description"
+                  },
+                  "objectState": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Object state"
+                  },
+                  "objectCount": {
+                    "type": "integer",
+                    "description": "Number of annotated objects"
+                  },
+                  "annotationMethod": {
+                    "type": "string",
+                    "description": "Method used for annotation"
+                  },
+                  "annotationSoftware": {
+                    "type": "string",
+                    "description": "Software used for annotation"
+                  },
+                  "groundTruthStatus": {
+                    "type": "boolean",
+                    "description": "Whether this is ground truth"
+                  },
+                  "isCuratorRecommended": {
+                    "type": "boolean",
+                    "description": "Whether curator recommended"
+                  },
+                  "methodType": {
+                    "type": "string",
+                    "description": "Method type (automated/manual/hybrid)"
+                  },
+                  "depositionDate": {
+                    "type": "string",
+                    "description": "Deposition date (ISO 8601)"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "Release date (ISO 8601)"
+                  },
+                  "annotationPublication": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Associated publication DOI"
+                  },
+                  "s3MetadataPath": {
+                    "type": "string",
+                    "description": "S3 path to annotation metadata"
+                  },
+                  "httpsMetadataPath": {
+                    "type": "string",
+                    "description": "HTTPS URL for annotation metadata"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 ]

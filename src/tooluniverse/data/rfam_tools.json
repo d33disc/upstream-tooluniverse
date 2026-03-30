@@ -39,6 +39,11 @@
         "operation": "get_family",
         "family_id": "RF00360",
         "format": "json"
+      },
+      {
+        "operation": "get_family",
+        "family_id": "RF00005",
+        "format": "xml"
       }
     ]
   },
@@ -88,6 +93,12 @@
         "operation": "get_alignment",
         "family_id": "RF00360",
         "format": "fasta"
+      },
+      {
+        "operation": "get_alignment",
+        "family_id": "RF00005",
+        "format": "stockholm",
+        "gzip": true
       }
     ]
   },
@@ -124,6 +135,10 @@
       {
         "operation": "get_covariance_model",
         "family_id": "RF00360"
+      },
+      {
+        "operation": "get_covariance_model",
+        "family_id": "RF00005"
       }
     ]
   },
@@ -174,7 +189,13 @@
     "test_examples": [
       {
         "operation": "search_sequence",
-        "sequence": "AGTTACGGCCATACCTCAGAGAATATACCGTATCCCGTTCGATCTGCGAAGTTAAGCTCTGAAGGGCGTCGTCAGTACTATAGTGGGTGACCATATGGGAATACGACGTGCTGTAGCTT"
+        "sequence": "GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA",
+        "max_wait_seconds": 60
+      },
+      {
+        "operation": "search_sequence",
+        "sequence": "UAGCUUAUCAGACUGAUGUUGA",
+        "max_wait_seconds": 30
       }
     ]
   },
@@ -211,6 +232,10 @@
       {
         "operation": "get_tree_data",
         "family_id": "RF00360"
+      },
+      {
+        "operation": "get_tree_data",
+        "family_id": "RF00005"
       }
     ]
   },
@@ -256,6 +281,11 @@
         "operation": "get_sequence_regions",
         "family_id": "RF00360",
         "format": "text"
+      },
+      {
+        "operation": "get_sequence_regions",
+        "family_id": "RF00005",
+        "format": "json"
       }
     ]
   },
@@ -300,6 +330,11 @@
         "operation": "get_structure_mapping",
         "family_id": "RF00002",
         "format": "json"
+      },
+      {
+        "operation": "get_structure_mapping",
+        "family_id": "RF00005",
+        "format": "text"
       }
     ]
   },
@@ -335,6 +370,10 @@
       {
         "operation": "get_family_id",
         "accession": "RF00360"
+      },
+      {
+        "operation": "get_family_id",
+        "accession": "RF00005"
       }
     ]
   },
@@ -370,6 +409,10 @@
       {
         "operation": "get_family_accession",
         "family_id": "snoZ107_R87"
+      },
+      {
+        "operation": "get_family_accession",
+        "family_id": "tRNA"
       }
     ]
   }

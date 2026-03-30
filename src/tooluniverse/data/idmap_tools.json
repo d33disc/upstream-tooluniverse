@@ -27,20 +27,32 @@
     "test_examples": [
       {
         "name": "rheumatoid arthritis"
+      },
+      {
+        "name": "type 2 diabetes mellitus"
+      },
+      {
+        "name": "Alzheimer disease"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "search": {
           "type": "object",
           "properties": {
-            "search": {
-              "type": "object",
-              "properties": {
-                "hits": {
-                  "type": "array",
-                  "items": {
+            "hits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "object": {
                     "type": "object",
                     "properties": {
                       "id": {
@@ -49,21 +61,10 @@
                       "name": {
                         "type": "string"
                       },
-                      "object": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "dbXRefs": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
+                      "dbXRefs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -104,29 +105,30 @@
     "test_examples": [
       {
         "efoId": "EFO_0000685"
+      },
+      {
+        "efoId": "EFO_0000400"
+      },
+      {
+        "efoId": "EFO_0000228"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "disease": {
           "type": "object",
           "properties": {
-            "disease": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "dbXRefs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dbXRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
@@ -161,27 +163,28 @@
     "type": "OpenTarget",
     "test_examples": [
       {
-        "inputId": "1"
+        "inputId": "OMIM:604302"
+      },
+      {
+        "inputId": "MONDO:0005148"
+      },
+      {
+        "inputId": "UMLS:C0003873"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "data": {
+        "mapIds": {
           "type": "object",
           "properties": {
-            "mapIds": {
-              "type": "object",
-              "properties": {
-                "mappings": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "term": {
-                        "type": "string"
-                      }
-                    }
+            "mappings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "term": {
+                    "type": "string"
                   }
                 }
               }

@@ -57,8 +57,12 @@
     },
     "test_examples": [
       {
-        "uri": "https://example.com/file.txt",
-        "output_path": "./downloads/output.txt",
+        "uri": "https://raw.githubusercontent.com/microsoft/markitdown/main/README.md",
+        "output_path": "./downloads/readme.md",
+        "enable_plugins": false
+      },
+      {
+        "uri": "https://example.com/data.csv",
         "enable_plugins": false
       }
     ]

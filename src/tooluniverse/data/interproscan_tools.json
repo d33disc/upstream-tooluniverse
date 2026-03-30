@@ -37,6 +37,11 @@
         "test_examples": [
             {
                 "sequence": "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH"
+            },
+            {
+                "sequence": "MTEITAAMVKELRESTGAGMMDCKNALSET",
+                "go_terms": true,
+                "pathways": false
             }
         ],
         "return_schema": {
@@ -77,6 +82,9 @@
         "test_examples": [
             {
                 "job_id": "iprscan5-R20240101-123456-0001-12345678"
+            },
+            {
+                "job_id": "iprscan5-R20240601-000001-0001-ABCD1234"
             }
         ],
         "return_schema": {

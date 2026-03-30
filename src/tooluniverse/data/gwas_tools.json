@@ -8,7 +8,7 @@
       "properties": {
         "disease_trait": {
           "type": "string",
-          "description": "Disease or trait name for text-based search (e.g., 'diabetes', 'coronary artery disease', 'breast cancer'). NOTE: GWAS associations are indexed by trait/disease, not by gene or drug name — passing a gene symbol or drug name here will fail. Use efo_id for precise filtering."
+          "description": "Disease or trait name for text-based search (e.g., 'diabetes', 'coronary artery disease', 'breast cancer'). NOTE: GWAS associations are indexed by trait/disease, not by gene or drug name \u2014 passing a gene symbol or drug name here will fail. Use efo_id for precise filtering."
         },
         "query": {
           "type": "string",
@@ -211,6 +211,14 @@
     "test_examples": [
       {
         "disease_trait": "coronary artery disease",
+        "size": 5
+      },
+      {
+        "disease_trait": "type 2 diabetes",
+        "size": 5
+      },
+      {
+        "efo_id": "EFO_0000249",
         "size": 5
       }
     ]
@@ -420,6 +428,14 @@
       {
         "disease_trait": "diabetes",
         "size": 5
+      },
+      {
+        "disease_trait": "breast cancer",
+        "size": 5
+      },
+      {
+        "full_pvalue_set": true,
+        "size": 5
       }
     ]
   },
@@ -565,6 +581,13 @@
       {
         "mapped_gene": "BRCA1",
         "size": 5
+      },
+      {
+        "rs_id": "rs7903146"
+      },
+      {
+        "mapped_gene": "TP53",
+        "size": 5
       }
     ]
   },
@@ -697,6 +720,9 @@
     "test_examples": [
       {
         "association_id": "216200848"
+      },
+      {
+        "association_id": "216200849"
       }
     ]
   },
@@ -837,6 +863,9 @@
     "test_examples": [
       {
         "study_id": "GCST000392"
+      },
+      {
+        "study_id": "GCST000140"
       }
     ]
   },
@@ -932,6 +961,9 @@
       }
     },
     "test_examples": [
+      {
+        "rs_id": "rs7903146"
+      },
       {
         "rs_id": "rs429358"
       }
@@ -1119,8 +1151,12 @@
     },
     "test_examples": [
       {
-        "disease_trait": "breast cancer",
-        "size": 20
+        "efo_id": "EFO_0000249",
+        "size": 10
+      },
+      {
+        "efo_id": "EFO_0001645",
+        "size": 10
       }
     ]
   },
@@ -1328,7 +1364,11 @@
     },
     "test_examples": [
       {
-        "disease_trait": "type 2 diabetes",
+        "efo_id": "EFO_0000249",
+        "size": 10
+      },
+      {
+        "efo_id": "EFO_0001359",
         "size": 10
       }
     ]
@@ -1515,9 +1555,11 @@
     "test_examples": [
       {
         "rs_id": "rs7903146",
-        "sort": "p_value",
-        "direction": "asc",
-        "size": 5
+        "size": 10
+      },
+      {
+        "rs_id": "rs429358",
+        "size": 10
       }
     ]
   },
@@ -1745,8 +1787,10 @@
     },
     "test_examples": [
       {
-        "disease_trait": "hypertension",
-        "size": 5
+        "efo_id": "EFO_0000249"
+      },
+      {
+        "efo_id": "EFO_0001645"
       }
     ]
   },
@@ -1895,8 +1939,11 @@
     "test_examples": [
       {
         "mapped_gene": "BRCA1",
-        "size": 10,
-        "page": 1
+        "size": 10
+      },
+      {
+        "mapped_gene": "TP53",
+        "size": 10
       }
     ]
   },
@@ -2073,8 +2120,10 @@
     },
     "test_examples": [
       {
-        "accession_id": "GCST000392",
-        "size": 10
+        "accession_id": "GCST000392"
+      },
+      {
+        "accession_id": "GCST000140"
       }
     ]
   },
@@ -2122,8 +2171,12 @@
     },
     "test_examples": [
       {
-        "gene_name": "TP53",
-        "size": 5
+        "gene": "BRCA1",
+        "size": 10
+      },
+      {
+        "gene": "TP53",
+        "size": 10
       }
     ]
   }

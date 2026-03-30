@@ -33,34 +33,32 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "entry_name": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "entry_name": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "family": {
-              "type": "string"
-            },
-            "species": {
-              "type": "string"
-            },
-            "accession": {
-              "type": "string"
-            }
-          }
+        "name": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "accession": {
+          "type": "string"
         }
       }
     },
     "test_examples": [
       {
         "protein": "adrb2_human"
+      },
+      {
+        "protein": "drd2_human"
+      },
+      {
+        "protein": "P07550"
       }
     ]
   },
@@ -90,24 +88,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "proteins": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "proteins": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
     "test_examples": [
-      {}
+      {},
+      {
+        "family": "001"
+      },
+      {
+        "protein_class": "Class A"
+      }
     ]
   },
   {
@@ -157,19 +153,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "structures": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "structures": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -232,31 +220,32 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "protein": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "protein": {
-              "type": "string"
-            },
-            "ligands": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            },
-            "total_count": {
-              "type": "integer"
-            }
-          }
+        "ligands": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "total_count": {
+          "type": "integer"
         }
       }
     },
     "test_examples": [
       {
         "protein": "adrb2_human",
+        "limit": 10
+      },
+      {
+        "protein": "drd2_human",
+        "limit": 10
+      },
+      {
+        "protein": "adrb2_human",
+        "type": "small molecule",
         "limit": 10
       }
     ]
@@ -295,28 +284,26 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "protein": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "protein": {
-              "type": "string"
-            },
-            "mutations": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "mutations": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
     "test_examples": [
       {
         "protein": "adrb2_human"
+      },
+      {
+        "protein": "drd2_human"
+      },
+      {
+        "protein": "agtr1_human"
       }
     ]
   }

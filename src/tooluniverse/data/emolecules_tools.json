@@ -37,7 +37,10 @@
     },
     "test_examples": [
       {
-        "query": "caffeine"
+        "query": "aspirin"
+      },
+      {
+        "query": "metformin"
       }
     ]
   },
@@ -84,8 +87,12 @@
     },
     "test_examples": [
       {
-        "smiles": "Cn1cnc2c1c(=O)n(c(=O)n2C)C",
+        "smiles": "CC(=O)Oc1ccccc1C(=O)O",
         "search_type": "exact"
+      },
+      {
+        "smiles": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",
+        "search_type": "similarity"
       }
     ]
   },
@@ -123,6 +130,9 @@
     "test_examples": [
       {
         "smiles": "CC(=O)Oc1ccccc1C(=O)O"
+      },
+      {
+        "smiles": "HOC1=CC=CC=C1C(=O)O"
       }
     ]
   },

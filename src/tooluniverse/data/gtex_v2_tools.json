@@ -87,6 +87,14 @@
       {
         "operation": "get_median_gene_expression",
         "gencode_id": "ENSG00000141510.18"
+      },
+      {
+        "operation": "get_median_gene_expression",
+        "gene_symbol": "TP53"
+      },
+      {
+        "operation": "get_median_gene_expression",
+        "gene_symbol": "BRCA1"
       }
     ]
   },
@@ -168,6 +176,10 @@
     "test_examples": [
       {
         "operation": "get_tissue_sites"
+      },
+      {
+        "operation": "get_tissue_sites",
+        "dataset_id": "gtex_v8"
       }
     ]
   },
@@ -251,6 +263,15 @@
         "tissue_site_detail_id": [
           "Whole_Blood"
         ]
+      },
+      {
+        "operation": "get_eqtl_genes",
+        "tissue_site_detail_id": [
+          "Liver"
+        ]
+      },
+      {
+        "operation": "get_eqtl_genes"
       }
     ]
   },
@@ -356,6 +377,21 @@
         "tissue_site_detail_id": [
           "Whole_Blood"
         ]
+      },
+      {
+        "operation": "get_single_tissue_eqtls",
+        "gencode_id": [
+          "ENSG00000141510.18"
+        ],
+        "tissue_site_detail_id": [
+          "Liver"
+        ]
+      },
+      {
+        "operation": "get_single_tissue_eqtls",
+        "tissue_site_detail_id": [
+          "Brain_Cortex"
+        ]
       }
     ]
   },
@@ -444,8 +480,13 @@
         "operation": "calculate_eqtl",
         "gencode_id": "ENSG00000227232.5",
         "variant_id": "chr1_64764_C_T_b38",
-        "tissue_site_detail_id": "Whole_Blood",
-        "dataset_id": "gtex_v8"
+        "tissue_site_detail_id": "Whole_Blood"
+      },
+      {
+        "operation": "calculate_eqtl",
+        "gencode_id": "ENSG00000141510.18",
+        "variant_id": "chr17_7577120_C_T_b38",
+        "tissue_site_detail_id": "Liver"
       }
     ]
   },
@@ -525,6 +566,15 @@
         "operation": "get_top_expressed_genes",
         "tissue_site_detail_id": "Liver",
         "items_per_page": 50
+      },
+      {
+        "operation": "get_top_expressed_genes",
+        "tissue_site_detail_id": "Brain_Cortex",
+        "items_per_page": 50
+      },
+      {
+        "operation": "get_top_expressed_genes",
+        "tissue_site_detail_id": "Whole_Blood"
       }
     ]
   },
@@ -592,6 +642,10 @@
     "test_examples": [
       {
         "operation": "get_dataset_info"
+      },
+      {
+        "operation": "get_dataset_info",
+        "dataset_id": "gtex_v8"
       }
     ]
   },
@@ -683,7 +737,10 @@
             "type": "string"
           },
           "subsetGroup": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       }
@@ -694,6 +751,13 @@
         "gencode_id": "ENSG00000141510.18",
         "tissue_site_detail_id": [
           "Liver"
+        ]
+      },
+      {
+        "operation": "get_gene_expression",
+        "gencode_id": "ENSG00000141510.18",
+        "tissue_site_detail_id": [
+          "Whole_Blood"
         ],
         "attribute_subset": "sex"
       }
@@ -835,6 +899,20 @@
         ],
         "sex": "female",
         "items_per_page": 10
+      },
+      {
+        "operation": "get_sample_info",
+        "tissue_site_detail_id": [
+          "Liver"
+        ],
+        "items_per_page": 10
+      },
+      {
+        "operation": "get_sample_info",
+        "age_bracket": [
+          "60-69"
+        ],
+        "items_per_page": 10
       }
     ]
   },
@@ -937,7 +1015,15 @@
     "test_examples": [
       {
         "operation": "get_multi_tissue_eqtls",
-        "gencode_id": "ENSG00000141510.16"
+        "gencode_id": "ENSG00000227232.5"
+      },
+      {
+        "operation": "get_multi_tissue_eqtls",
+        "gencode_id": "ENSG00000141510.18"
+      },
+      {
+        "operation": "get_multi_tissue_eqtls",
+        "gencode_id": "ENSG00000157764.13"
       }
     ]
   }

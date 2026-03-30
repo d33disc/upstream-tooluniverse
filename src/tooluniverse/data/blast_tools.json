@@ -56,7 +56,18 @@
       }
     },
     "test_examples": [
-      {"sequence": "ATGCGATCGATCGATCGATCGATCGATCGATCG", "database": "refseq_select_rna", "hitlist_size": 5}
+      {
+        "sequence": "ATGGAGGAGCCGCAGTCAGATCCTAGCGTCGAGC",
+        "database": "refseq_select_rna",
+        "expect": 0.01,
+        "hitlist_size": 3
+      },
+      {
+        "sequence": "CTGCGTTCGGCACGGTGTATAAGGAAATCACATAA",
+        "database": "refseq_representative_genomes",
+        "expect": 0.001,
+        "hitlist_size": 2
+      }
     ],
     "test_timeout": 600
   },
@@ -117,7 +128,18 @@
       }
     },
     "test_examples": [
-      {"sequence": "MKLLILTCLVAVALARPKHPIKHQGLPQEVLNENLLRFFVAPFPEVFGKEKVNEL", "database": "swissprot", "hitlist_size": 5}
+      {
+        "sequence": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKT",
+        "database": "swissprot",
+        "expect": 0.01,
+        "hitlist_size": 3
+      },
+      {
+        "sequence": "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFT",
+        "database": "pdb",
+        "expect": 0.001,
+        "hitlist_size": 2
+      }
     ],
     "test_timeout": 600
   }

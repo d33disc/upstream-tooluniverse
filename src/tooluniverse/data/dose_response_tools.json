@@ -39,11 +39,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "fit_curve",
-        "concentrations": [0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
-        "responses": [2, 5, 15, 50, 85, 95]
-      }
+      {"operation": "fit_curve", "concentrations": [0.001, 0.01, 0.1, 1.0, 10.0, 100.0], "responses": [2, 5, 15, 50, 85, 95]},
+      {"operation": "fit_curve", "concentrations": [0.1, 1.0, 10.0, 100.0, 1000.0], "responses": [5, 20, 45, 75, 90]}
     ]
   },
   {
@@ -85,11 +82,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "calculate_ic50",
-        "concentrations": [0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
-        "responses": [2, 5, 15, 50, 85, 95]
-      }
+      {"operation": "calculate_ic50", "concentrations": [0.001, 0.01, 0.1, 1.0, 10.0, 100.0], "responses": [2, 5, 15, 50, 85, 95]},
+      {"operation": "calculate_ic50", "concentrations": [1, 10, 100, 1000, 10000], "responses": [10, 25, 50, 75, 90]}
     ]
   },
   {
@@ -138,13 +132,8 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "compare_potency",
-        "conc_a": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "resp_a": [5, 20, 50, 80, 95],
-        "conc_b": [0.01, 0.1, 1.0, 10.0, 100.0],
-        "resp_b": [2, 8, 30, 65, 90]
-      }
+      {"operation": "compare_potency", "conc_a": [0.01, 0.1, 1.0, 10.0, 100.0], "resp_a": [5, 20, 50, 80, 95], "conc_b": [0.01, 0.1, 1.0, 10.0, 100.0], "resp_b": [2, 8, 30, 65, 90]},
+      {"operation": "compare_potency", "conc_a": [1, 10, 100, 1000], "resp_a": [10, 30, 60, 85], "conc_b": [1, 10, 100, 1000], "resp_b": [15, 40, 70, 90]}
     ]
   }
 ]

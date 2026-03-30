@@ -200,6 +200,28 @@
           "description": "Error message (only present if status is error)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "arxiv_id": "1706.03762",
+        "terms": [
+          "transformer",
+          "attention"
+        ],
+        "window_chars": 220,
+        "max_snippets_per_term": 2,
+        "max_total_chars": 4000
+      },
+      {
+        "arxiv_id": "1406.2661",
+        "terms": [
+          "generator",
+          "discriminator"
+        ],
+        "window_chars": 120,
+        "max_snippets_per_term": 1,
+        "max_total_chars": 2500
+      }
+    ]
   }
 ]

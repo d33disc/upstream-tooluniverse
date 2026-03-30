@@ -1,7 +1,7 @@
 [
   {
     "name": "DisGeNET_search_gene",
-    "description": "Search DisGeNET for diseases associated with a gene. DisGeNET is the largest public database of gene-disease associations. Returns diseases, association scores, and evidence counts. Use the 'gene' parameter (e.g., 'BRCA1', 'TP53') — note: parameter name is 'gene', not 'gene_symbol'. Requires DISGENET_API_KEY env var (register free at disgenet.org).",
+    "description": "Search DisGeNET for diseases associated with a gene. DisGeNET is the largest public database of gene-disease associations. Returns diseases, association scores, and evidence counts. Use the 'gene' parameter (e.g., 'BRCA1', 'TP53') \u2014 note: parameter name is 'gene', not 'gene_symbol'. Requires DISGENET_API_KEY env var (register free at disgenet.org).",
     "type": "DisGeNETTool",
     "optional_api_keys": [
       "DISGENET_API_KEY"
@@ -31,23 +31,15 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "gene": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "gene": {
-              "type": "string"
-            },
-            "associations": {
-              "type": "array",
-              "description": "Gene-disease associations"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "associations": {
+          "type": "array",
+          "description": "Gene-disease associations"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -55,6 +47,14 @@
       {
         "gene": "BRCA1",
         "limit": 10
+      },
+      {
+        "gene": "TP53",
+        "limit": 15
+      },
+      {
+        "gene": "EGFR",
+        "limit": 20
       }
     ]
   },
@@ -90,22 +90,14 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "disease": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "disease": {
-              "type": "string"
-            },
-            "associations": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "associations": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -113,6 +105,14 @@
       {
         "disease": "C0006142",
         "limit": 10
+      },
+      {
+        "disease": "C0011849",
+        "limit": 15
+      },
+      {
+        "disease": "diabetes mellitus",
+        "limit": 20
       }
     ]
   },
@@ -166,19 +166,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "associations": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "associations": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -187,6 +179,17 @@
         "gene": "TP53",
         "min_score": 0.3,
         "limit": 20
+      },
+      {
+        "gene": "BRCA1",
+        "source": "CURATED",
+        "min_score": 0.5,
+        "limit": 15
+      },
+      {
+        "disease": "C0006142",
+        "min_score": 0.3,
+        "limit": 25
       }
     ]
   },
@@ -224,19 +227,11 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "associations": {
+          "type": "array"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "associations": {
-              "type": "array"
-            },
-            "count": {
-              "type": "integer"
-            }
-          }
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -244,6 +239,14 @@
       {
         "gene": "BRCA1",
         "limit": 20
+      },
+      {
+        "variant": "rs1234",
+        "limit": 15
+      },
+      {
+        "gene": "APOE",
+        "limit": 25
       }
     ]
   },
@@ -285,36 +288,28 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
+        "disease": {
           "type": "string"
         },
-        "data": {
-          "type": "object",
-          "properties": {
-            "disease": {
-              "type": "string"
-            },
-            "genes": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "symbol": {
-                    "type": "string"
-                  },
-                  "score": {
-                    "type": "number"
-                  },
-                  "evidence_count": {
-                    "type": "integer"
-                  }
-                }
+        "genes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number"
+              },
+              "evidence_count": {
+                "type": "integer"
               }
-            },
-            "gene_count": {
-              "type": "integer"
             }
           }
+        },
+        "gene_count": {
+          "type": "integer"
         }
       }
     },
@@ -323,6 +318,15 @@
         "disease": "C0006142",
         "min_score": 0.3,
         "limit": 30
+      },
+      {
+        "disease": "C0011849",
+        "min_score": 0.5,
+        "limit": 20
+      },
+      {
+        "disease": "diabetes mellitus",
+        "limit": 50
       }
     ]
   }

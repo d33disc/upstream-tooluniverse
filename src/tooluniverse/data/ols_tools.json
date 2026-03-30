@@ -2,7 +2,7 @@
   {
     "type": "OLSTool",
     "name": "ols_search_terms",
-    "description": "Search for terms in OLS (Ontology Lookup Service)",
+    "description": "Search biomedical ontology terms in EBI's Ontology Lookup Service (OLS). Covers GO, HP, MONDO, EFO, and 200+ ontologies. Returns term labels, IRIs, synonyms, and definitions.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -80,103 +80,88 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "query": "gene:TP53",
-        "rows": 10,
-        "ontology": "efo",
+        "query": "apoptosis",
+        "rows": 5,
+        "ontology": "go",
         "exact_match": false,
         "include_obsolete": false
+      },
+      {
+        "query": "breast cancer",
+        "rows": 5,
+        "ontology": "mondo",
+        "exact_match": false
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "response": {
-          "type": "object",
-          "properties": {
-            "docs": {
-              "type": "array"
-            },
-            "numFound": {
-              "type": "integer"
-            },
-            "start": {
-              "type": "integer"
-            }
-          }
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
         },
-        "responseHeader": {
-          "type": "object",
-          "properties": {
-            "QTime": {
-              "type": "integer"
-            },
-            "status": {
-              "type": "integer"
-            }
-          }
-        },
-        "facet_counts": {
-          "type": "object",
-          "properties": {
-            "facet_fields": {
-              "type": "object",
-              "properties": {
-                "ontologyPreferredPrefix": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isDefiningOntology": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "ontologyId": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "ontologyIri": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "isObsolete": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Internationalized Resource Identifier for the term"
+              },
+              "ontologyName": {
+                "type": "string",
+                "description": "Name of the ontology containing this term"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier (e.g. GO_0006915)"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable term label"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier (e.g. GO:0006915)"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
               }
             }
-          }
+          },
+          "description": "Array of matching ontology terms"
+        },
+        "total_items": {
+          "type": "integer",
+          "description": "Total number of matching terms"
+        },
+        "showing": {
+          "type": "integer",
+          "description": "Number of terms returned in this response"
         },
         "query": {
-          "type": "string"
+          "type": "string",
+          "description": "The search query used"
         },
         "filters": {
           "type": "object",
           "properties": {
             "ontology": {
-              "type": "string"
+              "type": "string",
+              "description": "Ontology filter applied"
             },
             "exact_match": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Whether exact matching was used"
             },
             "include_obsolete": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
             }
-          }
+          },
+          "description": "Filters applied to the search"
         }
       }
     }
@@ -184,7 +169,7 @@
   {
     "type": "OLSTool",
     "name": "ols_get_ontology_info",
-    "description": "Get detailed information about an ontology",
+    "description": "Get metadata for a biomedical ontology in EBI OLS by ontology ID (e.g., 'hp', 'go', 'mondo'). Returns title, description, number of terms, homepage, and preferred prefix.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -224,40 +209,69 @@
     "test_examples": [
       {
         "ontology_id": "efo"
+      },
+      {
+        "ontology_id": "hp"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
         "ontologyId": {
-          "type": "string"
+          "type": "string",
+          "description": "Ontology identifier"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "description": "Full title of the ontology"
         },
         "version": {
-          "type": "null"
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Ontology version"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the ontology"
         },
         "domain": {
-          "type": "null"
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Domain of the ontology"
         },
         "homepage": {
-          "type": "string"
+          "type": "string",
+          "description": "Homepage URL"
         },
         "preferredPrefix": {
-          "type": "string"
+          "type": "string",
+          "description": "Preferred namespace prefix"
         },
         "number_of_terms": {
-          "type": "null"
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of terms in the ontology"
         },
         "numberOfClasses": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of classes in the ontology"
         },
         "repository": {
-          "type": "null"
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Source repository URL"
         }
       }
     }
@@ -265,7 +279,7 @@
   {
     "type": "OLSTool",
     "name": "ols_search_ontologies",
-    "description": "Search for ontologies in OLS",
+    "description": "Browse and search available ontologies in EBI OLS. Returns ontology metadata including IDs, titles, and descriptions. Supports keyword filtering and pagination.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -319,38 +333,53 @@
       {
         "search": "cancer",
         "page": 0,
-        "size": 20
+        "size": 5
+      },
+      {
+        "search": "phenotype",
+        "page": 0,
+        "size": 5
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "error": {
-          "type": "string"
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
         },
-        "error_details": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Array of matching ontologies"
+        },
+        "pagination": {
           "type": "object",
           "properties": {
-            "type": {
-              "type": "string"
+            "page": {
+              "type": "integer",
+              "description": "Current page number"
             },
-            "message": {
-              "type": "string"
+            "size": {
+              "type": "integer",
+              "description": "Page size"
             },
-            "retriable": {
-              "type": "boolean"
+            "total_pages": {
+              "type": "integer",
+              "description": "Total number of pages"
             },
-            "next_steps": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "details": {
-              "type": "object",
-              "properties": {}
+            "total_items": {
+              "type": "integer",
+              "description": "Total matching ontologies"
             }
-          }
+          },
+          "description": "Pagination metadata"
+        },
+        "search": {
+          "type": "string",
+          "description": "The search query used"
         }
       }
     }
@@ -358,7 +387,7 @@
   {
     "type": "OLSTool",
     "name": "ols_get_term_info",
-    "description": "Get detailed information about a specific term in OLS",
+    "description": "Get detailed information about a specific ontology term in EBI OLS by term ID or IRI. Returns label, definition, synonyms, and ontology membership. Supports HP, GO, EFO, MONDO IDs.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -403,34 +432,55 @@
     "test_examples": [
       {
         "id": "HP:0001903"
+      },
+      {
+        "id": "GO:0006915"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
         "iri": {
-          "type": "string"
+          "type": "string",
+          "description": "Internationalized Resource Identifier for the term"
         },
         "ontologyName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the ontology containing this term"
         },
         "shortForm": {
-          "type": "string"
+          "type": "string",
+          "description": "Short form identifier"
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable term label"
         },
         "oboId": {
-          "type": "string"
+          "type": "string",
+          "description": "OBO-format identifier"
         },
         "isObsolete": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Whether the term is obsolete"
         },
         "description": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Term descriptions"
         },
         "synonyms": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Alternative names for the term"
         }
       }
     }
@@ -497,40 +547,82 @@
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
         "include_obsolete": false,
-        "size": 20
+        "size": 10
+      },
+      {
+        "term_id": "HP:0000118",
+        "size": 10
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
         "page": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Current page number"
         },
         "numElements": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of elements on this page"
         },
         "totalPages": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total number of pages"
         },
         "totalElements": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total number of child terms"
         },
         "elements": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Term IRI"
+              },
+              "label": {
+                "type": "string",
+                "description": "Term label"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
+              }
+            }
+          },
+          "description": "Array of child terms"
         },
         "term_iri": {
-          "type": "string"
+          "type": "string",
+          "description": "IRI of the parent term"
         },
         "ontology": {
-          "type": "string"
+          "type": "string",
+          "description": "Ontology queried"
         },
         "filters": {
           "type": "object",
           "properties": {
             "include_obsolete": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
             }
-          }
+          },
+          "description": "Filters applied"
         }
       }
     }
@@ -596,40 +688,82 @@
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
         "include_obsolete": false,
-        "size": 20
+        "size": 10
+      },
+      {
+        "term_id": "HP:0000118",
+        "size": 10
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status (success or error)"
+        },
         "page": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Current page number"
         },
         "numElements": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Number of elements on this page"
         },
         "totalPages": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total number of pages"
         },
         "totalElements": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total number of ancestor terms"
         },
         "elements": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "iri": {
+                "type": "string",
+                "description": "Term IRI"
+              },
+              "label": {
+                "type": "string",
+                "description": "Term label"
+              },
+              "shortForm": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "oboId": {
+                "type": "string",
+                "description": "OBO-format identifier"
+              },
+              "isObsolete": {
+                "type": "boolean",
+                "description": "Whether the term is obsolete"
+              }
+            }
+          },
+          "description": "Array of ancestor terms"
         },
         "term_iri": {
-          "type": "string"
+          "type": "string",
+          "description": "IRI of the queried term"
         },
         "ontology": {
-          "type": "string"
+          "type": "string",
+          "description": "Ontology queried"
         },
         "filters": {
           "type": "object",
           "properties": {
             "include_obsolete": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Whether obsolete terms were included"
             }
-          }
+          },
+          "description": "Filters applied"
         }
       }
     }
@@ -637,7 +771,7 @@
   {
     "type": "OLSTool",
     "name": "ols_find_similar_terms",
-    "description": "Find similar terms using LLM-based similarity",
+    "description": "Find semantically similar ontology terms in EBI OLS using LLM-based embedding similarity. Returns related terms from the same ontology. Useful for ontology mapping and term disambiguation.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -692,49 +826,94 @@
       {
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
-        "size": 10
+        "size": 5
+      },
+      {
+        "term_id": "MONDO:0005015",
+        "ontology": "mondo",
+        "size": 5
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "terms": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "term_iri": {
+          "type": "string",
+          "description": "IRI of the query term"
+        },
+        "source_label": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Labels of the source term"
+        },
+        "ontology": {
+          "type": "string",
+          "description": "Ontology searched"
+        },
+        "similar_terms": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "iri": {
-                "type": "string"
+                "type": "string",
+                "description": "IRI of the similar term"
               },
-              "ontologyName": {
-                "type": "string"
+              "ontology_name": {
+                "type": "string",
+                "description": "Ontology name"
               },
-              "shortForm": {
-                "type": "string"
+              "ontology_prefix": {
+                "type": "string",
+                "description": "Ontology prefix"
+              },
+              "short_form": {
+                "type": "string",
+                "description": "Short form identifier"
+              },
+              "description": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Term descriptions"
               },
               "label": {
-                "type": "string"
+                "type": "string",
+                "description": "Human-readable label"
               },
-              "oboId": {
-                "type": "null"
+              "obo_id": {
+                "type": "string",
+                "description": "OBO identifier"
               },
-              "isObsolete": {
-                "type": "boolean"
+              "type": {
+                "type": "string",
+                "description": "Term type (e.g. class)"
+              },
+              "exact_synonyms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Exact synonym list"
               }
             }
-          }
+          },
+          "description": "List of similar terms found"
         },
-        "total_items": {
-          "type": "integer"
+        "total": {
+          "type": "integer",
+          "description": "Total number of similar terms found"
         },
-        "showing": {
-          "type": "integer"
-        },
-        "term_iri": {
-          "type": "string"
-        },
-        "ontology": {
-          "type": "string"
+        "note": {
+          "type": "string",
+          "description": "Additional information about the search method"
         }
       }
     }

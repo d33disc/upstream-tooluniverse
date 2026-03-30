@@ -80,66 +80,48 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pdb_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "4-character PDB identifier"
-                  },
-                  "score": {
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "description": "Search relevance score"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_count": {
-                  "type": "integer",
-                  "description": "Total matching structures in PDB"
-                },
-                "returned": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "score": {
+                "type": "number",
+                "description": "Search relevance score"
+              }
             }
           },
-          "required": [
-            "error"
-          ]
+          "description": "Matching PDB structures"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "total_count": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            }
+          }
         }
-      ]
-    },
-    "aliases": ["RCSB_search"]
+      }
+    }
   },
   {
     "name": "RCSBAdvSearch_search_by_motif",
@@ -185,83 +167,63 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pdb_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "4-character PDB identifier"
-                  },
-                  "entity_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Polymer entity number within the PDB entry"
-                  },
-                  "identifier": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Full identifier (PDB_ID + entity, e.g., '1A1F_3')"
-                  },
-                  "score": {
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "description": "Match score"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_count": {
-                  "type": "integer"
-                },
-                "returned": {
-                  "type": "integer"
-                },
-                "pattern": {
-                  "type": "string"
-                },
-                "pattern_type": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string",
+                "description": "PDB structure identifier"
+              },
+              "entity_id": {
+                "type": "string",
+                "description": "Entity ID within the structure"
+              },
+              "identifier": {
+                "type": "string",
+                "description": "Combined PDB_entity identifier"
+              },
+              "score": {
+                "type": "number",
+                "description": "Search relevance score"
+              }
             }
           },
-          "required": [
-            "error"
-          ]
+          "description": "Structures matching the sequence motif"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source attribution"
+            },
+            "total_count": {
+              "type": "integer",
+              "description": "Total matching structures"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "pattern": {
+              "type": "string",
+              "description": "Motif pattern used for search"
+            },
+            "pattern_type": {
+              "type": "string",
+              "description": "Pattern format (e.g. prosite, regex)"
+            }
+          }
         }
-      ]
+      }
     }
   }
 ]

@@ -33,12 +33,18 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json",
           "description": "Response format: 'json' or 'xml'"
         }
       },
-      "required": ["domain", "query"]
+      "required": [
+        "domain",
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -111,11 +117,17 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json"
         }
       },
-      "required": ["domain", "query"]
+      "required": [
+        "domain",
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -125,25 +137,17 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "entries": {
+          "type": "array",
+          "description": "Search result entries"
         },
-        "data": {
+        "facets": {
           "type": "object",
-          "properties": {
-            "entries": {
-              "type": "array",
-              "description": "Search result entries"
-            },
-            "facets": {
-              "type": "object",
-              "description": "Facet information for filtering"
-            },
-            "hitCount": {
-              "type": "integer",
-              "description": "Total number of results"
-            }
-          }
+          "description": "Facet information for filtering"
+        },
+        "hitCount": {
+          "type": "integer",
+          "description": "Total number of results"
         }
       }
     },
@@ -154,6 +158,12 @@
         "facets": "TAXONOMY:9606",
         "facetcount": 5,
         "size": 10
+      },
+      {
+        "domain": "ensembl",
+        "query": "BRCA1",
+        "facets": "TAXONOMY:9606",
+        "size": 5
       }
     ]
   },
@@ -178,11 +188,17 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json"
         }
       },
-      "required": ["domain", "entry_id"]
+      "required": [
+        "domain",
+        "entry_id"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -221,7 +237,10 @@
       "properties": {
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json",
           "description": "Response format"
         }
@@ -246,6 +265,7 @@
       }
     },
     "test_examples": [
+      {},
       {}
     ]
   },
@@ -262,11 +282,16 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json"
         }
       },
-      "required": ["domain"]
+      "required": [
+        "domain"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -307,11 +332,16 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json"
         }
       },
-      "required": ["domain"]
+      "required": [
+        "domain"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -356,11 +386,17 @@
         },
         "format": {
           "type": "string",
-          "enum": ["json", "xml"],
+          "enum": [
+            "json",
+            "xml"
+          ],
           "default": "json"
         }
       },
-      "required": ["domain", "query"]
+      "required": [
+        "domain",
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "",
@@ -388,6 +424,11 @@
       {
         "domain": "ensembl",
         "query": "xref_uniprot:P04637",
+        "size": 10
+      },
+      {
+        "domain": "uniprot",
+        "query": "xref_ensembl:ENSG00000141510",
         "size": 10
       }
     ]

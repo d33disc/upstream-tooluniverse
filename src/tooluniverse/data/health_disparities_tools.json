@@ -58,25 +58,32 @@
     },
     "test_examples": [
       {
-        "year": 1,
+        "year": 2020,
         "geography": "county"
+      },
+      {
+        "geography": "tract"
+      },
+      {
+        "year": 2018,
+        "geography": "state"
       }
     ]
   },
   {
     "name": "health_disparities_get_county_rankings_info",
-    "description": "Get information about County Health Rankings data. County Health Rankings provides county-level health data. This tool provides information about available datasets and access methods. Note: Data may be available as downloadable files or through their website.",
+    "description": "Get information about County Health Rankings data. County Health Rankings provides county-level health data for US counties including health outcomes, factors, and rankings. Returns available years, state filters, and access URLs for downloading CSV/Excel datasets.",
     "type": "HealthDisparitiesTool",
     "parameter": {
       "type": "object",
       "properties": {
         "year": {
           "type": "integer",
-          "description": "Optional year for County Health Rankings data"
+          "description": "Optional year for County Health Rankings data (e.g., 2023, 2022, 2021)."
         },
         "state": {
           "type": "string",
-          "description": "Optional state abbreviation (e.g., 'CA', 'NY') to filter by state"
+          "description": "Optional state abbreviation (e.g., 'CA', 'NY', 'TX') to filter by state."
         }
       },
       "required": []
@@ -85,38 +92,69 @@
       "endpoint": "county_rankings",
       "return_format": "JSON"
     },
-    "return_schema": {
-      "type": "object",
-      "properties": {
-        "data_sources": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "year": {
-                "type": "integer"
-              },
-              "state": {
-                "type": "string"
-              },
-              "access_url": {
-                "type": "string",
-                "description": "URL to access County Health Rankings data"
-              }
-            }
-          }
-        },
-        "note": {
-          "type": "string",
-          "description": "Information about data access"
-        }
-      }
-    },
     "test_examples": [
       {
         "year": 2023,
-        "state": "California"
+        "state": "CA"
+      },
+      {
+        "state": "NY"
       }
-    ]
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Response status"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "data_sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "type": "integer",
+                    "description": "Data year"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State abbreviation"
+                  },
+                  "access_url": {
+                    "type": "string",
+                    "description": "URL to access the data"
+                  }
+                }
+              }
+            },
+            "note": {
+              "type": "string",
+              "description": "Information about data format and access"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Data source name"
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "API endpoint used"
+            },
+            "query": {
+              "type": "object",
+              "description": "Query parameters used"
+            }
+          }
+        }
+      }
+    }
   }
 ]

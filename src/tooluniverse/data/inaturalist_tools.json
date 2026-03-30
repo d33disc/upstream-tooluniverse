@@ -35,93 +35,79 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "description": "iNaturalist taxon ID"
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "Scientific name"
-                  },
-                  "common_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Preferred common name"
-                  },
-                  "rank": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Taxonomic rank (species, genus, family, etc.)"
-                  },
-                  "observations_count": {
-                    "type": "integer",
-                    "description": "Total research-grade observations"
-                  },
-                  "is_active": {
-                    "type": "boolean",
-                    "description": "Whether taxon is currently accepted"
-                  },
-                  "conservation_status": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "IUCN conservation status if available"
-                  },
-                  "wikipedia_url": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Link to Wikipedia article"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                },
-                "query": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
         },
-        {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common name"
+              },
+              "rank": {
+                "type": "string",
+                "description": "Taxonomic rank (species, genus, etc.)"
+              },
+              "observations_count": {
+                "type": "integer",
+                "description": "Number of observations"
+              },
+              "is_active": {
+                "type": "boolean",
+                "description": "Whether the taxon is active"
+              },
+              "conservation_status": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "IUCN conservation status code"
+              },
+              "wikipedia_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Wikipedia URL"
+              }
+            }
+          }
+        },
+        "metadata": {
           "type": "object",
           "properties": {
-            "error": {
-              "type": "string"
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Total number of matching taxa"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query used"
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -156,88 +142,72 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "description": "iNaturalist taxon ID"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Scientific name"
-                },
-                "common_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Preferred common name"
-                },
-                "rank": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Taxonomic rank"
-                },
-                "observations_count": {
-                  "type": "integer",
-                  "description": "Total observations"
-                },
-                "is_active": {
-                  "type": "boolean",
-                  "description": "Currently accepted taxon"
-                },
-                "conservation_status": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "IUCN status"
-                },
-                "wikipedia_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Wikipedia article URL"
-                },
-                "ancestry": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "rank": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "id": {
-                        "type": "integer"
-                      }
-                    }
-                  },
-                  "description": "Taxonomic lineage from kingdom to species"
-                }
-              }
+            "id": {
+              "type": "integer",
+              "description": "iNaturalist taxon ID"
             },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
+            "name": {
+              "type": "string",
+              "description": "Scientific name"
+            },
+            "common_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Preferred common name"
+            },
+            "rank": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Taxonomic rank"
+            },
+            "observations_count": {
+              "type": "integer",
+              "description": "Total observations"
+            },
+            "is_active": {
+              "type": "boolean",
+              "description": "Currently accepted taxon"
+            },
+            "conservation_status": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "IUCN status"
+            },
+            "wikipedia_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Wikipedia article URL"
+            },
+            "ancestry": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "rank": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
                 }
-              }
+              },
+              "description": "Taxonomic lineage from kingdom to species"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -313,116 +283,78 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "description": "Observation ID"
-                  },
-                  "species_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Scientific name of observed species"
-                  },
-                  "common_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Common name"
-                  },
-                  "observed_on": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Date of observation (YYYY-MM-DD)"
-                  },
-                  "place_guess": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Location description"
-                  },
-                  "latitude": {
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "description": "GPS latitude"
-                  },
-                  "longitude": {
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "description": "GPS longitude"
-                  },
-                  "quality_grade": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Observation quality grade"
-                  },
-                  "user": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Observer username"
-                  },
-                  "photo_url": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "URL of observation photo"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                },
-                "per_page": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
         },
-        {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Observation ID"
+              },
+              "species_name": {
+                "type": "string",
+                "description": "Scientific name of observed species"
+              },
+              "common_name": {
+                "type": "string",
+                "description": "Common name of observed species"
+              },
+              "observed_on": {
+                "type": "string",
+                "description": "Date of observation (YYYY-MM-DD)"
+              },
+              "place_guess": {
+                "type": "string",
+                "description": "Location description"
+              },
+              "latitude": {
+                "type": "number",
+                "description": "Latitude coordinate"
+              },
+              "longitude": {
+                "type": "number",
+                "description": "Longitude coordinate"
+              },
+              "quality_grade": {
+                "type": "string",
+                "description": "Quality grade (research/needs_id/casual)"
+              },
+              "user": {
+                "type": "string",
+                "description": "Observer username"
+              },
+              "photo_url": {
+                "type": "string",
+                "description": "URL to observation photo"
+              }
+            }
+          }
+        },
+        "metadata": {
           "type": "object",
           "properties": {
-            "error": {
-              "type": "string"
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_results": {
+              "type": "integer",
+              "description": "Total matching observations"
+            },
+            "per_page": {
+              "type": "integer",
+              "description": "Results per page"
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -478,72 +410,54 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "taxon_id": {
-                    "type": "integer",
-                    "description": "iNaturalist taxon ID"
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "Scientific name"
-                  },
-                  "common_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Common name"
-                  },
-                  "rank": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Taxonomic rank"
-                  },
-                  "count": {
-                    "type": "integer",
-                    "description": "Number of observations"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "total_species": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status (success/error)"
         },
-        {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taxon_id": {
+                "type": "integer",
+                "description": "Taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": "string",
+                "description": "Common name"
+              },
+              "rank": {
+                "type": "string",
+                "description": "Taxonomic rank"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Number of observations"
+              }
+            }
+          }
+        },
+        "metadata": {
           "type": "object",
           "properties": {
-            "error": {
-              "type": "string"
+            "source": {
+              "type": "string",
+              "description": "Data source"
+            },
+            "total_species": {
+              "type": "integer",
+              "description": "Total number of species"
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
-      ]
+      }
     }
   }
 ]

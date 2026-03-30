@@ -94,6 +94,12 @@
         "gene": "TP53",
         "species": "human",
         "type": "tissue"
+      },
+      {
+        "operation": "get_gene_expression",
+        "gene": "EGFR",
+        "species": "human",
+        "type": "cellline"
       }
     ],
     "fields": {
@@ -151,6 +157,11 @@
         "operation": "get_gene_correlations",
         "gene": "TP53",
         "count": 10
+      },
+      {
+        "operation": "get_gene_correlations",
+        "gene": "BRCA1",
+        "count": 2
       }
     ],
     "fields": {

@@ -8,7 +8,8 @@
       "TXAGENT_MCP_SERVER_HOST"
     ],
     "test_examples": [
-      {}
+      {},
+      {"note": "Auto-discovers and loads all TxAgent MCP server tools"}
     ],
     "return_schema": {
       "type": "object",

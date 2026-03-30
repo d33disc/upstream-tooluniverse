@@ -15,20 +15,68 @@
           "default": 10,
           "minimum": 1,
           "maximum": 100,
-          "description": "Number of records to return (1–100)."
+          "description": "Number of records to return (1\u2013100)."
         }
       },
-      "required": ["scientificname"]
+      "required": [
+        "scientificname"
+      ]
     },
     "fields": {
       "endpoint": "https://api.obis.org/v3/taxon",
       "format": "json"
     },
+    "test_examples": [
+      {
+        "scientificname": "Gadus",
+        "size": 1
+      },
+      {
+        "scientificname": "Thunnus albacares",
+        "size": 5
+      }
+    ],
+    "label": [
+      "OBIS",
+      "Taxonomy",
+      "Marine"
+    ],
+    "metadata": {
+      "tags": [
+        "marine",
+        "taxonomy",
+        "aphia"
+      ],
+      "estimated_execution_time": "< 2 seconds"
+    },
     "return_schema": {
       "type": "object",
-      "description": "OBIS taxon search response",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string",
+          "description": "Success or error status"
+        },
+        "source": {
+          "type": "string",
+          "description": "Data source (OBIS)"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "API endpoint used"
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "scientificname": {
+              "type": "string",
+              "description": "Scientific name queried"
+            },
+            "size": {
+              "type": "integer",
+              "description": "Requested result size"
+            }
+          }
+        },
         "data": {
           "type": "object",
           "properties": {
@@ -37,24 +85,63 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "scientificName": {"type": "string"},
-                  "aphiaID": {"type": "integer"},
-                  "rank": {"type": "string"}
+                  "scientificName": {
+                    "type": "string",
+                    "description": "Full scientific name"
+                  },
+                  "aphiaID": {
+                    "type": "integer",
+                    "description": "WoRMS AphiaID"
+                  },
+                  "rank": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxonomic rank"
+                  },
+                  "kingdom": {
+                    "type": "string",
+                    "description": "Taxonomic kingdom"
+                  },
+                  "phylum": {
+                    "type": "string",
+                    "description": "Taxonomic phylum"
+                  },
+                  "class": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxonomic class"
+                  },
+                  "order": {
+                    "type": "string",
+                    "description": "Taxonomic order"
+                  },
+                  "family": {
+                    "type": "string",
+                    "description": "Taxonomic family"
+                  },
+                  "genus": {
+                    "type": "string",
+                    "description": "Taxonomic genus"
+                  }
                 }
-              }
+              },
+              "description": "Matching taxa"
+            },
+            "total": {
+              "type": "integer",
+              "description": "Total matching records"
             }
           }
         },
-        "url": {"type": "string"}
+        "success": {
+          "type": "boolean",
+          "description": "Whether the request succeeded"
+        }
       }
-    },
-    "test_examples": [
-      {"scientificname": "Gadus", "size": 1}
-    ],
-    "label": ["OBIS", "Taxonomy", "Marine"],
-    "metadata": {
-      "tags": ["marine", "taxonomy", "aphia"],
-      "estimated_execution_time": "< 2 seconds"
     }
   },
   {
@@ -77,7 +164,7 @@
           "default": 10,
           "minimum": 1,
           "maximum": 100,
-          "description": "Number of records to return (1–100)."
+          "description": "Number of records to return (1\u2013100)."
         }
       }
     },
@@ -89,33 +176,48 @@
       "type": "object",
       "description": "OBIS occurrence search response",
       "properties": {
-        "status": {"type": "string"},
-        "data": {
-          "type": "object",
-          "properties": {
-            "results": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "scientificName": {"type": "string"},
-                  "decimalLatitude": {"type": "number"},
-                  "decimalLongitude": {"type": "number"},
-                  "eventDate": {"type": "string"}
-                }
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scientificName": {
+                "type": "string"
+              },
+              "decimalLatitude": {
+                "type": "number"
+              },
+              "decimalLongitude": {
+                "type": "number"
+              },
+              "eventDate": {
+                "type": "string"
               }
             }
           }
-        },
-        "url": {"type": "string"}
+        }
       }
     },
     "test_examples": [
-      {"size": 1}
+      {
+        "size": 1
+      },
+      {
+        "scientificname": "Gadus morhua",
+        "size": 5
+      }
     ],
-    "label": ["OBIS", "Occurrence", "Marine"],
+    "label": [
+      "OBIS",
+      "Occurrence",
+      "Marine"
+    ],
     "metadata": {
-      "tags": ["marine", "occurrence", "geospatial"],
+      "tags": [
+        "marine",
+        "occurrence",
+        "geospatial"
+      ],
       "estimated_execution_time": "< 3 seconds"
     }
   }

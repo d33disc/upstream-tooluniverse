@@ -40,9 +40,19 @@
     },
     "test_examples": [
       {
-        "tool_description": "A tool that searches for drugs",
-        "reference_info": "PubMed API documentation for literature search",
-        "xml_template": "<tool><name>example</name></tool>"
+        "tool_description": "A tool that retrieves drug-drug interaction data from DrugBank API",
+        "reference_info": "{\"api_documentation\": [{\"source\": \"DrugBank API\", \"url\": \"https://go.drugbank.com/api\", \"key_points\": [\"RESTful endpoints for drug interactions\", \"Requires API key authentication\"]}], \"package_recommendations\": [{\"package_name\": \"requests\", \"purpose\": \"HTTP client\", \"relevance_score\": 9}]}",
+        "xml_template": "<tool><name>drugInteractionFetcher</name><code><![CDATA[import requests]]></code><spec><![CDATA[{\"type\": \"DrugInteractionFetcher\", \"name\": \"fetchDrugInteractions\", \"description\": \"Fetch drug interactions from DrugBank\", \"parameter\": {\"type\": \"object\", \"properties\": {\"drug_id\": {\"type\": \"string\"}}, \"required\": [\"drug_id\"]}}]></spec></tool>"
+      },
+      {
+        "tool_description": "A tool that fetches gene expression data from GTEx database",
+        "reference_info": "{\"api_documentation\": [{\"source\": \"GTEx Portal API\", \"url\": \"https://gtexportal.org/api\", \"key_points\": [\"RNA-Seq expression data\", \"Tissue-specific expression\"]}], \"package_recommendations\": [{\"package_name\": \"requests\", \"purpose\": \"HTTP client\", \"relevance_score\": 9}]}",
+        "xml_template": "<tool><name>gtexExpressionFetcher</name><code><![CDATA[import requests]]></code><spec><![CDATA[{\"type\": \"GtexExpressionFetcher\", \"name\": \"fetchGtexExpression\", \"description\": \"Fetch gene expression from GTEx\", \"parameter\": {\"type\": \"object\", \"properties\": {\"gene_symbol\": {\"type\": \"string\"}, \"tissue\": {\"type\": \"string\"}}, \"required\": [\"gene_symbol\"]}}]></spec></tool>"
+      },
+      {
+        "tool_description": "A tool that predicts protein subcellular localization using DeepLoc",
+        "reference_info": "{\"package_recommendations\": [{\"package_name\": \"requests\", \"purpose\": \"HTTP client for API calls\", \"relevance_score\": 9}, {\"package_name\": \"pandas\", \"purpose\": \"Data manipulation\", \"relevance_score\": 8}]}",
+        "xml_template": "<tool><name>deeplocPredictor</name><code><![CDATA[import requests]]></code><spec><![CDATA[{\"type\": \"DeeplocPredictor\", \"name\": \"predictLocalization\", \"description\": \"Predict protein subcellular localization\", \"parameter\": {\"type\": \"object\", \"properties\": {\"sequence\": {\"type\": \"string\"}}, \"required\": [\"sequence\"]}}]></spec></tool>"
       }
     ]
   },
@@ -81,8 +91,16 @@
     },
     "test_examples": [
       {
-        "xml_tool": "<tool><name>example</name></tool>",
-        "optimization_context": "The quick brown fox jumps over the lazy dog."
+        "xml_tool": "<tool><name>stringReverser</name><code><![CDATA[def reverse(s): return s[::-1]]]></code><spec><![CDATA[{\"type\": \"StringReverser\", \"name\": \"reverseString\", \"description\": \"Reverse a string\", \"parameter\": {\"type\": \"object\", \"properties\": {\"input\": {\"type\": \"string\"}}, \"required\": [\"input\"]}}]]></spec></tool>",
+        "optimization_context": "{\"test_results\": {\"passed\": 2, \"failed\": 1, \"test_details\": [{\"output\": {\"result\": \"olleh\"}}, {\"output\": {\"result\": \"error\"}}]}, \"quality_feedback\": \"Handle empty string edge case\"}"
+      },
+      {
+        "xml_tool": "<tool><name>geneSearcher</name><code><![CDATA[import requests\ndef search_gene(gene): return requests.get(f'https://api.example.com/genes/{gene}').json()]]></code><spec><![CDATA[{\"type\": \"GeneSearcher\", \"name\": \"searchGene\", \"description\": \"Search gene by symbol\", \"parameter\": {\"type\": \"object\", \"properties\": {\"gene_symbol\": {\"type\": \"string\"}}, \"required\": [\"gene_symbol\"]}}]]></spec></tool>",
+        "optimization_context": "{\"test_results\": {\"passed\": 1, \"failed\": 2, \"test_details\": [{\"output\": {\"error\": \"ImportError: requests not found\"}}]}, \"improvement_history\": [{\"attempt\": 1, \"error\": \"Missing import statement\"}], \"instruction\": \"Add missing import at top of code\"}"
+      },
+      {
+        "xml_tool": "<tool><name>pubmedSearch</name><code><![CDATA[def search(query): return {\"query\": query, \"results\": []}]]></code><spec><![CDATA[{\"type\": \"PubmedSearch\", \"name\": \"searchPubmed\", \"description\": \"Search PubMed\", \"parameter\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\"}, \"max_results\": {\"type\": \"integer\"}}, \"required\": [\"query\", \"max_results\"]}}]]></spec></tool>",
+        "optimization_context": "{\"test_results\": {\"validation_errors\": [\"'max_results' is required but not provided\"]}, \"quality_feedback\": \"Schema requires max_results parameter but test doesn't provide it\"}"
       }
     ]
   },
@@ -145,8 +163,16 @@
     },
     "test_examples": [
       {
-        "tool_description": "A tool that searches for drugs",
-        "raw_reference_info": "REST API endpoint: https://api.example.com/v1"
+        "tool_description": "A tool that fetches protein-protein interactions from STRING API",
+        "raw_reference_info": "{\"search_results\": [{\"url\": \"https://string-db.org/api\", \"title\": \"STRING API documentation\", \"content\": \"REST API for protein interactions, supports multiple identifiers\"}, {\"url\": \"https://pypi.org/project/pystring\", \"title\": \"pystring package\", \"content\": \"Python wrapper for STRING API\"}], \"package_candidates\": [\"requests\", \"pandas\", \"pystring\"]}"
+      },
+      {
+        "tool_description": "A tool that queries ClinVar for variant clinical significance",
+        "raw_reference_info": "{\"search_results\": [{\"url\": \"https://www.ncbi.nlm.nih.gov/clinvar/docs/api_http/\", \"title\": \"ClinVar API\", \"content\": \"NCBI ClinVar Variation API, returns XML/JSON for variant interpretations\"}, {\"url\": \"https://pypi.org/project/biocommons.variation/\", \"title\": \"biocommons.variation\", \"content\": \"HGVS variation nomenclature\"}], \"package_candidates\": [\"requests\", \"xmltodict\", \"biopython\"]}"
+      },
+      {
+        "tool_description": "A tool that predicts drug ADMET properties using machine learning",
+        "raw_reference_info": "{\"search_results\": [{\"url\": \"https://pubmed.ncbi.nlm.nih.gov/12345/\", \"title\": \"ADMET prediction review\", \"content\": \"Machine learning models for absorption, distribution, metabolism, excretion, toxicity\"}], \"package_candidates\": [\"rdkit\", \"scikit-learn\", \"deepchem\", \"mordred\"]}"
       }
     ]
   },
@@ -215,8 +241,16 @@
     },
     "test_examples": [
       {
-        "tool_description": "A tool that searches for drugs",
-        "package_candidates": "[\"requests\", \"httpx\", \"aiohttp\"]"
+        "tool_description": "A tool that fetches and parses PubMed XML data",
+        "package_candidates": "[{\"name\": \"requests\", \"downloads\": 100000000, \"github_stars\": 50000, \"last_release\": \"2024-01\", \"description\": \"Simple HTTP library\"}, {\"name\": \"httpx\", \"downloads\": 10000000, \"github_stars\": 10000, \"last_release\": \"2024-02\", \"description\": \"Async HTTP client\"}, {\"name\": \"urllib3\", \"downloads\": 500000000, \"github_stars\": 3000, \"last_release\": \"2024-01\", \"description\": \"HTTP library with connection pooling\"}]"
+      },
+      {
+        "tool_description": "A tool that performs sequence alignment using BLAST",
+        "package_candidates": "[{\"name\": \"biopython\", \"downloads\": 5000000, \"github_stars\": 4000, \"last_release\": \"2024-01\", \"description\": \"Biological computation toolkit\"}, {\"name\": \"pyblast\", \"downloads\": 10000, \"github_stars\": 200, \"last_release\": \"2022-06\", \"description\": \"BLAST wrapper\"}]"
+      },
+      {
+        "tool_description": "A tool that visualizes protein 3D structures",
+        "package_candidates": "[{\"name\": \"nglview\", \"downloads\": 500000, \"github_stars\": 800, \"last_release\": \"2024-01\", \"description\": \"Jupyter widget for molecular visualization\"}, {\"name\": \"py3Dmol\", \"downloads\": 100000, \"github_stars\": 300, \"last_release\": \"2023-11\", \"description\": \"3Dmol.js Python wrapper\"}, {\"name\": \"mdtraj\", \"downloads\": 2000000, \"github_stars\": 1000, \"last_release\": \"2023-12\", \"description\": \"Molecular dynamics trajectory analysis\"}]"
       }
     ]
   },
@@ -299,8 +333,16 @@
     },
     "test_examples": [
       {
-        "test_results": "{\"passed\": 8, \"failed\": 2, \"errors\": []}",
-        "tool_implementation": "def search(): pass"
+        "test_results": "{\"passed\": 8, \"failed\": 2, \"test_details\": [{\"output\": {\"result\": {\"interactions\": 15}}}, {\"output\": {\"error\": \"KeyError: 'uniprot_id'\"}}, {\"output\": {\"error\": \"ConnectionError: timeout\"}}]}",
+        "tool_implementation": "import requests\n@register_tool('stringInteractionFetcher')\nclass StringInteractionFetcher(BaseTool):\n    def run(self, args):\n        resp = requests.get(f'https://string-api.org/{args[\"protein_id\"]}')\n        return {\"uniprot_id\": resp.json()[\"id\"], \"interactions\": resp.json()[\"partners\"]}"
+      },
+      {
+        "test_results": "{\"passed\": 3, \"failed\": 0, \"test_details\": [{\"output\": {\"result\": \"MKTAYIAKQRQISFVK\"}}, {\"output\": {\"result\": \"MRSLGYQE\"}}]}",
+        "tool_implementation": "from Bio import SeqIO\n@register_tool('fastaReader')\nclass FastaReader(BaseTool):\n    def run(self, args):\n        records = list(SeqIO.parse(args[\"file_path\"], \"fasta\"))\n        return [str(r.seq) for r in records]"
+      },
+      {
+        "test_results": "{\"passed\": 1, \"failed\": 3, \"test_details\": [{\"output\": {\"error\": \"ImportError: No module named 'rdkit'\"}}, {\"output\": {\"error\": \"ValueError: Invalid SMILES string\"}}], \"improvement_history\": [{\"attempt\": 1, \"error\": \"Missing rdkit import\"}, {\"attempt\": 2, \"error\": \"No SMILES validation\"}]}",
+        "tool_implementation": "@register_tool('smilesValidator')\nclass SmilesValidator(BaseTool):\n    def run(self, args):\n        from rdkit import Chem\n        mol = Chem.MolFromSmiles(args[\"smiles\"])\n        return {\"valid\": mol is not None}"
       }
     ]
   },
@@ -363,12 +405,20 @@
     },
     "test_examples": [
       {
-        "tool_name": "ExampleTool",
-        "tool_description": "A sample utility that performs arithmetic operations",
-        "tool_parameters": "{\"operand1\":\"number\",\"operand2\":\"number\"}",
-        "implementation_code": "def add(a, b):\n    return a + b",
-        "test_cases": "[{\"input\": [1, 2], \"expected\": 3}, {\"input\": [5, -2], \"expected\": 3}]",
-        "test_execution_results": "[{\"input\": [1, 2], \"expected\": 3, \"actual\": 3, \"status\": \"pass\"}, {\"input\": [5, -2], \"expected\": 3, \"actual\": 3, \"status\": \"pass\"}]"
+        "tool_name": "GeneExpressionFetcher",
+        "tool_description": "Fetches gene expression data from GTEx API for a given gene symbol and tissue type",
+        "tool_parameters": "{\"gene_symbol\": \"string\", \"tissue\": \"string\"}",
+        "implementation_code": "import requests\n\n@register_tool('geneExpressionFetcher')\nclass GeneExpressionFetcher(BaseTool):\n    def run(self, args):\n        if not args.get('gene_symbol'):\n            return {'status': 'error', 'error': 'gene_symbol required'}\n        resp = requests.get(f'https://gtexportal.org/api/gene/{args[\"gene_symbol\"]}')\n        return {'status': 'success', 'data': resp.json()}",
+        "test_cases": "[{\"input\": {\"gene_symbol\": \"TP53\", \"tissue\": \"Whole Blood\"}}, {\"input\": {\"gene_symbol\": \"BRCA1\"}}]",
+        "test_execution_results": "[{\"input\": {\"gene_symbol\": \"TP53\"}, \"status\": \"pass\", \"output\": {\"status\": \"success\", \"data\": {\"expression\": 45.2}}}, {\"input\": {\"gene_symbol\": \"\"}, \"status\": \"pass\", \"output\": {\"status\": \"error\", \"error\": \"gene_symbol required\"}}]"
+      },
+      {
+        "tool_name": "DrugInteractionChecker",
+        "tool_description": "Checks for drug-drug interactions using DrugBank API",
+        "tool_parameters": "{\"drug1\": \"string\", \"drug2\": \"string\"}",
+        "implementation_code": "@register_tool('drugInteractionChecker')\nclass DrugInteractionChecker(BaseTool):\n    def run(self, args):\n        if not args.get('drug1') or not args.get('drug2'):\n            raise ValueError('Both drug1 and drug2 are required')\n        return {'interactions': [], 'severity': 'none'}",
+        "test_cases": "[{\"input\": {\"drug1\": \"aspirin\", \"drug2\": \"warfarin\"}}, {\"input\": {\"drug1\": \"metformin\"}}]",
+        "test_execution_results": "[{\"input\": {\"drug1\": \"aspirin\", \"drug2\": \"warfarin\"}, \"status\": \"pass\"}, {\"input\": {\"drug1\": \"metformin\"}, \"status\": \"fail\", \"error\": \"ValueError: Both drug1 and drug2 are required\"}]"
       }
     ]
   },
@@ -443,11 +493,17 @@
     },
     "test_examples": [
       {
-        "tool_description": "A tool that searches for drugs",
+        "tool_description": "A tool that fetches drug-drug interactions from DrugBank API"
+      },
+      {
+        "tool_description": "A tool that queries ClinVar for variant clinical significance and pathogenicity",
+        "max_iterations": 3,
+        "save_to_file": true
+      },
+      {
+        "tool_description": "A tool that predicts protein subcellular localization using DeepLoc API",
         "max_iterations": 2,
-        "save_to_file": true,
-        "output_file": "output.json",
-        "save_dir": "./generated_tools"
+        "save_to_file": false
       }
     ]
   }

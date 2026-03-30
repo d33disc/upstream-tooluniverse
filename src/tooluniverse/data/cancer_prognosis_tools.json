@@ -40,64 +40,56 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "study_id": {
+              "type": "string"
+            },
+            "cancer": {
+              "type": "string"
+            },
+            "total_patients": {
+              "type": "integer"
+            },
+            "overall_survival": {
               "type": "object",
               "properties": {
-                "study_id": {
-                  "type": "string"
-                },
-                "cancer": {
-                  "type": "string"
-                },
-                "total_patients": {
+                "n_patients": {
                   "type": "integer"
                 },
-                "overall_survival": {
-                  "type": "object",
-                  "properties": {
-                    "n_patients": {
-                      "type": "integer"
-                    },
-                    "n_events": {
-                      "type": "integer"
-                    },
-                    "patients": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "patient_id": {
-                            "type": "string"
-                          },
-                          "os_months": {
-                            "type": "number"
-                          },
-                          "os_status": {
-                            "type": "string"
-                          },
-                          "event": {
-                            "type": "integer"
-                          }
-                        }
-                      }
-                    }
-                  }
+                "n_events": {
+                  "type": "integer"
                 },
-                "disease_free_survival": {
-                  "type": "object",
-                  "properties": {
-                    "n_patients": {
-                      "type": "integer"
-                    },
-                    "n_events": {
-                      "type": "integer"
+                "patients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "patient_id": {
+                        "type": "string"
+                      },
+                      "os_months": {
+                        "type": "number"
+                      },
+                      "os_status": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "integer"
+                      }
                     }
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "disease_free_survival": {
+              "type": "object",
+              "properties": {
+                "n_patients": {
+                  "type": "integer"
+                },
+                "n_events": {
+                  "type": "integer"
+                }
+              }
             }
           }
         },
@@ -119,6 +111,11 @@
         "operation": "get_survival_data",
         "cancer": "BRCA",
         "max_patients": 50
+      },
+      {
+        "operation": "get_survival_data",
+        "study_id": "coadread_tcga",
+        "max_patients": 75
       }
     ]
   },
@@ -175,86 +172,83 @@
         {
           "type": "object",
           "properties": {
-            "data": {
+            "study_id": {
+              "type": "string"
+            },
+            "gene": {
+              "type": "string"
+            },
+            "entrez_gene_id": {
+              "type": "integer"
+            },
+            "profile_id": {
+              "type": "string"
+            },
+            "expression_units": {
+              "type": "string",
+              "description": "Description of the expression value type (e.g., 'RSEM (RNA Seq V2 normalized expected read counts)')"
+            },
+            "n_samples_with_expression_data": {
+              "type": "integer",
+              "description": "Number of samples with non-null expression values for this gene"
+            },
+            "n_samples_returned": {
+              "type": "integer",
+              "description": "Number of sample records in the 'samples' array (may be less than n_samples_with_expression_data if max_samples was applied)"
+            },
+            "expression_summary": {
               "type": "object",
               "properties": {
-                "study_id": {
-                  "type": "string"
+                "mean": {
+                  "type": "number"
                 },
-                "gene": {
-                  "type": "string"
+                "median": {
+                  "type": "number"
                 },
-                "entrez_gene_id": {
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                }
+              }
+            },
+            "samples": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "sample_id": {
+                    "type": "string"
+                  },
+                  "patient_id": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "note": {
+              "type": "string",
+              "description": "Description of profile and any warnings (e.g., duplicate aliquot warning)"
+            },
+            "duplicate_aliquot_warning": {
+              "type": "object",
+              "description": "Present when patients have multiple samples (e.g., primary + recurrence). Joining on patient_id will double-count affected patients.",
+              "properties": {
+                "n_affected_patients": {
                   "type": "integer"
                 },
-                "profile_id": {
-                  "type": "string"
-                },
-                "expression_units": {
-                  "type": "string",
-                  "description": "Description of the expression value type (e.g., 'RSEM (RNA Seq V2 normalized expected read counts)')"
-                },
-                "n_samples_with_expression_data": {
-                  "type": "integer",
-                  "description": "Number of samples with non-null expression values for this gene"
-                },
-                "n_samples_returned": {
-                  "type": "integer",
-                  "description": "Number of sample records in the 'samples' array (may be less than n_samples_with_expression_data if max_samples was applied)"
-                },
-                "expression_summary": {
-                  "type": "object",
-                  "properties": {
-                    "mean": {
-                      "type": "number"
-                    },
-                    "median": {
-                      "type": "number"
-                    },
-                    "min": {
-                      "type": "number"
-                    },
-                    "max": {
-                      "type": "number"
-                    }
-                  }
-                },
-                "samples": {
+                "affected_patient_ids": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "sample_id": {
-                        "type": "string"
-                      },
-                      "patient_id": {
-                        "type": "string"
-                      },
-                      "value": {
-                        "type": "number"
-                      }
-                    }
+                    "type": "string"
                   }
                 },
-                "note": {
-                  "type": "string",
-                  "description": "Description of profile and any warnings (e.g., duplicate aliquot warning)"
-                },
-                "duplicate_aliquot_warning": {
-                  "type": "object",
-                  "description": "Present when patients have multiple samples (e.g., primary + recurrence). Joining on patient_id will double-count affected patients.",
-                  "properties": {
-                    "n_affected_patients": {
-                      "type": "integer"
-                    },
-                    "affected_patient_ids": {
-                      "type": "array",
-                      "items": {"type": "string"}
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                "message": {
+                  "type": "string"
                 }
               }
             }
@@ -279,6 +273,12 @@
         "cancer": "BRCA",
         "gene": "TP53",
         "max_samples": 50
+      },
+      {
+        "operation": "get_gene_expression",
+        "study_id": "luad_tcga",
+        "gene": "EGFR",
+        "max_samples": 75
       }
     ]
   },
@@ -327,39 +327,31 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "keyword": {
-                  "type": "string"
-                },
-                "n_results": {
-                  "type": "integer"
-                },
-                "studies": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "study_id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "cancer_type_id": {
-                        "type": "string"
-                      },
-                      "sample_count": {
-                        "type": "integer"
-                      }
-                    }
+            "keyword": {
+              "type": "string"
+            },
+            "n_results": {
+              "type": "integer"
+            },
+            "studies": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "study_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "cancer_type_id": {
+                    "type": "string"
+                  },
+                  "sample_count": {
+                    "type": "integer"
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
           }
         },
@@ -381,6 +373,11 @@
         "operation": "search_studies",
         "keyword": "breast",
         "limit": 10
+      },
+      {
+        "operation": "search_studies",
+        "query": "glioblastoma",
+        "limit": 5
       }
     ]
   },
@@ -418,62 +415,54 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "study_id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "cancer_type_id": {
-                  "type": "string"
-                },
-                "sample_count": {
-                  "type": "integer"
-                },
-                "molecular_profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "profile_id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "survival_attributes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "available_tcga_types": {
-                  "type": "array",
-                  "items": {
+            "study_id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "cancer_type_id": {
+              "type": "string"
+            },
+            "sample_count": {
+              "type": "integer"
+            },
+            "molecular_profiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "profile_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
                     "type": "string"
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "survival_attributes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "available_tcga_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         },
@@ -494,6 +483,10 @@
       {
         "operation": "get_study_summary",
         "cancer": "LUAD"
+      },
+      {
+        "operation": "get_study_summary",
+        "study_id": "brca_tcga"
       }
     ]
   }
