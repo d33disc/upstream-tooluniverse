@@ -38,6 +38,7 @@
       }
     ],
     "return_schema": {
+<<<<<<< HEAD
       "type": "array",
       "description": "List of matching mouse genes",
       "items": {
@@ -49,6 +50,51 @@
               "null"
             ],
             "description": "Official gene symbol (e.g., 'Trp53')"
+=======
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matching mouse genes",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": ["string", "null"],
+                    "description": "Official gene symbol (e.g., 'Trp53')"
+                  },
+                  "name": {
+                    "type": ["string", "null"],
+                    "description": "Gene name"
+                  },
+                  "gene_id": {
+                    "type": ["string", "null"],
+                    "description": "MGI identifier (e.g., 'MGI:98834')"
+                  },
+                  "category": {
+                    "type": ["string", "null"],
+                    "description": "Entity category (always 'gene')"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "total_results": {"type": "integer"},
+                "query": {"type": "string"},
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+>>>>>>> upstream/main
           },
           "name": {
             "type": [
