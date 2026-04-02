@@ -63,8 +63,16 @@
             "type": "string"
           }
         }
+<<<<<<< HEAD
       }
     }
+=======
+      ]
+    },
+    "aliases": [
+      "ENA_search"
+    ]
+>>>>>>> upstream/main
   },
   {
     "name": "ENAPortal_search_samples",
