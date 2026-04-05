@@ -515,6 +515,11 @@ class UniProtRESTTool(BaseTool):
                 "retryable": True,
             }
 
+        # Compact mode: return structured summary instead of full entry
+        compact = arguments.get("compact", True)
+        if compact and not self.extract_path:
+            return self._summarize_entry(data)
+
         # If extract_path is configured, extract the corresponding subset
         if self.extract_path:
             result = self._extract_data(data, self.extract_path)
@@ -531,6 +536,113 @@ class UniProtRESTTool(BaseTool):
             return result
 
         return data
+
+    @staticmethod
+    def _summarize_entry(data: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract a compact summary from a full UniProtKB JSON entry."""
+        # Protein name
+        protein_name = ""
+        pd = data.get("proteinDescription", {})
+        rec = pd.get("recommendedName") or pd.get("submittedName")
+        if isinstance(rec, dict):
+            protein_name = rec.get("fullName", {}).get("value", "")
+        elif isinstance(rec, list) and rec:
+            protein_name = rec[0].get("fullName", {}).get("value", "")
+
+        # Gene names
+        gene_names = []
+        for g in data.get("genes", []):
+            gn = g.get("geneName", {})
+            if gn and gn.get("value"):
+                gene_names.append(gn["value"])
+
+        # Organism
+        org = data.get("organism", {})
+
+        # Sequence info (length + MW, not the full sequence)
+        seq = data.get("sequence", {})
+
+        # Function
+        function_texts = []
+        for c in data.get("comments", []):
+            if c.get("commentType") == "FUNCTION":
+                for t in c.get("texts", []):
+                    if t.get("value"):
+                        function_texts.append(t["value"])
+
+        # Subcellular location
+        locations = []
+        for c in data.get("comments", []):
+            if c.get("commentType") == "SUBCELLULAR LOCATION":
+                for loc in c.get("subcellularLocations", []):
+                    val = loc.get("location", {}).get("value")
+                    if val:
+                        locations.append(val)
+
+        # Disease associations
+        diseases = []
+        for c in data.get("comments", []):
+            if c.get("commentType") == "DISEASE":
+                disease = c.get("disease", {})
+                if disease.get("diseaseId"):
+                    diseases.append(
+                        {
+                            "name": disease.get("diseaseId"),
+                            "acronym": disease.get("acronym", ""),
+                            "description": disease.get("description", "")[:200],
+                        }
+                    )
+
+        # Feature counts by type
+        feature_counts: Dict[str, int] = {}
+        for f in data.get("features", []):
+            ft = f.get("type", "unknown")
+            feature_counts[ft] = feature_counts.get(ft, 0) + 1
+
+        # Cross-reference counts by database
+        xref_counts: Dict[str, int] = {}
+        for xref in data.get("uniProtKBCrossReferences", []):
+            db = xref.get("database", "unknown")
+            xref_counts[db] = xref_counts.get(db, 0) + 1
+
+        # GO annotations
+        go_terms = []
+        for xref in data.get("uniProtKBCrossReferences", []):
+            if xref.get("database") == "GO":
+                go_id = xref.get("id", "")
+                props = {p["key"]: p["value"] for p in xref.get("properties", [])}
+                go_terms.append(
+                    {"id": go_id, "term": props.get("GoTerm", ""), "aspect": ""}
+                )
+
+        # Keywords
+        keywords = [
+            kw.get("name", "") for kw in data.get("keywords", []) if kw.get("name")
+        ]
+
+        return {
+            "accession": data.get("primaryAccession", ""),
+            "id": data.get("uniProtkbId", ""),
+            "protein_name": protein_name,
+            "gene_names": gene_names,
+            "organism": {
+                "scientific": org.get("scientificName", ""),
+                "common": org.get("commonName", ""),
+                "taxon_id": org.get("taxonId"),
+            },
+            "sequence_length": seq.get("length"),
+            "molecular_weight": seq.get("molWeight"),
+            "function": function_texts,
+            "subcellular_locations": locations,
+            "diseases": diseases[:10],
+            "feature_counts": feature_counts,
+            "xref_counts": xref_counts,
+            "go_terms": go_terms[:20],
+            "keywords": keywords,
+            "annotation_score": data.get("annotationScore"),
+            "compact": True,
+            "note": "Set compact=false for the full UniProtKB entry.",
+        }
 
     # Method bindings for backward compatibility
     def get_entry_by_accession(self, accession: str) -> Any:
