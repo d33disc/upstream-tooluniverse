@@ -372,7 +372,9 @@ class AzureOpenAIClient(BaseLLMClient):
 
                 stream = self.client.chat.completions.create(**kwargs)
                 for chunk in stream:
-                    text = self._extract_text_from_chunk(chunk)
+                    text = (
+                        (chunk.choices[0].delta.content or "") if chunk.choices else ""
+                    )
                     if text:
                         yield text
                 return
@@ -913,11 +915,12 @@ class ClaudeCliClient(BaseLLMClient):
         self._subprocess = _sp
         self.model_name = model_name or "sonnet"
         self.logger = logger
-        self.timeout = int(os.environ.get("CLAUDE_CLI_TIMEOUT", "30"))
+        self.timeout = int(os.environ.get("CLAUDE_CLI_TIMEOUT", "120"))
         self.budget = os.environ.get("CLAUDE_CLI_BUDGET", "0.10")
-        self._claude_path = shutil.which("claude")
-        if not self._claude_path:
+        claude_path = shutil.which("claude")
+        if not claude_path:
             raise ValueError("claude CLI not found on PATH")
+        self._claude_path: str = claude_path
 
     def test_api(self) -> None:
         try:
@@ -961,9 +964,13 @@ class ClaudeCliClient(BaseLLMClient):
             "json",
             "--model",
             self.model_name,
+            "--fallback-model",
+            "haiku",
             "--max-budget-usd",
             self.budget,
             "--no-session-persistence",
+            "--permission-mode",
+            "auto",
         ]
         if system_prompt:
             cmd.extend(["--system-prompt", system_prompt])
@@ -1005,6 +1012,71 @@ class ClaudeCliClient(BaseLLMClient):
 
         self.logger.error("Max retries exceeded for Claude CLI")
         return None
+
+    def infer_stream(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 2,
+        retry_delay: int = 3,
+    ):
+        """Yield text chunks via claude --print --output-format stream-json."""
+        system_parts = []
+        user_parts = []
+        for msg in messages:
+            if msg["role"] == "system":
+                system_parts.append(msg["content"])
+            else:
+                user_parts.append(msg["content"])
+
+        prompt = "\n\n".join(user_parts)
+        system_prompt = "\n\n".join(system_parts) if system_parts else None
+
+        cmd = [
+            self._claude_path,
+            "--print",
+            "--output-format",
+            "stream-json",
+            "--model",
+            self.model_name,
+            "--fallback-model",
+            "haiku",
+            "--max-budget-usd",
+            self.budget,
+            "--no-session-persistence",
+            "--permission-mode",
+            "auto",
+        ]
+        if system_prompt:
+            cmd.extend(["--system-prompt", system_prompt])
+
+        proc = self._subprocess.Popen(
+            cmd,
+            stdin=self._subprocess.PIPE,
+            stdout=self._subprocess.PIPE,
+            stderr=self._subprocess.PIPE,
+            text=True,
+        )
+        assert proc.stdin is not None
+        proc.stdin.write(prompt)
+        proc.stdin.close()
+
+        assert proc.stdout is not None
+        for line in proc.stdout:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                event = _json.loads(line)
+                if event.get("type") == "assistant" and "message" in event:
+                    yield event["message"]
+            except _json.JSONDecodeError:
+                continue
+
+        proc.wait(timeout=10)
 
     @staticmethod
     def _strip_markdown_fences(text: str) -> str:
