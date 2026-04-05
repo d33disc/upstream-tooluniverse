@@ -69,18 +69,23 @@ class MonarchTool(RESTfulTool):
         if "facet_fields" in response:
             del response["facet_fields"]
 
-        def remove_empty_values(obj):
+        # Strip ontology closure arrays — they contain ~150 ancestor terms per
+        # item and inflate responses from ~5KB to 100KB+ without adding signal
+        # for downstream LLM consumption.
+        _CLOSURE_KEYS = {"object_closure", "object_closure_label"}
+
+        def _clean(obj):
             if isinstance(obj, dict):
                 return {
-                    k: remove_empty_values(v) for k, v in obj.items() if v is not None
+                    k: _clean(v)
+                    for k, v in obj.items()
+                    if v is not None and k not in _CLOSURE_KEYS
                 }
             elif isinstance(obj, list):
-                return [remove_empty_values(v) for v in obj if v is not None]
-            else:
-                return obj
+                return [_clean(v) for v in obj if v is not None]
+            return obj
 
-        response = remove_empty_values(response)
-        return response
+        return _clean(response)
 
 
 @register_tool("MonarchDiseasesForMultiplePheno")
