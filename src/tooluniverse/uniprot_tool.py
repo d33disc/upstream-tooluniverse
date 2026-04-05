@@ -4,6 +4,15 @@ from typing import Any, Dict, Optional
 from .base_tool import BaseTool, ToolError
 from .tool_registry import register_tool
 
+# Compact-mode sample sizes for LLM thread-chasing.
+# Empirical: P00698 (lysozyme) has 57 xref DBs (63% count=1, max=1279)
+# and 11 feature types (median count=2, max=8).
+# min(N, count) means categories at or below N have zero data loss.
+_XREF_SAMPLE_SIZE = 5  # few-shot threshold for ID-format pattern recognition
+_FEATURE_SAMPLE_SIZE = 3  # covers 100% of median feature type; larger objects
+_GO_TERM_LIMIT = 20  # molecular function + biological process + cellular component
+_DISEASE_LIMIT = 10
+
 
 @register_tool("UniProtRESTTool")
 class UniProtRESTTool(BaseTool):
@@ -601,7 +610,7 @@ class UniProtRESTTool(BaseTool):
         feature_summary = {}
         for ft, feats in features_by_type.items():
             samples = []
-            for f in feats[: min(3, len(feats))]:
+            for f in feats[:_FEATURE_SAMPLE_SIZE]:
                 loc = f.get("location", {})
                 start = loc.get("start", {}).get("value")
                 end = loc.get("end", {}).get("value")
@@ -623,7 +632,7 @@ class UniProtRESTTool(BaseTool):
             db = xref.get("database", "unknown")
             xref_by_db.setdefault(db, []).append(xref.get("id", ""))
         xref_summary = {
-            db: {"count": len(ids), "sample": ids[: min(5, len(ids))]}
+            db: {"count": len(ids), "sample": ids[:_XREF_SAMPLE_SIZE]}
             for db, ids in xref_by_db.items()
         }
 
@@ -656,10 +665,10 @@ class UniProtRESTTool(BaseTool):
             "molecular_weight": seq.get("molWeight"),
             "function": function_texts,
             "subcellular_locations": locations,
-            "diseases": diseases[:10],
+            "diseases": diseases[:_DISEASE_LIMIT],
             "features": feature_summary,
             "cross_references": xref_summary,
-            "go_terms": go_terms[:20],
+            "go_terms": go_terms[:_GO_TERM_LIMIT],
             "keywords": keywords,
             "annotation_score": data.get("annotationScore"),
             "compact": True,
