@@ -155,7 +155,7 @@
       "max_retries": 2,
       "retry_delay": 2,
       "fallback_api_type": "OLLAMA",
-      "fallback_model_id": "deepseek-coder:6.7b",
+      "fallback_model_id": "qwen2.5-coder:32b",
       "use_global_fallback": false,
       "exclude_tools": [
         "Tool_RAG",

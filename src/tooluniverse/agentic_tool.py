@@ -9,7 +9,7 @@ from .base_tool import BaseTool
 from .tool_registry import register_tool
 from .logging_config import get_logger
 from .llm_clients import (
-    AzureOpenAIClient,
+    BaseLLMClient,
     ClaudeCliClient,
     GeminiClient,
     OllamaClient,
@@ -20,14 +20,13 @@ from .llm_clients import (
 
 # Global default fallback configuration
 DEFAULT_FALLBACK_CHAIN = [
-    {"api_type": "CHATGPT", "model_id": "gpt-4o-1120"},
+    {"api_type": "CLAUDE_CLI", "model_id": "haiku"},
     {"api_type": "OPENROUTER", "model_id": "openai/gpt-4o"},
     {"api_type": "GEMINI", "model_id": "gemini-2.0-flash"},
 ]
 
 # API key environment variable mapping
 API_KEY_ENV_VARS = {
-    "CHATGPT": ["AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT"],
     "OPENROUTER": ["OPENROUTER_API_KEY"],
     "GEMINI": ["GEMINI_API_KEY"],
     "VLLM": ["VLLM_SERVER_URL"],
@@ -124,7 +123,7 @@ class AgenticTool(BaseTool):
                 return default
 
         # LLM configuration
-        self._api_type: str = get_config("api_type", "CHATGPT")
+        self._api_type: str = get_config("api_type", "CLAUDE_CLI")
         self._model_id: str = get_config("model_id", "gpt-5")
         self._temperature: Optional[float] = get_config("temperature", 1.0)
         # max_new_tokens is handled by LLM client automatically
@@ -170,8 +169,8 @@ class AgenticTool(BaseTool):
         self._validate_model_config()
 
         # Initialize the provider client
-        self._llm_client = None
-        self._initialization_error = None
+        self._llm_client: Optional[BaseLLMClient] = None
+        self._initialization_error: Optional[str] = None
         self._is_available = False
         self._current_api_type = None
         self._current_model_id = None
@@ -279,9 +278,7 @@ class AgenticTool(BaseTool):
     ) -> bool:
         """Try to initialize a specific API and model."""
         try:
-            if api_type == "CHATGPT":
-                self._llm_client = AzureOpenAIClient(model_id, None, self.logger)
-            elif api_type == "OPENROUTER":
+            if api_type == "OPENROUTER":
                 self._llm_client = OpenRouterClient(model_id, self.logger)
             elif api_type == "GEMINI":
                 self._llm_client = GeminiClient(model_id, self.logger)
@@ -301,6 +298,7 @@ class AgenticTool(BaseTool):
                 raise ValueError(f"Unsupported API type: {api_type}")
 
             # Test API key validity after initialization (if enabled)
+            assert self._llm_client is not None
             if self._validate_api_key:
                 self._llm_client.test_api()
                 self.logger.debug(
@@ -380,6 +378,7 @@ class AgenticTool(BaseTool):
                     suggestion="Check that the required LLM backend (Claude CLI or Ollama) is running.",
                 )
 
+        assert self._llm_client is not None  # guarded by _is_available check above
         try:
             # Validate required args
             missing_required_args = [
@@ -629,9 +628,7 @@ class AgenticTool(BaseTool):
     def retry_initialization(self) -> bool:
         """Attempt to reinitialize the tool (useful if API keys were updated)."""
         try:
-            if self._api_type == "CHATGPT":
-                self._llm_client = AzureOpenAIClient(self._model_id, None, self.logger)
-            elif self._api_type == "OPENROUTER":
+            if self._api_type == "OPENROUTER":
                 self._llm_client = OpenRouterClient(self._model_id, self.logger)
             elif self._api_type == "GEMINI":
                 self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
@@ -640,9 +637,15 @@ class AgenticTool(BaseTool):
                 if not server_url:
                     raise ValueError("VLLM_SERVER_URL environment variable not set")
                 self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
+            elif self._api_type == "CLAUDE_CLI":
+                self._llm_client = ClaudeCliClient(self._model_id, None, self.logger)
+            elif self._api_type == "OLLAMA":
+                server_url = os.getenv("OLLAMA_SERVER_URL")
+                self._llm_client = OllamaClient(self._model_id, server_url, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {self._api_type}")
 
+            assert self._llm_client is not None
             if self._validate_api_key:
                 self._llm_client.test_api()
                 self.logger.info(
@@ -667,16 +670,14 @@ class AgenticTool(BaseTool):
         return self._input_arguments.copy()
 
     def validate_configuration(self) -> Dict[str, Any]:
-        validation_results = {"valid": True, "warnings": [], "errors": []}
+        errors: List[str] = []
         try:
             self._validate_model_config()
         except ValueError as e:
-            validation_results["valid"] = False
-            validation_results["errors"].append(str(e))
+            errors.append(str(e))
         if not self._prompt_template:
-            validation_results["valid"] = False
-            validation_results["errors"].append("Missing prompt template")
-        return validation_results
+            errors.append("Missing prompt template")
+        return {"valid": len(errors) == 0, "warnings": [], "errors": errors}
 
     def estimate_token_usage(self, arguments: Dict[str, Any]) -> Dict[str, int]:
         prompt = self._format_prompt(arguments)
