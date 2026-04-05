@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[nofonts]{tufte-swiss}
+\geometry{paper=letterpaper, top=18mm, bottom=20mm, left=22mm, right=22mm, heightrounded}
+
+% --- Fonts (discover via fc-list, prefer Minion Pro + Acumin Pro) ---
+% \setmainfont{MinionPro-Regular.otf}[
+%   Path=..., ItalicFont=..., BoldFont=..., BoldItalicFont=...,
+%   Numbers=OldStyle,
+% ]
+% \newfontfamily\sansfont{AcuminPro-Regular.otf}[
+%   Path=..., ItalicFont=..., BoldFont=..., BoldItalicFont=...,
+% ]
+
+% --- Packages ---
+\usepackage{amsmath}
+\usepackage[numbers,super,sort&compress]{natbib}
+\bibliographystyle{naturemag}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=TSText, urlcolor=TSMuted, citecolor=TSMuted}
+
+% --- Spacing ---
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+\setlength{\emergencystretch}{3em}
+
+% --- Macros ---
+\newcommand{\sectitle}[1]{%
+  \vspace{\TSGrid}%
+  {\sansfont\TSStep\color{TSText}\bfseries\TSTrack[60]{\MakeUppercase{#1}}\par}%
+  \vspace{\TSHalf}\TSRule{\linewidth}{0.2pt}\par\vspace{\TSHalf}%
+}
+\newcommand{\gene}[1]{\textit{#1}}
+
+\begin{document}
+
+% --- Title Block ---
+\begin{center}
+{\sansfont\TSTitle\color{TSText} TITLE HERE\par}
+\vspace{\TSGrid}
+{\TSBody Author One\textsuperscript{1,*}, Author Two\textsuperscript{2}\par}
+\vspace{\TSHalf}
+{\TSMicro\color{TSMuted}%
+\textsuperscript{1}Affiliation\quad
+\textsuperscript{2}Affiliation\par}
+\vspace{3pt}
+{\TSMicro\color{TSMuted}\textsuperscript{*}Correspondence: email@example.com\par}
+\end{center}
+\vspace{\TSHalf}\TSRule[TSStrong]{\linewidth}{0.6pt}\vspace{\TSGrid}
+
+% --- Abstract ---
+\sectitle{Abstract}
+{\TSBody\itshape Abstract text here (max 200 words, no citations).\par}
+
+% --- Body sections (use \input{}) ---
+% \input{sections_intro}
+% \input{sections_body}
+
+% --- Figure (if earned) ---
+% \begin{center}\includegraphics[width=\linewidth]{figure1.pdf}\end{center}
+% {\TSBody\small \textbf{Figure 1 | Title.} Legend here (~200 words).\par}
+
+% --- Back matter ---
+\sectitle{Acknowledgements}
+{\TSBody\small Acknowledgements here.\par}
+
+\sectitle{Author Contributions}
+{\TSBody\small Contributions here.\par}
+
+\sectitle{Competing Interests}
+{\TSBody\small Declarations here.\par}
+
+% --- Bibliography ---
+\small\bibliography{references}\normalsize
+
+% --- SI ---
+\clearpage
+% \input{si_unified}
+
+\end{document}
