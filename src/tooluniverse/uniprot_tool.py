@@ -593,17 +593,39 @@ class UniProtRESTTool(BaseTool):
                         }
                     )
 
-        # Feature counts by type
-        feature_counts: Dict[str, int] = {}
+        # Features: count + sample per type
+        features_by_type: Dict[str, list] = {}
         for f in data.get("features", []):
             ft = f.get("type", "unknown")
-            feature_counts[ft] = feature_counts.get(ft, 0) + 1
+            features_by_type.setdefault(ft, []).append(f)
+        feature_summary = {}
+        for ft, feats in features_by_type.items():
+            samples = []
+            for f in feats[: min(3, len(feats))]:
+                loc = f.get("location", {})
+                start = loc.get("start", {}).get("value")
+                end = loc.get("end", {}).get("value")
+                entry: Dict[str, Any] = {}
+                if start is not None:
+                    entry["position"] = (
+                        f"{start}-{end}" if end and end != start else str(start)
+                    )
+                desc = f.get("description")
+                if desc:
+                    entry["description"] = desc[:120]
+                if entry:
+                    samples.append(entry)
+            feature_summary[ft] = {"count": len(feats), "sample": samples}
 
-        # Cross-reference counts by database
-        xref_counts: Dict[str, int] = {}
+        # Cross-references: count + sample IDs per database
+        xref_by_db: Dict[str, list] = {}
         for xref in data.get("uniProtKBCrossReferences", []):
             db = xref.get("database", "unknown")
-            xref_counts[db] = xref_counts.get(db, 0) + 1
+            xref_by_db.setdefault(db, []).append(xref.get("id", ""))
+        xref_summary = {
+            db: {"count": len(ids), "sample": ids[: min(5, len(ids))]}
+            for db, ids in xref_by_db.items()
+        }
 
         # GO annotations
         go_terms = []
@@ -635,8 +657,8 @@ class UniProtRESTTool(BaseTool):
             "function": function_texts,
             "subcellular_locations": locations,
             "diseases": diseases[:10],
-            "feature_counts": feature_counts,
-            "xref_counts": xref_counts,
+            "features": feature_summary,
+            "cross_references": xref_summary,
             "go_terms": go_terms[:20],
             "keywords": keywords,
             "annotation_score": data.get("annotationScore"),
