@@ -452,19 +452,51 @@ Requirements:
                 try:
                     parsed_response = json.loads(llm_response)
                 except json.JSONDecodeError as e:
-                    print(f"❌ Failed to parse LLM response as JSON: {e}")
-                    print(f"Raw response: {llm_response[:500]}...")
-                    return {
-                        "success": False,
-                        "error": f"Invalid JSON response from LLM: {str(e)}",
-                        "raw_response": llm_response,
-                        "selected_tools": [],
+                    print(
+                        f"⚠️  LLM returned invalid JSON ({e}), falling back to keyword ranking"
+                    )
+                    keyword_ranked = self._prefilter_tools_by_keywords(
+                        available_tools, query, max_tools=limit
+                    )
+                    tool_names = [t["name"] for t in keyword_ranked[:limit]]
+                    parsed_response = {
+                        "selected_tools": [
+                            {
+                                "name": n,
+                                "relevance_score": 0.5,
+                                "reasoning": "keyword match",
+                            }
+                            for n in tool_names
+                        ],
+                        "selection_reasoning": "LLM JSON parse failed; keyword fallback",
                     }
             elif llm_response is None:
+                # All LLM backends failed — degrade to keyword ranking
+                print("⚠️  All LLM backends failed, falling back to keyword ranking")
+                keyword_ranked = self._prefilter_tools_by_keywords(
+                    available_tools, query, max_tools=limit
+                )
+                tool_names = [t["name"] for t in keyword_ranked[:limit]]
+                if tool_names:
+                    selected_tool_objects = (
+                        self.tooluniverse.get_tool_specification_by_names(tool_names)
+                    )
+                    tool_prompts = self.tooluniverse.prepare_tool_prompts(
+                        selected_tool_objects
+                    )
+                else:
+                    selected_tool_objects = []
+                    tool_prompts = []
                 return {
-                    "success": False,
-                    "error": "All LLM backends failed",
-                    "selected_tools": [],
+                    "success": True,
+                    "selected_tools": tool_names,
+                    "tool_objects": selected_tool_objects,
+                    "tool_prompts": tool_prompts,
+                    "total_selected": len(tool_names),
+                    "total_available": len(available_tools),
+                    "query": query,
+                    "limit_requested": limit,
+                    "fallback": "keyword_ranking",
                 }
             else:
                 parsed_response = llm_response
