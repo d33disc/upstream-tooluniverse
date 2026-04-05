@@ -11,27 +11,26 @@ from .logging_config import get_logger
 from .llm_clients import (
     BaseLLMClient,
     ClaudeCliClient,
-    GeminiClient,
+    # GeminiClient,       # no GEMINI_API_KEY
     OllamaClient,
-    OpenRouterClient,
-    VLLMClient,
+    # OpenRouterClient,   # no OPENROUTER_API_KEY
+    # VLLMClient,         # no VLLM_SERVER_URL
 )
 
 
 # Global default fallback configuration
 DEFAULT_FALLBACK_CHAIN = [
     {"api_type": "CLAUDE_CLI", "model_id": "haiku"},
-    {"api_type": "OPENROUTER", "model_id": "openai/gpt-4o"},
-    {"api_type": "GEMINI", "model_id": "gemini-2.0-flash"},
+    {"api_type": "OLLAMA", "model_id": "qwen2.5-coder:32b"},
 ]
 
 # API key environment variable mapping
 API_KEY_ENV_VARS = {
-    "OPENROUTER": ["OPENROUTER_API_KEY"],
-    "GEMINI": ["GEMINI_API_KEY"],
-    "VLLM": ["VLLM_SERVER_URL"],
     "CLAUDE_CLI": [],
     "OLLAMA": [],
+    # "VLLM": ["VLLM_SERVER_URL"],
+    # "OPENROUTER": ["OPENROUTER_API_KEY"],
+    # "GEMINI": ["GEMINI_API_KEY"],
 }
 
 
@@ -278,22 +277,22 @@ class AgenticTool(BaseTool):
     ) -> bool:
         """Try to initialize a specific API and model."""
         try:
-            if api_type == "OPENROUTER":
-                self._llm_client = OpenRouterClient(model_id, self.logger)
-            elif api_type == "GEMINI":
-                self._llm_client = GeminiClient(model_id, self.logger)
-            elif api_type == "VLLM":
-                if not server_url:
-                    server_url = os.getenv("VLLM_SERVER_URL")
-                if not server_url:
-                    raise ValueError("VLLM_SERVER_URL environment variable not set")
-                self._llm_client = VLLMClient(model_id, server_url, self.logger)
-            elif api_type == "CLAUDE_CLI":
+            if api_type == "CLAUDE_CLI":
                 self._llm_client = ClaudeCliClient(model_id, server_url, self.logger)
             elif api_type == "OLLAMA":
                 if not server_url:
                     server_url = os.getenv("OLLAMA_SERVER_URL")
                 self._llm_client = OllamaClient(model_id, server_url, self.logger)
+            # elif api_type == "VLLM":
+            #     if not server_url:
+            #         server_url = os.getenv("VLLM_SERVER_URL")
+            #     if not server_url:
+            #         raise ValueError("VLLM_SERVER_URL environment variable not set")
+            #     self._llm_client = VLLMClient(model_id, server_url, self.logger)
+            # elif api_type == "OPENROUTER":
+            #     self._llm_client = OpenRouterClient(model_id, self.logger)
+            # elif api_type == "GEMINI":
+            #     self._llm_client = GeminiClient(model_id, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {api_type}")
 
@@ -628,20 +627,20 @@ class AgenticTool(BaseTool):
     def retry_initialization(self) -> bool:
         """Attempt to reinitialize the tool (useful if API keys were updated)."""
         try:
-            if self._api_type == "OPENROUTER":
-                self._llm_client = OpenRouterClient(self._model_id, self.logger)
-            elif self._api_type == "GEMINI":
-                self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
-            elif self._api_type == "VLLM":
-                server_url = os.getenv("VLLM_SERVER_URL")
-                if not server_url:
-                    raise ValueError("VLLM_SERVER_URL environment variable not set")
-                self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
-            elif self._api_type == "CLAUDE_CLI":
+            if self._api_type == "CLAUDE_CLI":
                 self._llm_client = ClaudeCliClient(self._model_id, None, self.logger)
             elif self._api_type == "OLLAMA":
                 server_url = os.getenv("OLLAMA_SERVER_URL")
                 self._llm_client = OllamaClient(self._model_id, server_url, self.logger)
+            # elif self._api_type == "VLLM":
+            #     server_url = os.getenv("VLLM_SERVER_URL")
+            #     if not server_url:
+            #         raise ValueError("VLLM_SERVER_URL environment variable not set")
+            #     self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
+            # elif self._api_type == "OPENROUTER":
+            #     self._llm_client = OpenRouterClient(self._model_id, self.logger)
+            # elif self._api_type == "GEMINI":
+            #     self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {self._api_type}")
 
