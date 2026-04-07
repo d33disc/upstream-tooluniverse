@@ -26,9 +26,15 @@ class SemanticScholarTool(BaseTool):
     API key is read from environment variable SEMANTIC_SCHOLAR_API_KEY.
     Request an API key at: https://www.semanticscholar.org/product/api
 
-    Rate limits:
-    - Without API key: 1 request/second
-    - With API key: 100 requests/second
+    Rate limits (as of 2026, confirmed by S2 approval email 2026-04-07):
+    - No API key: 1 request/second (shared public quota)
+    - Personal API key: 1 request/second cumulative across all endpoints
+    - Legacy/commercial tier: historically 100 req/sec (rare, grandfathered)
+
+    This fork defaults to a conservative 1.05s min interval regardless of
+    key presence. Holders of a higher-tier key can override the floor via
+    the SEMANTIC_SCHOLAR_MIN_INTERVAL env var (float seconds). See the
+    DVS-FORK-PATCH block on ``_enforce_rate_limit`` for background.
     """
 
     _last_request_time = 0.0
@@ -73,15 +79,75 @@ class SemanticScholarTool(BaseTool):
             "metadata": {"total": len(papers), "query": query},
         }
 
+    # === DVS-FORK-PATCH-START: semantic-scholar-rate-limit ===============
+    # Fork of mims-harvard/ToolUniverse — d33disc/upstream-tooluniverse.
+    # DO NOT DROP on upstream rebase/merge unless upstream introduces an
+    # equivalent mechanism. Grep `DVS-FORK-PATCH` to review all fork-
+    # specific patches during an upstream sync.
+    #
+    # BACKGROUND
+    # ----------
+    # Upstream historically assumed "with API key = 100 req/sec" (legacy
+    # commercial S2 tier). As of 2026, new *personal* API keys issued by
+    # Semantic Scholar are capped at **1 req/sec cumulative across all
+    # endpoints** (confirmed by the S2 approval email received by
+    # christopher.dvs@gmail.com on 2026-04-07, which explicitly reads:
+    # "1 request per second, cumulative across all endpoints. Please set
+    # your rate limit to below this threshold to avoid rejected requests.")
+    #
+    # Under the upstream code, merely *setting* SEMANTIC_SCHOLAR_API_KEY
+    # switched the throttle to a 0.02s floor (~50 req/s) — 50× over the
+    # personal-tier quota — guaranteeing 429 storms and risking an S2-side
+    # ban on the key. Ironic: the key made the client UNSAFE.
+    #
+    # PATCH BEHAVIOR
+    # --------------
+    # 1. Default min_interval is 1.05s whether or not a key is present.
+    #    This keeps traffic just under the 1 req/sec cumulative quota.
+    # 2. SEMANTIC_SCHOLAR_MIN_INTERVAL env var (float seconds) lets holders
+    #    of higher-tier keys lower the floor. Example:
+    #        export SEMANTIC_SCHOLAR_MIN_INTERVAL=0.02   # 50 req/s
+    #        export SEMANTIC_SCHOLAR_MIN_INTERVAL=0.011  # ~90 req/s
+    # 3. Value is clamped to >= 0.0; a malformed value falls back to 1.05s
+    #    rather than silently disabling throttling.
+    # 4. The `has_api_key` parameter is preserved for signature stability
+    #    with upstream callers, but is intentionally NOT used to select the
+    #    default interval — personal-tier keys have the same cumulative
+    #    quota as anonymous access.
+    #
+    # UPSTREAM MERGE NOTES
+    # --------------------
+    # If upstream adds a configurable override, prefer upstream's mechanism
+    # and delete this entire block. If upstream merely tweaks the constants,
+    # keep this block — the env-var escape hatch is the load-bearing piece.
+    # =====================================================================
     def _enforce_rate_limit(self, has_api_key: bool) -> None:
-        # Keep anonymous usage below 1 req/sec to reduce 429s.
-        min_interval = 0.02 if has_api_key else 1.05
+        """Block until min_interval has elapsed since the last request.
+
+        See the DVS-FORK-PATCH block directly above for why the default is
+        1.05s regardless of ``has_api_key``.
+        """
+        override = os.environ.get("SEMANTIC_SCHOLAR_MIN_INTERVAL", "").strip()
+        if override:
+            try:
+                min_interval = max(0.0, float(override))
+            except ValueError:
+                # Malformed override — fail safe to the conservative default
+                # rather than silently disabling throttling.
+                min_interval = 1.05
+        else:
+            # Default: ~0.95 req/sec, safely under the 1 req/sec personal
+            # tier cumulative quota. Do NOT branch on ``has_api_key`` here;
+            # see DVS-FORK-PATCH block above.
+            min_interval = 1.05
         with self._rate_limit_lock:
             now = time.time()
             elapsed = now - SemanticScholarTool._last_request_time
             if elapsed < min_interval:
                 time.sleep(min_interval - elapsed)
             SemanticScholarTool._last_request_time = time.time()
+
+    # === DVS-FORK-PATCH-END: semantic-scholar-rate-limit =================
 
     def _fetch_missing_abstract(self, paper_id: str) -> dict | None:
         paper_id = (paper_id or "").strip()
