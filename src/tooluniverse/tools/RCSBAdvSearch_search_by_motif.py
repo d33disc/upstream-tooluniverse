@@ -17,7 +17,7 @@ def RCSBAdvSearch_search_by_motif(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search RCSB PDB for protein structures containing a specific sequence motif pattern. Supports PRO...
 
@@ -40,7 +40,7 @@ def RCSBAdvSearch_search_by_motif(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

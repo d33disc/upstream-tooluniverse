@@ -22,9 +22,9 @@ def health_disparities_get_county_rankings_info(
     Parameters
     ----------
     year : int
-        Optional year for County Health Rankings data
+        Optional year for County Health Rankings data (e.g., 2023, 2022, 2021).
     state : str
-        Optional state abbreviation (e.g., 'CA', 'NY') to filter by state
+        Optional state abbreviation (e.g., 'CA', 'NY', 'TX') to filter by state.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

@@ -1,7 +1,7 @@
 """
 ReactomeAnalysis_token_result
 
-Retrieve previously computed Reactome pathway analysis results using an analysis token. Tokens ar...
+Fetch cached Reactome Analysis Service results by token from a prior enrichment or species-compar...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def ReactomeAnalysis_token_result(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve previously computed Reactome pathway analysis results using an analysis token. Tokens ar...
+    Fetch cached Reactome Analysis Service results by token from a prior enrichment or species-compar...
 
     Parameters
     ----------

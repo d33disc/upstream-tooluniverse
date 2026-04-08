@@ -14,7 +14,7 @@ def SGD_get_go_annotations(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get Gene Ontology annotations for a yeast gene from SGD. Returns GO terms (biological process, mo...
 
@@ -31,7 +31,7 @@ def SGD_get_go_annotations(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def Bgee_get_gene_expression(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get expression data for a gene across tissues and organs from the Bgee database. Returns where a ...
 
@@ -34,7 +34,7 @@ def Bgee_get_gene_expression(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

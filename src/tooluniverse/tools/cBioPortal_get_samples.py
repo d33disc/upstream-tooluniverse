@@ -1,7 +1,7 @@
 """
 cBioPortal_get_samples
 
-Get all samples in a cancer study
+Get all samples in a cancer study. Returns sampleId, sampleType, patientId, and studyId for each ...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def cBioPortal_get_samples(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get all samples in a cancer study
+    Get all samples in a cancer study. Returns sampleId, sampleType, patientId, and studyId for each ...
 
     Parameters
     ----------

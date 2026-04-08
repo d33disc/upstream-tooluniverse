@@ -16,7 +16,7 @@ def FlyBase_get_gene_alleles(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get alleles and variants for a Drosophila gene from FlyBase via the Alliance of Genome Resources....
 
@@ -37,7 +37,7 @@ def FlyBase_get_gene_alleles(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

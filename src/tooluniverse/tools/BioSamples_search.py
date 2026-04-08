@@ -16,7 +16,7 @@ def BioSamples_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search the EBI BioSamples database by text query across 60+ million biological samples. Returns m...
 
@@ -37,7 +37,7 @@ def BioSamples_search(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

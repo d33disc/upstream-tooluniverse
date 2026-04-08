@@ -6,11 +6,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -138,11 +147,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -270,11 +288,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -395,11 +422,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -526,11 +562,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -655,11 +700,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -784,11 +838,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -915,11 +978,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [
@@ -1044,11 +1116,20 @@
       "type": "object",
       "properties": {
         "smiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of SMILES strings."
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of SMILES strings."
+            },
+            {
+              "type": "string",
+              "description": "Single SMILES string (will be wrapped in a list)."
+            }
+          ],
+          "description": "SMILES string(s) for the molecule(s). Accepts a single string or list of strings."
         }
       },
       "required": [

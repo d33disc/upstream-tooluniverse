@@ -16,7 +16,7 @@ def MyDisease_search_diseases(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search for diseases by keyword in MyDisease.info, a BioThings aggregator combining data from MOND...
 
@@ -37,7 +37,7 @@ def MyDisease_search_diseases(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

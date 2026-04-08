@@ -14,7 +14,7 @@ def EOL_get_hierarchy_entry(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get taxonomy hierarchy (classification tree) for a species from a specific classification system ...
 
@@ -31,7 +31,7 @@ def EOL_get_hierarchy_entry(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

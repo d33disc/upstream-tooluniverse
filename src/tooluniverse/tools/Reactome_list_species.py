@@ -1,7 +1,7 @@
 """
 Reactome_list_species
 
-List all species available in Reactome database.
+List Reactome species with scientific names and taxonomy IDs for valid species filters in pathway...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def Reactome_list_species(
     validate: bool = True,
 ) -> list[Any]:
     """
-    List all species available in Reactome database.
+    List Reactome species with scientific names and taxonomy IDs for valid species filters in pathway...
 
     Parameters
     ----------

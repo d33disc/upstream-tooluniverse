@@ -15,7 +15,7 @@ def RGD_search_genes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for rat genes by symbol or keyword in the Rat Genome Database. Returns matching genes with...
 
@@ -34,7 +34,7 @@ def RGD_search_genes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

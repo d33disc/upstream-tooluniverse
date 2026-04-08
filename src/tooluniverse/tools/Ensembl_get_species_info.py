@@ -14,7 +14,7 @@ def Ensembl_get_species_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search and list species available in the Ensembl database with their genome assembly information....
 
@@ -31,7 +31,7 @@ def Ensembl_get_species_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

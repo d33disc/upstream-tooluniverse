@@ -1,7 +1,7 @@
 """
 cBioPortal_get_patients
 
-Get all patients in a cancer study
+Get all patients in a cancer study. Returns patientId and studyId for each patient. Use to enumer...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def cBioPortal_get_patients(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get all patients in a cancer study
+    Get all patients in a cancer study. Returns patientId and studyId for each patient. Use to enumer...
 
     Parameters
     ----------

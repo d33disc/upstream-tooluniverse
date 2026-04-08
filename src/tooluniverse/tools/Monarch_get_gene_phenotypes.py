@@ -1,7 +1,7 @@
 """
 Monarch_get_gene_phenotypes
 
-Get phenotypes associated with a gene from Monarch Initiative (cross-species). Input is a gene CU...
+Fetch Monarch Initiative gene-to-phenotype associations for a gene CURIE. Returns human and model...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def Monarch_get_gene_phenotypes(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get phenotypes associated with a gene from Monarch Initiative (cross-species). Input is a gene CU...
+    Fetch Monarch Initiative gene-to-phenotype associations for a gene CURIE. Returns human and model...
 
     Parameters
     ----------

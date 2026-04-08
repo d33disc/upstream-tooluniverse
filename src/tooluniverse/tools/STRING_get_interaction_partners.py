@@ -1,7 +1,7 @@
 """
 STRING_get_interaction_partners
 
-Get interaction partners for a single protein from STRING database. Returns a ranked list of prot...
+Get interaction partners for a single protein from STRING database. Returns ranked partner list w...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def STRING_get_interaction_partners(
     validate: bool = True,
 ) -> Any:
     """
-    Get interaction partners for a single protein from STRING database. Returns a ranked list of prot...
+    Get interaction partners for a single protein from STRING database. Returns ranked partner list w...
 
     Parameters
     ----------

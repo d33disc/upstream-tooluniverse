@@ -16,7 +16,7 @@ def EOL_search_species(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search the Encyclopedia of Life (EOL) for species and taxa by name. Returns matching EOL page IDs...
 
@@ -37,7 +37,7 @@ def EOL_search_species(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

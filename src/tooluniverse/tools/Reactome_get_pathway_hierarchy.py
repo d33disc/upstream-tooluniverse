@@ -1,7 +1,7 @@
 """
 Reactome_get_pathway_hierarchy
 
-Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.
+Get parent Reactome pathways for a pathway stable ID, returning ancestor branches from the querie...
 """
 
 from typing import Any, Optional, Callable
@@ -16,7 +16,7 @@ def Reactome_get_pathway_hierarchy(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.
+    Get parent Reactome pathways for a pathway stable ID, returning ancestor branches from the querie...
 
     Parameters
     ----------

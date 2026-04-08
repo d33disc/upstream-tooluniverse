@@ -18,7 +18,7 @@ def BVBRC_search_pathways(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for metabolic pathways in pathogen genomes from BV-BRC. Returns KEGG pathway assignments w...
 
@@ -43,7 +43,7 @@ def BVBRC_search_pathways(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 Reactome_get_database_version
 
-Get Reactome database version information. Returns version number as integer.
+Get the current Reactome Content Service release number for provenance when comparing pathway, re...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def Reactome_get_database_version(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get Reactome database version information. Returns version number as integer.
+    Get the current Reactome Content Service release number for provenance when comparing pathway, re...
 
     Parameters
     ----------

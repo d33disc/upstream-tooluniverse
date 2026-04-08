@@ -21,7 +21,7 @@ def RCSBAdvSearch_search_structures(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Advanced search of RCSB Protein Data Bank structures by combining multiple attribute filters. Fil...
 
@@ -52,7 +52,7 @@ def RCSBAdvSearch_search_structures(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

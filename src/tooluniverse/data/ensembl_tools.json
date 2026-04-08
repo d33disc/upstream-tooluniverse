@@ -143,7 +143,8 @@
         "id": "ENST00000380152",
         "type": "cdna"
       }
-    ]
+    ],
+    "aliases": ["Ensembl_get_sequence"]
   },
   {
     "type": "EnsemblRESTTool",
@@ -218,6 +219,7 @@
   {
     "type": "EnsemblRESTTool",
     "name": "ensembl_get_variation",
+    "aliases": ["Ensembl_get_variant_info"],
     "description": "Get detailed information about a specific genetic variation by its ID (e.g., rs699). Returns variation details including alleles, frequencies, consequences, and evidence. Use ensembl_get_variants to find variant IDs in a region.",
     "endpoint": "/variation/{species}/{id}",
     "parameter": {
@@ -226,6 +228,10 @@
         "id": {
           "type": "string",
           "description": "Variation ID (e.g., 'rs699', 'rs1421085'). Use ensembl_get_variants to find variant IDs in a genomic region."
+        },
+        "variant_id": {
+          "type": "string",
+          "description": "Alias for id. dbSNP rsID or Ensembl variation ID (e.g., 'rs7903146', 'rs699')."
         },
         "species": {
           "type": "string",
@@ -238,9 +244,7 @@
           "description": "Include phenotype associations (0=no, 1=yes)"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": []
     },
     "return_schema": {
       "type": "object",

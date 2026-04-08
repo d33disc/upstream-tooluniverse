@@ -15,7 +15,7 @@ def UniProtRef_search_keywords(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search the UniProt keyword controlled vocabulary. Keywords are standardized terms used to annotat...
 
@@ -34,7 +34,7 @@ def UniProtRef_search_keywords(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

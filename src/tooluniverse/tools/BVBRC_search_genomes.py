@@ -15,7 +15,7 @@ def BVBRC_search_genomes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for pathogen genomes in BV-BRC by organism name or keyword. Returns a list of matching gen...
 
@@ -34,7 +34,7 @@ def BVBRC_search_genomes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

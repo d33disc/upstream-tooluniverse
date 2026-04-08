@@ -16,7 +16,7 @@ def RxClass_find_classes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search NLM RxClass drug classification database by keyword. Returns matching class IDs, names, an...
 
@@ -37,7 +37,7 @@ def RxClass_find_classes(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

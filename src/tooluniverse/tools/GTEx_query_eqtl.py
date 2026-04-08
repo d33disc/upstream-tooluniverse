@@ -12,6 +12,7 @@ def GTEx_query_eqtl(
     gene_symbol: Optional[str] = None,
     ensembl_gene_id: Optional[str] = None,
     gene_id: Optional[str] = None,
+    gene_input: Optional[str] = None,
     tissue_id: Optional[str] = None,
     tissue: Optional[str] = None,
     page: Optional[int] = 1,
@@ -20,7 +21,7 @@ def GTEx_query_eqtl(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Query GTEx single-tissue eQTL associations for a gene. Accepts gene symbols (TP53, BRCA1) or Ense...
 
@@ -32,6 +33,8 @@ def GTEx_query_eqtl(
         Ensembl gene identifier (e.g., 'ENSG00000141510'). Use gene_symbol instead if...
     gene_id : str
         Alias for ensembl_gene_id. Ensembl gene ID (e.g., 'ENSG00000141510').
+    gene_input : str
+        Alias for gene_symbol. Gene symbol or Ensembl ID (e.g., 'TP53', 'ENSG00000141...
     tissue_id : str
         GTEx tissue ID to filter eQTL results (e.g., 'Brain_Cortex', 'Whole_Blood', '...
     tissue : str
@@ -49,7 +52,7 @@ def GTEx_query_eqtl(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
@@ -60,6 +63,7 @@ def GTEx_query_eqtl(
             "gene_symbol": gene_symbol,
             "ensembl_gene_id": ensembl_gene_id,
             "gene_id": gene_id,
+            "gene_input": gene_input,
             "tissue_id": tissue_id,
             "tissue": tissue,
             "page": page,

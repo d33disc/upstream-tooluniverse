@@ -15,7 +15,7 @@ def EnsemblReg_get_motif_features(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get transcription factor (TF) binding motif features in a genomic region from the Ensembl REST AP...
 
@@ -34,7 +34,7 @@ def EnsemblReg_get_motif_features(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

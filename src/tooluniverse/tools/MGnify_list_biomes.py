@@ -16,7 +16,7 @@ def MGnify_list_biomes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Browse the MGnify biome hierarchy. Returns biome identifiers, names, and sample counts. Biomes ra...
 
@@ -37,7 +37,7 @@ def MGnify_list_biomes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

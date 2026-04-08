@@ -15,7 +15,7 @@ def miRBase_get_mirna_xrefs(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get cross-references (xrefs) for a microRNA from RNAcentral. Returns database links from miRBase,...
 
@@ -34,7 +34,7 @@ def miRBase_get_mirna_xrefs(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

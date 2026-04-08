@@ -15,7 +15,7 @@ def Ensembl_get_cross_references(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get all external database cross-references for an Ensembl stable identifier. Returns linked recor...
 
@@ -34,7 +34,7 @@ def Ensembl_get_cross_references(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

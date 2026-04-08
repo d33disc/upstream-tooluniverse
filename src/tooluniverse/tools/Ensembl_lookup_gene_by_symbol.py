@@ -16,7 +16,7 @@ def Ensembl_lookup_gene_by_symbol(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Look up Ensembl gene IDs for a gene symbol across external databases. Given a gene symbol (e.g., ...
 
@@ -37,7 +37,7 @@ def Ensembl_lookup_gene_by_symbol(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

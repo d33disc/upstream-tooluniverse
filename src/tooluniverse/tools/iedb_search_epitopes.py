@@ -16,6 +16,7 @@ def iedb_search_epitopes(
     order: Optional[str] = None,
     select: Optional[str] = None,
     filters: Optional[dict[str, Any]] = None,
+    antigen_uniprot: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -40,6 +41,8 @@ def iedb_search_epitopes(
         Optional projection list to reduce payload size. Provide a comma-separated st...
     filters : dict[str, Any]
         Advanced PostgREST filters mapping column -> filter expression (e.g., {"linea...
+    antigen_uniprot : str
+        UniProt accession of the source antigen. Example: 'Q15116' for PD-1 (PDCD1), ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -64,6 +67,7 @@ def iedb_search_epitopes(
             "order": order,
             "select": select,
             "filters": filters,
+            "antigen_uniprot": antigen_uniprot,
         }.items()
         if v is not None
     }

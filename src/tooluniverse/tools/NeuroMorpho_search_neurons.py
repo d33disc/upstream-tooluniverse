@@ -19,7 +19,7 @@ def NeuroMorpho_search_neurons(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for neurons in NeuroMorpho.Org by species, brain region, cell type, or other attributes. S...
 
@@ -46,7 +46,7 @@ def NeuroMorpho_search_neurons(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

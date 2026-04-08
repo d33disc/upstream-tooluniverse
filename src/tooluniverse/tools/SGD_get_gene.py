@@ -14,7 +14,7 @@ def SGD_get_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get yeast gene/locus overview from SGD (Saccharomyces Genome Database) by SGD identifier. Returns...
 
@@ -31,7 +31,7 @@ def SGD_get_gene(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

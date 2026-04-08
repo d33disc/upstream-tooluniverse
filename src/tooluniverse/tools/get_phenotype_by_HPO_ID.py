@@ -1,7 +1,7 @@
 """
 get_phenotype_by_HPO_ID
 
-Retrieve a phenotype or symptom by its HPO ID.
+Look up an HPO phenotype entity in Monarch Initiative by HP identifier. Returns the phenotype rec...
 """
 
 from typing import Any, Optional, Callable
@@ -16,7 +16,7 @@ def get_phenotype_by_HPO_ID(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve a phenotype or symptom by its HPO ID.
+    Look up an HPO phenotype entity in Monarch Initiative by HP identifier. Returns the phenotype rec...
 
     Parameters
     ----------

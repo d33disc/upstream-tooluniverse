@@ -10,10 +10,10 @@ from ._shared_client import get_shared_client
 
 def drugbank_vocab_search(
     query: str,
-    search_fields: list[str],
-    case_sensitive: bool,
-    exact_match: bool,
-    limit: int,
+    search_fields: Optional[list[str]] = None,
+    case_sensitive: Optional[bool] = False,
+    exact_match: Optional[bool] = False,
+    limit: Optional[int] = 10,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -46,7 +46,8 @@ def drugbank_vocab_search(
     dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
-
+    if search_fields is None:
+        search_fields = ["Common name", "Synonyms", "DrugBank ID"]
     # Strip None values so optional parameters don't trigger schema validation errors
     _args = {
         k: v

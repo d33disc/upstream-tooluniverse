@@ -16,7 +16,7 @@ def BioImageArchive_search_studies(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search the BioImage Archive (EBI BioStudies) for biological imaging datasets. The BioImage Archiv...
 
@@ -37,7 +37,7 @@ def BioImageArchive_search_studies(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

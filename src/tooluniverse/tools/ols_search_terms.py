@@ -1,7 +1,7 @@
 """
 ols_search_terms
 
-Search for terms in OLS (Ontology Lookup Service)
+Search biomedical ontology terms in EBI's Ontology Lookup Service (OLS). Covers GO, HP, MONDO, EF...
 """
 
 from typing import Any, Optional, Callable
@@ -23,7 +23,7 @@ def ols_search_terms(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search for terms in OLS (Ontology Lookup Service)
+    Search biomedical ontology terms in EBI's Ontology Lookup Service (OLS). Covers GO, HP, MONDO, EF...
 
     Parameters
     ----------
