@@ -13,8 +13,13 @@ import unittest
 from unittest.mock import MagicMock, patch
 from tooluniverse import ToolUniverse
 
-# Known-safe API tools (no GPU/model loading).
-_SAFE_TOOL_NAMES = ["PubChemGetCompoundByName", "WikipediaTool"]
+# Known-safe API tools (no GPU/model loading). These are the canonical
+# registered names in the tool registry — verified via
+# `tu.load_tools(include_tools=[...])` returning 2 matches.
+# Previous values ("PubChemGetCompoundByName", "WikipediaTool") did not
+# exist in the registry, causing include_tools to silently return 0 tools
+# and every test downstream to skipTest("No tools loaded").
+_SAFE_TOOL_NAMES = ["Wikipedia_search", "PubChem_get_compound_properties_by_CID"]
 
 # Tool name substrings that indicate crash-prone tools (GPU/model loading).
 _SKIP_KEYWORDS = {"embedding", "finder", "rag", "sentence", "llm", "vllm"}
@@ -27,12 +32,15 @@ def _first_available_tool(tu: ToolUniverse) -> str:
     when sentence-transformers tries to load a model without a GPU.
     """
     from tooluniverse.tool_registry import get_tool_errors
+
     tool_errors = get_tool_errors()
     for name in _SAFE_TOOL_NAMES:
         if name in tu.all_tool_dict and name not in tool_errors:
             return name
     for name in tu.all_tool_dict:
-        if name not in tool_errors and not any(k in name.lower() for k in _SKIP_KEYWORDS):
+        if name not in tool_errors and not any(
+            k in name.lower() for k in _SKIP_KEYWORDS
+        ):
             return name
     return None
 
@@ -43,11 +51,12 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.tu = ToolUniverse()
-        # Load minimal tools for testing - use include_tools to load specific tools
-        try:
-            self.tu.load_tools(include_tools=["PubChemGetCompoundByName", "WikipediaTool"])
-        except Exception:
-            # If that fails, try loading any available tools
+        # Load minimal tools for testing — use include_tools to load specific
+        # safe tools. include_tools silently returns 0 tools on unknown names
+        # (no exception raised), so verify the result and fall through to a
+        # full load if nothing was included.
+        self.tu.load_tools(include_tools=_SAFE_TOOL_NAMES)
+        if not self.tu.all_tool_dict:
             self.tu.load_tools()
 
     def tearDown(self):
@@ -63,28 +72,28 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         tool_names = list(self.tu.all_tool_dict.keys())
         if not tool_names:
             self.skipTest("No tools loaded")
-        
+
         tool_name = tool_names[0]
-        
+
         # Mock _get_tool_instance to track calls
         original_get_tool_instance = self.tu._get_tool_instance
         call_log = []
-        
+
         def tracked_get_tool_instance(name, cache=True):
             call_log.append({"name": name, "cache": cache})
             return original_get_tool_instance(name, cache=cache)
-        
+
         self.tu._get_tool_instance = tracked_get_tool_instance
-        
+
         # Call _validate_parameters
         self.tu._validate_parameters(tool_name, {})
-        
+
         # Verify that cache=True was used
         self.assertTrue(len(call_log) > 0, "No calls to _get_tool_instance")
         for call in call_log:
             self.assertTrue(
-                call["cache"], 
-                f"_validate_parameters should use cache=True, but used cache={call['cache']}"
+                call["cache"],
+                f"_validate_parameters should use cache=True, but used cache={call['cache']}",
             )
 
     def test_classify_exception_uses_cache(self):
@@ -93,29 +102,29 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         tool_names = list(self.tu.all_tool_dict.keys())
         if not tool_names:
             self.skipTest("No tools loaded")
-        
+
         tool_name = tool_names[0]
-        
+
         # Mock _get_tool_instance to track calls
         original_get_tool_instance = self.tu._get_tool_instance
         call_log = []
-        
+
         def tracked_get_tool_instance(name, cache=True):
             call_log.append({"name": name, "cache": cache})
             return original_get_tool_instance(name, cache=cache)
-        
+
         self.tu._get_tool_instance = tracked_get_tool_instance
-        
+
         # Call _classify_exception
         exception = ValueError("Test exception")
         self.tu._classify_exception(exception, tool_name, {})
-        
+
         # Verify that cache=True was used
         self.assertTrue(len(call_log) > 0, "No calls to _get_tool_instance")
         for call in call_log:
             self.assertTrue(
-                call["cache"], 
-                f"_classify_exception should use cache=True, but used cache={call['cache']}"
+                call["cache"],
+                f"_classify_exception should use cache=True, but used cache={call['cache']}",
             )
 
     def test_make_cache_key_uses_cache(self):
@@ -124,28 +133,28 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         tool_names = list(self.tu.all_tool_dict.keys())
         if not tool_names:
             self.skipTest("No tools loaded")
-        
+
         tool_name = tool_names[0]
-        
+
         # Mock _get_tool_instance to track calls
         original_get_tool_instance = self.tu._get_tool_instance
         call_log = []
-        
+
         def tracked_get_tool_instance(name, cache=True):
             call_log.append({"name": name, "cache": cache})
             return original_get_tool_instance(name, cache=cache)
-        
+
         self.tu._get_tool_instance = tracked_get_tool_instance
-        
+
         # Call _make_cache_key without providing tool_instance
         self.tu._make_cache_key(tool_name, {})
-        
+
         # Verify that cache=True was used
         self.assertTrue(len(call_log) > 0, "No calls to _get_tool_instance")
         for call in call_log:
             self.assertTrue(
-                call["cache"], 
-                f"_make_cache_key should use cache=True, but used cache={call['cache']}"
+                call["cache"],
+                f"_make_cache_key should use cache=True, but used cache={call['cache']}",
             )
 
     def test_tool_instance_reuse(self):
@@ -160,15 +169,16 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         except Exception as e:
             self.skipTest(f"Tool instantiation failed (e.g. missing GPU/model): {e}")
         self.assertIsNotNone(instance1, "Tool instance should not be None")
-        
+
         # Get tool instance second time - should be same object
         instance2 = self.tu._get_tool_instance(tool_name, cache=True)
         self.assertIsNotNone(instance2, "Tool instance should not be None")
-        
+
         # Verify they are the same object (cached)
         self.assertIs(
-            instance1, instance2,
-            "Tool instances should be the same object when cache=True is used"
+            instance1,
+            instance2,
+            "Tool instances should be the same object when cache=True is used",
         )
 
     def test_cache_key_consistency(self):
@@ -177,15 +187,15 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         tool_names = list(self.tu.all_tool_dict.keys())
         if not tool_names:
             self.skipTest("No tools loaded")
-        
+
         tool_name = tool_names[0]
         arguments = {"test": "value"}
-        
+
         # Generate cache key multiple times
         key1 = self.tu._make_cache_key(tool_name, arguments)
         key2 = self.tu._make_cache_key(tool_name, arguments)
         key3 = self.tu._make_cache_key(tool_name, arguments)
-        
+
         # All keys should be identical
         self.assertEqual(key1, key2, "Cache keys should be consistent (key1 vs key2)")
         self.assertEqual(key2, key3, "Cache keys should be consistent (key2 vs key3)")
@@ -196,32 +206,33 @@ class TestLazyLoadCacheConsistency(unittest.TestCase):
         tool_name = _first_available_tool(self.tu)
         if tool_name is None:
             self.skipTest("No instantiable tools available")
-        
+
         # Track init_tool calls
         original_init_tool = self.tu.init_tool
         init_count = [0]
-        
+
         def tracked_init_tool(*args, **kwargs):
             init_count[0] += 1
             return original_init_tool(*args, **kwargs)
-        
+
         self.tu.init_tool = tracked_init_tool
-        
+
         # Clear the cache for this tool
         if tool_name in self.tu.callable_functions:
             del self.tu.callable_functions[tool_name]
-        
+
         initial_count = init_count[0]
-        
+
         # Make multiple calls that should use the cached instance
         self.tu._get_tool_instance(tool_name, cache=True)
         self.tu._get_tool_instance(tool_name, cache=True)
         self.tu._get_tool_instance(tool_name, cache=True)
-        
+
         # Should only initialize once
         self.assertEqual(
-            init_count[0] - initial_count, 1,
-            "Tool should only be initialized once when using cache=True"
+            init_count[0] - initial_count,
+            1,
+            "Tool should only be initialized once when using cache=True",
         )
 
 
@@ -231,11 +242,9 @@ class TestLazyLoadPerformance(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.tu = ToolUniverse()
-        # Load minimal tools for testing
-        try:
-            self.tu.load_tools(include_tools=["PubChemGetCompoundByName", "WikipediaTool"])
-        except Exception:
-            # If that fails, try loading any available tools
+        # Load minimal tools for testing — same contract as the suite above.
+        self.tu.load_tools(include_tools=_SAFE_TOOL_NAMES)
+        if not self.tu.all_tool_dict:
             self.tu.load_tools()
 
     def tearDown(self):
@@ -289,8 +298,9 @@ class TestLazyLoadPerformance(unittest.TestCase):
 
         # Cached should be faster or at most equal (allow 2x slack for CI noise)
         self.assertLessEqual(
-            cached_time, uncached_time * 2.0,
-            "Cached validation should not be more than 2x slower than uncached"
+            cached_time,
+            uncached_time * 2.0,
+            "Cached validation should not be more than 2x slower than uncached",
         )
 
 
