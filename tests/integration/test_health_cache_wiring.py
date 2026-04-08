@@ -13,16 +13,23 @@ Verifies:
 6. Stale sort order: live < stale < broken
 7. --filter-healthy also excludes stale tools (Task 7)
 
-Environmental dependency:
-The `TestHealthCacheWiring` class requires ``~/.tooluniverse/health.json`` to be
-pre-populated with real annotations for FAERS (live), SIDER (broken), and CTD
-(broken) tools. This cache is user-local, gitignored, and built via
-``tu health refresh`` — it does NOT exist on fresh CI runners. The module-level
-``_health_cache_is_populated`` check below skips the whole class when the cache
-is missing or lacks the expected fixtures, so CI stays green while preserving
-real coverage for local developers who run ``tu health refresh`` first.
+Cache seeding:
+The ``TestHealthCacheWiring`` class asserts specific tools carry specific
+``_health`` annotations end-to-end through the tool finder. Those annotations
+come from a :class:`~tooluniverse.tool_health.ToolHealthCache` which reads
+``tooluniverse.tool_health.DEFAULT_CACHE_PATH`` at instantiation time.
+Production users populate that cache via ``tu health refresh``, but CI runners
+start with no cache.
 
-``TestStaleHealthRecords`` uses its own tmp_path fixture and always runs.
+Rather than skip in CI, the ``_seeded_health_cache`` fixture writes a real
+JSON cache to a ``tmp_path`` containing verified live FAERS entries and broken
+SIDER/CTD entries, then monkeypatches the module-level ``DEFAULT_CACHE_PATH``
+so every ``ToolHealthCache()`` construction inside the tool finders picks up
+the seeded path. This exercises the real wiring code (finder → cache →
+annotation → sort) instead of skipping the class.
+
+``TestStaleHealthRecords`` builds its own per-test cache via ``tmp_path`` and
+does not need the seeded fixture.
 """
 
 import json
@@ -33,43 +40,40 @@ from pathlib import Path
 import pytest
 
 from tooluniverse import ToolUniverse
+from tooluniverse import tool_health as tool_health_module
 from tooluniverse.tool_finder_keyword import ToolFinderKeyword
-from tooluniverse.tool_health import DEFAULT_CACHE_PATH, ToolHealthCache
 
 
-def _health_cache_is_populated() -> bool:
-    """Return True if the user-local health cache has the entries these tests need.
-
-    The TestHealthCacheWiring class asserts that specific tools carry specific
-    ``_health`` annotations end-to-end through the tool finder. Those annotations
-    come from ``~/.tooluniverse/health.json``, which is user-local and never
-    committed. If the cache is missing or lacks the fixture tools, the tests
-    cannot possibly pass and should skip cleanly rather than fail.
-    """
-    if not DEFAULT_CACHE_PATH.exists():
-        return False
-    try:
-        cache = ToolHealthCache(path=DEFAULT_CACHE_PATH)
-        # The test fixtures exercise three tool families. Require at least one
-        # live FAERS entry and at least one broken SIDER entry; CTD is a bonus.
-        cache._ensure_loaded()  # noqa: SLF001 — test setup, not production code
-        data = cache._data  # noqa: SLF001
-        has_live_faers = any(
-            k.startswith("FAERS") and v.get("status") == "live" for k, v in data.items()
-        )
-        has_broken_sider = any(
-            k.startswith("SIDER") and v.get("status") == "broken"
-            for k, v in data.items()
-        )
-        return has_live_faers and has_broken_sider
-    except (OSError, json.JSONDecodeError, KeyError):
-        return False
-
-
-_SKIP_REASON = (
-    "health cache not populated (~/.tooluniverse/health.json missing or lacks "
-    "FAERS/SIDER fixtures) — run `tu health refresh` to enable these tests locally"
-)
+# ─────────────────────────────────────────────────────────────────────────
+# Seed cache contents
+#
+# These tool names were verified against a live `ToolFinderKeyword` search
+# on 2026-04-08:
+#   * "adverse event drug safety"  → returns FAERS_count_* and SIDER_get_*
+#   * "FAERS_count_reactions_by_drug_event" → returns that exact tool
+#   * "CTD chemical gene"          → returns CTD_get_chemical_gene_interactions
+#   * "SIDER drug side effect"     → returns SIDER_* family
+# If the finder's ranking changes and these names stop appearing in results,
+# update the seed below alongside the expectation — the tests will fail
+# loudly rather than silently skipping.
+# ─────────────────────────────────────────────────────────────────────────
+_SEED_LIVE_FAERS = [
+    "FAERS_count_reactions_by_drug_event",
+    "FAERS_count_death_related_by_drug",
+    "FAERS_count_drugs_by_drug_event",
+    "FAERS_count_outcomes_by_drug_event",
+]
+_SEED_BROKEN_SIDER = [
+    "SIDER_get_drugs_for_side_effect",
+    "SIDER_get_drug_side_effects",
+    "SIDER_get_drug_indications",
+    "SIDER_search_drug",
+    "SIDER_search_side_effect",
+]
+_SEED_BROKEN_CTD = [
+    "CTD_get_chemical_gene_interactions",
+    "CTD_get_gene_chemicals",
+]
 
 
 @pytest.fixture(scope="module")
@@ -84,6 +88,58 @@ def keyword_finder(tu):
     return ToolFinderKeyword({}, tooluniverse=tu)
 
 
+@pytest.fixture(scope="module")
+def _seeded_health_cache_path(tmp_path_factory):
+    """Write a seed health.json and return its path.
+
+    Module-scoped so it runs once per suite. Contents cover every tool the
+    TestHealthCacheWiring assertions reach for; tested_epoch is set to "now"
+    so broken records do not cross the STALE_DAYS threshold mid-run.
+    """
+    now = time.time()
+    data: dict = {}
+    for name in _SEED_LIVE_FAERS:
+        data[name] = {
+            "status": "live",
+            "detail": "passed",
+            "tested": "2026-04-08",
+            "tested_epoch": now,
+        }
+    for name in _SEED_BROKEN_SIDER + _SEED_BROKEN_CTD:
+        data[name] = {
+            "status": "broken",
+            "detail": "test seeded: connection refused",
+            "tested": "2026-04-08",
+            "tested_epoch": now,
+        }
+    path = tmp_path_factory.mktemp("health_cache") / "health.json"
+    path.write_text(json.dumps(data))
+    return path
+
+
+@pytest.fixture(autouse=True)
+def _seed_health_cache(_seeded_health_cache_path, monkeypatch, request):
+    """Redirect tool_health.DEFAULT_CACHE_PATH to the seeded cache.
+
+    Applied as an autouse fixture so every test in this module (but NOT
+    TestStaleHealthRecords, which writes its own tmp_path caches) sees a
+    populated cache without needing to import or patch anything itself.
+
+    Scope: each ToolHealthCache() call inside ToolFinderKeyword reads
+    DEFAULT_CACHE_PATH at __init__ time, so a monkeypatch on the module
+    constant takes effect immediately for any downstream instantiation.
+    """
+    # TestStaleHealthRecords builds its own caches via tmp_path and must not
+    # be redirected to the seeded module cache.
+    if request.node.get_closest_marker("skip_seeded_cache") or (
+        request.cls is not None and request.cls.__name__ == "TestStaleHealthRecords"
+    ):
+        return
+    monkeypatch.setattr(
+        tool_health_module, "DEFAULT_CACHE_PATH", _seeded_health_cache_path
+    )
+
+
 def _find(finder, query, limit=15):
     raw = finder._run_json_search({"description": query, "limit": limit})
     return json.loads(raw).get("tools", [])
@@ -95,12 +151,13 @@ def _grep(finder, pattern, limit=30):
 
 
 @pytest.mark.integration
-@pytest.mark.skipif(not _health_cache_is_populated(), reason=_SKIP_REASON)
 class TestHealthCacheWiring:
     """End-to-end tests for health annotations in all three tool finders.
 
-    Skipped in environments without a populated ``~/.tooluniverse/health.json``
-    (e.g., fresh CI runners). See module docstring for details.
+    Relies on the autouse ``_seed_health_cache`` fixture defined at module
+    scope, which monkeypatches ``tool_health.DEFAULT_CACHE_PATH`` to a
+    pre-seeded temp cache. See the module docstring for details on cache
+    seeding.
     """
 
     # ── find ────────────────────────────────────────────────────────────────
