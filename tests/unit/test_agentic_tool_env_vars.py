@@ -5,6 +5,14 @@ This test module verifies that:
 1. Profile LLM configuration correctly passes to AgenticTool via environment variables
 2. Original environment variables still work as expected
 3. Configuration priority is correct for both "default" and "fallback" modes
+
+Note on supported API types:
+Commit 5e226192 ("refactor: comment out OpenRouter, Gemini, VLLM — no keys loaded")
+removed CHATGPT, GEMINI, VLLM, and OPENROUTER from API_KEY_ENV_VARS, leaving only
+CLAUDE_CLI and OLLAMA. Tests that used the removed types as fixtures have been
+updated to use CLAUDE_CLI / OLLAMA — the behavior under test (priority modes,
+env var reading, config overrides) is identical regardless of which concrete
+type is supplied, so long as the type is currently supported.
 """
 
 import os
@@ -42,9 +50,10 @@ class TestAgenticToolEnvironmentVariables:
 
     def test_profile_llm_default_provider_env_var(self):
         """Test that TOOLUNIVERSE_LLM_DEFAULT_PROVIDER is correctly read."""
-        # Set environment variable
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "CHATGPT"
-        
+        # Set environment variable — CLAUDE_CLI is one of the two currently
+        # supported API types (see module docstring for migration note).
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "CLAUDE_CLI"
+
         # Create AgenticTool with minimal config
         tool_config = {
             "name": "test_tool",
@@ -53,21 +62,21 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the provider was correctly read
-            assert tool._api_type == "CHATGPT"
+            assert tool._api_type == "CLAUDE_CLI"
 
     def test_profile_llm_model_default_env_var(self):
         """Test that TOOLUNIVERSE_LLM_MODEL_DEFAULT is correctly read."""
         # Set environment variable
         os.environ["TOOLUNIVERSE_LLM_MODEL_DEFAULT"] = "gpt-4o"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -75,13 +84,13 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the model was correctly read
             assert tool._env_model_id == "gpt-4o"
 
@@ -89,7 +98,7 @@ class TestAgenticToolEnvironmentVariables:
         """Test that TOOLUNIVERSE_LLM_TEMPERATURE is correctly read."""
         # Set environment variable
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.8"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -97,13 +106,13 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the temperature was correctly read
             assert tool._temperature == 0.8
 
@@ -116,24 +125,25 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify that max_new_tokens is not used in AgenticTool
             # (it's handled by the LLM client automatically)
-            assert not hasattr(tool, '_max_new_tokens')
+            assert not hasattr(tool, "_max_new_tokens")
 
     def test_profile_llm_config_mode_default(self):
         """Test 'default' mode configuration priority."""
-        # Set environment variables
+        # Set environment variables. OLLAMA vs CLAUDE_CLI gives us a
+        # distinguishable env-vs-config pair for the priority assertion below.
         os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = "default"
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "GEMINI"
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "OLLAMA"
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.9"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -141,27 +151,28 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
+                "required": ["input"],
             },
             # Tool config should override env vars
-            "api_type": "CHATGPT",
-            "temperature": 0.5
+            "api_type": "CLAUDE_CLI",
+            "temperature": 0.5,
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # In default mode, tool config should take priority
-            assert tool._api_type == "CHATGPT"  # From tool config
-            assert tool._temperature == 0.5     # From tool config
+            assert tool._api_type == "CLAUDE_CLI"  # From tool config
+            assert tool._temperature == 0.5  # From tool config
 
     def test_profile_llm_config_mode_fallback(self):
         """Test 'fallback' mode configuration priority."""
-        # Set environment variables
+        # Set environment variables. OLLAMA vs CLAUDE_CLI gives us a
+        # distinguishable env-vs-config pair for the priority assertion below.
         os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = "fallback"
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "GEMINI"
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "OLLAMA"
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.9"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -169,28 +180,29 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
+                "required": ["input"],
             },
             # Tool config should override env vars
-            "api_type": "CHATGPT",
-            "temperature": 0.5
+            "api_type": "CLAUDE_CLI",
+            "temperature": 0.5,
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # In fallback mode, tool config should take priority
-            assert tool._api_type == "CHATGPT"  # From tool config
-            assert tool._temperature == 0.5     # From tool config
+            assert tool._api_type == "CLAUDE_CLI"  # From tool config
+            assert tool._temperature == 0.5  # From tool config
 
     def test_profile_llm_config_mode_env_override(self):
         """Test 'env_override' mode where environment variables have highest priority."""
-        # Set environment variables
+        # Set environment variables. OLLAMA (env) must override CLAUDE_CLI
+        # (tool config) to demonstrate env_override semantics.
         os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = "env_override"
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "VLLM"
-        os.environ["TOOLUNIVERSE_LLM_MODEL_DEFAULT"] = "meta-llama/Llama-3.1-8B-Instruct"
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "OLLAMA"
+        os.environ["TOOLUNIVERSE_LLM_MODEL_DEFAULT"] = "qwen2.5-coder:32b"
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.7"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -198,27 +210,27 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
+                "required": ["input"],
             },
             # Tool config should be overridden by env vars in env_override mode
-            "api_type": "CHATGPT",
-            "model_id": "gpt-4o",
-            "temperature": 0.5
+            "api_type": "CLAUDE_CLI",
+            "model_id": "sonnet",
+            "temperature": 0.5,
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # In env_override mode, environment variables should take priority
-            assert tool._api_type == "VLLM"  # From env var, not tool config
-            assert tool._model_id == "meta-llama/Llama-3.1-8B-Instruct"  # From env var
+            assert tool._api_type == "OLLAMA"  # From env var, not tool config
+            assert tool._model_id == "qwen2.5-coder:32b"  # From env var
             assert tool._temperature == 0.7  # From env var, not tool config
 
     def test_original_gemini_model_id_env_var(self):
         """Test that original GEMINI_MODEL_ID environment variable still works."""
         # Set original environment variable
         os.environ["GEMINI_MODEL_ID"] = "gemini-1.5-pro"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -226,13 +238,13 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the original Gemini model ID was correctly read
             assert tool._gemini_model_id == "gemini-1.5-pro"
 
@@ -241,10 +253,12 @@ class TestAgenticToolEnvironmentVariables:
         # Set original environment variable
         fallback_chain = [
             {"api_type": "CHATGPT", "model_id": "gpt-4o"},
-            {"api_type": "GEMINI", "model_id": "gemini-2.0-flash"}
+            {"api_type": "GEMINI", "model_id": "gemini-2.0-flash"},
         ]
-        os.environ["AGENTIC_TOOL_FALLBACK_CHAIN"] = str(fallback_chain).replace("'", '"')
-        
+        os.environ["AGENTIC_TOOL_FALLBACK_CHAIN"] = str(fallback_chain).replace(
+            "'", '"'
+        )
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -252,48 +266,31 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the fallback chain was correctly read
             assert len(tool._global_fallback_chain) == 2
             assert tool._global_fallback_chain[0]["api_type"] == "CHATGPT"
             assert tool._global_fallback_chain[1]["api_type"] == "GEMINI"
 
-    def test_original_vllm_server_url_env_var(self):
-        """Test that original VLLM_SERVER_URL environment variable still works."""
-        # Set original environment variable
-        os.environ["VLLM_SERVER_URL"] = "http://localhost:8000"
-        
-        tool_config = {
-            "name": "test_tool",
-            "prompt": "Test prompt: {input}",
-            "input_arguments": ["input"],
-            "parameter": {
-                "type": "object",
-                "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            },
-            "api_type": "VLLM"
-        }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
-            _ = AgenticTool(tool_config)
-            
-            # Verify the VLLM server URL was correctly read
-            # This is tested indirectly through the VLLM client initialization
-            assert os.getenv("VLLM_SERVER_URL") == "http://localhost:8000"
+    # NOTE: test_original_vllm_server_url_env_var was removed.
+    # VLLM is no longer a supported api_type (commented out in API_KEY_ENV_VARS
+    # by commit 5e226192), and the test's only assertion was that os.getenv
+    # could read an env var it had just set — which does not exercise any code
+    # in AgenticTool. If VLLM support is ever reinstated, restore this test
+    # alongside the VLLMClient wiring.
 
     def test_task_specific_model_env_var(self):
         """Test that task-specific model environment variables work."""
         # Set task-specific environment variable
         os.environ["TOOLUNIVERSE_LLM_MODEL_ANALYSIS"] = "gpt-4o"
         os.environ["TOOLUNIVERSE_LLM_MODEL_DEFAULT"] = "gpt-3.5-turbo"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -301,24 +298,25 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
+                "required": ["input"],
             },
-            "llm_task": "analysis"  # This should use the analysis-specific model
+            "llm_task": "analysis",  # This should use the analysis-specific model
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # Verify the task-specific model was correctly read
             assert tool._env_model_id == "gpt-4o"
 
     def test_environment_variable_priority_in_default_mode(self):
         """Test that environment variables take priority over defaults in 'default' mode."""
-        # Set environment variables
+        # Set environment variables. OLLAMA is distinct from the CLAUDE_CLI
+        # built-in default, so seeing OLLAMA proves env vars were consulted.
         os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = "default"
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "GEMINI"
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "OLLAMA"
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.8"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -326,25 +324,28 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
             # No tool-level config, should use env vars
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
+
             # In default mode with no tool config, env vars should be used
-            assert tool._api_type == "GEMINI"  # From env var
-            assert tool._temperature == 0.8    # From env var
+            assert tool._api_type == "OLLAMA"  # From env var
+            assert tool._temperature == 0.8  # From env var
 
     def test_environment_variable_fallback_in_fallback_mode(self):
         """Test that environment variables are used as fallback in 'fallback' mode."""
-        # Set environment variables
+        # Set environment variables. These should NOT be applied because the
+        # tool config has no api_type/temperature, and fallback mode only
+        # consults env vars when neither tool config nor built-in defaults
+        # satisfy the field — i.e., the built-in defaults win here.
         os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = "fallback"
-        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "GEMINI"
+        os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = "OLLAMA"
         os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = "0.8"
-        
+
         tool_config = {
             "name": "test_tool",
             "prompt": "Test prompt: {input}",
@@ -352,17 +353,19 @@ class TestAgenticToolEnvironmentVariables:
             "parameter": {
                 "type": "object",
                 "properties": {"input": {"type": "string"}},
-                "required": ["input"]
-            }
+                "required": ["input"],
+            },
             # No tool-level config, should use built-in defaults
         }
-        
-        with patch.object(AgenticTool, '_try_initialize_api'):
+
+        with patch.object(AgenticTool, "_try_initialize_api"):
             tool = AgenticTool(tool_config)
-            
-            # In fallback mode with no tool config, should use built-in defaults
-            assert tool._api_type == "CHATGPT"  # Built-in default
-            assert tool._temperature == 1.0     # Built-in default
+
+            # In fallback mode with no tool config, should use built-in defaults.
+            # Built-in default api_type is CLAUDE_CLI (agentic_tool.py:125).
+            # Built-in default temperature is 1.0 (agentic_tool.py:127).
+            assert tool._api_type == "CLAUDE_CLI"  # Built-in default
+            assert tool._temperature == 1.0  # Built-in default
 
 
 if __name__ == "__main__":
