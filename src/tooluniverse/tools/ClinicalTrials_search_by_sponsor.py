@@ -18,7 +18,7 @@ def ClinicalTrials_search_by_sponsor(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search ClinicalTrials.gov for clinical trials by sponsor or lead organization. Returns trials fun...
 
@@ -43,7 +43,7 @@ def ClinicalTrials_search_by_sponsor(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

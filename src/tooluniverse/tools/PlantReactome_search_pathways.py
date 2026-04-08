@@ -15,7 +15,7 @@ def PlantReactome_search_pathways(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for plant biological pathways in Plant Reactome (Gramene). Plant Reactome is a curated res...
 
@@ -34,7 +34,7 @@ def PlantReactome_search_pathways(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

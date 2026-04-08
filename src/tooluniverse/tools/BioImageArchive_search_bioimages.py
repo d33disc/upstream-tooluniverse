@@ -15,7 +15,7 @@ def BioImageArchive_search_bioimages(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search the BioImage Archive specifically for biological image datasets (BioImages collection). Th...
 
@@ -34,7 +34,7 @@ def BioImageArchive_search_bioimages(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

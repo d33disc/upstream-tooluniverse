@@ -12,6 +12,7 @@ def iedb_search_tcell_assays(
     sequence: Optional[str] = None,
     sequence_contains: Optional[str] = None,
     mhc_class: Optional[str] = None,
+    antigen_uniprot: Optional[str] = None,
     qualitative_measure: Optional[str] = None,
     limit: Optional[int] = 10,
     offset: Optional[int] = 0,
@@ -33,6 +34,8 @@ def iedb_search_tcell_assays(
         Partial peptide sequence (substring match). Example: 'SIINFEKL'.
     mhc_class : str
         MHC class restriction (I or II).
+    antigen_uniprot : str
+        UniProt accession of the source antigen. Example: 'Q15116' for PD-1 (PDCD1), ...
     qualitative_measure : str
         Filter by assay result.
     limit : int
@@ -63,6 +66,7 @@ def iedb_search_tcell_assays(
             "sequence": sequence,
             "sequence_contains": sequence_contains,
             "mhc_class": mhc_class,
+            "antigen_uniprot": antigen_uniprot,
             "qualitative_measure": qualitative_measure,
             "limit": limit,
             "offset": offset,

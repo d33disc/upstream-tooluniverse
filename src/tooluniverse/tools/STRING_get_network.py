@@ -1,7 +1,7 @@
 """
 STRING_get_network
 
-Get the protein-protein interaction network for one or more proteins from STRING database. Return...
+Get protein-protein interaction networks from STRING database. Returns interaction edges with com...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def STRING_get_network(
     validate: bool = True,
 ) -> Any:
     """
-    Get the protein-protein interaction network for one or more proteins from STRING database. Return...
+    Get protein-protein interaction networks from STRING database. Returns interaction edges with com...
 
     Parameters
     ----------

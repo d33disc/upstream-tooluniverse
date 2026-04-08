@@ -17,7 +17,7 @@ def UCSC_get_sequence(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get DNA sequence from the UCSC Genome Browser for a specified genomic region. Returns the nucleot...
 
@@ -40,7 +40,7 @@ def UCSC_get_sequence(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

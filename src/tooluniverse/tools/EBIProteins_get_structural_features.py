@@ -14,7 +14,7 @@ def EBIProteins_get_structural_features(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get secondary structure annotations for a protein from the EBI Proteins API. Returns helix, beta ...
 
@@ -31,7 +31,7 @@ def EBIProteins_get_structural_features(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

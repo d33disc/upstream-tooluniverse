@@ -17,7 +17,7 @@ def LNCipedia_search_ncrna_by_type(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search for any type of non-coding RNA by RNA type classification. Supports all RNA types in RNAce...
 
@@ -40,7 +40,7 @@ def LNCipedia_search_ncrna_by_type(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

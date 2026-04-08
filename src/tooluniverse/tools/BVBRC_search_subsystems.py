@@ -19,7 +19,7 @@ def BVBRC_search_subsystems(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for functional subsystems (curated groups of functionally related proteins) in BV-BRC path...
 
@@ -46,7 +46,7 @@ def BVBRC_search_subsystems(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

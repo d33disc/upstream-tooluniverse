@@ -15,7 +15,7 @@ def HPO_search_terms(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for Human Phenotype Ontology (HPO) terms by keyword. HPO contains over 18,000 standardized...
 
@@ -34,7 +34,7 @@ def HPO_search_terms(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

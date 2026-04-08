@@ -15,7 +15,7 @@ def EnsemblPheno_get_by_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get phenotype associations for a gene from the Ensembl REST API. Returns diseases, traits, and cl...
 
@@ -34,7 +34,7 @@ def EnsemblPheno_get_by_gene(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

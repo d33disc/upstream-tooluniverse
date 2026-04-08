@@ -1,7 +1,7 @@
 """
 Tool_Finder
 
-Retrieve related tools from the toolbox based on the provided description, advanced version with ...
+Retrieve related tools from the toolbox based on the provided description using embedding-based s...
 """
 
 from typing import Any, Optional, Callable
@@ -20,7 +20,7 @@ def Tool_Finder(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve related tools from the toolbox based on the provided description, advanced version with ...
+    Retrieve related tools from the toolbox based on the provided description using embedding-based s...
 
     Parameters
     ----------

@@ -1,7 +1,7 @@
 """
 MGnify_list_analyses
 
-List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
+List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and l...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def MGnify_list_analyses(
     validate: bool = True,
 ) -> list[Any]:
     """
-    List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
+    List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and l...
 
     Parameters
     ----------

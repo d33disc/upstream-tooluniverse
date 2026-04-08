@@ -17,7 +17,7 @@ def EnsemblLD_get_ld_variants(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get linkage disequilibrium (LD) data for a variant from the Ensembl REST API. Returns all variant...
 
@@ -40,7 +40,7 @@ def EnsemblLD_get_ld_variants(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

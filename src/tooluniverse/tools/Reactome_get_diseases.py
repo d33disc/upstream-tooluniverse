@@ -1,7 +1,7 @@
 """
 Reactome_get_diseases
 
-Get list of disease pathways or DOIDs (Disease Ontology IDs) annotated in Reactome. Returns disea...
+List Reactome disease annotations and Disease Ontology IDs curated for disease-associated pathway...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def Reactome_get_diseases(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get list of disease pathways or DOIDs (Disease Ontology IDs) annotated in Reactome. Returns disea...
+    List Reactome disease annotations and Disease Ontology IDs curated for disease-associated pathway...
 
     Parameters
     ----------

@@ -16,7 +16,7 @@ def InterPro_get_proteins_by_domain(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Find proteins that contain a specific InterPro domain. Performs a reverse lookup from an InterPro...
 
@@ -37,7 +37,7 @@ def InterPro_get_proteins_by_domain(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

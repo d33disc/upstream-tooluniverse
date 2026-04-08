@@ -16,7 +16,7 @@ def EBIProteins_get_variation(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get all known protein sequence variants for a UniProt protein from the EBI Proteins API. Returns ...
 
@@ -37,7 +37,7 @@ def EBIProteins_get_variation(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

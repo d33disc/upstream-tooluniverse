@@ -16,7 +16,7 @@ def MeSH_search_terms(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search MeSH terms (entry terms/synonyms) by label. MeSH terms include the preferred descriptor na...
 
@@ -37,7 +37,7 @@ def MeSH_search_terms(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -16,7 +16,7 @@ def FDAGSRS_search_substances(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search FDA GSRS (Global Substance Registration System) for substances by name, UNII code, InChIKe...
 
@@ -37,7 +37,7 @@ def FDAGSRS_search_substances(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

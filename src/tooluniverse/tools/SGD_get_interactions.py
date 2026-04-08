@@ -14,7 +14,7 @@ def SGD_get_interactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get genetic and physical interactions for a yeast gene from SGD. Returns interaction type (Physic...
 
@@ -31,7 +31,7 @@ def SGD_get_interactions(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

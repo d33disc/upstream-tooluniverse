@@ -16,7 +16,7 @@ def NeuroMorpho_get_field_values(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get available values for a neuron metadata field in NeuroMorpho.Org. Useful for discovering what ...
 
@@ -37,7 +37,7 @@ def NeuroMorpho_get_field_values(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

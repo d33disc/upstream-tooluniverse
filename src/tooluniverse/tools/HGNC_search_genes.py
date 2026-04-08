@@ -15,7 +15,7 @@ def HGNC_search_genes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for human genes in HGNC by symbol, name, or alias. Supports wildcards (e.g., 'BRCA*' finds...
 
@@ -34,7 +34,7 @@ def HGNC_search_genes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

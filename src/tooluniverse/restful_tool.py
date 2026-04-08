@@ -1,4 +1,4 @@
-from .graphql_tool import GraphQLTool
+from .graphql_tool import GraphQLTool, remove_none_and_empty_values
 import requests
 import copy
 from .tool_registry import register_tool
@@ -69,23 +69,28 @@ class MonarchTool(RESTfulTool):
         if "facet_fields" in response:
             del response["facet_fields"]
 
+        response = remove_none_and_empty_values(response)
+
         # Strip ontology closure arrays — they contain ~150 ancestor terms per
         # item and inflate responses from ~5KB to 100KB+ without adding signal
         # for downstream LLM consumption.
         _CLOSURE_KEYS = {"object_closure", "object_closure_label"}
 
-        def _clean(obj):
+        def _strip_closure(obj):
             if isinstance(obj, dict):
                 return {
-                    k: _clean(v)
+                    k: _strip_closure(v)
                     for k, v in obj.items()
-                    if v is not None and k not in _CLOSURE_KEYS
+                    if k not in _CLOSURE_KEYS
                 }
-            elif isinstance(obj, list):
-                return [_clean(v) for v in obj if v is not None]
+            if isinstance(obj, list):
+                return [_strip_closure(v) for v in obj]
             return obj
 
-        return _clean(response)
+        response = _strip_closure(response)
+        if isinstance(response, dict) and "status" not in response:
+            return {"status": "success", "data": response}
+        return response
 
 
 @register_tool("MonarchDiseasesForMultiplePheno")

@@ -16,7 +16,7 @@ def GOAPI_get_gene_functions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get Gene Ontology (GO) annotations for a specific gene, showing its known biological processes, m...
 
@@ -37,7 +37,7 @@ def GOAPI_get_gene_functions(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

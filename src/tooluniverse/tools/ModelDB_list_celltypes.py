@@ -1,7 +1,7 @@
 """
 ModelDB_list_celltypes
 
-List all neuron/cell type IDs available in ModelDB. Returns an array of cell type IDs that can be...
+List ModelDB neuron and cell type IDs for modeled systems such as CA1/CA3 pyramidal neurons or Pu...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def ModelDB_list_celltypes(
     validate: bool = True,
 ) -> Any:
     """
-    List all neuron/cell type IDs available in ModelDB. Returns an array of cell type IDs that can be...
+    List ModelDB neuron and cell type IDs for modeled systems such as CA1/CA3 pyramidal neurons or Pu...
 
     Parameters
     ----------

@@ -14,7 +14,7 @@ def Nextstrain_list_datasets(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     List available pathogen phylogenetic datasets from Nextstrain. Returns datasets grouped by pathog...
 
@@ -31,7 +31,7 @@ def Nextstrain_list_datasets(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

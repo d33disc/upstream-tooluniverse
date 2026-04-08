@@ -1,7 +1,7 @@
 """
 get_joint_associated_diseases_by_HPO_ID_list
 
-Retrieve diseases associated with a list of phenotypes or symptoms by a list of HPO IDs.
+Query Monarch Initiative for diseases shared across one or more HPO phenotypes. Returns disease l...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def get_joint_associated_diseases_by_HPO_ID_list(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Retrieve diseases associated with a list of phenotypes or symptoms by a list of HPO IDs.
+    Query Monarch Initiative for diseases shared across one or more HPO phenotypes. Returns disease l...
 
     Parameters
     ----------

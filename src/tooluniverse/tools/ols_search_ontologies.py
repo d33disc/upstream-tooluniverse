@@ -1,7 +1,7 @@
 """
 ols_search_ontologies
 
-Search for ontologies in OLS
+Browse and search available ontologies in EBI OLS. Returns ontology metadata including IDs, title...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def ols_search_ontologies(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search for ontologies in OLS
+    Browse and search available ontologies in EBI OLS. Returns ontology metadata including IDs, title...
 
     Parameters
     ----------

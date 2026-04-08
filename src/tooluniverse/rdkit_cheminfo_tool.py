@@ -313,9 +313,11 @@ class RDKitCheminfoTool(BaseTool):
                     # Pick largest common core by heavy atom count
                     best_core = max(
                         common,
-                        key=lambda s: Chem.MolFromSmiles(s).GetNumHeavyAtoms()
-                        if Chem.MolFromSmiles(s)
-                        else 0,
+                        key=lambda s: (
+                            Chem.MolFromSmiles(s).GetNumHeavyAtoms()
+                            if Chem.MolFromSmiles(s)
+                            else 0
+                        ),
                     )
                     sc_a = cores_a.get(best_core, "")
                     sc_b = cores_b.get(best_core, "")

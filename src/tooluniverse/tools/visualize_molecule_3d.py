@@ -1,7 +1,7 @@
 """
 visualize_molecule_3d
 
-Visualize 3D molecular structures using RDKit and py3Dmol. Supports SMILES, MOL files, SDF conten...
+Render an interactive 3D molecule with RDKit and py3Dmol from SMILES, MOL, or SDF input. Returns ...
 """
 
 from typing import Any, Optional, Callable
@@ -26,7 +26,7 @@ def visualize_molecule_3d(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Visualize 3D molecular structures using RDKit and py3Dmol. Supports SMILES, MOL files, SDF conten...
+    Render an interactive 3D molecule with RDKit and py3Dmol from SMILES, MOL, or SDF input. Returns ...
 
     Parameters
     ----------

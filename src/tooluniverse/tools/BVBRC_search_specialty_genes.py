@@ -18,7 +18,7 @@ def BVBRC_search_specialty_genes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for specialty genes in BV-BRC including virulence factors, antibiotic resistance genes, dr...
 
@@ -43,7 +43,7 @@ def BVBRC_search_specialty_genes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

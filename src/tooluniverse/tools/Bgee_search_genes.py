@@ -14,7 +14,7 @@ def Bgee_search_genes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search for genes in the Bgee comparative gene expression database across 29+ animal species. Bgee...
 
@@ -31,7 +31,7 @@ def Bgee_search_genes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

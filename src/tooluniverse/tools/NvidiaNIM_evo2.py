@@ -20,7 +20,7 @@ def NvidiaNIM_evo2(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Generate DNA sequences using Evo2-40B via NVIDIA NIM. 40 billion parameter model trained on 9 tri...
 
@@ -49,22 +49,28 @@ def NvidiaNIM_evo2(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {
+        k: v
+        for k, v in {
+            "sequence": sequence,
+            "num_tokens": num_tokens,
+            "temperature": temperature,
+            "top_k": top_k,
+            "top_p": top_p,
+            "enable_sampled_probs": enable_sampled_probs,
+            "enable_logits": enable_logits,
+        }.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "NvidiaNIM_evo2",
-            "arguments": {
-                "sequence": sequence,
-                "num_tokens": num_tokens,
-                "temperature": temperature,
-                "top_k": top_k,
-                "top_p": top_p,
-                "enable_sampled_probs": enable_sampled_probs,
-                "enable_logits": enable_logits,
-            },
+            "arguments": _args,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

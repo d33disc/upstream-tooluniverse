@@ -18,7 +18,7 @@ def BVBRC_search_surveillance(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search influenza and pathogen surveillance data in BV-BRC. Returns surveillance samples with host...
 
@@ -43,7 +43,7 @@ def BVBRC_search_surveillance(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

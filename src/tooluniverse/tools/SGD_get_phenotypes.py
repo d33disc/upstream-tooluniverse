@@ -14,7 +14,7 @@ def SGD_get_phenotypes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Get curated phenotype annotations for a yeast gene from SGD. Returns observable phenotypes (growt...
 
@@ -31,7 +31,7 @@ def SGD_get_phenotypes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

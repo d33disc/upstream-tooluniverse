@@ -14,7 +14,7 @@ def DiseaseOntology_get_term(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get detailed information about a disease from the Disease Ontology (DO) by its DOID identifier. R...
 
@@ -31,7 +31,7 @@ def DiseaseOntology_get_term(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

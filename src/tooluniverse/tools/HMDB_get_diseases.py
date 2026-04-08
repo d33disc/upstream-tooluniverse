@@ -1,7 +1,7 @@
 """
 HMDB_get_diseases
 
-Alias for Metabolite_get_diseases. Get disease associations for a metabolite via CTD database.
+CTD-backed HMDB alias that resolves a metabolite to curated disease associations with disease IDs...
 """
 
 from typing import Any, Optional, Callable
@@ -16,9 +16,9 @@ def HMDB_get_diseases(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
-    Alias for Metabolite_get_diseases. Get disease associations for a metabolite via CTD database.
+    CTD-backed HMDB alias that resolves a metabolite to curated disease associations with disease IDs...
 
     Parameters
     ----------
@@ -37,7 +37,7 @@ def HMDB_get_diseases(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

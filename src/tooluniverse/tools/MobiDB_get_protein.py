@@ -14,7 +14,7 @@ def MobiDB_get_protein(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get comprehensive protein disorder data from MobiDB for a UniProt accession. MobiDB integrates cu...
 
@@ -31,7 +31,7 @@ def MobiDB_get_protein(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

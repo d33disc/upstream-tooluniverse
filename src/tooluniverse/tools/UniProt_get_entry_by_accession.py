@@ -1,7 +1,7 @@
 """
 UniProt_get_entry_by_accession
 
-Get the complete JSON entry for a specified UniProtKB accession. WARNING: This tool returns the c...
+Get a UniProtKB entry by accession. Returns a compact summary by default (protein name, gene, org...
 """
 
 from typing import Any, Optional, Callable
@@ -10,18 +10,21 @@ from ._shared_client import get_shared_client
 
 def UniProt_get_entry_by_accession(
     accession: str,
+    compact: Optional[bool] = True,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get the complete JSON entry for a specified UniProtKB accession. WARNING: This tool returns the c...
+    Get a UniProtKB entry by accession. Returns a compact summary by default (protein name, gene, org...
 
     Parameters
     ----------
     accession : str
         UniProtKB entry accession, e.g., P05067.
+    compact : bool
+        Return compact summary (default true). Set false for full raw JSON entry.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -36,7 +39,11 @@ def UniProt_get_entry_by_accession(
     # Handle mutable defaults to avoid B006 linting error
 
     # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"accession": accession}.items() if v is not None}
+    _args = {
+        k: v
+        for k, v in {"accession": accession, "compact": compact}.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "UniProt_get_entry_by_accession",

@@ -16,7 +16,7 @@ def GEO_search_rnaseq_datasets(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search NCBI GEO for RNA-seq gene expression datasets by query keyword, disease, tissue, or gene o...
 
@@ -37,7 +37,7 @@ def GEO_search_rnaseq_datasets(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

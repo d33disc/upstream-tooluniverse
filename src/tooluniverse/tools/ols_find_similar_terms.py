@@ -1,7 +1,7 @@
 """
 ols_find_similar_terms
 
-Find similar terms using LLM-based similarity
+Find semantically similar ontology terms in EBI OLS using LLM-based embedding similarity. Returns...
 """
 
 from typing import Any, Optional, Callable
@@ -20,7 +20,7 @@ def ols_find_similar_terms(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Find similar terms using LLM-based similarity
+    Find semantically similar ontology terms in EBI OLS using LLM-based embedding similarity. Returns...
 
     Parameters
     ----------

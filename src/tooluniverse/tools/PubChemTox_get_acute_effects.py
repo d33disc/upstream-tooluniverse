@@ -15,7 +15,7 @@ def PubChemTox_get_acute_effects(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get acute toxicity effects for a chemical compound from PubChem. Returns documented acute (short-...
 
@@ -34,7 +34,7 @@ def PubChemTox_get_acute_effects(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def NCBIDatasets_get_gene_by_symbol(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Look up gene information by gene symbol and organism. Searches NCBI Gene database using official ...
 
@@ -34,7 +34,7 @@ def NCBIDatasets_get_gene_by_symbol(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

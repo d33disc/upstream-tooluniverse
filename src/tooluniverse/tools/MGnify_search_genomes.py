@@ -17,7 +17,7 @@ def MGnify_search_genomes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Search the MGnify genome catalog for metagenome-assembled genomes (MAGs) and isolate genomes. Fil...
 
@@ -40,7 +40,7 @@ def MGnify_search_genomes(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
