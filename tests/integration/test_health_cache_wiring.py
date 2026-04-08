@@ -12,6 +12,17 @@ Verifies:
 5. Stale broken records get _health="stale" instead of "broken" (Task 7)
 6. Stale sort order: live < stale < broken
 7. --filter-healthy also excludes stale tools (Task 7)
+
+Environmental dependency:
+The `TestHealthCacheWiring` class requires ``~/.tooluniverse/health.json`` to be
+pre-populated with real annotations for FAERS (live), SIDER (broken), and CTD
+(broken) tools. This cache is user-local, gitignored, and built via
+``tu health refresh`` — it does NOT exist on fresh CI runners. The module-level
+``_health_cache_is_populated`` check below skips the whole class when the cache
+is missing or lacks the expected fixtures, so CI stays green while preserving
+real coverage for local developers who run ``tu health refresh`` first.
+
+``TestStaleHealthRecords`` uses its own tmp_path fixture and always runs.
 """
 
 import json
@@ -23,6 +34,42 @@ import pytest
 
 from tooluniverse import ToolUniverse
 from tooluniverse.tool_finder_keyword import ToolFinderKeyword
+from tooluniverse.tool_health import DEFAULT_CACHE_PATH, ToolHealthCache
+
+
+def _health_cache_is_populated() -> bool:
+    """Return True if the user-local health cache has the entries these tests need.
+
+    The TestHealthCacheWiring class asserts that specific tools carry specific
+    ``_health`` annotations end-to-end through the tool finder. Those annotations
+    come from ``~/.tooluniverse/health.json``, which is user-local and never
+    committed. If the cache is missing or lacks the fixture tools, the tests
+    cannot possibly pass and should skip cleanly rather than fail.
+    """
+    if not DEFAULT_CACHE_PATH.exists():
+        return False
+    try:
+        cache = ToolHealthCache(path=DEFAULT_CACHE_PATH)
+        # The test fixtures exercise three tool families. Require at least one
+        # live FAERS entry and at least one broken SIDER entry; CTD is a bonus.
+        cache._ensure_loaded()  # noqa: SLF001 — test setup, not production code
+        data = cache._data  # noqa: SLF001
+        has_live_faers = any(
+            k.startswith("FAERS") and v.get("status") == "live" for k, v in data.items()
+        )
+        has_broken_sider = any(
+            k.startswith("SIDER") and v.get("status") == "broken"
+            for k, v in data.items()
+        )
+        return has_live_faers and has_broken_sider
+    except (OSError, json.JSONDecodeError, KeyError):
+        return False
+
+
+_SKIP_REASON = (
+    "health cache not populated (~/.tooluniverse/health.json missing or lacks "
+    "FAERS/SIDER fixtures) — run `tu health refresh` to enable these tests locally"
+)
 
 
 @pytest.fixture(scope="module")
@@ -48,8 +95,13 @@ def _grep(finder, pattern, limit=30):
 
 
 @pytest.mark.integration
+@pytest.mark.skipif(not _health_cache_is_populated(), reason=_SKIP_REASON)
 class TestHealthCacheWiring:
-    """End-to-end tests for health annotations in all three tool finders."""
+    """End-to-end tests for health annotations in all three tool finders.
+
+    Skipped in environments without a populated ``~/.tooluniverse/health.json``
+    (e.g., fresh CI runners). See module docstring for details.
+    """
 
     # ── find ────────────────────────────────────────────────────────────────
 
