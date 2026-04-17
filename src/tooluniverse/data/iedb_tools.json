@@ -53,10 +53,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "antigen_uniprot": {
-          "type": "string",
-          "description": "UniProt accession of the source antigen. Example: 'Q15116' for PD-1 (PDCD1), 'P01012' for ovalbumin. Accepts with or without 'UNIPROT:' prefix."
         }
       },
       "required": []
@@ -116,10 +112,6 @@
         "structure_type": {
           "column": "structure_type",
           "op": "eq"
-        },
-        "antigen_uniprot": {
-          "column": "parent_source_antigen_iris",
-          "op": "cs_uniprot"
         }
       }
     },

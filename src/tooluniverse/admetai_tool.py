@@ -1,3 +1,17 @@
+import os
+
+# Force CPU before torch is imported anywhere — prevents MPS (Metal) segfaults
+# in forked subprocesses (uvx MCP server, tu CLI, Claude Code plugin).
+os.environ["PYTORCH_MPS_HIGH_WATERMARK_RATIO"] = "0.0"
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+try:
+    import torch
+
+    if hasattr(torch, "set_default_device"):
+        torch.set_default_device("cpu")
+except ImportError:
+    pass
+
 import numpy
 from .base_tool import BaseTool
 from .tool_registry import register_tool
@@ -11,9 +25,15 @@ if not hasattr(numpy, "VisibleDeprecationWarning"):
 
 
 def _patch_torch_load():
-    """Lazy patch for torch.load to set weights_only=False by default."""
+    """Lazy patch for torch.load to set weights_only=False by default,
+    and force CPU device to avoid MPS segfaults in subprocess."""
     try:
         import torch
+
+        # Force CPU to prevent MPS (Metal) segfaults when running in
+        # forked subprocesses (e.g., uvx MCP server, tu CLI).
+        if hasattr(torch, "set_default_device"):
+            torch.set_default_device("cpu")
 
         if not hasattr(torch.load, "_patched_by_tooluniverse"):
             _original_torch_load = torch.load
@@ -137,14 +157,14 @@ class ADMETAITool(BaseTool):
                 for col in columns:
                     expanded_columns.append(col)
                     percentile_col = f"{col}_drugbank_approved_percentile"
-                    if percentile_col in predictions.columns:
+                    if percentile_col in predictions.columns:  # type: ignore[attr-defined]
                         expanded_columns.append(percentile_col)
                 predictions = predictions[expanded_columns]
 
             # Organize output: {smiles: {col: value, ...}, ...}
             result = {}
-            for idx, row in predictions.iterrows():
-                result[idx] = {col: row[col] for col in predictions.columns}
+            for idx, row in predictions.iterrows():  # type: ignore[attr-defined]
+                result[idx] = {col: row[col] for col in predictions.columns}  # type: ignore[attr-defined]
             return result
         except Exception as e:
             return {"status": "error", "error": f"An unexpected error occurred: {e}"}

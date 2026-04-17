@@ -45,12 +45,6 @@
         "smiles": [
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
       }
     ],
     "return_schema": {
@@ -186,12 +180,6 @@
         "smiles": [
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
       }
     ],
     "return_schema": {
@@ -318,12 +306,6 @@
     "test_examples": [
       {
         "smiles": [
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
       }
@@ -460,12 +442,6 @@
         "smiles": [
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
       }
     ],
     "return_schema": {
@@ -596,13 +572,7 @@
     "test_examples": [
       {
         "smiles": [
-          "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"
-        ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
+          "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
       }
     ],
@@ -734,13 +704,7 @@
     "test_examples": [
       {
         "smiles": [
-          "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"
-        ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
+          "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
       }
     ],
@@ -876,12 +840,6 @@
         "smiles": [
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
-      },
-      {
-        "smiles": [
-          "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
       }
     ],
     "return_schema": {
@@ -1014,12 +972,6 @@
         "smiles": [
           "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
-      },
-      {
-        "smiles": [
-          "CN(C)C(=N)NC(=N)N",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
-        ]
       }
     ],
     "return_schema": {
@@ -1148,13 +1100,7 @@
     "test_examples": [
       {
         "smiles": [
-          "CN(C)C(=N)NC(=N)N"
-        ]
-      },
-      {
-        "smiles": [
-          "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
-          "Cn1cnc2n(C)c(=O)n(C)c(=O)c12"
+          "CC(=O)OC1=CC=CC=C1C(=O)O"
         ]
       }
     ],

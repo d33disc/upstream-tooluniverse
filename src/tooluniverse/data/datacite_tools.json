@@ -102,7 +102,8 @@
                 "publisher": {
                   "type": [
                     "string",
-                    "null"
+                    "null",
+                    "object"
                   ],
                   "description": "Publisher or repository name"
                 },
@@ -134,12 +135,27 @@
                     }
                   }
                 },
-                "description": {
+                "descriptions": {
+                  "type": "array",
+                  "description": "Descriptions/abstracts",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "descriptionType": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "url": {
                   "type": [
                     "string",
                     "null"
                   ],
-                  "description": "Abstract or description"
+                  "description": "Landing page URL"
                 },
                 "fundingReferences": {
                   "type": "array",
@@ -161,7 +177,7 @@
                 },
                 "relatedIdentifiers": {
                   "type": "array",
-                  "description": "Related DOIs and identifiers (e.g., linked publications)",
+                  "description": "Related DOIs and identifiers",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -210,7 +226,7 @@
             "string",
             "null"
           ],
-          "description": "Filter by resource type: 'Dataset', 'Software', 'Text', 'Image', 'Workflow', 'Model', 'PhysicalObject', 'Collection'"
+          "description": "Filter by resource type: 'Dataset', 'Software', 'Text', 'Image', 'Workflow', 'Model', 'PhysicalObject', 'Collection'. Maps to DataCite 'resource-type-id' parameter."
         },
         "page_size": {
           "type": [
@@ -253,60 +269,52 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "description": "DataCite search results",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching DOI records",
-              "items": {
+          "type": "array",
+          "description": "List of matching DOI records",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "DOI"
+              },
+              "type": {
+                "type": "string"
+              },
+              "attributes": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "DOI"
+                  "doi": {
+                    "type": "string"
                   },
-                  "attributes": {
-                    "type": "object",
-                    "properties": {
-                      "doi": {
-                        "type": "string"
-                      },
-                      "titles": {
-                        "type": "array"
-                      },
-                      "creators": {
-                        "type": "array"
-                      },
-                      "publicationYear": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "publisher": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "types": {
-                        "type": "object"
-                      }
-                    }
+                  "titles": {
+                    "type": "array"
+                  },
+                  "creators": {
+                    "type": "array"
+                  },
+                  "publicationYear": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "publisher": {},
+                  "types": {
+                    "type": "object"
+                  },
+                  "subjects": {
+                    "type": "array"
+                  },
+                  "descriptions": {
+                    "type": "array"
+                  },
+                  "url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
-                }
-              }
-            },
-            "meta": {
-              "type": "object",
-              "properties": {
-                "total": {
-                  "type": "integer",
-                  "description": "Total number of matching records"
-                },
-                "page": {
-                  "type": "integer"
                 }
               }
             }
