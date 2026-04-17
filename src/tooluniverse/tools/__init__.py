@@ -121,6 +121,10 @@ from .BindingDB_get_ligands_by_uniprot import BindingDB_get_ligands_by_uniprot
 from .BindingDB_get_ligands_by_uniprots import BindingDB_get_ligands_by_uniprots
 from .BindingDB_get_targets_by_compound import BindingDB_get_targets_by_compound
 from .BindingDB_search_by_target import BindingDB_search_by_target
+from .BioGRID_get_chemical_interactions import BioGRID_get_chemical_interactions
+from .BioGRID_get_interactions import BioGRID_get_interactions
+from .BioGRID_get_ptms import BioGRID_get_ptms
+from .BioGRID_search_by_pubmed import BioGRID_search_by_pubmed
 from .BioImageArchive_get_study import BioImageArchive_get_study
 from .BioImageArchive_search_bioimages import BioImageArchive_search_bioimages
 from .BioImageArchive_search_studies import BioImageArchive_search_studies
@@ -2889,6 +2893,10 @@ __all__ = [
     "BindingDB_get_ligands_by_uniprots",
     "BindingDB_get_targets_by_compound",
     "BindingDB_search_by_target",
+    "BioGRID_get_chemical_interactions",
+    "BioGRID_get_interactions",
+    "BioGRID_get_ptms",
+    "BioGRID_search_by_pubmed",
     "BioImageArchive_get_study",
     "BioImageArchive_search_bioimages",
     "BioImageArchive_search_studies",
@@ -5033,6 +5041,7 @@ __all__ = [
     "miRBase_get_mirna_publications",
     "miRBase_get_mirna_xrefs",
     "miRBase_search_mirna",
+    "NHANES_download_and_parse",
     "nhanes_get_dataset_info",
     "nhanes_search_datasets",
     "odphp_itemlist",

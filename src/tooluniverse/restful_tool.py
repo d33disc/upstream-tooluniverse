@@ -70,24 +70,6 @@ class MonarchTool(RESTfulTool):
             del response["facet_fields"]
 
         response = remove_none_and_empty_values(response)
-
-        # Strip ontology closure arrays — they contain ~150 ancestor terms per
-        # item and inflate responses from ~5KB to 100KB+ without adding signal
-        # for downstream LLM consumption.
-        _CLOSURE_KEYS = {"object_closure", "object_closure_label"}
-
-        def _strip_closure(obj):
-            if isinstance(obj, dict):
-                return {
-                    k: _strip_closure(v)
-                    for k, v in obj.items()
-                    if k not in _CLOSURE_KEYS
-                }
-            if isinstance(obj, list):
-                return [_strip_closure(v) for v in obj]
-            return obj
-
-        response = _strip_closure(response)
         if isinstance(response, dict) and "status" not in response:
             return {"status": "success", "data": response}
         return response
