@@ -105,38 +105,11 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       # ------------------------------------------------------------------ #
-      # Happy path: upstream is a strict ancestor of our local HEAD → just  #
-      # fast-forward merge and push directly to main.                       #
-      # ------------------------------------------------------------------ #
-      - name: Fast-forward merge (no conflicts)
-        if: steps.status.outputs.in_sync == 'false' && inputs.dry_run != true
-        id: ff_merge
-        run: |
-          git checkout main
-
-          if git merge --ff-only upstream/main 2>/dev/null; then
-            echo "merged=true" >> "$GITHUB_OUTPUT"
-            echo "✅ Fast-forward successful"
-          else
-            echo "merged=false" >> "$GITHUB_OUTPUT"
-            echo "⚠️  Fast-forward not possible — diverged history. Will open a PR."
-          fi
-
-      - name: Push fast-forward merge to main
-        if: |
-          steps.status.outputs.in_sync == 'false' &&
-          steps.ff_merge.outputs.merged == 'true'  &&
-          inputs.dry_run != true
-        run: git push origin main
-
-      # ------------------------------------------------------------------ #
-      # Fallback: histories have diverged → create a PR so the maintainer  #
-      # can review diffs and resolve any conflicts.                         #
+      # Always open a PR so the maintainer can review upstream changes.    #
       # ------------------------------------------------------------------ #
       - name: Check for existing sync PR
         if: |
           steps.status.outputs.in_sync == 'false' &&
-          steps.ff_merge.outputs.merged == 'false' &&
           inputs.dry_run != true
         id: existing_pr
         env:
@@ -156,7 +129,6 @@ jobs:
       - name: Create sync branch and open PR
         if: |
           steps.status.outputs.in_sync == 'false' &&
-          steps.ff_merge.outputs.merged == 'false' &&
           steps.existing_pr.outputs.pr_number == '' &&
           inputs.dry_run != true
         env:
