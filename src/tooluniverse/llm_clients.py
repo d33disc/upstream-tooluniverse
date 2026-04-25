@@ -204,6 +204,8 @@ class OpenRouterClient(BaseLLMClient):
     Supports models from OpenAI, Anthropic, Google, Qwen, and many other providers.
     """
 
+    MIN_TEST_MAX_TOKENS = 16
+
     # Default model limits based on latest OpenRouter offerings
     DEFAULT_MODEL_LIMITS: Dict[str, Dict[str, int]] = {
         "openai/gpt-5": {"max_output": 128_000, "context_window": 400_000},
@@ -239,10 +241,12 @@ class OpenRouterClient(BaseLLMClient):
         if site_name := os.getenv("OPENROUTER_SITE_NAME"):
             default_headers["X-Title"] = site_name
 
+        timeout = int(os.environ.get("OPENROUTER_TIMEOUT", "90"))
         self.client = self._OpenAI(
             base_url="https://openrouter.ai/api/v1",
             api_key=api_key,
             default_headers=default_headers if default_headers else None,
+            timeout=timeout,
         )
 
         # Load env overrides for model limits
@@ -309,7 +313,7 @@ class OpenRouterClient(BaseLLMClient):
     def test_api(self) -> None:
         """Test API connectivity with minimal token usage."""
         test_messages = [{"role": "user", "content": "ping"}]
-        token_attempts = [1, 4, 16, 32]
+        token_attempts = [self.MIN_TEST_MAX_TOKENS, 32]
         last_error: Optional[Exception] = None
 
         for tok in token_attempts:
@@ -392,6 +396,14 @@ class OpenRouterClient(BaseLLMClient):
                 )
                 retries += 1
                 time.sleep(retry_delay * retries)
+            except self._openai.APITimeoutError:  # type: ignore[attr-defined]
+                retries += 1
+                self.logger.warning(
+                    f"Request timed out (attempt {retries}/{max_retries}). "
+                    f"Retrying in {retry_delay} seconds..."
+                )
+                if retries < max_retries:
+                    time.sleep(retry_delay * retries)
             except Exception as e:  # noqa: BLE001
                 self.logger.error(f"OpenRouter error: {e}")
                 import traceback
@@ -631,7 +643,18 @@ class ClaudeCliClient(BaseLLMClient):
                     timeout=self.timeout,
                 )
                 if result.returncode != 0:
-                    self.logger.error(f"claude CLI error: {result.stderr[:500]}")
+                    detail = (result.stderr or result.stdout or "").strip()
+                    if result.stdout:
+                        try:
+                            payload = _json.loads(result.stdout)
+                            detail = (
+                                payload.get("result")
+                                or payload.get("error", {}).get("message")
+                                or detail
+                            )
+                        except _json.JSONDecodeError:
+                            pass
+                    self.logger.error(f"claude CLI error: {detail[:500]}")
                     retries += 1
                     if retries < max_retries:
                         time.sleep(retry_delay)
