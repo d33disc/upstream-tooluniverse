@@ -11,8 +11,13 @@
         },
         "compact": {
           "type": "boolean",
+<<<<<<< HEAD
           "description": "Return compact summary (default true). Set false for full raw JSON entry.",
           "default": true
+=======
+          "description": "Return a bounded summary instead of the complete UniProtKB JSON entry. Use this when calling from an LLM context to avoid oversized outputs.",
+          "default": false
+>>>>>>> upstream/main
         }
       },
       "required": [
