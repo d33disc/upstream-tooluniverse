@@ -33,7 +33,8 @@ answers a multi-hop question.
 
 ## 1 — Connection Surfaces (How You Connect In)
 
-Six ways to reach the same ToolUniverse instance. Pick by deployment context.
+Seven ways to reach the same ToolUniverse instance. Pick by deployment
+context.
 
 - **Python SDK** — `from tooluniverse import ToolUniverse` (in-process).
   Embed in scripts, notebooks, agent frameworks.
@@ -46,7 +47,7 @@ Six ways to reach the same ToolUniverse instance. Pick by deployment context.
 - **CLI (`tu`)** — `tu` (shell). Humans, shell scripts, CI.
 - **HTTP client lib** — `from tooluniverse import ToolUniverseClient`
   (HTTP wrapper). Python apps talking to a remote REST server.
-- **smolagents** — `tooluniverse.smolagent_tool.SmolagentsTool`
+- **smolagents** — `tooluniverse.smolagent_tool.ToolUniverseTool`
   (adapter). Wire TU tools into the smolagents agent framework.
 
 All console scripts come from `pyproject.toml [project.scripts]`.
@@ -58,7 +59,8 @@ surface, grouped:
 
 #### Lifecycle
 
-- `ToolUniverse(tool_files=..., profile=..., workspace=..., hooks=...)`
+- `ToolUniverse(tool_files=..., profile=..., workspace=...,
+  hooks_enabled=False, hook_type=..., hook_config=...)`
 - `load_tools(categories=None, exclude_tools=None, python_files=None)`
   — glob filtering supported
 - `load_profile()`, `refresh_tools()`, `clear_tools()`, `clear_cache()`,
@@ -93,7 +95,7 @@ result = tu.run_one_function({
     "arguments": {"accession": "P05067"},
 })
 
-# Equivalent attribute-access form (ToolProxy under the hood)
+# Equivalent attribute-access form (ToolNamespace + ToolCallable)
 tu.tools.UniProt_get_entry_by_accession(accession="P05067")
 
 # Batch (parallel within the worker pool)
@@ -129,11 +131,12 @@ long-running tools: `tasks/get`, `tasks/list`, `tasks/cancel`, `tasks/result`
 (see `src/tooluniverse/smcp.py:806-827`). Outside agents can fire-and-poll
 instead of blocking on multi-minute calls.
 
-In **compact mode** (default for `tooluniverse`) only the 4 proxy tools
-(`list_tools`, `grep_tools`, `get_tool_info`, `execute_tool`) are exposed at
-the MCP protocol level — backend tools stay loaded and reachable via
-`execute_tool`. A 5th, `find_tools`, is registered when the `tool_finder`
-category is included.
+In **compact mode** (default for `tooluniverse`) the MCP protocol layer
+exposes the 4 proxy tools `list_tools`, `grep_tools`, `get_tool_info`,
+`execute_tool`, plus `find_tools` whenever search is enabled (the default —
+controlled by the `search_enabled` flag in `SMCP._add_search_tools()` and
+suppressed by excluding the `tool_finder` category). Backend tools stay
+loaded and reachable via `execute_tool` regardless.
 
 Manifest: `server.json` (`io.github.mims-harvard/tooluniverse`, runtime `uvx`,
 default args `tooluniverse-smcp-stdio --compact-mode`).
@@ -181,7 +184,7 @@ curl -X POST http://localhost:8080/api/call \
 ```python
 from tooluniverse import ToolUniverseClient
 c = ToolUniverseClient("http://localhost:8080")
-c.load_tools(tool_type=["uniprot"])
+c.load_tools(categories=["uniprot"])
 c.run_one_function({"name": "UniProt_get_entry_by_accession",
                     "arguments": {"accession": "P05067"}})
 c.list_available_methods(); c.health_check(); c.reset_server({})
@@ -217,11 +220,11 @@ Other console scripts (operational):
 Three finder strategies live behind `find_tools` / `grep_tools`. Pick by
 constraint, not preference.
 
-| Finder                     | Algorithm                                          | When                                   |
-|----------------------------|----------------------------------------------------|----------------------------------------|
-| `ToolFinderKeyword`        | BM25 + TF-IDF, stemming, phrase bonuses            | exact terms, no GPU, reproducible      |
-| `ToolFinderEmbedding`      | `ToolRAG-T1-GTE-Qwen2-1.5B` + cosine, FAISS, MPS   | natural-language paraphrase, GPU OK    |
-| `ToolFinderLLM`            | keyword pre-filter (top 50) → LLM JSON reasoning   | multi-tool composition, multi-hop      |
+| Finder                     | Algorithm                                                       | When                                   |
+|----------------------------|-----------------------------------------------------------------|----------------------------------------|
+| `ToolFinderKeyword`        | BM25 + TF-IDF, stemming, phrase bonuses                         | exact terms, no GPU, reproducible      |
+| `ToolFinderEmbedding`      | SentenceTransformer (`ToolRAG-T1-GTE-Qwen2-1.5B`), cosine, MPS  | natural-language paraphrase, GPU OK    |
+| `ToolFinderLLM`            | keyword pre-filter (top 50) → LLM JSON reasoning                | multi-tool composition, multi-hop      |
 
 Cache: `~/.cache/tooluniverse/embeddings/*.pt`, MD5 cache-busting on tool list
 change. Static lazy registry at `src/tooluniverse/_lazy_registry_static.py`
@@ -248,8 +251,9 @@ agentic tools in `src/tooluniverse/data/agentic_tools.json` (e.g.
 `ScientificTextSummarizer`, `MedicalLiteratureReviewer`, `HypothesisGenerator`,
 `ExperimentalDesignScorer`, `NoveltySignificanceReviewer`).
 
-`SmolagentsTool` (`smolagent_tool.py`) wraps any TU tool as a
-`smolagents.Tool` subclass for the smolagents framework.
+`ToolUniverseTool` (`smolagent_tool.py`) wraps any TU tool as a
+`smolagents.Tool` subclass; the same module's `SmolAgentTool` is the inverse
+(a TU tool that wraps a smolagents agent).
 
 ### Sandboxed Python execution
 
@@ -458,7 +462,8 @@ If you only remember one thing, remember the file map:
 |-------------------------------|---------------------------------------------------------------|
 | Python class API              | `src/tooluniverse/execute_function.py`                        |
 | MCP entry points              | `src/tooluniverse/smcp_server.py`                             |
-| MCP tool registration         | `mcp_tool_registry.py` + `mcp_tool_registration_en.md`        |
+| MCP tool registration code    | `src/tooluniverse/mcp_tool_registry.py`                       |
+| MCP tool registration tutorial| `docs/dev_docs/mcp_tool_registration_en.md`                   |
 | Compact-mode proxy tools      | `src/tooluniverse/smcp.py`                                    |
 | HTTP REST                     | `src/tooluniverse/http_api_server.py`                         |
 | HTTP client                   | `src/tooluniverse/http_client.py`                             |

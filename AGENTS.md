@@ -54,10 +54,12 @@ Also useful:
 
 ## Conventions
 
-- The default `tooluniverse` console script runs in **compact mode**: only the
-  4 proxy tools (`list_tools`, `grep_tools`, `get_tool_info`, `execute_tool`)
-  are exposed at the MCP layer; the full ~2,300 tools stay loaded and
-  reachable via `execute_tool`.
+- The default `tooluniverse` console script runs in **compact mode**: the MCP
+  layer exposes the 4 proxy tools (`list_tools`, `grep_tools`,
+  `get_tool_info`, `execute_tool`) plus `find_tools` when search is enabled
+  (the default). The full ~2,300 tools stay loaded and reachable via
+  `execute_tool`. To suppress `find_tools`, exclude the `tool_finder`
+  category at startup.
 - Credentials are env-var-based; tools auto-skip when their key is missing.
   Run `tu status` to see what's configured.
 - Set `TOOLUNIVERSE_CACHE_ENABLED=true` for repeatable lookups.
