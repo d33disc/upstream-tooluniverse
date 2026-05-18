@@ -10,7 +10,11 @@ from ._shared_client import get_shared_client
 
 def UniProt_get_entry_by_accession(
     accession: str,
+<<<<<<< HEAD
     compact: Optional[bool] = True,
+=======
+    compact: Optional[bool] = None,
+>>>>>>> upstream/main
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -23,8 +27,13 @@ def UniProt_get_entry_by_accession(
     ----------
     accession : str
         UniProtKB entry accession, e.g., P05067.
+<<<<<<< HEAD
     compact : bool
         Return compact summary (default true). Set false for full raw JSON entry.
+=======
+    compact : bool, optional
+        Return a bounded summary instead of the complete UniProtKB JSON entry. Defaults to true in the tool configuration.
+>>>>>>> upstream/main
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,10 +48,18 @@ def UniProt_get_entry_by_accession(
     # Handle mutable defaults to avoid B006 linting error
 
     # Strip None values so optional parameters don't trigger schema validation errors
+<<<<<<< HEAD
     _args = {k: v for k, v in {
         "accession": accession,
                 "compact": compact
     }.items() if v is not None}
+=======
+    _args = {
+        k: v
+        for k, v in {"accession": accession, "compact": compact}.items()
+        if v is not None
+    }
+>>>>>>> upstream/main
     return get_shared_client().run_one_function(
         {
             "name": "UniProt_get_entry_by_accession",
