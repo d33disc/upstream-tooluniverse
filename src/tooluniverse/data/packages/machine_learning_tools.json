@@ -12,9 +12,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "scikit-learn",
     "local_info": {
@@ -66,24 +64,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -154,9 +143,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "torch",
     "local_info": {
@@ -208,24 +195,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -296,9 +274,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "torch_geometric",
     "local_info": {
@@ -351,24 +327,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -439,9 +406,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "umap-learn",
     "local_info": {
@@ -493,24 +458,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -581,9 +537,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "statsmodels",
     "local_info": {
@@ -635,24 +589,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -723,9 +668,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "schnetpack",
     "local_info": {
@@ -777,24 +720,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -861,18 +795,11 @@
       "properties": {
         "info_type": {
           "type": "string",
-          "enum": [
-            "overview",
-            "installation",
-            "usage",
-            "documentation"
-          ],
+          "enum": ["overview", "installation", "usage", "documentation"],
           "description": "Type of information to retrieve about harmony-pytorch"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "harmony-pytorch",
     "local_info": {
@@ -925,24 +852,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1009,18 +927,11 @@
       "properties": {
         "info_type": {
           "type": "string",
-          "enum": [
-            "overview",
-            "installation",
-            "usage",
-            "documentation"
-          ],
+          "enum": ["overview", "installation", "usage", "documentation"],
           "description": "Type of information to retrieve about python-libsbml"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "python-libsbml",
     "local_info": {
@@ -1073,24 +984,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1157,18 +1059,11 @@
       "properties": {
         "info_type": {
           "type": "string",
-          "enum": [
-            "overview",
-            "installation",
-            "usage",
-            "documentation"
-          ],
+          "enum": ["overview", "installation", "usage", "documentation"],
           "description": "Type of information to retrieve about pymzML"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "pymzml",
     "local_info": {
@@ -1221,24 +1116,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1309,9 +1195,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "faiss-cpu",
     "local_info": {
@@ -1363,24 +1247,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1457,9 +1332,7 @@
           "description": "Type of information to retrieve about hmmlearn"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "hmmlearn",
     "local_info": {
@@ -1512,24 +1385,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1596,18 +1460,11 @@
       "properties": {
         "info_type": {
           "type": "string",
-          "enum": [
-            "overview",
-            "installation",
-            "usage",
-            "documentation"
-          ],
+          "enum": ["overview", "installation", "usage", "documentation"],
           "description": "Type of information to retrieve about COBRApy"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "cobra",
     "local_info": {
@@ -1660,24 +1517,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1748,9 +1596,7 @@
           "default": true
         }
       },
-      "required": [
-        "include_examples"
-      ]
+      "required": ["include_examples"]
     },
     "package_name": "deepxde",
     "local_info": {
@@ -1801,24 +1647,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -1895,9 +1732,7 @@
           "description": "Type of information to retrieve about DeepPurpose"
         }
       },
-      "required": [
-        "info_type"
-      ]
+      "required": ["info_type"]
     },
     "package_name": "deeppurpose",
     "local_info": {
@@ -1949,24 +1784,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2035,9 +1861,7 @@
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2054,24 +1878,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2140,9 +1955,7 @@
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2159,24 +1972,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2245,9 +2049,7 @@
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2264,24 +2066,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2350,9 +2143,7 @@
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2369,24 +2160,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2448,16 +2230,17 @@
     "type": "PackageTool",
     "name": "get_skopt_info",
     "description": "Get information about the skopt package. Scikit-Optimize: sequential model-based optimization",
-    "package_name": "skopt",
+    "package_name": "scikit-optimize",
+    "local_info": {
+      "import_name": "skopt"
+    },
     "parameter": {
       "type": "object",
       "properties": {},
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2474,24 +2257,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
@@ -2560,9 +2334,7 @@
       "required": []
     },
     "required": [],
-    "test_examples": [
-      {}
-    ],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -2579,24 +2351,15 @@
           "description": "Latest version number"
         },
         "author": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Author or maintainer"
         },
         "license": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "License type"
         },
         "home_page": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "description": "Home page URL"
         },
         "documentation": {
