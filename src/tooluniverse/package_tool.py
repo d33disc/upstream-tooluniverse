@@ -71,9 +71,11 @@ class PackageTool(BaseTool):
                 "author": info.get("author", "Unknown"),
                 "license": info.get("license", "Not specified"),
                 "home_page": info.get("home_page", ""),
-                "documentation": info.get("project_urls", {}).get("Documentation", ""),
-                "repository": info.get("project_urls", {}).get(
-                    "Repository", info.get("project_urls", {}).get("Source", "")
+                "documentation": (info.get("project_urls") or {}).get(
+                    "Documentation", ""
+                ),
+                "repository": (info.get("project_urls") or {}).get(
+                    "Repository", (info.get("project_urls") or {}).get("Source", "")
                 ),
                 "python_versions": info.get("classifiers", []),
                 "keywords": (
