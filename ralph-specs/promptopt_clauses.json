@@ -1,0 +1,45 @@
+{
+  "_note": "Toggleable reinforcement clauses for the Ollama worker system prompt. The optimizer hill-climbs over which to include (added to the core ollama_worker.system.md) to maximize eval score. Doc-derived clauses (from ollama_qwen_prompting_notes.md) get appended here.",
+  "clauses": [
+    {
+      "id": "act",
+      "text": "Always ACT by calling a tool (write_file / read_file / run_shell). Never write code or commands in prose or markdown fences and assume they ran — an unexecuted tool call does nothing.",
+      "targets": [
+        "mechanical",
+        "no_fabricate",
+        "fix_real_bug",
+        "scope_no_overedit"
+      ]
+    },
+    {
+      "id": "finish",
+      "text": "When the task is complete, call the finish tool with the status string. Do not end with a plain-text answer.",
+      "targets": ["mechanical", "no_fabricate"]
+    },
+    {
+      "id": "skip",
+      "text": "If the root cause is a missing API key/credential or an unreachable external service, make ZERO file edits and finish with 'SKIP <reason>'. A missing key is never a code bug.",
+      "targets": ["skip_unfixable"]
+    },
+    {
+      "id": "scope",
+      "text": "Edit ONLY the file named in the task. Never create, modify, or delete any other file.",
+      "targets": ["scope_no_overedit"]
+    },
+    {
+      "id": "verify",
+      "text": "After editing, re-run the exact failing command with run_shell and confirm it passes before calling finish.",
+      "targets": ["fix_real_bug"]
+    },
+    {
+      "id": "observed",
+      "text": "Report only values you actually saw in a run_shell result. Never predict or invent command output.",
+      "targets": ["no_fabricate"]
+    },
+    {
+      "id": "onestep",
+      "text": "One tool call per step; wait for its result before the next action.",
+      "targets": ["mechanical", "fix_real_bug"]
+    }
+  ]
+}
