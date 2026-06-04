@@ -3,8 +3,8 @@
 How an outside codebase, agent, or human reaches into ToolUniverse and pulls
 information together iteratively.
 
-ToolUniverse exposes **~2,300 scientific tools across ~510 categories**,
-**~134 orchestration skills**, and **~10 entry points**. The point of this
+ToolUniverse exposes **~2,300 scientific tools across ~500 categories**,
+**136 orchestration skills**, and **~10 entry points**. The point of this
 document is to make every entry point and every layer findable from one page.
 
 ---
@@ -230,10 +230,10 @@ Cache: `~/.cache/tooluniverse/embeddings/*.pt`, MD5 cache-busting on tool list
 change. Static lazy registry at `src/tooluniverse/_lazy_registry_static.py`
 maps tool type → module so imports happen on first use, not at startup.
 
-Docs already in repo:
+Related sources in repo:
 
-- `docs/dev_docs/Embedding_Search.md` — embedding pipeline
-- `docs/dev_docs/Tool_Registration_Chain.md` — 6 links from JSON → MCP
+- `src/tooluniverse/tool_finder_embedding.py` — embedding pipeline
+- `docs/dev_docs/Adding_Tools_Tutorial.md` — JSON config to MCP-callable tool
 
 ---
 
@@ -294,7 +294,7 @@ Cached graph files at repo root: `tool_composition_graph.{json,pkl}`,
 
 ---
 
-## 4 — Skills Layer (~134 skills)
+## 4 — Skills Layer (136 skills)
 
 Skills are higher-level orchestration playbooks that sit *above* the tools.
 They're in `skills/` and follow `SKILL.md` frontmatter conventions.
@@ -470,11 +470,11 @@ If you only remember one thing, remember the file map:
 | CLI (`tu`)                    | `src/tooluniverse/cli.py`                                     |
 | Discovery: keyword / NL / LLM | `tool_finder_{keyword,embedding,llm}.py`                      |
 | Lazy startup registry         | `src/tooluniverse/_lazy_registry_static.py`                   |
-| Tool registration chain       | `docs/dev_docs/Tool_Registration_Chain.md`                    |
-| Embedding pipeline            | `docs/dev_docs/Embedding_Search.md`                           |
+| Tool registration chain       | `docs/dev_docs/Adding_Tools_Tutorial.md`                      |
+| Embedding pipeline            | `src/tooluniverse/tool_finder_embedding.py`                   |
 | MCP tutorial                  | `docs/dev_docs/MCP_Server_Tutorial.md`                        |
 | Adding new tools              | `docs/dev_docs/Adding_Tools_Tutorial.md` (+ Quick_Reference)  |
-| Skills inventory              | `skills/` (134 SKILL.md files)                                |
+| Skills inventory              | `skills/` (129 SKILL.md files)                                |
 | Tool graph UI                 | `src/tooluniverse/tool_graph_web_ui.py`                       |
 | Agentic tools registry        | `src/tooluniverse/data/agentic_tools.json`                    |
 | Tool composition graph data   | `tool_composition_graph.{json,pkl}` (repo root)               |
