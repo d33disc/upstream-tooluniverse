@@ -123,7 +123,7 @@ class AgenticTool(BaseTool):
 
         # LLM configuration
         self._api_type: str = get_config("api_type", "CLAUDE_CLI")
-        self._model_id: str = get_config("model_id", "gpt-5")
+        self._model_id: str = get_config("model_id", "haiku")
         self._temperature: Optional[float] = get_config("temperature", 1.0)
         # max_new_tokens is handled by LLM client automatically
         self._return_json: bool = get_config("return_json", False)

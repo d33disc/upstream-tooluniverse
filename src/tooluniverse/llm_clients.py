@@ -592,6 +592,47 @@ class ClaudeCliClient(BaseLLMClient):
         except self._subprocess.TimeoutExpired:
             raise ValueError("claude --version timed out")
 
+    @staticmethod
+    def _parse_cli_payload(stdout: str):
+        """`claude --print --output-format json` may emit a single result object OR
+        a list of stream events ([system, assistant, result]). Returns
+        (content, cost_usd, error); error is non-None on any failure shape."""
+        data = _json.loads(stdout)
+        event = data
+        if isinstance(data, list):
+            event = next(
+                (
+                    e
+                    for e in reversed(data)
+                    if isinstance(e, dict) and e.get("type") == "result"
+                ),
+                None,
+            )
+            if event is None:
+                texts = []
+                for e in data:
+                    if isinstance(e, dict) and e.get("type") == "assistant":
+                        for c in (e.get("message", {}) or {}).get("content", []) or []:
+                            if isinstance(c, dict) and c.get("type") == "text":
+                                texts.append(c.get("text", ""))
+                return (
+                    ("".join(texts), 0, None)
+                    if texts
+                    else (
+                        None,
+                        0,
+                        "no result event in CLI output",
+                    )
+                )
+        if not isinstance(event, dict):
+            return None, 0, "unexpected CLI payload shape"
+        if event.get("is_error"):
+            err = event.get("result") or event.get("error") or "CLI returned is_error"
+            return None, event.get("total_cost_usd", 0) or 0, str(err)
+        content = event.get("result", "")
+        cost = event.get("total_cost_usd") or event.get("cost_usd") or 0
+        return content, cost, None
+
     def infer(
         self,
         messages: List[Dict[str, str]],
@@ -646,12 +687,8 @@ class ClaudeCliClient(BaseLLMClient):
                     detail = (result.stderr or result.stdout or "").strip()
                     if result.stdout:
                         try:
-                            payload = _json.loads(result.stdout)
-                            detail = (
-                                payload.get("result")
-                                or payload.get("error", {}).get("message")
-                                or detail
-                            )
+                            _c, _cost, _err = self._parse_cli_payload(result.stdout)
+                            detail = _err or _c or detail
                         except _json.JSONDecodeError:
                             pass
                     self.logger.error(f"claude CLI error: {detail[:500]}")
@@ -660,10 +697,14 @@ class ClaudeCliClient(BaseLLMClient):
                         time.sleep(retry_delay)
                     continue
 
-                # Parse JSON output — extract the result field
-                response = _json.loads(result.stdout)
-                content = response.get("result", "")
-                cost = response.get("cost_usd", 0)
+                # Parse JSON output — robust to dict OR stream-event-array shapes
+                content, cost, parse_err = self._parse_cli_payload(result.stdout)
+                if parse_err is not None:
+                    self.logger.error(f"claude CLI: {parse_err[:500]}")
+                    retries += 1
+                    if retries < max_retries:
+                        time.sleep(retry_delay)
+                    continue
                 self.logger.info(f"Claude CLI cost: ${cost:.4f}")
                 return self._strip_markdown_fences(content)
 
