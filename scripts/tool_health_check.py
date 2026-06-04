@@ -2,9 +2,13 @@
 """Nightly tool health check for ToolUniverse CI.
 
 Reads the previous TOOL_HEALTH_REPORT.json for smart filtering, then runs
-`python -m tooluniverse.cli test <tool>` (15 s timeout, 16 workers) for:
+`python -m tooluniverse.cli test <tool>` for:
   - all broken/unknown tools from the previous run
   - a 10 % random sample of passing tools (regression coverage)
+
+Transient failures (timeout, 5xx, 429, connection errors) are retried before a
+tool is flagged broken — a single network blip must not condemn a working tool.
+Concurrency, timeout, and retry count are env-tunable (see constants below).
 
 Writes a new TOOL_HEALTH_REPORT.json with per-tool status and a summary.
 """
@@ -20,10 +24,35 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-TIMEOUT = 15
-MAX_WORKERS = 16
+TIMEOUT = int(os.getenv("TU_HEALTH_TIMEOUT", "15"))
+MAX_WORKERS = int(os.getenv("TU_HEALTH_WORKERS", "8"))
+RETRIES = int(os.getenv("TU_HEALTH_RETRIES", "2"))
+RETRY_BACKOFF = float(os.getenv("TU_HEALTH_BACKOFF", "2.0"))
 SAMPLE_RATE = 0.10
 REPORT_PATH = Path("TOOL_HEALTH_REPORT.json")
+
+# Substrings marking a failure as transient (retriable) rather than a real defect.
+# Anything not matched here (NOT_FOUND, validation, code exceptions) is permanent.
+_TRANSIENT_MARKERS = (
+    "timeout",
+    "timed out",
+    "connection",
+    "connectionerror",
+    "rate limit",
+    "429",
+    "500",
+    "502",
+    "503",
+    "504",
+    "temporarily",
+    "read timed out",
+)
+
+
+def _is_transient(detail: str) -> bool:
+    """True if a failure detail looks like a retriable network blip, not a real bug."""
+    low = detail.lower()
+    return any(marker in low for marker in _TRANSIENT_MARKERS)
 
 
 def _load_prev() -> dict[str, dict]:
@@ -35,7 +64,8 @@ def _load_prev() -> dict[str, dict]:
     return {}
 
 
-def _test_tool(name: str) -> tuple[str, str, str]:
+def _test_once(name: str) -> tuple[str, str]:
+    """Run the tool's test examples exactly once; return (status, detail)."""
     t0 = time.time()
     try:
         proc = subprocess.run(
@@ -46,7 +76,7 @@ def _test_tool(name: str) -> tuple[str, str, str]:
         )
         elapsed = f"{time.time() - t0:.1f}s"
         if proc.returncode == 0:
-            return name, "live", f"passed ({elapsed})"
+            return "live", f"passed ({elapsed})"
         raw = (proc.stdout or proc.stderr).strip()
         try:
             parsed = json.loads(raw)
@@ -59,12 +89,30 @@ def _test_tool(name: str) -> tuple[str, str, str]:
             )[:120]
         except Exception:
             detail = raw[:120] or "test failed"
-        return name, "broken", f"{detail} ({elapsed})"
+        return "broken", f"{detail} ({elapsed})"
     except subprocess.TimeoutExpired:
-        return name, "broken", f"timeout after {TIMEOUT}s"
+        return "broken", f"timeout after {TIMEOUT}s"
     except Exception as exc:
         elapsed = f"{time.time() - t0:.1f}s"
-        return name, "broken", f"{type(exc).__name__}: {str(exc)[:80]} ({elapsed})"
+        return "broken", f"{type(exc).__name__}: {str(exc)[:80]} ({elapsed})"
+
+
+def _test_tool(name, _run=_test_once, _sleep=time.sleep) -> tuple[str, str, str]:
+    """Test a tool, retrying transient failures before flagging it broken.
+
+    A live result or a permanent failure (NOT_FOUND, validation, code bug) returns
+    immediately. A transient failure (timeout, 5xx, 429, connection) is retried up
+    to RETRIES times with linear backoff — a network blip must not condemn a tool.
+    """
+    status, detail = _run(name)
+    attempt = 0
+    while status == "broken" and _is_transient(detail) and attempt < RETRIES:
+        attempt += 1
+        _sleep(RETRY_BACKOFF * attempt)
+        status, detail = _run(name)
+    if attempt and status == "live":
+        detail = f"{detail} [recovered after {attempt} retry(s)]"
+    return name, status, detail
 
 
 def _select(all_tools: list[str], prev: dict[str, dict]) -> list[str]:
