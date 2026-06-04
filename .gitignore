@@ -207,3 +207,7 @@ CLAUDE.md
 credentials.json
 *_api_key*
 *_token*
+
+# SQLite transient write-ahead-log / shared-memory files (runtime, never commit)
+*.db-wal
+*.db-shm
