@@ -1,0 +1,47 @@
+{
+  "FDA_get_brand_name_generic_name": {
+    "args": {
+      "drug_name": "Aspirin",
+      "limit": 1
+    },
+    "elapsed": 1.28,
+    "result_type": "<class 'dict'>",
+    "result_preview": "{\"meta\": {\"skip\": 0, \"limit\": 1, \"total\": 749}, \"results\": [{\"openfda.brand_name\": [\"Low Dose Aspirin\"], \"openfda.generic_name\": [\"ASPIRIN\"], \"set_id\": \"0058175f-3474-40c3-a046-6cfaec86d84b\", \"id\": \"008ee85b-5cac-45a6-a857-a828f8125175\"}]}",
+    "verdict": "HAS_RESULTS(1)"
+  },
+  "FDA_get_drug_name_by_pharmacodynamics": {
+    "args": {
+      "pharmacodynamics": "reduces hepatic glucose production",
+      "limit": 2
+    },
+    "elapsed": 1.35,
+    "result_type": "<class 'dict'>",
+    "result_preview": "{\"status\": \"error\", \"error\": {\"code\": \"NOT_FOUND\", \"message\": \"No matches found!\"}, \"suggestion\": \"This label section ('openfda.brand_name') may be missing for that product; try a related section like 'contraindications' or 'warnings_and_precautions'. As a fallback, try searching label text fields (e.g., spl_product_data_elements) and then pivot to the desired section.\", \"meta\": {\"skip\": 0, \"limit\": 2, \"total\": 0}, \"results\": []}",
+    "verdict": "ERROR_DICT"
+  },
+  "FDA_get_warnings_and_cautions_info_by_drug_name": {
+    "args": {
+      "drug_name": "Aspirin"
+    },
+    "elapsed": 0.0,
+    "result_type": "<class 'dict'>",
+    "result_preview": "{\"status\": \"error\", \"error\": \"Tool 'FDA_get_warnings_and_cautions_info_by_drug_name' not found even after loading tools\", \"error_details\": {\"type\": \"ToolUnavailableError\", \"message\": \"Tool 'FDA_get_warnings_and_cautions_info_by_drug_name' not found even after loading tools\", \"retriable\": false, \"next_steps\": [\"Check network connection\", \"Verify service status\", \"Run tu.tools.refresh() if MCP tool\", \"Check tool name spelling\"], \"details\": {}}}",
+    "verdict": "ERROR_DICT"
+  },
+  "FDA_get_drug_names_by_indication": {
+    "args": {},
+    "elapsed": 0.0,
+    "result_type": "<class 'dict'>",
+    "result_preview": "{\"status\": \"error\", \"error\": \"Parameter validation failed for 'root': 'indication' is a required property\", \"error_details\": {\"type\": \"ToolValidationError\", \"message\": \"Parameter validation failed for 'root': 'indication' is a required property\", \"retriable\": false, \"next_steps\": [\"Check parameter types and values\", \"Review tool documentation\", \"Verify required parameters are provided\"], \"details\": {\"validation_error\": \"'indication' is a required property\\n\\nFailed validating 'required' in schema:\\n    {'type': 'object',\\n     'properties': {'indication': {'type': 'string',\\n                                   'description': 'The indication or usage '\\n                                                  'of the drug.'},\\n                    'limit': {'type': 'integer',\\n                              'description': 'The number of records to '\\n                                             're",
+    "verdict": "ERROR_DICT"
+  },
+  "FDA_get_boxed_warning_info_by_drug_name": {
+    "args": {
+      "drug_name": "warfarin"
+    },
+    "elapsed": 1.27,
+    "result_type": "<class 'dict'>",
+    "result_preview": "{\"meta\": {\"skip\": 0, \"limit\": 100, \"total\": 71}, \"results\": [{\"openfda.brand_name\": [\"Warfarin Sodium\"], \"openfda.generic_name\": [\"WARFARIN SODIUM\"], \"boxed_warning\": [\"WARNING: BLEEDING RISK Warfarin sodium can cause major or fatal bleeding [see Warnings and Precautions ( 5.1 )] . Perform regular monitoring of INR in all treated patients [see Dosage and Administration ( 2.1 )] . Drugs, dietary changes, and other factors affect INR levels achieved with warfarin sodium therapy [see Drug Interactions ( 7 )] . Instruct patients about prevention measures to minimize risk of bleeding and to report signs and symptoms of bleeding [see Patient Counseling Information ( 17 )] . WARNING: BLEEDING RISK See full prescribing information for complete boxed warning. Warfarin sodium can cause major or fatal bleeding. ( 5.1 ) Perform regular monitoring of INR in all treated patients. ( 2.1 ) Drugs, dietar",
+    "verdict": "HAS_RESULTS(71)"
+  }
+}
