@@ -3,7 +3,8 @@
 You're an AI agent working in this repo. Read this first.
 
 ToolUniverse is a scientific research platform exposing **~2,300 tools across
-~510 categories** plus **~134 orchestration skills**. It is reachable through
+~500 categories** (494 cataloged in `TOOL_MANIFEST.json`, 2026-03-28) plus
+**136 orchestration skills**. It is reachable through
 multiple transports — every transport routes through the same core class.
 
 ## How to interact (5 connection surfaces)
@@ -44,9 +45,9 @@ skills inventory, credentials inventory, and the canonical iterative workflow.
 
 Also useful:
 
-- `docs/dev_docs/Tool_Registration_Chain.md` — how a tool gets from JSON
-  definition to MCP-callable
-- `docs/dev_docs/Embedding_Search.md` — how `find_tools` indexes tools
+- `docs/dev_docs/Adding_Tools_Tutorial.md` (+ `src/tooluniverse/_lazy_registry_static.py`)
+  — how a tool gets from JSON definition to MCP-callable
+- `docs/dev_docs/Interaction_Surfaces.md` 2 — how `find_tools` indexes tools
 - `docs/dev_docs/MCP_Server_Tutorial.md` — MCP setup walkthrough
 - `docs/dev_docs/Adding_Tools_Tutorial.md` — adding new tools
 - `server.json` — machine-readable MCP manifest

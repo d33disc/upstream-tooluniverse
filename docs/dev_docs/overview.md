@@ -14,13 +14,13 @@ This directory contains documentation for TxAgent and guides on integrating with
 - Troubleshooting and testing guides
 - Multiple registration methods
 
-### [Embedding Search](Embedding_Search.md)
+### [Embedding Search](Interaction_Surfaces.md#2--the-discovery-layer-in-depth)
 
 How `find_tools` works: HuggingFace sentence embeddings, cosine
 similarity, caching, auto-refresh. How another codebase or Claude Code
 session queries the embeddings to discover tools by natural language.
 
-### [Tool Registration Chain](Tool_Registration_Chain.md)
+### [Tool Registration Chain](Adding_Tools_Tutorial.md)
 
 The 6-link chain that makes a tool loadable via MCP. Covers every file
 that must be created or updated when adding a new tool: JSON definition,
