@@ -5,11 +5,15 @@
 ## Workflow Summary
 
 ```
-1. CLARIFY → Subject type? Scope? Aliases? Domain?
+1. CLARIFY     → Subject type? Scope? Aliases? Domain?
 2. DISAMBIGUATE → Resolve IDs, find collisions, gather baseline profile
-3. SEARCH → High-precision seeds → Citation expansion → Collision-filtered broad
-4. GRADE → Apply evidence tiers (T1-T4) to all claims
-5. REPORT → 15-section template, integrated model, testable hypotheses
+3. SEARCH      → High-precision seeds → Citation expansion → Collision-filtered broad
+4. PULL FULL TEXT → For every T1/T2 anchor: open-access full text + supplement
+                    (Tier 0 in FULLTEXT_STRATEGY.md). Parse page-range for `.e<N>` / `.S<N>`.
+                    Default → full text. Fallback → abstract with explicit `abstract-only` tag.
+5. GRADE       → Apply evidence tiers (T1-T4) to all claims; downgrade abstract-only T1 anchors to T2
+6. REPORT      → 15-section template, integrated model, testable hypotheses;
+                 cite figure/table/page anchors, not paragraph-of-abstract anchors
 ```
 
 ---
@@ -45,6 +49,7 @@
 ### General Academic (No Bio Tools)
 
 Skip bio annotation tools. Use domain-appropriate literature databases directly:
+
 - CS/ML: `ArXiv_search_papers`, `DBLP_search_publications`, `SemanticScholar_search_papers`
 - Social Science: `OSF_search_preprints`, `openalex_literature_search`
 - General: `openalex_literature_search`, `Crossref_search_works`, `CORE_search_papers`
@@ -52,6 +57,7 @@ Skip bio annotation tools. Use domain-appropriate literature databases directly:
 ### Interdisciplinary / Cross-Domain
 
 For topics spanning multiple domains (e.g., "GNNs for drug discovery"):
+
 1. Identify each domain component separately
 2. Resolve bio entities using Phase 1 bio tools
 3. Search CS/general literature using ArXiv, DBLP, SemanticScholar
@@ -80,6 +86,7 @@ For topics spanning multiple domains (e.g., "GNNs for drug discovery"):
 ## Phase 2: Query Strategy
 
 ### Step 1: High-Precision Seeds
+
 ```
 Biomedical: "[TERM]"[Title] AND (mechanism OR function OR structure OR review)
 CS/ML:      ti:"[TERM]" AND (architecture OR benchmark OR evaluation OR survey)
@@ -87,6 +94,7 @@ General:    "[TERM]" in title via OpenAlex/Crossref
 ```
 
 ### Step 2: Citation Expansion
+
 ```
 PubMed_get_cited_by(pmid) → Forward citations
 EuropePMC_get_citations(pmid) → Fallback for forward
@@ -97,6 +105,7 @@ EuropePMC_get_references(pmid) → Backward citations
 ```
 
 ### Step 2b: Citation Impact (optional)
+
 ```
 iCite_search_publications(query) → Search + RCR/APT/NIH percentile (PubMed-only)
 iCite_get_publications(pmids) → Metrics by PMID (PubMed-only)
@@ -105,6 +114,7 @@ SemanticScholar_get_paper(paper_id) → Citation counts for any paper (CS/ML inc
 ```
 
 ### Step 3: Collision-Filtered Broad
+
 ```
 "[TERM]" AND ([context1] OR [context2]) NOT [collision_term]
 ```
@@ -124,6 +134,19 @@ SemanticScholar_get_paper(paper_id) → Citation counts for any paper (CS/ML inc
 Target X regulates pathway Y [★★★: PMID:12345678] through direct
 phosphorylation [★★☆: PMID:23456789].
 ```
+
+**Veracity escalation (abstract-only penalty).** A paper cited as T1 mechanistic but read only at abstract level MUST be downgraded to T2 — OR the agent must explicitly tag the inline citation as `abstract-only` and disclose the dependency in the return summary. Open-access papers with `.e<N>` / `.S<N>` supplement notation that were not supplement-extracted are treated the same way. Full text + supplement is the default; abstract-only is the fallback that costs a tier.
+
+---
+
+## DO vs DON'T (Full-Text Reading)
+
+| DO | DON'T |
+|----|-------|
+| Pull full text on every T1/T2 anchor | Treat abstract as sufficient for load-bearing claims |
+| Parse page-range for `.e<N>` / `.S<N>` supplement | Ignore supplement when supplement is present |
+| Cite figure/table/page anchors inline | Cite paragraph-of-abstract for quantitative claims |
+| Tag abstract-only reads explicitly and downgrade | Silently rely on abstract for mechanistic claims |
 
 ---
 

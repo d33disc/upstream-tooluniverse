@@ -1,5 +1,17 @@
 # Literature Deep Research - Quick Reference
 
+## Reading Discipline (Top of Page)
+
+- **Pull full text on every T1 / T2 anchor.** Open access + supplement is the default read, not a fallback. Abstract-only reads cost a tier.
+- **Parse the page-range string for supplement count.** Notation like `2918-2933.e17` or `2918-2933.S1-S17` signals supplementary items — pull them.
+- **Cite figure/table/page references inline.** `[T1: PMID 42092352, Fig S4, Table S7]` beats `[T1: PMID 42092352, abstract]` every time.
+- **Downgrade to T2 if you read only the abstract.** OR tag the citation `abstract-only` and disclose the dependency in the return summary.
+- **Tier 0 retrieval order**: `EuropePMC_get_full_text` → `PMC_get_full_text` → `Unpaywall_check_oa_status` + `read_url` → `Crossref_search_works` + `read_url` on publisher page → preprint version (BioRxiv / MedRxiv).
+
+See `FULLTEXT_STRATEGY.md` Tier 0 for the canonical sequence and the Sang et al., Cell 2026 (PMID 42092352, pages 2918-2933.e17) worked example.
+
+---
+
 **Enhanced strategy with target disambiguation, evidence grading, and mandatory completeness.**
 
 ---
@@ -43,12 +55,14 @@
 ## Phase 2: Query Strategy
 
 ### Step 1: High-Precision Seeds
+
 ```
 "[GENE_SYMBOL]"[Title] AND (mechanism OR function OR structure)
 "[FULL_PROTEIN_NAME]"[Title]
 ```
 
 ### Step 2: Citation Expansion (especially for sparse targets)
+
 ```
 PubMed_get_cited_by(pmid) → Forward citations
 EuropePMC_get_citations(pmid) → Fallback for forward
@@ -57,6 +71,7 @@ EuropePMC_get_references(pmid) → Backward citations
 ```
 
 ### Step 3: Collision-Filtered Broad
+
 ```
 "[GENE]" AND ([pathway] OR [function]) NOT [collision_term]
 ```
@@ -73,6 +88,7 @@ EuropePMC_get_references(pmid) → Backward citations
 | **T4** | ☆☆☆ Mention | Review, text-mining, peripheral |
 
 **In report**:
+
 ```markdown
 Target X regulates pathway Y [★★★: PMID:12345678] through direct 
 phosphorylation [★★☆: PMID:23456789].
@@ -111,6 +127,7 @@ phosphorylation [★★☆: PMID:23456789].
 | <3 | Note as "limited evidence" |
 
 **Standard themes** (adapt to target):
+
 - Core function / Mechanism
 - Disease relevance
 - Signaling / Pathways
@@ -148,6 +165,7 @@ Attempt 1 → fails → wait 2s → Attempt 2 → fails → wait 5s → Fallback
 
 **With Unpaywall email**: Full OA check for all DOIs
 **Without**: Best-effort using:
+
 - Europe PMC `isOpenAccess` field
 - PMC papers (all OA)
 - OpenAlex `is_oa` field
@@ -161,11 +179,13 @@ Label: `*OA Status: Best-effort*`
 Before delivery, verify ALL:
 
 ### Identity
+
 - [ ] UniProt, Ensembl, NCBI, ChEMBL IDs
 - [ ] All synonyms documented
 - [ ] Collisions handled
 
 ### Biology
+
 - [ ] Domains + architecture
 - [ ] Localization
 - [ ] Expression profile
@@ -173,17 +193,20 @@ Before delivery, verify ALL:
 - [ ] Interactors
 
 ### Mechanism
+
 - [ ] Core function (with evidence grades)
 - [ ] Model organism data (or "none")
 - [ ] Assays described
 
 ### Disease
+
 - [ ] Constraint scores + interpretation
 - [ ] Variants (ClinVar, gnomAD)
 - [ ] Disease links (graded by evidence)
 - [ ] Pathogens (or "none")
 
 ### Synthesis
+
 - [ ] Themes with ≥3 papers each
 - [ ] Open questions listed
 - [ ] Biological model written
@@ -191,6 +214,7 @@ Before delivery, verify ALL:
 - [ ] Conclusions + confidence
 
 ### Technical
+
 - [ ] All claims have sources
 - [ ] Evidence grades applied
 - [ ] Bibliography file created
@@ -215,11 +239,13 @@ Before delivery, verify ALL:
 ## Communication Style
 
 **Brief progress updates**:
+
 - "Resolving target identifiers..."
 - "Building core paper set..."
 - "Grading evidence and clustering themes..."
 
 **Never expose**:
+
 - Raw tool outputs
 - Deduplication stats
 - Round-by-round search details

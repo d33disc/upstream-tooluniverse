@@ -11,11 +11,20 @@ Systematic literature research: disambiguate, search with collision-aware querie
 
 ---
 
+## READING DISCIPLINE (Load-Bearing)
+
+> **Open access plus supplement equals full read. The supplement carries the data tables. The abstract carries the framing. Load-bearing claims must trace to specific page/figure/table references in the full text, not paragraph references in the abstract.**
+
+For any article cited inline as the anchor for a specific quantitative claim (T1 or T2 tier), the agent MUST pull full text + supplement before treating the abstract as sufficient. **Default → full text. Fallback → abstract with explicit "abstract-only" tag.** Page-range notation like `2918-2933.e17` or `2918-2933.S1-S17` indicates supplementary items — pull them. See `FULLTEXT_STRATEGY.md` Tier 0 for the canonical retrieval sequence.
+
+---
+
 ## LOOK UP, DON'T GUESS
 
 Search PubMed/EuropePMC FIRST before reasoning. A published paper beats memory.
 
 **Factoid search strategy:**
+
 1. Extract KEY TERMS (most specific nouns/verbs)
 2. `EuropePMC_search_articles(query="term1 term2 term3", limit=5)`
 3. No results -> BROADEN (remove most restrictive term)
@@ -26,6 +35,7 @@ Search PubMed/EuropePMC FIRST before reasoning. A published paper beats memory.
 ---
 
 ## COMPUTE, DON'T DESCRIBE
+
 When analysis requires computation (statistics, data processing, scoring, enrichment), write and run Python code via Bash. Don't describe what you would do — execute it and report actual results. Use ToolUniverse tools to retrieve data, then Python (pandas, scipy, statsmodels, matplotlib) to analyze it.
 
 ## Workflow
@@ -45,6 +55,7 @@ Phase 0: Clarify + Mode Select → Phase 1: Disambiguate + Profile → Phase 2: 
 | **Full Deep-Research** | Comprehensive overview | 15-section report + bibliography |
 
 ### Factoid Mode (Fast Path)
+
 ```markdown
 # [TOPIC]: Fact-check Report
 ## Question / ## Answer (with evidence rating) / ## Source(s) / ## Verification Notes / ## Limitations
@@ -61,6 +72,7 @@ Phase 0: Clarify + Mode Select → Phase 1: Disambiguate + Profile → Phase 2: 
 | Cross-domain | Interdisciplinary | Resolve each entity in its domain |
 
 ### Cross-Skill Delegation
+
 - Gene/protein deep-dive: `tooluniverse-target-research`
 - Drug profile: `tooluniverse-drug-research`
 - Disease profile: `tooluniverse-disease-research`
@@ -72,29 +84,35 @@ Use this skill for **literature synthesis**. Use specialized skills for **entity
 ## Phase 1: Subject Disambiguation + Profile
 
 ### 1.1 Biological Target Resolution
+
 ```
 UniProt_search → UniProt_get_entry_by_accession → UniProt_id_mapping
 ensembl_lookup_gene → MyGene_get_gene_annotation
 ```
 
 ### 1.2 Naming Collision Detection
+
 Check first 20 results. If >20% off-topic, build negative filter: `NOT [collision1] NOT [collision2]`.
 Gene family: `"ADAR" NOT "ADAR2" NOT "ADARB1"`. Cross-domain: add context terms.
 
 ### 1.3 Baseline Profile (Bio Targets)
+
 ```
 InterPro_get_protein_domains, UniProt_get_ptm_processing_by_accession, HPA_get_subcellular_location,
 GTEx_get_median_gene_expression, GO_get_annotations_for_gene, Reactome_map_uniprot_to_pathways,
 STRING_get_protein_interactions, intact_get_interactions, OpenTargets_get_target_tractability_by_ensemblID
 ```
+
 GPCR targets: delegate to `tooluniverse-target-research`.
 
 ### 1.5 Drug Disambiguation
+
 **Identity**: `OpenTargets_get_drug_chembId_by_generic_name`, `ChEMBL_get_drug`, `PubChem_get_CID_by_compound_name`, `drugbank_get_drug_basic_info_by_drug_name_or_id`
 **Targets**: `ChEMBL_get_drug_mechanisms`, `OpenTargets_get_associated_targets_by_drug_chemblId`, `DGIdb_get_drug_gene_interactions`
 **Safety**: `OpenTargets_get_drug_adverse_events_by_chemblId`, `OpenTargets_get_drug_indications_by_chemblId`, `search_clinical_trials`
 
 ### 1.6 Disease Disambiguation
+
 ```
 OpenTargets disease search → EFO/MONDO IDs
 DisGeNET_get_disease_genes, DisGeNET_search_disease
@@ -102,9 +120,11 @@ CTD_get_disease_chemicals
 ```
 
 ### 1.7 Compound Queries (e.g., "metformin in breast cancer")
+
 Resolve both entities, then cross-reference via CTD_get_chemical_gene_interactions, CTD_get_chemical_diseases, OpenTargets drug-target/drug-disease tools. Intersect shared targets/pathways.
 
 ### 1.8 General Academic / 1.9 Interdisciplinary
+
 Non-bio: skip bio tools, use ArXiv/DBLP/OSF. Cross-domain: resolve bio entities with 1.1-1.3, search CS/general in parallel, merge and cross-reference.
 
 ---
@@ -114,6 +134,7 @@ Non-bio: skip bio tools, use ArXiv/DBLP/OSF. Cross-domain: resolve bio entities 
 **Methodology stays internal. Report shows findings, not process.**
 
 ### 2.1 Query Strategy
+
 **Step 1: Seeds** (15-30 core papers): domain-specific title searches with date/sort filters.
 **Step 2: Citation expansion**: `PubMed_get_cited_by`, `EuropePMC_get_citations/references`, `PubMed_get_related`, `SemanticScholar_get_recommendations`, `OpenCitations_get_citations`
 **Step 3: Collision-filtered broader queries**: `"[TERM]" AND ([context]) NOT [collision]`
@@ -130,11 +151,12 @@ Non-bio: skip bio tools, use ArXiv/DBLP/OSF. Cross-domain: resolve bio entities 
 
 ### 2.3-2.4 Full-Text & PubMed Zero-Result Fallback
 
-Full-text: see `FULLTEXT_STRATEGY.md` for three-tier strategy.
+Full-text: see `FULLTEXT_STRATEGY.md`. **Tier 0 (mandatory full text + supplement for load-bearing claims)** is the default for every T1/T2 anchor — pull full text on open-access articles, parse the page-range string for `.e<N>` / `.S<N>` supplement suffixes, and cite figure/table/page references inline. Tier 1-3 (snippet, manual two-step, paywalled download) cover non-anchor verification and remain available.
 
 **CRITICAL**: PubMed returns 0 for ~30% of valid queries. **Always retry with EuropePMC** when PubMed returns empty. This is not optional.
 
 ### 2.5 Tool Failure / OA Handling
+
 Retry once -> fallback tool. Key fallbacks: PubMed_get_cited_by -> EuropePMC_get_citations -> OpenCitations. OA: Unpaywall if configured, else Europe PMC/PMC/OpenAlex flags.
 
 ---
@@ -149,6 +171,8 @@ Retry once -> fallback tool. Key fallbacks: PubMed_get_cited_by -> EuropePMC_get
 | **T4** | Mention | Review article | Survey, workshop abstract |
 
 Inline: `Target X regulates Y [T1: PMID:12345678]`. Per theme: summarize evidence distribution.
+
+**Veracity escalation rule** (abstract-only penalty). A paper cited as T1 (mechanistic) but read only at abstract level MUST be downgraded to T2 in the substrate's evidence tier — OR the agent must explicitly state in its return summary which load-bearing claims rest on abstract-only reading. Open-access papers with `.e<N>` / `.S<N>` page-range notation that were not supplement-extracted are treated the same: downgrade or disclose. Inline tag: `[T1: PMID:12345678, abstract-only]` when the supplement could not be retrieved.
 
 ---
 
