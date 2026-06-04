@@ -17,6 +17,6 @@
     "pairs_evaluated": 1,
     "edges": 0,
     "llm_calls": 5,
-    "runtime_sec": 0.31
+    "runtime_sec": 10.75
   }
 }
