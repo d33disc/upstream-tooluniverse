@@ -594,6 +594,18 @@ def compose(arguments, tooluniverse, call_tool, stream_callback=None):
             "agent_start", {"agent": "OverallSummaryAgent", "step": "overall_summary"}
         )
 
+        # TODO(2026-05-22T15:43:06.000Z): `user_intent` can be empty here when
+        # IntentAnalyzerAgent returns success=True but the parsed result has
+        # no `user_intent` key (line 143 above defaults to ""). When that
+        # happens, OverallSummaryAgent's underlying validator raises
+        # "Required argument 'user_intent' cannot be empty" and the
+        # surrounding run_one_function retry loop reattempts indefinitely at
+        # 0% CPU. Fix: either guard with `if not user_intent: user_intent =
+        # query` here (treats user query as fallback intent) OR add a
+        # max-retries break to OverallSummaryAgent's run_one_function loop.
+        # See dd-bigbio bug-tu-overallsummaryagent-infinite-loop; mitigated
+        # downstream with a per-workstream consecutive-tier-timeout circuit
+        # breaker but the right fix lives here.
         overall_summary_result = call_tool(
             "OverallSummaryAgent",
             {
