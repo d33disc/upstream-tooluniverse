@@ -1,0 +1,23 @@
+{
+  "n": 20,
+  "lane": "fast-mlx",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "wall_total_s": 20.9,
+  "DIRECT_frontier_tokens": 8099,
+  "DIRECT_breakdown": {
+    "read_configs_in": 7299,
+    "classify_out": 800
+  },
+  "FLEET_frontier_tokens": 430,
+  "FLEET_breakdown": {
+    "spec_out": 200,
+    "read_report_in": 230
+  },
+  "FLEET_local_tokens_FREE": 8771,
+  "frontier_ratio_direct_over_fleet": 18.8,
+  "categories": {
+    "unknown": 1,
+    "timeout": 18,
+    "schema_or_config_error": 1
+  }
+}
