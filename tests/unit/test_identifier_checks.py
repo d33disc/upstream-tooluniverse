@@ -2,7 +2,14 @@
 
 import pytest
 
-from tooluniverse.identifier_checks import cas_is_valid, inchikey_is_valid
+from tooluniverse.identifier_checks import (
+    cas_is_valid,
+    ensembl_gene_is_valid,
+    hgnc_is_valid,
+    inchikey_is_valid,
+    mondo_is_valid,
+    nct_is_valid,
+)
 
 
 @pytest.mark.parametrize(
@@ -49,3 +56,22 @@ def test_inchikey_accepts_real():
 )
 def test_inchikey_rejects_malformed(value):
     assert not inchikey_is_valid(value)
+
+
+@pytest.mark.parametrize(
+    "func, valid, invalid",
+    [
+        (
+            ensembl_gene_is_valid,
+            "ENSG00000141510",
+            ["ENSG123", "ENST00000269305", "abc"],
+        ),
+        (nct_is_valid, "NCT01158625", ["NCT123", "nct01158625", "abc"]),
+        (mondo_is_valid, "MONDO:0005148", ["MONDO:123", "MONDO0005148", "abc"]),
+        (hgnc_is_valid, "HGNC:11998", ["HGNC:", "hgnc:11998", "abc"]),
+    ],
+)
+def test_format_validators(func, valid, invalid):
+    assert func(valid)
+    for bad in invalid:
+        assert not func(bad)
