@@ -13,12 +13,27 @@ Usage:
 from __future__ import annotations
 import argparse
 import json
+import os
 import subprocess
 import sys
+import time
 import urllib.request
 from pathlib import Path
 
+# Env-gated profiling: OLLAMA_PROFILE=1 prints per-call latency to stderr (no behavior change).
+_PROFILE = os.getenv("OLLAMA_PROFILE")
+# Env-gated multi-tool turns: OLLAMA_MULTITOOL=1 lifts the one-tool-per-turn cap to batch
+# independent actions (fewer round-trips). Default OFF — the cap is #14493 insurance; only
+# lift it if the 8-task suite confirms quality holds.
+_MULTITOOL = os.getenv("OLLAMA_MULTITOOL")
+
 OLLAMA = "http://localhost:11434/v1/chat/completions"
+
+# Reasoning suppression. On Ollama's /v1 OpenAI-compat endpoint, `think=false` and
+# `enable_thinking` are IGNORED; only `reasoning_effort` is honored (probed 2026-06-05).
+# "none" halves completion tokens (~89->42) and ~2-3x's per-call latency. Off by default
+# until the 8-task suite confirms it holds 24/24; set OLLAMA_REASONING_EFFORT=none to A/B.
+_REASONING_EFFORT = os.getenv("OLLAMA_REASONING_EFFORT")
 
 TOOLS = [
     {
@@ -139,6 +154,7 @@ def call(model: str, messages: list) -> dict:
             "temperature": 0.1,
             "top_p": 0.8,
             "top_k": 20,
+            **({"reasoning_effort": _REASONING_EFFORT} if _REASONING_EFFORT else {}),
         }
     ).encode()
     req = urllib.request.Request(
@@ -167,12 +183,21 @@ def main() -> None:
     ]
 
     for step in range(1, a.max_steps + 1):
+        _t = time.time()
         msg = call(a.model, messages)
+        if _PROFILE:
+            print(
+                f"[profile] step={step} call={time.time() - _t:.1f}s "
+                f"ctx_msgs={len(messages)}",
+                file=sys.stderr,
+                flush=True,
+            )
         calls = msg.get("tool_calls") or []
         if not calls:
             print(f"[step {step}] (no tool call) {msg.get('content', '')[:500]}")
             break
-        calls = calls[:1]  # one tool per turn — round-trip safety (bug #14493)
+        if not _MULTITOOL:
+            calls = calls[:1]  # one tool per turn — round-trip safety (bug #14493)
         messages.append(
             {
                 "role": "assistant",

@@ -45,3 +45,42 @@ and without reinforcement clauses.
 
 48 runs total (2 configs x 8 tasks x 3 repeats). "Ceiling" = no failure observed across 48
 stochastic runs at temp 0.1 — robust, not exhaustive. Re-derive: rerun `/tmp/baseline8.py`.
+
+---
+
+# Part 2 — Latency axis (the one with headroom)
+
+Quality is pinned at ceiling, so latency was the remaining axis. Result: **also at its floor.**
+Three levers tested, all quality-gated at 24/24; none moved wall-clock beyond run-to-run noise (~±10%).
+
+## Where the time goes (warm profile, 1 run/task, `OLLAMA_PROFILE=1`)
+
+| task | wall | steps | avg_call | note |
+|---|---|---|---|---|
+| recovery_from_error | 15.6s | 7 | 2.1s | hardest — fix/rerun/recover cycle |
+| multifile_handler | 13.5s | 6 | 2.2s | read both files + fix + verify |
+| fix_real_bug / scope | ~7.7s | 5 | ~1.5s | run/fix/rerun/finish |
+| mechanical | 6.2s | 3 | 2.0s | write/run/finish (irreducible) |
+| skip / no_fabricate / ambiguous | ~4s | 2 | ~1.9s | diagnose + report |
+
+**Wall-clock = (task-inherent steps) x (~2s/call).** Per-call is flat ~1.4-2.2s warm; first call
+of each task is 2-4.5s (system-prompt + 4-tool-schema prefill). Steps are SEQUENTIAL and necessary
+(can't run a file before writing it) — the worker wastes no turns.
+
+## Levers tested (all 8-task, repeats=3)
+
+| lever | env knob | quality | wall vs baseline | verdict |
+|---|---|---|---|---|
+| suppress reasoning | `OLLAMA_REASONING_EFFORT=none` | 24/24 | 0.94x | tokens 89->42 but NO wall-clock gain — generation isn't the bound |
+| multi-tool per turn | `OLLAMA_MULTITOOL=1` | 24/24 | 0.92x | steps are sequential — nothing to batch; also proves #14493 absent on this model |
+
+NB: my initial single-call probe showed reasoning=none at ~2-3x — a WARMUP-ORDER ARTIFACT
+(cold first call vs warm last). The batched A/B (48 fresh runs) corrected it to ~1x. Trust the batch.
+
+## Conclusion
+
+The loop is at its latency floor for the overnight maintenance workload (~4-16s/task; a few
+hundred tools ~= ~1h). Time is structural: sequential steps x ~2s prefill floor. No low-risk lever
+yields speedup. Env knobs kept (default OFF, zero behavior change) as documented diagnostics +
+findings — `reasoning_effort=none` would still help on token-metered backends or
+generation-bound hardware. Re-derive: `/tmp/profile_loop.py`, `/tmp/ab_reasoning.py`, `/tmp/ab_multitool.py`.
