@@ -33,7 +33,7 @@
               "claim_id": {"type": "string"},
               "claim_text": {"type": "string"},
               "is_independent": {"type": "boolean"},
-              "dependent_on": {"type": "integer"}
+              "dependent_on": {"type": ["integer", "null"]}
             }
           }
         }

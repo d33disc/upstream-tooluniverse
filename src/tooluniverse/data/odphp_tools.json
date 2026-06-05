@@ -295,7 +295,7 @@
               "type": "string"
             },
             "TopicId": {
-              "type": "string"
+              "type": ["string", "null"]
             },
             "CategoryId": {
               "type": "null"
