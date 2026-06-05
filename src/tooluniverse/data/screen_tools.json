@@ -48,12 +48,12 @@
                 "type": "string"
               },
               "target": {
-                "type": "object"
+                "type": "string"
               },
-              "biosample_ontology": {
-                "type": "object"
+              "biosample": {
+                "type": "string"
               },
-              "description": {
+              "status": {
                 "type": "string"
               }
             }
