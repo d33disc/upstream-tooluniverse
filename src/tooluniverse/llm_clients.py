@@ -529,6 +529,7 @@ class OllamaClient(BaseLLMClient):
         custom_format: Any = None,
         max_retries: int = 3,
         retry_delay: int = 3,
+        think: Optional[bool] = None,
     ) -> Optional[str]:
         payload: Dict[str, Any] = {
             "model": self.model_name,
@@ -541,6 +542,11 @@ class OllamaClient(BaseLLMClient):
             payload.setdefault("options", {})["num_predict"] = max_tokens
         if return_json:
             payload["format"] = "json"
+        # Thinking-capable models (e.g. qwen3.5) otherwise emit a long reasoning trace before
+        # the answer; with a bounded num_predict that leaves the content empty. Disabling it
+        # returns direct, valid output far faster. Only sent when explicitly configured.
+        if think is not None:
+            payload["think"] = think
 
         retries = 0
         while retries < max_retries:

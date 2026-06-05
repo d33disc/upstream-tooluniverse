@@ -28,7 +28,20 @@ DEFAULT_FALLBACK_CHAIN = [
     # qwen3.5 (general-instruct MoE) over qwen3.6 (coding-flagship, regressed on
     # instruction-following per IFBench) — agentic tools need JSON/instruction adherence,
     # not code-gen. 35B/3B-active runs at ~3B-dense speed on M1 Metal. `ollama pull qwen3.5:35b-a3b`
-    {"api_type": "OLLAMA", "model_id": "qwen3.5:35b-a3b"},
+    #
+    # `options` are empirically tuned for this thinking-capable model on TU's structured
+    # agentic tasks (1-D temperature sweep on real tool prompts, 2026-06-05):
+    #   think=False  — qwen3.5 otherwise spends ~3k tokens reasoning before answering, so a
+    #                  bounded num_predict yields EMPTY content; disabling it is 5-19x faster
+    #                  (~1-3s vs 14-118s) and populates valid output. Structured extraction
+    #                  needs no chain-of-thought.
+    #   temperature=0.0 — max determinism (same input -> same output, every JSON tool fully
+    #                  reproducible) with zero prose degeneration at greedy decoding.
+    {
+        "api_type": "OLLAMA",
+        "model_id": "qwen3.5:35b-a3b",
+        "options": {"think": False, "temperature": 0.0},
+    },
     {"api_type": "OPENROUTER", "model_id": "anthropic/claude-3.5-haiku"},
 ]
 
@@ -333,43 +346,60 @@ class AgenticTool(BaseTool):
             self._initialization_error = error_msg
             return False
 
+    def _chain_options_for(self, api_type, model_id) -> Dict[str, Any]:
+        """Tuned options for a backend, looked up by (api_type, model_id) from the global
+        fallback chain — so they apply whether the backend is the active primary or a
+        fallback hop."""
+        for fc in self._global_fallback_chain:
+            if fc.get("api_type") == api_type and fc.get("model_id") == model_id:
+                return fc.get("options", {}) or {}
+        return {}
+
     def _buffered_infer_with_fallback(self, messages, custom_format):
         """Call the active backend; if it returns nothing at RUNTIME (e.g. the Claude CLI
         is usage-capped and returns None), fall through the remaining fallback-chain
         backends whose required keys are present, so the agentic tool stays up. Returns
         the first non-empty result, or None if every backend fails."""
-        attempts = [
-            (
-                self._current_api_type or self._api_type,
-                self._current_model_id or self._model_id,
-            )
-        ]
+        active = (
+            self._current_api_type or self._api_type,
+            self._current_model_id or self._model_id,
+        )
+        # Tuned options follow the BACKEND, not the chain position: once a tool falls back to
+        # Ollama, `_current_api_type` becomes sticky-OLLAMA, so the active backend must also
+        # pick up its chain-entry options (think=False, temperature=0.0) — otherwise warm
+        # calls revert to the tool default (temp 1.0, thinking on: slow + non-deterministic).
+        attempts = [(*active, self._chain_options_for(*active))]
         if self._use_global_fallback:
             for fc in self._global_fallback_chain:
                 pair = (fc.get("api_type"), fc.get("model_id"))
-                if pair in attempts or None in pair:
+                if any(pair == (a, m) for a, m, _ in attempts) or None in pair:
                     continue
                 if all(os.getenv(v) for v in API_KEY_ENV_VARS.get(pair[0], [])):
-                    attempts.append(pair)
+                    attempts.append((*pair, fc.get("options", {}) or {}))
 
         result = None
-        for idx, (api_type, model_id) in enumerate(attempts):
+        for idx, (api_type, model_id, options) in enumerate(attempts):
             if idx > 0:
                 self.logger.info(
                     f"Agentic runtime fallback: '{self.name}' -> {api_type} ({model_id})"
                 )
                 if not self._try_api(api_type, model_id):
                     continue
+            # Per-backend tuned options (e.g. Ollama think=False, temperature=0.0) override
+            # the tool default; `think` is Ollama-only so it is passed only for that backend.
+            infer_kwargs: Dict[str, Any] = dict(
+                messages=messages,
+                temperature=options.get("temperature", self._temperature),
+                max_tokens=None,
+                return_json=self._return_json,
+                custom_format=custom_format,
+                max_retries=self._max_retries,
+                retry_delay=self._retry_delay,
+            )
+            if api_type == "OLLAMA" and "think" in options:
+                infer_kwargs["think"] = options["think"]
             try:
-                result = self._llm_client.infer(
-                    messages=messages,
-                    temperature=self._temperature,
-                    max_tokens=None,
-                    return_json=self._return_json,
-                    custom_format=custom_format,
-                    max_retries=self._max_retries,
-                    retry_delay=self._retry_delay,
-                )
+                result = self._llm_client.infer(**infer_kwargs)
             except Exception as exc:  # noqa: BLE001
                 self.logger.warning(f"Backend {api_type} raised: {exc}")
                 result = None
