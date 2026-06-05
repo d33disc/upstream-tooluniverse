@@ -32,6 +32,8 @@ Files (all in `ralph-specs/`):
 - `ollama_worker.system.md` — the worker's system prompt (9 ABSOLUTE RULES).
 - `LOCAL_SWARM_STACK.md` — runtime/model selection + the empirical tool_calls gate.
 - `TOKEN_ECONOMICS.md` — when fleet beats direct (the measured crossover).
+- `DEPLOY_PROMPT.md` — copy-paste kickoff prompt for a fresh session to run a long, gated
+  maintenance loop (TDD + worktrees + drift guards + the re-triage-first discipline).
 
 ## The non-negotiable gate
 
