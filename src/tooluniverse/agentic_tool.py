@@ -18,10 +18,18 @@ from .llm_clients import (
 )
 
 
-# Global default fallback configuration
+# Global default fallback configuration.
+# Order is cost-ascending: free backends first (Claude CLI subscription, local Ollama),
+# then paid OpenRouter only as a last resort — so agentic tools stay up even when the
+# Claude CLI is usage-capped and Ollama is offline. OpenRouter is skipped automatically
+# when OPENROUTER_API_KEY is absent (see API_KEY_ENV_VARS).
 DEFAULT_FALLBACK_CHAIN = [
     {"api_type": "CLAUDE_CLI", "model_id": "haiku"},
-    {"api_type": "OLLAMA", "model_id": "qwen2.5-coder:32b"},
+    # qwen3.5 (general-instruct MoE) over qwen3.6 (coding-flagship, regressed on
+    # instruction-following per IFBench) — agentic tools need JSON/instruction adherence,
+    # not code-gen. 35B/3B-active runs at ~3B-dense speed on M1 Metal. `ollama pull qwen3.5:35b-a3b`
+    {"api_type": "OLLAMA", "model_id": "qwen3.5:35b-a3b"},
+    {"api_type": "OPENROUTER", "model_id": "anthropic/claude-3.5-haiku"},
 ]
 
 # API key environment variable mapping
@@ -123,7 +131,7 @@ class AgenticTool(BaseTool):
 
         # LLM configuration
         self._api_type: str = get_config("api_type", "CLAUDE_CLI")
-        self._model_id: str = get_config("model_id", "gpt-5")
+        self._model_id: str = get_config("model_id", "haiku")
         self._temperature: Optional[float] = get_config("temperature", 1.0)
         # max_new_tokens is handled by LLM client automatically
         self._return_json: bool = get_config("return_json", False)
@@ -325,6 +333,50 @@ class AgenticTool(BaseTool):
             self._initialization_error = error_msg
             return False
 
+    def _buffered_infer_with_fallback(self, messages, custom_format):
+        """Call the active backend; if it returns nothing at RUNTIME (e.g. the Claude CLI
+        is usage-capped and returns None), fall through the remaining fallback-chain
+        backends whose required keys are present, so the agentic tool stays up. Returns
+        the first non-empty result, or None if every backend fails."""
+        attempts = [
+            (
+                self._current_api_type or self._api_type,
+                self._current_model_id or self._model_id,
+            )
+        ]
+        if self._use_global_fallback:
+            for fc in self._global_fallback_chain:
+                pair = (fc.get("api_type"), fc.get("model_id"))
+                if pair in attempts or None in pair:
+                    continue
+                if all(os.getenv(v) for v in API_KEY_ENV_VARS.get(pair[0], [])):
+                    attempts.append(pair)
+
+        result = None
+        for idx, (api_type, model_id) in enumerate(attempts):
+            if idx > 0:
+                self.logger.info(
+                    f"Agentic runtime fallback: '{self.name}' -> {api_type} ({model_id})"
+                )
+                if not self._try_api(api_type, model_id):
+                    continue
+            try:
+                result = self._llm_client.infer(
+                    messages=messages,
+                    temperature=self._temperature,
+                    max_tokens=None,
+                    return_json=self._return_json,
+                    custom_format=custom_format,
+                    max_retries=self._max_retries,
+                    retry_delay=self._retry_delay,
+                )
+            except Exception as exc:  # noqa: BLE001
+                self.logger.warning(f"Backend {api_type} raised: {exc}")
+                result = None
+            if result:
+                return result
+        return result
+
     # ------------------------------------------------------------------ LLM utilities -----------
     def _validate_model_config(self):
         supported_api_types = list(API_KEY_ENV_VARS.keys())
@@ -432,15 +484,7 @@ class AgenticTool(BaseTool):
                     response = None
 
             if response is None:
-                response = self._llm_client.infer(
-                    messages=messages,
-                    temperature=self._temperature,
-                    max_tokens=None,  # client resolves per-model defaults/env
-                    return_json=self._return_json,
-                    custom_format=custom_format,
-                    max_retries=self._max_retries,
-                    retry_delay=self._retry_delay,
-                )
+                response = self._buffered_infer_with_fallback(messages, custom_format)
 
                 if streaming_requested and response:
                     for chunk in self._iter_chunks(response):
