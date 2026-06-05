@@ -18,6 +18,20 @@ from .llm_clients import (
 )
 
 
+# System prompt for the Ollama agentic fallback. qwen3.5:35b-a3b ships with NO system
+# prompt, so without this it gets zero format/role guidance. Phrased CONDITIONALLY ("when
+# the user asks for JSON") so it tightens the JSON tools (kills the documented qwen failure
+# modes — prose preamble + ```json fences) WITHOUT forcing JSON onto prose tools
+# (HypothesisGenerator, *Reviewer). Grounded in Qwen/Ollama structured-output guidance:
+# the format grammar fence constrains tokens, but only a prose instruction aims the
+# probability mass at the right shape and suppresses preamble.
+OLLAMA_AGENTIC_SYSTEM_PROMPT = (
+    "You are a biomedical NLP expert. Follow the user's task instructions and requested "
+    "output format exactly, matching field names and schema verbatim. When the user asks "
+    "for JSON, output ONLY raw valid JSON: no markdown fences, no preamble, no commentary; "
+    "use null for missing or uncertain values and never omit required fields."
+)
+
 # Global default fallback configuration.
 # Order is cost-ascending: free backends first (Claude CLI subscription, local Ollama),
 # then paid OpenRouter only as a last resort — so agentic tools stay up even when the
@@ -40,7 +54,11 @@ DEFAULT_FALLBACK_CHAIN = [
     {
         "api_type": "OLLAMA",
         "model_id": "qwen3.5:35b-a3b",
-        "options": {"think": False, "temperature": 0.0},
+        "options": {
+            "think": False,
+            "temperature": 0.0,
+            "system": OLLAMA_AGENTIC_SYSTEM_PROMPT,
+        },
     },
     {"api_type": "OPENROUTER", "model_id": "anthropic/claude-3.5-haiku"},
 ]
@@ -387,8 +405,17 @@ class AgenticTool(BaseTool):
                     continue
             # Per-backend tuned options (e.g. Ollama think=False, temperature=0.0) override
             # the tool default; `think` is Ollama-only so it is passed only for that backend.
+            # A per-backend `system` prompt is prepended as a system-role turn (qwen3.5 ships
+            # with none) — phrased conditionally so it tightens JSON tools without forcing
+            # JSON onto prose tools.
+            backend_messages = messages
+            if options.get("system"):
+                backend_messages = [
+                    {"role": "system", "content": options["system"]},
+                    *messages,
+                ]
             infer_kwargs: Dict[str, Any] = dict(
-                messages=messages,
+                messages=backend_messages,
                 temperature=options.get("temperature", self._temperature),
                 max_tokens=None,
                 return_json=self._return_json,
