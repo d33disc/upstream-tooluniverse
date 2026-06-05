@@ -322,9 +322,9 @@ class GTExV2Tool(BaseTool):
 
     def _get_single_tissue_eqtls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get significant single-tissue eQTLs."""
-        gencode_ids = arguments.get("gencode_id", [])
-        variant_ids = arguments.get("variant_id", [])
-        tissue_ids = arguments.get("tissue_site_detail_id", [])
+        gencode_ids = arguments.get("gencode_id") or []
+        variant_ids = arguments.get("variant_id") or []
+        tissue_ids = arguments.get("tissue_site_detail_id") or []
         # Feature-69A-002: gtex_v10 returns empty for eQTL endpoints; use gtex_v8
         dataset_id = arguments.get("dataset_id", "gtex_v8")
 
