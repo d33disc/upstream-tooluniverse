@@ -252,7 +252,7 @@ class ProtVarFunctionTool:
 
         # Extract features at this position
         features = []
-        for f in result.get("features", []):
+        for f in result.get("features") or []:
             features.append(
                 {
                     "type": f.get("type"),
@@ -266,17 +266,17 @@ class ProtVarFunctionTool:
 
         # Extract function comments
         comments = []
-        for c in result.get("comments", []):
+        for c in result.get("comments") or []:
             ctype = c.get("type")
             if ctype == "FUNCTION":
-                for t in c.get("text", []):
+                for t in c.get("text") or []:
                     comments.append({"type": ctype, "value": t.get("value")})
             elif ctype == "CATALYTIC_ACTIVITY":
                 rxn = c.get("reaction", {})
                 if rxn:
                     comments.append({"type": ctype, "value": rxn.get("name")})
             elif ctype in ("SUBCELLULAR_LOCATION", "DISEASE", "TISSUE_SPECIFICITY"):
-                for t in c.get("text", []):
+                for t in c.get("text") or []:
                     comments.append({"type": ctype, "value": t.get("value")})
         data["comments"] = comments
 

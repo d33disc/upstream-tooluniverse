@@ -389,6 +389,9 @@
       },
       {
         "operation": "get_single_tissue_eqtls",
+        "gencode_id": [
+          "ENSG00000227232.5"
+        ],
         "tissue_site_detail_id": [
           "Brain_Cortex"
         ]

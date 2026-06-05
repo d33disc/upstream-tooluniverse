@@ -213,7 +213,9 @@ class ReactomeContentTool(BaseTool):
 
         # Extract sub-events
         sub_events = []
-        for e in data.get("hasEvent", []):
+        for e in data.get("hasEvent") or []:
+            if not isinstance(e, dict):
+                continue
             sub_events.append(
                 {
                     "stId": e.get("stId"),
@@ -224,7 +226,9 @@ class ReactomeContentTool(BaseTool):
 
         # Extract literature
         literature = []
-        for ref in data.get("literatureReference", []):
+        for ref in data.get("literatureReference") or []:
+            if not isinstance(ref, dict):
+                continue
             literature.append(
                 {
                     "title": ref.get("title"),
@@ -258,10 +262,12 @@ class ReactomeContentTool(BaseTool):
 
         # Extract summation (description)
         summation = ""
-        summ_list = data.get("summation", [])
+        summ_list = data.get("summation") or []
         if summ_list:
             texts = [
-                self._strip_html(s.get("text", "")) for s in summ_list if s.get("text")
+                self._strip_html(s.get("text", ""))
+                for s in summ_list
+                if isinstance(s, dict) and s.get("text")
             ]
             summation = " ".join(texts)
 
