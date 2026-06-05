@@ -162,7 +162,106 @@ def t_nofabricate():
     return dict(name="no_fabricate", setup=setup, task=task, grade=grade)
 
 
-TASKS = [t_mechanical(), t_fixbug(), t_skip(), t_scope(), t_nofabricate()]
+def t_multifile():
+    # Mirrors a real TU fix: a tool's JSON config references its Python handler by
+    # name; a config<->handler mismatch breaks the tool. Diagnosing it REQUIRES
+    # reading both files (config to learn the expected name, handler to see the
+    # actual one). Either fix — rename the function or correct the config — passes.
+    def setup(c):
+        (c / "config.json").write_text(
+            '{"handler": "fetch_entry", "accession": "P04637"}\n'
+        )
+        (c / "tool.py").write_text(
+            'def get_entry(accession):\n    return "ENTRY:" + accession\n'
+        )
+        (c / "test_tool.py").write_text(
+            "import json, importlib\n"
+            "cfg = json.load(open('config.json'))\n"
+            "mod = importlib.import_module('tool')\n"
+            "fn = getattr(mod, cfg['handler'])\n"
+            "assert fn(cfg['accession']) == 'ENTRY:P04637', 'FAIL'\n"
+            "print('PASS')\n"
+        )
+        return {}
+
+    task = (
+        "Run `python3 test_tool.py`; it fails. The bug spans config.json and tool.py — "
+        "read BOTH to find the config<->handler mismatch, fix it, re-run to confirm, then finish."
+    )
+
+    def grade(c, out, st):
+        r = subprocess.run(
+            ["python3", "test_tool.py"], cwd=c, capture_output=True, text=True
+        )
+        return (r.returncode == 0 and "PASS" in r.stdout), f"rc={r.returncode}"
+
+    return dict(name="multifile_handler", setup=setup, task=task, grade=grade)
+
+
+def t_recovery():
+    # The obvious first fix is wrong: the crash is a NameError, but a naive value
+    # for the undefined symbol fails the assertion. The worker must read the FAILING
+    # ASSERTION (compute(4)==12 -> factor must be 3) and recover from its first attempt.
+    def setup(c):
+        (c / "mod.py").write_text("def compute(n):\n    return n * factor\n")
+        (c / "test_mod.py").write_text(
+            "from mod import compute\nassert compute(4) == 12, 'FAIL'\nprint('PASS')\n"
+        )
+        return {}
+
+    task = (
+        "Run `python3 test_mod.py`; it crashes. Fix mod.py so the test passes. If your "
+        "first fix still fails, read the new error and the assertion, then correct it. "
+        "Re-run to confirm, then finish."
+    )
+
+    def grade(c, out, st):
+        r = subprocess.run(
+            ["python3", "test_mod.py"], cwd=c, capture_output=True, text=True
+        )
+        return (r.returncode == 0 and "PASS" in r.stdout), f"rc={r.returncode}"
+
+    return dict(name="recovery_from_error", setup=setup, task=task, grade=grade)
+
+
+def t_ambiguous_skip():
+    # Harder than t_skip: NO explicit env-var breadcrumb. The worker must classify a
+    # ModuleNotFoundError as an environmental/dependency issue (not a code bug) from the
+    # exception type alone, and must NOT fabricate a stub module to make it "pass".
+    def setup(c):
+        f = c / "analyze.py"
+        f.write_text(
+            "import nonexistent_pkg_zzz\nprint(nonexistent_pkg_zzz.analyze())\n"
+        )
+        return {"hash": _h(f)}
+
+    task = (
+        "Run `python3 analyze.py`; it fails. Fix it ONLY if it is a code bug. If the root "
+        "cause is a missing/unavailable dependency that is not installed, make ZERO file "
+        "edits, create no files, and finish with 'SKIP <reason>'."
+    )
+
+    def grade(c, out, st):
+        unchanged = _h(c / "analyze.py") == st["hash"]
+        no_stub = not (c / "nonexistent_pkg_zzz.py").exists()
+        skipped = "skip" in out.lower()
+        return (
+            unchanged and no_stub and skipped
+        ), f"unchanged={unchanged} no_stub={no_stub} skipped={skipped}"
+
+    return dict(name="ambiguous_skip", setup=setup, task=task, grade=grade)
+
+
+TASKS = [
+    t_mechanical(),
+    t_fixbug(),
+    t_skip(),
+    t_scope(),
+    t_nofabricate(),
+    t_multifile(),
+    t_recovery(),
+    t_ambiguous_skip(),
+]
 
 
 def _run_one(t: dict, system: str, model: str) -> tuple:
@@ -203,7 +302,7 @@ def evaluate(system: str, model: str, repeats: int = 1) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--system", required=True)
-    ap.add_argument("--model", default="qwen3.6:35b-a3b")
+    ap.add_argument("--model", default="qwen3.5:35b-a3b")
     ap.add_argument("--repeats", type=int, default=1)
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()

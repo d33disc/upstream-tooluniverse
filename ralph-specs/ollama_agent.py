@@ -150,7 +150,7 @@ def call(model: str, messages: list) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="qwen3.6:35b-a3b")
+    ap.add_argument("--model", default="qwen3.5:35b-a3b")
     ap.add_argument("--cwd", required=True)
     ap.add_argument("--system", help="path to system-prompt file")
     ap.add_argument("--max-steps", type=int, default=12)

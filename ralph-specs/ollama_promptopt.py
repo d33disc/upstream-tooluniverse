@@ -19,7 +19,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from ollama_promptopt_eval import evaluate  # noqa: E402
+from ollama_promptopt_eval import evaluate, TASKS  # noqa: E402
 
 CORE = HERE / "ollama_worker.system.md"
 CLAUSES = HERE / "promptopt_clauses.json"
@@ -48,7 +48,11 @@ def write_tmp(text: str) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--loops", type=int, default=20)
-    ap.add_argument("--model", default="qwen3.6:35b-a3b")
+    ap.add_argument("--model", default="qwen3.5:35b-a3b")
+    # repeats>=3: the worker is stochastic at temp 0.1, so single-run scores swap on
+    # rerun and the hill-climb would chase noise. Pass-RATE over repeats is the signal
+    # (see ollama_promptopt_eval.evaluate docstring). Default 1 was the latent bug.
+    ap.add_argument("--repeats", type=int, default=3)
     a = ap.parse_args()
 
     core = CORE.read_text()
@@ -62,7 +66,7 @@ def main() -> None:
     for it in range(1, a.loops + 1):
         text = compose(core, clauses, cur)
         path = write_tmp(text)
-        res = evaluate(path, a.model)
+        res = evaluate(path, a.model, a.repeats)
         score = res["score"]
         failed = [r["task"] for r in res["results"] if not r["pass"]]
         history.append(
@@ -109,7 +113,8 @@ def main() -> None:
         "",
         f"- model: {a.model}",
         f"- loops: {a.loops}",
-        f"- BEST score: {best['score']}/{len(__import__('json').loads(CLAUSES.read_text())['clauses']) and 5}",
+        f"- BEST score: {best['score']}/{len(TASKS) * a.repeats}",
+        f"- repeats: {a.repeats}",
         f"- best clauses: {sorted(best['ids'])}",
         f"- output: {OUT.name}",
         "",

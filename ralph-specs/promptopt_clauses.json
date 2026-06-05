@@ -8,7 +8,9 @@
         "mechanical",
         "no_fabricate",
         "fix_real_bug",
-        "scope_no_overedit"
+        "scope_no_overedit",
+        "multifile_handler",
+        "recovery_from_error"
       ]
     },
     {
@@ -18,8 +20,8 @@
     },
     {
       "id": "skip",
-      "text": "If the root cause is a missing API key/credential or an unreachable external service, make ZERO file edits and finish with 'SKIP <reason>'. A missing key is never a code bug.",
-      "targets": ["skip_unfixable"]
+      "text": "If the root cause is a missing API key/credential, an unreachable external service, or an unavailable/uninstalled dependency, make ZERO file edits, create no files, and finish with 'SKIP <reason>'. A missing key or package is never a code bug — never stub or fabricate it to force a pass.",
+      "targets": ["skip_unfixable", "ambiguous_skip"]
     },
     {
       "id": "scope",
@@ -29,17 +31,22 @@
     {
       "id": "verify",
       "text": "After editing, re-run the exact failing command with run_shell and confirm it passes before calling finish.",
-      "targets": ["fix_real_bug"]
+      "targets": ["fix_real_bug", "multifile_handler", "recovery_from_error"]
     },
     {
       "id": "observed",
       "text": "Report only values you actually saw in a run_shell result. Never predict or invent command output.",
-      "targets": ["no_fabricate"]
+      "targets": ["no_fabricate", "recovery_from_error"]
     },
     {
       "id": "onestep",
       "text": "One tool call per step; wait for its result before the next action.",
       "targets": ["mechanical", "fix_real_bug"]
+    },
+    {
+      "id": "readrefs",
+      "text": "Before editing, read every file the task or a failing traceback references, so a fix that spans multiple files targets the real mismatch. After a failed fix, re-read the new error and the test's assertion before trying again.",
+      "targets": ["multifile_handler", "recovery_from_error"]
     }
   ]
 }
