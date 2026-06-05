@@ -25,7 +25,10 @@ from .llm_clients import (
 # when OPENROUTER_API_KEY is absent (see API_KEY_ENV_VARS).
 DEFAULT_FALLBACK_CHAIN = [
     {"api_type": "CLAUDE_CLI", "model_id": "haiku"},
-    {"api_type": "OLLAMA", "model_id": "qwen2.5-coder:32b"},
+    # qwen3.5 (general-instruct MoE) over qwen3.6 (coding-flagship, regressed on
+    # instruction-following per IFBench) — agentic tools need JSON/instruction adherence,
+    # not code-gen. 35B/3B-active runs at ~3B-dense speed on M1 Metal. `ollama pull qwen3.5:35b-a3b`
+    {"api_type": "OLLAMA", "model_id": "qwen3.5:35b-a3b"},
     {"api_type": "OPENROUTER", "model_id": "anthropic/claude-3.5-haiku"},
 ]
 
