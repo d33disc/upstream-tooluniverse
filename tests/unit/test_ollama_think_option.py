@@ -94,7 +94,22 @@ def test_infer_omits_think_when_not_set():
 def test_default_chain_ollama_entry_carries_tuned_options():
     ollama = next(e for e in DEFAULT_FALLBACK_CHAIN if e["api_type"] == "OLLAMA")
     assert ollama["model_id"] == "qwen3.5:35b-a3b"
-    assert ollama["options"] == {"think": False, "temperature": 0.0}
+    assert ollama["options"]["think"] is False
+    assert ollama["options"]["temperature"] == 0.0
+    # conditional ("when the user asks for JSON") so it is safe for prose tools too
+    assert "json" in ollama["options"]["system"].lower()
+
+
+def test_sticky_ollama_prepends_system_message():
+    """The tuned `system` prompt (qwen3.5 ships with none) must be prepended as a
+    system-role turn before the user message on the Ollama path."""
+    captured = {}
+    tool = _sticky_ollama_tool(captured)
+    tool._buffered_infer_with_fallback([{"role": "user", "content": "hi"}], None)
+    msgs = captured["messages"]
+    assert msgs[0]["role"] == "system"
+    assert "biomedical" in msgs[0]["content"].lower()
+    assert msgs[1] == {"role": "user", "content": "hi"}
 
 
 def test_sticky_ollama_primary_applies_tuned_options():
@@ -109,8 +124,8 @@ def test_sticky_ollama_primary_applies_tuned_options():
 
 def test_chain_options_lookup_by_backend():
     tool = _sticky_ollama_tool({})
-    assert tool._chain_options_for("OLLAMA", "qwen3.5:35b-a3b") == {
-        "think": False,
-        "temperature": 0.0,
-    }
+    opts = tool._chain_options_for("OLLAMA", "qwen3.5:35b-a3b")
+    assert opts["think"] is False
+    assert opts["temperature"] == 0.0
+    assert "system" in opts
     assert tool._chain_options_for("CLAUDE_CLI", "haiku") == {}
