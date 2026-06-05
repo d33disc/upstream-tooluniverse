@@ -140,7 +140,7 @@ def strip_think(text: str) -> str:
     return text.split("<think>")[0].strip()  # drop any unclosed trailing block
 
 
-def call(model: str, messages: list) -> dict:
+def call(model: str, messages: list, base_url: str = OLLAMA) -> dict:
     body = json.dumps(
         {
             "model": model,
@@ -158,7 +158,7 @@ def call(model: str, messages: list) -> dict:
         }
     ).encode()
     req = urllib.request.Request(
-        OLLAMA, data=body, headers={"Content-Type": "application/json"}
+        base_url, data=body, headers={"Content-Type": "application/json"}
     )
     with urllib.request.urlopen(req, timeout=600) as r:
         return json.loads(r.read())["choices"][0]["message"]
@@ -167,6 +167,11 @@ def call(model: str, messages: list) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="qwen3.5:35b-a3b")
+    ap.add_argument(
+        "--base-url",
+        default=OLLAMA,
+        help="OpenAI /v1/chat/completions endpoint (Ollama :11434 or MLX :8081)",
+    )
     ap.add_argument("--cwd", required=True)
     ap.add_argument("--system", help="path to system-prompt file")
     ap.add_argument("--max-steps", type=int, default=12)
@@ -184,7 +189,7 @@ def main() -> None:
 
     for step in range(1, a.max_steps + 1):
         _t = time.time()
-        msg = call(a.model, messages)
+        msg = call(a.model, messages, a.base_url)
         if _PROFILE:
             print(
                 f"[profile] step={step} call={time.time() - _t:.1f}s "

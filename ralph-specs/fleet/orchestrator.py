@@ -30,14 +30,29 @@ AGENT = HERE.parent / "ollama_agent.py"
 WORKER_SYS = HERE.parent / "ollama_worker.system.md"
 WT_ROOT = Path("/tmp/fleet")
 
+# Tiered lanes — separate processes/ports run CONCURRENTLY (true parallelism on one box).
+# A queue task picks its lane via {"lane": "hard"|"fast"}; default "hard".
+LANES = {
+    "hard": {
+        "base_url": "http://localhost:11434/v1/chat/completions",
+        "model": "qwen3.5:35b-a3b",
+    },
+    "fast": {
+        "base_url": "http://localhost:8081/v1/chat/completions",
+        "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+    },
+}
+
 
 def sh(cmd, cwd=None, timeout=900):
     r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout)
     return r.returncode, r.stdout, r.stderr
 
 
-def run_task(repo: Path, t: dict, model: str, max_steps: int) -> dict:
+def run_task(repo: Path, t: dict, max_steps: int) -> dict:
     wid = t["id"]
+    lane = t.get("lane", "hard")
+    cfg = LANES[lane]
     wt = WT_ROOT / f"wt-{wid}"
     branch = f"fleet/{wid}"
     base = t.get("base", "main")
@@ -55,7 +70,9 @@ def run_task(repo: Path, t: dict, model: str, max_steps: int) -> dict:
             "python3",
             str(AGENT),
             "--model",
-            model,
+            cfg["model"],
+            "--base-url",
+            cfg["base_url"],
             "--cwd",
             str(wt),
             "--system",
@@ -79,6 +96,8 @@ def run_task(repo: Path, t: dict, model: str, max_steps: int) -> dict:
 
     return {
         "id": wid,
+        "lane": lane,
+        "model": cfg["model"],
         "task": t["task"],
         "duration_s": dur,
         "worker_tail": out[-500:],
@@ -101,7 +120,6 @@ def main() -> None:
         default=1,
         help="orchestration concurrency (GPU serializes inference)",
     )
-    ap.add_argument("--model", default="qwen3.5:35b-a3b")
     ap.add_argument("--max-steps", type=int, default=15)
     ap.add_argument(
         "--halt", type=int, default=3, help="halt after N consecutive verify fails"
@@ -116,14 +134,15 @@ def main() -> None:
         for line in (HERE / "queue.jsonl").read_text().splitlines()
         if line.strip()
     ]
+    lanes = sorted({t.get("lane", "hard") for t in tasks})
     print(
-        f"fleet: {len(tasks)} task(s), K={a.k}, model={a.model}, repo={repo}",
+        f"fleet: {len(tasks)} task(s), K={a.k}, lanes={lanes}, repo={repo}",
         flush=True,
     )
 
     consecutive_fail = 0
     with ThreadPoolExecutor(max_workers=a.k) as ex:
-        futs = {ex.submit(run_task, repo, t, a.model, a.max_steps): t for t in tasks}
+        futs = {ex.submit(run_task, repo, t, a.max_steps): t for t in tasks}
         for fut in as_completed(futs):
             res = fut.result()
             (HERE / "results" / f"{res['id']}.json").write_text(
@@ -132,8 +151,9 @@ def main() -> None:
             vp = res.get("verify_pass")
             mark = "PASS" if vp else ("FAIL" if vp is False else "n/a")
             print(
-                f"  [{res['id']}] verify={mark}  {res.get('duration_s', '?')}s  "
-                f"diff={res.get('diff_bytes', 0)}b  -> results/{res['id']}.json",
+                f"  [{res['id']}] lane={res.get('lane', '?')} verify={mark}  "
+                f"{res.get('duration_s', '?')}s  diff={res.get('diff_bytes', 0)}b  "
+                f"-> results/{res['id']}.json",
                 flush=True,
             )
             consecutive_fail = consecutive_fail + 1 if vp is False else 0
