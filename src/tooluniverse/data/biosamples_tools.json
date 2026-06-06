@@ -152,78 +152,9 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Success or error status"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "accession": {
-                "type": "string",
-                "description": "BioSample accession ID"
-              },
-              "name": {
-                "type": "string",
-                "description": "Sample name"
-              },
-              "taxon_id": {
-                "type": "integer",
-                "description": "NCBI taxonomy ID"
-              },
-              "status": {
-                "type": "string",
-                "description": "Sample status"
-              },
-              "key_characteristics": {
-                "type": "object",
-                "description": "Key sample attributes",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "description": "List of matching samples"
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "source": {
-              "type": "string",
-              "description": "Data source"
-            },
-            "total_elements": {
-              "type": "integer",
-              "description": "Total matching samples"
-            },
-            "total_pages": {
-              "type": "integer",
-              "description": "Total pages available"
-            },
-            "current_page": {
-              "type": "integer",
-              "description": "Current page number"
-            },
-            "returned": {
-              "type": "integer",
-              "description": "Number of results returned"
-            },
-            "query": {
-              "type": "string",
-              "description": "Search query used"
-            },
-            "endpoint": {
-              "type": "string",
-              "description": "API endpoint used"
-            }
-          },
-          "description": "Query metadata and pagination"
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
@@ -271,69 +202,9 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Success or error status"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "accession": {
-                "type": "string",
-                "description": "BioSample accession ID"
-              },
-              "name": {
-                "type": "string",
-                "description": "Sample name"
-              },
-              "taxon_id": {
-                "type": "integer",
-                "description": "NCBI taxonomy ID"
-              },
-              "key_characteristics": {
-                "type": "object",
-                "description": "Key sample attributes",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "description": "List of matching samples"
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "source": {
-              "type": "string",
-              "description": "Data source"
-            },
-            "total_elements": {
-              "type": [
-                "integer",
-                "null"
-              ],
-              "description": "Total matching samples or null"
-            },
-            "returned": {
-              "type": "integer",
-              "description": "Number of results returned"
-            },
-            "filter": {
-              "type": "string",
-              "description": "Filter expression used"
-            },
-            "endpoint": {
-              "type": "string",
-              "description": "API endpoint used"
-            }
-          },
-          "description": "Query metadata"
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   }

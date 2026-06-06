@@ -59,7 +59,10 @@
             "description": "Entity type (Pathway or Reaction)"
           },
           "compartment_names": {
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
               "type": "string"
             },

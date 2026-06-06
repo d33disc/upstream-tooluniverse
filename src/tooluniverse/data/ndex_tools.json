@@ -39,35 +39,10 @@
       "type": "array",
       "items": {
         "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "owner": {
-            "type": "string"
-          },
-          "node_count": {
-            "type": "integer"
-          },
-          "edge_count": {
-            "type": "integer"
-          },
-          "visibility": {
-            "type": "string"
-          },
-          "doi": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          }
-        }
+        "required": [
+          "uuid",
+          "name"
+        ]
       }
     }
   },

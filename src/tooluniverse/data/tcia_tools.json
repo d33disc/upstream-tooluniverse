@@ -197,57 +197,14 @@
         "PatientID": "LIDC-IDRI-0001"
       },
       {
-        "Collection": "TCGA-GBM",
-        "PatientID": "TCGA-06-0125"
+        "Collection": "LIDC-IDRI",
+        "PatientID": "LIDC-IDRI-0002"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Response status"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "StudyInstanceUID": {
-                "type": "string",
-                "description": "DICOM Study Instance UID"
-              },
-              "StudyDate": {
-                "type": "string",
-                "description": "Date of the study"
-              },
-              "PatientID": {
-                "type": "string",
-                "description": "Patient identifier"
-              },
-              "PatientName": {
-                "type": "string",
-                "description": "Patient name"
-              },
-              "Collection": {
-                "type": "string",
-                "description": "TCIA collection name"
-              },
-              "SeriesCount": {
-                "type": "integer",
-                "description": "Number of series in the study"
-              }
-            }
-          }
-        },
-        "url": {
-          "type": "string",
-          "description": "API endpoint URL used"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Number of results returned"
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
@@ -282,37 +239,13 @@
         "Collection": "LIDC-IDRI"
       },
       {
-        "Collection": "TCGA-GBM",
-        "Modality": "MR"
+        "Collection": "TCGA-LUAD"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Response status"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "Modality": {
-                "type": "string",
-                "description": "DICOM modality code (e.g., CT, MR, PT)"
-              }
-            }
-          }
-        },
-        "url": {
-          "type": "string",
-          "description": "API endpoint URL used"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Number of results returned"
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
@@ -347,36 +280,13 @@
         "Modality": "CT"
       },
       {
-        "Collection": "TCGA-GBM"
+        "Collection": "LIDC-IDRI"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Response status"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "BodyPartExamined": {
-                "type": "string",
-                "description": "Body part name"
-              }
-            }
-          }
-        },
-        "url": {
-          "type": "string",
-          "description": "API endpoint URL used"
-        },
-        "count": {
-          "type": "integer",
-          "description": "Number of results returned"
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
