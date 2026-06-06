@@ -23,7 +23,7 @@ def MSigDB_check_gene_in_set(
     Parameters
     ----------
     operation : str
-        
+
     gene_set_name : str
         Exact gene set name (e.g., 'ZNF549_TARGET_GENES', 'ESC_V6.5_UP_EARLY.V1_DN', ...
     gene : str
@@ -42,11 +42,15 @@ def MSigDB_check_gene_in_set(
     # Handle mutable defaults to avoid B006 linting error
 
     # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {
-        "operation": operation,
-                "gene_set_name": gene_set_name,
-                "gene": gene
-    }.items() if v is not None}
+    _args = {
+        k: v
+        for k, v in {
+            "operation": operation,
+            "gene_set_name": gene_set_name,
+            "gene": gene,
+        }.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "MSigDB_check_gene_in_set",
@@ -54,7 +58,7 @@ def MSigDB_check_gene_in_set(
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
-        validate=validate
+        validate=validate,
     )
 
 
