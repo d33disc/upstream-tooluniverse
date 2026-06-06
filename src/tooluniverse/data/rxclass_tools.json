@@ -55,52 +55,9 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Operation status (success/error)"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "classId": {
-                "type": "string",
-                "description": "Drug class identifier (e.g. ATC code)"
-              },
-              "className": {
-                "type": "string",
-                "description": "Drug class name"
-              },
-              "classType": {
-                "type": "string",
-                "description": "Classification type (e.g. ATC1-4)"
-              },
-              "rxcui": {
-                "type": "string",
-                "description": "RxNorm concept unique identifier"
-              },
-              "drugName": {
-                "type": "string",
-                "description": "Drug name"
-              },
-              "tty": {
-                "type": "string",
-                "description": "Term type (e.g. IN, MIN, PIN)"
-              },
-              "rela": {
-                "type": "string",
-                "description": "Relationship attribute"
-              },
-              "relaSource": {
-                "type": "string",
-                "description": "Source of the relationship"
-              }
-            }
-          }
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
@@ -157,53 +114,9 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Operation status (success/error)"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rxcui": {
-                "type": "string",
-                "description": "RxNorm concept unique identifier"
-              },
-              "name": {
-                "type": "string",
-                "description": "Drug name"
-              },
-              "tty": {
-                "type": "string",
-                "description": "Term type (e.g. IN, MIN, PIN)"
-              }
-            }
-          }
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "class_id": {
-              "type": "string",
-              "description": "Class ID queried"
-            },
-            "rela_source": {
-              "type": "string",
-              "description": "Relationship source used"
-            },
-            "ttys": {
-              "type": "string",
-              "description": "Term types filter applied"
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of members returned"
-            }
-          }
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   },
@@ -253,49 +166,9 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Operation status (success/error)"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "classId": {
-                "type": "string",
-                "description": "Drug class identifier"
-              },
-              "className": {
-                "type": "string",
-                "description": "Drug class name"
-              },
-              "classType": {
-                "type": "string",
-                "description": "Classification system type (e.g. VA, ATC1-4)"
-              }
-            }
-          }
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "Search query used"
-            },
-            "class_type": {
-              "type": "string",
-              "description": "Class type filter applied"
-            },
-            "count": {
-              "type": "integer",
-              "description": "Number of results returned"
-            }
-          }
-        }
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     }
   }

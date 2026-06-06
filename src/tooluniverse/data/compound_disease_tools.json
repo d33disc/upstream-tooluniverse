@@ -15,28 +15,24 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {"const": "success"},
-            "data": {
-              "type": "object",
-              "properties": {
-                "query": {"type": "string"},
-                "sources_queried": {"type": "array"},
-                "sources_failed": {"type": "array"},
-                "profile": {"type": "object"},
-                "per_source": {"type": "object"}
-              }
-            }
-          }
+      "properties": {
+        "query": {
+          "type": "string"
         },
-        {
-          "properties": {
-            "status": {"const": "error"},
-            "error": {"type": "string"}
-          }
+        "sources_queried": {
+          "type": "array"
+        },
+        "sources_failed": {
+          "type": "array"
+        },
+        "profile": {
+          "type": "object"
         }
+      },
+      "required": [
+        "query",
+        "sources_queried",
+        "sources_failed"
       ]
     },
     "test_examples": [

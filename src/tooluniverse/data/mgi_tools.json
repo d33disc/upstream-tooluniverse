@@ -236,51 +236,10 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of phenotype annotations for the mouse gene",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gene_symbol": {
-                    "type": ["string", "null"],
-                    "description": "Gene symbol"
-                  },
-                  "gene_id": {
-                    "type": ["string", "null"],
-                    "description": "MGI gene ID"
-                  },
-                  "phenotype_statement": {
-                    "type": ["string", "null"],
-                    "description": "Phenotype description from MP ontology annotation"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {"type": "integer"},
-                "returned": {"type": "integer"},
-                "query_gene_id": {"type": "string"},
-                "page": {"type": "integer"},
-                "source": {"type": "string"}
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
-        }
-      ]
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
     }
   }
 ]

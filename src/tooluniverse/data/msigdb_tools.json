@@ -193,29 +193,22 @@
       "required": ["gene_set_name", "gene"]
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"const": "success"},
-            "data": {
-              "type": "object",
-              "properties": {
-                "gene_set_name": {"type": "string"},
-                "gene": {"type": "string"},
-                "is_member": {"type": "boolean"},
-                "total_genes_in_set": {"type": "integer"}
-              }
-            }
-          }
+      "type": "object",
+      "properties": {
+        "gene_set_name": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"const": "error"},
-            "error": {"type": "string"}
-          }
+        "systematic_name": {
+          "type": "string"
+        },
+        "collection": {
+          "type": "string"
         }
+      },
+      "required": [
+        "gene_set_name",
+        "systematic_name",
+        "collection"
       ]
     },
     "test_examples": [
@@ -242,29 +235,25 @@
       "required": ["gene_set_name"]
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {"const": "success"},
-            "data": {
-              "type": "object",
-              "properties": {
-                "gene_set_name": {"type": "string"},
-                "num_genes": {"type": "integer"},
-                "genes": {"type": "array"},
-                "collection": {"type": "string"}
-              }
-            }
-          }
+      "type": "object",
+      "properties": {
+        "gene_set_name": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "status": {"const": "error"},
-            "error": {"type": "string"}
-          }
+        "systematic_name": {
+          "type": "string"
+        },
+        "collection": {
+          "type": "string"
+        },
+        "genes": {
+          "type": "array"
         }
+      },
+      "required": [
+        "gene_set_name",
+        "systematic_name",
+        "collection"
       ]
     },
     "test_examples": [

@@ -36,10 +36,10 @@
             {"sequence": "GILGFVFTL", "allele": "HLA-A*02:01", "length": 9}
         ],
         "return_schema": {
-            "oneOf": [
-                {"type": "object", "properties": {"data": {"type": "array"}, "metadata": {"type": "object"}}},
-                {"type": "object", "properties": {"error": {"type": "string"}}}
-            ]
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
     },
     {
@@ -70,13 +70,19 @@
         },
         "type": "IEDBPredictionTool",
         "test_examples": [
-            {"sequence": "PKYVKQNTLKLAT", "allele": "HLA-DRB1*01:01"}
+            {"sequence": "PKYVKQNTLKLATGMRNVPEKQT", "allele": "HLA-DRB1*01:01"}
         ],
         "return_schema": {
-            "oneOf": [
-                {"type": "object", "properties": {"data": {"type": "array"}, "metadata": {"type": "object"}}},
-                {"type": "object", "properties": {"error": {"type": "string"}}}
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "peptide",
+              "core_peptide",
+              "score",
+              "rank"
             ]
+          }
         }
     }
 ]

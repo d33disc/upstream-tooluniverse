@@ -166,7 +166,10 @@
             "type": "string"
           },
           "gene_name": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "product": {
             "type": "string"

@@ -23,28 +23,27 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {"const": "success"},
-            "data": {
-              "type": "object",
-              "properties": {
-                "query": {"type": "object"},
-                "sources_queried": {"type": "array"},
-                "sources_failed": {"type": "array"},
-                "summary": {"type": "object"},
-                "annotations": {"type": "object"}
-              }
-            }
-          }
+      "properties": {
+        "query": {
+          "type": "object"
         },
-        {
-          "properties": {
-            "status": {"const": "error"},
-            "error": {"type": "string"}
-          }
+        "sources_queried": {
+          "type": "array"
+        },
+        "sources_failed": {
+          "type": "array"
+        },
+        "summary": {
+          "type": "object"
+        },
+        "annotations": {
+          "type": "object"
         }
+      },
+      "required": [
+        "query",
+        "sources_queried",
+        "sources_failed"
       ]
     },
     "test_examples": [
