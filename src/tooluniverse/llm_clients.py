@@ -632,8 +632,10 @@ class ClaudeCliClient(BaseLLMClient):
                 )
         if not isinstance(event, dict):
             return None, 0, "unexpected CLI payload shape"
-        if event.get("is_error"):
+        if event.get("is_error") or event.get("error"):
             err = event.get("result") or event.get("error") or "CLI returned is_error"
+            if isinstance(err, dict):
+                err = err.get("message") or err.get("error") or str(err)
             return None, event.get("total_cost_usd", 0) or 0, str(err)
         content = event.get("result", "")
         cost = event.get("total_cost_usd") or event.get("cost_usd") or 0
