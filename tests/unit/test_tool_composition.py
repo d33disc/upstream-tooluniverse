@@ -21,7 +21,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 from tooluniverse import ToolUniverse
 
 
-@pytest.mark.unit
+@pytest.mark.integration
+@pytest.mark.network
 class TestToolComposition(unittest.TestCase):
     """Test tool composition and workflow functionality."""
 

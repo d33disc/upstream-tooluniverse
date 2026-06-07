@@ -46,6 +46,7 @@ class TestToolExecution:
         assert "total_tools" in tools
         assert tools["total_tools"] > 0
 
+    @pytest.mark.network
     def test_tool_execution_real(self):
         """Test real tool execution with actual ToolUniverse calls."""
         # Test with a real tool (may fail due to missing API keys, but that's OK)
@@ -63,6 +64,7 @@ class TestToolExecution:
             # Expected if API key not configured
             assert isinstance(e, Exception)
 
+    @pytest.mark.network
     def test_tool_execution_multiple_tools_real(self):
         """Test real tool execution with multiple tools."""
         # Test multiple tool calls individually
