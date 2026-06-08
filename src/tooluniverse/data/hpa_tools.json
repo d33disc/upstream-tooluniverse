@@ -43,7 +43,13 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "Gene"
+        ]
+      }
     }
   },
   {
@@ -79,6 +85,11 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "genes",
+        "match_count",
+        "search_query"
+      ],
       "properties": {
         "error": {
           "type": "string"
@@ -126,6 +137,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "cell_line",
+        "cell_line_expression",
+        "comparison_summary",
+        "expression_unit",
+        "gene_name"
+      ],
       "properties": {
         "error": {
           "type": "string"
@@ -180,6 +198,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "disease_expression",
+        "disease_name",
+        "disease_vs_healthy",
+        "expression_unit",
+        "gene_name"
+      ],
       "properties": {
         "error": {
           "type": "string"
@@ -227,6 +252,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "biological_processes",
+        "gene_name",
+        "gene_symbol",
+        "gene_synonym",
+        "target_process_names"
+      ],
       "properties": {
         "gene_name": {
           "type": "string"
@@ -329,6 +361,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "antibodies",
+        "cell_line_expression",
+        "chromosome_location",
+        "ensembl_id",
+        "expression_summary"
+      ],
       "properties": {
         "ensembl_id": {
           "type": "string"
@@ -511,6 +550,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "ensembl_id",
+        "gene",
+        "gene_synonym",
+        "note",
+        "prognostic_cancers_count"
+      ],
       "properties": {
         "ensembl_id": {
           "type": "string"
@@ -704,6 +750,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "biological_processes",
+        "context",
+        "context_category",
+        "context_type",
+        "contextual_conclusion"
+      ],
       "properties": {
         "error": {
           "type": "string"
@@ -758,6 +811,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "available_sources",
+        "column_queried",
+        "expression_level",
+        "expression_unit",
+        "expression_value"
+      ],
       "properties": {
         "error": {
           "type": "string"
@@ -798,6 +858,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "additional_locations",
+        "gene_name",
+        "gene_synonym",
+        "location_summary",
+        "main_locations"
+      ],
       "properties": {
         "gene_name": {
           "type": "string"

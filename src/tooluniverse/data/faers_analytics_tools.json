@@ -30,7 +30,14 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "drug_name",
+        "adverse_event",
+        "contingency_table",
+        "metrics",
+        "signal_detection"
+      ]
     },
     "test_examples": [
       {
@@ -93,7 +100,13 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "drug_name",
+        "stratified_by",
+        "total_reports",
+        "stratification"
+      ]
     },
     "test_examples": [
       {
@@ -151,7 +164,13 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "drug_name",
+        "seriousness_type",
+        "total_serious_events",
+        "top_serious_reactions"
+      ]
     },
     "test_examples": [
       {
@@ -203,7 +222,13 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "adverse_event",
+        "drug1",
+        "drug2",
+        "comparison"
+      ]
     },
     "test_examples": [
       {
@@ -249,7 +274,13 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "drug_name",
+        "adverse_event",
+        "temporal_data",
+        "trend_analysis"
+      ]
     },
     "test_examples": [
       {
@@ -284,7 +315,11 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "drug_name",
+        "meddra_hierarchy"
+      ]
     },
     "test_examples": [
       {
