@@ -27,7 +27,23 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "category"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        }
+      }
     }
   },
   {
@@ -69,7 +85,30 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject",
+          "object",
+          "category",
+          "predicate"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string"
+          },
+          "object": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "predicate": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   {
@@ -112,7 +151,26 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        }
+      }
     },
     "aliases": [
       "Monarch_search_diseases"
@@ -146,7 +204,26 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "body_system",
+          "phenotype_count",
+          "id"
+        ],
+        "properties": {
+          "body_system": {
+            "type": "string"
+          },
+          "phenotype_count": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   {
@@ -182,7 +259,26 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject_id",
+          "predicate",
+          "object_id"
+        ],
+        "properties": {
+          "subject_id": {
+            "type": "string"
+          },
+          "predicate": {
+            "type": "string"
+          },
+          "object_id": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   {
@@ -235,7 +331,26 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "disease_id",
+          "disease_name",
+          "score"
+        ],
+        "properties": {
+          "disease_id": {
+            "type": "string"
+          },
+          "disease_name": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        }
+      }
     }
   }
 ]

@@ -27,7 +27,13 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "input_description",
+        "corrected_description",
+        "normalized_description",
+        "gene_id"
+      ]
     }
   },
   {
@@ -58,7 +64,20 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "input_protein_variant",
+        "dna_descriptions",
+        "count"
+      ],
+      "properties": {
+        "dna_descriptions": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
     }
   },
   {
@@ -89,7 +108,11 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "input_description",
+        "model"
+      ]
     }
   }
 ]

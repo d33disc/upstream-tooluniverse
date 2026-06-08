@@ -19,7 +19,34 @@
       "required": []
     },
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "library_name",
+          "num_terms",
+          "gene_coverage",
+          "genes_per_term",
+          "category_id"
+        ],
+        "properties": {
+          "library_name": {
+            "type": "string"
+          },
+          "num_terms": {
+            "type": "integer"
+          },
+          "gene_coverage": {
+            "type": "integer"
+          },
+          "genes_per_term": {
+            "type": "number"
+          },
+          "category_id": {
+            "type": "integer"
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -65,7 +92,69 @@
       ]
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "library",
+        "gene_count",
+        "total_terms",
+        "enriched_terms"
+      ],
+      "properties": {
+        "library": {
+          "type": "string"
+        },
+        "gene_count": {
+          "type": "integer"
+        },
+        "total_terms": {
+          "type": "integer"
+        },
+        "enriched_terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rank",
+              "term",
+              "p_value",
+              "z_score",
+              "combined_score",
+              "overlapping_genes",
+              "adjusted_p_value",
+              "overlap_count"
+            ],
+            "properties": {
+              "rank": {
+                "type": "integer"
+              },
+              "term": {
+                "type": "string"
+              },
+              "p_value": {
+                "type": "number"
+              },
+              "z_score": {
+                "type": "number"
+              },
+              "combined_score": {
+                "type": "number"
+              },
+              "overlapping_genes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "adjusted_p_value": {
+                "type": "number"
+              },
+              "overlap_count": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -131,7 +220,64 @@
       ]
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "gene_count",
+        "results_by_library"
+      ],
+      "properties": {
+        "gene_count": {
+          "type": "integer"
+        },
+        "results_by_library": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "total_terms",
+              "top_terms"
+            ],
+            "properties": {
+              "total_terms": {
+                "type": "integer"
+              },
+              "top_terms": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "term",
+                    "p_value",
+                    "combined_score",
+                    "overlapping_genes",
+                    "adjusted_p_value"
+                  ],
+                  "properties": {
+                    "term": {
+                      "type": "string"
+                    },
+                    "p_value": {
+                      "type": "number"
+                    },
+                    "combined_score": {
+                      "type": "number"
+                    },
+                    "overlapping_genes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "adjusted_p_value": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {

@@ -107,10 +107,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "DOI": {
@@ -149,7 +146,12 @@
         "funder": {
           "type": "array"
         }
-      }
+      },
+      "required": [
+        "DOI",
+        "type",
+        "title"
+      ]
     },
     "test_examples": [
       {
@@ -181,10 +183,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "title": {
@@ -202,7 +201,12 @@
         "flags": {
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "ISSN",
+        "title",
+        "publisher"
+      ]
     },
     "test_examples": [
       {
@@ -238,10 +242,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "description": "List of funders.",
       "items": {
         "type": "object",
@@ -262,7 +263,11 @@
           "tokens": {
             "type": "array"
           }
-        }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
       }
     },
     "test_examples": [
@@ -296,10 +301,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "id": {
@@ -320,7 +322,11 @@
         "hierarchy": {
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
     },
     "test_examples": [
       {
@@ -344,10 +350,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "description": "List of publication types.",
       "items": {
         "type": "object",
@@ -359,7 +362,11 @@
           "label": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "id",
+          "label"
+        ]
       }
     },
     "test_examples": [
