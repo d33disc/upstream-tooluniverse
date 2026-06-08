@@ -280,9 +280,10 @@
       "default_params": {}
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "meta",
+        "results"
       ],
       "description": "OpenAlex /works search response data.",
       "additionalProperties": true,
@@ -363,9 +364,9 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "id"
       ],
       "description": "OpenAlex work (paper) data.",
       "additionalProperties": true,
@@ -429,9 +430,9 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "id"
       ],
       "description": "OpenAlex work data from DOI lookup.",
       "additionalProperties": true
@@ -486,9 +487,10 @@
       }
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "meta",
+        "results"
       ],
       "description": "OpenAlex authors search response data.",
       "additionalProperties": true
@@ -531,9 +533,9 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "id"
       ],
       "description": "OpenAlex author data.",
       "additionalProperties": true
@@ -588,9 +590,10 @@
       }
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "meta",
+        "results"
       ],
       "description": "OpenAlex institutions search response data.",
       "additionalProperties": true
@@ -633,9 +636,9 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "id"
       ],
       "description": "OpenAlex institution data.",
       "additionalProperties": true
