@@ -108,12 +108,14 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "items": {
         "type": "object",
+        "required": [
+          "soma_joinid",
+          "dataset_id",
+          "cell_type"
+        ],
         "properties": {
           "cell_type": {
             "type": "string"
@@ -208,12 +210,14 @@
       ]
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "items": {
         "type": "object",
+        "required": [
+          "soma_joinid",
+          "feature_id",
+          "feature_name"
+        ],
         "properties": {
           "feature_id": {
             "type": "string",
