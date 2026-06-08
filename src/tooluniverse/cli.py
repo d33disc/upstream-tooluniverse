@@ -1207,6 +1207,31 @@ def cmd_status(args: argparse.Namespace) -> None:
     _print_result(status, args, _render_status)
 
 
+def _validate_return_schema(data: object, return_schema: dict) -> list[str]:
+    """Validate a tool's unwrapped payload against its ``return_schema``.
+
+    Returns a list of failure messages (empty list == valid).
+
+    A missing ``jsonschema`` is itself a failure, never a silent skip:
+    ``jsonschema`` is a declared dependency, so its absence means the one
+    semantic gate is invisibly disabled — a green without teeth. Surface it
+    loudly so the failure is diagnosable instead of masquerading as success.
+    """
+    try:
+        import jsonschema
+    except ImportError:
+        return [
+            "return_schema not validated: jsonschema is unavailable but is a "
+            "declared dependency (pip install jsonschema) — refusing to report a "
+            "green that skipped schema validation"
+        ]
+    try:
+        jsonschema.validate(data, return_schema)
+    except jsonschema.ValidationError as exc:
+        return [f"return_schema mismatch: {exc.message} (at {list(exc.absolute_path)})"]
+    return []
+
+
 def cmd_test(args: argparse.Namespace) -> None:
     """Test a tool against example inputs and report pass/fail."""
     import time
@@ -1408,16 +1433,9 @@ def cmd_test(args: argparse.Namespace) -> None:
                 tool_def.get("return_schema") if isinstance(tool_def, dict) else None
             )
             if return_schema:
-                try:
-                    import jsonschema
-
-                    jsonschema.validate(result.get("data"), return_schema)
-                except ImportError:
-                    pass  # jsonschema not installed — skip silently
-                except jsonschema.ValidationError as exc:
-                    failures.append(
-                        f"return_schema mismatch: {exc.message} (at {list(exc.absolute_path)})"
-                    )
+                failures.extend(
+                    _validate_return_schema(result.get("data"), return_schema)
+                )
 
         # Feature-25B-01: warn when data is empty on success — test example may be stale
         warnings = []
