@@ -24,14 +24,7 @@
       "description": "Raw EMDB API response body.",
       "additionalProperties": true,
       "required": [
-        "_id",
-        "emdb_id",
-        "admin",
-        "map",
-        "sample",
-        "crossreferences",
-        "structure_determination_list",
-        "version"
+        "emdb_id"
       ],
       "properties": {
         "_id": {
@@ -110,14 +103,7 @@
         "type": "object",
         "additionalProperties": true,
         "required": [
-          "_id",
-          "emdb_id",
-          "admin",
-          "map",
-          "sample",
-          "crossreferences",
-          "structure_determination_list",
-          "version"
+          "emdb_id"
         ],
         "properties": {
           "_id": {
@@ -192,8 +178,7 @@
       "description": "Publications associated with the EMDB entry.",
       "additionalProperties": true,
       "required": [
-        "emdb_id",
-        "crossreferences"
+        "emdb_id"
       ],
       "properties": {
         "emdb_id": {
