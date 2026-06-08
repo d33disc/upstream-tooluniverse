@@ -35,11 +35,20 @@
       "oneOf": [
         {
           "type": "object",
-          "description": "Single protein information (when single accession provided) including annotations, sequences, features, and cross-references. Contains fields: accession, id, proteinExistence, info, organism, secondaryAccession, protein, gene, comments, features, dbReferences, references, etc."
+          "description": "Single protein information (when single accession provided) including annotations, sequences, features, and cross-references. Contains fields: accession, id, proteinExistence, info, organism, secondaryAccession, protein, gene, comments, features, dbReferences, references, etc.",
+          "required": [
+            "accession"
+          ]
         },
         {
           "type": "array",
-          "description": "List of protein results (when multiple accessions provided in batch). Each item contains 'accession', 'status', 'data', and 'url' fields."
+          "description": "List of protein results (when multiple accessions provided in batch). Each item contains 'accession', 'status', 'data', and 'url' fields.",
+          "items": {
+            "type": "object",
+            "required": [
+              "accession"
+            ]
+          }
         }
       ]
     },
@@ -105,6 +114,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "accession"
+        ]
+      },
       "description": "List of protein variations with positions, amino acid changes, disease associations, and evidence. Each variant includes fields like 'ftId', 'wildType', 'alternativeSequence', 'begin', 'end', 'somaticStatus', 'association', etc."
     },
     "test_examples": [
@@ -152,6 +167,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ]
+      },
       "description": "Proteomics data including PTM comments, modified residues, and related features."
     },
     "test_examples": [
@@ -200,6 +221,9 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object"
+      },
       "description": "Epitope sequences and annotations including immunology comments and epitope features."
     },
     "test_examples": [
@@ -266,6 +290,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "accession"
+        ]
+      },
       "description": "Array of protein objects matching the search query. Each protein contains accession, id, organism, protein names, gene names, features, and other annotations."
     },
     "test_examples": [
@@ -313,6 +343,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ]
+      },
       "description": "List of genome mapping records for the requested protein."
     },
     "test_examples": [
@@ -361,6 +397,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ]
+      },
       "description": "List of sequence feature annotations for the requested protein."
     },
     "test_examples": [
@@ -409,6 +451,13 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ]
+      },
       "description": "List of cross-reference records for the requested protein."
     },
     "test_examples": [
@@ -457,6 +506,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ]
+      },
       "description": "List of comment/annotation records for the requested protein."
     },
     "test_examples": [
@@ -505,6 +560,12 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "citation"
+        ]
+      },
       "description": "List of publication records associated with the requested protein."
     },
     "test_examples": [
