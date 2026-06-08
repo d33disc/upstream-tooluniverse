@@ -15,6 +15,11 @@ from typing import no_type_check, Optional, Dict, Any
 import hashlib
 import inspect
 
+# jsonschema is a declared, non-optional dependency (pyproject.toml). Importing it at
+# module load means a missing install fails loudly here, never as a silent skip mid-
+# validation — the production-path twin of the cli.py fix (PR #51).
+import jsonschema
+
 
 def tool_error(
     error: str,
@@ -224,12 +229,6 @@ class BaseTool:
             return None  # No schema to validate against
 
         try:
-            import jsonschema
-        except ImportError:
-            # jsonschema not available, skip validation
-            return None
-
-        try:
             # Filter out internal control parameters before validation
             # Only filter known internal parameters, not all underscore-prefixed params
             # to allow optional streaming parameter _tooluniverse_stream
@@ -284,6 +283,14 @@ class BaseTool:
                     if hasattr(e, "validator_value")
                     else None,
                 },
+            )
+        except jsonschema.SchemaError as e:
+            # The tool's parameter schema is itself malformed — a developer/config bug,
+            # not a user-input error. Surface it as a distinct, diagnosable config error.
+            return ToolConfigError(
+                f"Invalid parameter schema for tool "
+                f"'{self.tool_config.get('name', '?')}': {e.message}",
+                details={"schema_error": str(e), "schema": schema},
             )
         except Exception as e:
             return ToolValidationError(f"Validation error: {str(e)}")

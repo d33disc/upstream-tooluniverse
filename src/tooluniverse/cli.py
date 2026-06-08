@@ -1229,6 +1229,10 @@ def _validate_return_schema(data: object, return_schema: dict) -> list[str]:
         jsonschema.validate(data, return_schema)
     except jsonschema.ValidationError as exc:
         return [f"return_schema mismatch: {exc.message} (at {list(exc.absolute_path)})"]
+    except jsonschema.SchemaError as exc:
+        # The return_schema itself is malformed — a developer bug. Report it as a
+        # diagnosable failure instead of crashing the whole test run with a traceback.
+        return [f"return_schema is invalid (malformed schema): {exc.message}"]
     return []
 
 
