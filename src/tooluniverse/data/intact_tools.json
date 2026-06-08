@@ -29,11 +29,27 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "array",
-        "object"
+      "type": "object",
+      "description": "Interactor information including names, organism, cross-references (returns array for multiple results or object for single result)",
+      "required": [
+        "id",
+        "source",
+        "interaction_name"
       ],
-      "description": "Interactor information including names, organism, cross-references (returns array for multiple results or object for single result)"
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "interaction_name": {
+          "type": "string"
+        },
+        "interactor_descriptions": {
+          "type": "array"
+        }
+      }
     },
     "test_examples": [
       {
@@ -74,7 +90,29 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of interactions involving the interactor"
+      "description": "List of interactions involving the interactor",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interaction_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "interaction_name": {
+            "type": "string"
+          },
+          "interactor_descriptions": {
+            "type": "array"
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -127,7 +165,29 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "Search results with interactions"
+      "description": "Search results with interactions",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interaction_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "interaction_name": {
+            "type": "string"
+          },
+          "interactor_descriptions": {
+            "type": "array"
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -254,7 +314,26 @@
     "return_schema": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interaction_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "interaction_name": {
+            "type": "string"
+          },
+          "interactor_descriptions": {
+            "type": "array"
+          }
+        }
       }
     }
   },
@@ -294,7 +373,29 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of interactions for the organism"
+      "description": "List of interactions for the organism",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "interaction_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "interaction_name": {
+            "type": "string"
+          },
+          "interactor_descriptions": {
+            "type": "array"
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -349,7 +450,35 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of complexes matching the search. Each complex includes complexAC, complexName, organismName, description, predictedComplex, and interactors."
+      "description": "List of complexes matching the search. Each complex includes complexAC, complexName, organismName, description, predictedComplex, and interactors.",
+      "items": {
+        "type": "object",
+        "required": [
+          "complexAC",
+          "complexName",
+          "organismName"
+        ],
+        "properties": {
+          "complexAC": {
+            "type": "string"
+          },
+          "complexName": {
+            "type": "string"
+          },
+          "organismName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "predictedComplex": {
+            "type": "boolean"
+          },
+          "interactors": {
+            "type": "array"
+          }
+        }
+      }
     },
     "test_examples": [
       {
