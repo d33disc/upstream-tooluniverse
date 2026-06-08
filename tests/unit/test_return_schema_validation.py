@@ -16,6 +16,8 @@ from __future__ import annotations
 
 import sys
 
+import pytest
+
 from tooluniverse.cli import _validate_return_schema
 
 _SCHEMA = {
@@ -25,26 +27,44 @@ _SCHEMA = {
 }
 
 
+@pytest.mark.unit
 def test_valid_payload_has_no_failures():
+    """A payload matching the schema produces no failures."""
     assert _validate_return_schema({"count": 3}, _SCHEMA) == []
 
 
+@pytest.mark.unit
 def test_wrong_payload_is_rejected():
+    """A well-formed but schema-violating payload is rejected (the teeth)."""
     # well-formed dict, but `count` is a string, not an integer
     failures = _validate_return_schema({"count": "three"}, _SCHEMA)
     assert failures, "a schema-violating payload must be rejected (teeth)"
     assert "return_schema mismatch" in failures[0]
 
 
+@pytest.mark.unit
 def test_missing_required_key_is_rejected():
+    """A payload missing a required key is rejected."""
     failures = _validate_return_schema({}, _SCHEMA)
     assert failures, "missing required key must be rejected"
 
 
+@pytest.mark.unit
 def test_missing_jsonschema_is_a_failure_not_silent_skip(monkeypatch):
+    """A missing jsonschema (declared dep) is a loud failure, never a silent pass."""
     # Simulate an environment where the declared dependency is absent:
     # mapping the module name to None makes `import jsonschema` raise ImportError.
     monkeypatch.setitem(sys.modules, "jsonschema", None)
     failures = _validate_return_schema({"count": 3}, _SCHEMA)
     assert failures, "missing jsonschema must be a loud failure, not a silent pass"
     assert "jsonschema" in failures[0].lower()
+
+
+@pytest.mark.unit
+def test_malformed_schema_is_reported_not_crashed():
+    """A malformed return_schema is reported as a failure, never crashes `tu test`."""
+    # `required` must be an array; a string makes the return_schema itself invalid.
+    bad_schema = {"type": "object", "required": "oops"}
+    failures = _validate_return_schema({"count": 3}, bad_schema)
+    assert failures, "a malformed return_schema must be reported as a failure"
+    assert "schema" in failures[0].lower()
