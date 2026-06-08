@@ -2,7 +2,7 @@
   {
     "type": "EMDBRESTTool",
     "name": "EMDB_get_structure",
-    "description": "Get 3D electron microscopy (EM) structure data from the Electron Microscopy Data Bank (EMDB). Returns cryo-EM structure metadata including resolution (in \u00c5ngstr\u00f6ms), imaging method, organism, molecule details, voxel dimensions, map download URLs, and cross-references to PDB entries. Use this for structural biology research, comparing protein conformations, drug design, and downloading electron density maps for visualization or model fitting.",
+    "description": "Get 3D electron microscopy (EM) structure data from the Electron Microscopy Data Bank (EMDB). Returns cryo-EM structure metadata including resolution (in Ångströms), imaging method, organism, molecule details, voxel dimensions, map download URLs, and cross-references to PDB entries. Use this for structural biology research, comparing protein conformations, drug design, and downloading electron density maps for visualization or model fitting.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -20,96 +20,52 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "description": "Raw EMDB API response body.",
       "additionalProperties": true,
+      "required": [
+        "_id",
+        "emdb_id",
+        "admin",
+        "map",
+        "sample",
+        "crossreferences",
+        "structure_determination_list",
+        "version"
+      ],
       "properties": {
+        "_id": {
+          "type": "string"
+        },
         "emdb_id": {
           "type": "string"
         },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "resolution": {
-          "type": "number"
-        },
-        "method": {
-          "type": "string"
-        },
-        "organism": {
-          "type": "string"
-        },
-        "molecule": {
-          "type": "string"
-        },
-        "deposition_date": {
-          "type": "string"
-        },
-        "release_date": {
-          "type": "string"
-        },
-        "authors": {
-          "type": "array"
-        },
-        "journal": {
-          "type": "string"
-        },
-        "volume": {
-          "type": "string"
-        },
-        "page": {
-          "type": "string"
-        },
-        "year": {
-          "type": "integer"
-        },
-        "doi": {
-          "type": "string"
-        },
-        "pdb_id": {
-          "type": "string"
-        },
-        "map_url": {
-          "type": "string"
-        },
-        "contour_level": {
-          "type": "number"
-        },
-        "voxel_size": {
+        "admin": {
           "type": "object",
-          "additionalProperties": true,
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
+          "additionalProperties": true
         },
-        "map_dimensions": {
+        "map": {
           "type": "object",
-          "additionalProperties": true,
-          "properties": {
-            "x": {
-              "type": "integer"
-            },
-            "y": {
-              "type": "integer"
-            },
-            "z": {
-              "type": "integer"
-            }
-          }
+          "additionalProperties": true
+        },
+        "sample": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "crossreferences": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "structure_determination_list": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "version": {
+          "type": "string"
+        },
+        "interpretation": {
+          "type": "object",
+          "additionalProperties": true
         }
       }
     },
@@ -153,14 +109,50 @@
       "items": {
         "type": "object",
         "additionalProperties": true,
+        "required": [
+          "_id",
+          "emdb_id",
+          "admin",
+          "map",
+          "sample",
+          "crossreferences",
+          "structure_determination_list",
+          "version"
+        ],
         "properties": {
-          "_id": {"type": "string"},
-          "emdb_id": {"type": "string"},
-          "admin": {"type": "object", "additionalProperties": true},
-          "map": {"type": "object", "additionalProperties": true},
-          "sample": {"type": "object", "additionalProperties": true},
-          "crossreferences": {"type": "object", "additionalProperties": true},
-          "interpretation": {"type": "object", "additionalProperties": true}
+          "_id": {
+            "type": "string"
+          },
+          "emdb_id": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "map": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "sample": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "crossreferences": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "structure_determination_list": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "version": {
+            "type": "string"
+          },
+          "interpretation": {
+            "type": "object",
+            "additionalProperties": true
+          }
         }
       }
     },
@@ -196,43 +188,20 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "array",
-        "null"
-      ],
+      "type": "object",
       "description": "Publications associated with the EMDB entry.",
       "additionalProperties": true,
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "authors": {
-            "type": "array"
-          },
-          "journal": {
-            "type": "string"
-          },
-          "volume": {
-            "type": "string"
-          },
-          "pages": {
-            "type": "string"
-          },
-          "year": {
-            "type": "integer"
-          },
-          "doi": {
-            "type": "string"
-          },
-          "pubmed_id": {
-            "type": "string"
-          },
-          "abstract": {
-            "type": "string"
-          }
+      "required": [
+        "emdb_id",
+        "crossreferences"
+      ],
+      "properties": {
+        "emdb_id": {
+          "type": "string"
+        },
+        "crossreferences": {
+          "type": "object",
+          "additionalProperties": true
         }
       }
     },
@@ -266,58 +235,20 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "description": "Electron density map details and statistics.",
       "additionalProperties": true,
+      "required": [
+        "emdb_id",
+        "map"
+      ],
       "properties": {
         "emdb_id": {
           "type": "string"
         },
-        "contour_level": {
-          "type": "number"
-        },
-        "pixel_spacing": {
+        "map": {
           "type": "object",
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
-        },
-        "dimensions": {
-          "type": "object",
-          "properties": {
-            "col": {
-              "type": "integer"
-            },
-            "row": {
-              "type": "integer"
-            },
-            "sec": {
-              "type": "integer"
-            }
-          }
-        },
-        "symmetry": {
-          "type": "string"
-        },
-        "map_format": {
-          "type": "string"
-        },
-        "map_url": {
-          "type": "string"
-        },
-        "map_size": {
-          "type": "integer"
+          "additionalProperties": true
         }
       }
     },
@@ -351,42 +282,20 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "description": "Sample preparation and composition details.",
       "additionalProperties": true,
+      "required": [
+        "emdb_id",
+        "sample"
+      ],
       "properties": {
         "emdb_id": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
-        "organism": {
-          "type": "string"
-        },
-        "expression_system": {
-          "type": "string"
-        },
-        "molecular_weight": {
-          "type": "number"
-        },
-        "oligomeric_state": {
-          "type": "string"
-        },
-        "components": {
-          "type": "array"
-        },
-        "ligands": {
-          "type": "array"
-        },
-        "buffer": {
-          "type": "string"
-        },
-        "ph": {
-          "type": "number"
+        "sample": {
+          "type": "object",
+          "additionalProperties": true
         }
       }
     },
@@ -420,10 +329,7 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "description": "Microscopy imaging parameters and data collection details.",
       "additionalProperties": true,
       "properties": {
@@ -495,10 +401,7 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "description": "Validation metrics keyed by EMDB ID (e.g., {'1234': {...}}).",
       "additionalProperties": true
     },

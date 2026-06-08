@@ -26,7 +26,8 @@
       ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
+      "required": ["success", "results", "query"],
       "properties": {
         "success": {
           "type": "boolean",
@@ -96,7 +97,8 @@
       ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
+      "required": ["success", "original_query", "solr_query", "is_valid"],
       "properties": {
         "success": {
           "type": "boolean",
@@ -215,6 +217,7 @@
     },
     "return_schema": {
       "type": "object",
+      "required": ["success", "accession", "data"],
       "properties": {
         "success": {
           "type": "boolean",
