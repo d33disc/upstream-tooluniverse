@@ -43,7 +43,27 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "Gene"
+        ],
+        "properties": {
+          "Gene": {
+            "type": "string"
+          },
+          "Gene synonym": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "Gene description": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   {
@@ -79,9 +99,19 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "search_query",
+        "match_count"
+      ],
       "properties": {
-        "error": {
+        "search_query": {
           "type": "string"
+        },
+        "match_count": {
+          "type": "integer"
+        },
+        "genes": {
+          "type": "array"
         }
       }
     }
@@ -126,9 +156,29 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "gene_name",
+        "gene_symbol",
+        "cell_line"
+      ],
       "properties": {
-        "error": {
+        "gene_name": {
           "type": "string"
+        },
+        "gene_symbol": {
+          "type": "string"
+        },
+        "gene_synonym": {
+          "type": "array"
+        },
+        "cell_line": {
+          "type": "string"
+        },
+        "cell_line_expression": {
+          "type": "object"
+        },
+        "healthy_tissue_expression": {
+          "type": "object"
         }
       }
     }
@@ -180,9 +230,29 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "gene_name",
+        "gene_symbol",
+        "tissue_type"
+      ],
       "properties": {
-        "error": {
+        "gene_name": {
           "type": "string"
+        },
+        "gene_symbol": {
+          "type": "string"
+        },
+        "gene_synonym": {
+          "type": "array"
+        },
+        "tissue_type": {
+          "type": "string"
+        },
+        "disease_name": {
+          "type": "string"
+        },
+        "disease_expression": {
+          "type": "object"
         }
       }
     }
@@ -657,9 +727,29 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "ensembl_id",
+        "gene",
+        "expression_unit"
+      ],
       "properties": {
-        "error": {
+        "ensembl_id": {
           "type": "string"
+        },
+        "gene": {
+          "type": "string"
+        },
+        "gene_synonym": {
+          "type": "array"
+        },
+        "expression_unit": {
+          "type": "string"
+        },
+        "queried_tissues": {
+          "type": "array"
+        },
+        "tissue_expression": {
+          "type": "object"
         }
       }
     }
@@ -704,8 +794,28 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "gene",
+        "ensembl_id",
+        "context"
+      ],
       "properties": {
-        "error": {
+        "gene": {
+          "type": "string"
+        },
+        "gene_synonym": {
+          "type": "array"
+        },
+        "ensembl_id": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "context_type": {
+          "type": "string"
+        },
+        "context_category": {
           "type": "string"
         }
       }
@@ -758,8 +868,26 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "gene_name",
+        "source_type",
+        "source_name"
+      ],
       "properties": {
-        "error": {
+        "gene_name": {
+          "type": "string"
+        },
+        "gene_synonym": {
+          "type": "array"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_name": {
+          "type": "string"
+        },
+        "expression_value": {},
+        "expression_level": {
           "type": "string"
         }
       }

@@ -229,34 +229,57 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "accession": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "accession",
+            "type",
+            "description"
+          ],
+          "properties": {
+            "accession": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "factors": {
+              "type": "array"
+            },
+            "technology": {
+              "type": "array"
+            },
+            "contrasts": {
+              "type": "array"
+            },
+            "assay_count": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "last_update": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "pubmed_ids": {
+              "type": "array"
+            }
+          }
         },
-        "type": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "species": {
-          "type": "string"
-        },
-        "factors": {
-          "type": "array"
-        },
-        "assay_count": {
-          "type": [
-            "integer",
-            "null"
-          ]
+        {
+          "type": "null"
         }
-      },
-      "additionalProperties": true
+      ]
     },
     "label": [
       "Expression Atlas",

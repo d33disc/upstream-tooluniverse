@@ -2,7 +2,7 @@
   {
     "type": "PubTatorTool",
     "name": "PubTator3_EntityAutocomplete",
-    "description": "Provides suggestions for the best\u2010matching standardized PubTator IDs for a partial biomedical term (gene, disease, chemical, or variant). Use this tool first to convert free\u2010text names into the stable @IDs required by the other PubTator APIs.",
+    "description": "Provides suggestions for the best‐matching standardized PubTator IDs for a partial biomedical term (gene, disease, chemical, or variant). Use this tool first to convert free‐text names into the stable @IDs required by the other PubTator APIs.",
     "endpoint_path": "/entity/autocomplete/",
     "method": "GET",
     "param_map": {
@@ -15,7 +15,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "A few characters or the full name of the biomedical concept you are trying to look up (e.g. \u201cBRAF V6\u201d)."
+          "description": "A few characters or the full name of the biomedical concept you are trying to look up (e.g. “BRAF V6”)."
         },
         "entity_type": {
           "type": "string",
@@ -46,13 +46,41 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "_id",
+          "biotype",
+          "name"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "biotype": {
+            "type": "string"
+          },
+          "db_id": {
+            "type": "string"
+          },
+          "db": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "match": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   {
     "type": "PubTatorTool",
     "name": "PubTator3_LiteratureSearch",
-    "description": "Find PubMed articles that match a keyword, a PubTator entity ID (e.g. \u201c@GENE_BRAF\u201d), or an entity-to-entity relation expression (e.g. \u201crelations:treat|@CHEMICAL_Doxorubicin|@DISEASE_Neoplasms\u201d).",
+    "description": "Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_BRAF”), or an entity-to-entity relation expression (e.g. “relations:treat|@CHEMICAL_Doxorubicin|@DISEASE_Neoplasms”).",
     "endpoint_path": "/search/",
     "method": "GET",
     "param_map": {

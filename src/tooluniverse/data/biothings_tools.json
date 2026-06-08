@@ -702,7 +702,34 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "_id",
+        "cadd"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "_version": {
+          "type": "integer"
+        },
+        "cadd": {
+          "type": "object"
+        },
+        "dbsnp": {
+          "type": "object"
+        },
+        "clinvar": {
+          "type": "object"
+        },
+        "gnomad_genome": {
+          "type": "object"
+        },
+        "dbnsfp": {
+          "type": "object"
+        }
+      }
     }
   }
 ]
