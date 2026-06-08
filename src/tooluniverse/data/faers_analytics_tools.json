@@ -30,7 +30,22 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["drug_name", "adverse_event", "contingency_table", "metrics", "signal_detection"],
+          "properties": {
+            "drug_name": {"type": "string"},
+            "adverse_event": {"type": "string"},
+            "contingency_table": {"type": "object"},
+            "metrics": {"type": "object"},
+            "signal_detection": {"type": "object"}
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -93,7 +108,27 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["drug_name", "stratified_by", "total_reports", "stratification"],
+          "properties": {
+            "drug_name": {"type": "string"},
+            "stratified_by": {"type": "string"},
+            "total_reports": {"type": "integer"},
+            "stratification": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["group", "count", "percentage"]
+              }
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -151,7 +186,27 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["drug_name", "seriousness_type", "total_serious_events", "top_serious_reactions"],
+          "properties": {
+            "drug_name": {"type": "string"},
+            "seriousness_type": {"type": "string"},
+            "total_serious_events": {"type": "integer"},
+            "top_serious_reactions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["reaction", "count"]
+              }
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -203,7 +258,21 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["adverse_event", "drug1", "drug2", "comparison"],
+          "properties": {
+            "adverse_event": {"type": "string"},
+            "drug1": {"type": "object"},
+            "drug2": {"type": "object"},
+            "comparison": {"type": "string"}
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -249,7 +318,27 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["drug_name", "adverse_event", "temporal_data", "trend_analysis"],
+          "properties": {
+            "drug_name": {"type": "string"},
+            "adverse_event": {"type": "string"},
+            "temporal_data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["year", "count"]
+              }
+            },
+            "trend_analysis": {"type": "object"}
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -284,7 +373,31 @@
       }
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": ["status", "data"],
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "required": ["drug_name", "meddra_hierarchy"],
+          "properties": {
+            "drug_name": {"type": "string"},
+            "meddra_hierarchy": {
+              "type": "object",
+              "required": ["PT_level"],
+              "properties": {
+                "PT_level": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["preferred_term", "count"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
