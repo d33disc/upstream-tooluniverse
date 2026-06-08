@@ -46,6 +46,12 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "hits",
+        "max_score",
+        "took",
+        "total"
+      ],
       "properties": {
         "took": {
           "type": "integer",
@@ -142,6 +148,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "_id",
+        "_version",
+        "name",
+        "pathway",
+        "summary"
+      ],
       "properties": {
         "_id": {
           "type": "string",
@@ -262,6 +275,9 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "results"
+      ],
       "properties": {
         "results": {
           "type": "array",
@@ -338,6 +354,12 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "hits",
+        "max_score",
+        "took",
+        "total"
+      ],
       "properties": {
         "took": {
           "type": "integer"
@@ -503,6 +525,12 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "hits",
+        "max_score",
+        "took",
+        "total"
+      ],
       "properties": {
         "took": {
           "type": "integer"
@@ -590,6 +618,11 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "_id",
+        "_version",
+        "drugbank"
+      ],
       "properties": {
         "_id": {
           "type": "string"

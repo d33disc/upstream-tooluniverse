@@ -34,6 +34,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "baseline_experiments",
+        "gene",
+        "gene_specific_count",
+        "species",
+        "total_baseline"
+      ],
       "properties": {
         "gene": {
           "type": "string"
@@ -105,6 +112,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "condition",
+        "experiment_count",
+        "experiments",
+        "gene",
+        "species"
+      ],
       "properties": {
         "gene": {
           "type": "string"
@@ -170,6 +184,13 @@
     ],
     "return_schema": {
       "type": "object",
+      "required": [
+        "condition",
+        "experiments",
+        "gene",
+        "gene_specific_count",
+        "species"
+      ],
       "properties": {
         "gene": {
           "type": "string"
@@ -229,9 +250,13 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "null"
+      "type": "object",
+      "required": [
+        "accession",
+        "assay_count",
+        "contrasts",
+        "description",
+        "factors"
       ],
       "properties": {
         "accession": {

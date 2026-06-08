@@ -74,6 +74,15 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interaction_name",
+          "interactor_descriptions",
+          "source"
+        ]
+      },
       "description": "List of interactions involving the interactor"
     },
     "test_examples": [
@@ -127,6 +136,15 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interaction_name",
+          "interactor_descriptions",
+          "source"
+        ]
+      },
       "description": "Search results with interactions"
     },
     "test_examples": [
@@ -294,6 +312,15 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interaction_name",
+          "interactor_descriptions",
+          "source"
+        ]
+      },
       "description": "List of interactions for the organism"
     },
     "test_examples": [
@@ -349,6 +376,15 @@
     },
     "return_schema": {
       "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "complexAC",
+          "complexName",
+          "description",
+          "interactors"
+        ]
+      },
       "description": "List of complexes matching the search. Each complex includes complexAC, complexName, organismName, description, predictedComplex, and interactors."
     },
     "test_examples": [
@@ -392,6 +428,13 @@
     },
     "return_schema": {
       "type": "object",
+      "required": [
+        "ac",
+        "agonists",
+        "antagonists",
+        "comments",
+        "complexAc"
+      ],
       "description": "Complete complex details including complexAC, name, synonyms, systematicName, functions, properties, species, ligands, complexAssemblies, participants, diseases, and other metadata",
       "properties": {
         "complexAc": {
