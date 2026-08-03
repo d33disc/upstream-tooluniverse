@@ -97,7 +97,10 @@ class MonarchTool(RESTfulTool):
         if "facet_fields" in response:
             del response["facet_fields"]
 
+        had_empty_items = response.get("items") == []
         response = remove_none_and_empty_values(response)
+        if had_empty_items:
+            response["items"] = []
         # Fix-R16A-2: Monarch's search endpoint has no server-side namespace
         # filter (confirmed live: a "prefix" query param is silently
         # ignored) and its "category" filter (e.g. biolink:PhenotypicFeature)

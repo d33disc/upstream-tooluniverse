@@ -101,8 +101,27 @@ class MetaCycTool(BaseTool):
         if not operation:
             operation = self.get_schema_const_operation()
 
+        required_arguments = {
+            "search_pathways": "query",
+            "get_pathway": "pathway_id",
+            "get_compound": "compound_id",
+            "get_reaction": "reaction_id",
+        }
+        if operation not in required_arguments:
+            return {
+                "status": "error",
+                "error": f"Unknown operation: {operation}. Supported: {', '.join(required_arguments)}",
+            }
+
+        required_argument = required_arguments[operation]
+        if not arguments.get(required_argument):
+            return {
+                "status": "error",
+                "error": f"Missing required parameter: {required_argument}",
+            }
+
         # All operations hit the account-gated BioCyc web services, so log in
-        # first and surface a clear credentials error before doing any work.
+        # after validating the request and surface a clear credentials error.
         auth_error = self._ensure_login()
         if auth_error is not None:
             return auth_error
@@ -115,11 +134,6 @@ class MetaCycTool(BaseTool):
             return self._get_compound(arguments)
         elif operation == "get_reaction":
             return self._get_reaction(arguments)
-        else:
-            return {
-                "status": "error",
-                "error": f"Unknown operation: {operation}. Supported: search_pathways, get_pathway, get_compound, get_reaction",
-            }
 
     def _fetch_biocyc_xml(self, object_id: str) -> Optional[str]:
         """Fetch BioCyc XML for a MetaCyc object using the web services API.

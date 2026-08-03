@@ -1468,7 +1468,7 @@ class TestGTExGeneSymbolResolution(unittest.TestCase):
             mock_get.return_value = {"data": [{"variantId": "chr17_1234_A_G", "pValue": 0.001}]}
             result = tool.run({"gene_symbol": "TP53"})
             mock_resolve.assert_called_once_with(
-                "TP53", "https://gtexportal.org/api/v2", 30
+                "TP53", "https://gtexportal.org/api/v2", 30, "gtex_v8"
             )
             self.assertEqual(result["status"], "success")
 

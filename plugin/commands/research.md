@@ -30,6 +30,14 @@ Research the following using ToolUniverse: $ARGUMENTS
 
 The user is in this conversation and can interrupt — pause for clarification if a key step depends on a choice the user should make (e.g., which species, which disease subtype, which time window).
 
+For a single known tool, use the CLI by default:
+
+```bash
+tu run UniProt_get_entry_by_accession '{"accession":"P04637"}'
+```
+
+- `UniProt_get_entry_by_accession` — `{"accession":"P04637"}`
+
 ## Anchor Tools
 
 Call these directly via `execute_tool`. For anything else, use `find_tools` once.

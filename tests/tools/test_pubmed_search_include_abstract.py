@@ -94,13 +94,14 @@ def test_pubmed_search_include_abstract_adds_abstract(monkeypatch):
 
     result = tool.run({"query": "x", "limit": 1, "include_abstract": True})
 
-    assert isinstance(result, list)
-    assert len(result) == 1
-    assert result[0]["pmid"] == "1"
-    assert result[0]["abstract"] == "Abstract text."
-    assert result[0]["abstract_source"] == "PubMed"
-    assert result[0]["doi_url"] == "https://doi.org/10.1000/example"
-    assert result[0]["pmc_url"].endswith("/PMC12345/")
+    assert result["status"] == "success"
+    assert len(result["data"]) == 1
+    article = result["data"][0]
+    assert article["pmid"] == "1"
+    assert article["abstract"] == "Abstract text."
+    assert article["abstract_source"] == "PubMed"
+    assert article["doi_url"] == "https://doi.org/10.1000/example"
+    assert article["pmc_url"].endswith("/PMC12345/")
 
 
 @pytest.mark.unit
@@ -155,4 +156,4 @@ def test_pubmed_search_include_abstract_handles_inline_xml_tags(monkeypatch):
 
     result = tool.run({"query": "x", "limit": 1, "include_abstract": True})
 
-    assert result[0]["abstract"] == "First italic second."
+    assert result["data"][0]["abstract"] == "First italic second."

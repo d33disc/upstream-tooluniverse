@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
 
 jobs:
@@ -105,7 +106,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       # ------------------------------------------------------------------ #
-      # Always open a PR so the maintainer can review upstream changes.    #
+      # Open a PR when GitHub Actions can safely prepare the merge.        #
       # ------------------------------------------------------------------ #
       - name: Check for existing sync PR
         if: |
@@ -137,55 +138,48 @@ jobs:
           BRANCH="sync/upstream-$(date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
 
-          # ---- Attempt the merge ----------------------------------------
-          HAS_CONFLICTS=false
-          if git merge upstream/main \
+          report_blocker() {
+            local details="$1"
+            local title="chore: upstream sync needs manual resolution"
+            local body="## Automated upstream sync paused
+
+          Upstream is **${{ steps.status.outputs.commits_behind }} commit(s)** ahead, but automation cannot safely prepare a branch.
+
+          ${details}
+
+          - Upstream: \`${{ steps.status.outputs.upstream_sha }}\`
+          - Local: \`${{ steps.status.outputs.local_sha }}\`
+          - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            local issue
+            issue=$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number // empty')
+            if [ -n "$issue" ]; then
+              gh issue comment "$issue" --body "$body"
+            else
+              gh issue create --title "$title" --body "$body"
+            fi
+          }
+
+          WORKFLOW_FILES=$(git diff --name-only origin/main upstream/main -- .github/workflows)
+          if [ -n "$WORKFLOW_FILES" ]; then
+            FORMATTED_FILES=$(printf '%s\n' "$WORKFLOW_FILES" | sed 's/^/- `/' | sed 's/$/`/')
+            DETAILS=$(printf 'Upstream changes workflow files that the repository GITHUB_TOKEN cannot push:\n\n%s' "$FORMATTED_FILES")
+            report_blocker "$DETAILS"
+            exit 0
+          fi
+
+          if ! git merge upstream/main \
                --no-edit \
                -m "chore: sync with upstream mims-harvard/ToolUniverse"; then
-            echo "✅ Merge succeeded with no conflicts."
-          else
-            HAS_CONFLICTS=true
-            echo "⚠️  Merge conflicts detected. Staging conflict markers."
-
-            # Collect the list of conflicting files before we stage them
-            CONFLICT_FILES=$(git diff --name-only --diff-filter=U | sed 's/^/  - `/' | sed 's/$/`/')
-            CONFLICT_FILE_COUNT=$(git diff --name-only --diff-filter=U | wc -l | tr -d ' ')
-
-            # Stage everything (including conflict markers) so the diff is visible in the PR
-            git add -A
-            git commit -m "chore: sync with upstream (conflict markers included — resolve before merging)"
+            CONFLICT_FILES=$(git diff --name-only --diff-filter=U)
+            FORMATTED_FILES=$(printf '%s\n' "$CONFLICT_FILES" | sed 's/^/- `/' | sed 's/$/`/')
+            git merge --abort
+            DETAILS=$(printf 'The merge has conflicts and was aborted without committing conflict markers:\n\n%s' "$FORMATTED_FILES")
+            report_blocker "$DETAILS"
+            exit 0
           fi
 
+          echo "✅ Merge succeeded with no conflicts."
           git push origin "$BRANCH"
-
-          # ---- Build the PR labels list ---------------------------------
-          LABELS="upstream-sync"
-          if [ "$HAS_CONFLICTS" = "true" ]; then
-            LABELS="upstream-sync,conflicts"
-          fi
-
-          # ---- Build the conflict section (only shown when relevant) ----
-          if [ "$HAS_CONFLICTS" = "true" ]; then
-            CONFLICT_SECTION="## ⚠️ Merge Conflicts
-
-          The following **${CONFLICT_FILE_COUNT}** file(s) have conflict markers that must be resolved before merging:
-
-          ${CONFLICT_FILES}
-
-          **How to resolve:**
-          \`\`\`bash
-          git fetch origin
-          git checkout ${BRANCH}
-          # open each file above, find <<<<<<< / ======= / >>>>>>> markers, edit, then:
-          git add <file>
-          git commit
-          git push
-          \`\`\`
-
-          "
-          else
-            CONFLICT_SECTION=""
-          fi
 
           # ---- Build the PR body ----------------------------------------
           PR_BODY="## 🔄 Automated Upstream Sync
@@ -199,7 +193,6 @@ jobs:
           | **Local SHA** | \`${{ steps.status.outputs.local_sha }}\` |
           | **Commits behind** | ${{ steps.status.outputs.commits_behind }} |
 
-          ${CONFLICT_SECTION}
           ## 📋 New Commits
 
           ${{ steps.diff.outputs.commit_log }}
@@ -211,8 +204,7 @@ jobs:
           ## ✅ What to do
 
           1. Review the commits and file diffs listed above (and in the **Files changed** tab).
-          2. If conflicts are flagged, resolve them using the instructions above.
-          3. Merge when satisfied.
+          2. Merge when satisfied.
 
           > _Opened automatically by the [Sync with Upstream](${{ github.server_url }}/${{ github.repository }}/actions/workflows/sync-upstream.yml) workflow._"
 
@@ -221,7 +213,7 @@ jobs:
             --body "$PR_BODY" \
             --base main \
             --head "$BRANCH" \
-            --label "$LABELS"
+            --label "upstream-sync"
 
       # ------------------------------------------------------------------ #
       # Dry-run summary                                                     #

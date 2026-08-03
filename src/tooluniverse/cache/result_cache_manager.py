@@ -109,6 +109,7 @@ class ResultCacheManager:
 
         self._persist_queue: Optional["queue.Queue[tuple[str, Dict[str, Any]]]"] = None
         self._worker_thread: Optional[threading.Thread] = None
+        self._worker_lock = threading.Lock()
         # Always initialize shutdown event for safe cleanup
         self._shutdown_event = threading.Event()
 
@@ -117,12 +118,6 @@ class ResultCacheManager:
 
         queue_size = max(1, async_queue_size)
         self._persist_queue = queue.Queue(maxsize=queue_size)
-        self._worker_thread = threading.Thread(
-            target=self._async_worker,
-            name="ResultCacheWriter",
-            daemon=True,
-        )
-        self._worker_thread.start()
 
     # ------------------------------------------------------------------
     # Public API
@@ -358,6 +353,8 @@ class ResultCacheManager:
                         except Exception:
                             pass
                     self._worker_thread.join(timeout=0.5)
+            if hasattr(self, "persistent") and self.persistent:
+                self.persistent.close()
         except Exception:
             # Ignore errors during destruction - Python is shutting down anyway
             pass
@@ -373,6 +370,7 @@ class ResultCacheManager:
     def _schedule_persist(self, op: str, payload: Dict[str, Any]) -> bool:
         if not self.async_persist or self._persist_queue is None:
             return False
+        self._ensure_async_worker()
         try:
             self._persist_queue.put_nowait((op, payload))
             return True
@@ -382,11 +380,30 @@ class ResultCacheManager:
             )
             return False
 
-    def _async_worker(self):
-        queue_ref = self._persist_queue
-        if queue_ref is None:
+    def _ensure_async_worker(self) -> None:
+        """Start the persistence worker only when the first write is queued."""
+        if self._worker_thread is not None and self._worker_thread.is_alive():
             return
 
+        with self._worker_lock:
+            if self._worker_thread is not None and self._worker_thread.is_alive():
+                return
+            if self._persist_queue is None or self._shutdown_event.is_set():
+                return
+            self._worker_thread = threading.Thread(
+                target=ResultCacheManager._async_worker,
+                args=(
+                    weakref.ref(self),
+                    self._persist_queue,
+                    self._shutdown_event,
+                ),
+                name="ResultCacheWriter",
+                daemon=True,
+            )
+            self._worker_thread.start()
+
+    @staticmethod
+    def _async_worker(manager_ref, queue_ref, shutdown_event):
         # Use shorter timeout for faster shutdown response
         # Event.wait() can be interrupted immediately by setting the event
         TIMEOUT = 0.5  # Check every 0.5 seconds for faster shutdown
@@ -395,7 +412,7 @@ class ResultCacheManager:
             # Wait for shutdown event or timeout
             # If shutdown is set, wait() returns immediately (True)
             # Otherwise, wait up to TIMEOUT seconds
-            shutdown_signaled = self._shutdown_event.wait(timeout=TIMEOUT)
+            shutdown_signaled = shutdown_event.wait(timeout=TIMEOUT)
 
             # Process all available queue items before checking shutdown
             # Use non-blocking get to avoid blocking when shutdown is signaled
@@ -411,15 +428,20 @@ class ResultCacheManager:
                     return
 
                 try:
+                    manager = manager_ref()
+                    if manager is None:
+                        return
                     if op == "set":
-                        self._perform_persist_set(**payload)
+                        manager._perform_persist_set(**payload)
                     else:
                         logger.warning("Unknown async cache operation: %s", op)
                 except Exception as exc:
                     logger.warning("Async cache write failed: %s", exc)
                     # Disable async persistence to avoid repeated failures
-                    self.async_persist = False
+                    if manager is not None:
+                        manager.async_persist = False
                 finally:
+                    manager = None
                     queue_ref.task_done()
 
             # Only break after processing all items if shutdown was signaled

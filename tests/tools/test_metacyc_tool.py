@@ -1,7 +1,7 @@
 """Unit tests for MetaCycTool."""
 
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from tooluniverse.metacyc_tool import MetaCycTool
 
@@ -44,13 +44,11 @@ class TestMetaCycTool:
         assert result["status"] == "error"
         assert "Unknown operation" in result["error"]
 
-    @patch("tooluniverse.metacyc_tool.requests.get")
-    def test_get_pathway_success(self, mock_get, tool):
+    @patch.object(MetaCycTool, "_ensure_login", return_value=None)
+    @patch.object(MetaCycTool, "_fetch_biocyc_xml")
+    def test_get_pathway_success(self, mock_fetch, _mock_login, tool):
         """Test successful pathway retrieval."""
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.text = "<pathway>...</pathway>"
-        mock_get.return_value = mock_response
+        mock_fetch.return_value = "<?xml version='1.0'?><Pathway frameid='GLYCOLYSIS'><common-name>Glycolysis</common-name></Pathway>"
 
         result = tool.run({"operation": "get_pathway", "pathway_id": "GLYCOLYSIS"})
 
@@ -69,7 +67,15 @@ class TestMetaCycToolInterface:
         tu = ToolUniverse()
         tu.load_tools()
 
-        assert hasattr(tu.tools, "MetaCyc_search_pathways")
-        assert hasattr(tu.tools, "MetaCyc_get_pathway")
-        assert hasattr(tu.tools, "MetaCyc_get_compound")
-        assert hasattr(tu.tools, "MetaCyc_get_reaction")
+        expected_tools = {
+            "MetaCyc_search_pathways",
+            "MetaCyc_get_pathway",
+            "MetaCyc_get_compound",
+            "MetaCyc_get_reaction",
+        }
+        assert expected_tools <= tu._excluded_api_key_tools.keys()
+        for tool_name in expected_tools:
+            assert tu._excluded_api_key_tools[tool_name] == [
+                "BIOCYC_EMAIL",
+                "BIOCYC_PASSWORD",
+            ]

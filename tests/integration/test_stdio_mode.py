@@ -29,7 +29,7 @@ _PYTHON = sys.executable
 _SUBPROCESS_ENV = {**os.environ, "PYTHONUNBUFFERED": "1"}
 
 from tooluniverse.smcp_server import run_stdio_server
-from tooluniverse.logging_config import reconfigure_for_stdio
+from tooluniverse.logging_config import get_logger, reconfigure_for_stdio
 
 
 def _read_json_line(process, timeout=30):
@@ -61,11 +61,16 @@ class TestStdioMode:
 
     def test_stdio_logging_redirection(self):
         """Test that stdio mode redirects logs to stderr"""
-        # Test that reconfigure_for_stdio works
-        reconfigure_for_stdio()
-        
-        # This should not raise an exception
-        assert True
+        logger = get_logger()
+        original_handlers = logger.handlers[:]
+        original_propagate = logger.propagate
+
+        try:
+            reconfigure_for_stdio()
+            assert logger.handlers[0].stream is sys.stderr
+        finally:
+            logger.handlers[:] = original_handlers
+            logger.propagate = original_propagate
 
     def test_stdio_server_startup(self):
         """Test that stdio server can start without errors"""

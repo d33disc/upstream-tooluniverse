@@ -7,6 +7,7 @@ import json
 import pytest
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
@@ -135,8 +136,13 @@ class TestEnsemblDirectClass:
         assert "data" in result
         assert isinstance(result["data"], list)
 
-    def test_get_homology(self, tool_configs):
+    @patch("tooluniverse.ensembl_tool.request_with_retry")
+    def test_get_homology(self, mock_request, tool_configs):
         """Test homology retrieval (orthologues/paralogues)"""
+        mock_request.return_value.json.return_value = {
+            "data": [{"homologies": []}]
+        }
+        mock_request.return_value.headers = {"content-type": "application/json"}
         config = next(t for t in tool_configs if t["name"] == "ensembl_get_homology")
         tool = EnsemblRESTTool(config)
         
@@ -367,8 +373,13 @@ class TestEnsemblToolUniverse:
         assert result["status"] == "success"
         assert "data" in result
 
-    def test_homology_via_tooluniverse(self, tu):
+    @patch("tooluniverse.ensembl_tool.request_with_retry")
+    def test_homology_via_tooluniverse(self, mock_request, tu):
         """Test homology retrieval via ToolUniverse interface"""
+        mock_request.return_value.json.return_value = {
+            "data": [{"homologies": []}]
+        }
+        mock_request.return_value.headers = {"content-type": "application/json"}
         result = tu.tools.ensembl_get_homology(**{
             "species": "human",
             "symbol": "BRCA2",

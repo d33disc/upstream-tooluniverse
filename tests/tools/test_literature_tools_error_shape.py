@@ -18,16 +18,23 @@ from tooluniverse.semantic_scholar_tool import SemanticScholarTool
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
-    "tool_cls,args",
+    "tool_cls",
     [
-        (EuropePMCTool, {"limit": 1}),
-        (SemanticScholarTool, {"limit": 1}),
-        (PMCTool, {"limit": 1}),
+        EuropePMCTool,
+        SemanticScholarTool,
     ],
 )
-def test_missing_query_returns_list_with_error_item(tool_cls, args):
+def test_missing_query_returns_error_envelope(tool_cls):
     tool = tool_cls({"name": "x"})
-    result = tool.run(args)
+    result = tool.run({"limit": 1})
+
+    assert result["status"] == "error"
+    assert "query" in result["error"]
+
+
+@pytest.mark.unit
+def test_pmc_missing_query_returns_legacy_error_list():
+    result = PMCTool({"name": "x"}).run({"limit": 1})
 
     assert isinstance(result, list)
     assert len(result) == 1

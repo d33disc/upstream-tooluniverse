@@ -4760,7 +4760,7 @@ class ToolUniverse:
             else:
                 persistent_path = None
 
-            self.cache_manager = ResultCacheManager(
+            replacement = ResultCacheManager(
                 memory_size=memory_size,
                 persistent_path=persistent_path,
                 enabled=enabled,
@@ -4768,6 +4768,8 @@ class ToolUniverse:
                 singleflight=current.singleflight is not None,
                 default_ttl=ttl if ttl != 0 else None,
             )
+            current.close()
+            self.cache_manager = replacement
             self.logger.debug(
                 f"Cache reconfigured: enabled={enabled}, memory_size={memory_size}, "
                 f"ttl={ttl}, persist={persist}"

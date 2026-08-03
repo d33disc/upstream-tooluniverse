@@ -72,28 +72,30 @@ jobs:
 
       - name: Push report to health-report branch
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           cp TOOL_HEALTH_REPORT.json /tmp/health_report.json
+          REPORT_WORKTREE=$(mktemp -d)
+          trap 'git worktree remove --force "$REPORT_WORKTREE"' EXIT
 
           if git show-ref --verify --quiet refs/remotes/origin/health-report; then
-            git checkout -B health-report origin/health-report
+            git worktree add -B health-report "$REPORT_WORKTREE" origin/health-report
           else
-            git checkout --orphan health-report
-            git rm -rf . --quiet
+            git worktree add --detach "$REPORT_WORKTREE"
+            git -C "$REPORT_WORKTREE" switch --orphan health-report
+            git -C "$REPORT_WORKTREE" rm -rf . --quiet
           fi
 
-          cp /tmp/health_report.json TOOL_HEALTH_REPORT.json
-          git add TOOL_HEALTH_REPORT.json
+          git -C "$REPORT_WORKTREE" config user.name "github-actions[bot]"
+          git -C "$REPORT_WORKTREE" config user.email "github-actions[bot]@users.noreply.github.com"
+          cp /tmp/health_report.json "$REPORT_WORKTREE/TOOL_HEALTH_REPORT.json"
+          git -C "$REPORT_WORKTREE" add TOOL_HEALTH_REPORT.json
 
-          if git diff --cached --quiet; then
+          if git -C "$REPORT_WORKTREE" diff --cached --quiet; then
             echo "Report unchanged — nothing to commit."
             exit 0
           fi
 
-          git commit -m "chore: tool health report $(date -u +%Y-%m-%d)"
-          git push origin health-report
+          git -C "$REPORT_WORKTREE" commit -m "chore: tool health report $(date -u +%Y-%m-%d)"
+          git -C "$REPORT_WORKTREE" push origin health-report
 
       - name: Create or update PR
         env:

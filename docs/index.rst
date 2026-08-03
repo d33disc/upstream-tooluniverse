@@ -28,7 +28,7 @@ ToolUniverse Documentation
 Democratizing AI Scientists for Science
 ---------------------------------------
 
-ToolUniverse is a unified ecosystem that transforms any large language model (LLM)—open or closed—into a powerful AI scientist. By standardizing how LLMs identify and call tools, it integrates over **1000 scientific resources**, including machine learning models, datasets, APIs, and analysis packages.
+ToolUniverse is a unified ecosystem that transforms any large language model (LLM)—open or closed—into a powerful AI scientist. By standardizing how LLMs identify and call tools, it integrates over **2,500 scientific resources**, including machine learning models, datasets, APIs, and analysis packages.
 
 With its **AI-Tool Interaction Protocol**, ToolUniverse provides a common interface for seamless communication between LLMs and tools, ensuring compatibility across platforms such as GPT, Claude, Gemini, and open-source models.
 
@@ -59,7 +59,7 @@ Get Started
 
       **Choose CLI**
 
-      Discover, inspect, run, and test 1000+ tools directly from your shell with the ``tu`` command.
+      Discover, inspect, run, and test 2,500+ tools directly from your shell with the ``tu`` command.
 
    .. grid-item-card:: Writing code?
       :link: guide/python_guide
@@ -74,7 +74,7 @@ Get Started
 What Can You Do?
 ----------------
 
-**AI Agent Skills** - Specialized workflows combining 1000+ scientific tools:
+**AI Agent Skills** - Specialized workflows combining 2,500+ scientific tools:
 
 .. grid:: 1 1 2 2
    :gutter: 3
@@ -89,7 +89,7 @@ What Can You Do?
       
       +++
       
-      :bdg-info:`15 skills available`
+      :bdg-info:`Research workflows`
 
    .. grid-item-card:: Development Skills
       :link: guide/skills_showcase
@@ -101,7 +101,7 @@ What Can You Do?
       
       +++
       
-      :bdg-info:`6 skills available`
+      :bdg-info:`Developer workflows`
 
    .. grid-item-card:: Setup & Configuration
       :link: guide/skills_showcase
@@ -113,7 +113,7 @@ What Can You Do?
       
       +++
       
-      :bdg-info:`1 skill available`
+      :bdg-info:`Setup workflows`
 
    .. grid-item-card:: General Purpose
       :link: guide/skills_showcase
@@ -125,7 +125,7 @@ What Can You Do?
       
       +++
       
-      :bdg-info:`1 skill available`
+      :bdg-info:`Routing workflows`
 
 .. button-ref:: guide/skills_showcase
    :color: primary
@@ -140,7 +140,7 @@ Explore More
 .. grid:: 1 1 2 2
    :gutter: 3
 
-   .. grid-item-card:: Browse 1000+ Tools
+   .. grid-item-card:: Browse 2,500+ Tools
       :link: tools/tools_config_index
       :link-type: doc
       :shadow: md

@@ -1803,6 +1803,7 @@ class SMCP(FastMCP):
                 import json
 
                 stream_callback = None
+                stream_futures = []
                 try:
                     # Remove ctx if present (legacy support)
                     ctx = kwargs.pop("ctx", None) if "ctx" in kwargs else None
@@ -1892,6 +1893,7 @@ class SMCP(FastMCP):
                                 future = asyncio.run_coroutine_threadsafe(
                                     ctx.info(chunk), loop
                                 )
+                                stream_futures.append(future)
 
                                 def _log_future_result(fut) -> None:
                                     exc = fut.exception()
@@ -1956,6 +1958,11 @@ class SMCP(FastMCP):
                         )
 
                     result = await loop.run_in_executor(self.executor, run_callable)
+                    if stream_futures:
+                        await asyncio.gather(
+                            *(asyncio.wrap_future(future) for future in stream_futures),
+                            return_exceptions=True,
+                        )
 
                     # Ensure result is properly serialized to JSON
                     if isinstance(result, str):

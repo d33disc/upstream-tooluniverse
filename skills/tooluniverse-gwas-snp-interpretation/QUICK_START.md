@@ -158,3 +158,4 @@ For Claude Desktop or other MCP clients:
 
 ```
 User: Interpret the SNP rs7903146
+```

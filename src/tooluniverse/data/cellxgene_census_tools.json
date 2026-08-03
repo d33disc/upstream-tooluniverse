@@ -53,18 +53,7 @@
         "operation": "get_census_versions"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ],
-    "api_key_info": {
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED": {
-        "domain": "Genomics & Variants",
-        "type": "secret",
-        "register_url": "https://chanzuckerberg.github.io/cellxgene-census/",
-        "purpose": "Synthetic gate. Set to '1' after `pip install cellxgene-census`; CELLxGENE tools require the Python package, not a network key.",
-        "without": "All 7 CELLxGENE tools skip in the test harness and return a clear 'package not installed' error at runtime."
-      }
-    }
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_get_cell_metadata",
@@ -159,9 +148,7 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_get_gene_metadata",
@@ -247,9 +234,7 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_get_expression_data",
@@ -342,9 +327,7 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_get_presence_matrix",
@@ -431,9 +414,7 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_get_embeddings",
@@ -521,9 +502,7 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   },
   {
     "name": "CELLxGENE_download_h5ad",
@@ -596,8 +575,6 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": [
-      "CELLXGENE_CENSUS_PACKAGE_INSTALLED"
-    ]
+    "required_api_keys": []
   }
 ]

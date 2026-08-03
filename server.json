@@ -26,7 +26,7 @@
         {
           "type": "positional",
           "value": "--compact-mode",
-          "description": "Compact mode enabled by default: only exposes 4 core tools (tool finder, tool executor, etc.) to prevent context window overflow. All 2,500+ tools remain accessible via the execute_tool function."
+          "description": "Compact mode enabled by default: exposes 4 core proxy tools plus find_tools when semantic search is enabled. All 2,500+ backend tools remain accessible via execute_tool."
         },
         {
           "type": "named",
@@ -40,12 +40,6 @@
         {
           "name": "OPENAI_API_KEY",
           "description": "OpenAI API key for LLM-based tool finding and embedding features",
-          "isRequired": false,
-          "isSecret": true
-        },
-        {
-          "name": "ANTHROPIC_API_KEY",
-          "description": "Anthropic API key for Claude-based features",
           "isRequired": false,
           "isSecret": true
         },

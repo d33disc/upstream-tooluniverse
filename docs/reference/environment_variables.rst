@@ -38,7 +38,7 @@ Control ToolUniverse's two-tier caching system (in-memory LRU + SQLite persisten
      - Enable SQLite persistence. Cached results survive Python restarts.
    * - ``TOOLUNIVERSE_CACHE_PATH``
      - (see below)
-     - Full path to SQLite cache file. If unset, uses ``TOOLUNIVERSE_CACHE_DIR``/``tooluniverse_cache.sqlite``
+     - Full path to SQLite cache file. If unset, uses ``TOOLUNIVERSE_CACHE_DIR``/``cache.sqlite``
    * - ``TOOLUNIVERSE_CACHE_DIR``
      - ``~/.tooluniverse``
      - Directory for cache file when ``CACHE_PATH`` is not specified.
@@ -157,7 +157,7 @@ Configure Large Language Model providers for agentic tools and LLM-powered featu
      - Description
    * - ``TOOLUNIVERSE_LLM_DEFAULT_PROVIDER``
      - (none)
-     - Default LLM provider: ``CHATGPT``, ``OPENAI``, ``OPENROUTER``, ``GEMINI``, ``VLLM``
+     - Default LLM provider: ``CLAUDE_CLI``, ``OLLAMA``, ``CHATGPT``, ``OPENAI``, ``OPENROUTER``, ``GEMINI``, or ``VLLM``
    * - ``TOOLUNIVERSE_LLM_CONFIG_MODE``
      - ``default``
      - LLM configuration mode. Use ``default`` or custom profiles.
@@ -237,16 +237,16 @@ Tune system resources and performance characteristics.
      - ``20``
      - Thread pool size for HTTP API server concurrent requests.
    * - ``TOOLUNIVERSE_TMPDIR``
-     - (system temp)
-     - Override temporary directory location. Useful for systems with custom temp partitions.
+     - platform user cache
+     - Override ToolUniverse's user-cache root, including downloaded datasets and embedding indexes.
 
 **Examples**::
 
    # Increase HTTP API concurrency
    export TOOLUNIVERSE_THREAD_POOL_SIZE=50
    
-   # Custom temporary directory
-   export TOOLUNIVERSE_TMPDIR=/mnt/fast-ssd/tmp
+   # Put ToolUniverse datasets and embedding indexes on a larger volume
+   export TOOLUNIVERSE_TMPDIR=/mnt/fast-ssd/tooluniverse-cache
 
 Development & Tool Generation
 ------------------------------

@@ -27,6 +27,14 @@ You research scientific questions using ToolUniverse (1000+ databases).
 4. **Validate**: cross-check key findings against a second source.
 5. **Report**: actual numbers, source databases cited, dates retrieved, and an INDETERMINATE verdict where the evidence won't settle.
 
+For a single known tool, use the CLI by default:
+
+```bash
+tu run UniProt_get_entry_by_accession '{"accession":"P04637"}'
+```
+
+- `UniProt_get_entry_by_accession` — `{"accession":"P04637"}`
+
 ## Anchor Tools
 
 Call these directly via `execute_tool`. For anything else, use `find_tools` once.

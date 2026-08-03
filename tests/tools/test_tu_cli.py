@@ -1942,7 +1942,7 @@ class TestRenderFunctions:
                 "detail": "Service temporarily unavailable, try again later",
             }
         )
-        assert "Tips:" in out
+        assert "Detail:" in out
         assert "Service temporarily unavailable, try again later" in out
 
     @pytest.mark.unit
@@ -3729,8 +3729,13 @@ class TestRound13Fixes:
         assert d.get("total_matches", 0) > 0, "should find matches for tool name query"
         assert "error" not in d
         # Top result should be BioGRID-related
-        names = [t.get("name", "") for t in d.get("tools", [])]
+        tools = d.get("tools", [])
+        names = [t.get("name", "") for t in tools]
         assert any("BioGRID" in n for n in names), f"BioGRID tool should be in results, got: {names}"
+        biogrid = next(
+            t for t in tools if t.get("name") == "BioGRID_get_chemical_interactions"
+        )
+        assert biogrid["missing_api_keys"] == ["BIOGRID_ACCESS_KEY"]
 
     @pytest.mark.unit
     def test_grep_zero_matches_shows_field_hint(self, monkeypatch, tu, capsys):

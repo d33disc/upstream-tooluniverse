@@ -9,9 +9,12 @@ This test suite validates that the following bugs have been fixed:
 """
 
 import os
+import gc
 import time
 import threading
+import weakref
 from tempfile import TemporaryDirectory
+from unittest.mock import Mock
 
 from tooluniverse.cache.memory_cache import SingleFlight
 from tooluniverse.cache.result_cache_manager import ResultCacheManager
@@ -98,6 +101,41 @@ def test_async_worker_processes_pending_on_shutdown(tmp_path):
     manager2.close()
 
     assert found_count >= 8, f"Only {found_count}/10 items persisted, expected at least 8"
+
+
+def test_async_worker_does_not_retain_unclosed_manager(tmp_path):
+    """An async writer thread must not keep an abandoned manager alive."""
+    manager = ResultCacheManager(
+        memory_size=2,
+        persistent_path=str(tmp_path / "collectible.sqlite"),
+        enabled=True,
+        persistence_enabled=True,
+        singleflight=False,
+        async_persist=True,
+    )
+    assert manager._worker_thread is None
+    manager.set(namespace="test", version="v1", cache_key="key", value="value")
+    manager.flush()
+    assert manager._worker_thread is not None
+    manager_ref = weakref.ref(manager)
+
+    del manager
+    gc.collect()
+
+    assert manager_ref() is None
+
+
+def test_cache_reconfiguration_closes_previous_manager():
+    """Replacing profile cache settings must release the previous manager."""
+    tu = ToolUniverse(tool_files={}, keep_default_tools=False)
+    previous = tu.cache_manager
+    previous.close = Mock(wraps=previous.close)
+
+    tu._apply_cache_config({"enabled": False, "persist": False})
+
+    previous.close.assert_called_once_with()
+    assert tu.cache_manager is not previous
+    tu.close()
 
 
 def test_iter_entries_includes_expires_at(tmp_path):

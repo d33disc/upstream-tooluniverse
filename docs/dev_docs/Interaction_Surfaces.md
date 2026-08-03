@@ -3,9 +3,10 @@
 How an outside codebase, agent, or human reaches into ToolUniverse and pulls
 information together iteratively.
 
-ToolUniverse exposes **~2,300 scientific tools across ~500 categories**,
-**136 orchestration skills**, and **~10 entry points**. The point of this
+ToolUniverse exposes **2,500+ scientific tools**, **150+ orchestration skills**,
+and several programmatic and human-facing entry points. The point of this
 document is to make every entry point and every layer findable from one page.
+Use `tu status` for the current runtime inventory.
 
 ---
 
@@ -17,10 +18,10 @@ Outside agents converge on these five primitives regardless of transport
 | # | Entry              | Backend                            | Best for                                                |
 |---|--------------------|------------------------------------|---------------------------------------------------------|
 | 1 | `grep_tools`       | `tool_finder_keyword.py` (BM25)    | exact strings, regex, deterministic, no GPU             |
-| 2 | `find_tools`       | `tool_finder_embedding.py` (FAISS) | semantic / natural language; needs embeddings cache     |
+| 2 | `find_tools`       | `tool_finder_embedding.py` (tensor cosine) | semantic / natural language; needs embeddings cache |
 | 3 | `list_tools`       | registry enumeration               | browse categories, count, paginate                      |
 | 4 | `get_tool_info`    | schema introspection               | exact parameter schema before any call                  |
-| 5 | `execute_tool`     | `execute_function.py`              | run any of the ~2,300 backend tools                     |
+| 5 | `execute_tool`     | `execute_function.py`              | run any backend tool                                    |
 
 The reasoning layer above this is `tu-llm` (skill `/tu-llm`) and the
 `Tool_Finder_LLM` agentic tool — both decide *which combination* of tools
@@ -116,10 +117,10 @@ tu.close()
 
 | Console script             | Function                          | Transport       | Default          |
 |----------------------------|-----------------------------------|-----------------|------------------|
-| `tooluniverse`             | `run_default_stdio_server` (1016) | stdio + compact | stdin/stdout     |
-| `tooluniverse-smcp-stdio`  | `run_stdio_server` (190)          | stdio           | stdin/stdout     |
-| `tooluniverse-smcp`        | `run_smcp_server` (628)           | http/stdio/sse  | `0.0.0.0:7000`   |
-| `tooluniverse-smcp-server` | `run_http_server` (53)            | streamable-http | `127.0.0.1:8000` |
+| `tooluniverse`             | `run_default_stdio_server`        | stdio + compact | stdin/stdout     |
+| `tooluniverse-smcp-stdio`  | `run_stdio_server`                | stdio           | stdin/stdout     |
+| `tooluniverse-smcp`        | `run_smcp_server`                 | http/stdio/sse  | `0.0.0.0:7000`   |
+| `tooluniverse-smcp-server` | `run_http_server`                 | streamable-http | `127.0.0.1:8000` |
 | `tooluniverse-mcp`         | `run_http_server` (alias)         | streamable-http | `127.0.0.1:8000` |
 
 Flags: `--compact-mode`, `--transport {stdio,http,sse}`, `--host`, `--port`,
@@ -128,7 +129,7 @@ Flags: `--compact-mode`, `--transport {stdio,http,sse}`, `--host`, `--port`,
 Beyond the standard MCP `tools/list`, `tools/call`, `resources/list`,
 `prompts/list` methods, the SMCP server adds an **async task family** for
 long-running tools: `tasks/get`, `tasks/list`, `tasks/cancel`, `tasks/result`
-(see `src/tooluniverse/smcp.py:806-827`). Outside agents can fire-and-poll
+(see `src/tooluniverse/smcp.py`). Outside agents can fire-and-poll
 instead of blocking on multi-minute calls.
 
 In **compact mode** (default for `tooluniverse`) the MCP protocol layer
@@ -223,12 +224,14 @@ constraint, not preference.
 | Finder                     | Algorithm                                                       | When                                   |
 |----------------------------|-----------------------------------------------------------------|----------------------------------------|
 | `ToolFinderKeyword`        | BM25 + TF-IDF, stemming, phrase bonuses                         | exact terms, no GPU, reproducible      |
-| `ToolFinderEmbedding`      | SentenceTransformer (`ToolRAG-T1-GTE-Qwen2-1.5B`), cosine, MPS  | natural-language paraphrase, GPU OK    |
+| `ToolFinderEmbedding`      | local or hosted embeddings + tensor cosine                       | natural-language paraphrase             |
 | `ToolFinderLLM`            | keyword pre-filter (top 50) → LLM JSON reasoning                | multi-tool composition, multi-hop      |
 
-Cache: `~/.cache/tooluniverse/embeddings/*.pt`, MD5 cache-busting on tool list
-change. Static lazy registry at `src/tooluniverse/_lazy_registry_static.py`
-maps tool type → module so imports happen on first use, not at startup.
+Cache: `<user_cache_dir>/embeddings/*.pt`, with a hash of tool specifications
+and embedding configuration. The cache root is platform-specific; see
+`docs/dev_docs/Embedding_Search.md`. Static lazy registry at
+`src/tooluniverse/_lazy_registry_static.py` maps tool type → module so imports
+happen on first use, not at startup.
 
 Related sources in repo:
 
@@ -245,9 +248,10 @@ not just *look up*.
 
 ### Agentic tools (LLMs-as-tools)
 
-`src/tooluniverse/agentic_tool.py`. `AgenticTool` is a generic LLM wrapper with
-a provider fallback chain (Claude CLI → OpenRouter → Ollama). 23 registered
-agentic tools in `src/tooluniverse/data/agentic_tools.json` (e.g.
+`src/tooluniverse/agentic_tool.py`. `AgenticTool` is a generic LLM wrapper. It
+tries the tool's configured primary provider, an explicit fallback when set,
+then the configured global fallback chain. Registered agentic tools live in
+`src/tooluniverse/data/agentic_tools.json` (e.g.
 `ScientificTextSummarizer`, `MedicalLiteratureReviewer`, `HypothesisGenerator`,
 `ExperimentalDesignScorer`, `NoveltySignificanceReviewer`).
 
@@ -294,60 +298,19 @@ Cached graph files at repo root: `tool_composition_graph.{json,pkl}`,
 
 ---
 
-## 4 — Skills Layer (136 skills)
+## 4 — Skills Layer
 
 Skills are higher-level orchestration playbooks that sit *above* the tools.
-They're in `skills/` and follow `SKILL.md` frontmatter conventions.
+Each maintained skill lives under `skills/` and declares its name and purpose
+in `SKILL.md` frontmatter. The generated showcase at
+`docs/guide/skills_showcase.rst` is the browsable inventory; regenerate it with
+`python docs/generate_skills_showcase.py` after adding or removing a skill.
 
-### Routing / meta (11)
+The main families are:
 
-| Skill                              | Purpose                                                          |
-|------------------------------------|------------------------------------------------------------------|
-| `tooluniverse`                     | Top-level router; dispatches to specialized skills               |
-| `tu-llm`                           | LLM-powered tool discovery for multi-step queries                |
-| `tooluniverse-deep-research`       | Iterative cross-database research agent                          |
-| `deep-review`                      | Publication-quality typeset review w/ verified bibliography      |
-| `setup-tooluniverse`               | Install + configure (MCP / CLI / SDK)                            |
-| `create-tooluniverse-skill`        | TDD methodology to build new skills                              |
-| `tooluniverse-install-skills`      | Auto-install missing research skills                             |
-| `tooluniverse-custom-tool`         | Add custom local tools                                           |
-| `tooluniverse-claude-code-plugin`  | Install ToolUniverse plugin for Claude Code                      |
-| `tooluniverse-sdk`                 | Build AI scientist systems via Python SDK                        |
-| `evals`                            | (orphan — no SKILL.md)                                           |
-
-### Development (`devtu-*`, 10)
-
-`devtu-auto-discover-apis`, `devtu-benchmark-harness`,
-`devtu-code-optimization`, `devtu-create-tool`, `devtu-docs-quality`,
-`devtu-fix-tool`, `devtu-github`, `devtu-optimize-descriptions`,
-`devtu-optimize-skills`, `devtu-self-evolve`.
-
-### Domain research (`tooluniverse-*`, ~112)
-
-- **Disease & clinical** (19) — `disease-research`,
-  `rare-disease-diagnosis`, `vaccine-design`, `epidemiological-analysis`
-- **Drug research** (18) — `drug-research`, `admet-prediction`,
-  `drug-repurposing`, `pharmacovigilance`
-- **Genomics & variants** (25) — `acmg-variant-classification`,
-  `gwas-trait-to-gene`, `polygenic-risk-score`
-- **Cancer & oncology** (2) — `cancer-classification`,
-  `precision-oncology`
-- **Protein & structure** (11) — `antibody-engineering`,
-  `binder-discovery`, `protein-structure-prediction`
-- **Cell & expression** (5) — `single-cell`, `crispr-screen-analysis`,
-  `stem-cell-organoid`
-- **Omics & pathways** (14) — `metabolomics`, `proteomics-analysis`,
-  `spatial-transcriptomics`, `rnaseq-deseq2`
-- **Other** (18) — `literature-deep-research`, `dataset-discovery`,
-  `image-analysis`, `statistical-modeling`
-
-### Non-domain (1)
-
-- `company-research` — FBI/SEC-style company briefs (job-application use).
-
-**Orphans (no SKILL.md):** `evals`, `tooluniverse-computational-biophysics-workspace`,
-`tooluniverse-drug-drug-interaction-workspace`,
-`tooluniverse-organic-chemistry-workspace`.
+- routing and setup (`tooluniverse`, `tu-llm`, `setup-tooluniverse`);
+- development (`devtu-*`);
+- domain research (`tooluniverse-*`).
 
 The `tooluniverse` router skill is the canonical entry point: it parses
 intent, matches keywords against the routing table, and either invokes a
@@ -368,7 +331,7 @@ What the outside codebase can know about a running ToolUniverse instance.
 | Which tools are healthy?             | `tu health` / `tu list --filter-healthy`                       |
 | Which API keys are configured?       | `tu status` / `tooluniverse-doctor`                            |
 | What does the tool graph look like?  | `tool_composition_graph.json` / `ToolGraphWebUI`               |
-| Has the embedding cache been built?  | `~/.cache/tooluniverse/embeddings/*.pt`                        |
+| Has the embedding cache been built?  | `<user_cache_dir>/embeddings/*.pt`                             |
 | What's in MEMORY.md?                 | conversation-scoped — not exposed via TU                       |
 
 ---
@@ -474,7 +437,7 @@ If you only remember one thing, remember the file map:
 | Embedding pipeline            | `src/tooluniverse/tool_finder_embedding.py`                   |
 | MCP tutorial                  | `docs/dev_docs/MCP_Server_Tutorial.md`                        |
 | Adding new tools              | `docs/dev_docs/Adding_Tools_Tutorial.md` (+ Quick_Reference)  |
-| Skills inventory              | `skills/` (129 SKILL.md files)                                |
+| Skills inventory              | `skills/` and `docs/guide/skills_showcase.rst`                |
 | Tool graph UI                 | `src/tooluniverse/tool_graph_web_ui.py`                       |
 | Agentic tools registry        | `src/tooluniverse/data/agentic_tools.json`                    |
 | Tool composition graph data   | `tool_composition_graph.{json,pkl}` (repo root)               |

@@ -181,21 +181,21 @@ async def test_smcp_tool_emits_stream_logs():
         hooks_enabled=False,
     )
 
-    tool_config = tu.all_tool_dict[config["name"]]
-    smcp._create_mcp_tool_from_tooluniverse(tool_config)
+    try:
+        tool_config = tu.all_tool_dict[config["name"]]
+        smcp._create_mcp_tool_from_tooluniverse(tool_config)
 
-    mcp_tool = await smcp.get_tool(config["name"])
-    dynamic_fn = mcp_tool.fn
+        mcp_tool = await smcp.get_tool(config["name"])
+        dynamic_fn = mcp_tool.fn
 
-    ctx = _DummyCtx()
-    result = await dynamic_fn(
-        question="How are you?",
-        _tooluniverse_stream=True,
-        ctx=ctx,
-    )
+        ctx = _DummyCtx()
+        result = await dynamic_fn(
+            question="How are you?",
+            _tooluniverse_stream=True,
+            ctx=ctx,
+        )
 
-    # Allow thread-safe callbacks to finish
-    await asyncio.sleep(0)
-
-    assert json.loads(result) == {"result": "log-1log-2"}
-    assert ctx.messages == ["log-1", "log-2"]
+        assert json.loads(result) == {"result": "log-1log-2"}
+        assert ctx.messages == ["log-1", "log-2"]
+    finally:
+        await smcp.close()

@@ -1,522 +1,115 @@
-# Documentation Validation Guide
+# Documentation validation guide
 
-This guide explains how to use the documentation validation system to ensure documentation quality before committing changes.
+Run the smallest checks that cover the edited pages, then build the complete
+documentation when navigation, shared references, or generated content changes.
 
-## Overview
-
-The validation system includes:
-
-1. **Pre-commit hook** (`.githooks/pre-commit-docs`) - Automatic validation on git commit
-2. **Manual validation** - Scripts you can run independently
-3. **CI/CD validation** - Automatic checks on pull requests
-
-## Quick Start
-
-### Enable Pre-Commit Hook
+## 1. Review scope
 
 ```bash
-# One-time setup
-./setup_precommit.sh
-
-# Or manually
-git config core.hooksPath .githooks
+git status --short
+git diff --name-status
+git diff --check
 ```
 
-### Run Validation Manually
+Generated locale catalogs and `.doctree` files should not appear in an ordinary
+documentation patch.
+
+## 2. Check stale inventory language
+
+Public docs use durable rounded counts. This command should not find retired
+inventories in maintained English sources:
 
 ```bash
-# Validate documentation changes
-./.githooks/pre-commit-docs
-
-# Or run specific validation scripts
-cd docs
-python validate_examples.py  # Validate code examples
-python doc_sync_tool.py      # Check API/docs sync
+rg -n '(~2,300|136 orchestration|134 skills|129 SKILL|66 specialized|54 skills|68 pre-built|9 subcommands|Actual count.*1962)' \
+  --glob '!VALIDATION_GUIDE.md' \
+  AGENTS.md README.md plugin/README.md docs/index.rst docs/dev_docs docs/guide docs/reference
 ```
 
-## Pre-Commit Hook Features
-
-The `.githooks/pre-commit-docs` hook automatically checks:
-
-### 1. RST Syntax Validation
-
-**What it checks:**
-- Title/underline length mismatches
-- Common reStructuredText syntax errors
-
-**Example issue:**
-```rst
-My Title
-========  <-- ❌ Wrong length (9 chars vs 8)
-
-My Title
-========  <-- ✅ Correct (8 chars = 8)
-```
-
-**How to fix:**
-```bash
-# The hook will show you the mismatch:
-⚠️  Line 42: Title/underline length mismatch in docs/quickstart.rst
-  Title: 'My Title' (length: 8)
-  Underline: '=========' (length: 9)
-
-# Fix by matching lengths exactly
-```
-
-### 2. Broken Internal References
-
-**What it checks:**
-- `:doc:` references to non-existent files
-- Missing cross-reference targets
-
-**Example issue:**
-```rst
-See :doc:`installation` for details.  <-- ✅ OK (file exists)
-See :doc:`setup_guide` for details.   <-- ❌ File not found
-```
-
-**How to fix:**
-```rst
-# Use correct path
-See :doc:`installation` for details.
-
-# Or use relative paths
-See :doc:`../guide/installation` for details.
-
-# Or use explicit labels
-.. _my-label:
-
-See :ref:`my-label` for details.
-```
-
-### 3. TODO/FIXME Markers
-
-**What it checks:**
-- Uncommitted TODO/FIXME comments in documentation
-
-**Example:**
-```rst
-.. TODO: Update this section  <-- ⚠️ Warning
-.. FIXME: Broken link          <-- ⚠️ Warning
-```
-
-**Why it matters:**
-- Documentation should be complete before committing
-- TODO markers indicate unfinished work
-
-**How to fix:**
-```bash
-# Either complete the TODOs:
-# "Update this section" → Actually update it
-
-# Or create GitHub issues:
-# Convert TODO to tracked issue
-# Remove TODO from docs
-```
-
-### 4. Long Lines
-
-**What it checks:**
-- Lines longer than 120 characters (excluding code blocks and URLs)
-
-**Why it matters:**
-- Improves readability
-- Better diffs in version control
-
-**How to fix:**
-```rst
-# ❌ Bad: Long line
-This is a very long line that goes on and on and on and contains too much information on a single line making it hard to read.
-
-# ✅ Good: Broken into multiple lines
-This is a long line that has been broken into multiple shorter lines,
-making it much easier to read and maintain in version control.
-```
-
-### 5. Auto-Generated Files
-
-**What it checks:**
-- Manual edits to files in `docs/tools/` and `docs/api/`
-
-**Example warning:**
-```
-⚠️  Warning: You are modifying auto-generated files:
- - docs/tools/uniprot_tools.rst
- - docs/api/tooluniverse.core.rst
-```
-
-**How to fix:**
-```bash
-# Don't edit these files directly!
-# Instead, edit source files and regenerate:
-
-# For tool documentation
-cd docs
-python generate_config_index.py
-python generate_tool_reference.py
-
-# For API documentation
-# Edit Python docstrings in src/tooluniverse/
-cd docs
-sphinx-apidoc -f -o api ../src/tooluniverse
-```
-
-### 6. Tool Count Consistency
-
-**What it checks:**
-- Inconsistent tool counts across documentation (e.g., "600 tools" vs "750 tools")
-
-**Standard:** Use `1000+ tools` consistently
-
-**How to fix:**
-```bash
-# Search for tool count mentions
-grep -r "tools" docs/ --include="*.rst" | grep -E "[0-9]+"
-
-# Update to standard format (replace any stale counts with 1000+)
-sed -i 's/[0-9]*+ tools/1000+ tools/g' docs/quickstart.rst
-```
-
-## Manual Validation Scripts
-
-### validate_examples.py
-
-**Purpose:** Validates Python code examples in documentation
+When an exact count is needed, query the source instead of updating prose:
 
 ```bash
-cd docs
-python validate_examples.py
+tu status
+find -L skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l
 ```
 
-**What it checks:**
-- Python syntax errors
-- Import availability
-- Common code issues
+## 3. Validate generated pages
 
-**Example output:**
-```bash
-✅ quickstart.rst: All 5 code blocks valid
-❌ advanced.rst: Syntax error in block 3
-  Line 12: unexpected indent
-```
-
-### doc_sync_tool.py
-
-**Purpose:** Ensures documentation matches source code
+After changing a skill or the showcase generator:
 
 ```bash
-cd docs
-python doc_sync_tool.py
+python docs/generate_skills_showcase.py
+source_count=$(find -L skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')
+page_count=$(rg -c '^      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/' docs/guide/skills_showcase.rst)
+test "$source_count" = "$page_count"
 ```
 
-**What it checks:**
-- Docstring/documentation sync
-- API signature changes
-- Missing documentation
+After changing tool JSON, run the tool-document generators named in
+`DOCUMENTATION_STANDARDS.md` and review their diffs rather than editing generated
+pages directly.
 
-**Example output:**
-```bash
-⚠️  API change detected in tooluniverse.core
-  Method `load_tools()` signature changed
-  → Update docs/api/tooluniverse.core.rst
-```
+## 4. Smoke-test examples
 
-### doc_analytics.py
-
-**Purpose:** Analyzes documentation quality metrics
+The legacy example checker scans Python blocks in top-level `docs/*.rst` files:
 
 ```bash
-cd docs
-python doc_analytics.py
+python docs/validate_examples.py
 ```
 
-**What it provides:**
-- Page statistics (word count, code blocks, links)
-- Quality recommendations
-- Coverage analysis
+This is only a narrow smoke test; it does not scan nested guides or prove that
+remote examples return live data. The Sphinx build below is the required
+repository-wide structural check. Network examples require targeted integration
+tests.
 
-## Validation Workflow
-
-### Before Committing
+Check documented tool names against the live registry when a page names
+specific tools:
 
 ```bash
-# 1. Make documentation changes
-vim docs/quickstart.rst
-
-# 2. Regenerate auto-generated content if needed
-cd docs
-python generate_config_index.py
-python generate_tool_reference.py
-
-# 3. Build locally to test
-./quick_doc_build.sh
-
-# 4. Run validation (automatic on commit)
-git add docs/quickstart.rst
-git commit -m "docs: update quickstart"  # Validation runs automatically
-
-# If validation fails, fix issues and try again
+tu info UniProt_get_entry_by_accession
 ```
 
-### Dealing with Warnings
+## 5. Build Sphinx with warnings as errors
 
-Warnings **won't block** your commit, but you should fix them:
+Install the project documentation group in an isolated `uv` environment, then
+build outside the source tree:
 
 ```bash
-# Commit with warnings (allowed but not recommended)
-git commit -m "docs: update quickstart"
-⚠️  Validation completed with 2 warning(s)
-You can still commit, but consider fixing these issues
-
-# Fix warnings and amend commit
-vim docs/quickstart.rst  # Fix issues
-git add docs/quickstart.rst
-git commit --amend --no-edit
+uv sync --extra docs
+uv run sphinx-build -W --keep-going -b html docs /tmp/codex-tooluniverse-docs
 ```
 
-### Dealing with Errors
-
-Errors **will block** your commit:
+For a faster structural pass while iterating:
 
 ```bash
-git commit -m "docs: update quickstart"
-❌ Validation failed with 1 error(s)
-
-# Fix the error
-vim docs/quickstart.rst
-git add docs/quickstart.rst
-git commit -m "docs: update quickstart"
-✅ Documentation validation passed!
+uv run sphinx-build -W --keep-going -b dummy docs /tmp/codex-tooluniverse-docs-dummy
 ```
 
-## CI/CD Validation
+Fix warnings in maintained source pages. Regenerate rather than hand-editing
+generated API, tool, locale, or doctree content.
 
-GitHub Actions automatically validates documentation on pull requests:
+## 6. Validate machine-readable metadata
 
-```yaml
-# .github/workflows/deploy-docs.yml
-- name: Validate documentation
- run: |
-   ./.githooks/pre-commit-docs
-```
-
-**What happens:**
--  Validation passes → PR can be merged
--  Validation fails → PR blocked until fixed
-- ️  Warnings → PR can be merged but review recommended
-
-## Common Issues & Solutions
-
-### Issue: "Title/underline length mismatch"
-
-**Cause:** RST heading underline doesn't match title length
-
-**Solution:**
-```rst
-# Count characters carefully
-Installation Guide
-==================  (18 characters = 18 equals signs)
-```
-
-**Tip:** Use an editor with column indicators or run:
-```bash
-echo "My Title" | wc -c  # Get exact length
-```
-
-### Issue: "Possibly broken reference"
-
-**Cause:** `:doc:` or `:ref:` points to non-existent file
-
-**Solution:**
-```rst
-# Check if file exists
-ls docs/installation.rst
-
-# Use correct path
-:doc:`installation`          # For docs/installation.rst
-:doc:`guide/loading_tools`   # For docs/guide/loading_tools.rst
-
-# Or use explicit references
-.. _my-section:
-
-Some content here
-
-Reference it: :ref:`my-section`
-```
-
-### Issue: "Modifying auto-generated files"
-
-**Cause:** Editing files in `docs/tools/` or `docs/api/` directly
-
-**Solution:**
-```bash
-# Don't edit generated files!
-# Edit source instead:
-
-# For tool docs:
-vim src/tooluniverse/data/uniprot_tools.json
-cd docs && python generate_config_index.py
-
-# For API docs:
-vim src/tooluniverse/core_tool.py  # Edit docstrings
-cd docs && sphinx-apidoc -f -o api ../src/tooluniverse
-```
-
-### Issue: "Inconsistent tool counts"
-
-**Cause:** Different tool counts mentioned across docs
-
-**Solution:**
-```bash
-# Use standard format everywhere
-grep -r "[0-9]\+ tools" docs/ --include="*.rst"
-
-# Replace with "1000+ tools"
-# See DOCUMENTATION_STANDARDS.md for details
-```
-
-## Bypassing Validation (Not Recommended)
-
-In rare cases, you may need to bypass validation:
+When `server.json` changes:
 
 ```bash
-# Skip pre-commit hooks (not recommended)
-git commit --no-verify -m "docs: emergency fix"
+jq empty server.json
 ```
 
-**When to bypass:**
-- Emergency hotfixes
-- False positives in validation
-- Documented exceptions
-
-**Always:**
-- Document why you bypassed validation in commit message
-- Create follow-up issue to fix properly
-- Get code review before merging
-
-## Best Practices
-
-### 1. Validate Early and Often
+When command or environment-variable documentation changes, compare it with the
+live CLI and source reads:
 
 ```bash
-# Don't wait until commit time
-# Validate as you write
-
-# After making changes
-./quick_doc_build.sh  # Build and check
-./.githooks/pre-commit-docs  # Validate
+tu --help
+tu health --help
+rg -n 'os\.(getenv|environ\.get)\(' src/tooluniverse
 ```
 
-### 2. Fix Warnings Proactively
+## 7. Final review
 
 ```bash
-# Don't accumulate warnings
-# Fix them immediately
-
-# Each warning is a small issue
-# Small issues → big problems
+git diff --check
+git diff --stat
+git diff -- docs README.md AGENTS.md plugin/README.md server.json
 ```
 
-### 3. Use Auto-Generated Headers
-
-All auto-generated files **must** include header:
-
-```rst
-.. AUTO-GENERATED - DO NOT EDIT MANUALLY
-.. Generated by: docs/generate_config_index.py
-.. Last updated: 2026-02-05 10:30:00
-.. 
-.. To modify, edit source files and regenerate.
-```
-
-This is now automatically added by generation scripts.
-
-### 4. Keep Documentation in Sync
-
-```bash
-# When changing code, update docs
-git diff src/tooluniverse/core_tool.py  # Changed code
-# → Also update docs/api/ or relevant guides
-
-# Use doc_sync_tool.py to check
-python docs/doc_sync_tool.py
-```
-
-### 5. Test Code Examples
-
-```bash
-# All code examples should work
-# Test them regularly
-
-cd docs
-python validate_examples.py
-
-# Or run examples manually
-python -c "$(sed -n '/.. code-block:: python/,/^$/p' quickstart.rst | tail -n +3)"
-```
-
-## Troubleshooting
-
-### Hook not running
-
-```bash
-# Check hook path configuration
-git config --get core.hooksPath
-# Should be: .githooks
-
-# Reconfigure if needed
-git config core.hooksPath .githooks
-
-# Make hook executable
-chmod +x .githooks/pre-commit-docs
-```
-
-### Validation script errors
-
-```bash
-# Check Python environment
-python --version  # Should be 3.8+
-
-# Install dependencies
-pip install sphinx sphinx-rtd-theme
-
-# Check script permissions
-ls -la docs/*.py
-chmod +x docs/*.py  # If needed
-```
-
-### False positives
-
-```bash
-# Report false positives as issues
-# Include:
-# - File being validated
-# - Warning/error message
-# - Why it's a false positive
-
-# Example:
-# File: docs/advanced.rst
-# Warning: "Broken reference :doc:`custom_page`"
-# Reason: custom_page.rst exists but validation doesn't find it
-```
-
-## Contributing
-
-Want to improve validation? See:
-
-- `.githooks/pre-commit-docs` - Main validation script
-- `docs/validate_examples.py` - Code example validator
-- `docs/doc_sync_tool.py` - API/docs sync checker
-- `docs/DOCUMENTATION_STANDARDS.md` - Documentation standards
-
-## Additional Resources
-
-- [Documentation Standards Guide](DOCUMENTATION_STANDARDS.md)
-- [Utility Scripts Guide](UTILITY_SCRIPTS.md)
-- [Sphinx Documentation](https://www.sphinx-doc.org/)
-- [reStructuredText Primer](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html)
-
----
-
-**Last updated**: 2026-02-05  
-**Maintained by**: ToolUniverse Documentation Team
+Confirm that examples use registered names, internal links resolve, generated
+pages match their sources, and no unrelated file was reformatted.

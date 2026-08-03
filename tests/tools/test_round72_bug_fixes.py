@@ -139,7 +139,7 @@ class TestBlastBioPythonAttributes(unittest.TestCase):
         mock_record.application = "BLASTP"
         mock_record.alignments = [mock_alignment]
 
-        with patch("tooluniverse.blast_tool.NCBIXML") as mock_xml:
+        with patch("tooluniverse.blast_tool.NCBIXML", create=True) as mock_xml:
             mock_xml.read.return_value = mock_record
             result = tool._parse_blast_results("<fake_xml/>")
 

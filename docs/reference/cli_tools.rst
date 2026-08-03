@@ -38,6 +38,8 @@ The primary command-line interface for discovering, inspecting, running, and tes
      - Test a tool with example inputs and report pass/fail
    * - ``tu status``
      - Show ToolUniverse status (version, tool count, config)
+   * - ``tu health [TOOL]``
+     - Inspect cached health or refresh one tool with ``--refresh``
    * - ``tu build``
      - Rebuild the static tool registry after adding built-in tools
    * - ``tu serve``
@@ -62,6 +64,8 @@ The primary command-line interface for discovering, inspecting, running, and tes
 
    # Status and maintenance
    tu status
+   tu health
+   tu health UniProt_get_entry_by_accession --refresh
    tu build
 
 MCP Server Commands

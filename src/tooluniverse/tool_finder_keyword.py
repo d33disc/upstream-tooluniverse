@@ -783,11 +783,41 @@ class ToolFinderKeyword(BaseTool):
                         "relevance_score": round(total_score, 4),
                         "tfidf_score": round(tfidf_score, 4),
                         "exact_match_bonus": round(exact_bonus, 4),
+                        "_exact_name_match": tool_name.lower()
+                        == query_submitted.lower(),
                     }
                     tool_scores.append(tool_info)
 
+            # Keep an exactly named API-key-gated tool discoverable. Gated tools
+            # are absent from all_tool_dict, so without this result an exact query
+            # silently returns unrelated runnable tools instead of explaining the
+            # missing credential.
+            excluded = getattr(self.tooluniverse, "_excluded_api_key_tools", {})
+            gated_name = next(
+                (name for name in excluded if name.lower() == query_submitted.lower()),
+                None,
+            )
+            if gated_name and (not categories or "gated" in categories):
+                tool_scores.append(
+                    {
+                        "name": gated_name,
+                        "description": "Tool is gated by missing API credentials.",
+                        "type": "gated",
+                        "category": "gated",
+                        "parameters": {},
+                        "missing_api_keys": excluded[gated_name],
+                        "relevance_score": 1_000_000.0,
+                        "tfidf_score": 0.0,
+                        "exact_match_bonus": 0.0,
+                        "_exact_name_match": True,
+                    }
+                )
+
             # Sort by relevance score (highest first) and limit results
-            tool_scores.sort(key=lambda x: x["relevance_score"], reverse=True)
+            tool_scores.sort(
+                key=lambda x: (x["_exact_name_match"], x["relevance_score"]),
+                reverse=True,
+            )
             total_scored = len(tool_scores)
             matching_tools = tool_scores[offset : offset + limit] if limit > 0 else []
 
@@ -795,6 +825,7 @@ class ToolFinderKeyword(BaseTool):
             for tool in matching_tools:
                 tool.pop("tfidf_score", None)
                 tool.pop("exact_match_bonus", None)
+                tool.pop("_exact_name_match", None)
 
             # Annotate with health status (optional — cache may not exist)
             try:

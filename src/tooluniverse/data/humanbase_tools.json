@@ -47,7 +47,8 @@
           "items": {
             "type": "string"
           },
-          "description": "Alias for gene_list. List of gene symbols to analyze."
+          "description": "Alias for gene_list. List of gene symbols to analyze.",
+          "minItems": 1
         },
         "top_n": {
           "type": "integer",

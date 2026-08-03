@@ -9,8 +9,8 @@
   "github_issues": [],
   "retry_after": "2026-09-01",
   "retry_notes": "Check if HMDB has released a public API key program or relaxed Cloudflare rules. Contact samackay@ualberta.ca for institutional API access.",
-  "workaround": "HMDB_get_metabolite and HMDB_search use PubChem as a cross-reference (HMDB IDs are stored as RegistryID in PubChem). HMDB_get_diseases uses the CTD (Comparative Toxicogenomics Database) API to retrieve chemical-disease associations given the metabolite name resolved from PubChem.",
-  "workaround_tool_file": "src/tooluniverse/hmdb_tool.py",
+  "workaround": "Use Metabolite_get_info and Metabolite_search for PubChem-backed compound data. Use Metabolite_get_diseases for CTD-backed chemical-disease associations.",
+  "workaround_tool_file": "src/tooluniverse/metabolite_tool.py",
   "investigation_notes": [
     "curl https://hmdb.ca/metabolites/HMDB0000122.json → HTTP 403",
     "curl https://hmdb.ca/metabolites/HMDB0000122.xml → HTTP 403",

@@ -1,6 +1,6 @@
 # ToolUniverse Plugin for Claude Code
 
-1000+ scientific research tools for biology, chemistry, medicine, and data science.
+2,500+ scientific research tools for biology, chemistry, medicine, and data science.
 
 ## Prerequisite: `uv`
 
@@ -37,16 +37,19 @@ claude plugin install tooluniverse@tooluniverse
 
 ## What's Included
 
-- **MCP Server**: Auto-configured via `.mcp.json`. Provides `find_tools`, `list_tools`, `get_tool_info`, `execute_tool` — accessing 1000+ scientific APIs.
-- **120+ Research Skills**: Specialized workflows for genomics, drug discovery, clinical analysis, statistical modeling, data wrangling, and more.
+- **MCP Server**: Auto-configured via `.mcp.json`. Provides `find_tools`, `grep_tools`, `list_tools`, `get_tool_info`, and `execute_tool` — accessing 2,500+ scientific tools.
+- **140+ Research Skills**: Specialized workflows for genomics, drug discovery, clinical analysis, statistical modeling, data wrangling, and more.
 - **Slash Commands** (each enforces a discipline the agent won't apply on its own):
   - `/tooluniverse:research` — drive a multi-database investigation inline in this chat (you see every step)
+  - `/tooluniverse:find-tools` — discover tools and inspect their schemas
+  - `/tooluniverse:run-tool` — execute a known tool with validated arguments
   - `/tooluniverse:translate-id` — resolve an ID across all relevant namespaces
   - `/tooluniverse:cross-validate` — verify a claim across 3+ independent databases
   - `/tooluniverse:compare` — N-way side-by-side comparison with domain-appropriate columns
   - `/tooluniverse:literature-sweep` — graded mini-review across PubMed + EuropePMC + Semantic Scholar
   - `/tooluniverse:self-review` — generate weighted success criteria for a task and check work against them (what's missing / done well)
   - `/tooluniverse:setup-keys` — configure ToolUniverse API keys
+  - `/tooluniverse:verify-references` — verify identifiers and citations against source databases
 - **Research Agent**: `/tooluniverse:researcher` — same investigation, delegated to a forked-context subagent that returns one summary (use when you don't want intermediate tool-call output in your main thread).
 
 ## Usage
@@ -66,8 +69,8 @@ For specific surfaces, use the right interaction below.
 | Use this | When |
 |---|---|
 | Natural language ("what's the prevalence of X?") | Default. The router skill auto-dispatches; the agent finds and runs tools itself. |
-| `find_tools("topic")` (MCP, agent-side) | One-shot keyword search, you already know the topic |
-| `tu find "topic"` (CLI) | Same, from the shell |
+| `find_tools("topic")` (MCP, agent-side) | Semantic search from a natural-language description |
+| `tu find "topic"` (CLI) | Local keyword/BM25 search from the shell; no model or API key needed |
 | `tu run <name> '<json>'` (CLI) | You know the exact tool name and JSON args. Fastest. Good in scripts. |
 
 ### Slash commands (when discipline matters)
@@ -75,12 +78,15 @@ For specific surfaces, use the right interaction below.
 | Use this | When |
 |---|---|
 | `/tooluniverse:research <question>` | You want to drive a multi-database investigation inline in this conversation, watching each step. Enforces the same look-up-don't-guess + cross-validate + honest-INDETERMINATE discipline as the `researcher` agent, but stays in-thread so you can interrupt and refine. |
+| `/tooluniverse:find-tools <task>` | Discover candidate tools for a task, inspect their exact schemas, and return an executable shortlist. |
+| `/tooluniverse:run-tool <name> [arguments]` | Execute a known tool with schema-checked arguments and report the result. |
 | `/tooluniverse:translate-id <id>` | You have an ID in one namespace and need it in others (HGNC ↔ Ensembl ↔ UniProt ↔ NCBI ↔ OMIM ↔ ChEMBL ↔ PubChem). Detects the input namespace, picks the right resolver, returns a complete cross-reference table. |
 | `/tooluniverse:cross-validate <claim>` | You have a specific testable claim and want to know how strongly it's supported. Forces 3+ independent databases, reports concordance per source. Use before publishing or acting on a fact. |
 | `/tooluniverse:compare <items>` | You want a side-by-side comparison of N items (drugs, targets, diseases, variants). Detects the domain, picks domain-appropriate columns, produces a tabular report. |
 | `/tooluniverse:literature-sweep <topic>` | Graded mini-review across PubMed + EuropePMC + Semantic Scholar with dedup, relevance scoring, and a recommended reading order. |
 | `/tooluniverse:self-review <task>` | You (or an agent) are about to do, are doing, or have finished a task and want the success criteria for it — then to check work against them. Decomposes the task into scenarios → perspectives → weighted YES/NO criteria (the Qworld Recursive Expansion Tree method); with work supplied, scores it and lists what's missing. Use for self-review, a definition-of-done checklist, or an evaluation rubric. |
 | `/tooluniverse:setup-keys` | Set up ToolUniverse API keys — opens a setup page listing every key tools can use, with registration links, and saves them to a `.env` the MCP server, CLI, and SDK all read. |
+| `/tooluniverse:verify-references <references>` | Validate identifiers, citations, and source claims before relying on them. |
 
 ### Launch the research agent
 
@@ -145,7 +151,7 @@ Once enabled, Claude Code re-pulls this repo's `marketplace.json` on each startu
 
 **To force a refresh now**, run `uvx --refresh tooluniverse --version` from a shell once; the cache update then applies to future MCP launches.
 
-**To pin a specific version**, edit your `.mcp.json` to `"args": ["tooluniverse@1.2.0"]` (or any released version). Useful for reproducibility on long-running analyses.
+**To pin a specific version**, edit your `.mcp.json` to use a released version, for example `"args": ["tooluniverse@VERSION"]`. Useful for reproducibility on long-running analyses.
 
 **To opt out of auto-updates**: leave the marketplace's auto-update toggle OFF, or set `DISABLE_AUTOUPDATER=1` + `FORCE_AUTOUPDATE_PLUGINS=1` env vars to disable Claude Code auto-update while keeping plugin auto-update enabled (or vice versa).
 

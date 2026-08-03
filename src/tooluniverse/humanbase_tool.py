@@ -18,6 +18,11 @@ class HumanBaseTool(BaseTool):
         """Main entry point for the tool."""
         # Feature-111A-007: 'genes' as alias for 'gene_list'
         gene_list = arguments.get("gene_list") or arguments.get("genes")
+        if not gene_list:
+            return {
+                "status": "error",
+                "error": "gene_list (or genes) must contain at least one gene symbol",
+            }
         tissue = arguments.get("tissue", "brain")
         max_node = arguments.get("max_node") or arguments.get("top_n") or 10
         interaction = arguments.get("interaction", None)

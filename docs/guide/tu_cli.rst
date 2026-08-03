@@ -92,6 +92,18 @@ Show how many tools are loaded and the top categories.
 
    tu status
 
+health
+~~~~~~
+
+Inspect the cached tool-health summary, check one tool, or refresh its health
+record.
+
+.. code-block:: bash
+
+   tu health
+   tu health UniProt_get_entry_by_accession
+   tu health UniProt_get_entry_by_accession --refresh
+
 build
 ~~~~~
 

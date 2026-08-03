@@ -25,11 +25,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-# The tool imports these optional heavy packages at call time; stub them so
-# CELLxGENECensusTool.run() reaches its own dispatch logic under test.
-sys.modules.setdefault("cellxgene_census", MagicMock())
-sys.modules.setdefault("tiledbsoma", MagicMock())
-
 from tooluniverse.cellxgene_census_tool import CELLxGENECensusTool
 
 pytestmark = pytest.mark.unit
@@ -124,7 +119,11 @@ def test_omitted_operation_dispatches_to_the_correct_method(name, expected_metho
     cfg = _tool_config(name)
     tool = CELLxGENECensusTool(cfg)
 
-    with patch.object(
+    optional_modules = {
+        "cellxgene_census": MagicMock(),
+        "tiledbsoma": MagicMock(),
+    }
+    with patch.dict(sys.modules, optional_modules), patch.object(
         tool, expected_method, return_value={"status": "success", "data": []}
     ) as mock_method:
         # A superset covering every tool's other required field is safe

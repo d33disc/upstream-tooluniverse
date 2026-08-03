@@ -81,6 +81,8 @@ class TestPaperSearchTools(unittest.TestCase):
         }
         result = self.tu.run_one_function(function_call)
 
+        if isinstance(result, dict) and result.get("status") == "success":
+            result = result["data"]
         self.assertIsInstance(result, list)
         if result:
             paper = result[0]
@@ -152,6 +154,8 @@ class TestPaperSearchTools(unittest.TestCase):
         if isinstance(result, dict) and "error" in result:
             print(f"PubMed API error (skipping): {result['error']}")
             return  # Skip test if API is not available
+        if isinstance(result, dict) and result.get("status") == "success":
+            result = result["data"]
 
         self.assertIsInstance(result, list)
         if result:

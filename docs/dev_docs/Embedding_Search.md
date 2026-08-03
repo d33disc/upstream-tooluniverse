@@ -1,101 +1,103 @@
-# ToolUniverse Embedding Search -- How It Works
+# ToolUniverse embedding search
 
-How `find_tools` turns a natural language query into a ranked list of
-tools using HuggingFace sentence embeddings.
+`find_tools` turns a natural-language request into a ranked list of tools. It
+embeds the query and compares it with cached embeddings of the tools currently
+loaded by `ToolUniverse`.
 
-## The pipeline
+## Pipeline
 
-```
-"extract patent claims"          <-- your query (natural language)
-        |
-        v
-   SentenceTransformer.encode()  <-- encode query to 1536-dim vector
-        |
-        v
-   cosine similarity against     <-- compare to precomputed tool vectors
-   2,300 tool embeddings
-        |
-        v
-   torch.topk(scores, k)        <-- pick top-k highest scores
-        |
-        v
-   ["USPTO_get_patent_claims",   <-- ranked tool names
-    "USPTO_patent_deep_lookup",
-    ...]
+```text
+natural-language query
+        │
+        ▼
+embedding encoder
+        │
+        ▼
+cosine similarity against cached tool-description tensors
+        │
+        ▼
+top-k tool specifications
 ```
 
-## What gets embedded
+Each document embedding represents the full prepared tool specification: name,
+description, parameter schema, and return schema. Search is therefore not
+limited to words in the tool name.
 
-NOT just the tool name. Each tool's embedding is computed from its
-full JSON specification serialized to a string:
+The default local encoder is:
 
-```python
-all_tools_str = [json.dumps(each) for each in tu.prepare_tool_prompts(filtered_tools)]
-```
-
-`prepare_tool_prompts` returns the tool's name, description, parameter
-schema, and return schema -- everything an agent needs to decide if a
-tool is relevant. This means the embedding captures semantic meaning
-from parameter names, descriptions, and type information, not just the
-tool name.
-
-## The model
-
-```
+```text
 mims-harvard/ToolRAG-T1-GTE-Qwen2-1.5B
 ```
 
-A 1.5B parameter sentence transformer fine-tuned for tool retrieval.
-Hosted on HuggingFace, downloaded and cached locally on first use.
-Runs on MPS (Apple Silicon), CUDA, or CPU.
+It produces 1,536-dimensional, L2-normalized vectors and runs on CUDA, Apple
+Silicon MPS, or CPU. The model is downloaded from Hugging Face on first use.
 
-- Max sequence length: 4,096 tokens
-- Output dimension: 1,536 (normalized L2)
-- Similarity metric: cosine (via `model.similarity()`)
+## Install
 
-## Caching
+The embedding finder needs the optional embedding dependencies:
 
-Embeddings are cached to disk so they don't need to be recomputed
-every session.
-
-**Cache location:**
-
-```
-~/.cache/tooluniverse/embeddings/
+```bash
+uv pip install 'tooluniverse[embedding]'
 ```
 
-**Cache key:** MD5 hash of the serialized tool list. If any tool's
-JSON definition changes (name, description, parameters), the hash
-changes and embeddings auto-regenerate on next query.
+## Cache and automatic updates
 
-**Cache filename pattern:**
+Tool embeddings are stored under ToolUniverse's cross-platform user cache:
 
+| Platform | Default cache root |
+|---|---|
+| macOS | `~/Library/Caches/ToolUniverse` |
+| Linux | `$XDG_CACHE_HOME/tooluniverse` or `~/.cache/tooluniverse` |
+| Windows | `%LOCALAPPDATA%\ToolUniverse\Cache` |
+
+Embedding tensors live in `<user_cache_dir>/embeddings/`. Set
+`TOOLUNIVERSE_TMPDIR` to override the ToolUniverse user-cache root.
+
+The filename contains the encoder name and a hash:
+
+```text
+ToolRAG-T1-GTE-Qwen2-1.5Btool_embedding_<hash>.pt
 ```
-ToolRAG-T1-GTE-Qwen2-1.5Btool_embedding_<md5>.pt
-```
 
-**Staleness:** Adding, removing, or modifying any tool invalidates
-the cache. The rebuild takes 2-5 minutes on M1 Max (MPS), encoding
-~2,300 tool descriptions through a 1.5B model.
+The hash covers the prepared tool specifications and settings that affect
+document vectors: embedding backend, `trust_remote_code`, and document prompt.
+A new process therefore selects or builds the matching cache whenever the tool
+catalog or embedding configuration changes. During a running process,
+`_maybe_refresh_embeddings()` also rebuilds when the loaded set of tool names
+changes.
 
-## How to call it
+There is normally no manual update step. Load the current tools and issue an
+embedding query; ToolUniverse either reuses the matching tensor or generates a
+new one. Old cache files may coexist safely because their hashes differ.
 
-### Via MCP (Claude Code / agents)
-
-The embedding search is exposed as `find_tools` in ToolUniverse's
-compact mode MCP interface:
+To inspect the resolved cache directory:
 
 ```python
-mcp__tooluniverse__find_tools(
+from pathlib import Path
+from tooluniverse.utils import get_user_cache_dir
+
+cache_dir = Path(get_user_cache_dir()) / "embeddings"
+print(cache_dir)
+print(*sorted(cache_dir.glob("*tool_embedding_*.pt")), sep="\n")
+```
+
+## Query through ToolUniverse
+
+### MCP compact mode
+
+Call the compact-mode proxy:
+
+```python
+find_tools(
     query="extract patent claims from USPTO",
-    limit=10
+    limit=10,
 )
 ```
 
-This calls `Tool_Finder` internally, which is backed by
-`ToolFinderEmbedding.run()`.
+The MCP proxy invokes the configured `Tool_Finder` embedding tool and returns
+tool specifications suitable for a subsequent `get_tool_info` call.
 
-### Via Python SDK
+### Python SDK
 
 ```python
 from tooluniverse import ToolUniverse
@@ -103,159 +105,68 @@ from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 tu.load_tools()
 
-# Option 1: Through the standard run interface
 result = tu.run({
     "name": "Tool_Finder",
     "arguments": {
         "description": "extract patent claims from USPTO",
-        "limit": 10
-    }
+        "limit": 10,
+    },
 })
-
-# Option 2: Direct access to the embedding finder
-finder = tu.tool_finder  # ToolFinderEmbedding instance
-tool_names = finder.rag_infer("extract patent claims", top_k=10)
 ```
 
-### Via standalone (no ToolUniverse)
+ToolUniverse handles model loading, device placement, cache selection, and
+refresh. Prefer this interface over loading a `.pt` file directly: a tensor is
+only meaningful with the exact ordered tool list and encoder configuration that
+produced it.
 
-If you want just the embedding similarity without ToolUniverse's
-orchestration:
+## Encoder choices
 
-```python
-import torch
-from sentence_transformers import SentenceTransformer
+The `embedding_model` argument can select a configured encoder:
 
-# Load the model
-model = SentenceTransformer("mims-harvard/ToolRAG-T1-GTE-Qwen2-1.5B")
-model.max_seq_length = 4096
+| Value | Backend | Notes |
+|---|---|---|
+| `default` | local | Fine-tuned ToolRAG-T1 model |
+| `gte-qwen2-7b` | local | Larger instruction-tuned encoder; GPU recommended |
+| `e5-mistral-7b` | local | Larger instruction-tuned encoder; GPU recommended |
+| `openai-3-large` | hosted | OpenAI/Azure credentials required |
+| `openai-3-small` | hosted | OpenAI/Azure credentials required |
 
-# Load cached embeddings
-cache_path = "~/.cache/tooluniverse/embeddings/ToolRAG-T1-GTE-Qwen2-1.5Btool_embedding_<md5>.pt"
-tool_embeddings = torch.load(cache_path, weights_only=False)
+Hosted models use ToolUniverse's shared embedding provider. If a hosted encoder
+is requested without usable credentials, the finder falls back to its local
+model and logs a warning.
 
-# You also need the tool name list (same order as embeddings).
-# Rebuild it from ToolUniverse or cache it alongside the .pt file.
-tu = ToolUniverse()
-tu.load_tools()
-exclude = ["Tool_RAG", "Tool_Finder", "Finish", "CallAgent"]
-tool_names = [t["name"] for t in tu.all_tools if t["name"] not in exclude]
-
-# Query
-query_embedding = model.encode(
-    ["find patents by inventor name"],
-    normalize_embeddings=True,
-    convert_to_tensor=True,
-)
-
-# Cosine similarity (embeddings are L2-normalized, so dot product = cosine)
-scores = model.similarity(query_embedding, tool_embeddings)
-top_k = torch.topk(scores, 10).indices.tolist()[0]
-results = [tool_names[i] for i in top_k]
-print(results)
-```
-
-## How another codebase would integrate
-
-### Option A: Use ToolUniverse as a dependency
+Example:
 
 ```python
-pip install tooluniverse[embedding]
-```
-
-```python
-from tooluniverse import ToolUniverse
-
-tu = ToolUniverse()
-tu.load_tools()
-
-# Search for tools by natural language
 result = tu.run({
     "name": "Tool_Finder",
-    "arguments": {"description": "analyze protein structure stability", "limit": 5}
+    "arguments": {
+        "description": "find tools for protein stability analysis",
+        "limit": 5,
+        "embedding_model": "gte-qwen2-7b",
+    },
 })
-# Returns tool specifications with full parameter schemas
 ```
 
-This is the intended integration path. ToolUniverse handles model
-loading, caching, device placement, and cache invalidation.
+## Finder strategies
 
-### Option B: Use the MCP server
+ToolUniverse provides three complementary discovery strategies:
 
-Run ToolUniverse as an MCP server and call `find_tools` over HTTP.
-Another Claude Code session or any MCP client can query it:
+| Tool | Method | Best for |
+|---|---|---|
+| `Tool_Finder` / MCP `find_tools` | embedding cosine similarity | Natural-language and semantic matching |
+| `Tool_Finder_Keyword` / MCP `grep_tools` | BM25/TF-IDF keyword ranking | Exact terms, names, and deterministic local search |
+| `Tool_Finder_LLM` | LLM reasoning over candidates | Multi-tool and multi-hop planning |
 
-```python
-# From any MCP client:
-mcp__tooluniverse__find_tools(
-    query="predict drug-drug interactions",
-    limit=5
-)
-```
+The configured embedding finder excludes internal orchestration tools from its
+results: `Tool_RAG`, `Tool_Finder`, `Finish`, `CallAgent`, `Tool_Finder_LLM`,
+and `Tool_Finder_Keyword`.
 
-The MCP server handles everything -- model loading, embedding cache,
-similarity search. The client just sends a string and gets back tool
-specs.
-
-### Option C: Use the cached embeddings directly
-
-If you want to run similarity search without ToolUniverse:
-
-1. Install `sentence-transformers` and `torch`
-2. Load the same HF model: `mims-harvard/ToolRAG-T1-GTE-Qwen2-1.5B`
-3. Load the cached `.pt` file from `~/.cache/tooluniverse/embeddings/`
-4. Maintain your own tool name list (same order as the embedding rows)
-5. Encode your query and compute cosine similarity
-
-This is fragile -- you must keep the tool name list synchronized with
-the embedding tensor. Option A or B is better.
-
-## Key implementation details
-
-### Auto-refresh
-
-`ToolFinderEmbedding._maybe_refresh_embeddings()` runs before every
-query. It compares the current tool list against the indexed list. If
-tools were added or removed since last rebuild, it regenerates
-embeddings automatically. No manual cache invalidation needed.
-
-### Device handling
-
-The model and embeddings are placed on the same device:
-
-- CUDA if available (fastest)
-- MPS on Apple Silicon (used on this machine)
-- CPU fallback
-
-Both query embedding and tool embeddings must be on the same device
-for similarity computation. The code handles cross-device moves
-automatically.
-
-### Exclusions
-
-These tool names are excluded from embedding search results:
-`Tool_RAG`, `Tool_Finder`, `Finish`, `CallAgent`. These are internal
-orchestration tools that agents shouldn't discover through search.
-
-### Embedding vs keyword search
-
-ToolUniverse has TWO search tools:
-
-| Tool | Method | When to use |
-|------|--------|-------------|
-| `find_tools` (Tool_Finder) | Embedding similarity | Natural language queries, fuzzy matching, "find tools that do X" |
-| `grep_tools` (Tool_Finder_Keyword) | Text pattern matching | Known tool names, exact keywords, regex patterns |
-
-Embedding search understands semantics ("analyze protein folding"
-finds AlphaFold tools even though "folding" isn't in the tool name).
-Keyword search is faster and deterministic but requires you to know
-the right words.
-
-## Source files
+## Implementation map
 
 | File | Role |
-|------|------|
-| `src/tooluniverse/tool_finder_embedding.py` | Core class: model loading, embedding generation, similarity search |
-| `src/tooluniverse/data/finder_tools.json` | Tool_Finder JSON definition (type: ToolFinderEmbedding) |
-| `src/tooluniverse/data/compact_mode_tools.json` | MCP compact mode config that exposes `find_tools` |
-| `~/.cache/tooluniverse/embeddings/*.pt` | Cached embedding tensors |
+|---|---|
+| `src/tooluniverse/tool_finder_embedding.py` | Model selection, encoding, cache, and similarity |
+| `src/tooluniverse/data/finder_tools.json` | Finder schemas, default model, and exclusions |
+| `src/tooluniverse/data/compact_mode_tools.json` | MCP compact-mode proxy definitions |
+| `src/tooluniverse/utils.py` | Cross-platform user-cache resolution |
