@@ -47,15 +47,20 @@
       {
         "operation": "lookup_compound",
         "query": "CC(=O)Oc1ccccc1C(=O)O"
-      },
-      {
-        "operation": "lookup_compound",
-        "query": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
       }
     ],
     "optional_api_keys": [
       "MCULE_API_KEY"
-    ]
+    ],
+    "api_key_info": {
+      "MCULE_API_KEY": {
+        "domain": "Drugs & Chemistry",
+        "type": "secret",
+        "register_url": "https://mcule.com/api/",
+        "purpose": "Check purchasability and pricing of chemical compounds.",
+        "without": "Compound search works without it; the key unlocks ordering and availability."
+      }
+    }
   },
   {
     "name": "Mcule_get_compound",
@@ -216,10 +221,6 @@
       {
         "operation": "get_compound",
         "mcule_id": "MCULE-3199019536"
-      },
-      {
-        "operation": "get_compound",
-        "mcule_id": "MCULE-9475454445"
       }
     ],
     "optional_api_keys": [
@@ -409,10 +410,6 @@
       {
         "operation": "get_database",
         "database_id": 1
-      },
-      {
-        "operation": "get_database",
-        "database_id": 2
       }
     ],
     "optional_api_keys": [

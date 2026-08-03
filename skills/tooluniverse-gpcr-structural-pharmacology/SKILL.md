@@ -1,7 +1,7 @@
 ---
 name: tooluniverse-gpcr-structural-pharmacology
-description: >
-  Research GPCR receptors, antibody structures, and protein interface analysis using GPCRdb, SAbDab, and PDBePISA. Retrieves receptor families, known ligands (agonists/antagonists/biased), mutations, crystal/cryo-EM structures, antibody CDR annotations, and protein-protein interface geometry. Use when asked about GPCR drug targets, receptor-ligand interactions, antibody structural data, or protein assembly interfaces.
+description: GPCR receptor pharmacology — agonist/antagonist/inverse-agonist/biased-agonist classification, GPCRdb structural data, receptor-ligand binding analysis, antibody-target interface (SAbDab). Use for GPCR drug discovery, biased-agonism analysis, receptor subtype selectivity questions, and orthosteric vs allosteric pocket characterization.
+disable-model-invocation: true
 ---
 
 # GPCR and Structural Pharmacology Research

@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-metabolomics
-description: Comprehensive metabolomics research skill for identifying metabolites, analyzing studies, and searching metabolomics databases. Integrates HMDB (220k+ metabolites), MetaboLights, Metabolomics Workbench, and PubChem. Use when asked to identify or annotate metabolites (HMDB IDs, chemical properties, pathways), retrieve metabolomics study information from MetaboLights (MTBLS*) or Metabolomics Workbench (ST*), search for studies by keywords or disease, or generate comprehensive metabolomics research reports.
+description: Metabolomics research — metabolite identification, study analysis, and database searches across HMDB, MetaboLights, Metabolomics Workbench, KEGG. Use for annotating mass-spec features to known metabolites, finding metabolomics studies of a disease, and structured metabolomics research reports with metabolite-pathway mapping.
+disable-model-invocation: true
 ---
 
 # Metabolomics Research
@@ -28,6 +29,7 @@ Comprehensive metabolomics research skill that identifies metabolites, analyzes 
 - **HMDB** (Human Metabolome Database): 220,000+ metabolites with structures, pathways, and biological roles
 - **MetaboLights**: Public metabolomics repository with thousands of studies
 - **Metabolomics Workbench**: NIH Common Fund metabolomics data repository
+- **FooDB**: Food chemical-constituent database — use `FooDB_get_compound` (param `fdb_id`, e.g. `"FDB000004"`) for a food compound's structure plus HMDB/KEGG/PubChem/ChEBI cross-references; ideal for food-metabolomics annotation
 - **PubChem**: Chemical properties and bioactivity data (fallback)
 
 ## Research Workflow

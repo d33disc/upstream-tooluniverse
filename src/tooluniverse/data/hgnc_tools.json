@@ -28,110 +28,150 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "hgnc_id": {
-          "type": "string",
-          "description": "HGNC identifier (e.g., HGNC:11998)"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "hgnc_id": {
+                  "type": "string",
+                  "description": "HGNC identifier (e.g., HGNC:11998)"
+                },
+                "symbol": {
+                  "type": "string",
+                  "description": "Approved gene symbol"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Approved gene name"
+                },
+                "locus_type": {
+                  "type": "string",
+                  "description": "Type of locus (e.g., gene with protein product)"
+                },
+                "locus_group": {
+                  "type": "string",
+                  "description": "Locus group classification"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Symbol status (Approved, etc.)"
+                },
+                "location": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Chromosomal location"
+                },
+                "entrez_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "NCBI Entrez Gene ID"
+                },
+                "ensembl_gene_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Ensembl Gene ID"
+                },
+                "uniprot_ids": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "UniProt accession(s)"
+                },
+                "refseq_accession": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "RefSeq accession(s)"
+                },
+                "omim_id": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "OMIM ID(s)"
+                },
+                "ccds_id": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "CCDS ID(s)"
+                },
+                "prev_symbol": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "Previous gene symbols"
+                },
+                "prev_name": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "Previous gene names"
+                },
+                "alias_symbol": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "Alias symbols"
+                },
+                "gene_group": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "description": "Gene group memberships"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_field": {
+                  "type": "string"
+                },
+                "query_value": {
+                  "type": "string"
+                },
+                "num_found": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
         },
-        "symbol": {
-          "type": "string",
-          "description": "Approved gene symbol"
-        },
-        "name": {
-          "type": "string",
-          "description": "Approved gene name"
-        },
-        "locus_type": {
-          "type": "string",
-          "description": "Type of locus (e.g., gene with protein product)"
-        },
-        "locus_group": {
-          "type": "string",
-          "description": "Locus group classification"
-        },
-        "status": {
-          "type": "string",
-          "description": "Symbol status (Approved, etc.)"
-        },
-        "location": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Chromosomal location"
-        },
-        "entrez_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "NCBI Entrez Gene ID"
-        },
-        "ensembl_gene_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Ensembl Gene ID"
-        },
-        "uniprot_ids": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "UniProt accession(s)"
-        },
-        "refseq_accession": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "RefSeq accession(s)"
-        },
-        "omim_id": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "OMIM ID(s)"
-        },
-        "ccds_id": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "CCDS ID(s)"
-        },
-        "prev_symbol": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "Previous gene symbols"
-        },
-        "prev_name": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "Previous gene names"
-        },
-        "alias_symbol": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "Alias symbols"
-        },
-        "gene_group": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "description": "Gene group memberships"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -163,54 +203,94 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "hgnc_id": {
-          "type": "string"
-        },
-        "symbol": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "locus_type": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "location": {
-          "type": [
-            "string",
-            "null"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "hgnc_id": {
+                  "type": "string"
+                },
+                "symbol": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "locus_type": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "entrez_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "ensembl_gene_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "uniprot_ids": {
+                  "type": [
+                    "array",
+                    "null"
+                  ]
+                },
+                "refseq_accession": {
+                  "type": [
+                    "array",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_field": {
+                  "type": "string"
+                },
+                "query_value": {
+                  "type": "string"
+                },
+                "num_found": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
           ]
         },
-        "entrez_id": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "ensembl_gene_id": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "uniprot_ids": {
-          "type": [
-            "array",
-            "null"
-          ]
-        },
-        "refseq_accession": {
-          "type": [
-            "array",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     }
   },
   {
@@ -250,33 +330,70 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "hgnc_id": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hgnc_id": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "total_results": {
+                  "type": "integer"
+                },
+                "query": {
+                  "type": "string"
+                }
+              }
+            }
           },
-          "symbol": {
-            "type": "string"
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
           },
-          "name": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "status": {
-            "type": "string"
-          },
-          "location": {
-            "type": [
-              "string",
-              "null"
-            ]
-          }
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -308,39 +425,208 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "hgnc_id": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hgnc_id": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "locus_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "total_results": {
+                  "type": "integer"
+                },
+                "query_location": {
+                  "type": "string"
+                }
+              }
+            }
           },
-          "symbol": {
-            "type": "string"
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
           },
-          "name": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "status": {
-            "type": "string"
-          },
-          "location": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "locus_type": {
-            "type": [
-              "string",
-              "null"
-            ]
-          }
+          "required": [
+            "error"
+          ]
         }
+      ]
+    }
+  },
+  {
+    "name": "HGNC_fetch_gene_family_members",
+    "description": "Enumerate ALL member genes of an HGNC gene family/group by its numeric gene_group_id, returning the full HGNC record for every member gene. Unlike HGNC_fetch_gene_by_symbol/by_id (single gene) this lists the entire family. Each member record includes hgnc_id, approved symbol, full name, chromosomal location, locus type, and cross-references (Ensembl, Entrez, UniProt, OMIM, RefSeq). Example: gene_group_id '366' returns the 56 members of the 'Ubiquitin specific peptidases' family (USP1-USP54, USPL1, CYLD, PAN2). Find a gene_group_id from the 'gene_group_id' field of any gene record returned by HGNC_fetch_gene_by_symbol.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "gene_group_id": {
+          "type": "string",
+          "description": "Numeric HGNC gene group/family ID. Examples: '366' (Ubiquitin specific peptidases), '588' (BCL2 family), '475' (Solute carrier family). Accepts a string or integer."
+        }
+      },
+      "required": [
+        "gene_group_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "fetch",
+      "search_field": "gene_group_id"
+    },
+    "type": "HGNCTool",
+    "test_examples": [
+      {
+        "gene_group_id": "366"
+      },
+      {
+        "gene_group_id": "588"
       }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "data": {
+              "type": "array",
+              "description": "Full HGNC record for every member gene of the family",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hgnc_id": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "locus_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "gene_group": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "gene_group_id": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "ensembl_gene_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "entrez_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "uniprot_ids": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_field": {
+                  "type": "string"
+                },
+                "query_value": {
+                  "type": "string"
+                },
+                "num_found": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

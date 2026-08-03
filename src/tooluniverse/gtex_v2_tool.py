@@ -17,23 +17,41 @@ from .tool_registry import register_tool
 
 GTEX_BASE_URL = "https://gtexportal.org/api/v2"
 
+# Each GTEx dataset is annotated against a different GENCODE release, and the
+# API only matches gene IDs carrying that release's version suffix. The values
+# below are the `gencodeVersion` fields reported by /metadata/dataset.
+DATASET_GENCODE_VERSION = {
+    "gtex_v7": "v19",
+    "gtex_v8": "v26",
+    "gtex_v10": "v39",
+    "gtex_snrnaseq_pilot": "v26",
+    "kids_first_harmonization": "v26",
+}
+DEFAULT_GENCODE_VERSION = "v26"
 
-def _resolve_gencode_id(gene_input: str, timeout: int = 30) -> str:
-    """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
 
-    GTEx API requires versioned GENCODE IDs (e.g. ENSG00000141510.18 for TP53).
-    If already versioned (contains '.'), returns as-is.
-    Otherwise queries /reference/gene with gencodeVersion=v26 (used by gtex_v8).
+def _resolve_gencode_id(
+    gene_input: str, dataset_id: str = "gtex_v8", timeout: int = 30
+) -> str:
+    """Resolve a gene symbol or Ensembl ID to the GENCODE ID `dataset_id` uses.
+
+    GTEx requires versioned GENCODE IDs, and the version differs per dataset
+    (TP53 is ENSG00000141510.16 in gtex_v8/GENCODE v26 but .18 in
+    gtex_v10/GENCODE v39). Resolving against the wrong version makes the API
+    return an empty -- but HTTP 200 -- result set, which reads as "no data for
+    this gene" rather than as the ID mismatch it actually is. Any version
+    suffix on the input is therefore stripped and re-resolved against the
+    target dataset's GENCODE release.
     """
     if not gene_input:
         return gene_input
-    # Strip version suffix so versioned IDs (e.g. ENSG00000012048.23) resolve to correct v26 ID
+    gencode_version = DATASET_GENCODE_VERSION.get(dataset_id, DEFAULT_GENCODE_VERSION)
     base_id = gene_input.split(".")[0] if "." in gene_input else gene_input
     url = f"{GTEX_BASE_URL}/reference/gene"
     try:
         resp = requests.get(
             url,
-            params={"geneId": base_id, "gencodeVersion": "v26"},
+            params={"geneId": base_id, "gencodeVersion": gencode_version},
             timeout=timeout,
         )
         if resp.status_code == 200:
@@ -73,9 +91,13 @@ class GTExV2Tool(BaseTool):
                 }
 
         if "gencode_id" not in arguments:
-            arguments["gencode_id"] = arguments.get("gene_symbol") or arguments.get(
+            # Only inject when a gene symbol is actually present; injecting None
+            # breaks handlers that iterate gencode_id (e.g. variant-only eQTL queries).
+            resolved_symbol = arguments.get("gene_symbol") or arguments.get(
                 "geneSymbol"
             )
+            if resolved_symbol:
+                arguments["gencode_id"] = resolved_symbol
         if "dataset_id" not in arguments and "datasetId" in arguments:
             arguments["dataset_id"] = arguments["datasetId"]
 
@@ -97,6 +119,10 @@ class GTExV2Tool(BaseTool):
             "calculate_eqtl": self._calculate_eqtl,
             "get_sample_info": self._get_sample_info,
             "get_top_expressed_genes": self._get_top_expressed_genes,
+            "get_single_tissue_sqtls": self._get_single_tissue_sqtls,
+            "get_median_transcript_expression": self._get_median_transcript_expression,
+            "get_single_nucleus_expression": self._get_single_nucleus_expression,
+            "get_finemapping_and_independent_eqtl": self._get_finemapping_and_independent_eqtl,
         }
 
         handler = operation_handlers.get(operation)
@@ -127,12 +153,14 @@ class GTExV2Tool(BaseTool):
             }
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
-        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
-        gencode_ids = [_resolve_gencode_id(gid) for gid in (gencode_ids or [])]
-
-        # Feature-69A-002: gtex_v10 returns empty results for medianGeneExpression.
-        # Default to gtex_v8 which is stable and returns correct tissue expression.
+        # gtex_v8 stays the default because it is the most widely cited release;
+        # gtex_v10 is fully queryable once IDs are resolved against GENCODE v39.
         dataset_id = arguments.get("dataset_id", "gtex_v8")
+        # Resolve gene symbols/Ensembl IDs to the GENCODE version this dataset uses
+        gencode_ids = [
+            _resolve_gencode_id(gid, dataset_id) for gid in (gencode_ids or [])
+        ]
+
         tissue_ids = arguments.get("tissue_site_detail_id")
         if tissue_ids is None:
             tissue_ids = arguments.get("tissue_id") or []
@@ -189,11 +217,12 @@ class GTExV2Tool(BaseTool):
         gencode_ids = arguments.get("gencode_id")
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
-        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
-        gencode_ids = [_resolve_gencode_id(gid) for gid in (gencode_ids or [])]
-
-        # Feature-69A-002: gtex_v10 returns empty for geneExpression; use gtex_v8
         dataset_id = arguments.get("dataset_id", "gtex_v8")
+        # Resolve gene symbols/Ensembl IDs to the GENCODE version this dataset uses
+        gencode_ids = [
+            _resolve_gencode_id(gid, dataset_id) for gid in (gencode_ids or [])
+        ]
+
         tissue_ids = arguments.get("tissue_site_detail_id", [])
         attribute_subset = arguments.get("attribute_subset")
 
@@ -287,7 +316,7 @@ class GTExV2Tool(BaseTool):
     def _get_eqtl_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get eQTL genes (eGenes) with significant cis-eQTLs."""
         tissue_ids = arguments.get("tissue_site_detail_id", [])
-        # Feature-69A-002: gtex_v10 returns empty for eQTL endpoints; use gtex_v8
+        # gtex_v8 is the default release; gtex_v10 is also fully queryable here.
         dataset_id = arguments.get("dataset_id", "gtex_v8")
 
         if isinstance(tissue_ids, str):
@@ -322,16 +351,16 @@ class GTExV2Tool(BaseTool):
 
     def _get_single_tissue_eqtls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get significant single-tissue eQTLs."""
+        # `or []` (not a default arg) so an explicit None never reaches the loops below.
         gencode_ids = arguments.get("gencode_id") or []
         variant_ids = arguments.get("variant_id") or []
         tissue_ids = arguments.get("tissue_site_detail_id") or []
-        # Feature-69A-002: gtex_v10 returns empty for eQTL endpoints; use gtex_v8
         dataset_id = arguments.get("dataset_id", "gtex_v8")
 
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
-        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
-        gencode_ids = [_resolve_gencode_id(gid) for gid in gencode_ids]
+        # Resolve gene symbols/Ensembl IDs to the GENCODE version this dataset uses
+        gencode_ids = [_resolve_gencode_id(gid, dataset_id) for gid in gencode_ids]
         if isinstance(variant_ids, str):
             variant_ids = [variant_ids]
         if isinstance(tissue_ids, str):
@@ -378,10 +407,10 @@ class GTExV2Tool(BaseTool):
     def _get_multi_tissue_eqtls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get multi-tissue eQTL Metasoft results."""
         gencode_id = arguments.get("gencode_id")
-        if gencode_id:
-            gencode_id = _resolve_gencode_id(gencode_id)
-        variant_id = arguments.get("variant_id")
         dataset_id = arguments.get("dataset_id", "gtex_v8")
+        if gencode_id:
+            gencode_id = _resolve_gencode_id(gencode_id, dataset_id)
+        variant_id = arguments.get("variant_id")
 
         if not gencode_id:
             return {
@@ -420,11 +449,11 @@ class GTExV2Tool(BaseTool):
     def _calculate_eqtl(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Calculate dynamic eQTL for gene-variant pair."""
         gencode_id = arguments.get("gencode_id")
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
         if gencode_id:
-            gencode_id = _resolve_gencode_id(gencode_id)
+            gencode_id = _resolve_gencode_id(gencode_id, dataset_id)
         variant_id = arguments.get("variant_id")
         tissue_id = arguments.get("tissue_site_detail_id")
-        dataset_id = arguments.get("dataset_id", "gtex_v8")
 
         if not all([gencode_id, variant_id, tissue_id]):
             return {
@@ -460,7 +489,7 @@ class GTExV2Tool(BaseTool):
 
     def _get_sample_info(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get sample information and metadata."""
-        # Feature-69A-002: gtex_v10 returns empty; use gtex_v8
+        # gtex_v8 is the default release; gtex_v10 is also fully queryable here.
         dataset_id = arguments.get("dataset_id", "gtex_v8")
         sample_ids = arguments.get("sample_id", [])
         subject_ids = arguments.get("subject_id", [])
@@ -515,7 +544,7 @@ class GTExV2Tool(BaseTool):
     def _get_top_expressed_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get top expressed genes for a tissue."""
         tissue_id = arguments.get("tissue_site_detail_id")
-        # Feature-69A-002: gtex_v10 returns empty; use gtex_v8
+        # gtex_v8 is the default release; gtex_v10 is also fully queryable here.
         dataset_id = arguments.get("dataset_id", "gtex_v8")
         filter_mt = arguments.get("filter_mt_genes", True)
 
@@ -540,6 +569,233 @@ class GTExV2Tool(BaseTool):
                 "data": data.get("data", []),
                 "paging_info": data.get("paging_info", {}),
                 "num_genes": len(data.get("data", [])),
+            }
+        else:
+            return {
+                "status": "error",
+                "error": f"API request failed with status {response.status_code}",
+                "detail": response.text[:500],
+            }
+
+    def _get_single_tissue_sqtls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Get single-tissue splicing QTLs (sQTLs) or sGenes.
+
+        Two sub-modes via `result_type`:
+        - "sqtl" (default): significant single-tissue sQTL associations for a
+          gene/tissue. phenotypeId encodes the LeafCutter intron-excision cluster.
+        - "sgene": genes with at least one significant sQTL (sGenes) in a tissue.
+        """
+        result_type = arguments.get("result_type", "sqtl")
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
+        tissue_ids = arguments.get("tissue_site_detail_id") or []
+        if isinstance(tissue_ids, str):
+            tissue_ids = [tissue_ids]
+
+        params = {
+            "datasetId": dataset_id,
+            "page": arguments.get("page", 0),
+            "itemsPerPage": arguments.get("items_per_page", 250),
+        }
+        if tissue_ids:
+            params["tissueSiteDetailId"] = tissue_ids
+
+        if result_type == "sgene":
+            url = f"{GTEX_BASE_URL}/association/sgene"
+            count_key = "num_sgenes"
+        else:
+            gencode_ids = arguments.get("gencode_id") or []
+            if isinstance(gencode_ids, str):
+                gencode_ids = [gencode_ids]
+            gencode_ids = [_resolve_gencode_id(gid, dataset_id) for gid in gencode_ids]
+            variant_ids = arguments.get("variant_id") or []
+            if isinstance(variant_ids, str):
+                variant_ids = [variant_ids]
+            if gencode_ids:
+                params["gencodeId"] = gencode_ids
+            if variant_ids:
+                params["variantId"] = variant_ids
+            url = f"{GTEX_BASE_URL}/association/singleTissueSqtl"
+            count_key = "num_sqtls"
+
+        response = requests.get(url, params=params, timeout=30)
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get("data", [])
+            return {
+                "status": "success",
+                "data": results,
+                "paging_info": data.get("paging_info", {}),
+                count_key: len(results),
+            }
+        elif response.status_code == 400:
+            return {
+                "status": "error",
+                "error": "Invalid query parameters",
+                "detail": response.text[:500],
+                "message": "For sqtl mode provide gencode_id (and/or tissue_site_detail_id, variant_id); for sgene mode tissue_site_detail_id is recommended.",
+            }
+        else:
+            return {
+                "status": "error",
+                "error": f"API request failed with status {response.status_code}",
+                "detail": response.text[:500],
+            }
+
+    def _get_median_transcript_expression(
+        self, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Get per-transcript (ENST) median expression across tissues."""
+        gencode_ids = arguments.get("gencode_id") or arguments.get("gene_id")
+        if not gencode_ids:
+            return {
+                "status": "error",
+                "error": "gencode_id (or gene_symbol) is required. Provide a gene symbol (e.g., 'BRCA1') or Ensembl ID (e.g., 'ENSG00000012048').",
+            }
+        if isinstance(gencode_ids, str):
+            gencode_ids = [gencode_ids]
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
+        gencode_ids = [_resolve_gencode_id(gid, dataset_id) for gid in gencode_ids]
+
+        tissue_ids = arguments.get("tissue_site_detail_id") or []
+        if isinstance(tissue_ids, str):
+            tissue_ids = [tissue_ids]
+
+        params = {
+            "gencodeId": gencode_ids,
+            "datasetId": dataset_id,
+            "page": arguments.get("page", 0),
+            "itemsPerPage": arguments.get("items_per_page", 250),
+        }
+        if tissue_ids:
+            params["tissueSiteDetailId"] = tissue_ids
+
+        url = f"{GTEX_BASE_URL}/expression/medianTranscriptExpression"
+        response = requests.get(url, params=params, timeout=30)
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get("data", [])
+            return {
+                "status": "success",
+                "data": results,
+                "paging_info": data.get("paging_info", {}),
+                "num_results": len(results),
+            }
+        else:
+            return {
+                "status": "error",
+                "error": f"API request failed with status {response.status_code}",
+                "detail": response.text[:500],
+            }
+
+    def _get_single_nucleus_expression(
+        self, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Get GTEx single-nucleus (snRNA-seq) expression resolved by cell type.
+
+        Two sub-modes via `result_type`:
+        - "detail" (default): per-cell-type mean/median (with/without zeros) and
+          cell counts for a gene from /singleNucleusGeneExpression.
+        - "summary": tissue x cell-type cell-count summary from
+          /singleNucleusGeneExpressionSummary.
+        """
+        gencode_ids = arguments.get("gencode_id") or arguments.get("gene_id")
+        if not gencode_ids:
+            return {
+                "status": "error",
+                "error": "gencode_id (or gene_symbol) is required. Provide a gene symbol (e.g., 'BRCA1') or Ensembl ID (e.g., 'ENSG00000012048').",
+            }
+        if isinstance(gencode_ids, str):
+            gencode_ids = [gencode_ids]
+        # snRNA-seq data lives only in the pilot dataset.
+        dataset_id = arguments.get("dataset_id", "gtex_snrnaseq_pilot")
+        gencode_ids = [_resolve_gencode_id(gid, dataset_id) for gid in gencode_ids]
+
+        tissue_ids = arguments.get("tissue_site_detail_id") or []
+        if isinstance(tissue_ids, str):
+            tissue_ids = [tissue_ids]
+        result_type = arguments.get("result_type", "detail")
+
+        params = {
+            "gencodeId": gencode_ids,
+            "datasetId": dataset_id,
+            "page": arguments.get("page", 0),
+            "itemsPerPage": arguments.get("items_per_page", 250),
+        }
+        if tissue_ids:
+            params["tissueSiteDetailId"] = tissue_ids
+
+        if result_type == "summary":
+            url = f"{GTEX_BASE_URL}/expression/singleNucleusGeneExpressionSummary"
+        else:
+            url = f"{GTEX_BASE_URL}/expression/singleNucleusGeneExpression"
+
+        response = requests.get(url, params=params, timeout=30)
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get("data", [])
+            return {
+                "status": "success",
+                "data": results,
+                "paging_info": data.get("paging_info", {}),
+                "num_results": len(results),
+            }
+        else:
+            return {
+                "status": "error",
+                "error": f"API request failed with status {response.status_code}",
+                "detail": response.text[:500],
+            }
+
+    def _get_finemapping_and_independent_eqtl(
+        self, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Get statistical fine-mapping credible sets or conditionally-independent eQTLs.
+
+        Two sub-modes via `result_type`:
+        - "finemapping" (default): DAP-G credible sets with PIP per variant from
+          /fineMapping (likely causal variants).
+        - "independent": rank-ordered conditionally-independent (secondary) eQTL
+          signals from /independentEqtl.
+        """
+        gencode_id = arguments.get("gencode_id") or arguments.get("gene_id")
+        if not gencode_id:
+            return {
+                "status": "error",
+                "error": "gencode_id (or gene_symbol) is required. Provide a gene symbol (e.g., 'ERAP2') or Ensembl ID (e.g., 'ENSG00000164308').",
+            }
+        if isinstance(gencode_id, list):
+            gencode_id = gencode_id[0] if gencode_id else None
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
+        gencode_id = _resolve_gencode_id(gencode_id, dataset_id)
+
+        tissue_ids = arguments.get("tissue_site_detail_id") or []
+        if isinstance(tissue_ids, str):
+            tissue_ids = [tissue_ids]
+        result_type = arguments.get("result_type", "finemapping")
+
+        params = {
+            "gencodeId": gencode_id,
+            "datasetId": dataset_id,
+            "page": arguments.get("page", 0),
+            "itemsPerPage": arguments.get("items_per_page", 250),
+        }
+        if tissue_ids:
+            params["tissueSiteDetailId"] = tissue_ids
+
+        if result_type == "independent":
+            url = f"{GTEX_BASE_URL}/association/independentEqtl"
+        else:
+            url = f"{GTEX_BASE_URL}/association/fineMapping"
+
+        response = requests.get(url, params=params, timeout=30)
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get("data", [])
+            return {
+                "status": "success",
+                "data": results,
+                "paging_info": data.get("paging_info", {}),
+                "num_results": len(results),
             }
         else:
             return {

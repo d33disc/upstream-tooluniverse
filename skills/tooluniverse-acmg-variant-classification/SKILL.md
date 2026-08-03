@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-acmg-variant-classification
-description: Systematic ACMG/AMP variant classification using ToolUniverse tools. Given a genetic variant (HGVS, rsID, or gene+change), applies all 28 ACMG criteria (PVS1, PS1-4, PM1-6, PP1-5, BA1, BS1-4, BP1-7) through automated database queries and computational predictions. Produces a final 5-tier classification (Pathogenic / Likely Pathogenic / VUS / Likely Benign / Benign) with evidence summary. Use when asked to classify a variant, interpret a VUS, apply ACMG criteria, assess pathogenicity, or determine clinical significance of a germline variant.
+description: Systematic ACMG/AMP germline variant classification with all 28 criteria (PVS1, PS1-4, PM1-6, PP1-5, BA1, BS1-4, BP1-7) for clinical significance. Produces 5-tier verdict (Pathogenic / Likely Pathogenic / VUS / Likely Benign / Benign) with cited evidence per criterion. Use for variant interpretation, VUS resolution, and pathogenicity assessment. Combines ClinVar, gnomAD, computational predictors, and gene-mechanism context.
+disable-model-invocation: true
 ---
 
 # ACMG/AMP Variant Classification
@@ -47,6 +48,8 @@ When uncertain about any scientific fact, SEARCH databases first (PubMed, UniPro
 |------|---------------|-------|
 | `VariantValidator_validate_variant` | `variant_description`, `genome_build`, `select_transcripts` | genome_build="GRCh38" |
 | `VariantValidator_gene2transcripts` | `gene_symbol` | Returns MANE Select transcript |
+| `Tark_get_mane_transcripts` | `gene` (or `ensembl_id`/`refseq_id`) | Ensembl Tark MANE Select/Plus Clinical with ENST↔RefSeq pairing; lightweight cross-check of the canonical transcript namespace |
+| `Tark_get_transcript` | `stable_id` (e.g. "ENST00000380152") | Archived transcript record (assembly, biotype, coordinates, per-release versions) to resolve a specific transcript version |
 | `MyVariant_query_variants` | `query` | HGVS or rsID. Returns ClinVar, gnomAD, CADD, REVEL, SIFT, PolyPhen |
 | `EnsemblVEP_annotate_hgvs` | `hgvs_notation` | Consequence, colocated variants, ancestry gnomAD |
 | `gnomad_search_variants` | `query` | rsID to gnomAD variant ID |
@@ -67,7 +70,7 @@ When uncertain about any scientific fact, SEARCH databases first (PubMed, UniPro
 
 Wrong HGVS or wrong transcript cascades errors through every downstream criterion. Validate first.
 
-1. **Get MANE Select transcript**: `VariantValidator_gene2transcripts(gene_symbol="BRCA2")`
+1. **Get MANE Select transcript**: `VariantValidator_gene2transcripts(gene_symbol="BRCA2")`. Cross-check the canonical transcript with `Tark_get_mane_transcripts(gene="BRCA2")` (returns the ENST↔RefSeq pairing, e.g. ENST00000380152.8 / NM_000059.4); use `Tark_get_transcript(stable_id="ENST00000380152")` when you need to pin a specific transcript version.
 2. **Validate variant**: `VariantValidator_validate_variant(variant_description="NM_000059.4:c.5946delT", genome_build="GRCh38", select_transcripts="mane_select")`
 3. **Resolve gene IDs**: `MyGene_query_genes(query="BRCA2")` — extract Ensembl ID and UniProt accession. Filter results by `symbol == 'BRCA2'` (first hit may not match).
 4. **Record**: HGVS coding, HGVS protein, genomic coordinates, variant type (frameshift/missense/nonsense/splice/synonymous/in-frame indel).
@@ -105,6 +108,8 @@ EnsemblVEP_annotate_hgvs(hgvs_notation="...") # consequence, SpliceAI deltas
 ```
 
 For non-missense variants, skip PP3/BP4 and focus on SpliceAI scores in Phase 5.
+
+**Mechanism complement for VUS-resolution narratives**: PP3/BP4 is a vote count of predictor scores — it tells you *whether* the variant is damaging, not *how*. For a VUS resolution report where the verdict needs a mechanistic explanation (clinician asks "why is this damaging?"), add `ESM_explain_variant_mechanism(sequence=..., position=..., ref_aa=..., alt_aa=...)` — returns lost/gained ESMC-6B SAE feature categories (catalytic / ligand-binding / ptm / structural-stability / domain / etc.) with a one-line summary. This does not change PP3 strength but turns "PP3 satisfied (REVEL 0.78, AlphaMissense 0.85)" into "PP3 satisfied — and SAE shows catalytic-feature loss at position X, consistent with active-site disruption." Requires `ESM_API_KEY`; missense only.
 
 ---
 

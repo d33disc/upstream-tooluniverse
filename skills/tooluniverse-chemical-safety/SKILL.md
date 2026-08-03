@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-chemical-safety
-description: Comprehensive chemical safety and toxicology assessment integrating ADMET-AI predictions, CTD toxicogenomics, FDA label safety data, DrugBank safety profiles, and STITCH chemical-protein interactions. Performs predictive toxicology (AMES, DILI, LD50, carcinogenicity), organ/system toxicity profiling, chemical-gene-disease relationship mapping, regulatory safety extraction, and environmental hazard assessment. Use when asked about chemical toxicity, drug safety profiling, ADMET properties, environmental health risks, chemical hazard assessment, or toxicogenomic analysis.
+description: Chemical safety and toxicology assessment integrating ADMET-AI predictions, CTD toxicogenomics, PubChemTox experimental data, GHS/IARC hazard classification, and exposure-context analysis. Use for chemical hazard identification, occupational/consumer-product toxicity, dose-response evaluation, and acute (LD50) vs chronic toxicity assessment. Distinguishes drug toxicity from environmental chemical toxicity.
+disable-model-invocation: true
 ---
 
 # Chemical Safety & Toxicology Assessment
@@ -129,6 +130,11 @@ See **phase-procedures-detailed.md** for complete tool parameters, decision logi
 ### Phase 3.6: Adverse Outcome Pathways
 - `AOPWiki_list_aops` (`keyword`: str) — search for relevant AOPs by chemical/mechanism
 - `AOPWiki_get_aop` (`aop_id`: int) — full AOP detail: MIE, key events, adverse outcome
+
+### Phase 3.7: Environmental Exposure Context (US facilities)
+> Use for exposure/environmental-justice screening — locate regulated facilities near a community before assessing population-level exposure.
+- `EPA_search_tri_facilities` (`state`, `city`, `limit`) — Toxics Release Inventory facilities reporting toxic chemical releases
+- `EPA_search_frs_facilities` (`state`, `city`, `limit`) — Facility Registry Service (all EPA-regulated facilities) for broader siting/permitting context
 
 ### Phase 4: Regulatory Safety (for pharmaceuticals only)
 > **Environmental chemicals**: Skip Phases 4-5 (no FDA labels/DrugBank). Use CTD + PubChemTox + AOPWiki instead.

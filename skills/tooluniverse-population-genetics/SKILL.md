@@ -1,15 +1,10 @@
 ---
 name: tooluniverse-population-genetics
-description: Population genetics analysis — allele frequencies, Hardy-Weinberg equilibrium, Fst, GWAS associations, linkage disequilibrium, and evolutionary constraints. Use when users ask about population-level genetic variation, selection, or allele frequency calculations.
+description: Population genetics analysis — allele frequencies (gnomAD, 1000 Genomes), Hardy-Weinberg equilibrium testing, Fst between populations, GWAS associations, evolutionary constraint scores. Use for cross-population variant comparison, ancestry-aware allele frequency lookups, and population-level evolutionary analysis.
+disable-model-invocation: true
 ---
 
 # Population Genetics Analysis
-
-**MC Strategy**: Population genetics MC questions often test whether you know a specific theorem or result. COMPUTE the answer first (use popgen_calculator.py or write Python), then match to options. Don't try to reason about which option "sounds right."
-
-**MC Strategy**: Population genetics MC questions often test whether you know a specific theorem or result. COMPUTE the answer first (use popgen_calculator.py or write Python), then match to options. Don't try to reason about which option "sounds right."
-
-**MC Strategy**: Population genetics MC questions often test whether you know a specific theorem or result. COMPUTE the answer first (use popgen_calculator.py or write Python), then match to options. Don't try to reason about which option "sounds right."
 
 **MC Strategy**: Population genetics MC questions often test whether you know a specific theorem or result. COMPUTE the answer first (use popgen_calculator.py or write Python), then match to options. Don't try to reason about which option "sounds right."
 

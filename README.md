@@ -37,16 +37,30 @@ Add to your MCP config file:
 }
 ```
 
+`--refresh` checks PyPI for the newest release on every launch. Drop it
+(`"args": ["tooluniverse"]`) to start faster from `uv`'s cache — then upgrade
+with `uv cache clean tooluniverse`.
+
 Install agent skills:
 ```bash
 npx skills add mims-harvard/ToolUniverse
 ```
 </details>
 
-**Python developers** — install the SDK:
+**Claude Code users** — one line, no config file:
 ```bash
+claude plugin marketplace add mims-harvard/ToolUniverse
+claude plugin install tooluniverse@tooluniverse
+```
+
+**Python developers** — install the SDK. Install [`uv`](https://docs.astral.sh/uv/) first and **do not use system `pip`**: on a current Mac, `pip install tooluniverse` fails with `externally-managed-environment` (PEP 668) and `python3 -m venv` can fail at `ensurepip`. `uv` manages its own Python and avoids both.
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh   # if you don't have uv
+uv venv --python 3.12 && source .venv/bin/activate
 uv pip install tooluniverse
 ```
+
+The base install covers the API and database tools. Local ML, cheminformatics, and plotting tools need extras — `uv pip install 'tooluniverse[all]'`, or a single group such as `[ml]`, `[visualization]`, `[bioinformatics]`. Note `[all]` excludes `singlecell`, `smolagents`, `client`, and `build`, which install by name. Run `tooluniverse-doctor` to see which groups are missing.
 
 **[`tu` CLI](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/tu_cli.html)** — discover, inspect, run, and test tools from the terminal.
 **[Python SDK](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/python_guide.html)** — programmatic access for building AI scientist systems.
@@ -128,15 +142,5 @@ Full documentation: [zitniklab.hms.harvard.edu/ToolUniverse](https://zitniklab.h
       archivePrefix={arXiv},
       primaryClass={cs.AI},
       url={https://arxiv.org/abs/2509.23426}, 
-}
-
-@article{gao2025txagent,
-      title={TxAgent: An AI Agent for Therapeutic Reasoning Across a Universe of Tools},
-      author={Shanghua Gao and Richard Zhu and Zhenglun Kong and Ayush Noori and Xiaorui Su and Curtis Ginder and Theodoros Tsiligkaridis and Marinka Zitnik},
-      year={2025},
-      eprint={2503.10970},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2503.10970},
 }
 ```

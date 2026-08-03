@@ -279,6 +279,29 @@ class ToolNamespace:
         self.engine.eager_load_tools(names)
 
 
+def _load_global_dotenv(workspace_dotenv, logger=None):
+    """Load ~/.tooluniverse/.env as a global secrets store (override=False).
+
+    Skipped when the workspace .env already IS the global file (avoids a
+    redundant second load). Shell env and the workspace .env both win over
+    the global file because override=False.
+    """
+    from pathlib import Path
+
+    global_dotenv = Path.home() / ".tooluniverse" / ".env"
+    if global_dotenv == Path(workspace_dotenv) or not global_dotenv.exists():
+        return
+    try:
+        from dotenv import load_dotenv as _load_dotenv
+
+        _load_dotenv(global_dotenv, override=False)
+        if logger:
+            logger.debug(f"Loaded global .env: {global_dotenv}")
+    except Exception as exc:  # noqa: BLE001
+        if logger:
+            logger.debug(f"Could not load global .env: {exc}")
+
+
 class ToolUniverse:
     """
     A comprehensive tool management system for loading, organizing, and executing various scientific and data tools.
@@ -465,6 +488,10 @@ class ToolUniverse:
                 self.logger.debug(f"Loaded workspace .env: {_ws_dotenv}")
             except Exception as _exc:
                 self.logger.debug(f"Could not load workspace .env: {_exc}")
+
+        # Also load ~/.tooluniverse/.env so keys saved there are visible from
+        # any workspace (global secrets store). Shell env / workspace .env win.
+        _load_global_dotenv(_ws_dotenv, self.logger)
 
         # Seed workspace with default_profile.yaml on first use (if workspace dir exists
         # but has no profile.yaml). This gives the user a visible, editable starting point.
@@ -1281,7 +1308,8 @@ class ToolUniverse:
                         f"Skipping agentic tool '{tool_name}' due to missing LLM API keys"
                     )
                     all_missing_keys.add(
-                        "LLM API keys (AZURE_OPENAI_API_KEY, OPENROUTER_API_KEY, or GEMINI_API_KEY)"
+                        "LLM API keys (AZURE_OPENAI_API_KEY, OPENAI_API_KEY, "
+                        "OPENROUTER_API_KEY, GEMINI_API_KEY, or VLLM_SERVER_URL)"
                     )
                     continue
 
@@ -1556,7 +1584,7 @@ class ToolUniverse:
 
         Side Effects:
             - May add new tools to the tool registry
-            - Prints debug information about the discovery process
+            - Logs debug information about the discovery process
             - Updates tool counts after MCP registration
         """
         self.logger.debug("Starting _process_mcp_auto_loaders")
@@ -1668,14 +1696,14 @@ class ToolUniverse:
                                 f"  - Registered: {result.get('registered_count', 0)} tools"
                             )
 
-                            # Print detailed tool information
+                            # Log detailed tool information without polluting stdio stdout.
                             if result.get("tools"):
-                                print(
+                                info(
                                     f"  📋 Discovered MCP tools: {', '.join(result['tools'])}"
                                 )
 
                             if result.get("registered_tools"):
-                                print(
+                                info(
                                     f"  🔧 Registered tools in ToolUniverse: {', '.join(result['registered_tools'])}"
                                 )
                                 self.logger.debug(
@@ -1689,11 +1717,11 @@ class ToolUniverse:
                                 if name.startswith("expert_")
                             ]
                             if expert_tools:
-                                print(
+                                info(
                                     f"  ✅ Expert tools now available: {', '.join(expert_tools)}"
                                 )
                             else:
-                                print(
+                                info(
                                     "  ⚠️  No expert tools found in callable_functions after registration"
                                 )
 
@@ -2384,7 +2412,18 @@ class ToolUniverse:
             dict or None: Tool configuration if found, None otherwise.
         """
         if tool_name not in self.all_tool_dict:
-            warning(f"Tool name {tool_name} not found in the loaded tools.")
+            # Fix-R3-05: a tool held back for a missing API key is not "not
+            # found" -- the name is correct and the fix is to set a key, not to
+            # re-check the spelling. `tu info <gated tool>` printed this
+            # misleading warning immediately above the accurate API-key error.
+            missing_keys = getattr(self, "_excluded_api_key_tools", {}).get(tool_name)
+            if missing_keys:
+                warning(
+                    f"Tool {tool_name} is not loaded: requires API key(s) not set: "
+                    f"{', '.join(missing_keys)}."
+                )
+            else:
+                warning(f"Tool name {tool_name} not found in the loaded tools.")
             return None
 
         tool_config = self.all_tool_dict[tool_name]
@@ -3001,19 +3040,6 @@ class ToolUniverse:
         # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
         function_name = self._resolve_tool_name(function_name)
 
-        # Health check warning (non-blocking)
-        _health_warning = None
-        try:
-            from tooluniverse.tool_health import ToolHealthCache
-
-            _health_warning = ToolHealthCache().warn(function_name)
-            if _health_warning:
-                import logging
-
-                logging.getLogger("tooluniverse.health").warning(_health_warning)
-        except Exception:
-            pass
-
         # Handle malformed queries gracefully
         if not function_name:
             return self._create_dual_format_error(
@@ -3180,10 +3206,6 @@ class ToolUniverse:
                 result = self.hook_manager.apply_hooks(
                     result, function_name, tool_arguments, context
                 )
-
-            # Inject health warning into result
-            if _health_warning and isinstance(result, dict):
-                result["_health_warning"] = _health_warning
 
             # Cache result if enabled
             if (
@@ -3763,6 +3785,28 @@ class ToolUniverse:
         # Get the expected type
         expected_type = schema.get("type")
 
+        # Fix-R3-06: JSON Schema permits "type" to be a LIST of types, and
+        # ["integer", "null"] is this project's own convention for an optional
+        # parameter. Every comparison below is against a bare string, so a union
+        # type matched nothing and the value stayed a str -- which then failed
+        # schema validation. That made the documented `tu run <tool> limit=10`
+        # shorthand fail on most tools ("'10' is not of type 'integer', 'null'")
+        # while the JSON form worked, and equally affected LLM callers that pass
+        # numbers as strings. Try each non-null member of the union instead.
+        if isinstance(expected_type, list):
+            candidates = [t for t in expected_type if t != "null"]
+            # If a string is acceptable, keep it as-is rather than
+            # reinterpreting it as some other type.
+            if "string" in candidates:
+                return value
+            for candidate in candidates:
+                coerced = self._coerce_value_to_type(
+                    value, dict(schema, type=candidate)
+                )
+                if coerced is not value:
+                    return coerced
+            return value
+
         # Don't coerce if schema expects string type
         if expected_type == "string":
             return value
@@ -3846,16 +3890,31 @@ class ToolUniverse:
             # Check again after loading
             if function_name not in self.all_tool_dict:
                 missing_keys = self._excluded_api_key_tools.get(function_name)
+                # Fix-R3-03: both branches previously omitted next_steps and so
+                # inherited ToolUnavailableError's network-flavoured defaults
+                # ("Check network connection", "Verify service status") -- wrong
+                # and misleading advice for a misspelled tool name or an unset
+                # API key. The sibling not-found path in run_one_function already
+                # passes tool-discovery steps; match it here so SDK and MCP
+                # callers get the same actionable guidance the CLI shows.
                 if missing_keys:
                     return ToolUnavailableError(
                         f"Tool '{function_name}' requires API key(s) not set: "
                         f"{', '.join(missing_keys)}. "
                         "Set them as environment variables and retry.",
                         retriable=False,
+                        next_steps=[
+                            f"Set the environment variable(s): {', '.join(missing_keys)}",
+                            "Run `tu status` to check which API keys are configured",
+                        ],
                     )
                 return ToolUnavailableError(
                     f"Tool '{function_name}' not found even after loading tools",
                     retriable=False,
+                    next_steps=[
+                        "Check tool name spelling",
+                        "Verify tool is available in loaded categories",
+                    ],
                 )
 
         tool_instance = self._get_tool_instance(function_name, cache=True)
@@ -3897,13 +3956,20 @@ class ToolUniverse:
     def _classify_exception(
         self, exception: Exception, function_name: str, arguments: dict
     ) -> ToolError:
-        """Classify exception by delegating to BaseTool."""
+        """Classify exception by delegating to BaseTool.
+
+        Not every registered tool subclasses BaseTool (some are plain classes),
+        so ``handle_error`` may be absent. Guard for it instead of raising a
+        confusing ``AttributeError: ... has no attribute 'handle_error'`` that
+        masks the tool's real exception.
+        """
         tool_instance = self._get_tool_instance(function_name, cache=True)
 
-        if tool_instance:
-            return tool_instance.handle_error(exception)
+        handler = getattr(tool_instance, "handle_error", None)
+        if callable(handler):
+            return handler(exception)
 
-        # Fallback for tool instance creation failure
+        # Fallback for tool instance creation failure or non-BaseTool tools.
         return ToolServerError(f"Unexpected error calling {function_name}: {exception}")
 
     def _create_dual_format_error(self, error: ToolError) -> dict:

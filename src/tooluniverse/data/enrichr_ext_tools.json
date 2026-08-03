@@ -19,34 +19,7 @@
       "required": []
     },
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "library_name",
-          "num_terms",
-          "gene_coverage",
-          "genes_per_term",
-          "category_id"
-        ],
-        "properties": {
-          "library_name": {
-            "type": "string"
-          },
-          "num_terms": {
-            "type": "integer"
-          },
-          "gene_coverage": {
-            "type": "integer"
-          },
-          "genes_per_term": {
-            "type": "number"
-          },
-          "category_id": {
-            "type": "integer"
-          }
-        }
-      }
+      "type": "array"
     },
     "test_examples": [
       {
@@ -92,69 +65,7 @@
       ]
     },
     "return_schema": {
-      "type": "object",
-      "required": [
-        "library",
-        "gene_count",
-        "total_terms",
-        "enriched_terms"
-      ],
-      "properties": {
-        "library": {
-          "type": "string"
-        },
-        "gene_count": {
-          "type": "integer"
-        },
-        "total_terms": {
-          "type": "integer"
-        },
-        "enriched_terms": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "rank",
-              "term",
-              "p_value",
-              "z_score",
-              "combined_score",
-              "overlapping_genes",
-              "adjusted_p_value",
-              "overlap_count"
-            ],
-            "properties": {
-              "rank": {
-                "type": "integer"
-              },
-              "term": {
-                "type": "string"
-              },
-              "p_value": {
-                "type": "number"
-              },
-              "z_score": {
-                "type": "number"
-              },
-              "combined_score": {
-                "type": "number"
-              },
-              "overlapping_genes": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "adjusted_p_value": {
-                "type": "number"
-              },
-              "overlap_count": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      }
+      "type": "object"
     },
     "test_examples": [
       {
@@ -220,64 +131,7 @@
       ]
     },
     "return_schema": {
-      "type": "object",
-      "required": [
-        "gene_count",
-        "results_by_library"
-      ],
-      "properties": {
-        "gene_count": {
-          "type": "integer"
-        },
-        "results_by_library": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "required": [
-              "total_terms",
-              "top_terms"
-            ],
-            "properties": {
-              "total_terms": {
-                "type": "integer"
-              },
-              "top_terms": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "term",
-                    "p_value",
-                    "combined_score",
-                    "overlapping_genes",
-                    "adjusted_p_value"
-                  ],
-                  "properties": {
-                    "term": {
-                      "type": "string"
-                    },
-                    "p_value": {
-                      "type": "number"
-                    },
-                    "combined_score": {
-                      "type": "number"
-                    },
-                    "overlapping_genes": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "adjusted_p_value": {
-                      "type": "number"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      "type": "object"
     },
     "test_examples": [
       {
@@ -294,15 +148,96 @@
           "VHL"
         ],
         "top_n": 3
+      }
+    ]
+  },
+  {
+    "name": "Enrichr_gene_to_genesets",
+    "description": "Reverse gene-to-geneset membership lookup. Given ONE gene symbol, return every Enrichr term/gene-set (by name) that contains it, broken down across all ~243 Enrichr libraries (KEGG/Reactome/WikiPathways pathways, GO terms, transcription-factor target sets, disease/drug signatures, GeneSigDB publication tables, etc.). This is the inverse of forward enrichment (which takes a gene list): use it to ask 'what known programs/signatures is gene X a member of?' without running an enrichment. Returns a dict of library_name -> list of term/gene-set names containing the gene. Set include_metadata=true to also return per-library category/description metadata. No authentication required.",
+    "type": "EnrichrExtTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "gene_to_genesets",
+          "description": "Operation type (fixed: gene_to_genesets)"
+        },
+        "gene": {
+          "type": "string",
+          "description": "A single official HGNC gene symbol (e.g., 'STAT3', 'BRCA1'). Case-sensitive; use the canonical symbol."
+        },
+        "include_metadata": {
+          "type": "boolean",
+          "description": "If true, also return library category/description metadata (Enrichr setup=true). Default: false.",
+          "default": false
+        },
+        "max_terms_per_library": {
+          "type": "integer",
+          "description": "Optional cap on the number of term names returned per library (0 = no cap, return all). Default: 0.",
+          "default": 0
+        }
+      },
+      "required": [
+        "gene"
+      ]
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "gene": {
+              "type": "string",
+              "description": "The queried gene symbol"
+            },
+            "num_libraries": {
+              "type": "integer",
+              "description": "Number of Enrichr libraries in which the gene appears in at least one term"
+            },
+            "total_gene_sets": {
+              "type": "integer",
+              "description": "Total number of term/gene-set memberships across all libraries"
+            },
+            "libraries": {
+              "type": "object",
+              "description": "Map of library_name -> list of term/gene-set names in that library containing the gene"
+            },
+            "descriptions": {
+              "type": "array",
+              "description": "Per-library description metadata (only when include_metadata=true)"
+            },
+            "categories": {
+              "description": "Library category metadata (only when include_metadata=true)"
+            }
+          },
+          "required": [
+            "gene",
+            "num_libraries",
+            "total_gene_sets",
+            "libraries"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "gene": "STAT3"
       },
       {
-        "gene_list": [
-          "SOD1",
-          "SOD2",
-          "CAT",
-          "GPX1"
-        ],
-        "top_n": 5
+        "gene": "BRCA1",
+        "max_terms_per_library": 5
       }
     ]
   }

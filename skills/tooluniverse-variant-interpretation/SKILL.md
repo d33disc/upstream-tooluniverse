@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-variant-interpretation
-description: Systematic clinical variant interpretation from raw variant calls to ACMG-classified recommendations with structural impact analysis. Aggregates evidence from ClinVar, gnomAD, CIViC, UniProt, and PDB across ACMG criteria. Produces pathogenicity scores (0-100), clinical recommendations, and treatment implications. Use when interpreting genetic variants, classifying variants of uncertain significance (VUS), performing ACMG variant classification, or translating variant calls to clinical actionability.
+description: Clinical variant interpretation from raw variant calls to ACMG-classified recommendations with structural impact analysis. Use for VUS classification, pathogenicity assessment with cited criteria, structure-based variant impact (AlphaFold/PDB), non-coding/regulatory variant effect prediction with sequence deep-learning models (AlphaGenome, Enformer, Borzoi, ChromBPNet, Evo 2), and producing clinical-grade variant reports for return of results or molecular tumor boards. Use this whenever a user asks about a variant's significance, an intronic/promoter/enhancer/UTR non-coding variant's functional impact, or needs ACMG classification — even if they don't say "ACMG".
+disable-model-invocation: true
 ---
 
 # Clinical Variant Interpreter
@@ -36,7 +37,7 @@ When asked about a variant's significance, query ClinVar/gnomAD/CIViC FIRST. Nev
 ```
 Phase 1: VARIANT IDENTITY        → Normalize HGVS, map gene/transcript/consequence
 Phase 2: CLINICAL DATABASES       → ClinVar, gnomAD, OMIM, ClinGen, COSMIC, SpliceAI
-Phase 2.5: REGULATORY CONTEXT     → ChIPAtlas, ENCODE (non-coding variants only)
+Phase 2.5: REGULATORY CONTEXT     → ChIPAtlas/ENCODE annotation + DL variant-effect (AlphaGenome/Enformer/Borzoi/ChromBPNet/Evo2) (non-coding only)
 Phase 3: COMPUTATIONAL PREDICTIONS → CADD, AlphaMissense, EVE, SIFT/PolyPhen
 Phase 4: STRUCTURAL ANALYSIS      → PDB/AlphaFold2, domains, functional sites (VUS/novel)
 Phase 4.5: EXPRESSION CONTEXT     → CELLxGENE, GTEx tissue expression
@@ -48,12 +49,14 @@ Phase 6: ACMG CLASSIFICATION      → Evidence codes, classification, recommenda
 
 ## Phase 1: Variant Identity
 
-Tools: `MyVariant_query_variants`, `EnsemblVar_get_variant_consequences`, `NCBIGene_search`, `VariantValidator_gene2transcripts`, `VariantValidator_validate_variant`
+Tools: `MyVariant_query_variants`, `EnsemblVar_get_variant_consequences`, `NCBIGene_search`, `VariantValidator_gene2transcripts`, `VariantValidator_validate_variant`, `Tark_get_mane_transcripts`, `Tark_get_transcript`
 
 **VariantValidator_gene2transcripts**: Look up MANE Select and MANE Plus Clinical transcripts for a gene. Use this to identify the correct canonical transcript before variant annotation.
 - Parameters: `gene_symbol` (e.g. "TP53"), `transcript_set` ("mane" | "refseq" | "ensembl" | "all"), `genome_build` ("GRCh38" default)
 - Returns: Array of `{current_symbol, transcripts: [{reference, annotations: {mane_select, mane_plus_clinical}}]}`
 - Aliases: `gene` and `gene_name` also accepted for `gene_symbol`
+
+**Tark_get_mane_transcripts**: Lightweight MANE Select / MANE Plus Clinical lookup from Ensembl Tark with the ENST↔RefSeq pairing (e.g. `gene="BRCA2"` → ENST00000380152.8 / NM_000059.4). Use as a quick cross-check of the canonical transcript namespace alongside VariantValidator, or to translate an ENST↔NM accession. `Tark_get_transcript` (param `stable_id`, e.g. "ENST00000380152") returns the archived transcript record (assembly, biotype, coordinates, per-release versions) when you need to resolve a specific transcript version.
 
 **VariantValidator_validate_variant**: Validate HGVS variant descriptions and get normalized notation with genomic/transcript/protein consequences.
 - Parameters: `genome_build` ("GRCh37" | "GRCh38"), `variant_description` (HGVS, e.g. "NM_007294.4:c.5266dup"), `select_transcripts` (transcript or "all")
@@ -79,7 +82,23 @@ See `CODE_PATTERNS.md` for implementation details.
 
 Apply for intronic (non-splice), promoter, UTR, or intergenic variants near disease genes.
 
-Tools: `ChIPAtlas_enrichment_analysis`, `ChIPAtlas_get_peak_data`, `ENCODE_search_experiments`, `ENCODE_get_experiment`
+**Annotation — what regulatory element is here:** `ChIPAtlas_enrichment_analysis`, `ChIPAtlas_get_peak_data`, `ENCODE_search_experiments`, `ENCODE_get_experiment`. These tell you whether the variant falls in a known TF-binding peak, enhancer, or open-chromatin region.
+
+**Prediction — what the variant *does* to regulation:** annotation says an element is present, not whether this specific allele disrupts it. Sequence-based deep-learning models answer that directly: they read the reference and alternate DNA windows and predict the change in regulatory signal. This is what turns "the variant is in an enhancer" into "the variant is predicted to reduce accessibility/expression in the relevant tissue" — the mechanistic evidence ACMG PS3/PP3 actually needs for a non-coding variant, where SIFT/PolyPhen/AlphaMissense do not apply.
+
+| Tool | Predicts | Context | Access |
+|---|---|---|---|
+| `AlphaGenome_score_variant` | Δ across RNA-seq / ATAC / CAGE / splice tracks (frontier accuracy, single-base) | up to 1 Mb | hosted API — needs `ALPHA_GENOME_API_KEY` |
+| `run_enformer_variant_effect` | Δ across 5,313 human tracks (expression, chromatin, TF binding) | 196 kb | remote MCP server |
+| `run_borzoi_variant_effect` | Δ in RNA-seq coverage (expression / polyA / splicing emphasis) | 524 kb | remote MCP server |
+| `run_chrombpnet_variant_effect` | Δ in chromatin accessibility (ATAC / DNase), base-resolution | ~2 kb | remote MCP server |
+| `Evo2_score_variant` | Genome-foundation-model delta log-likelihood; covers coding **and** non-coding | up to 1 Mb | hosted NIM — needs `NVIDIA_API_KEY` |
+
+**Reading the score:** these return Δ (alt − ref) effect sizes, *not* calibrated pathogenicity probabilities. A large predicted disruption in a tissue-relevant track is mechanistic support (PS3_supporting / PP3) for a non-coding variant; near-zero across tracks supports BP4. Rank or calibrate against known regulatory variants rather than applying an absolute cutoff.
+
+**Which to pick:** start with `AlphaGenome_score_variant` (broadest readout, longest context, frontier accuracy) when its key is set; `run_enformer_variant_effect` / `run_borzoi_variant_effect` are the named, self-hostable equivalents (Enformer for general regulation, Borzoi when expression/splicing is the question); `run_chrombpnet_variant_effect` when the hypothesis is specifically chromatin accessibility; `Evo2_score_variant` as a sequence-only check that also works on coding variants. If no key/server is provisioned, fall back to the ChIPAtlas/ENCODE annotation above and note the predictive gap rather than guessing.
+
+**Inputs:** `AlphaGenome_score_variant` takes `chromosome` + `position` + `reference_bases`/`alternate_bases` (+ `output_type`, `sequence_length`); `Evo2_score_variant` takes a DNA window as `sequence` + `position` + `alternate` (point substitution) or `ref_sequence`/`alt_sequence`, plus optional `model` (`evo2-40b` default, `evo2-7b` faster); the Enformer/Borzoi/ChromBPNet remote tools take the variant locus and score the change over their output tracks.
 
 ## Phase 2.9: Short-Circuit Check
 
@@ -103,11 +122,40 @@ See `ACMG_CLASSIFICATION.md` for thresholds.
 
 ## Phase 4: Structural Analysis (VUS/Novel Missense)
 
-Tools: `PDBe_get_uniprot_mappings`, `NvidiaNIM_alphafold2`, `alphafold_get_prediction` (param: `qualifier`, e.g., UniProt accession), `InterPro_get_protein_domains`, `UniProt_get_function_by_accession`
+Tools: `PDBe_get_uniprot_mappings`, `NvidiaNIM_alphafold2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)*, `alphafold_get_prediction` (param: `qualifier`, e.g., UniProt accession), `InterPro_get_protein_domains`, `UniProt_get_function_by_accession`
 
 Workflow: Get structure -> map residue -> assess domain/functional site -> predict destabilization.
 
 > **AlphaFold size limitation**: Very large proteins (>2,700 aa, e.g., BRCA2 at 3,418 aa) may not have AlphaFold predictions via the standard API. Fall back to published structural studies or `PDBe_get_uniprot_mappings` for experimental structures.
+
+## Phase 4.2: Mechanism of Effect (VUS missense, ESMC-6B SAE)
+
+AlphaMissense / REVEL / CADD give a pathogenicity score but no mechanism. When you need to answer "**how** does this variant disrupt protein function" — e.g. for VUS write-ups, clinical reports, or to triangulate a discordant predictor consensus — use the ESMC-6B Sparse Autoencoder to identify which interpretable protein-language-model features the mutation disrupts.
+
+**One-call mechanism summary** (recommended starting point):
+```python
+mech = tu.tools.ESM_explain_variant_mechanism(
+    sequence=wt_aa_sequence,   # full reference protein sequence
+    position=600,              # 1-indexed
+    ref_aa="V",
+    alt_aa="E",
+    top_k_features=5,          # describe top 5 lost + top 5 gained
+)
+# mech["data"]["mechanism_summary"] e.g.:
+#   "Disrupted feature categories (lost): catalytic=2, ligand-binding=1;
+#    Induced feature categories (gained): structural-stability=1"
+```
+
+Returns `mechanism_summary`, per-feature lost/gained tables, and category aggregates. Use the category aggregate to support or qualify the pathogenicity verdict in the report:
+- `catalytic` / `ligand-binding` / `ptm` lost → mechanistic support for PP3
+- `secondary-structure` / `structural-stability` gained on a stable WT region → mechanistic basis for "destabilizing" claim
+- No interpretable change at top-K → does not weaken AlphaMissense alone, but flag for caution
+
+**When you have a saturation question** (e.g. "score all 19 substitutions at residue 600 to find the most disruptive"): use `ESM_score_variant_sae_batch` — 1 Forge call for the reference + 1 per variant, instead of 2 per variant.
+
+**When the region is what matters** (e.g. "what's the SAE signature of the kinase activation loop, residues 754-771"): use `ESM_get_region_sae_features` then `ESM_describe_sae_feature` on the top hits.
+
+**Requires**: `ESM_API_KEY` env var (free non-commercial token at https://forge.evolutionaryscale.ai) and `pip install 'esm @ git+https://github.com/evolutionaryscale/esm@ee891c52'` (SAE support is on an unmerged feature branch — PyPI esm 3.2.x does NOT include SAEConfig). License: EvolutionaryScale Cambrian Inference License — non-commercial use only.
 
 ## Phase 4.5: Expression Context
 
@@ -255,7 +303,7 @@ When predictors disagree: if REVEL says tolerated but SIFT/PolyPhen say damaging
 
 If a primary tool fails, use these alternatives:
 - **ClinVar_search_variants returns 0 results**: Use `MyVariant_query_variants` with rsID or HGVS — the `clinvar` field in MyVariant is more reliable for variant lookup than NCBI Entrez search
-- **gnomAD_search_variants fails**: Use `EnsemblVEP_annotate_hgvs` which includes gnomAD frequency via colocated variants
+- **gnomad_search_variants fails**: Use `EnsemblVEP_annotate_hgvs` which includes gnomAD frequency via colocated variants
 - **CADD_get_variant_score fails**: CADD PHRED is also available in the `dbnsfp` block from MyVariant
 - **AlphaFold prediction unavailable** (large proteins >2700aa): Use `PDBe_get_uniprot_mappings` for experimental structures
 

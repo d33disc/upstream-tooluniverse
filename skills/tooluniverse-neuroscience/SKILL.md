@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-neuroscience
-description: Neuroscience research and reasoning workflows using ToolUniverse tools. Covers computational neuroscience (rate models, integrate-and-fire neurons, synaptic plasticity, network dynamics), neuroanatomy (cortical regions, basal ganglia, cerebellum, brainstem, model organism connectomes), neurophysiology (ion channels, action potentials, synaptic transmission), neural circuits (E/I balance, oscillations, central pattern generators), synaptic dynamics (STDP, short-term plasticity, neuromodulation), neurodegenerative diseases (Alzheimer's, Parkinson's, ALS, Huntington's), and clinical neurology (cranial nerves, stroke localization, neuromuscular disorders). Use when researchers ask about brain regions, neural computation, firing rates, synaptic plasticity, connectomics, neurodegeneration, or clinical neurological questions.
+description: "Neuroscience research workflows: neuroanatomy, neural circuits, neurotransmitter biology, neurological/psychiatric disease genetics, neural-protein function. Uses Allen Brain Atlas, WormBase (C. elegans connectome), UniProt for neural proteins, PubMed for primary literature. Use for brain-region biology, neural development, neurodegeneration mechanisms (Alzheimer's, Parkinson's, ALS), and synaptic-protein characterization."
+disable-model-invocation: true
 ---
 
 # Neuroscience Research Skill
@@ -70,7 +71,7 @@ Brain region functions, boundaries, and connectivity are precise anatomical fact
 - **Hippocampus**: declarative memory formation; trisynaptic circuit: EC → DG → CA3 → CA1 → EC; place cells, grid cells
 
 ### Model Organism Neuroanatomy
-- **C. elegans**: 302 neurons, complete connectome mapped; use `WormBase_search` for gene expression, neuron identity, connectivity data
+- **C. elegans**: 302 neurons, complete connectome mapped; use `WormBase_get_gene` for gene expression, neuron identity, connectivity data
 - **Drosophila**: mushroom body (learning/memory), antennal lobe (olfaction), central complex (navigation); ~100,000 neurons; FlyWire connectome
 - **Zebrafish**: transparent larvae for whole-brain imaging; Mauthner cells (escape response); use `Alliance_search_genes` for orthologs
 - **Mouse**: Allen Brain Atlas for gene expression; use PubMed for circuit tracing studies (rabies virus, optogenetics)
@@ -152,16 +153,17 @@ Brain region functions, boundaries, and connectivity are precise anatomical fact
 |------|---------|---------------|
 | `PubMed_search_articles` | Neuroanatomy facts, clinical neurology, circuit studies | `query`, `limit` |
 | `EuropePMC_search_articles` | Broader literature including preprints | `query`, `limit` |
-| `WormBase_search` | C. elegans neurons, connectome, gene expression | `query` |
+| `WormBase_get_gene` | C. elegans neurons, connectome, gene expression | `query` |
+| `AllenCellTypes_search_specimens` | Single-neuron electrophysiology + morphology specimens (firing rate, input resistance, tau, reconstructions); filter by species/brain region | `species` (e.g. `"Homo Sapiens"`, `"Mus musculus"`), `brain_structure`, `limit` |
 | `Alliance_search_genes` | Cross-species gene search (mouse, fly, fish, worm) | `query` |
 | `UniProt_search` | Neural proteins (ion channels, receptors, disease genes) | `query`, `organism` |
 | `proteins_api_search` | Protein features, domains, variants | `query` |
-| `NCBI_search_gene` | Gene info, orthologs, expression | `query` |
+| `NCBIGene_search` | Gene info, orthologs, expression | `query` |
 | `ClinVar_search_variants` | Neurological disease variants | `gene`, `condition` |
-| `GWAS_search_associations` | Neurological trait associations | `query` |
+| `gwas_search_associations` | Neurological trait associations | `query` |
 | `Orphanet_search_diseases` | Rare neurological diseases | `query` |
-| `KEGG_get_pathway` | Neural signaling pathways | `pathway_id` |
-| `OpenTargets_search_target` | Drug targets in neurological diseases | `query` |
+| `kegg_get_pathway_info` | Neural signaling pathways | `pathway_id` |
+| `OpenTargets_multi_entity_search_by_query_string` | Drug targets in neurological diseases | `query` |
 
 ### Tool Selection Strategy
 1. **Neuroanatomy question**: PubMed first — search "[structure] [function/connectivity]"
@@ -175,7 +177,7 @@ Brain region functions, boundaries, and connectivity are precise anatomical fact
 
 ## 6. C. elegans Connectome Lookups
 
-For C. elegans neural circuit questions, ALWAYS use `WormBase_search` to look up specific synapse and connectivity data. Do not guess neural connections from general knowledge.
+For C. elegans neural circuit questions, ALWAYS use `WormBase_get_gene` to look up specific synapse and connectivity data. Do not guess neural connections from general knowledge.
 - **ASJ neuron projections**: the main projection target of ASJ axons is PVQ (verified in WormBase connectome data), NOT AIA. Always check actual synapse counts rather than inferring from circuit diagrams.
 - Search WormBase with the specific neuron name to get its pre/postsynaptic partners and projection targets.
 

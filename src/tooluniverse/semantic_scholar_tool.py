@@ -3,7 +3,6 @@ import re
 import tempfile
 import threading
 import time
-from typing import Any
 
 import requests
 from .base_tool import BaseTool
@@ -26,15 +25,9 @@ class SemanticScholarTool(BaseTool):
     API key is read from environment variable SEMANTIC_SCHOLAR_API_KEY.
     Request an API key at: https://www.semanticscholar.org/product/api
 
-    Rate limits (as of 2026, confirmed by S2 approval email 2026-04-07):
-    - No API key: 1 request/second (shared public quota)
-    - Personal API key: 1 request/second cumulative across all endpoints
-    - Legacy/commercial tier: historically 100 req/sec (rare, grandfathered)
-
-    This fork defaults to a conservative 1.05s min interval regardless of
-    key presence. Holders of a higher-tier key can override the floor via
-    the SEMANTIC_SCHOLAR_MIN_INTERVAL env var (float seconds). See the
-    DVS-FORK-PATCH block on ``_enforce_rate_limit`` for background.
+    Rate limits:
+    - Without API key: 1 request/second
+    - With API key: 100 requests/second
     """
 
     _last_request_time = 0.0
@@ -42,9 +35,9 @@ class SemanticScholarTool(BaseTool):
 
     def __init__(
         self,
-        tool_config: dict[str, Any],
-        base_url: str = "https://api.semanticscholar.org/graph/v1/paper/search",
-    ) -> None:
+        tool_config,
+        base_url="https://api.semanticscholar.org/graph/v1/paper/search",
+    ):
         super().__init__(tool_config)
         self.base_url = base_url
         # Get API key from environment as fallback
@@ -52,7 +45,7 @@ class SemanticScholarTool(BaseTool):
         self.session = requests.Session()
         self.session.headers.update({"Accept": "application/json"})
 
-    def run(self, arguments: dict[str, Any]) -> list[dict[str, Any]]:
+    def run(self, arguments):
         query = arguments.get("query")
         limit = arguments.get("limit", 5)
         year = arguments.get("year")
@@ -79,75 +72,15 @@ class SemanticScholarTool(BaseTool):
             "metadata": {"total": len(papers), "query": query},
         }
 
-    # === DVS-FORK-PATCH-START: semantic-scholar-rate-limit ===============
-    # Fork of mims-harvard/ToolUniverse — d33disc/upstream-tooluniverse.
-    # DO NOT DROP on upstream rebase/merge unless upstream introduces an
-    # equivalent mechanism. Grep `DVS-FORK-PATCH` to review all fork-
-    # specific patches during an upstream sync.
-    #
-    # BACKGROUND
-    # ----------
-    # Upstream historically assumed "with API key = 100 req/sec" (legacy
-    # commercial S2 tier). As of 2026, new *personal* API keys issued by
-    # Semantic Scholar are capped at **1 req/sec cumulative across all
-    # endpoints** (confirmed by the S2 approval email received by
-    # christopher.dvs@gmail.com on 2026-04-07, which explicitly reads:
-    # "1 request per second, cumulative across all endpoints. Please set
-    # your rate limit to below this threshold to avoid rejected requests.")
-    #
-    # Under the upstream code, merely *setting* SEMANTIC_SCHOLAR_API_KEY
-    # switched the throttle to a 0.02s floor (~50 req/s) — 50× over the
-    # personal-tier quota — guaranteeing 429 storms and risking an S2-side
-    # ban on the key. Ironic: the key made the client UNSAFE.
-    #
-    # PATCH BEHAVIOR
-    # --------------
-    # 1. Default min_interval is 1.05s whether or not a key is present.
-    #    This keeps traffic just under the 1 req/sec cumulative quota.
-    # 2. SEMANTIC_SCHOLAR_MIN_INTERVAL env var (float seconds) lets holders
-    #    of higher-tier keys lower the floor. Example:
-    #        export SEMANTIC_SCHOLAR_MIN_INTERVAL=0.02   # 50 req/s
-    #        export SEMANTIC_SCHOLAR_MIN_INTERVAL=0.011  # ~90 req/s
-    # 3. Value is clamped to >= 0.0; a malformed value falls back to 1.05s
-    #    rather than silently disabling throttling.
-    # 4. The `has_api_key` parameter is preserved for signature stability
-    #    with upstream callers, but is intentionally NOT used to select the
-    #    default interval — personal-tier keys have the same cumulative
-    #    quota as anonymous access.
-    #
-    # UPSTREAM MERGE NOTES
-    # --------------------
-    # If upstream adds a configurable override, prefer upstream's mechanism
-    # and delete this entire block. If upstream merely tweaks the constants,
-    # keep this block — the env-var escape hatch is the load-bearing piece.
-    # =====================================================================
     def _enforce_rate_limit(self, has_api_key: bool) -> None:
-        """Block until min_interval has elapsed since the last request.
-
-        See the DVS-FORK-PATCH block directly above for why the default is
-        1.05s regardless of ``has_api_key``.
-        """
-        override = os.environ.get("SEMANTIC_SCHOLAR_MIN_INTERVAL", "").strip()
-        if override:
-            try:
-                min_interval = max(0.0, float(override))
-            except ValueError:
-                # Malformed override — fail safe to the conservative default
-                # rather than silently disabling throttling.
-                min_interval = 1.05
-        else:
-            # Default: ~0.95 req/sec, safely under the 1 req/sec personal
-            # tier cumulative quota. Do NOT branch on ``has_api_key`` here;
-            # see DVS-FORK-PATCH block above.
-            min_interval = 1.05
+        # Keep anonymous usage below 1 req/sec to reduce 429s.
+        min_interval = 0.02 if has_api_key else 1.05
         with self._rate_limit_lock:
             now = time.time()
             elapsed = now - SemanticScholarTool._last_request_time
             if elapsed < min_interval:
                 time.sleep(min_interval - elapsed)
             SemanticScholarTool._last_request_time = time.time()
-
-    # === DVS-FORK-PATCH-END: semantic-scholar-rate-limit =================
 
     def _fetch_missing_abstract(self, paper_id: str) -> dict | None:
         paper_id = (paper_id or "").strip()
@@ -176,36 +109,36 @@ class SemanticScholarTool(BaseTool):
         return payload if isinstance(payload, dict) else None
 
     def _search(
-        self,
-        query: Any,
-        limit: Any,
-        *,
-        year: Any = None,
-        sort: Any = None,
-        include_abstract: bool = False,
-    ) -> list[dict[str, Any]]:
+        self, query, limit, *, year=None, sort=None, include_abstract: bool = False
+    ):
+        # Include identifiers and lightweight impact signals for better downstream utility.
+        fields = [
+            "paperId",
+            "externalIds",
+            "title",
+            "abstract",
+            "tldr",
+            "year",
+            "venue",
+            "url",
+            "authors",
+            "citationCount",
+            "referenceCount",
+            "isOpenAccess",
+            "openAccessPdf",
+            "fieldsOfStudy",
+        ]
+        # Fix-R12A-1: /paper/search/bulk (used below whenever sort is set)
+        # rejects the "tldr" field with a 400 ("Unrecognized or unsupported
+        # fields: [tldr]") -- confirmed live via raw curl -- even though the
+        # regular /paper/search endpoint supports it fine. Drop it only for
+        # the bulk path rather than losing TLDR summaries on every search.
+        if sort:
+            fields = [f for f in fields if f != "tldr"]
         params = {
             "query": query,
             "limit": limit,
-            # Include identifiers and lightweight impact signals for better downstream utility.
-            "fields": ",".join(
-                [
-                    "paperId",
-                    "externalIds",
-                    "title",
-                    "abstract",
-                    "tldr",
-                    "year",
-                    "venue",
-                    "url",
-                    "authors",
-                    "citationCount",
-                    "referenceCount",
-                    "isOpenAccess",
-                    "openAccessPdf",
-                    "fieldsOfStudy",
-                ]
-            ),
+            "fields": ",".join(fields),
         }
         if year:
             params["year"] = str(year)
@@ -249,39 +182,15 @@ class SemanticScholarTool(BaseTool):
                 }
             ]
 
-        # Standard /paper/search nests papers under "data".
-        # /paper/search/bulk may return papers under "data", as a top-level list,
-        # or only {"total": N} with no papers when token-based pagination is needed.
-        if isinstance(payload, list):
-            results = payload
-        elif isinstance(payload, dict):
-            results = payload.get("data", [])
-            if not results and payload.get("total", 0) > 0 and sort:
-                # Bulk endpoint returned count-only; retry with standard endpoint.
-                std_url = self.base_url  # original non-bulk URL
-                params.pop("sort", None)
-                self._enforce_rate_limit(bool(self.default_api_key))
-                retry_resp = request_with_retry(
-                    self.session,
-                    "GET",
-                    std_url,
-                    params=params,
-                    headers=headers,
-                    timeout=20,
-                    max_attempts=2,
-                )
-                if retry_resp.status_code == 200:
-                    try:
-                        retry_payload = retry_resp.json()
-                    except ValueError:
-                        retry_payload = {}
-                    results = (
-                        retry_payload.get("data", [])
-                        if isinstance(retry_payload, dict)
-                        else []
-                    )
-        else:
-            results = []
+        results = payload.get("data", []) if isinstance(payload, dict) else []
+        if sort:
+            # /paper/search/bulk has no `limit` concept of its own (only
+            # token-based pagination over its full result set), so the
+            # `limit` param above is silently ignored server-side -- slice
+            # here instead of returning however many the page happened to
+            # contain (and instead of unnecessarily paying the N+1
+            # missing-abstract lookup cost below for rows beyond `limit`).
+            results = results[:limit]
         papers = []
         for p in results:
             # Extract basic information
@@ -341,9 +250,10 @@ class SemanticScholarTool(BaseTool):
             if include_abstract and not abstract and paper_id:
                 details = self._fetch_missing_abstract(paper_id)
                 if details:
-                    raw_ext = details.get("externalIds")
-                    details_external: dict[str, Any] = (
-                        raw_ext if isinstance(raw_ext, dict) else {}
+                    details_external = (
+                        details.get("externalIds")
+                        if isinstance(details.get("externalIds"), dict)
+                        else {}
                     )
                     details_doi = (
                         details_external.get("DOI")
@@ -410,16 +320,16 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
     around user-provided terms. Uses markitdown to convert PDF to markdown text.
     """
 
-    def __init__(self, tool_config: dict[str, Any]) -> None:
+    def __init__(self, tool_config):
         super().__init__(tool_config)
         self.session = requests.Session()
         self.session.headers.update({"Accept": "application/pdf, */*;q=0.8"})
         if MARKITDOWN_AVAILABLE:
-            self.md_converter: Any = MarkItDown()
+            self.md_converter = MarkItDown()
         else:
             self.md_converter = None
 
-    def run(self, arguments: dict[str, Any]) -> dict[str, Any]:
+    def run(self, arguments):
         paper_id = arguments.get("paper_id")
         open_access_pdf_url = arguments.get("open_access_pdf_url")
         terms = arguments.get("terms")

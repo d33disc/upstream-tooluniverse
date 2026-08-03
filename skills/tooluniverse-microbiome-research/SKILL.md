@@ -1,6 +1,7 @@
 ---
-name: Microbiome Research
-description: Analyze microbiome and metagenomics data using MGnify, GTDB, ENA, and literature tools. Search studies by biome/keyword, retrieve taxonomic profiles and functional annotations, classify genomes with GTDB taxonomy, and find related publications. Use for human gut microbiome, soil/ocean metagenomics, and environmental microbiology research.
+name: tooluniverse-microbiome-research
+description: Microbiome research using MGnify, GTDB, ENA, OLS (ENVO biomes), and EuropePMC. Covers study discovery, taxonomic profiling, host-microbe interaction analysis, and biome-by-condition queries. Use for microbiome study selection, organism-environment associations, and clinical-microbiome literature review. Distinct from analytical workflow (use tooluniverse-metagenomics-analysis for that).
+disable-model-invocation: true
 ---
 
 # Microbiome Research with ToolUniverse
@@ -12,7 +13,7 @@ Comprehensive microbiome analysis using MGnify (EBI metagenomics), GTDB (genome 
 | Tool | Purpose | Auth |
 |------|---------|------|
 | **MGnify_search_studies** | Find metagenomics studies by biome/keyword | None |
-| **MGnify_search_studies_detail** | Study metadata, abstract, sample counts | None |
+| **MGnify_get_study_detail** | Study metadata, abstract, sample counts | None |
 | **MGnify_list_analyses** | List taxonomic/functional analysis outputs for a study | None |
 | **MGnify_get_taxonomy** | Taxonomic composition from an analysis | None |
 | **MGnify_get_go_terms** | GO functional annotations from an analysis | None |
@@ -55,7 +56,7 @@ studies = tu.run_one_function({
 
 # 2. Get study details
 detail = tu.run_one_function({
-    'name': 'MGnify_search_studies_detail',
+    'name': 'MGnify_get_study_detail',
     'arguments': {'study_accession': 'MGYS00006860'}
 })
 
@@ -208,7 +209,7 @@ Microbiome analysis starts with: what is the question? LOOK UP DON'T GUESS — a
 - Functional potential (what can they do?) → Shotgun metagenomics → MGnify GO terms, InterPro, KEGG pathways
 - Active function (what are they doing now?) → Metatranscriptomics → specialized pipelines (not MGnify/GTDB alone)
 
-Before calling any tool, determine which data type the user has via `MGnify_search_studies_detail` — the pipeline type (amplicon vs shotgun) determines which analyses are valid. Do not apply 16S diversity metrics to metagenomic data or vice versa.
+Before calling any tool, determine which data type the user has via `MGnify_get_study_detail` — the pipeline type (amplicon vs shotgun) determines which analyses are valid. Do not apply 16S diversity metrics to metagenomic data or vice versa.
 
 ### Dysbiosis Assessment Strategy
 

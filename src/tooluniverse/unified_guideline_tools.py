@@ -4,6 +4,7 @@ Unified Guideline Tools
 Consolidated clinical guidelines search tools from multiple sources.
 """
 
+import html
 import requests
 import time
 import re
@@ -268,7 +269,17 @@ class PubMedGuidelinesTool(BaseTool):
         if not query:
             return {"status": "error", "error": "Query parameter is required"}
 
-        return self._search_pubmed_guidelines(query, limit, api_key)
+        result = self._search_pubmed_guidelines(query, limit, api_key)
+        # Fix-R9E-1: _search_pubmed_guidelines returns either a bare list of
+        # results or an {"status": "error", ...} dict on failure. The
+        # bare-list success case was never wrapped in the standard
+        # {"status": "success", "data": [...]} envelope every sibling tool
+        # (e.g. PubMed_search_articles) uses -- independently reported by
+        # personas across 4 separate rounds, since callers writing generic
+        # status-checking code broke specifically on this tool.
+        if isinstance(result, list):
+            return {"status": "success", "data": result}
+        return result
 
     def _search_pubmed_guidelines(self, query, limit, api_key):
         """Search PubMed for guideline publications."""
@@ -327,31 +338,28 @@ class PubMedGuidelinesTool(BaseTool):
             )
             abstract_response.raise_for_status()
 
-            # Parse abstracts from XML — split by article to avoid cross-match
+            # Parse each PubMed article independently to avoid matching an
+            # abstract belonging to a different PMID.
             import re
 
             abstracts = {}
             xml_text = abstract_response.text
-            articles = re.findall(
+            for article_xml in re.findall(
                 r"<PubmedArticle>(.*?)</PubmedArticle>", xml_text, re.DOTALL
-            )
-            for article_xml in articles:
+            ):
                 pmid_match = re.search(r"<PMID[^>]*>(\d+)</PMID>", article_xml)
                 if not pmid_match:
                     continue
-                art_pmid = pmid_match.group(1)
-                abstract_parts = re.findall(
+                article_pmid = pmid_match.group(1)
+                parts = re.findall(
                     r"<AbstractText[^>]*>(.*?)</AbstractText>",
                     article_xml,
                     re.DOTALL,
                 )
-                if abstract_parts:
-                    full_abstract = " ".join(
-                        re.sub(r"<[^>]+>", "", part).strip() for part in abstract_parts
-                    )
-                    abstracts[art_pmid] = full_abstract
-                else:
-                    abstracts[art_pmid] = ""
+                abstracts[article_pmid] = " ".join(
+                    html.unescape(re.sub(r"<[^>]+>", "", part)).strip()
+                    for part in parts
+                )
 
             # Process results
             results = []
@@ -368,6 +376,18 @@ class PubMedGuidelinesTool(BaseTool):
                     author_str = ", ".join(authors)
                     if len(article.get("authors", [])) > 3:
                         author_str += ", et al."
+                    # Fix-R10E-3: NCBI Bookshelf-type records (e.g. WHO
+                    # monographs/guidelines, doctype="book") store their
+                    # title under `booktitle` instead of `title`, and have
+                    # no individual `authors` list -- confirmed live via
+                    # raw esummary for PMID 34787987 ("WHO guideline for
+                    # clinical management of exposure to lead"), whose
+                    # `title`/`authors` were both empty while `booktitle`
+                    # and `publishername` had the real values. Fall back to
+                    # those fields instead of silently returning blanks.
+                    title = article.get("title") or article.get("booktitle") or ""
+                    if not author_str:
+                        author_str = article.get("publishername", "")
 
                     # Check publication types
                     pub_types = article.get("pubtype", [])
@@ -375,24 +395,17 @@ class PubMedGuidelinesTool(BaseTool):
 
                     abstract_text = abstracts.get(pmid, "")
                     searchable_text = " ".join(
-                        [
-                            article.get("title", ""),
-                            abstract_text or "",
-                            " ".join(pub_types),
-                        ]
+                        [title, abstract_text or "", " ".join(pub_types)]
                     ).lower()
 
-                    # Score relevance but never drop results — PubMed already
-                    # filtered by guideline type; dropping here causes silent empty returns
-                    # when abstracts are missing or use different terminology.
-                    matched = sum(1 for t in query_terms if t in searchable_text)
+                    matched = sum(term in searchable_text for term in query_terms)
                     relevance = matched / len(query_terms) if query_terms else 1.0
 
                     result = {
                         "pmid": pmid,
-                        "title": article.get("title", ""),
+                        "title": title,
                         "abstract": abstract_text,
-                        "content": abstract_text,
+                        "content": abstract_text,  # Copy abstract to content field
                         "authors": author_str,
                         "journal": article.get("source", ""),
                         "publication_date": article.get("pubdate", ""),

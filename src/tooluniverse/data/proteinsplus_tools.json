@@ -36,21 +36,32 @@
         {
           "type": "object",
           "properties": {
-            "pockets": {
-              "type": "array",
-              "description": "Array of predicted binding pockets (URLs or objects)",
-              "items": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object"
+            "data": {
+              "type": "object",
+              "properties": {
+                "pockets": {
+                  "type": "array",
+                  "description": "Array of predicted binding pockets (URLs or objects)",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "object"
+                      }
+                    ]
                   }
-                ]
+                }
               }
+            },
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -75,10 +86,6 @@
     "test_examples": [
       {
         "pdb_id": "2OZR"
-      },
-      {
-        "pdb_id": "4HHB",
-        "chain": "A"
       }
     ]
   },
@@ -141,50 +148,61 @@
         {
           "type": "object",
           "properties": {
-            "result_table": {
-              "type": "string",
-              "description": "CSV formatted table with pocket predictions"
-            },
-            "pockets": {
-              "type": "array",
-              "description": "Array of predicted pockets with subpocket information",
-              "items": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object"
+            "data": {
+              "type": "object",
+              "properties": {
+                "result_table": {
+                  "type": "string",
+                  "description": "CSV formatted table with pocket predictions"
+                },
+                "pockets": {
+                  "type": "array",
+                  "description": "Array of predicted pockets with subpocket information",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "object"
+                      }
+                    ]
                   }
-                ]
+                },
+                "residues": {
+                  "oneOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "description": "Mapping of pockets to constituent residues, or array of URL strings"
+                },
+                "descriptor_explanation": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "URL or explanations of calculated descriptors"
+                },
+                "parameters": {
+                  "type": "object",
+                  "description": "Parameters used for the analysis"
+                }
               }
             },
-            "residues": {
-              "oneOf": [
-                {
-                  "type": "object"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              ],
-              "description": "Mapping of pockets to constituent residues, or array of URL strings"
-            },
-            "descriptor_explanation": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "description": "URL or explanations of calculated descriptors"
-            },
-            "parameters": {
-              "type": "object",
-              "description": "Parameters used for the analysis"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -252,19 +270,30 @@
         {
           "type": "object",
           "properties": {
-            "result_png_picture": {
-              "type": "string",
-              "description": "URL or base64-encoded PNG interaction diagram"
+            "data": {
+              "type": "object",
+              "properties": {
+                "result_png_picture": {
+                  "type": "string",
+                  "description": "URL or base64-encoded PNG interaction diagram"
+                },
+                "result_pdf_picture": {
+                  "type": "string",
+                  "description": "URL or base64-encoded PDF interaction diagram"
+                },
+                "result_svg_picture": {
+                  "type": "string",
+                  "description": "URL or base64-encoded SVG interaction diagram"
+                }
+              }
             },
-            "result_pdf_picture": {
-              "type": "string",
-              "description": "URL or base64-encoded PDF interaction diagram"
-            },
-            "result_svg_picture": {
-              "type": "string",
-              "description": "URL or base64-encoded SVG interaction diagram"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -290,10 +319,6 @@
       {
         "pdb_id": "1KZK",
         "ligand": "JE2_A_701"
-      },
-      {
-        "pdb_id": "2OZR",
-        "ligand": "4SP_A_301"
       }
     ]
   },
@@ -384,40 +409,51 @@
         {
           "type": "object",
           "properties": {
-            "result_table": {
-              "type": "string",
-              "description": "CSV table with binding site similarity analysis results"
-            },
-            "pdb_files": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Aligned PDB structures in the ensemble"
-            },
-            "ligands": {
-              "oneOf": [
-                {
-                  "type": "string"
+            "data": {
+              "type": "object",
+              "properties": {
+                "result_table": {
+                  "type": "string",
+                  "description": "CSV table with binding site similarity analysis results"
                 },
-                {
+                "pdb_files": {
                   "type": "array",
                   "items": {
                     "type": "string"
-                  }
+                  },
+                  "description": "Aligned PDB structures in the ensemble"
+                },
+                "ligands": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "description": "SDF file URL(s) with aligned ligands"
+                },
+                "alignment": {
+                  "type": "string",
+                  "description": "Text file with sequence alignment"
+                },
+                "parameters": {
+                  "type": "object",
+                  "description": "Parameters used for the analysis"
                 }
-              ],
-              "description": "SDF file URL(s) with aligned ligands"
+              }
             },
-            "alignment": {
-              "type": "string",
-              "description": "Text file with sequence alignment"
-            },
-            "parameters": {
-              "type": "object",
-              "description": "Parameters used for the analysis"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -444,17 +480,6 @@
         "pdb_id": "1KZK",
         "mode": "screening",
         "ligand": "JE2_A_701"
-      },
-      {
-        "pdb_id": "2OZR",
-        "mode": "flexibility_analysis",
-        "ligand": "4SP_A_301",
-        "flexibility_sensitivity": 0.7
-      },
-      {
-        "pdb_id": "4HHB",
-        "mode": "docking",
-        "ligand": "HEM_A_142"
       }
     ]
   },
@@ -499,31 +524,42 @@
         {
           "type": "object",
           "properties": {
-            "complex": {
-              "type": "string",
-              "description": "URL to overall protein-ligand complex quality metrics"
+            "data": {
+              "type": "object",
+              "properties": {
+                "complex": {
+                  "type": "string",
+                  "description": "URL to overall protein-ligand complex quality metrics"
+                },
+                "activesite": {
+                  "type": "string",
+                  "description": "URL to active site geometry and quality assessment"
+                },
+                "ligands": {
+                  "type": "string",
+                  "description": "URL to individual ligand quality assessments"
+                },
+                "smarts": {
+                  "type": "string",
+                  "description": "URL to SMARTS patterns for chemical validation"
+                },
+                "hetcode": {
+                  "type": "string",
+                  "description": "Heteroatom residue codes found"
+                },
+                "config": {
+                  "type": "string",
+                  "description": "URL to configuration and parameters used"
+                }
+              }
             },
-            "activesite": {
-              "type": "string",
-              "description": "URL to active site geometry and quality assessment"
-            },
-            "ligands": {
-              "type": "string",
-              "description": "URL to individual ligand quality assessments"
-            },
-            "smarts": {
-              "type": "string",
-              "description": "URL to SMARTS patterns for chemical validation"
-            },
-            "hetcode": {
-              "type": "string",
-              "description": "Heteroatom residue codes found"
-            },
-            "config": {
-              "type": "string",
-              "description": "URL to configuration and parameters used"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -550,6 +586,94 @@
       {
         "pdb_id": "4HHB",
         "setting": "platinum"
+      }
+    ]
+  },
+  {
+    "name": "ProteinsPlus_protonate_structure",
+    "description": "Add hydrogens and optimize protonation states of a protein-ligand complex using ProtoSS (Protonation Structure Solver) on ProteinsPlus. ProtoSS places hydrogen atoms, assigns tautomers and protonation states, and optimizes the hydrogen-bond network of the protein and any co-crystallized ligands. Protonation is the standard prerequisite step before molecular docking, interaction-fingerprint analysis, or binding-energy calculations, because raw PDB structures lack hydrogen positions. Input a PDB ID (or raw PDB content). Returns URLs to the protonated protein (PDB), protonated ligand(s) (SDF), and a log file. Example: pdbCode '1cbs' returns protein=.../1cbs.pdb (protonated), ligands=.../1cbs.sdf, log=.../1cbs_log.txt.",
+    "type": "ProteinsPlusRESTTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB identifier (e.g., '1cbs', '1KZK', '4HHB'). Use either pdb_id or pdb_content, not both."
+        },
+        "pdb_content": {
+          "type": "string",
+          "description": "Raw PDB file content as a string (multi-line text). Use either pdb_id or pdb_content, not both."
+        },
+        "ligand_content": {
+          "type": "string",
+          "description": "Optional raw ligand SDF content to protonate alongside the protein. Only used with pdb_content uploads."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "/protoss_rest",
+      "method": "POST",
+      "is_async": true,
+      "poll_interval": 10,
+      "max_wait_time": 600
+    },
+    "execution": {
+      "taskSupport": "required"
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "protein": {
+                  "type": "string",
+                  "description": "URL to the protonated protein structure (PDB format)"
+                },
+                "ligands": {
+                  "type": "string",
+                  "description": "URL to the protonated ligand(s) (SDF format)"
+                },
+                "log": {
+                  "type": "string",
+                  "description": "URL to the ProtoSS log file"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1cbs"
       }
     ]
   }

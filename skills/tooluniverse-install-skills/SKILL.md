@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-install-skills
-description: Detect and auto-install missing ToolUniverse research skills by checking common client skill directories and cloning from GitHub if absent. Use when ToolUniverse specialized skills are not installed, when setting up a new project, or when the tooluniverse router skill needs to bootstrap its sub-skills before routing.
+description: Detect and auto-install missing ToolUniverse research skills. Checks common Claude Code/Cursor/Codex skill directories for the canary file, and installs any missing skills if none found. Use when the plugin's research skills aren't loading, when migrating between clients, or when verifying a skill installation.
+disable-model-invocation: true
 ---
 
 # ToolUniverse Install Skills

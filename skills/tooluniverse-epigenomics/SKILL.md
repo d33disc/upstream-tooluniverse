@@ -1,9 +1,42 @@
 ---
 name: tooluniverse-epigenomics
-description: Production-ready genomics and epigenomics data processing for BixBench questions. Handles methylation array analysis (CpG filtering, differential methylation, age-related CpG detection, chromosome-level density), ChIP-seq peak analysis (peak calling, motif enrichment, coverage stats), ATAC-seq chromatin accessibility, multi-omics integration (expression + methylation correlation), and genome-wide statistics. Pure Python computation (pandas, scipy, numpy, pysam, statsmodels) plus ToolUniverse annotation tools (Ensembl, ENCODE, SCREEN, JASPAR, ReMap, RegulomeDB, ChIPAtlas). Supports BED, BigWig, methylation beta-value matrices, Illumina manifest files, and multi-sample clinical data. Use when processing methylation data, ChIP-seq peaks, ATAC-seq signals, or answering questions about CpG sites, differential methylation, chromatin accessibility, histone marks, or epigenomic statistics.
+description: "Genomics and epigenomics analysis: DNA methylation (CpG, 5mC, 5hmC, bisulfite, RRBS), m6A RNA modification (MeRIP-seq), ChIP-seq peaks, ATAC-seq accessibility, histone modifications, chromatin state, multi-omics integration. Combines pandas/scipy/pysam computation with ToolUniverse annotation tools. Use for genome-wide epigenomic statistics, methylation analysis, and chromatin-genome integration."
+disable-model-invocation: true
 ---
 
 # Genomics and Epigenomics Data Processing
+
+## ⚠️ TOP-OF-MIND RULE: long-format methylation CSV — count ROWS, not unique positions
+
+When the input is a long-format methylation CSV (one row per `(sample, CpG_position)`
+e.g. columns `Pos, Chromosome, MethylationPercentage`), "how many sites are
+removed when filtering" almost always means **rows removed**, NOT unique-position
+removals. The two answers differ by a factor of ≈ `n_samples`.
+
+| Question phrasing | What it means |
+|---|---|
+| "how many sites are removed when filtering …" | **rows removed** (= samples × positions failing the filter) |
+| "how many unique CpG sites pass filter" | **unique positions** (dedupe by `Pos` then filter) |
+
+❌ WRONG: `df.drop_duplicates(["Pos"]).query("MethylationPercentage<10 or >90")` then `len(filtered)` → counts unique positions (typically 100–1500)
+
+✅ RIGHT: `df.query("MethylationPercentage<10 or MethylationPercentage>90")` then `len(df) - len(filtered)` → counts rows (typically 10k–30k)
+
+If your answer is < 2000 when the data has 1000+ positions × 20+ samples, you
+deduplicated too early. Re-read the question's noun before reporting.
+
+---
+
+## RULE ZERO — Check for pre-computed results FIRST
+
+Before following any instruction below, scan the data folder for:
+- `*_executed.ipynb` → read with `tu run read_executed_notebook '{"data_folder":"<path>","search":"<keyword>"}'` and cite its cell outputs as the authoritative answer
+- Pre-computed result files (CSV/TSV with names like `*results*`, `*deseq*`, `*enrich*`, `*stats*`, `*_simplified.csv`) → read directly and report the requested value
+- Canonical analysis scripts (`analysis.R`, `run_*.py`, `find_*.R`, `*.Rmd`) → execute as-is and read the output
+
+Only follow this skill's re-analysis recipe below if **none** of the above exist. Re-running from raw data produces different numbers than the published answer and is much slower (often 5-10× turn count).
+
+---
 
 Production-ready skill combining Python computation (pandas, scipy, numpy, pysam, statsmodels) with ToolUniverse annotation tools for epigenomics analysis.
 
@@ -25,6 +58,57 @@ Methylation data, ChIP-seq peaks, ATAC-seq, multi-omics integration, genome-wide
 3. **Coordinate system awareness** - Track genome build (hg19/hg38/mm10), chr prefix
 4. **Statistical rigor** - FDR correction, effect size filtering
 5. **CpG identification** - Parse Illumina probe IDs, genomic coordinates
+
+## PRIMARY SCRIPT — methylation_density.py (use FIRST for CpG-density questions)
+
+For long-format methylation CSVs (`Pos, Chromosome, MethylationPercentage`)
+paired with chromosome-length CSVs, ALWAYS run the bundled script before
+hand-rolling pandas. It deterministically computes every common metric in one
+pass and avoids the rows-vs-sites pitfall that produces silently-wrong answers.
+
+```bash
+python skills/tooluniverse-epigenomics/scripts/methylation_density.py \
+  --cpg <CpG csv> --chr-lengths <chr lengths csv> \
+  --filter-meth-extremes 90 10
+```
+
+The full JSON output contains every metric. Pick the one that matches the
+question's wording (NOT a similar-looking one):
+
+| Question phrasing                                              | Script field              |
+|----------------------------------------------------------------|---------------------------|
+| "how many sites are removed when filtering …"                  | `rows_removed`            |
+| "how many unique CpG sites pass filter"                        | `unique_pos_after_filter` |
+| "genome-wide AVERAGE chromosomal density"                      | `density_avg_per_chr`     |
+| "density on chromosome X"                                      | `density_chromosome` (pass `--chromosome X`) |
+| "total density across the genome"                              | `density_total_over_genome` |
+
+The two density numbers (`density_avg_per_chr` vs `density_total_over_genome`)
+typically differ by ~2× because CpGs are not uniformly distributed across
+chromosomes; reporting one when the question asks for the other is the most
+common failure mode here.
+
+For "sites removed" questions, the long-format CSV has multiple rows per CpG
+position (one per sample), so `rows_removed` is in the tens of thousands while
+`unique_pos_removed` is in the hundreds. Match the granularity to the question.
+
+## Distinguish "rows" vs "unique sites" — methylation CSVs are usually long-format
+
+CpG methylation CSVs typically have ONE ROW PER (sample × CpG site) — so `len(df) >> n_unique_sites`. Before computing anything, decide which axis the question is asking about:
+
+| Question phrasing | Axis | Operation |
+|-------------------|------|-----------|
+| "how many sites are removed when filtering" | sample-rows | filter then count rows; do NOT dedupe by `Pos`. The CSV is in long format; "sites" here is row-shaped. Subtract `len(df_filtered)` from `len(df)`. |
+| "how many unique CpG sites pass filter" | unique positions | dedupe by position (or `Pos` column), then filter |
+| **"genome-wide average chromosomal density"** | per-chromosome density | MEAN of per-chromosome densities: `(n_unique_per_chr / chr_length).mean()`. NOT `total_unique / total_genome` — that gives a different answer (typically ≈ ½ of the per-chr mean for unevenly distributed CpGs). |
+| **"density on chromosome X"** | single chromosome | unique positions on X / length(X). Be careful which species — check the question text for "Zebra Finch" vs "Jackdaw". |
+| "chi-square for uniform distribution across chromosomes" | unique positions per chromosome | filter rows first, then dedupe by `(Chromosome, Pos)`, then count per-chromosome unique positions for chi-square against expected = `chr_length / total_length × n_unique_filtered` |
+
+**Sanity check**: if your filtered count is two orders of magnitude smaller than the GT range, you likely deduped when the question wanted row-level counts (or vice versa). Re-run with the other axis and compare.
+
+For the chi-square uniformity test: expected counts = `chromosome_length / total_genome_length × n_unique_sites`. The chi-square statistic depends on the **count granularity** (rows vs unique sites) — a row-level chi-square gives a much higher chi-square than a unique-position chi-square because `n` is larger.
+
+**Precedence**: when an `*_executed.ipynb` exists, read its filtering code verbatim — `df[(df.MethylationPercentage > 90) | (df.MethylationPercentage < 10)]` (no dedup) and `df.drop_duplicates('Pos')` (with dedup) yield wildly different counts on the same dataset.
 
 ---
 

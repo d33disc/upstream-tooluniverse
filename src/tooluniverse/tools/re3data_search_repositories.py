@@ -10,8 +10,8 @@ from ._shared_client import get_shared_client
 
 def re3data_search_repositories(
     query: str,
-    subjects: Optional[str | Any] = None,
-    countries: Optional[str | Any] = None,
+    subjects: Optional[str] = None,
+    countries: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -24,9 +24,9 @@ def re3data_search_repositories(
     ----------
     query : str
         Search keyword(s) to find repositories (e.g., 'nutrition longitudinal', 'geno...
-    subjects : str | Any
+    subjects : str
         Optional subject filter to narrow results (e.g., 'medicine', 'biology', 'chem...
-    countries : str | Any
+    countries : str
         Optional country filter using ISO 3166 country code (e.g., 'USA', 'GBR', 'DEU...
     stream_callback : Callable, optional
         Callback for streaming output

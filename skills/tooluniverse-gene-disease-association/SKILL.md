@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-gene-disease-association
-description: Find and compare gene-disease associations across multiple databases (DisGeNET, OpenTargets, Monarch Initiative, OMIM, GenCC, Orphanet, ClinVar). Produces a unified evidence table with confidence levels and cross-database concordance. Use when users ask about gene-disease links, disease genes, genetic basis of disease, or want to compare association evidence across sources.
+description: Gene-disease association analysis across DisGeNET, OpenTargets, Monarch, OMIM, GenCC, Orphanet. Cross-references multiple sources for evidence-graded association reports with concordance scoring (5/5 sources agree → strong, 1/5 → weak). Use for 'which diseases is gene X associated with' or 'which genes cause disease Y' queries with quantitative confidence.
+disable-model-invocation: true
 ---
 
 # Gene-Disease Association Analysis
@@ -66,7 +67,7 @@ tu.load_tools()
 # Gene query: resolve IDs
 gene_info = tu.tools.MyGene_query_genes(query=f"symbol:{gene_symbol}", species="human",
     fields="symbol,ensembl.gene,entrezgene,name", size=5)  # -> ensembl_id
-monarch_search = tu.tools.MonarchV3_search(query=gene_symbol, category="biolink:Gene", limit=5)  # -> HGNC CURIE
+Monarch_search = tu.tools.MonarchV3_search(query=gene_symbol, category="biolink:Gene", limit=5)  # -> HGNC CURIE
 omim_result = tu.tools.OMIM_search(query=gene_symbol, limit=5)  # -> MIM number
 gene_summary = tu.tools.Harmonizome_get_gene(gene_symbol=gene_symbol)
 
@@ -101,7 +102,7 @@ disgenet_ranked = tu.tools.DisGeNET_get_disease_genes(disease=disease_name, min_
 ```python
 ot_diseases = tu.tools.OpenTargets_get_diseases_phenotypes_by_target_ensembl(ensemblId=ensembl_id)
 ot_evidence = tu.tools.OpenTargets_target_disease_evidence(ensemblId=ensembl_id, efoId=efo_id)
-# Both require pre-resolved Ensembl/EFO IDs. Use OpenTargets_multi_entity_search to discover IDs.
+# Both require pre-resolved Ensembl/EFO IDs. Use OpenTargets_multi_entity_search_by_query_string to discover IDs.
 ```
 
 ---

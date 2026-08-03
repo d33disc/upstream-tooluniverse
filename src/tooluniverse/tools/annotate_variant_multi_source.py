@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def annotate_variant_multi_source(
-    variant: Optional[str | Any] = None,
-    gene: Optional[str | Any] = None,
-    rsid: Optional[str | Any] = None,
+    variant: Optional[str] = None,
+    gene: Optional[str] = None,
+    rsid: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -22,11 +22,11 @@ def annotate_variant_multi_source(
 
     Parameters
     ----------
-    variant : str | Any
+    variant : str
         Variant name (e.g., 'BRAF V600E', 'TP53 R175H'). Gene symbol + amino acid cha...
-    gene : str | Any
+    gene : str
         Gene symbol (e.g., 'BRCA1'). Used for gnomAD/CIViC lookup.
-    rsid : str | Any
+    rsid : str
         dbSNP rsID (e.g., 'rs113488022').
     stream_callback : Callable, optional
         Callback for streaming output

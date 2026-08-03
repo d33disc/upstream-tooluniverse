@@ -27,60 +27,77 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "accession": {
-          "type": "string",
-          "description": "UniProt accession queried"
-        },
-        "protein_length": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "description": "Full protein sequence length"
-        },
-        "domain_count": {
-          "type": "integer",
-          "description": "Number of Pfam domains found"
-        },
-        "domains": {
-          "type": "array",
-          "description": "List of Pfam domains with positions",
-          "items": {
-            "type": "object",
-            "properties": {
-              "pfam_accession": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "integrated_interpro": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "start": {
-                "type": "integer"
-              },
-              "end": {
-                "type": "integer"
-              },
-              "score": {
-                "type": [
-                  "number",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "accession": {
+              "type": "string"
+            },
+            "protein_length": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "domain_count": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "domains": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pfam_accession": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "integrated_interpro": {
+                    "type": "string"
+                  },
+                  "start": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "end": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "score": {
+                    "type": "number"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "accession"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -118,51 +135,62 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "pfam_accession": {
-          "type": "string",
-          "description": "Pfam accession queried"
-        },
-        "total_structures": {
-          "type": "integer",
-          "description": "Total number of PDB structures containing this domain"
-        },
-        "returned": {
-          "type": "integer",
-          "description": "Number of structures returned"
-        },
-        "structures": {
-          "type": "array",
-          "description": "PDB structures containing the domain",
-          "items": {
-            "type": "object",
-            "properties": {
-              "pdb_id": {
-                "type": "string"
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "experiment_type": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "resolution": {
-                "type": [
-                  "number",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "pfam_accession": {
+              "type": "string"
+            },
+            "total_structures": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "returned": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "structures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pdb_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "experiment_type": {
+                    "type": "string"
+                  },
+                  "resolution": {
+                    "type": "number"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "pfam_accession"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -199,67 +227,65 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "clan_accession": {
-          "type": "string",
-          "description": "Pfam clan accession"
-        },
-        "clan_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Name of the clan/superfamily"
-        },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Description of the superfamily"
-        },
-        "member_count": {
-          "type": "integer",
-          "description": "Total number of member families"
-        },
-        "members": {
-          "type": "array",
-          "description": "Member Pfam families in this clan",
-          "items": {
-            "type": "object",
-            "properties": {
-              "accession": {
-                "type": "string"
-              },
-              "short_name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "type": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "score": {
-                "type": [
-                  "number",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "clan_accession": {
+              "type": "string"
+            },
+            "clan_name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "member_count": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "accession": {
+                    "type": "string"
+                  },
+                  "short_name": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "clan_accession"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

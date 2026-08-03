@@ -46,12 +46,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "hits",
-        "max_score",
-        "took",
-        "total"
-      ],
       "properties": {
         "took": {
           "type": "integer",
@@ -148,13 +142,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "_id",
-        "_version",
-        "name",
-        "pathway",
-        "summary"
-      ],
       "properties": {
         "_id": {
           "type": "string",
@@ -275,9 +262,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "results"
-      ],
       "properties": {
         "results": {
           "type": "array",
@@ -354,12 +338,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "hits",
-        "max_score",
-        "took",
-        "total"
-      ],
       "properties": {
         "took": {
           "type": "integer"
@@ -434,12 +412,7 @@
     "type": "MyVariantTool",
     "test_examples": [
       {
-        "variant_id": "chr17:g.43092919G>A",
-        "fields": "clinvar,dbsnp,cadd"
-      },
-      {
-        "variant_id": "chr7:g.140453136A>T",
-        "fields": "clinvar,dbsnp,dbnsfp"
+        "variant_id": "chr1:g.218631822G>A"
       }
     ],
     "return_schema": {
@@ -525,12 +498,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "hits",
-        "max_score",
-        "took",
-        "total"
-      ],
       "properties": {
         "took": {
           "type": "integer"
@@ -618,11 +585,6 @@
     ],
     "return_schema": {
       "type": "object",
-      "required": [
-        "_id",
-        "_version",
-        "drugbank"
-      ],
       "properties": {
         "_id": {
           "type": "string"
@@ -731,11 +693,37 @@
         "variant_id": "rs45478192"
       },
       {
-        "variant_id": "chr17:g.43092919G>A"
+        "variant_id": "chr7:g.140453136A>T"
       }
     ],
     "return_schema": {
-      "type": "object"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

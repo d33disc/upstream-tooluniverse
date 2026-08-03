@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-structural-variant-analysis
-description: Comprehensive structural variant (SV) analysis skill for clinical genomics. Classifies SVs (deletions, duplications, inversions, translocations), assesses pathogenicity using ACMG-adapted criteria, evaluates gene disruption and dosage sensitivity, and provides clinical interpretation with evidence grading. Use when analyzing CNVs, large deletions/duplications, chromosomal rearrangements, or any structural variants requiring clinical interpretation.
+description: "Structural variant (SV) clinical interpretation: deletions, duplications, inversions, translocations, complex rearrangements. Applies ACMG-adapted criteria with ClinGen HI/TS dosage scores, gnomAD frequencies, and ClinVar evidence. Produces 5-tier classification with explicit per-criterion evidence. Use for clinical genomics SV review, dosage-sensitivity assessment, breakpoint analysis, and CNV pathogenicity calls. Gene-dosage-driven reasoning."
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE
@@ -122,7 +123,7 @@ For SV type definitions, scoring tables, and ACMG code details, see `CLASSIFICAT
 Tools:
 - `ensembl_lookup_gene` - gene structure, coordinates, exons
 - `NCBIGene_search` - official symbol, aliases, description
-- `Gene_Ontology_get_term_info` - biological process, molecular function
+- `GO_get_term_details` - biological process, molecular function
 - `OMIM_search`, `OMIM_get_entry` - disease associations, inheritance
 - `DisGeNET_search_gene` - gene-disease association scores
 
@@ -216,7 +217,7 @@ SV_analysis_[TYPE]_chr[CHR]_[START]_[END]_[GENES].md
 - `gnomad_search_variants` - population frequency and pLI (required)
 - `DisGeNET_search_gene` - additional disease associations (recommended)
 - `PubMed_search_articles` - literature evidence (recommended)
-- `Gene_Ontology_get_term_info` - gene function (supporting)
+- `GO_get_term_details` - gene function (supporting)
 
 ---
 

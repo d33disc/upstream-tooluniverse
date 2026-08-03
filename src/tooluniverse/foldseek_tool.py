@@ -74,7 +74,11 @@ class FoldseekTool(BaseRESTTool):
         # Accept 'query' as alias for 'sequence'
         sequence = (arguments.get("sequence") or arguments.get("query") or "").strip()
         database = arguments.get("database", "afdb50")
-        mode = arguments.get("mode", "tmalign")
+        # Fix-R2A-008: must match the JSON schema's documented default
+        # ("3diaa", Foldseek's fast structural-alphabet mode). The prior
+        # "tmalign" fallback silently returned noise-level hits (e-value ~0.3,
+        # ~2-5% identity) for every query, including trivial control cases.
+        mode = arguments.get("mode", "3diaa")
         max_results = min(int(arguments.get("max_results", 10)), 50)
 
         if not pdb_id and not sequence:
@@ -259,7 +263,7 @@ class FoldseekTool(BaseRESTTool):
                     )
 
         # Sort by e-value (lower is better)
-        alignments.sort(key=lambda x: x.get("e_value") or float("inf"))
+        alignments.sort(key=lambda x: (x.get("e_value") or float("inf")))
         total_hits = len(alignments)
         alignments = alignments[:max_results]
 

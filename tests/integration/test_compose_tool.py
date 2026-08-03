@@ -252,6 +252,7 @@ def test_config_file_tools(tooluni):
         engine.close()
 
 
+@pytest.mark.network
 def test_external_file_tools(tooluni):
     """
     Test additional ComposeTool functionality
@@ -281,13 +282,16 @@ def test_external_file_tools(tooluni):
         # Test each available composite tool
         for tool in compose_tools:
             tool_name = tool["name"]
-            if tool_name in [
-                "DrugSafetyAnalyzer",
-                "SimpleExample",
-                "TestDependencyLoading",
-                "ToolDiscover",  # Skip ToolDiscover as it requires LLM calls and may timeout
-                "ToolDescriptionOptimizer",  # Skip ToolDescriptionOptimizer as it requires LLM calls and may timeout
-            ]:
+            if (
+                tool_name
+                in [
+                    "DrugSafetyAnalyzer",
+                    "SimpleExample",
+                    "TestDependencyLoading",
+                    "ToolDiscover",  # Skip ToolDiscover as it requires LLM calls and may timeout
+                    "ToolDescriptionOptimizer",  # Skip ToolDescriptionOptimizer as it requires LLM calls and may timeout
+                ]
+            ):
                 # Skip these as they are tested in other functions or may timeout
                 continue
 
@@ -296,7 +300,9 @@ def test_external_file_tools(tooluni):
                 # Create generic test arguments based on tool requirements
                 test_args = {}
                 if "parameter" in tool and "properties" in tool["parameter"]:
-                    for param_name, param_info in tool["parameter"]["properties"].items():
+                    for param_name, param_info in tool["parameter"][
+                        "properties"
+                    ].items():
                         if param_name == "tool_config":
                             # Special handling for ToolDescriptionOptimizer
                             test_args[param_name] = {
@@ -306,9 +312,12 @@ def test_external_file_tools(tooluni):
                                 "parameter": {
                                     "type": "object",
                                     "properties": {
-                                        "query": {"type": "string", "description": "Search query"}
-                                    }
-                                }
+                                        "query": {
+                                            "type": "string",
+                                            "description": "Search query",
+                                        }
+                                    },
+                                },
                             }
                         elif param_info["type"] == "string":
                             test_args[param_name] = "test_input"

@@ -42,61 +42,101 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "source_gene": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Source Ensembl gene ID"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_gene": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Source Ensembl gene ID"
+                  },
+                  "target_gene": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Target orthologue Ensembl gene ID"
+                  },
+                  "target_protein": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Target orthologue Ensembl protein ID"
+                  },
+                  "target_species": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Target species name"
+                  },
+                  "homology_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Type: ortholog_one2one, ortholog_one2many, ortholog_many2many"
+                  },
+                  "taxonomy_level": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxonomic level of divergence (e.g., Euarchontoglires, Mammalia)"
+                  },
+                  "method": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Method used (ENSEMBL_ORTHOLOGUES)"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_gene": {
+                  "type": "string"
+                },
+                "query_species": {
+                  "type": "string"
+                },
+                "total_orthologues": {
+                  "type": "integer"
+                }
+              }
+            }
           },
-          "target_gene": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Target orthologue Ensembl gene ID"
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
           },
-          "target_protein": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Target orthologue Ensembl protein ID"
-          },
-          "target_species": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Target species name"
-          },
-          "homology_type": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Type: ortholog_one2one, ortholog_one2many, ortholog_many2many"
-          },
-          "taxonomy_level": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Taxonomic level of divergence (e.g., Euarchontoglires, Mammalia)"
-          },
-          "method": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Method used (ENSEMBL_ORTHOLOGUES)"
-          }
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -132,54 +172,94 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "source_gene": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Source Ensembl gene ID"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_gene": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Source Ensembl gene ID"
+                  },
+                  "paralogue_gene": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Paralogue Ensembl gene ID"
+                  },
+                  "paralogue_protein": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Paralogue Ensembl protein ID"
+                  },
+                  "species": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Species name"
+                  },
+                  "paralogy_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Type of paralogy (within_species_paralog, etc.)"
+                  },
+                  "taxonomy_level": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Level of gene duplication event"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_gene": {
+                  "type": "string"
+                },
+                "query_species": {
+                  "type": "string"
+                },
+                "total_paralogues": {
+                  "type": "integer"
+                }
+              }
+            }
           },
-          "paralogue_gene": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Paralogue Ensembl gene ID"
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
           },
-          "paralogue_protein": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Paralogue Ensembl protein ID"
-          },
-          "species": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Species name"
-          },
-          "paralogy_type": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Type of paralogy (within_species_paralog, etc.)"
-          },
-          "taxonomy_level": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Level of gene duplication event"
-          }
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -209,49 +289,235 @@
       {
         "gene": "BRCA1",
         "species": "human"
-      },
-      {
-        "gene": "TP53",
-        "species": "human"
       }
     ],
     "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "tree_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Gene tree stable ID"
+                },
+                "newick": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Tree in Newick format (if available)"
+                },
+                "rooted": {
+                  "type": [
+                    "boolean",
+                    "integer",
+                    "null"
+                  ],
+                  "description": "Whether tree is rooted (may be 0/1 integer or boolean)"
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "description": "Gene tree members (gene_id, species) - max 50 shown"
+                },
+                "total_members": {
+                  "type": "integer",
+                  "description": "Total members in the gene tree"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_gene": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "EnsemblCompara_get_cafe_tree",
+    "description": "Retrieve the Ensembl Compara CAFE tree for a gene family: the gene gain/loss (expansion/contraction) analysis that infers ancestral gene-copy counts (n_members) at every node of the species tree, with the birth-death rate (lambda) and per-node p-values. Unlike EnsemblCompara_get_gene_tree (which returns the phylogenetic gene tree topology + members), this returns the CAFE family-size dynamics used to detect lineage-specific gene-family expansions/contractions. Provide either gene_tree_id (e.g. 'ENSGT00390000003602') or gene (symbol e.g. 'BRCA2', or Ensembl gene ID). Example: gene_tree_id='ENSGT00390000003602' returns type 'cafe tree', rooted, pvalue_avg, lambda ~5.08e-08, and per-node n_members / pvalue along the species tree.",
+    "parameter": {
       "type": "object",
       "properties": {
-        "tree_id": {
+        "gene_tree_id": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Gene tree stable ID"
+          "description": "Ensembl gene tree (family) stable ID, e.g. 'ENSGT00390000003602'. Use this OR 'gene'."
         },
-        "newick": {
+        "gene": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Tree in Newick format (if available)"
+          "description": "Gene symbol (e.g. 'BRCA2') or Ensembl gene ID (e.g. 'ENSG00000139618'). The CAFE tree for the family containing this gene is returned. Use this OR 'gene_tree_id'."
         },
-        "rooted": {
+        "species": {
           "type": [
-            "boolean",
-            "integer",
+            "string",
             "null"
           ],
-          "description": "Whether tree is rooted (may be 0/1 integer or boolean)"
-        },
-        "members": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "description": "Gene tree members (gene_id, species) - max 50 shown"
-        },
-        "total_members": {
-          "type": "integer",
-          "description": "Total members in the gene tree"
+          "description": "Species for symbol lookup when 'gene' is a symbol (default: 'human'). Examples: 'human', 'mouse', 'homo_sapiens'."
         }
       }
+    },
+    "fields": {
+      "endpoint": "cafe_tree"
+    },
+    "type": "EnsemblComparaTool",
+    "test_examples": [
+      {
+        "gene_tree_id": "ENSGT00390000003602"
+      },
+      {
+        "gene": "BRCA2",
+        "species": "homo_sapiens"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "rooted": {
+              "type": [
+                "integer",
+                "boolean",
+                "null"
+              ]
+            },
+            "pvalue_avg": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "lambda": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "root_n_members": {
+              "type": [
+                "integer",
+                "number",
+                "null"
+              ]
+            },
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "scientific_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "taxon_id": {
+                    "type": [
+                      "integer",
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "n_members": {
+                    "type": [
+                      "integer",
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "pvalue": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "p_value_lim": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "lambda": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "total_nodes": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

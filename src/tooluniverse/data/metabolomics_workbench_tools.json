@@ -41,12 +41,25 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "array",
-        "string"
-      ],
-      "description": "Study information object, empty array if not found, or text response"
+      "oneOf": [
+        {
+          "type": [
+            "array",
+            "string"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -86,41 +99,60 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "regno": {
-          "type": "string",
-          "description": "Registry number"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "pubchem_cid": {
+              "type": "string"
+            },
+            "inchi_key": {
+              "type": "string"
+            },
+            "exactmass": {
+              "type": "number"
+            },
+            "formula": {
+              "type": "string"
+            },
+            "super_class": {
+              "type": "string"
+            },
+            "main_class": {
+              "type": "string"
+            },
+            "sub_class": {
+              "type": "string"
+            },
+            "smiles": {
+              "type": "string"
+            },
+            "regno": {
+              "type": "string"
+            },
+            "refmet_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
         },
-        "formula": {
-          "type": "string",
-          "description": "Molecular formula"
-        },
-        "exactmass": {
-          "type": "number",
-          "description": "Exact molecular mass"
-        },
-        "inchi_key": {
-          "type": "string",
-          "description": "InChIKey identifier"
-        },
-        "name": {
-          "type": "string",
-          "description": "Compound name"
-        },
-        "sys_name": {
-          "type": "string",
-          "description": "Systematic name"
-        },
-        "smiles": {
-          "type": "string",
-          "description": "SMILES structure"
-        },
-        "data": {
-          "type": "string",
-          "description": "Raw response data if not JSON"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -166,27 +198,63 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "regno": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "pubchem_cid": {
+              "type": "string"
+            },
+            "regno": {
+              "type": "string"
+            },
+            "formula": {
+              "type": "string"
+            },
+            "exactmass": {
+              "type": "number"
+            },
+            "inchi_key": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "sys_name": {
+              "type": "string"
+            },
+            "hmdb_id": {
+              "type": "string"
+            },
+            "kegg_id": {
+              "type": "string"
+            },
+            "chebi_id": {
+              "type": "string"
+            },
+            "metacyc_id": {
+              "type": "string"
+            },
+            "smiles": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "pubchem_cid"
+          ]
         },
-        "formula": {
-          "type": "string"
-        },
-        "exactmass": {
-          "type": "number"
-        },
-        "inchi_key": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "smiles": {
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -223,33 +291,60 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Standardized RefMet name"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "pubchem_cid": {
+              "type": "string"
+            },
+            "inchi_key": {
+              "type": "string"
+            },
+            "exactmass": {
+              "type": "number"
+            },
+            "formula": {
+              "type": "string"
+            },
+            "super_class": {
+              "type": "string"
+            },
+            "main_class": {
+              "type": "string"
+            },
+            "sub_class": {
+              "type": "string"
+            },
+            "smiles": {
+              "type": "string"
+            },
+            "regno": {
+              "type": "string"
+            },
+            "refmet_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
         },
-        "formula": {
-          "type": "string",
-          "description": "Molecular formula"
-        },
-        "exactmass": {
-          "type": "number",
-          "description": "Exact mass"
-        },
-        "super_class": {
-          "type": "string",
-          "description": "Super class classification"
-        },
-        "main_class": {
-          "type": "string",
-          "description": "Main class classification"
-        },
-        "sub_class": {
-          "type": "string",
-          "description": "Sub class classification"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -304,11 +399,25 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "string"
-      ],
-      "description": "Metabolite matches object or error message string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -346,12 +455,246 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "array",
-        "string"
-      ],
-      "description": "Metabolite matches object or empty array if no matches found"
+      "oneOf": [
+        {
+          "type": ["array", "string"],
+          "description": "Array of matched-compound records; a raw TSV header-only string when the search returns no matches.",
+          "items": {
+            "type": "object"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "MetabolomicsWorkbench_find_studies_by_phenotype",
+    "description": "Discover Metabolomics Workbench studies matching a phenotype/experimental profile via the METSTAT context. Filter the study catalog by any combination of: analysis type (e.g. 'MS', 'NMR'), polarity (POSITIVE/NEGATIVE), chromatography (e.g. 'HILIC', 'Reverse phase'), species (e.g. 'Human', 'Mouse'), sample source (e.g. 'Blood', 'Urine', 'Liver'), disease (e.g. 'Diabetes', 'Cancer'), KEGG id, and RefMet metabolite name. Every filter is optional and empty filters act as wildcards (at least one filter is required). Returns the matching studies (study id, title, and the matched species/source/disease context). Example: species='Human', source='Blood', disease='Diabetes' -> 28 studies including ST003897 'Postprandial Plasma Lipidomic Changes...'.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "analysis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Analysis type filter (e.g. 'MS', 'NMR', 'LC-MS')."
+        },
+        "polarity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Ionization polarity filter ('POSITIVE' or 'NEGATIVE')."
+        },
+        "chromatography": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Chromatography type filter (e.g. 'HILIC', 'Reverse phase')."
+        },
+        "species": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Subject species filter (e.g. 'Human', 'Mouse', 'Rat')."
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Sample source / specimen filter (e.g. 'Blood', 'Urine', 'Liver', 'Feces')."
+        },
+        "disease": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Disease / condition filter (e.g. 'Diabetes', 'Cancer', 'Obesity')."
+        },
+        "kegg_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "KEGG compound id filter (e.g. 'C00031')."
+        },
+        "refmet_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "RefMet standardized metabolite name filter (e.g. 'Glucose', 'Cholic acid')."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "context": "metstat",
+      "output_format": "json"
+    },
+    "type": "MetabolomicsWorkbenchTool",
+    "test_examples": [
+      {
+        "species": "Human",
+        "source": "Blood",
+        "disease": "Diabetes"
+      },
+      {
+        "species": "Human",
+        "source": "Urine"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Matching studies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "study": {
+                "type": "string",
+                "description": "Study id (e.g. ST003897)"
+              },
+              "study_title": {
+                "type": "string"
+              },
+              "species": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "disease": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "MetabolomicsWorkbench_get_gene_protein",
+    "description": "Look up a Metabolomics Workbench gene or protein (MGP) annotation record linking gene/protein identifiers to the Metabolomics Workbench. Set entity='gene' (default) or entity='protein'; id_type selects the lookup namespace. Gene records (entity='gene') return gene_symbol, gene_id, gene_name, synonyms, chromosome/map_location, MGP id, and a summary. Protein records (entity='protein') return UniProt id, gene_symbol, species, mRNA/RefSeq ids, protein entry name, sequence length and the amino-acid sequence. Examples: entity='gene', id_type='gene_symbol', input_value='acaca' -> ACACA 'acetyl-CoA carboxylase alpha', gene_id 31, MGP000016; entity='protein', id_type='uniprot_id', input_value='Q13085' -> ACACA_HUMAN, NM_198839, NP_942136, 2346 aa.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "input_value": {
+          "type": "string",
+          "description": "The identifier to look up (e.g. gene symbol 'acaca', UniProt id 'Q13085', mgp_id 'MGP000016')."
+        },
+        "entity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Which record type to fetch: 'gene' (default) or 'protein'."
+        },
+        "id_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Namespace of input_value. For genes: gene_symbol (default), gene_id, gene_name, mgp_id, refseq_id. For proteins: uniprot_id (default), gene_symbol, mgp_id, refseq_id, gene_id."
+        }
+      },
+      "required": [
+        "input_value"
+      ]
+    },
+    "fields": {
+      "context": "gene_protein",
+      "output_format": "json"
+    },
+    "type": "MetabolomicsWorkbenchTool",
+    "test_examples": [
+      {
+        "input_value": "acaca",
+        "entity": "gene",
+        "id_type": "gene_symbol"
+      },
+      {
+        "input_value": "Q13085",
+        "entity": "protein",
+        "id_type": "uniprot_id"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Gene or protein MGP record(s)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_symbol": {
+                "type": "string"
+              },
+              "gene_id": {
+                "type": "string"
+              },
+              "gene_name": {
+                "type": "string"
+              },
+              "mgp_id": {
+                "type": "string"
+              },
+              "uniprot_id": {
+                "type": "string"
+              },
+              "protein_entry": {
+                "type": "string"
+              },
+              "mrna_id": {
+                "type": "string"
+              },
+              "refseq_id": {
+                "type": "string"
+              },
+              "seqlength": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

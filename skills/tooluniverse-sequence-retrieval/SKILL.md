@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-sequence-retrieval
-description: Retrieves biological sequences (DNA, RNA, protein) from NCBI and ENA with gene disambiguation, accession type handling, and comprehensive sequence profiles. Creates detailed reports with sequence metadata, cross-database references, and download options. Use when users need nucleotide sequences, protein sequences, genome data, or mention GenBank, RefSeq, EMBL accessions.
+description: "Retrieve DNA/RNA/protein sequences from NCBI and ENA with disambiguation. Quality hierarchy: RefSeq (NM_/NP_) > RefSeq predicted (XM_/XP_) > GenBank submissions. Use for fetching specific sequences by accession, gene-symbol-to-sequence lookup, transcript-isoform retrieval, and curated-vs-raw-submission preference."
+disable-model-invocation: true
 ---
 
 # Biological Sequence Retrieval
@@ -77,7 +78,7 @@ fasta = tu.tools.ena_get_sequence_fasta(accession=accession)
 | Primary | Fallback | Notes |
 |---------|----------|-------|
 | NCBI_get_sequence | ENA (if GenBank format) | NCBI unavailable |
-| ENA_get_entry | NCBI_get_sequence | ENA doesn't have RefSeq |
+| ena_get_entry | NCBI_get_sequence | ENA doesn't have RefSeq |
 | NCBI_search_nucleotide | Try broader keywords | No results |
 
 ---

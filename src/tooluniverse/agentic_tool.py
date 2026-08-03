@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import json
+import math
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional
 
@@ -9,22 +10,18 @@ from .base_tool import BaseTool
 from .tool_registry import register_tool
 from .logging_config import get_logger
 from .llm_clients import (
-    BaseLLMClient,
+    AzureOpenAIClient,
     ClaudeCliClient,
-    # GeminiClient,       # no GEMINI_API_KEY
-    OpenRouterClient,
+    GeminiClient,
     OllamaClient,
-    # VLLMClient,         # no VLLM_SERVER_URL
+    OpenAICompatibleClient,
+    OpenRouterClient,
+    VLLMClient,
 )
 
 
-# System prompt for the Ollama agentic fallback. qwen3.5:35b-a3b ships with NO system
-# prompt, so without this it gets zero format/role guidance. Phrased CONDITIONALLY ("when
-# the user asks for JSON") so it tightens the JSON tools (kills the documented qwen failure
-# modes — prose preamble + ```json fences) WITHOUT forcing JSON onto prose tools
-# (HypothesisGenerator, *Reviewer). Grounded in Qwen/Ollama structured-output guidance:
-# the format grammar fence constrains tokens, but only a prose instruction aims the
-# probability mass at the right shape and suppresses preamble.
+# Local, key-free backends remain first so fork users can run agentic tools
+# through an existing Claude subscription or local Ollama installation.
 OLLAMA_AGENTIC_SYSTEM_PROMPT = (
     "You are a biomedical NLP expert. Follow the user's task instructions and requested "
     "output format exactly, matching field names and schema verbatim. When the user asks "
@@ -32,25 +29,8 @@ OLLAMA_AGENTIC_SYSTEM_PROMPT = (
     "use null for missing or uncertain values and never omit required fields."
 )
 
-# Global default fallback configuration.
-# Order is cost-ascending: free backends first (Claude CLI subscription, local Ollama),
-# then paid OpenRouter only as a last resort — so agentic tools stay up even when the
-# Claude CLI is usage-capped and Ollama is offline. OpenRouter is skipped automatically
-# when OPENROUTER_API_KEY is absent (see API_KEY_ENV_VARS).
 DEFAULT_FALLBACK_CHAIN = [
     {"api_type": "CLAUDE_CLI", "model_id": "haiku"},
-    # qwen3.5 (general-instruct MoE) over qwen3.6 (coding-flagship, regressed on
-    # instruction-following per IFBench) — agentic tools need JSON/instruction adherence,
-    # not code-gen. 35B/3B-active runs at ~3B-dense speed on M1 Metal. `ollama pull qwen3.5:35b-a3b`
-    #
-    # `options` are empirically tuned for this thinking-capable model on TU's structured
-    # agentic tasks (1-D temperature sweep on real tool prompts, 2026-06-05):
-    #   think=False  — qwen3.5 otherwise spends ~3k tokens reasoning before answering, so a
-    #                  bounded num_predict yields EMPTY content; disabling it is 5-19x faster
-    #                  (~1-3s vs 14-118s) and populates valid output. Structured extraction
-    #                  needs no chain-of-thought.
-    #   temperature=0.0 — max determinism (same input -> same output, every JSON tool fully
-    #                  reproducible) with zero prose degeneration at greedy decoding.
     {
         "api_type": "OLLAMA",
         "model_id": "qwen3.5:35b-a3b",
@@ -60,16 +40,20 @@ DEFAULT_FALLBACK_CHAIN = [
             "system": OLLAMA_AGENTIC_SYSTEM_PROMPT,
         },
     },
-    {"api_type": "OPENROUTER", "model_id": "anthropic/claude-3.5-haiku"},
+    {"api_type": "CHATGPT", "model_id": "gpt-4o-1120"},
+    {"api_type": "OPENROUTER", "model_id": "openai/gpt-4o"},
+    {"api_type": "GEMINI", "model_id": "gemini-3.6-flash"},
 ]
 
 # API key environment variable mapping
 API_KEY_ENV_VARS = {
     "CLAUDE_CLI": [],
     "OLLAMA": [],
+    "CHATGPT": ["AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT"],
+    "OPENAI": ["OPENAI_API_KEY"],
     "OPENROUTER": ["OPENROUTER_API_KEY"],
-    # "VLLM": ["VLLM_SERVER_URL"],
-    # "GEMINI": ["GEMINI_API_KEY"],
+    "GEMINI": ["GEMINI_API_KEY"],
+    "VLLM": ["VLLM_SERVER_URL"],
 }
 
 
@@ -78,6 +62,33 @@ class AgenticTool(BaseTool):
     """Generic wrapper around LLM prompting supporting JSON-defined configs with prompts and input arguments."""
 
     STREAM_FLAG_KEY = "_tooluniverse_stream"
+
+    @staticmethod
+    def _parse_bool_env(value: Optional[str]) -> Optional[bool]:
+        if value is None:
+            return None
+        normalized = value.strip().lower()
+        if normalized in {"1", "true", "yes", "on"}:
+            return True
+        if normalized in {"0", "false", "no", "off"}:
+            return False
+        raise ValueError(f"Expected boolean environment value, got: {value!r}")
+
+    @staticmethod
+    def _parse_float_env(value: Optional[str]) -> Optional[float]:
+        if value is None or value == "":
+            return None
+        try:
+            parsed = float(value)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                f"Expected numeric TOOLUNIVERSE_LLM_TEMPERATURE, got: {value!r}"
+            ) from exc
+        if not math.isfinite(parsed):
+            raise ValueError(
+                f"Expected finite numeric TOOLUNIVERSE_LLM_TEMPERATURE, got: {value!r}"
+            )
+        return parsed
 
     @staticmethod
     def has_any_api_keys() -> bool:
@@ -135,8 +146,13 @@ class AgenticTool(BaseTool):
                     "TOOLUNIVERSE_LLM_MODEL_DEFAULT"
                 )
             elif key == "temperature":
-                temp_str = os.getenv("TOOLUNIVERSE_LLM_TEMPERATURE")
-                env_value = float(temp_str) if temp_str else None
+                env_value = self._parse_float_env(
+                    os.getenv("TOOLUNIVERSE_LLM_TEMPERATURE")
+                )
+            elif key == "return_json":
+                env_value = self._parse_bool_env(
+                    os.getenv("TOOLUNIVERSE_LLM_RETURN_JSON")
+                )
 
             mode = os.getenv("TOOLUNIVERSE_LLM_CONFIG_MODE", "default")
 
@@ -161,8 +177,8 @@ class AgenticTool(BaseTool):
                 return default
 
         # LLM configuration
-        self._api_type: str = get_config("api_type", "CLAUDE_CLI")
-        self._model_id: str = get_config("model_id", "haiku")
+        self._api_type: str = get_config("api_type", "CHATGPT")
+        self._model_id: str = get_config("model_id", "gpt-5")
         self._temperature: Optional[float] = get_config("temperature", 1.0)
         # max_new_tokens is handled by LLM client automatically
         self._return_json: bool = get_config("return_json", False)
@@ -183,7 +199,7 @@ class AgenticTool(BaseTool):
         # Gemini model configuration (optional; env override)
         self._gemini_model_id: str = get_config(
             "gemini_model_id",
-            __import__("os").getenv("GEMINI_MODEL_ID", "gemini-2.0-flash"),
+            __import__("os").getenv("GEMINI_MODEL_ID", "gemini-3.6-flash"),
         )
 
         # Validation
@@ -207,8 +223,8 @@ class AgenticTool(BaseTool):
         self._validate_model_config()
 
         # Initialize the provider client
-        self._llm_client: Optional[BaseLLMClient] = None
-        self._initialization_error: Optional[str] = None
+        self._llm_client = None
+        self._initialization_error = None
         self._is_available = False
         self._current_api_type = None
         self._current_model_id = None
@@ -319,24 +335,26 @@ class AgenticTool(BaseTool):
             if api_type == "CLAUDE_CLI":
                 self._llm_client = ClaudeCliClient(model_id, server_url, self.logger)
             elif api_type == "OLLAMA":
-                if not server_url:
-                    server_url = os.getenv("OLLAMA_SERVER_URL")
+                server_url = server_url or os.getenv("OLLAMA_SERVER_URL")
                 self._llm_client = OllamaClient(model_id, server_url, self.logger)
+            elif api_type == "CHATGPT":
+                self._llm_client = AzureOpenAIClient(model_id, None, self.logger)
+            elif api_type == "OPENAI":
+                self._llm_client = OpenAICompatibleClient(model_id, self.logger)
             elif api_type == "OPENROUTER":
                 self._llm_client = OpenRouterClient(model_id, self.logger)
-            # elif api_type == "VLLM":
-            #     if not server_url:
-            #         server_url = os.getenv("VLLM_SERVER_URL")
-            #     if not server_url:
-            #         raise ValueError("VLLM_SERVER_URL environment variable not set")
-            #     self._llm_client = VLLMClient(model_id, server_url, self.logger)
-            # elif api_type == "GEMINI":
-            #     self._llm_client = GeminiClient(model_id, self.logger)
+            elif api_type == "GEMINI":
+                self._llm_client = GeminiClient(model_id, self.logger)
+            elif api_type == "VLLM":
+                if not server_url:
+                    server_url = os.getenv("VLLM_SERVER_URL")
+                if not server_url:
+                    raise ValueError("VLLM_SERVER_URL environment variable not set")
+                self._llm_client = VLLMClient(model_id, server_url, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {api_type}")
 
             # Test API key validity after initialization (if enabled)
-            assert self._llm_client is not None
             if self._validate_api_key:
                 self._llm_client.test_api()
                 self.logger.debug(
@@ -365,82 +383,96 @@ class AgenticTool(BaseTool):
             return False
 
     def _chain_options_for(self, api_type, model_id) -> Dict[str, Any]:
-        """Tuned options for a backend, looked up by (api_type, model_id) from the global
-        fallback chain — so they apply whether the backend is the active primary or a
-        fallback hop."""
-        for fc in self._global_fallback_chain:
-            if fc.get("api_type") == api_type and fc.get("model_id") == model_id:
-                return fc.get("options", {}) or {}
+        """Return backend-specific tuning from the configured fallback chain."""
+        for fallback in getattr(self, "_global_fallback_chain", []):
+            if (
+                fallback.get("api_type") == api_type
+                and fallback.get("model_id") == model_id
+            ):
+                return fallback.get("options", {}) or {}
         return {}
 
     def _buffered_infer_with_fallback(self, messages, custom_format):
-        """Call the active backend; if it returns nothing at RUNTIME (e.g. the Claude CLI
-        is usage-capped and returns None), fall through the remaining fallback-chain
-        backends whose required keys are present, so the agentic tool stays up. Returns
-        the first non-empty result, or None if every backend fails."""
+        """Fall through configured providers when inference fails at runtime."""
         active = (
-            self._current_api_type or self._api_type,
-            self._current_model_id or self._model_id,
+            getattr(self, "_current_api_type", None) or self._api_type,
+            getattr(self, "_current_model_id", None) or self._model_id,
         )
-        # Tuned options follow the BACKEND, not the chain position: once a tool falls back to
-        # Ollama, `_current_api_type` becomes sticky-OLLAMA, so the active backend must also
-        # pick up its chain-entry options (think=False, temperature=0.0) — otherwise warm
-        # calls revert to the tool default (temp 1.0, thinking on: slow + non-deterministic).
         attempts = [(*active, self._chain_options_for(*active))]
-        if self._use_global_fallback:
-            for fc in self._global_fallback_chain:
-                pair = (fc.get("api_type"), fc.get("model_id"))
-                if any(pair == (a, m) for a, m, _ in attempts) or None in pair:
+        if getattr(self, "_use_global_fallback", False):
+            for fallback in getattr(self, "_global_fallback_chain", []):
+                pair = (fallback.get("api_type"), fallback.get("model_id"))
+                if any(pair == (api, model) for api, model, _ in attempts):
                     continue
-                if all(os.getenv(v) for v in API_KEY_ENV_VARS.get(pair[0], [])):
-                    attempts.append((*pair, fc.get("options", {}) or {}))
+                if None in pair:
+                    continue
+                if all(os.getenv(var) for var in API_KEY_ENV_VARS.get(pair[0], [])):
+                    attempts.append((*pair, fallback.get("options", {}) or {}))
 
         result = None
-        for idx, (api_type, model_id, options) in enumerate(attempts):
-            if idx > 0:
-                self.logger.info(
-                    f"Agentic runtime fallback: '{self.name}' -> {api_type} ({model_id})"
-                )
-                if not self._try_api(api_type, model_id):
-                    continue
-            # Per-backend tuned options (e.g. Ollama think=False, temperature=0.0) override
-            # the tool default; `think` is Ollama-only so it is passed only for that backend.
-            # A per-backend `system` prompt is prepended as a system-role turn (qwen3.5 ships
-            # with none) — phrased conditionally so it tightens JSON tools without forcing
-            # JSON onto prose tools.
+        for index, (api_type, model_id, options) in enumerate(attempts):
+            if index and not self._try_api(api_type, model_id):
+                continue
             backend_messages = messages
             if options.get("system"):
                 backend_messages = [
                     {"role": "system", "content": options["system"]},
                     *messages,
                 ]
-            infer_kwargs: Dict[str, Any] = dict(
-                messages=backend_messages,
-                temperature=options.get("temperature", self._temperature),
-                max_tokens=None,
-                return_json=self._return_json,
-                custom_format=custom_format,
-                max_retries=self._max_retries,
-                retry_delay=self._retry_delay,
-            )
+            infer_kwargs: Dict[str, Any] = {
+                "messages": backend_messages,
+                "temperature": options.get("temperature", self._temperature),
+                "max_tokens": None,
+                "return_json": self._return_json,
+                "custom_format": custom_format,
+                "max_retries": self._max_retries,
+                "retry_delay": self._retry_delay,
+            }
             if api_type == "OLLAMA" and "think" in options:
                 infer_kwargs["think"] = options["think"]
             try:
                 result = self._llm_client.infer(**infer_kwargs)
             except Exception as exc:  # noqa: BLE001
                 self.logger.warning(f"Backend {api_type} raised: {exc}")
-                result = None
             if result:
                 return result
         return result
 
     # ------------------------------------------------------------------ LLM utilities -----------
     def _validate_model_config(self):
-        supported_api_types = list(API_KEY_ENV_VARS.keys())
+        supported_api_types = list(API_KEY_ENV_VARS)
         if self._api_type not in supported_api_types:
             raise ValueError(
                 f"Unsupported API type: {self._api_type}. Supported types: {supported_api_types}"
             )
+
+    def _execution_model_info(self) -> Dict[str, Any]:
+        """Return metadata for the model and parameters used for this execution."""
+        api_type = getattr(self, "_current_api_type", None) or self._api_type
+        model_id = getattr(self, "_current_model_id", None) or self._model_id
+        model_info = {
+            "api_type": api_type,
+            "model_id": model_id,
+            "temperature": self._temperature,
+        }
+
+        accepts_sampling_parameters = getattr(
+            self._llm_client, "_accepts_sampling_parameters", None
+        )
+        if (
+            api_type == "GEMINI"
+            and callable(accepts_sampling_parameters)
+            and not accepts_sampling_parameters()
+        ):
+            model_info.update(
+                {
+                    "temperature": None,
+                    "configured_temperature": self._temperature,
+                    "sampling_parameters_omitted": True,
+                }
+            )
+
+        return model_info
 
     # ------------------------------------------------------------------ public API --------------
     def run(
@@ -483,10 +515,9 @@ class AgenticTool(BaseTool):
                 return tool_error(
                     error_msg,
                     error_type="ToolUnavailable",
-                    suggestion="Check that the required LLM backend (Claude CLI or Ollama) is running.",
+                    suggestion="Check that the configured LLM backend is available.",
                 )
 
-        assert self._llm_client is not None  # guarded by _is_available check above
         try:
             # Validate required args
             missing_required_args = [
@@ -563,11 +594,7 @@ class AgenticTool(BaseTool):
                         "input_arguments": {
                             arg: arguments.get(arg) for arg in self._input_arguments
                         },
-                        "model_info": {
-                            "api_type": self._api_type,
-                            "model_id": self._model_id,
-                            "temperature": self._temperature,
-                        },
+                        "model_info": self._execution_model_info(),
                         "execution_time_seconds": execution_time,
                         "timestamp": start_time.isoformat(),
                     },
@@ -579,7 +606,7 @@ class AgenticTool(BaseTool):
                     return tool_error(
                         f"All LLM backends returned empty for '{self.name}'",
                         error_type="LLMBackendFailure",
-                        suggestion="Check Claude CLI / Ollama availability and timeout settings.",
+                        suggestion="Check the configured LLM backends and timeout settings.",
                     )
                 return response
 
@@ -601,11 +628,7 @@ class AgenticTool(BaseTool):
                         "input_arguments": {
                             arg: arguments.get(arg) for arg in self._input_arguments
                         },
-                        "model_info": {
-                            "api_type": self._api_type,
-                            "model_id": self._model_id,
-                            "temperature": self._temperature,
-                        },
+                        "model_info": self._execution_model_info(),
                         "execution_time_seconds": execution_time,
                         "timestamp": start_time.isoformat(),
                     },
@@ -625,11 +648,7 @@ class AgenticTool(BaseTool):
                         "input_arguments": {
                             arg: arguments.get(arg) for arg in self._input_arguments
                         },
-                        "model_info": {
-                            "api_type": self._api_type,
-                            "model_id": self._model_id,
-                            "temperature": self._temperature,
-                        },
+                        "model_info": self._execution_model_info(),
                         "execution_time_seconds": execution_time,
                     },
                 )
@@ -731,21 +750,25 @@ class AgenticTool(BaseTool):
             if self._api_type == "CLAUDE_CLI":
                 self._llm_client = ClaudeCliClient(self._model_id, None, self.logger)
             elif self._api_type == "OLLAMA":
-                server_url = os.getenv("OLLAMA_SERVER_URL")
-                self._llm_client = OllamaClient(self._model_id, server_url, self.logger)
+                self._llm_client = OllamaClient(
+                    self._model_id, os.getenv("OLLAMA_SERVER_URL"), self.logger
+                )
+            elif self._api_type == "CHATGPT":
+                self._llm_client = AzureOpenAIClient(self._model_id, None, self.logger)
+            elif self._api_type == "OPENAI":
+                self._llm_client = OpenAICompatibleClient(self._model_id, self.logger)
             elif self._api_type == "OPENROUTER":
                 self._llm_client = OpenRouterClient(self._model_id, self.logger)
-            # elif self._api_type == "VLLM":
-            #     server_url = os.getenv("VLLM_SERVER_URL")
-            #     if not server_url:
-            #         raise ValueError("VLLM_SERVER_URL environment variable not set")
-            #     self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
-            # elif self._api_type == "GEMINI":
-            #     self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
+            elif self._api_type == "GEMINI":
+                self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
+            elif self._api_type == "VLLM":
+                server_url = os.getenv("VLLM_SERVER_URL")
+                if not server_url:
+                    raise ValueError("VLLM_SERVER_URL environment variable not set")
+                self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {self._api_type}")
 
-            assert self._llm_client is not None
             if self._validate_api_key:
                 self._llm_client.test_api()
                 self.logger.info(
@@ -770,14 +793,16 @@ class AgenticTool(BaseTool):
         return self._input_arguments.copy()
 
     def validate_configuration(self) -> Dict[str, Any]:
-        errors: List[str] = []
+        validation_results = {"valid": True, "warnings": [], "errors": []}
         try:
             self._validate_model_config()
         except ValueError as e:
-            errors.append(str(e))
+            validation_results["valid"] = False
+            validation_results["errors"].append(str(e))
         if not self._prompt_template:
-            errors.append("Missing prompt template")
-        return {"valid": len(errors) == 0, "warnings": [], "errors": errors}
+            validation_results["valid"] = False
+            validation_results["errors"].append("Missing prompt template")
+        return validation_results
 
     def estimate_token_usage(self, arguments: Dict[str, Any]) -> Dict[str, int]:
         prompt = self._format_prompt(arguments)

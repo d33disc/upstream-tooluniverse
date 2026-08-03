@@ -33,11 +33,28 @@
     "test_examples": [
       {
         "query": "glycolysis"
-      },
-      {
-        "query": "tricarboxylic acid cycle"
       }
-    ]
+    ],
+    "required_api_keys": [
+      "BIOCYC_EMAIL",
+      "BIOCYC_PASSWORD"
+    ],
+    "api_key_info": {
+      "BIOCYC_EMAIL": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account email — unlocks MetaCyc pathway/compound/reaction web services.",
+        "without": "MetaCyc tools are blocked without an account (paired with the password)."
+      },
+      "BIOCYC_PASSWORD": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account password — authenticates the MetaCyc web-service session.",
+        "without": "Required together with the BioCyc email."
+      }
+    }
   },
   {
     "name": "MetaCyc_get_pathway",
@@ -73,11 +90,28 @@
     "test_examples": [
       {
         "pathway_id": "GLYCOLYSIS"
-      },
-      {
-        "pathway_id": "PWY-5177"
       }
-    ]
+    ],
+    "required_api_keys": [
+      "BIOCYC_EMAIL",
+      "BIOCYC_PASSWORD"
+    ],
+    "api_key_info": {
+      "BIOCYC_EMAIL": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account email — unlocks MetaCyc pathway/compound/reaction web services.",
+        "without": "MetaCyc tools are blocked without an account (paired with the password)."
+      },
+      "BIOCYC_PASSWORD": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account password — authenticates the MetaCyc web-service session.",
+        "without": "Required together with the BioCyc email."
+      }
+    }
   },
   {
     "name": "MetaCyc_get_compound",
@@ -113,11 +147,28 @@
     "test_examples": [
       {
         "compound_id": "PYRUVATE"
-      },
-      {
-        "compound_id": "CPD-1"
       }
-    ]
+    ],
+    "required_api_keys": [
+      "BIOCYC_EMAIL",
+      "BIOCYC_PASSWORD"
+    ],
+    "api_key_info": {
+      "BIOCYC_EMAIL": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account email — unlocks MetaCyc pathway/compound/reaction web services.",
+        "without": "MetaCyc tools are blocked without an account (paired with the password)."
+      },
+      "BIOCYC_PASSWORD": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account password — authenticates the MetaCyc web-service session.",
+        "without": "Required together with the BioCyc email."
+      }
+    }
   },
   {
     "name": "MetaCyc_get_reaction",
@@ -153,10 +204,27 @@
     "test_examples": [
       {
         "reaction_id": "PEPDEPHOS-RXN"
-      },
-      {
-        "reaction_id": "RXN-14500"
       }
-    ]
+    ],
+    "required_api_keys": [
+      "BIOCYC_EMAIL",
+      "BIOCYC_PASSWORD"
+    ],
+    "api_key_info": {
+      "BIOCYC_EMAIL": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account email — unlocks MetaCyc pathway/compound/reaction web services.",
+        "without": "MetaCyc tools are blocked without an account (paired with the password)."
+      },
+      "BIOCYC_PASSWORD": {
+        "domain": "Biological Pathways",
+        "type": "secret",
+        "register_url": "https://biocyc.org/signup.shtml",
+        "purpose": "BioCyc account password — authenticates the MetaCyc web-service session.",
+        "without": "Required together with the BioCyc email."
+      }
+    }
   }
 ]

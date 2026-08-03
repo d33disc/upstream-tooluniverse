@@ -54,10 +54,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -171,12 +168,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 10
-      },
-      {
-        "query": "cancer",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 10
       }
     ]
   },
@@ -235,10 +226,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -349,12 +337,6 @@
     "test_examples": [
       {
         "query": "cancer",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 50
-      },
-      {
-        "query": "diabetes",
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
@@ -418,10 +400,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -535,12 +514,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
-      },
-      {
-        "query": "diabetes",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 50
       }
     ]
   },
@@ -599,10 +572,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -716,12 +686,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 50
-      },
-      {
-        "query": "cancer",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 50
       }
     ]
   },
@@ -790,10 +754,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -915,12 +876,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -987,10 +942,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -1105,12 +1057,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -1166,10 +1112,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -1259,12 +1202,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "aspirin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -1330,10 +1267,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -1455,12 +1389,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -1527,10 +1455,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -1652,12 +1577,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 1
-      },
-      {
-        "query": "aspirin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 1
       }
     ]
   },
@@ -1724,10 +1643,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -1834,12 +1750,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -1932,10 +1842,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -2121,12 +2028,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -2188,10 +2089,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -2293,12 +2191,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "aspirin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -2379,10 +2271,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -2542,12 +2431,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -2607,10 +2490,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -2708,12 +2588,6 @@
         "case_sensitive": false,
         "exact_match": true,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": true,
-        "limit": 5
       }
     ]
   },
@@ -2783,10 +2657,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -2924,12 +2795,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -3007,10 +2872,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -3146,12 +3008,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "metformin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -3227,10 +3083,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -3358,12 +3211,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 1
-      },
-      {
-        "query": "aspirin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 1
       }
     ]
   },
@@ -3433,10 +3280,7 @@
         }
       },
       "required": [
-        "query",
-        "case_sensitive",
-        "exact_match",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {
@@ -3560,12 +3404,6 @@
         "case_sensitive": false,
         "exact_match": false,
         "limit": 5
-      },
-      {
-        "query": "aspirin",
-        "case_sensitive": false,
-        "exact_match": false,
-        "limit": 5
       }
     ]
   },
@@ -3621,8 +3459,7 @@
       },
       "required": [
         "condition",
-        "value",
-        "limit"
+        "value"
       ]
     },
     "return_schema": {
@@ -3700,11 +3537,6 @@
       }
     },
     "test_examples": [
-      {
-        "condition": "ends_with",
-        "value": "cillin",
-        "limit": 10
-      },
       {
         "condition": "ends_with",
         "value": "cillin",

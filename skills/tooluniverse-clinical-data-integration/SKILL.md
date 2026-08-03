@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-clinical-data-integration
-description: Comprehensive drug safety review integrating FDA labels, FAERS adverse event reports, disproportionality analysis, pharmacogenomics, clinical trials, and literature. Use for regulatory assessments, post-market surveillance, drug safety reviews, adverse event investigation, and pharmacovigilance.
+description: End-to-end drug safety review integrating FDA labels, FAERS adverse event reports, PRR/ROR disproportionality, pharmacogenomic biomarkers, clinical trial data, and published literature. Use for regulatory drug safety reviews, comprehensive pharmacovigilance reports, label-vs-real-world AE comparison, and clinical decision support for drug safety.
+disable-model-invocation: true
 ---
 
 # Clinical Data Integration for Drug Safety

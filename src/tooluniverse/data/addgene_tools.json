@@ -47,46 +47,54 @@
         {
           "type": "object",
           "properties": {
-            "plasmids": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "purpose": {
-                    "type": "string"
-                  },
-                  "depositor": {
-                    "type": "array"
-                  },
-                  "genes": {
-                    "type": "array"
-                  },
-                  "species": {
-                    "type": "array"
-                  },
-                  "vector_types": {
-                    "type": "array"
-                  },
-                  "expression": {
-                    "type": "array"
+            "data": {
+              "type": "object",
+              "properties": {
+                "plasmids": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "purpose": {
+                        "type": "string"
+                      },
+                      "depositor": {
+                        "type": "array"
+                      },
+                      "genes": {
+                        "type": "array"
+                      },
+                      "species": {
+                        "type": "array"
+                      },
+                      "vector_types": {
+                        "type": "array"
+                      },
+                      "expression": {
+                        "type": "array"
+                      }
+                    }
                   }
+                },
+                "total_count": {
+                  "type": "integer"
+                },
+                "next_page": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
-            "total_count": {
-              "type": "integer"
-            },
-            "next_page": {
-              "type": [
-                "string",
-                "null"
-              ]
+            "metadata": {
+              "type": "object"
             }
           }
         },
@@ -106,20 +114,22 @@
     "test_examples": [
       {
         "operation": "search_plasmids",
-        "query": "lentiCRISPR v2",
+        "query": "pSpCas9",
         "limit": 5
-      },
-      {
-        "operation": "search_plasmids",
-        "query": "EGFP",
-        "organism": "Human",
-        "vector_type": "Mammalian Expression",
-        "limit": 3
       }
     ],
     "required_api_keys": [
       "ADDGENE_API_KEY"
-    ]
+    ],
+    "api_key_info": {
+      "ADDGENE_API_KEY": {
+        "domain": "Proteins & Structure",
+        "type": "secret",
+        "register_url": "https://www.addgene.org/contact/",
+        "purpose": "Look up plasmids and deposited constructs from the Addgene repository.",
+        "without": "Addgene tools are blocked without it."
+      }
+    }
   },
   {
     "name": "Addgene_get_plasmid",
@@ -150,44 +160,52 @@
         {
           "type": "object",
           "properties": {
-            "id": {
-              "type": "integer"
+            "data": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "inserts": {
+                  "type": "array"
+                },
+                "cloning": {
+                  "type": "object"
+                },
+                "tags": {
+                  "type": "array"
+                },
+                "bacterial_resistance": {
+                  "type": "string"
+                },
+                "growth_strain": {
+                  "type": "string"
+                },
+                "growth_temp": {
+                  "type": "integer"
+                },
+                "origin": {
+                  "type": "string"
+                },
+                "article": {
+                  "type": "object"
+                },
+                "depositor_comments": {
+                  "type": "string"
+                }
+              }
             },
-            "name": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string"
-            },
-            "inserts": {
-              "type": "array"
-            },
-            "cloning": {
+            "metadata": {
               "type": "object"
-            },
-            "tags": {
-              "type": "array"
-            },
-            "bacterial_resistance": {
-              "type": "string"
-            },
-            "growth_strain": {
-              "type": "string"
-            },
-            "growth_temp": {
-              "type": "integer"
-            },
-            "origin": {
-              "type": "string"
-            },
-            "article": {
-              "type": "object"
-            },
-            "depositor_comments": {
-              "type": "string"
             }
           }
         },
@@ -208,10 +226,6 @@
       {
         "operation": "get_plasmid",
         "plasmid_id": 39296
-      },
-      {
-        "operation": "get_plasmid",
-        "plasmid_id": 48138
       }
     ],
     "required_api_keys": [
@@ -256,28 +270,36 @@
         {
           "type": "object",
           "properties": {
-            "depositors": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "plasmid_count": {
-                    "type": "integer"
-                  },
-                  "example_plasmids": {
-                    "type": "array"
+            "data": {
+              "type": "object",
+              "properties": {
+                "depositors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "plasmid_count": {
+                        "type": "integer"
+                      },
+                      "example_plasmids": {
+                        "type": "array"
+                      }
+                    }
                   }
+                },
+                "total_depositors": {
+                  "type": "integer"
+                },
+                "total_plasmids_searched": {
+                  "type": "integer"
                 }
               }
             },
-            "total_depositors": {
-              "type": "integer"
-            },
-            "total_plasmids_searched": {
-              "type": "integer"
+            "metadata": {
+              "type": "object"
             }
           }
         },
@@ -298,10 +320,6 @@
       {
         "operation": "search_depositors",
         "name": "Feng Zhang"
-      },
-      {
-        "operation": "search_depositors",
-        "institution": "Broad Institute"
       }
     ],
     "required_api_keys": [

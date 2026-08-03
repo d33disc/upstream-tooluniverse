@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-systems-biology
-description: Comprehensive systems biology and pathway analysis using multiple pathway databases (Reactome, KEGG, WikiPathways, Pathway Commons, BioModels). Performs pathway enrichment, protein-pathway mapping, keyword searches, and systems-level analysis. Use when analyzing gene sets, exploring biological pathways, or investigating systems-level biology.
+description: Systems biology and pathway analysis integrating Reactome, KEGG, WikiPathways, BioCarta, NCI-Nature Pathway Interaction Database. Multi-database pathway enrichment, protein-pathway relationships, network reasoning. Use for pathway analysis on a gene list, multi-source pathway concordance, and systems-level interpretation across databases.
+disable-model-invocation: true
 ---
 
 # Systems Biology & Pathway Analysis
@@ -180,7 +181,7 @@ Create a markdown report progressively: header â†’ Phase 1 enrichment results â†
 
 ## Domain Reasoning: Enzyme Kinetics & Metabolic Analysis
 
-LOOK UP DON'T GUESS: Km values, kcat values, cofactor requirements, and optimal pH/temperature for specific enzymes. Use `BindingDB_search_by_target`, `ChEMBL_get_molecule`, `BRENDA_search` (if available), or `EuropePMC_search_articles` to retrieve published kinetic parameters. Do not estimate Km from first principles.
+LOOK UP DON'T GUESS: Km values, kcat values, cofactor requirements, and optimal pH/temperature for specific enzymes. Use `BindingDB_search_by_target`, `ChEMBL_get_molecule`, `BRENDA_get_enzyme_info` *(requires BRENDA_EMAIL + BRENDA_PASSWORD env vars; free academic registration at brenda-enzymes.org)* (if available), or `EuropePMC_search_articles` to retrieve published kinetic parameters. Do not estimate Km from first principles.
 
 ### Michaelis-Menten Kinetics
 

@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-inorganic-physical-chemistry
-description: Inorganic chemistry, physical chemistry, and materials science — crystal structures, coordination chemistry, bonding theory (covalency, orbital mixing), symmetry/point groups, thermodynamics, kinetics, spectroscopy interpretation, noble gas compounds, lanthanide/actinide chemistry. Use for questions about crystal systems, unit cells, density calculations, metal complexes, solid-state chemistry, or physical chemistry calculations.
+description: Inorganic chemistry, physical chemistry, and materials science — crystal structures, coordination chemistry, lattice parameters, thermodynamic properties, electronic structure. Use for unit cell volume calculations, coordination geometry, materials property estimation, and inorganic-mechanism reasoning. Complementary to tooluniverse-organic-chemistry.
+disable-model-invocation: true
 ---
 
 # Inorganic & Physical Chemistry

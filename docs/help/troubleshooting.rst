@@ -1,5 +1,5 @@
 Troubleshooting Tutorial
-=====================
+========================
 
 Quick Diagnostic
 ----------------
@@ -38,6 +38,58 @@ Run this diagnostic script to check your ToolUniverse installation:
 
 Installation Issues
 -------------------
+
+.. tip::
+
+   Install with `uv <https://docs.astral.sh/uv/>`_ rather than the system
+   ``pip``. It sidesteps the two errors below entirely, because it downloads and
+   manages its own Python::
+
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+      uv venv --python 3.12 && source .venv/bin/activate
+      uv pip install tooluniverse
+
+error: externally-managed-environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Symptom:** ``pip install tooluniverse`` refuses to run::
+
+   error: externally-managed-environment
+   × This environment is externally managed
+
+**Cause:** PEP 668. Homebrew, Debian/Ubuntu, and Fedora mark their system
+Python as externally managed so that ``pip`` cannot modify packages the OS
+package manager owns.
+
+**Solution:** install into a virtual environment managed by ``uv``::
+
+   uv venv --python 3.12
+   source .venv/bin/activate      # Windows: .venv\Scripts\activate
+   uv pip install tooluniverse
+
+Do **not** use ``sudo pip install`` or ``pip install --break-system-packages``;
+both can leave the system Python in a broken state.
+
+python3 -m venv fails at ensurepip
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Symptom:** creating a virtual environment fails::
+
+   Error: Command '[.../bin/python3.14', '-m', 'ensurepip', '--upgrade',
+   '--default-pip']' returned non-zero exit status 1.
+
+**Cause:** some Homebrew Python builds (3.13/3.14) ship without a working
+``ensurepip``, so the standard library ``venv`` module cannot bootstrap ``pip``.
+
+**Solution:** let ``uv`` supply the interpreter instead of the system one::
+
+   uv venv --python 3.12
+   source .venv/bin/activate
+   uv pip install tooluniverse
+
+If you only need the ``tu`` command line and not the Python API::
+
+   uv tool install tooluniverse
 
 ImportError: No module named 'tooluniverse'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,6 +164,52 @@ Dependency conflicts
 
 Runtime Errors
 --------------
+
+A tool loads but fails when run
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Symptom:** the tool appears in ``tu list`` and ``tu status`` counts it, but
+running it raises something like ``ADMETModel requires 'admet-ai' package`` or
+``RDKit is required``.
+
+**Cause:** loading a tool registers its JSON config; it does not install the
+tool's dependencies. Tools backed by an optional extra load fine on a base
+install and only fail at call time.
+
+**Diagnosis:**
+
+.. code-block:: bash
+
+   tooluniverse-doctor
+
+The report lists every optional dependency group that is not installed.
+
+**Solution:** install the group it names::
+
+   uv pip install 'tooluniverse[ml]'              # ADMET-AI, embeddings
+   uv pip install 'tooluniverse[visualization]'   # RDKit, py3Dmol, plotting
+   uv pip install 'tooluniverse[bioinformatics]'  # Biopython, freesasa
+   uv pip install 'tooluniverse[all]'             # everything except the four below
+
+``[all]`` excludes ``singlecell``, ``smolagents``, ``client``, and ``build`` —
+install those by name.
+
+PyTorch / Lightning warnings during ML tool calls
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Symptom:** ADMET-AI or other local-model tools print warnings about a missing
+GPU, PyTorch Lightning ``Trainer`` settings, or ``TypedStorage is deprecated``.
+
+**These are normal.** They come from PyTorch and PyTorch Lightning during
+ordinary CPU inference and do not affect results. Treat the call as failed only
+if the tool returns an ``error`` field or no predictions.
+
+To silence them in scripts:
+
+.. code-block:: python
+
+   import warnings
+   warnings.filterwarnings("ignore", category=UserWarning)
 
 Tool not found errors
 ~~~~~~~~~~~~~~~~~~~~~
@@ -565,6 +663,47 @@ Claude/AI assistant not finding tools
       tools = tu.return_all_loaded_tools()
       print(f"Registered {len(tools)} tools")
 
+Claude Desktop reports ``spawn uv ENOENT`` or ``spawn uvx ENOENT``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Diagnosis:**
+
+Claude Desktop starts MCP servers from a GUI process and may not inherit the
+same ``PATH`` as your terminal. A config that works in a shell can still fail in
+Claude Desktop if ``uv`` or ``uvx`` is not available by absolute path.
+
+**Solutions:**
+
+1. **Verify the command in a normal terminal:**
+
+   .. code-block:: bash
+
+      uvx --version
+      uvx tooluniverse --help
+
+2. **Find the absolute path to ``uvx``:**
+
+   .. code-block:: bash
+
+      which uvx      # macOS/Linux
+      where uvx      # Windows
+
+3. **Use that absolute path in Claude Desktop config.** For example:
+
+   .. code-block:: json
+
+      {
+        "mcpServers": {
+          "tooluniverse": {
+            "command": "/Users/yourname/.local/bin/uvx",
+            "args": ["--refresh", "tooluniverse"]
+          }
+        }
+      }
+
+4. **Restart Claude Desktop completely** after saving the config. First startup
+   can take longer while ``uvx`` resolves and installs the package.
+
 Advanced Debugging
 ------------------
 
@@ -639,8 +778,8 @@ If none of these solutions work:
 4. **Join our community**: Discord server link
 
 .. note::
-=========
- When reporting issues, please run the diagnostic script first:
+
+   When reporting issues, please run the diagnostic script first:
 
    .. code-block:: python
 

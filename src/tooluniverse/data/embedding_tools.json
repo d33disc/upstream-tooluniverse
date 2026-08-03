@@ -57,6 +57,29 @@
       ]
     },
     "required_api_keys": [],
+    "api_key_info": {
+      "HF_TOKEN": {
+        "domain": "Proteins & Structure",
+        "type": "secret",
+        "register_url": "https://huggingface.co/settings/tokens",
+        "purpose": "Download Hugging Face models and datasets used by structure/sequence tools.",
+        "without": "Public models work without it; needed for gated or private repos."
+      },
+      "OPENAI_API_KEY": {
+        "domain": "Models & Infrastructure",
+        "type": "secret",
+        "register_url": "https://platform.openai.com/api-keys",
+        "purpose": "Generate text embeddings for the semantic tool finder.",
+        "without": "The tool finder falls back to local embeddings without it."
+      },
+      "AZURE_OPENAI_API_KEY": {
+        "domain": "Models & Infrastructure",
+        "type": "secret",
+        "register_url": "https://portal.azure.com/",
+        "purpose": "Use Azure-hosted OpenAI models for embeddings (enterprise alternative to OpenAI).",
+        "without": "Optional alternative to OpenAI — leave blank if you don't use Azure."
+      }
+    },
     "optional_api_keys": [
       "OPENAI_API_KEY",
       "AZURE_OPENAI_API_KEY",
@@ -74,17 +97,6 @@
         "database_name": "biomedical_tools",
         "documents": [
           "Sample document for testing embeddings"
-        ],
-        "metadata": [],
-        "provider": "openai",
-        "model": "all-MiniLM-L6-v2",
-        "description": "Find tools for analyzing gene expression data"
-      },
-      {
-        "action": "create_from_docs",
-        "database_name": "genomics_tools",
-        "documents": [
-          "Different sample document for embeddings"
         ],
         "metadata": [],
         "provider": "openai",
@@ -172,16 +184,6 @@
         "metadata": [],
         "provider": "openai",
         "model": "all-MiniLM-L6-v2"
-      },
-      {
-        "action": "add_docs",
-        "database_name": "genomics_tools",
-        "documents": [
-          "Different sample document for embeddings"
-        ],
-        "metadata": [],
-        "provider": "openai",
-        "model": "all-MiniLM-L6-v2"
       }
     ],
     "return_schema": {
@@ -263,15 +265,6 @@
         "filters": {},
         "provider": "openai",
         "model": "all-MiniLM-L6-v2"
-      },
-      {
-        "action": "search",
-        "database_name": "genomics_tools",
-        "query": "different query for testing",
-        "top_k": 5,
-        "filters": {},
-        "provider": "openai",
-        "model": "all-MiniLM-L6-v2"
       }
     ],
     "return_schema": {
@@ -341,14 +334,6 @@
         "description": "Find tools for analyzing gene expression data",
         "private": false,
         "commit_message": "Update embeddings"
-      },
-      {
-        "action": "upload",
-        "database_name": "genomics_tools",
-        "repository": "username/genomics-embeddings",
-        "description": "Find tools for analyzing gene expression data",
-        "private": false,
-        "commit_message": "Update embeddings"
       }
     ],
     "return_schema": {
@@ -404,12 +389,6 @@
         "action": "download",
         "repository": "username/biomedical-embeddings",
         "local_name": "biomedical_tools",
-        "overwrite": false
-      },
-      {
-        "action": "download",
-        "repository": "username/genomics-embeddings",
-        "local_name": "genomics_tools",
         "overwrite": false
       }
     ],

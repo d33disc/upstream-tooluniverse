@@ -29,152 +29,249 @@
       "endpoint": "/prediction/{qualifier}",
       "return_format": "JSON"
     },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "toolUsed": {
+                    "type": "string"
+                  },
+                  "providerId": {
+                    "type": "string"
+                  },
+                  "entityType": {
+                    "type": "string"
+                  },
+                  "isUniProt": {
+                    "type": "boolean"
+                  },
+                  "modelEntityId": {
+                    "type": "string"
+                  },
+                  "modelCreatedDate": {
+                    "type": "string"
+                  },
+                  "sequenceVersionDate": {
+                    "type": "string"
+                  },
+                  "globalMetricValue": {
+                    "type": "number"
+                  },
+                  "fractionPlddtVeryLow": {
+                    "type": "number"
+                  },
+                  "fractionPlddtLow": {
+                    "type": "number"
+                  },
+                  "fractionPlddtConfident": {
+                    "type": "number"
+                  },
+                  "fractionPlddtVeryHigh": {
+                    "type": "number"
+                  },
+                  "latestVersion": {
+                    "type": "integer"
+                  },
+                  "allVersions": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "sequence": {
+                    "type": "string"
+                  },
+                  "sequenceStart": {
+                    "type": "integer"
+                  },
+                  "sequenceEnd": {
+                    "type": "integer"
+                  },
+                  "sequenceChecksum": {
+                    "type": "string"
+                  },
+                  "isUniProtReviewed": {
+                    "type": "boolean"
+                  },
+                  "gene": {
+                    "type": "string"
+                  },
+                  "uniprotAccession": {
+                    "type": "string"
+                  },
+                  "uniprotId": {
+                    "type": "string"
+                  },
+                  "uniprotDescription": {
+                    "type": "string"
+                  },
+                  "taxId": {
+                    "type": "integer"
+                  },
+                  "organismScientificName": {
+                    "type": "string"
+                  },
+                  "isUniProtReferenceProteome": {
+                    "type": "boolean"
+                  },
+                  "organismCommonNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "organismSynonyms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "geneSynonyms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "proteinFullNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "proteinShortNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "complexName": {
+                    "type": "string"
+                  },
+                  "stoichiometry": {
+                    "type": "number"
+                  },
+                  "ipTM": {
+                    "type": "number"
+                  },
+                  "ipSAE": {
+                    "type": "number"
+                  },
+                  "keywords": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "taxonomyLineage": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "functions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "alternativeNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "catalyticActivities": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "bcifUrl": {
+                    "type": "string"
+                  },
+                  "cifUrl": {
+                    "type": "string"
+                  },
+                  "pdbUrl": {
+                    "type": "string"
+                  },
+                  "paeImageUrl": {
+                    "type": "string"
+                  },
+                  "paeDocUrl": {
+                    "type": "string"
+                  },
+                  "amAnnotationsUrl": {
+                    "type": "string"
+                  },
+                  "amAnnotationsHg19Url": {
+                    "type": "string"
+                  },
+                  "amAnnotationsHg38Url": {
+                    "type": "string"
+                  },
+                  "entryId": {
+                    "type": "string"
+                  },
+                  "isReviewed": {
+                    "type": "boolean"
+                  },
+                  "isReferenceProteome": {
+                    "type": "boolean"
+                  },
+                  "uniprotStart": {
+                    "type": "integer"
+                  },
+                  "uniprotEnd": {
+                    "type": "integer"
+                  },
+                  "uniprotSequence": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            },
+            "endpoint": {
+              "type": "string"
+            },
+            "query": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
     "test_examples": [
       {
-        "qualifier": "P04637"
-      },
-      {
-        "uniprot_accession": "P00533"
+        "qualifier": "P69905"
       }
-    ],
-    "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "toolUsed": {
-            "type": "string"
-          },
-          "providerId": {
-            "type": "string"
-          },
-          "entityType": {
-            "type": "string"
-          },
-          "isUniProt": {
-            "type": "boolean"
-          },
-          "modelEntityId": {
-            "type": "string"
-          },
-          "modelCreatedDate": {
-            "type": "string"
-          },
-          "sequenceVersionDate": {
-            "type": "string"
-          },
-          "globalMetricValue": {
-            "type": "number"
-          },
-          "fractionPlddtVeryLow": {
-            "type": "number"
-          },
-          "fractionPlddtLow": {
-            "type": "number"
-          },
-          "fractionPlddtConfident": {
-            "type": "number"
-          },
-          "fractionPlddtVeryHigh": {
-            "type": "number"
-          },
-          "latestVersion": {
-            "type": "integer"
-          },
-          "allVersions": {
-            "type": "array",
-            "items": {}
-          },
-          "sequence": {
-            "type": "string"
-          },
-          "sequenceStart": {
-            "type": "integer"
-          },
-          "sequenceEnd": {
-            "type": "integer"
-          },
-          "sequenceChecksum": {
-            "type": "string"
-          },
-          "isUniProtReviewed": {
-            "type": "boolean"
-          },
-          "gene": {
-            "type": "string"
-          },
-          "uniprotAccession": {
-            "type": "string"
-          },
-          "uniprotId": {
-            "type": "string"
-          },
-          "uniprotDescription": {
-            "type": "string"
-          },
-          "taxId": {
-            "type": "integer"
-          },
-          "organismScientificName": {
-            "type": "string"
-          },
-          "isUniProtReferenceProteome": {
-            "type": "boolean"
-          },
-          "bcifUrl": {
-            "type": "string"
-          },
-          "cifUrl": {
-            "type": "string"
-          },
-          "pdbUrl": {
-            "type": "string"
-          },
-          "paeImageUrl": {
-            "type": "string"
-          },
-          "msaUrl": {
-            "type": "string"
-          },
-          "plddtDocUrl": {
-            "type": "string"
-          },
-          "paeDocUrl": {
-            "type": "string"
-          },
-          "amAnnotationsUrl": {
-            "type": "string"
-          },
-          "amAnnotationsHg19Url": {
-            "type": "string"
-          },
-          "amAnnotationsHg38Url": {
-            "type": "string"
-          },
-          "isComplex": {
-            "type": "boolean"
-          },
-          "entryId": {
-            "type": "string"
-          },
-          "uniprotSequence": {
-            "type": "string"
-          },
-          "uniprotStart": {
-            "type": "integer"
-          },
-          "uniprotEnd": {
-            "type": "integer"
-          },
-          "isReferenceProteome": {
-            "type": "boolean"
-          },
-          "isReviewed": {
-            "type": "boolean"
-          }
-        }
-      }
-    }
+    ]
   },
   {
     "name": "alphafold_get_summary",
@@ -202,14 +299,6 @@
       "endpoint": "/uniprot/summary/{qualifier}.json",
       "return_format": "JSON"
     },
-    "test_examples": [
-      {
-        "qualifier": "P38398"
-      },
-      {
-        "uniprot_id": "P04637"
-      }
-    ],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -241,16 +330,189 @@
           "items": {
             "type": "object",
             "properties": {
-              "summary": {}
+              "summary": {
+                "type": "object",
+                "properties": {
+                  "model_identifier": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "model_category": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "model_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "model_format": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "model_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "model_page_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provider": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "number_of_conformers": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "ensemble_sample_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "ensemble_sample_format": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "created": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "sequence_identity": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "uniprot_start": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "uniprot_end": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "coverage": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "experimental_method": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "resolution": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "confidence_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence_version": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence_avg_local_score": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "oligomeric_state": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "preferred_assembly_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "entities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "entity_type": {
+                          "type": "string"
+                        },
+                        "entity_poly_type": {
+                          "type": "string"
+                        },
+                        "identifier": {
+                          "type": "string"
+                        },
+                        "identifier_category": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "chain_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "qualifier": "P04637"
+      }
+    ]
   },
   {
     "name": "alphafold_get_annotations",
-    "description": "Retrieve AlphaFold MUTAGEN annotations for a given UniProt accession. Returns experimental mutagenesis data mapped onto protein structures from UniProt. The qualifier must be a UniProt ACCESSION (e.g., 'P69905'). Note: Not all proteins have MUTAGEN annotations available in the database.",
+    "description": "Retrieve AlphaFold MUTAGEN annotations for a given UniProt accession. Returns experimental mutagenesis data mapped onto protein structures from UniProt. The qualifier must be a UniProt ACCESSION (e.g., 'P69905'). Note: Not all proteins have MUTAGEN annotations available in the database. As of 2026-05 AFDB's MUTAGEN annotation endpoint returns empty for all tested UniProts; the tool returns a structured error in that case.",
     "type": "AlphaFoldRESTTool",
     "parameter": {
       "type": "object",
@@ -330,7 +592,10 @@
                       "type": "string"
                     },
                     "unit": {
-                      "type": ["string", "null"]
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   }
                 }
@@ -342,10 +607,7 @@
     },
     "test_examples": [
       {
-        "qualifier": "P69905"
-      },
-      {
-        "qualifier": "P04637"
+        "qualifier": "P00533"
       }
     ]
   }

@@ -2,7 +2,7 @@
   {
     "type": "SwissDockTool",
     "name": "SwissDock_dock_ligand",
-    "description": "Perform protein-ligand molecular docking using SwissDock service with AutoDock Vina or Attracting Cavities 2.0 engines. Predicts binding modes, poses, and energies for small molecules against protein structures. Essential for drug discovery, virtual screening, and structure-based drug design. Supports blind docking (whole protein) or targeted docking (specific binding site). Returns docking scores, poses, and download URL for detailed results. Example: Dock aspirin (CC(=O)Oc1ccccc1C(=O)O) against COX-2 (PDB: 1CX2) to predict binding mode and affinity.",
+    "description": "Perform protein-ligand molecular docking using SwissDock service with AutoDock Vina or Attracting Cavities 2.0 engines. Predicts binding modes, poses, and energies for small molecules against protein structures. Essential for drug discovery, virtual screening, and structure-based drug design. Supports blind docking (whole protein) or targeted docking (specific binding site). Returns docking scores, poses, and download URL for detailed results. Example: Dock aspirin (CC(=O)Oc1ccccc1C(=O)O) against COX-2 (PDB: 1CX2) to predict binding mode and affinity. Note: actual docking takes minutes-to-hours of upstream compute. test_examples are intentionally empty; submit a job with check_job_status polling to retrieve results.",
     "parameter": {
       "type": "object",
       "required": [
@@ -55,27 +55,38 @@
         {
           "type": "object",
           "properties": {
-            "session_id": {
-              "type": "string",
-              "description": "Unique session identifier for this docking job"
+            "data": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Unique session identifier for this docking job"
+                },
+                "download_url": {
+                  "type": "string",
+                  "description": "URL to download complete docking results (tar.gz archive)"
+                },
+                "result_size_bytes": {
+                  "type": "integer",
+                  "description": "Size of result archive in bytes"
+                },
+                "content_type": {
+                  "type": "string",
+                  "description": "MIME type of result file"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable status message"
+                }
+              }
             },
-            "download_url": {
-              "type": "string",
-              "description": "URL to download complete docking results (tar.gz archive)"
-            },
-            "result_size_bytes": {
-              "type": "integer",
-              "description": "Size of result archive in bytes"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of result file"
-            },
-            "message": {
-              "type": "string",
-              "description": "Human-readable status message"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -93,27 +104,7 @@
         }
       ]
     },
-    "test_examples": [
-      {
-        "ligand_smiles": "CC(=O)Oc1ccccc1C(=O)O",
-        "pdb_id": "1CX2",
-        "exhaustiveness": 8,
-        "docking_engine": "attracting_cavities"
-      },
-      {
-        "ligand_smiles": "Cc1ccc(cc1)S(=O)(=O)N",
-        "pdb_id": "3EYG",
-        "exhaustiveness": 10,
-        "box_center": "15.2,20.5,30.1",
-        "box_size": "25,25,25",
-        "docking_engine": "vina"
-      },
-      {
-        "ligand_smiles": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",
-        "pdb_id": "1ATP",
-        "exhaustiveness": 12
-      }
-    ]
+    "test_examples": []
   },
   {
     "type": "SwissDockTool",
@@ -142,23 +133,34 @@
         {
           "type": "object",
           "properties": {
-            "session_id": {
-              "type": "string",
-              "description": "Session identifier"
+            "data": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Session identifier"
+                },
+                "job_status": {
+                  "type": "string",
+                  "description": "Current job status: RUNNING, FINISHED, ERROR, NOT_FOUND"
+                },
+                "is_finished": {
+                  "type": "boolean",
+                  "description": "True if job has completed successfully"
+                },
+                "has_error": {
+                  "type": "boolean",
+                  "description": "True if job encountered an error"
+                }
+              }
             },
-            "job_status": {
-              "type": "string",
-              "description": "Current job status: RUNNING, FINISHED, ERROR, NOT_FOUND"
-            },
-            "is_finished": {
-              "type": "boolean",
-              "description": "True if job has completed successfully"
-            },
-            "has_error": {
-              "type": "boolean",
-              "description": "True if job encountered an error"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -178,10 +180,7 @@
     },
     "test_examples": [
       {
-        "session_id": "abc123def456"
-      },
-      {
-        "session_id": "dock_20240615_xyz789"
+        "session_id": "example_session_123456"
       }
     ]
   },
@@ -212,31 +211,42 @@
         {
           "type": "object",
           "properties": {
-            "session_id": {
-              "type": "string",
-              "description": "Session identifier"
+            "data": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Session identifier"
+                },
+                "download_url": {
+                  "type": "string",
+                  "description": "URL to download complete docking results"
+                },
+                "result_size_bytes": {
+                  "type": "integer",
+                  "description": "Size of result archive"
+                },
+                "content_type": {
+                  "type": "string",
+                  "description": "MIME type of result file"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Status message"
+                },
+                "job_status": {
+                  "type": "string",
+                  "description": "Job status if not FINISHED yet"
+                }
+              }
             },
-            "download_url": {
-              "type": "string",
-              "description": "URL to download complete docking results"
-            },
-            "result_size_bytes": {
-              "type": "integer",
-              "description": "Size of result archive"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of result file"
-            },
-            "message": {
-              "type": "string",
-              "description": "Status message"
-            },
-            "job_status": {
-              "type": "string",
-              "description": "Job status if not FINISHED yet"
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
@@ -256,10 +266,7 @@
     },
     "test_examples": [
       {
-        "session_id": "abc123def456"
-      },
-      {
-        "session_id": "dock_20240615_xyz789"
+        "session_id": "example_session_123456"
       }
     ]
   }

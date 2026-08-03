@@ -1,7 +1,7 @@
 [
   {
     "name": "ExpressionAtlas_get_baseline",
-    "description": "Get baseline gene expression experiments from EBI Expression Atlas. Shows which tissues/cell types express a gene under normal conditions. Complements GTEx and HPA. No API key needed. Query by gene symbol or Ensembl ID.",
+    "description": "List baseline gene expression experiments in EBI Expression Atlas for a given species. The `gene` argument is used to label the request and suggest a follow-up call, but does NOT filter the returned experiment list (the underlying API has no reliable way to filter experiments by gene) -- use GxA_get_experiment_expression with an experiment_accession from the results and gene_id=<gene> to check whether a specific experiment actually has data for that gene. Complements GTEx and HPA. No API key needed.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -13,6 +13,22 @@
           "type": "string",
           "description": "Species name (default: 'homo sapiens'). Also supports 'mus musculus', 'rattus norvegicus', etc.",
           "default": "homo sapiens"
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Maximum number of experiments to return (default 50, max 500). Compare with the total reported in the response to see how many exist.",
+          "default": 50
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Zero-based index of the first experiment to return, for paging through results beyond the first page (e.g. offset=50 returns 51-100). Default: 0.",
+          "default": 0
         }
       },
       "required": [
@@ -33,31 +49,68 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "required": [
-        "baseline_experiments",
-        "gene",
-        "gene_specific_count",
-        "species",
-        "total_baseline"
-      ],
-      "properties": {
-        "gene": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "gene": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "baseline_experiments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "experiment_accession": {
+                    "type": "string"
+                  },
+                  "experiment_type": {
+                    "type": "string"
+                  },
+                  "experiment_description": {
+                    "type": "string"
+                  },
+                  "species": {
+                    "type": "string"
+                  },
+                  "num_assays": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "last_update": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "total_baseline": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            }
+          },
+          "required": [
+            "gene"
+          ]
         },
-        "species": {
-          "type": "string"
-        },
-        "baseline_experiments": {
-          "type": "array"
-        },
-        "total_baseline": {
-          "type": "integer"
-        },
-        "gene_specific_count": {
-          "type": "integer"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     },
     "label": [
       "Expression Atlas",
@@ -77,7 +130,7 @@
   },
   {
     "name": "ExpressionAtlas_search_differential",
-    "description": "Search for differential expression experiments from EBI Expression Atlas. Find experiments where a gene is differentially expressed in disease vs. normal, treated vs. untreated, etc. Supports disease-context expression analysis.",
+    "description": "Search for differential expression EXPERIMENTS from EBI Expression Atlas by condition text and/or a gene mentioned in the experiment description. Supports disease-context expression analysis. Caveat: `condition` does real text filtering, but `gene` is a text-search coincidence (experiment descriptions rarely name individual genes) and does not return actual per-gene differential-expression values -- treat gene-tagged results as a starting point for manual review, not a validated gene-specific result set.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -93,6 +146,22 @@
           "type": "string",
           "description": "Species name (default: 'homo sapiens')",
           "default": "homo sapiens"
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Maximum number of experiments to return (default 50, max 500). Compare with the total reported in the response to see how many exist.",
+          "default": 50
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Zero-based index of the first experiment to return, for paging through results beyond the first page (e.g. offset=50 returns 51-100). Default: 0.",
+          "default": 0
         }
       }
     },
@@ -111,28 +180,77 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "required": [
-        "condition",
-        "experiment_count",
-        "experiments",
-        "gene",
-        "species"
-      ],
-      "properties": {
-        "gene": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "gene": {
+              "type": "string"
+            },
+            "condition": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "experiments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "experiment_accession": {
+                    "type": "string"
+                  },
+                  "experiment_type": {
+                    "type": "string"
+                  },
+                  "experiment_description": {
+                    "type": "string"
+                  },
+                  "species": {
+                    "type": "string"
+                  },
+                  "num_assays": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "gene_mentioned": {
+                    "type": "boolean"
+                  },
+                  "factors": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "experiment_count": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            }
+          },
+          "required": [
+            "gene"
+          ]
         },
-        "condition": {
-          "type": "string"
-        },
-        "experiments": {
-          "type": "array"
-        },
-        "experiment_count": {
-          "type": "integer"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     },
     "label": [
       "Expression Atlas",
@@ -150,7 +268,7 @@
   },
   {
     "name": "ExpressionAtlas_search_experiments",
-    "description": "Search all EBI Expression Atlas experiments (baseline + differential) by gene and/or condition. Returns experiment accessions, types, descriptions, and assay counts. Use to find relevant expression datasets.",
+    "description": "Search all EBI Expression Atlas experiments (baseline + differential) by condition text and/or a gene mentioned in the experiment description. Returns experiment accessions, types, descriptions, and assay counts. Caveat: `condition` does real text filtering, but `gene` is a text-search coincidence (experiment descriptions rarely name individual genes), so a gene-only query effectively returns the unfiltered catalog -- use to find relevant expression datasets, not as a validated per-gene result set.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -165,6 +283,22 @@
         "species": {
           "type": "string",
           "description": "Species name (optional, e.g., 'homo sapiens')"
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Maximum number of experiments to return (default 50, max 500). Compare with the total reported in the response to see how many exist.",
+          "default": 50
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Zero-based index of the first experiment to return, for paging through results beyond the first page (e.g. offset=50 returns 51-100). Default: 0.",
+          "default": 0
         }
       }
     },
@@ -183,28 +317,80 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "required": [
-        "condition",
-        "experiments",
-        "gene",
-        "gene_specific_count",
-        "species"
-      ],
-      "properties": {
-        "gene": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "gene": {
+              "type": "string"
+            },
+            "condition": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "experiments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "experiment_accession": {
+                    "type": "string"
+                  },
+                  "experiment_type": {
+                    "type": "string"
+                  },
+                  "experiment_description": {
+                    "type": "string"
+                  },
+                  "species": {
+                    "type": "string"
+                  },
+                  "num_assays": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "gene_mentioned": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "total_count": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "gene_specific_count": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            }
+          },
+          "required": [
+            "gene"
+          ]
         },
-        "condition": {
-          "type": "string"
-        },
-        "experiments": {
-          "type": "array"
-        },
-        "total_count": {
-          "type": "integer"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     },
     "label": [
       "Expression Atlas",
@@ -221,7 +407,7 @@
   },
   {
     "name": "ExpressionAtlas_get_experiment",
-    "description": "Get detailed metadata for a specific Expression Atlas experiment by accession (e.g., E-MTAB-2836). Returns experiment design, species, technology, contrasts, PubMed references, and number of assays.",
+    "description": "Get metadata for a specific Expression Atlas experiment by accession (e.g., E-MTAB-2836): accession, type, species, and description/URLs. Caveat: the underlying GXA API does not expose per-experiment design/technology/contrasts/PubMed/assay-count data through this endpoint (confirmed live: those fields are always empty) -- for that level of detail, visit the experiment's page on https://www.ebi.ac.uk/gxa directly.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -241,47 +427,60 @@
     "test_examples": [
       {
         "accession": "E-MTAB-2836"
-      },
-      {
-        "accession": "E-GTEX-8"
-      },
-      {
-        "accession": "E-GEOD-26284"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "required": [
-        "accession",
-        "assay_count",
-        "contrasts",
-        "description",
-        "factors"
-      ],
-      "properties": {
-        "accession": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "accession": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "factors": {
+              "type": "array"
+            },
+            "technology": {
+              "type": "array"
+            },
+            "contrasts": {
+              "type": "array"
+            },
+            "assay_count": {
+              "type": "null"
+            },
+            "last_update": {
+              "type": "null"
+            },
+            "pubmed_ids": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "accession"
+          ]
         },
-        "type": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "species": {
-          "type": "string"
-        },
-        "factors": {
-          "type": "array"
-        },
-        "assay_count": {
-          "type": [
-            "integer",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      },
-      "additionalProperties": true
+      ]
     },
     "label": [
       "Expression Atlas",

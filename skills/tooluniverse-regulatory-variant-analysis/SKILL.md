@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-regulatory-variant-analysis
-description: Regulatory variant interpretation -- GWAS association lookup, eQTL analysis, chromatin state annotation, regulatory element overlap, and trait ontology resolution. Connects GWAS Catalog, GTEx, ENCODE, RegulomeDB, OpenTargets, OLS ontology, and Ensembl regulatory features. Use when users ask about non-coding variants, GWAS hits, eQTLs, regulatory elements, enhancer/promoter variants, or trait-associated SNPs.
+description: Non-coding/regulatory variant interpretation — GWAS association lookup, eQTL evidence (GTEx), chromatin state (ENCODE), regulatory variant scoring (RegulomeDB, CADD), and TF-binding disruption. Use for non-coding GWAS hit interpretation, eQTL-based gene assignment, and regulatory mechanism reasoning. Distinct from coding-variant tools.
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE
@@ -118,11 +119,13 @@ When interpreting results, ask: does the eQTL effect occur in the tissue most re
 
 **Reasoning tip**: RegulomeDB aggregates ENCODE, Roadmap, and other data. If ENCODE doesn't have the specific biosample, RegulomeDB may still have aggregate evidence from related cell types.
 
+When you have the variant as a GRCh38 coordinate, `FAVOR_annotate_variant(variant="chr-pos-ref-alt")` returns a regulatory annotation block (plus conservation, frequency, and CADD) in one call — use it to quickly confirm whether the position falls in an annotated regulatory element before drilling into RegulomeDB/ENCODE.
+
 ---
 
 ## Phase 4: OpenTargets GWAS Integration
 
-`OpenTargets_search_gwas_studies_by_disease` takes `diseaseIds` as an array of MONDO IDs. It provides locus-to-gene (L2G) scores from multiple GWAS studies, which go beyond simple proximity to incorporate colocalisation, eQTL, and chromatin data. Use `OpenTargets_multi_entity_search` or `OpenTargets_get_disease_id_description_by_name` to resolve disease names to MONDO/EFO IDs first.
+`OpenTargets_search_gwas_studies_by_disease` takes `diseaseIds` as an array of MONDO IDs. It provides locus-to-gene (L2G) scores from multiple GWAS studies, which go beyond simple proximity to incorporate colocalisation, eQTL, and chromatin data. Use `OpenTargets_multi_entity_search_by_query_string` or `OpenTargets_get_disease_id_description_by_name` to resolve disease names to MONDO/EFO IDs first.
 
 ---
 
@@ -141,8 +144,8 @@ After collecting evidence, reason through the layers:
 
 - **GWAS Catalog returns empty**: Switch from free-text `disease_trait` to `efo_id`; broaden the trait term.
 - **GTEx eQTL empty for gene**: Verify gene symbol spelling; try Ensembl ID; increase `size` parameter.
-- **RegulomeDB returns no data**: Query ENCODE directly; the variant may lack regulatory annotations in available data.
-- **OpenTargets GWAS returns None**: Verify MONDO/EFO ID format; try `OpenTargets_multi_entity_search` first to confirm the correct ID.
+- **RegulomeDB returns no data**: Query ENCODE directly, or run `FAVOR_annotate_variant` (GRCh38 coordinate) for its regulatory + conservation annotation; the variant may lack regulatory annotations in available data.
+- **OpenTargets GWAS returns None**: Verify MONDO/EFO ID format; try `OpenTargets_multi_entity_search_by_query_string` first to confirm the correct ID.
 - **ENCODE tissue not found**: ENCODE uses specific biosample names; RegulomeDB aggregates data from many cell types and may cover the gap.
 
 ---

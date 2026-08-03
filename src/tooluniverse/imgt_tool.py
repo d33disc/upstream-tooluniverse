@@ -8,8 +8,11 @@ Website: https://www.imgt.org/
 Uses DBFetch for sequence retrieval where available.
 """
 
+import html
+import re
 import requests
 from typing import Dict, Any, Optional, List
+from urllib.parse import urljoin
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
@@ -46,6 +49,8 @@ class IMGTTool(BaseTool):
 
         if operation == "get_sequence":
             return self._get_sequence(arguments)
+        elif operation == "get_germline_fasta":
+            return self._get_germline_fasta(arguments)
         elif operation == "search_genes":
             return self._search_genes(arguments)
         elif operation == "get_gene_info":
@@ -53,8 +58,127 @@ class IMGTTool(BaseTool):
         else:
             return {
                 "status": "error",
-                "error": f"Unknown operation: {operation}. Supported: get_sequence, search_genes, get_gene_info",
+                "error": f"Unknown operation: {operation}. Supported: get_sequence, get_germline_fasta, search_genes, get_gene_info",
             }
+
+    @staticmethod
+    def _follow_imgt_redirects(
+        session: requests.Session, url: str, params: Dict[str, str], timeout: int
+    ) -> requests.Response:
+        """Follow the IMGT GENE-DB redirect chain, forcing HTTPS.
+
+        GENElect issues a 302 to ``http://...`` (port 80, which hangs from many
+        networks) and then a relative redirect to ``/genedb/fastaC.action``. We
+        resolve each Location against the current URL and rewrite http->https so
+        the request stays on the working TLS endpoint.
+        """
+        resp = session.get(url, params=params, timeout=timeout, allow_redirects=False)
+        current = resp.url
+        hops = 0
+        while resp.status_code in (301, 302, 303, 307, 308) and hops < 6:
+            location = urljoin(current, resp.headers.get("Location", ""))
+            if location.startswith("http://"):
+                location = "https://" + location[len("http://") :]
+            resp = session.get(location, timeout=timeout, allow_redirects=False)
+            current = location
+            hops += 1
+        return resp
+
+    def _get_germline_fasta(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Retrieve IMGT germline IG/TR gene reference sequences in FASTA.
+
+        Queries IMGT/GENE-DB (GENElect) for V/D/J-REGION reference sequences of
+        a gene type (e.g. IGHV, TRBV) in a species, returning labeled FASTA
+        records such as '>AB019441|IGHV(II)-1-1*01|Homo sapiens|...'.
+
+        Args:
+            arguments: Dict containing:
+                - gene_type: IG/TR gene type, e.g. IGHV, IGHD, IGHJ, IGKV,
+                  IGLV, TRAV, TRBV, TRBD, TRBJ (alias: query when it is a gene type)
+                - species: species name (default: Homo sapiens)
+                - label: IMGT GENElect label number controlling the region set
+                  (default '7.2' = all V-REGION/D-REGION/J-REGION reference alleles)
+        """
+        gene_type = (
+            arguments.get("gene_type")
+            or arguments.get("gene")
+            or arguments.get("query")
+            or ""
+        ).strip()
+        if not gene_type:
+            return {
+                "status": "error",
+                "error": "Missing required parameter: gene_type (e.g. 'IGHV', 'TRBV')",
+            }
+
+        species = (arguments.get("species") or "Homo sapiens").strip()
+        label = str(arguments.get("label") or "7.2").strip()
+
+        # GENElect's query field is "<label> <GENETYPE>" (e.g. "7.2 IGHV").
+        query_value = f"{label} {gene_type.upper()}"
+
+        try:
+            session = requests.Session()
+            session.headers.update({"User-Agent": "Mozilla/5.0 (ToolUniverse/IMGT)"})
+
+            response = self._follow_imgt_redirects(
+                session,
+                f"{IMGT_BASE_URL}/IMGT_GENE-DB/GENElect",
+                {"query": query_value, "species": species},
+                self.timeout,
+            )
+            response.raise_for_status()
+
+            page = response.text
+
+            # The result page embeds the labeled FASTA inside <pre> blocks. The
+            # first <pre> documents the header fields; the FASTA records are in
+            # the block whose content begins with a '>' header line.
+            fasta_text = None
+            for block in re.findall(r"<pre[^>]*>(.*?)</pre>", page, re.DOTALL):
+                unescaped = html.unescape(block).strip()
+                if unescaped.startswith(">"):
+                    fasta_text = unescaped
+                    break
+
+            if not fasta_text:
+                return {
+                    "status": "error",
+                    "error": (
+                        f"No FASTA records returned by IMGT/GENE-DB for "
+                        f"gene_type='{gene_type}' species='{species}'. "
+                        "Verify the gene type is a valid IG/TR locus "
+                        "(e.g. IGHV, IGKV, IGLV, TRAV, TRBV)."
+                    ),
+                }
+
+            headers = re.findall(r"^>.*$", fasta_text, re.MULTILINE)
+
+            return {
+                "status": "success",
+                "data": {
+                    "gene_type": gene_type.upper(),
+                    "species": species,
+                    "query": query_value,
+                    "fasta": fasta_text,
+                    "record_count": len(headers),
+                    "first_records": headers[:5],
+                },
+                "metadata": {
+                    "source": "IMGT/GENE-DB (GENElect)",
+                    "format": "FASTA",
+                    "note": (
+                        "FASTA headers carry 15 '|'-separated IMGT fields "
+                        "(accession, gene/allele, species, functionality, region, ...)."
+                    ),
+                },
+            }
+
+        except requests.exceptions.RequestException as e:
+            return {"status": "error", "error": f"Request failed: {str(e)}"}
+        except Exception as e:
+            return {"status": "error", "error": f"Unexpected error: {str(e)}"}
 
     def _get_sequence(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -71,12 +195,11 @@ class IMGTTool(BaseTool):
 
         fmt = arguments.get("format", "fasta")
 
-        try:
-            # Use EBI DBFetch to retrieve IMGT sequences
-            response = requests.get(
+        def _dbfetch(db):
+            return requests.get(
                 EBI_DBFETCH_URL,
                 params={
-                    "db": "imgt",
+                    "db": db,
                     "id": accession,
                     "format": fmt,
                     "style": "raw",
@@ -85,21 +208,25 @@ class IMGTTool(BaseTool):
                 headers={"User-Agent": "ToolUniverse/IMGT"},
             )
 
-            if response.status_code == 404 or "not found" in response.text.lower():
-                # Try EMBL database as fallback
-                response = requests.get(
-                    EBI_DBFETCH_URL,
-                    params={
-                        "db": "embl",
-                        "id": accession,
-                        "format": fmt,
-                        "style": "raw",
-                    },
-                    timeout=self.timeout,
-                    headers={"User-Agent": "ToolUniverse/IMGT"},
-                )
+        def _dbfetch_failed(resp):
+            # DBFetch reports failures (unknown database, no entries found) as an
+            # HTTP 200 whose body begins with "ERROR <n> ...", so a status-code
+            # check alone would let that error text through as a "sequence".
+            if resp.status_code == 404:
+                return True
+            body = resp.text.lstrip()
+            return body.startswith("ERROR ") or "not found" in body.lower()
 
-            if response.status_code == 404:
+        try:
+            # IMGT/LIGM-DB is the native IMGT nucleotide database for IG/TR gene
+            # sequences; fall back to EMBL/ENA for accessions not mirrored there.
+            # (The old "imgt" slug is not a valid DBFetch database, so every
+            # request returned "ERROR 1 Unknown database [imgt]." as the result.)
+            response = _dbfetch("imgtligm")
+            if _dbfetch_failed(response):
+                response = _dbfetch("embl")
+
+            if _dbfetch_failed(response):
                 return {"status": "error", "error": f"Sequence not found: {accession}"}
 
             response.raise_for_status()

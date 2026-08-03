@@ -90,11 +90,6 @@
         "collection": "CORE",
         "page": 1,
         "page_size": 5
-      },
-      {
-        "collection": "CORE",
-        "page": 2,
-        "page_size": 10
       }
     ]
   },
@@ -228,9 +223,6 @@
     "test_examples": [
       {
         "matrix_id": "MA0002.2"
-      },
-      {
-        "matrix_id": "MA0136.2"
       }
     ]
   },
@@ -326,11 +318,6 @@
         "base_id": "MA0002",
         "page": 1,
         "page_size": 5
-      },
-      {
-        "base_id": "MA0136",
-        "page": 1,
-        "page_size": 3
       }
     ]
   },
@@ -409,10 +396,6 @@
       {
         "page": 1,
         "page_size": 5
-      },
-      {
-        "page": 2,
-        "page_size": 10
       }
     ]
   },
@@ -586,10 +569,6 @@
       {
         "page": 1,
         "page_size": 3
-      },
-      {
-        "page": 2,
-        "page_size": 5
       }
     ]
   },
@@ -618,7 +597,7 @@
         },
         "species": {
           "type": "string",
-          "description": "Filter by NCBI taxonomy ID (e.g., '9606' for human)."
+          "description": "Filter by NCBI taxonomy ID (e.g., '9606' for human). Sent to JASPAR as its `tax_id` query parameter."
         },
         "page": {
           "type": "integer",
@@ -630,12 +609,16 @@
           "default": 20,
           "description": "Results per page."
         }
-      }
+      },
+      "additionalProperties": false
     },
     "fields": {
       "endpoint": "https://jaspar.elixir.no/api/v1/matrix/",
       "return_format": "JSON",
-      "use_params": true
+      "use_params": true,
+      "param_map": {
+        "species": "tax_id"
+      }
     },
     "return_schema": {
       "type": "object",

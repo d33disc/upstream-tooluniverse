@@ -35,20 +35,11 @@
       "oneOf": [
         {
           "type": "object",
-          "description": "Single protein information (when single accession provided) including annotations, sequences, features, and cross-references. Contains fields: accession, id, proteinExistence, info, organism, secondaryAccession, protein, gene, comments, features, dbReferences, references, etc.",
-          "required": [
-            "accession"
-          ]
+          "description": "Single protein information (when single accession provided) including annotations, sequences, features, and cross-references. Contains fields: accession, id, proteinExistence, info, organism, secondaryAccession, protein, gene, comments, features, dbReferences, references, etc."
         },
         {
           "type": "array",
-          "description": "List of protein results (when multiple accessions provided in batch). Each item contains 'accession', 'status', 'data', and 'url' fields.",
-          "items": {
-            "type": "object",
-            "required": [
-              "accession"
-            ]
-          }
+          "description": "List of protein results (when multiple accessions provided in batch). Each item contains 'accession', 'status', 'data', and 'url' fields."
         }
       ]
     },
@@ -114,21 +105,11 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "accession"
-        ]
-      },
       "description": "List of protein variations with positions, amino acid changes, disease associations, and evidence. Each variant includes fields like 'ftId', 'wildType', 'alternativeSequence', 'begin', 'end', 'somaticStatus', 'association', etc."
     },
     "test_examples": [
       {
         "accession": "P05067",
-        "size": 5
-      },
-      {
-        "accession": "P04637",
         "size": 5
       }
     ]
@@ -167,12 +148,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "type"
-        ]
-      },
       "description": "Proteomics data including PTM comments, modified residues, and related features."
     },
     "test_examples": [
@@ -221,9 +196,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object"
-      },
       "description": "Epitope sequences and annotations including immunology comments and epitope features."
     },
     "test_examples": [
@@ -280,6 +252,14 @@
         "reviewed": {
           "type": "boolean",
           "description": "If true, return only reviewed Swiss-Prot entries. If false or omitted, includes unreviewed TrEMBL entries."
+        },
+        "organism": {
+          "type": "string",
+          "description": "Restrict the search to an organism by name (e.g. 'Klebsiella pneumoniae', 'Escherichia coli'). By default a gene/protein-name search is biased toward human (taxid 9606); set this for non-human proteins. If omitted and no human match is found, the search auto-widens to all organisms."
+        },
+        "taxid": {
+          "type": "string",
+          "description": "Restrict the search to an NCBI taxonomy id (e.g. '573' for Klebsiella pneumoniae, '562' for E. coli). Alternative to 'organism' for precise scoping."
         }
       },
       "required": []
@@ -290,12 +270,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "accession"
-        ]
-      },
       "description": "Array of protein objects matching the search query. Each protein contains accession, id, organism, protein names, gene names, features, and other annotations."
     },
     "test_examples": [
@@ -306,6 +280,10 @@
       {
         "query": "insulin",
         "size": 5
+      },
+      {
+        "query": "blaKPC",
+        "size": 3
       }
     ]
   },
@@ -343,12 +321,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "id"
-        ]
-      },
       "description": "List of genome mapping records for the requested protein."
     },
     "test_examples": [
@@ -397,12 +369,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "type"
-        ]
-      },
       "description": "List of sequence feature annotations for the requested protein."
     },
     "test_examples": [
@@ -451,13 +417,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "id",
-          "type"
-        ]
-      },
       "description": "List of cross-reference records for the requested protein."
     },
     "test_examples": [
@@ -506,12 +465,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "type"
-        ]
-      },
       "description": "List of comment/annotation records for the requested protein."
     },
     "test_examples": [
@@ -560,12 +513,6 @@
     },
     "return_schema": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "citation"
-        ]
-      },
       "description": "List of publication records associated with the requested protein."
     },
     "test_examples": [

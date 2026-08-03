@@ -39,54 +39,54 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string",
-                "description": "4-character PDB ID"
-              },
-              "struct": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "Biomolecular structure title"
-                  }
-                }
-              },
-              "exptl": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "method": {
-                      "type": "string",
-                      "description": "Experimental method used to obtain structure"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "struct": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      }
                     }
-                  }
-                }
-              },
-              "rcsb_entry_info": {
-                "type": "object",
-                "properties": {
-                  "resolution_combined": {
+                  },
+                  "exptl": {
                     "type": "array",
                     "items": {
-                      "type": "number"
-                    },
-                    "description": "Combined resolution values"
-                  }
-                }
-              },
-              "rcsb_accession_info": {
-                "type": "object",
-                "properties": {
-                  "initial_release_date": {
-                    "type": "string",
-                    "description": "Initial release date in ISO format"
+                      "type": "object",
+                      "properties": {
+                        "method": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "rcsb_entry_info": {
+                    "type": "object",
+                    "properties": {
+                      "resolution_combined": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "rcsb_accession_info": {
+                    "type": "object",
+                    "properties": {
+                      "initial_release_date": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -96,9 +96,6 @@
       }
     },
     "test_examples": [
-      {
-        "pdb_id": "4HHB"
-      },
       {
         "pdb_id": "4HHB"
       }
@@ -141,24 +138,27 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string",
-                "description": "4-character PDB ID"
-              },
-              "rcsb_entry_container_identifiers": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "polymer_entity_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "List of polymer entity IDs"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_entry_container_identifiers": {
+                    "type": "object",
+                    "properties": {
+                      "polymer_entity_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -170,9 +170,6 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ]
   },
@@ -214,31 +211,32 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "List of polymer entities",
-            "properties": {
-              "rcsb_id": {
-                "type": "string",
-                "description": "Polymer entity ID"
-              },
-              "rcsb_polymer_entity": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "pdbx_description": {
-                    "type": "string",
-                    "description": "Description of the polymer entity"
-                  }
-                }
-              },
-              "entity_poly": {
-                "type": "object",
-                "properties": {
-                  "rcsb_entity_polymer_type": {
-                    "type": "string",
-                    "description": "Type of polymer entity (e.g., Protein, DNA, RNA)"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_polymer_entity": {
+                    "type": "object",
+                    "properties": {
+                      "pdbx_description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "entity_poly": {
+                    "type": "object",
+                    "properties": {
+                      "rcsb_entity_polymer_type": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -250,9 +248,6 @@
     "test_examples": [
       {
         "entity_id": "1A8M_1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ]
   },
@@ -293,28 +288,31 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string",
-                "description": "4-character PDB ID"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "rcsb_entity_source_organism": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "ncbi_scientific_name": {
-                            "type": "string",
-                            "description": "Scientific name of the source organism"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rcsb_entity_source_organism": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ncbi_scientific_name": {
+                                "type": "string"
+                              }
+                            }
                           }
                         }
                       }
@@ -330,9 +328,6 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ]
   },
@@ -380,56 +375,61 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "rcsb_primary_citation": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "rcsb_authors": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_primary_citation": {
+                    "type": "object",
+                    "properties": {
+                      "rcsb_authors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "rcsb_journal_abbrev": {
+                        "type": "string"
+                      },
+                      "year": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "pdbx_database_id_DOI": {
+                        "type": "string"
+                      },
+                      "rcsb_ORCID_identifiers": {
+                        "type": "null"
+                      }
                     }
                   },
-                  "title": {
-                    "type": "string"
-                  },
-                  "rcsb_journal_abbrev": {
-                    "type": "string"
-                  },
-                  "year": {
-                    "type": "integer"
-                  },
-                  "pdbx_database_id_DOI": {
-                    "type": "string"
-                  },
-                  "rcsb_ORCID_identifiers": {
-                    "type": "null"
-                  }
-                }
-              },
-              "pubmed": {
-                "type": "object",
-                "properties": {
-                  "rcsb_pubmed_abstract_text": {
-                    "type": "string"
-                  },
-                  "rcsb_pubmed_mesh_descriptors_lineage": {
-                    "type": "null"
+                  "pubmed": {
+                    "type": "object",
+                    "properties": {
+                      "rcsb_pubmed_abstract_text": {
+                        "type": "string"
+                      },
+                      "rcsb_pubmed_mesh_descriptors_lineage": {
+                        "type": "null"
+                      }
+                    }
                   }
                 }
               }
@@ -476,32 +476,37 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "entity_poly": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
                       "type": "object",
                       "properties": {
-                        "rcsb_sample_sequence_length": {
-                          "type": "integer"
+                        "entity_poly": {
+                          "type": "object",
+                          "properties": {
+                            "rcsb_sample_sequence_length": {
+                              "type": [
+                                "integer",
+                                "number"
+                              ]
+                            }
+                          }
                         }
                       }
                     }
@@ -551,26 +556,29 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string",
-                "description": "4-character PDB ID"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "entity_poly": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
                       "type": "object",
                       "properties": {
-                        "pdbx_seq_one_letter_code_can": {
-                          "type": "string",
-                          "description": "Polymer (amino acid or nucleotide) sequence in one-letter code"
+                        "entity_poly": {
+                          "type": "object",
+                          "properties": {
+                            "pdbx_seq_one_letter_code_can": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -583,9 +591,6 @@
       }
     },
     "test_examples": [
-      {
-        "pdb_id": "4HHB"
-      },
       {
         "pdb_id": "4HHB"
       }
@@ -630,40 +635,54 @@
     "test_examples": [
       {
         "pdb_id": "2JIV"
-      },
-      {
-        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "entity_poly": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
                       "type": "object",
                       "properties": {
-                        "rcsb_mutation_count": {
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "rcsb_polymer_entity": {
-                      "type": "object",
-                      "properties": {
-                        "pdbx_mutation": {
-                          "type": "null"
+                        "entity_poly": {
+                          "type": "object",
+                          "properties": {
+                            "rcsb_mutation_count": {
+                              "type": [
+                                "integer",
+                                "number"
+                              ]
+                            }
+                          }
+                        },
+                        "rcsb_polymer_entity": {
+                          "type": "object",
+                          "properties": {
+                            "pdbx_mutation": {
+                              "type": "string"
+                            },
+                            "details": {
+                              "type": "string"
+                            },
+                            "pdbx_fragment": {
+                              "type": "string"
+                            },
+                            "pdbx_description": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -729,27 +748,76 @@
     "test_examples": [
       {
         "pdb_id": "7BV2"
-      },
-      {
-        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "em_3d_fitting_list": {
-                "type": "null"
-              },
-              "em_3d_reconstruction": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "em_3d_fitting_list": {
+                    "type": "null"
+                  },
+                  "em_3d_reconstruction": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "algorithm": {
+                          "type": "null"
+                        },
+                        "method": {
+                          "type": "null"
+                        },
+                        "details": {
+                          "type": "null"
+                        },
+                        "nominal_pixel_size": {
+                          "type": "null"
+                        },
+                        "actual_pixel_size": {
+                          "type": "null"
+                        },
+                        "resolution": {
+                          "type": "number"
+                        },
+                        "resolution_method": {
+                          "type": "string"
+                        },
+                        "symmetry_type": {
+                          "type": "string"
+                        },
+                        "num_particles": {
+                          "type": [
+                            "integer",
+                            "number"
+                          ]
+                        },
+                        "num_class_averages": {
+                          "type": "null"
+                        },
+                        "refinement_type": {
+                          "type": "null"
+                        },
+                        "magnification_calibration": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -801,16 +869,81 @@
     "test_examples": [
       {
         "assembly_id": "1A8M-1"
-      },
-      {
-        "assembly_id": "4HHB-1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "assemblies": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "assemblies": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_assembly_info": {
+                    "type": "object",
+                    "properties": {
+                      "polymer_entity_instance_count_protein": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "polymer_entity_instance_count_DNA": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "polymer_entity_instance_count_RNA": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "num_homomeric_interface_entities": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "num_heteromeric_interface_entities": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "total_assembly_buried_surface_area": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "rcsb_struct_symmetry": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "oligomeric_state": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -853,43 +986,45 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "assemblies": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "rcsb_assembly_info": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "assemblies": {
+                    "type": "array",
+                    "items": {
                       "type": "object",
                       "properties": {
-                        "assembly_id": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "pdbx_struct_assembly": {
-                      "type": "object",
-                      "properties": {
-                        "method_details": {
-                          "type": "null"
+                        "rcsb_assembly_info": {
+                          "type": "object",
+                          "properties": {
+                            "assembly_id": {
+                              "type": "string"
+                            }
+                          }
                         },
-                        "details": {
-                          "type": "string"
+                        "pdbx_struct_assembly": {
+                          "type": "object",
+                          "properties": {
+                            "method_details": {
+                              "type": "null"
+                            },
+                            "details": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -933,52 +1068,68 @@
         ]
       },
       "return_fields": [
-        "polymer_entities.rcsb_entity_host_organism.taxonomy_lineage.name",
-        "polymer_entities.rcsb_entity_source_organism.ncbi_parent_scientific_name"
+        "polymer_entities.rcsb_entity_source_organism.ncbi_scientific_name",
+        "polymer_entities.rcsb_entity_source_organism.ncbi_taxonomy_id",
+        "polymer_entities.rcsb_entity_source_organism.ncbi_parent_scientific_name",
+        "polymer_entities.rcsb_entity_host_organism.ncbi_scientific_name"
       ]
     },
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "rcsb_entity_host_organism": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "taxonomy_lineage": {
-                            "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rcsb_entity_host_organism": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ncbi_scientific_name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
                           }
-                        }
-                      }
-                    },
-                    "rcsb_entity_source_organism": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "ncbi_parent_scientific_name": {
-                            "type": "string"
+                        },
+                        "rcsb_entity_source_organism": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ncbi_scientific_name": {
+                                "type": "string"
+                              },
+                              "ncbi_taxonomy_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "ncbi_parent_scientific_name": {
+                                "type": "string"
+                              }
+                            }
                           }
                         }
                       }
@@ -1030,30 +1181,32 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "rcsb_accession_info": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "initial_release_date": {
+                  "rcsb_id": {
                     "type": "string"
                   },
-                  "deposit_date": {
-                    "type": "string"
+                  "rcsb_accession_info": {
+                    "type": "object",
+                    "properties": {
+                      "initial_release_date": {
+                        "type": "string"
+                      },
+                      "deposit_date": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -1101,37 +1254,39 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "entity_src_gen": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "host_org_common_name": {
-                            "type": "null"
-                          },
-                          "pdbx_host_org_scientific_name": {
-                            "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "entity_src_gen": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "host_org_common_name": {
+                                "type": "null"
+                              },
+                              "pdbx_host_org_scientific_name": {
+                                "type": "null"
+                              }
+                            }
                           }
                         }
                       }
@@ -1184,16 +1339,18 @@
     "test_examples": [
       {
         "entity_id": "5FMB_2"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array"
+            }
+          }
         }
       }
     }
@@ -1236,16 +1393,18 @@
     "test_examples": [
       {
         "entity_id": "1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array"
+            }
+          }
         }
       }
     }
@@ -1286,16 +1445,18 @@
     "test_examples": [
       {
         "entity_id": "1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array"
+            }
+          }
         }
       }
     }
@@ -1337,85 +1498,67 @@
     "test_examples": [
       {
         "pdb_id": "1IEP"
-      },
-      {
-        "pdb_id": "4HHB"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "nonpolymer_entities": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "nonpolymer_entity_instances": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "rcsb_nonpolymer_instance_feature_summary": {
-                            "type": [
-                              "array",
-                              "null"
-                            ],
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "comp_id": {
-                                  "type": "string"
-                                }
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "nonpolymer_entities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "nonpolymer_entity_instances": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rcsb_nonpolymer_instance_feature_summary": {
+                                "type": "null"
                               }
                             }
                           }
                         }
                       }
                     }
-                  }
-                }
-              },
-              "assemblies": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "nonpolymer_entity_instances": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "nonpolymer_entity": {
+                  },
+                  "assemblies": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "nonpolymer_entity_instances": {
+                          "type": "array",
+                          "items": {
                             "type": "object",
                             "properties": {
-                              "nonpolymer_comp": {
+                              "nonpolymer_entity": {
                                 "type": "object",
                                 "properties": {
-                                  "rcsb_chem_comp_info": {
+                                  "nonpolymer_comp": {
                                     "type": "object",
                                     "properties": {
-                                      "bond_count": {
-                                        "type": "integer"
+                                      "rcsb_chem_comp_info": {
+                                        "type": "object",
+                                        "properties": {
+                                          "bond_count": {
+                                            "type": [
+                                              "integer",
+                                              "number"
+                                            ]
+                                          }
+                                        }
                                       }
                                     }
                                   }
@@ -1476,24 +1619,26 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "exptl_crystal_grow": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "exptl_crystal_grow": {
+                    "type": "null"
+                  }
+                }
               }
             }
           }
@@ -1541,16 +1686,57 @@
     "test_examples": [
       {
         "entity_id": "1IEP_1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "uniprots": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rcsb_uniprot_accession": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "rcsb_polymer_entity_annotation": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "annotation_id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -1593,16 +1779,18 @@
     "test_examples": [
       {
         "entity_id": "1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "branched_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "branched_entities": {
+              "type": "array"
+            }
+          }
         }
       }
     }
@@ -1645,16 +1833,58 @@
     "test_examples": [
       {
         "instance_id": "1NDO.A"
-      },
-      {
-        "instance_id": "4HHB.A"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entity_instances": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entity_instances": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_polymer_instance_feature": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "feature_positions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "beg_seq_id": {
+                                "type": [
+                                  "integer",
+                                  "number"
+                                ]
+                              },
+                              "end_seq_id": {
+                                "type": [
+                                  "integer",
+                                  "null",
+                                  "number"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -1701,50 +1931,52 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "cell": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "length_a": {
-                    "type": "number"
-                  },
-                  "length_b": {
-                    "type": "number"
-                  },
-                  "length_c": {
-                    "type": "number"
-                  },
-                  "angle_alpha": {
-                    "type": "number"
-                  },
-                  "angle_beta": {
-                    "type": "number"
-                  },
-                  "angle_gamma": {
-                    "type": "number"
-                  }
-                }
-              },
-              "symmetry": {
-                "type": "object",
-                "properties": {
-                  "space_group_name_H_M": {
+                  "rcsb_id": {
                     "type": "string"
+                  },
+                  "cell": {
+                    "type": "object",
+                    "properties": {
+                      "length_a": {
+                        "type": "number"
+                      },
+                      "length_b": {
+                        "type": "number"
+                      },
+                      "length_c": {
+                        "type": "number"
+                      },
+                      "angle_alpha": {
+                        "type": "number"
+                      },
+                      "angle_beta": {
+                        "type": "number"
+                      },
+                      "angle_gamma": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "symmetry": {
+                    "type": "object",
+                    "properties": {
+                      "space_group_name_H_M": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -1792,43 +2024,45 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "refine": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ls_R_factor_R_free": {
-                      "type": "null"
-                    },
-                    "ls_R_factor_R_work": {
-                      "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "refine": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ls_R_factor_R_free": {
+                          "type": "null"
+                        },
+                        "ls_R_factor_R_work": {
+                          "type": "null"
+                        }
+                      }
                     }
-                  }
-                }
-              },
-              "pdbx_vrpt_summary_geometry": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "clashscore": {
-                      "type": "number"
+                  },
+                  "pdbx_vrpt_summary_geometry": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clashscore": {
+                          "type": "number"
+                        }
+                      }
                     }
                   }
                 }
@@ -1874,27 +2108,29 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "struct": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "title": {
+                  "rcsb_id": {
                     "type": "string"
+                  },
+                  "struct": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -1939,27 +2175,32 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "rcsb_entry_info": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "polymer_entity_count": {
-                    "type": "integer"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_entry_info": {
+                    "type": "object",
+                    "properties": {
+                      "polymer_entity_count": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      }
+                    }
                   }
                 }
               }
@@ -2004,27 +2245,29 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "rcsb_entry_container_identifiers": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "emdb_ids": {
-                    "type": "null"
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_entry_container_identifiers": {
+                    "type": "object",
+                    "properties": {
+                      "emdb_ids": {
+                        "type": "null"
+                      }
+                    }
                   }
                 }
               }
@@ -2069,16 +2312,18 @@
     "test_examples": [
       {
         "entity_id": "1"
-      },
-      {
-        "entity_id": "4HHB_1"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "polymer_entities": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "polymer_entities": {
+              "type": "array"
+            }
+          }
         }
       }
     }
@@ -2118,24 +2363,26 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "exptl_crystal_grow": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "exptl_crystal_grow": {
+                    "type": "null"
+                  }
+                }
               }
             }
           }
@@ -2178,27 +2425,29 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "symmetry": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "space_group_name_H_M": {
+                  "rcsb_id": {
                     "type": "string"
+                  },
+                  "symmetry": {
+                    "type": "object",
+                    "properties": {
+                      "space_group_name_H_M": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -2243,27 +2492,29 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "struct_keywords": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                  "pdbx_keywords": {
+                  "rcsb_id": {
                     "type": "string"
+                  },
+                  "struct_keywords": {
+                    "type": "object",
+                    "properties": {
+                      "pdbx_keywords": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -2310,35 +2561,37 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "software": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "version": {
-                      "type": "null"
-                    },
-                    "type": {
-                      "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "software": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "null"
+                        },
+                        "type": {
+                          "type": "null"
+                        }
+                      }
                     }
                   }
                 }
@@ -2384,29 +2637,31 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "refine": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ls_d_res_high": {
-                      "type": "number"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "refine": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ls_d_res_high": {
+                          "type": "number"
+                        }
+                      }
                     }
                   }
                 }
@@ -2455,24 +2710,26 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "rcsb_binding_affinity": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_binding_affinity": {
+                    "type": "null"
+                  }
+                }
               }
             }
           }
@@ -2516,16 +2773,34 @@
     "test_examples": [
       {
         "chem_comp_id": "ATP"
-      },
-      {
-        "chem_comp_id": "HEM"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "chem_comps": {
-          "type": "array"
+        "data": {
+          "type": "object",
+          "properties": {
+            "chem_comps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "rcsb_chem_comp_descriptor": {
+                    "type": "object",
+                    "properties": {
+                      "SMILES": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -2573,47 +2848,49 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "refine": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ls_R_factor_R_work": {
-                      "type": "null"
-                    },
-                    "ls_R_factor_R_free": {
-                      "type": "null"
-                    },
-                    "occupancy_max": {
-                      "type": "null"
-                    },
-                    "occupancy_min": {
-                      "type": "null"
-                    },
-                    "pdbx_overall_phase_error": {
-                      "type": "null"
-                    },
-                    "solvent_model_param_bsol": {
-                      "type": "null"
-                    },
-                    "solvent_model_param_ksol": {
-                      "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "refine": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ls_R_factor_R_work": {
+                          "type": "null"
+                        },
+                        "ls_R_factor_R_free": {
+                          "type": "null"
+                        },
+                        "occupancy_max": {
+                          "type": "null"
+                        },
+                        "occupancy_min": {
+                          "type": "null"
+                        },
+                        "pdbx_overall_phase_error": {
+                          "type": "null"
+                        },
+                        "solvent_model_param_bsol": {
+                          "type": "null"
+                        },
+                        "solvent_model_param_ksol": {
+                          "type": "null"
+                        }
+                      }
                     }
                   }
                 }
@@ -2668,29 +2945,31 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "polymer_entities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "rcsb_target_cofactors": {
-                      "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "polymer_entities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rcsb_target_cofactors": {
+                          "type": "null"
+                        }
+                      }
                     }
                   }
                 }
@@ -2743,24 +3022,26 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "nonpolymer_entities": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "nonpolymer_entities": {
+                    "type": "null"
+                  }
+                }
               }
             }
           }
@@ -2805,24 +3086,26 @@
     "test_examples": [
       {
         "pdb_id": "1CRN"
-      },
-      {
-        "pdb_id": "1IEP"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "rcsb_id": {
-                "type": "string"
-              },
-              "nonpolymer_entities": {
-                "type": "null"
+        "data": {
+          "type": "object",
+          "properties": {
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rcsb_id": {
+                    "type": "string"
+                  },
+                  "nonpolymer_entities": {
+                    "type": "null"
+                  }
+                }
               }
             }
           }

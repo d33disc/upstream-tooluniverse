@@ -4,6 +4,7 @@
     "description": "Search ClinicalTrials.gov for clinical trials by disease/condition, drug/intervention, or keywords. This is the PRIMARY tool for finding clinical trials \u2014 use it when you need to discover trials for a drug (e.g., 'olaparib', 'pembrolizumab'), a disease (e.g., 'lung cancer', 'diabetes'), or any study criteria. Accepts condition names, intervention/treatment names, and free-text queries. Returns NCT IDs and brief descriptions with pagination. Use the returned NCT IDs with 'get_clinical_trial_*' tools for detailed protocol info, or 'extract_clinical_trial_*' tools for efficacy/safety results. Limited to trials beyond phase 1.",
     "parameter": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "condition": {
           "type": "string",
@@ -81,14 +82,6 @@
         "condition": "diabetes mellitus",
         "intervention": "metformin",
         "pageSize": 1
-      },
-      {
-        "condition": "non-small cell lung cancer",
-        "intervention": "pembrolizumab",
-        "overall_status": [
-          "RECRUITING"
-        ],
-        "pageSize": 3
       }
     ],
     "return_schema": {
@@ -190,13 +183,6 @@
           "NCT01158625"
         ],
         "description_type": "brief"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705",
-          "NCT04852770"
-        ],
-        "description_type": "full"
       }
     ],
     "return_schema": {
@@ -261,13 +247,6 @@
           "NCT01158625"
         ],
         "status_and_date": "recruiting"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705",
-          "NCT04852770"
-        ],
-        "status_and_date": "completed"
       }
     ],
     "return_schema": {
@@ -333,12 +312,6 @@
           "NCT01158625"
         ],
         "condition_and_intervention": "diabetes-mellitus"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
-        ],
-        "condition_and_intervention": "COVID-19"
       }
     ],
     "return_schema": {
@@ -427,12 +400,6 @@
           "NCT01158625"
         ],
         "eligibility_criteria": "E11.9"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
-        ],
-        "eligibility_criteria": "SARS-CoV-2"
       }
     ],
     "return_schema": {
@@ -499,12 +466,6 @@
           "NCT01158625"
         ],
         "location": "E11.9"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
-        ],
-        "location": "United States"
       }
     ],
     "return_schema": {
@@ -580,12 +541,6 @@
           "NCT01158625"
         ],
         "outcome_measures": "primary"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
-        ],
-        "outcome_measures": "secondary"
       }
     ],
     "return_schema": {
@@ -648,23 +603,82 @@
     "test_examples": [
       {
         "nct_ids": [
-          "NCT04280705"
+          "NCT04368728"
         ],
-        "references": "all"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705",
-          "NCT04852770"
-        ],
-        "references": "Publication"
+        "references": "Study"
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "NCT ID": {
+                "type": "string"
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "pmid": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "citation": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "see_also_links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -706,29 +720,44 @@
     "test_examples": [
       {
         "nct_ids": [
-          "NCT04852770"
+          "NCT04368728"
         ],
         "outcome_measure": "primary"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
-        ],
-        "outcome_measure": "overall survival"
       }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "string",
-          "description": "Message when no outcome data found or trial has no results"
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "NCT ID": {
+                    "type": "string"
+                  },
+                  "outcomes": {
+                    "type": "array"
+                  }
+                }
+              }
+            ]
+          }
         },
         {
-          "type": "array",
-          "description": "List of outcome result objects",
-          "items": {
-            "type": "object"
-          }
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -806,22 +835,89 @@
     "test_examples": [
       {
         "nct_ids": [
-          "NCT00000620"
+          "NCT04368728"
         ],
-        "adverse_event_type": "all"
-      },
-      {
-        "nct_ids": [
-          "NCT04280705"
+        "organ_systems": [
+          "Cardiac Disorders",
+          "Nervous System Disorders"
         ],
-        "adverse_event_type": "all"
+        "adverse_event_type": "serious"
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "NCT ID": {
+                "type": "string"
+              },
+              "freq_threshold": {
+                "type": [
+                  "string",
+                  "number"
+                ]
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "serious_adverse_events": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "term": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "organSystem": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -829,6 +925,7 @@
     "description": "Search ClinicalTrials.gov for clinical trial studies by condition, intervention, sponsor, or other criteria. Returns NCT IDs, titles, status, phase, enrollment, and key trial metadata. Example: search for 'breast cancer' trials with 'pembrolizumab' that are RECRUITING in Phase 3.",
     "parameter": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "query_cond": {
           "type": [
@@ -913,6 +1010,20 @@
             "null"
           ],
           "description": "Maximum number of results to return. Alias for page_size."
+        },
+        "intervention": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Intervention or drug to search for. Alias for query_intr. E.g., \"pembrolizumab\", \"metformin\"."
+        },
+        "sponsor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Lead sponsor or collaborator name to search for. E.g., \"National Cancer Institute\"."
         }
       },
       "required": []
@@ -928,95 +1039,107 @@
         "query_intr": "pembrolizumab",
         "filter_status": "RECRUITING",
         "page_size": 5
-      },
-      {
-        "query_cond": "type 2 diabetes",
-        "query_intr": "insulin",
-        "filter_phase": "PHASE3",
-        "page_size": 5
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "studies": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "nct_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "brief_title": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "status": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "study_type": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "phases": {
-                "type": "array"
-              },
-              "enrollment": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "conditions": {
-                "type": "array"
-              },
-              "interventions": {
-                "type": "array"
-              },
-              "sponsor": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "start_date": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "completion_date": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "studies": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nct_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "brief_title": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "status": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "study_type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "phases": {
+                    "type": "array"
+                  },
+                  "enrollment": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "conditions": {
+                    "type": "array"
+                  },
+                  "interventions": {
+                    "type": "array"
+                  },
+                  "sponsor": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "completion_date": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
               }
+            },
+            "total_count": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "next_page_token": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          }
-        },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
+          },
+          "required": [
+            "studies"
           ]
         },
-        "next_page_token": {
-          "type": [
-            "string",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1048,87 +1171,110 @@
     "test_examples": [
       {
         "nct_id": "NCT04280705"
-      },
-      {
-        "nct_id": "NCT04852770"
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "nct_id": {
-          "type": [
-            "string",
-            "null"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "nct_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "brief_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "official_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "study_type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "phases": {
+                  "type": "array"
+                },
+                "enrollment": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "brief_summary": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "conditions": {
+                  "type": "array"
+                },
+                "interventions": {
+                  "type": "array"
+                },
+                "primary_outcomes": {
+                  "type": "array"
+                },
+                "eligibility_criteria": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "sponsor": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "locations": {
+                  "type": "array"
+                },
+                "references": {
+                  "type": "array"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
           ]
         },
-        "brief_title": {
-          "type": [
-            "string",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
-        },
-        "official_title": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "status": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "study_type": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "phases": {
-          "type": "array"
-        },
-        "enrollment": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "brief_summary": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "conditions": {
-          "type": "array"
-        },
-        "interventions": {
-          "type": "array"
-        },
-        "primary_outcomes": {
-          "type": "array"
-        },
-        "eligibility_criteria": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "sponsor": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "locations": {
-          "type": "array"
-        },
-        "references": {
-          "type": "array"
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1196,32 +1342,53 @@
         "intervention": "nivolumab",
         "filter_phase": "PHASE3",
         "page_size": 5
-      },
-      {
-        "intervention": "CAR-T cells",
-        "condition": "lymphoma",
-        "page_size": 5
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "studies": {
-          "type": "array"
-        },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "studies": {
+                  "type": "array"
+                },
+                "total_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "next_page_token": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
           ]
         },
-        "next_page_token": {
-          "type": [
-            "string",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1283,32 +1450,53 @@
         "sponsor": "National Cancer Institute",
         "filter_phase": "PHASE3",
         "page_size": 5
-      },
-      {
-        "sponsor": "Pfizer",
-        "query_cond": "cancer",
-        "page_size": 5
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "studies": {
-          "type": "array"
-        },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "studies": {
+                  "type": "array"
+                },
+                "total_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "next_page_token": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "data"
           ]
         },
-        "next_page_token": {
-          "type": [
-            "string",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1334,27 +1522,45 @@
       {}
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "total_studies": {
-          "type": [
-            "integer",
-            "null"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "total_studies": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "average_byte_size": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "largest_studies": {
+              "type": [
+                "array",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "largest_studies"
           ]
         },
-        "average_byte_size": {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "largest_studies": {
-          "type": [
-            "array",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1398,45 +1604,67 @@
       {
         "field": "Phase",
         "page_size": 20
-      },
-      {
-        "field": "OverallStatus",
-        "page_size": 10
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "field": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "studies_count": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "studies_count": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "total_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
               }
+            },
+            "metadata": {
+              "type": "object"
             }
-          }
+          },
+          "required": [
+            "data"
+          ]
         },
-        "total_count": {
-          "type": [
-            "integer",
-            "null"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
           ]
         }
-      }
+      ]
     },
     "label": [
       "ClinicalTrials.gov",

@@ -35,6 +35,8 @@ def _load_defined_tool_names() -> set[str]:
     """All tool names from ``name`` fields in data/*.json."""
     names: set[str] = set()
     for jf in DATA_DIR.glob("*.json"):
+        if jf.name == "api_keys_catalog.json":
+            continue
         try:
             data = json.loads(jf.read_text())
         except (json.JSONDecodeError, UnicodeDecodeError):
@@ -52,6 +54,8 @@ def _load_type_names() -> set[str]:
     """All ``type`` fields from data/*.json (Python class names)."""
     types: set[str] = set()
     for jf in DATA_DIR.glob("*.json"):
+        if jf.name == "api_keys_catalog.json":
+            continue
         try:
             data = json.loads(jf.read_text())
         except (json.JSONDecodeError, UnicodeDecodeError):

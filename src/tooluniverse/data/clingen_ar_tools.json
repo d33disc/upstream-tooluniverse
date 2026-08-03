@@ -27,49 +27,83 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "allele_id": {
-          "type": "string",
-          "description": "ClinGen canonical allele ID (e.g., CA000387)"
-        },
-        "allele_url": {
-          "type": "string",
-          "description": "Full URL to allele record"
-        },
-        "community_standard_title": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Standardized HGVS title"
-        },
-        "external_records": {
+      "oneOf": [
+        {
           "type": "object",
-          "description": "Cross-references to external databases (dbSNP, ClinVar, COSMIC, gnomAD, ExAC)"
-        },
-        "genomic_alleles": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "hgvs": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "reference_genome": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "allele_id": {
+                  "type": "string",
+                  "description": "ClinGen canonical allele ID (e.g., CA000387)"
+                },
+                "allele_url": {
+                  "type": "string",
+                  "description": "Full URL to allele record"
+                },
+                "community_standard_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Standardized HGVS title"
+                },
+                "external_records": {
+                  "type": "object",
+                  "description": "Cross-references to external databases (dbSNP, ClinVar, COSMIC, gnomAD, ExAC)"
+                },
+                "genomic_alleles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hgvs": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "reference_genome": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "description": "Genomic coordinates in different assemblies"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_hgvs": {
+                  "type": "string"
+                }
               }
             }
           },
-          "description": "Genomic coordinates in different assemblies"
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -94,37 +128,172 @@
     "test_examples": [
       {
         "allele_id": "CA000387"
-      },
-      {
-        "allele_id": "CA006116"
-      },
-      {
-        "allele_id": "CA000013"
       }
     ],
     "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "allele_id": {
+                  "type": "string",
+                  "description": "ClinGen canonical allele ID"
+                },
+                "community_standard_title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Standardized variant title"
+                },
+                "databases": {
+                  "type": "object",
+                  "description": "External database records keyed by database name (ClinVarAlleles, ClinVarVariations, dbSNP, COSMIC, gnomAD_2, gnomAD_3, gnomAD_4, ExAC, MyVariantInfo_hg19, MyVariantInfo_hg38)"
+                },
+                "database_count": {
+                  "type": "integer",
+                  "description": "Number of external databases with records"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query_allele_id": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ClinGenAR_lookup_by_external_id",
+    "description": "Reverse-lookup the ClinGen Allele Registry by an external identifier. Given a dbSNP rsID (dbsnp_rs) or a ClinVar VariationID (clinvar_variation_id), resolves it to the canonical ClinGen allele (CA id) and returns ALL cross-references (ClinVar alleles/variations, dbSNP, COSMIC, gnomAD, MyVariantInfo) plus the community standard HGVS title and genomic allele HGVS. This complements ClinGenAR_lookup_allele (which takes an HGVS expression): use this when you start from an rsID or ClinVar variation id instead of HGVS. Example: dbsnp_rs=113488022 -> CA123643, 'NM_004333.6(BRAF):c.1799T>A (p.Val600Glu)', incl COSM476; clinvar_variation_id=13961 resolves to the same CA123643 record. Public API, no key required.",
+    "parameter": {
       "type": "object",
       "properties": {
-        "allele_id": {
-          "type": "string",
-          "description": "ClinGen canonical allele ID"
+        "dbsnp_rs": {
+          "type": ["string", "integer", "null"],
+          "description": "dbSNP rsID to resolve. The 'rs' prefix is optional (e.g. 113488022 or 'rs113488022'). Mutually exclusive with clinvar_variation_id."
         },
-        "community_standard_title": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Standardized variant title"
-        },
-        "databases": {
-          "type": "object",
-          "description": "External database records keyed by database name (ClinVarAlleles, ClinVarVariations, dbSNP, COSMIC, gnomAD_2, gnomAD_3, gnomAD_4, ExAC, MyVariantInfo_hg19, MyVariantInfo_hg38)"
-        },
-        "database_count": {
-          "type": "integer",
-          "description": "Number of external databases with records"
+        "clinvar_variation_id": {
+          "type": ["string", "integer", "null"],
+          "description": "ClinVar VariationID to resolve (e.g. 13961). Mutually exclusive with dbsnp_rs."
         }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "lookup_by_external_id"
+    },
+    "type": "ClinGenARTool",
+    "test_examples": [
+      {
+        "dbsnp_rs": "113488022"
+      },
+      {
+        "clinvar_variation_id": "13961"
       }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "description": "The external-id query that was resolved (e.g. 'dbSNP.rs=113488022')"
+                },
+                "allele_count": {
+                  "type": "integer",
+                  "description": "Number of matching canonical alleles"
+                },
+                "alleles": {
+                  "type": "array",
+                  "description": "Matching canonical alleles, each with CA id and cross-references",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "allele_id": {
+                        "type": ["string", "null"],
+                        "description": "ClinGen canonical allele ID (e.g. CA123643)"
+                      },
+                      "allele_url": {
+                        "type": ["string", "null"]
+                      },
+                      "community_standard_title": {
+                        "type": ["string", "null"],
+                        "description": "Standardized HGVS title"
+                      },
+                      "external_records": {
+                        "type": "object",
+                        "description": "Cross-references (ClinVarAlleles, ClinVarVariations, dbSNP, COSMIC, gnomAD, MyVariantInfo)"
+                      },
+                      "genomic_alleles": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "hgvs": {"type": ["string", "null"]},
+                            "reference_genome": {"type": ["string", "null"]}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"},
+                "query": {"type": "string"}
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

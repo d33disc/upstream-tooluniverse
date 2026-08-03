@@ -1,171 +1,75 @@
 ---
 name: research
-description: Answer a scientific research question using ToolUniverse databases. Automatically routes to the right tools, cross-validates findings, and reports with actual data. Use this for any biology, chemistry, medicine, or data science question.
-argument-hint: "[your research question]"
+description: Conduct a multi-database scientific research investigation inline in the current chat. Same operating discipline as the /tooluniverse:researcher agent (look up specific claims, cross-validate, honest INDETERMINATE) — but runs in this conversation so you can watch each step, follow up, and refine, instead of receiving a single summary from a forked subagent. Use when you want to drive the research yourself with ToolUniverse rather than delegating to a subagent.
+argument-hint: "[research question, e.g. 'FDA-approved indications of metformin' or 'KRAS G12C resistance mechanisms']"
 ---
 
-Answer this scientific research question: $ARGUMENTS
+Research the following using ToolUniverse: $ARGUMENTS
 
-## Skill Routing (check FIRST before calling tools)
+## Operating Rules
 
-If the question matches a specialized skill, invoke it via `Skill('<name>')` — these produce structured reports with deeper tool coverage than ad-hoc tool calls.
+1. **Look up specific claims; don't guess them.** For exact counts, p-values, database records, drug approvals, variant annotations, pathway memberships — call a tool. Memory is only for textbook-level background.
+2. **Don't search for tools you already have.** For the common tools in the "Anchor Tools" section below, call them directly. For anything else, run `find_tools("topic")` once, then `get_tool_info(name)` once. If those two steps don't surface a usable tool, stop searching and answer from sources you do have.
+3. **Cross-validate high-stakes facts.** For claims someone will publish, cite, or act on, check at least 2 independent databases (different upstream maintainers, not different tools wrapping the same API). State agreement or disagreement explicitly.
+4. **An honest "INDETERMINATE" beats a confident wrong answer.** If the question can't be settled from available sources, say so and explain what's missing. Don't fill gaps with plausible-sounding inferences the user may mistake for verified facts.
+5. **For data-file analysis (CSV, TSV, h5ad, VCF, FASTA, tree files, etc.), route to the matching ToolUniverse skill before writing code:**
 
-| Question pattern | Skill |
-|---|---|
-| Treatment for cancer mutation / precision oncology / BRAF V600E / EGFR L858R | `tooluniverse-precision-oncology` |
-| Target validation / druggability / "is X a good drug target" | `tooluniverse-drug-target-validation` |
-| Comprehensive target profile | `tooluniverse-target-research` |
-| Drug safety / adverse events | `tooluniverse-pharmacovigilance` |
-| Disease overview | `tooluniverse-disease-research` |
-| Drug profiling | `tooluniverse-drug-research` |
+   ```
+   Skill('tooluniverse')   # loads the router, which dispatches to the specialized skill
+   ```
 
-If none match, continue with the generic workflow below.
+   The skills encode discovered analysis conventions (which library, which filter, which denominator) that ad-hoc code often gets wrong. Do not re-derive conventions inside this chat.
 
-## Core Rules
+## Workflow
 
-1. **ALWAYS give an answer.** Never return empty. If tools fail, answer from your knowledge and note the limitation.
-2. **If you know the answer, state it immediately.** Do NOT search for tools when you already have the knowledge.
-3. **If a tool is not found after 2 searches, stop searching.** Answer from knowledge instead of burning more turns.
-4. **If a tool returns an API key error, do NOT retry.** Move on immediately.
-5. **Use tools only when you need specific data** — exact counts, p-values, database-specific records, recent data.
+1. **Plan**: state which tools or skills you'll need before calling them.
+2. **Execute**: call tools or skills directly. For batches of 5+ similar queries, use the Python SDK pattern (see below) — `subprocess.run(["tu", "run", ...])` per call reloads the registry every time.
+3. **Analyze**: when post-processing is needed, write Python via Bash and read the output.
+4. **Validate**: cross-check key findings against a second source.
+5. **Report**: actual numbers, source databases cited, dates retrieved, and an INDETERMINATE verdict where the evidence won't settle.
 
-## One-Liner Tool Recipes (skip all discovery)
+The user is in this conversation and can interrupt — pause for clarification if a key step depends on a choice the user should make (e.g., which species, which disease subtype, which time window).
 
-Copy-paste these directly into Bash. **No MCP calls needed.**
+## Anchor Tools
 
-```bash
-# Gene info
-tu run ensembl_lookup_gene '{"gene_id":"TP53","species":"homo_sapiens"}'
-tu run NCBIGene_search '{"term":"TP53 human"}'
-tu run UniProt_search '{"query":"BRCA1","organism":"human","limit":5}'
+Call these directly via `execute_tool`. For anything else, use `find_tools` once.
 
-# Variants
-tu run ClinVar_search_variants '{"query":"BRCA1","limit":10}'
-tu run civic_get_variants_by_gene '{"gene_symbol":"BRAF"}'
-tu run gnomad_get_gene '{"gene_symbol":"BRCA1"}'
+| Domain | Tool | Example arguments |
+|---|---|---|
+| Gene → all IDs (Ensembl/UniProt/NCBI/RefSeq/MGI) | `MyGene_query_genes` | `{"q": "BRAF", "species": "human"}` |
+| Cancer drivers | `IntOGen_get_drivers` | `{"cancer_type": "BRCA"}` |
+| Mutation freq (pan-cancer) | `GDC_get_mutation_frequency` | `{"gene_symbol": "TP53"}` |
+| Drug ↔ gene | `DGIdb_get_drug_gene_interactions` | `{"genes": ["TP53", "PIK3CA"]}` |
+| Variant annotation (precision oncology) | `OncoKB_annotate_variant` | `{"gene": "PIK3CA", "variant": "H1047R", "tumor_type": "Breast Cancer"}` |
+| Literature | `PubMed_search_articles` | `{"query": "BRCA1 therapy", "max_results": 10}` |
+| Clinical trials | `search_clinical_trials` | `{"query_term": "metformin cancer", "status": "RECRUITING"}` |
+| Pharmacogenomics | `CPIC_list_guidelines` | `{"gene": "CYP2D6"}` |
 
-# Disease/drug
-tu run DGIdb_get_drug_gene_interactions '{"genes":["TP53","PIK3CA"]}'
-tu run DisGeNET_search_disease '{"disease":"breast cancer"}'
+**Compound tools** (run multiple databases in one call):
 
-# Cancer
-tu run IntOGen_get_drivers '{"cancer_type":"BRCA"}'
-tu run GDC_get_mutation_frequency '{"gene_symbol":"TP53"}'
+- `gather_gene_disease_associations`
+- `annotate_variant_multi_source`
+- `gather_disease_profile`
 
-# Literature
-tu run PubMed_search_articles '{"query":"BRCA1 therapy","max_results":5}'
+For anything else: `find_tools("your topic")` then `get_tool_info("name")`.
 
-# Pathways
-tu run STRING_get_interaction_partners '{"identifiers":"TP53","species":9606,"limit":5}'
-tu run kegg_search_pathway '{"keyword":"PI3K signaling"}'
+## Batch Pattern (5+ similar queries)
 
-# Gene sets (MSigDB — covers GTRD TF targets, miRDB miRNA targets, oncogenic sigs, hallmarks)
-tu run MSigDB_check_gene_in_set '{"gene_set_name":"ZNF549_TARGET_GENES","gene":"SELENOP"}'
-tu run MSigDB_get_gene_set_members '{"gene_set_name":"ESC_V6.5_UP_EARLY.V1_DN"}'
-```
-
-## Compound Tools (multi-database, one call)
-
-For questions that need data from multiple databases, use compound tools instead of calling each database separately:
-
-```bash
-# Gene-disease associations: queries DisGeNET+OMIM+OpenTargets+GenCC+ClinVar, returns concordance
-tu run gather_gene_disease_associations '{"disease":"distal renal tubular acidosis"}'
-tu run gather_gene_disease_associations '{"gene":"BRCA1"}'
-
-# Variant annotation: queries ClinVar+gnomAD+CIViC+UniProt
-tu run annotate_variant_multi_source '{"variant":"BRAF V600E","gene":"BRAF"}'
-
-# Disease profile: queries Orphanet+OMIM+DisGeNET+OpenTargets+OLS
-tu run gather_disease_profile '{"disease":"breast cancer"}'
-```
-
-These return structured JSON with cross-database concordance. Much faster than calling each tool individually.
-
-**If a tool fails** (API key missing, error), answer from knowledge and move on. Never retry.
-
-## For Unfamiliar Tools Only
-
-If you need a tool not listed above, use MCP discovery:
-```
-find_tools("your topic") → get_tool_info("tool_name") → tu run tool_name '{...}'
-```
-
-## For Large Batches (5+ calls)
-
-Use the Python SDK to avoid per-call CLI overhead:
 ```python
 from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 tu.load_tools()
-result = tu.run_one_function({"name": "tool_name", "arguments": {...}})
+for gene in ["TP53", "BRCA1", "PIK3CA", "PTEN", "KRAS"]:
+    print(tu.run_one_function({
+        "name": "GDC_get_mutation_frequency",
+        "arguments": {"gene_symbol": gene},
+    }))
 ```
 
-## Tool Quick Reference (with example parameters)
+Registry loads once; ~3 s total. The same loop with `subprocess.run(["tu", "run", ...])` is ~12 s because each call reloads the registry.
 
-**Cancer/Genomics:**
-- `IntOGen_get_drivers` — `{"cancer_type": "BRCA"}` → top driver genes
-- `GDC_get_mutation_frequency` — `{"gene_symbol": "TP53"}` → pan-cancer frequency
-- `GDC_get_ssm_by_gene` — `{"gene_symbol": "TP53", "project_id": "TCGA-BRCA", "size": 10}`
-- `GDC_get_clinical_data` — `{"project_id": "TCGA-BRCA", "size": 10}`
-- `GDC_get_survival` — `{"project_id": "TCGA-BRCA", "gene_symbol": "TP53"}`
-- `OncoKB_annotate_variant` — `{"operation": "annotate_variant", "gene": "PIK3CA", "variant": "H1047R", "tumor_type": "Breast Cancer"}`
+## Constraints
 
-**Drugs:**
-- `DGIdb_get_drug_gene_interactions` — `{"genes": ["TP53", "PIK3CA"]}` → batch multiple genes
-- `OpenFDA_search_drug_approvals` — `{"operation": "search_approvals", "drug_name": "alpelisib", "limit": 3}`
-- `OpenTargets_get_associated_drugs_by_target_ensemblID` — `{"ensemblId": "ENSG00000121879"}` (use Ensembl ID, not gene symbol)
-- `ChEMBL_search_molecules` — `{"query": "metformin", "limit": 5}`
-
-**Literature:**
-- `PubMed_search_articles` — `{"query": "BRCA1 resistance therapy", "max_results": 10}`
-- `EuropePMC_search_articles` — `{"query": "BRCA1 resistance", "limit": 10}`
-
-**Genes/Proteins:**
-- `UniProt_search` — `{"query": "BRCA1", "organism": "human", "limit": 5}`
-- `NCBIGene_search` — `{"term": "TP53 human"}`
-- `ensembl_lookup_gene` — `{"gene_id": "TP53", "species": "homo_sapiens"}`
-
-**Variants:**
-- `ClinVar_search_variants` — `{"query": "BRCA1", "limit": 10}`
-- `civic_get_variants_by_gene` — `{"gene_symbol": "BRAF"}`
-- `gnomad_get_gene` — `{"gene_symbol": "BRCA1"}`
-
-**Pharmacogenomics:**
-- `CPIC_list_guidelines` — `{"gene": "CYP2D6"}` or `{"drug": "codeine"}`
-- `PharmGKB_search_variants` — `{"query": "CYP2D6"}`
-
-**Clinical/Epidemiology:**
-- `search_clinical_trials` — `{"query_term": "metformin breast cancer", "status": "RECRUITING", "limit": 10}`
-- `NHANES_download_and_parse` — `{"component": "Demographics", "cycle": "2017-2018", "variables": ["SEQN", "RIDAGEYR"]}`
-
-**Pathways:**
-- `kegg_search_pathway` — `{"keyword": "PI3K signaling"}`
-- `ReactomeContent_search` — `{"query": "PI3K AKT"}`
-- `STRING_get_interaction_partners` — `{"identifiers": "TP53", "species": 9606, "limit": 10}`
-
-For anything not listed: `find_tools("your topic")` or `get_tool_info("tool_name")` to check parameters.
-
-## Local Data Analysis — Invoke the Specialized Skill FIRST
-
-When the question provides local data files (CSV, TSV, Excel, h5ad, VCF, etc.), **your first action must be to invoke the matching skill via the Skill tool**, e.g. `Skill('tooluniverse-statistical-modeling')` or `Skill('tooluniverse-rnaseq-deseq2')`. Do NOT write your own pandas/scipy code before loading the skill — the skill encodes dataset-specific conventions (encoding, join types, aggregation level, library choice, significance thresholds, set-operation semantics) that have been reverse-engineered from benchmark ground truths and that you will otherwise get wrong.
-
-| If the question involves… | Use this skill |
-|---|---|
-| Regression, odds ratios, ANOVA/chi-square/Mann-Whitney, clinical-trial outcome analysis (SDTM DM/AE/EX), spline/polynomial fits | `tooluniverse-statistical-modeling` |
-| RNA-seq count matrix, DESeq2, DEG lists, dispersion, design formulas, strain-comparison set operations | `tooluniverse-rnaseq-deseq2` |
-| GO / KEGG / Reactome / enrichGO / clusterProfiler simplify, pathway over-representation, gseapy | `tooluniverse-gene-enrichment` |
-| CRISPR screen (MAGeCK), sgRNA counts, replicate correlation, pathway GSEA on screen output | `tooluniverse-crispr-screen-analysis` |
-| Sequence alignments, parsimony informative sites, treeness, phylogenetic trees | `tooluniverse-phylogenetics` |
-| VCF parsing, variant classification, structural variants, mutation counts | `tooluniverse-variant-analysis` |
-| scRNA-seq, h5ad, scanpy, UMAP, clustering, cell-type annotation | `tooluniverse-single-cell` |
-| Protein structure (PDB/AlphaFold), folding prediction, structural profiles | `tooluniverse-protein-structure-retrieval` |
-
-If no skill matches, you may write a short pandas/scipy script yourself — but check the dataset folder first for `analysis.R`, `run_*.py`, or `find_*.R`. Those are ground-truth analysis recipes; read them before writing a new one, and copy every kwarg literally.
-
-**Universal data-handling tips**
-- `encoding='latin1'` when `pd.read_csv` fails with `UnicodeDecodeError` (common for clinical-trial CSV exports).
-- Inspect first: one quick `head()`, `shape`, `columns`; scan for `README`/`.txt`/`.md` files describing columns.
-- One complete script: read → compute → print answer clearly; keep scripts under 50 lines.
-- Do NOT use ToolUniverse MCP for local file computation — pandas/scipy/numpy are faster.
-
+- API key errors: don't retry; move on and note the limitation in the final report.
+- For local data-file analysis, route to a skill before writing ad-hoc analysis code.
+- Stay in this conversation — do not spawn a subagent.

@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-epidemiological-analysis
-description: End-to-end epidemiological data analysis — from research question to statistical report. Covers study design assessment, dataset discovery and download, data wrangling, confounder adjustment, regression modeling, sensitivity analysis, visualization, and biological interpretation. Integrates ToolUniverse tools for dataset discovery, literature search, and biological context with Python code execution for data analysis. Use whenever users ask to analyze health data, study disease risk factors, assess exposure-outcome relationships, or conduct observational epidemiology. Also use when users want to run regression on clinical/survey data, calculate odds ratios or hazard ratios from a dataset, adjust for confounders, or produce a Table 1. If the task involves downloading a health dataset and running statistical analysis on it, this is the right skill.
+description: End-to-end observational epidemiology analysis — from research question (PECO Population/Exposure/Comparator/Outcome) to publication-ready statistical report. Covers cohort/case-control/cross-sectional design, regression with confounders, propensity scoring, sensitivity analysis. Writes Python code for every step. Use for epidemiology study analysis, NHANES/UK-Biobank-style analyses.
+disable-model-invocation: true
 ---
 
 # Epidemiological Data Analysis

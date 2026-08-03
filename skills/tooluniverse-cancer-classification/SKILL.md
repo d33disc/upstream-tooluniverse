@@ -1,11 +1,7 @@
 ---
 name: tooluniverse-cancer-classification
-description: >
-  Translate free-text tumor descriptions to OncoTree codes, look up cancer subtypes and tissue
-  hierarchies, resolve UMLS/NCI cross-references, and obtain OncoKB-compatible tumor type codes
-  for variant annotation. Use when asked to find the OncoTree code for a tumor type, enumerate
-  subtypes of a cancer, list cancers by tissue of origin, or standardize tumor nomenclature for
-  downstream precision oncology analysis.
+description: Translate free-text tumor descriptions to OncoTree codes and resolve cancer subtypes/tissue hierarchy. Cross-references UMLS/NCI vocabularies. Use for standardizing cancer-type nomenclature in EHR free-text, building cohorts in OncoKB or GDC, mapping tumor-board notes to ontology codes, and ensuring consistent terminology across cancer-genomics pipelines.
+disable-model-invocation: true
 ---
 
 # Cancer Classification via OncoTree

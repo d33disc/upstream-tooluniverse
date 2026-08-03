@@ -133,6 +133,7 @@ class ProteomicsDBTool(BaseTool):
             "search_proteins": self._search_proteins,
             "get_expression_summary": self._get_expression_summary,
             "list_tissues": self._list_tissues,
+            "get_peptides_for_protein": self._get_peptides_for_protein,
         }
 
         handler = handlers.get(operation)
@@ -224,9 +225,17 @@ class ProteomicsDBTool(BaseTool):
                     "tissue_category": t[3] or "",
                 }
 
-        # Build expression records
-        # mapdata format: [protein_id, tissue_id, val1, val2, val3, val4]
-        # val1 appears to be the main normalized expression value (log10 iBAQ)
+        # Build expression records.
+        #
+        # mapdata rows mirror ProteomicsDB's documented proteinexpression.xsodata
+        # columns, in this order:
+        #   [protein_id, tissue_id, UNNORMALIZED_INTENSITY, NORMALIZED_INTENSITY,
+        #    MIN_NORMALIZED_INTENSITY, MAX_NORMALIZED_INTENSITY]
+        # `expression_value` must be the NORMALIZED intensity: it is the value the
+        # tool documents, the one comparable across tissues, and the only one that
+        # lies inside the min/max interval reported alongside it. Using the
+        # un-normalized column put every value outside its own error bars and
+        # reordered the tissue ranking.
         records = []
         for row in mapdata:
             if len(row) < 3:
@@ -238,18 +247,17 @@ class ProteomicsDBTool(BaseTool):
                 "tissue_name": tissue_info.get("tissue_name", ""),
                 "tissue_group": tissue_info.get("tissue_group", ""),
                 "tissue_category": tissue_info.get("tissue_category", ""),
-                "expression_value": row[2] if len(row) > 2 else None,
+                "expression_value": row[3] if len(row) > 3 else None,
+                "unnormalized_intensity": row[2],
             }
             # Add additional quantification values if present
-            if len(row) > 3:
-                rec["median_expression"] = row[3]
             if len(row) > 4:
                 rec["min_expression"] = row[4]
             if len(row) > 5:
                 rec["max_expression"] = row[5]
             records.append(rec)
 
-        # Sort by expression value descending
+        # Sort by normalized expression value descending
         records.sort(key=lambda r: r.get("expression_value") or 0, reverse=True)
 
         # Get protein info
@@ -446,5 +454,109 @@ class ProteomicsDBTool(BaseTool):
                 "total_sources": len(tissues),
                 "category_counts": cat_counts,
                 "tissues": tissues,
+            },
+        }
+
+    @staticmethod
+    def _to_float(value):
+        """Best-effort convert a numeric string to float; return None on failure."""
+        if value is None:
+            return None
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return value
+
+    @staticmethod
+    def _to_int(value):
+        """Best-effort convert a numeric string to int; leave as-is on failure."""
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return value
+
+    def _get_peptides_for_protein(self, arguments):
+        """Get peptide-level identification evidence for a protein.
+
+        Returns per-peptide sequence, uniqueness, peptide & protein q-values,
+        peptide score, search engine, and source experiment/project/PubMed -
+        the identification-level evidence that the tissue-level expression tools
+        do not expose.
+        """
+        uniprot_id = arguments.get("uniprot_id")
+        if not uniprot_id:
+            return {"status": "error", "error": "uniprot_id parameter is required"}
+
+        max_results = arguments.get("max_results", 50)
+        try:
+            max_results = int(max_results)
+        except (TypeError, ValueError):
+            max_results = 50
+        if max_results < 1:
+            max_results = 1
+
+        # The proteinpeptideresult OData service takes the protein accession as
+        # an InputParam and returns one row per peptide identification.
+        select_fields = (
+            "PEPTIDE_SEQUENCE,PEPTIDE_MASS,ISUNIQUE,ISUNIQUE_PROTEIN,"
+            "PEPTIDE_Q_VALUE,PROTEIN_Q_VALUE,PEPTIDE_SCORE,SEARCH_ENGINE,"
+            "START_POSITION,END_POSITION,EXPERIMENT_ID,EXPERIMENT_NAME,"
+            "PROJECT_NAME,PROJECT_DESCRIPTION,PUBMEDID,UNIQUE_IDENTIFIER,"
+            "GENE_NAME,PROTEIN_NAME,ENTRY_NAME"
+        )
+        safe_id = str(uniprot_id).replace("'", "")
+        url = (
+            "%s/api/proteinpeptideresult.xsodata/"
+            "InputParams(PROTEINFILTER='%s')/Results"
+            "?$format=json&$top=%d&$select=%s"
+        ) % (BASE_URL, safe_id, max_results, select_fields)
+
+        result = _odata_request(url, timeout=30)
+        if not result["ok"]:
+            return {"status": "error", "error": result["error"]}
+
+        raw = result["data"].get("d", {}).get("results", [])
+        if not raw:
+            return {
+                "status": "success",
+                "data": {
+                    "uniprot_id": uniprot_id,
+                    "num_peptides": 0,
+                    "peptides": [],
+                },
+            }
+
+        peptides = []
+        for r in raw:
+            peptides.append(
+                {
+                    "peptide_sequence": r.get("PEPTIDE_SEQUENCE", ""),
+                    "peptide_mass": self._to_float(r.get("PEPTIDE_MASS")),
+                    "is_unique": self._to_int(r.get("ISUNIQUE")),
+                    "is_unique_to_protein": self._to_int(r.get("ISUNIQUE_PROTEIN")),
+                    "peptide_q_value": self._to_float(r.get("PEPTIDE_Q_VALUE")),
+                    "protein_q_value": self._to_float(r.get("PROTEIN_Q_VALUE")),
+                    "peptide_score": self._to_float(r.get("PEPTIDE_SCORE")),
+                    "search_engine": self._to_int(r.get("SEARCH_ENGINE")),
+                    "start_position": self._to_int(r.get("START_POSITION")),
+                    "end_position": self._to_int(r.get("END_POSITION")),
+                    "experiment_id": r.get("EXPERIMENT_ID"),
+                    "experiment_name": r.get("EXPERIMENT_NAME", ""),
+                    "project_name": r.get("PROJECT_NAME", ""),
+                    "project_description": r.get("PROJECT_DESCRIPTION", ""),
+                    "pubmed_id": r.get("PUBMEDID"),
+                }
+            )
+
+        first = raw[0]
+        return {
+            "status": "success",
+            "data": {
+                "uniprot_id": uniprot_id,
+                "gene_name": first.get("GENE_NAME", ""),
+                "protein_name": first.get("PROTEIN_NAME", ""),
+                "entry_name": first.get("ENTRY_NAME", ""),
+                "num_peptides": len(peptides),
+                "peptides": peptides,
             },
         }

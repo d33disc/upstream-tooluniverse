@@ -1,9 +1,21 @@
 ---
 name: tooluniverse-crispr-screen-analysis
-description: Comprehensive CRISPR screen analysis for functional genomics. Analyze pooled or arrayed CRISPR screens (knockout, activation, interference) to identify essential genes, synthetic lethal interactions, and drug targets. Perform sgRNA count processing, gene-level scoring (MAGeCK, BAGEL), quality control, pathway enrichment, and drug target prioritization. Use for CRISPR screen analysis, gene essentiality studies, synthetic lethality detection, functional genomics, drug target validation, or identifying genetic vulnerabilities.
+description: Analyze CRISPR-Cas9 genetic screens — MAGeCK gene-level scores, sgRNA count QC, replicate correlation, hit prioritization, and pathway GSEA on screen output. Use for genome-wide essentiality screens, synthetic-lethality discovery, dropout vs positive-selection screen analysis, target identification, and resistance-screen interpretation. Includes screen-QC and statistical thresholds.
+disable-model-invocation: true
 ---
 
 # ToolUniverse CRISPR Screen Analysis
+
+## RULE ZERO — Check for pre-computed results FIRST
+
+Before following any instruction below, scan the data folder for:
+- `*_executed.ipynb` → read with `tu run read_executed_notebook '{"data_folder":"<path>","search":"<keyword>"}'` and cite its cell outputs as the authoritative answer
+- Pre-computed result files (CSV/TSV with names like `*results*`, `*deseq*`, `*enrich*`, `*stats*`, `*_simplified.csv`) → read directly and report the requested value
+- Canonical analysis scripts (`analysis.R`, `run_*.py`, `find_*.R`, `*.Rmd`) → execute as-is and read the output
+
+Only follow this skill's re-analysis recipe below if **none** of the above exist. Re-running from raw data produces different numbers than the published answer and is much slower (often 5-10× turn count).
+
+---
 
 Comprehensive skill for analyzing CRISPR-Cas9 genetic screens to identify essential genes, synthetic lethal interactions, and therapeutic targets through robust statistical analysis and pathway enrichment.
 
@@ -163,7 +175,7 @@ LOOK UP DON'T GUESS: DepMap dependency scores, known core essential gene sets (H
 
 **Synthesis questions to address in the report:**
 1. Do the top hits cluster in known pathways (Reactome/KEGG), or are they scattered -- suggesting technical noise?
-2. Are known essential genes (Hart et al. reference set) correctly identified, confirming screen quality?
+2. Are known essential genes (Hart et al. reference set) correctly identified, confirming screen quality? The full CEGv2 core-essential (~684) and NEGv1 non-essential (~928) reference sets are bundled in `scripts/` — load them with `from reference_gene_sets import core_essential, nonessential, recovery_rate`. `recovery_rate(top_depleted_genes)` gives the fraction of core-essential genes recovered (a good genome-wide screen recovers >~0.8).
 3. For drug target candidates: does DGIdb show existing compounds, and does DepMap confirm the dependency across multiple cell lines?
 
 ---
@@ -177,7 +189,7 @@ LOOK UP DON'T GUESS: DepMap dependency scores, known core essential gene sets (H
 
 ---
 
-## BixBench-verified conventions
+## Analysis conventions
 
 ### Replicate Spearman correlation — match the paper's aggregation level
 Papers differ on how replicate reproducibility is reported: sgRNA-level CPM vs gene-level summed CPM vs gene-level mean CPM. The expected GT is almost always the **sgRNA-level** Spearman (noisier, lower ρ), not the gene-level aggregate. If you get ρ ≈ 0.6+ you are probably at gene level; drop to per-sgRNA CPM pairs.

@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def gather_gene_disease_associations(
-    gene: Optional[str | Any] = None,
-    disease: Optional[str | Any] = None,
+    gene: Optional[str] = None,
+    disease: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -21,9 +21,9 @@ def gather_gene_disease_associations(
 
     Parameters
     ----------
-    gene : str | Any
+    gene : str
         Gene symbol (e.g., 'TP53', 'BRCA1'). At least one of gene or disease required.
-    disease : str | Any
+    disease : str
         Disease name (e.g., 'breast cancer', 'distal renal tubular acidosis'). At lea...
     stream_callback : Callable, optional
         Callback for streaming output

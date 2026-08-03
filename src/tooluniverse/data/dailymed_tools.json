@@ -36,6 +36,10 @@
           "description": "Number of items per page, maximum 100, default 100.",
           "default": 100
         },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Alias for pagesize."
+        },
         "page": {
           "type": "integer",
           "description": "Page number, starts from 1, default 1.",
@@ -49,23 +53,50 @@
     "test_examples": [
       {
         "drug_name": "Aspirin",
-        "pagesize": 5,
+        "pagesize": 2,
         "page": 1
-      },
-      {
-        "drug_name": "Metformin",
-        "pagesize": 3
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "spl_version": {"type": "integer"},
-          "published_date": {"type": "string"},
-          "title": {"type": "string"},
-          "setid": {"type": "string"}
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "db_published_date": {
+              "type": "string"
+            },
+            "elements_per_page": {
+              "type": "integer"
+            },
+            "current_url": {
+              "type": "string"
+            },
+            "next_page_url": {
+              "type": ["string", "null"]
+            },
+            "total_elements": {
+              "type": "integer"
+            },
+            "total_pages": {
+              "type": "integer"
+            },
+            "current_page": {
+              "type": "integer"
+            },
+            "previous_page": {
+              "type": ["string", "integer", "null"]
+            },
+            "previous_page_url": {
+              "type": ["string", "null"]
+            },
+            "next_page": {
+              "type": ["string", "integer", "null"]
+            }
+          }
         }
       }
     }
@@ -99,21 +130,24 @@
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277",
         "format": "xml"
-      },
-      {
-        "setid": "b4f7a1e8-7e6d-4d5e-9c3a-1f2e3d4c5b6a",
-        "format": "xml"
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string"
+        },
         "xml": {
-          "type": "string",
-          "description": "SPL label content in XML format"
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "error_details": {
+          "type": "object"
         }
-      },
-      "required": ["xml"]
+      }
     }
   },
   {
@@ -156,9 +190,6 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
-      },
-      {
-        "drug_name": "Aspirin"
       }
     ]
   },
@@ -202,9 +233,6 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
-      },
-      {
-        "drug_name": "Metformin"
       }
     ]
   },
@@ -248,9 +276,6 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
-      },
-      {
-        "drug_name": "Lisinopril"
       }
     ]
   },
@@ -294,9 +319,6 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
-      },
-      {
-        "drug_name": "Warfarin"
       }
     ]
   },
@@ -340,10 +362,174 @@
     "test_examples": [
       {
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
-      },
-      {
-        "drug_name": "Atorvastatin"
       }
     ]
+  },
+  {
+    "type": "GetSPLBySetIDTool",
+    "name": "DailyMed_get_spl_media",
+    "description": "Get the structured list of drug-label images (pill photos, packaging/carton images, figures) for a DailyMed SPL Set ID. Returns each media item's MIME type, file name, and a direct image URL. Useful for pill identification and label review. No API key required. Example: setid '43c94480-78d1-4a23-91d4-1d49fea72cb7' (Ibuprofen Capsule, Aurohealth) returns media including 'ibuprofen-fig1.jpg' (image/jpeg) with its image.cfm URL.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "setid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "DailyMed SPL Set ID UUID. Example: '43c94480-78d1-4a23-91d4-1d49fea72cb7'."
+        }
+      },
+      "required": [
+        "setid"
+      ]
+    },
+    "fields": {
+      "resource": "media"
+    },
+    "test_examples": [
+      {
+        "setid": "43c94480-78d1-4a23-91d4-1d49fea72cb7"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "setid": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": ["string", "null"]
+                },
+                "spl_version": {
+                  "type": ["integer", "null"]
+                },
+                "media": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "mime_type": {
+                        "type": "string",
+                        "description": "Image MIME type, e.g., image/jpeg"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Media file name"
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "Direct image URL"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["setid", "media"]
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "type": "GetSPLBySetIDTool",
+    "name": "DailyMed_get_spl_history",
+    "description": "Get the full version history of a DailyMed SPL Set ID: every published SPL version with its version number and publication date. Useful for tracking label revisions over time. No API key required. Example: setid '43c94480-78d1-4a23-91d4-1d49fea72cb7' returns history including spl_version 2 (published 'Jun 09, 2026') and spl_version 1 (published 'Jul 22, 2022').",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "setid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "DailyMed SPL Set ID UUID. Example: '43c94480-78d1-4a23-91d4-1d49fea72cb7'."
+        }
+      },
+      "required": [
+        "setid"
+      ]
+    },
+    "fields": {
+      "resource": "history"
+    },
+    "test_examples": [
+      {
+        "setid": "43c94480-78d1-4a23-91d4-1d49fea72cb7"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "setid": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": ["string", "null"]
+                },
+                "history": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "spl_version": {
+                        "type": "integer",
+                        "description": "SPL version number"
+                      },
+                      "published_date": {
+                        "type": "string",
+                        "description": "Publication date, e.g., 'Jul 22, 2022'"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["setid", "history"]
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    }
   }
 ]

@@ -32,27 +32,22 @@
           "type": "object",
           "properties": {
             "taxon_id": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "scientific_name": {
               "type": "string"
             },
             "common_name": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": "string"
             },
             "mnemonic": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "description": "5-letter UniProt mnemonic (e.g., HUMAN, MOUSE)"
+              "type": "string"
             },
             "rank": {
-              "type": "string",
-              "description": "Taxonomic rank (e.g., species, genus, family)"
+              "type": "string"
             },
             "lineage": {
               "type": "array",
@@ -60,38 +55,44 @@
                 "type": "object",
                 "properties": {
                   "taxon_id": {
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
                   },
                   "scientific_name": {
                     "type": "string"
                   },
                   "rank": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": "string"
                   },
                   "hidden": {
                     "type": "boolean"
                   }
                 }
-              },
-              "description": "Full taxonomic lineage from root to parent"
+              }
             },
             "statistics": {
               "type": "object",
               "properties": {
                 "reviewed_protein_count": {
-                  "type": "integer",
-                  "description": "Swiss-Prot (curated) protein count"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 },
                 "unreviewed_protein_count": {
-                  "type": "integer",
-                  "description": "TrEMBL (automated) protein count"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 }
               }
             }
-          }
+          },
+          "required": [
+            "taxon_id"
+          ]
         },
         {
           "type": "object",
@@ -140,10 +141,60 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taxon_id": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "scientific_name": {
+                "type": "string"
+              },
+              "common_name": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "mnemonic": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "string"
+              },
+              "reviewed_protein_count": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "unreviewed_protein_count": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

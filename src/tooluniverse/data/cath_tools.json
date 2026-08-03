@@ -1,7 +1,7 @@
 [
   {
     "name": "CATH_get_superfamily",
-    "description": "Get CATH protein structure superfamily information by CATH ID. CATH classifies protein domain structures into a four-level hierarchy: Class, Architecture, Topology, Homologous superfamily. Superfamilies group evolutionarily related domains. Returns classification name, number of families, and domain counts. Example: 2.40.50.140 returns 'Nucleic acid-binding proteins' with 227 S35 families and 2,879 total domains.",
+    "description": "Get CATH protein structure superfamily information by CATH ID. CATH classifies protein domain structures into a four-level hierarchy: Class, Architecture, Topology, Homologous superfamily. Superfamilies group evolutionarily related domains. Returns classification name, number of families, and domain counts. Example: 2.40.50.140 returns 'Nucleic acid-binding proteins' with 227 S35 families and 2,879 total domains. Note: 'classification_name'/'classification_description' are null for some superfamilies (e.g. 1.10.530.10, the lysozyme-like fold) -- this is missing curation in CATH's own API, not a query error; family/domain counts and example_domain_id are still populated in that case.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -27,79 +27,113 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "cath_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH ID"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "cath_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH ID"
+                },
+                "superfamily_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Superfamily ID"
+                },
+                "classification_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Name of the CATH node"
+                },
+                "classification_description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Description"
+                },
+                "example_domain_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Example PDB domain ID"
+                },
+                "num_s35_families": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Number of S35 sequence families"
+                },
+                "num_s60_families": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Number of S60 sequence families"
+                },
+                "num_s95_families": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Number of S95 sequence families"
+                },
+                "num_s100_domains": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Number of S100 (near-identical) domains"
+                },
+                "total_domain_count": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Total number of classified domains"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
         },
-        "superfamily_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Superfamily ID"
-        },
-        "classification_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Name of the CATH node"
-        },
-        "classification_description": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Description"
-        },
-        "example_domain_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Example PDB domain ID"
-        },
-        "num_s35_families": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Number of S35 sequence families"
-        },
-        "num_s60_families": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Number of S60 sequence families"
-        },
-        "num_s95_families": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Number of S95 sequence families"
-        },
-        "num_s100_domains": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Number of S100 (near-identical) domains"
-        },
-        "total_domain_count": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Total number of classified domains"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -130,72 +164,106 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "domain_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Query domain ID"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "domain_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Query domain ID"
+                },
+                "cath_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Full CATH classification ID"
+                },
+                "superfamily_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH superfamily ID (C.A.T.H)"
+                },
+                "class": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH Class number (1=Alpha, 2=Beta, 3=Alpha-Beta, 4=Few SS)"
+                },
+                "architecture": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH Architecture (C.A)"
+                },
+                "topology": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH Topology (C.A.T)"
+                },
+                "homologous_superfamily": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "CATH Superfamily (C.A.T.H)"
+                },
+                "class_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Human-readable class name"
+                },
+                "residue_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "Number of residues in domain"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
         },
-        "cath_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Full CATH classification ID"
-        },
-        "superfamily_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH superfamily ID (C.A.T.H)"
-        },
-        "class": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH Class number (1=Alpha, 2=Beta, 3=Alpha-Beta, 4=Few SS)"
-        },
-        "architecture": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH Architecture (C.A)"
-        },
-        "topology": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH Topology (C.A.T)"
-        },
-        "homologous_superfamily": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "CATH Superfamily (C.A.T.H)"
-        },
-        "class_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Human-readable class name"
-        },
-        "residue_count": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "description": "Number of residues in domain"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -216,68 +284,31 @@
           "description": "Maximum number of FunFams to return (default: 25)."
         }
       },
-      "required": [
-        "superfamily_id"
-      ]
+      "required": ["superfamily_id"]
     },
     "fields": {
       "endpoint": "list_funfams"
     },
     "type": "CATHTool",
     "test_examples": [
-      {
-        "superfamily_id": "1.10.510.10",
-        "max_results": 5
-      },
-      {
-        "superfamily_id": "3.40.50.300",
-        "max_results": 5
-      }
+      {"superfamily_id": "1.10.510.10", "max_results": 5},
+      {"superfamily_id": "3.40.50.300", "max_results": 5}
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "superfamily_id": {
-          "type": "string"
-        },
-        "total_funfams": {
-          "type": "integer"
-        },
+        "superfamily_id": {"type": "string"},
+        "total_funfams": {"type": "integer"},
         "funfams": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "funfam_number": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "num_members": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "rep_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "superfamily_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
+              "funfam_number": {"type": ["string", "null"]},
+              "name": {"type": ["string", "null"]},
+              "num_members": {"type": ["string", "null"]},
+              "rep_id": {"type": ["string", "null"]},
+              "superfamily_id": {"type": ["string", "null"]}
             }
           }
         }
@@ -299,91 +330,29 @@
           "description": "FunFam number within the superfamily (e.g., '1', '83'). Get from CATH_list_funfams or CATH_get_domain_summary."
         }
       },
-      "required": [
-        "superfamily_id",
-        "funfam_number"
-      ]
+      "required": ["superfamily_id", "funfam_number"]
     },
     "fields": {
       "endpoint": "get_funfam"
     },
     "type": "CATHTool",
     "test_examples": [
-      {
-        "superfamily_id": "1.10.510.10",
-        "funfam_number": "1"
-      },
-      {
-        "superfamily_id": "2.40.50.140",
-        "funfam_number": "83"
-      }
+      {"superfamily_id": "1.10.510.10", "funfam_number": "1"},
+      {"superfamily_id": "2.40.50.140", "funfam_number": "83"}
     ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "funfam_number": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "superfamily_id": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "num_members": {
-          "type": [
-            "string",
-            "integer",
-            "null"
-          ]
-        },
-        "num_seed_members": {
-          "type": [
-            "string",
-            "integer",
-            "null"
-          ]
-        },
-        "dops_score": {
-          "type": [
-            "string",
-            "number",
-            "null"
-          ]
-        },
-        "rep_id": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "ec_terms": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "go_terms": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
+        "funfam_number": {"type": ["string", "null"]},
+        "superfamily_id": {"type": ["string", "null"]},
+        "name": {"type": ["string", "null"]},
+        "description": {"type": ["string", "null"]},
+        "num_members": {"type": ["string", "integer", "null"]},
+        "num_seed_members": {"type": ["string", "integer", "null"]},
+        "dops_score": {"type": ["string", "number", "null"]},
+        "rep_id": {"type": ["string", "null"]},
+        "ec_terms": {"type": "array", "items": {"type": "object"}},
+        "go_terms": {"type": "array", "items": {"type": "object"}}
       }
     }
   }

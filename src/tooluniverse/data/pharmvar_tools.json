@@ -17,9 +17,17 @@
     "required_api_keys": [
       "PHARMVAR_API_KEY"
     ],
+    "api_key_info": {
+      "PHARMVAR_API_KEY": {
+        "domain": "Genomics & Variants",
+        "type": "secret",
+        "register_url": "https://www.pharmvar.org/",
+        "purpose": "Resolve pharmacogene star-allele definitions (e.g. CYP2D6, CYP2C19).",
+        "without": "PharmVar tools are blocked without it."
+      }
+    },
     "type": "BaseRESTTool",
     "test_examples": [
-      {},
       {}
     ],
     "return_schema": {

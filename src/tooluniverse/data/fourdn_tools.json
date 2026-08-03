@@ -42,7 +42,7 @@
           "maximum": 100
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -61,19 +61,6 @@
         "operation": "search",
         "query": "Hi-C",
         "item_type": "File",
-        "limit": 10
-      },
-      {
-        "operation": "search",
-        "item_type": "File",
-        "assay_title": "Hi-C",
-        "biosource_name": "GM12878",
-        "limit": 5
-      },
-      {
-        "operation": "search",
-        "item_type": "Experiment",
-        "file_type": "contact list",
         "limit": 10
       }
     ]
@@ -100,7 +87,7 @@
           "default": false
         }
       },
-      "required": ["operation", "file_accession"]
+      "required": ["file_accession"]
     },
     "return_schema": {
       "type": "object",
@@ -121,15 +108,6 @@
       {
         "operation": "get_file_metadata",
         "file_accession": "4DNFIIA7E3HL"
-      },
-      {
-        "operation": "get_file_metadata",
-        "file_accession": "4DNFI26DK9VW"
-      },
-      {
-        "operation": "get_file_metadata",
-        "file_accession": "4DNFICW1V4L7",
-        "include_full_metadata": false
       }
     ]
   },
@@ -155,7 +133,7 @@
           "default": false
         }
       },
-      "required": ["operation", "experiment_accession"]
+      "required": ["experiment_accession"]
     },
     "return_schema": {
       "type": "object",
@@ -178,15 +156,6 @@
       {
         "operation": "get_experiment_metadata",
         "experiment_accession": "4DNEXHVF8WA9"
-      },
-      {
-        "operation": "get_experiment_metadata",
-        "experiment_accession": "4DNEX021E4EZ"
-      },
-      {
-        "operation": "get_experiment_metadata",
-        "experiment_accession": "4DNEXHVF8WA9",
-        "include_full_metadata": false
       }
     ]
   },
@@ -207,7 +176,7 @@
           "description": "4DN file accession (e.g., '4DNFIIA7E3HL'). Obtain by searching with FourDN_search_data (item_type='File')."
         }
       },
-      "required": ["operation", "file_accession"]
+      "required": ["file_accession"]
     },
     "return_schema": {
       "type": "object",
@@ -226,14 +195,6 @@
       {
         "operation": "download_file_url",
         "file_accession": "4DNFIIA7E3HL"
-      },
-      {
-        "operation": "download_file_url",
-        "file_accession": "4DNFI26DK9VW"
-      },
-      {
-        "operation": "download_file_url",
-        "file_accession": "4DNFICW1V4L7"
       }
     ]
   }

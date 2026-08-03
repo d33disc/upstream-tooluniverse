@@ -1,18 +1,18 @@
 {
   "name": "tooluniverse",
   "owner": {
-    "name": "MIMS Harvard",
-    "url": "https://github.com/mims-harvard"
+    "name": "Shanghua Gao",
+    "url": "https://shgao.site"
   },
   "metadata": {
-    "description": "ToolUniverse marketplace — 1000+ scientific research tools and 114 specialized skills for biology, chemistry, medicine, and data science.",
-    "version": "1.1.11"
+    "description": "ToolUniverse marketplace \u2014 1000+ scientific research tools and 115 specialized skills for biology, chemistry, medicine, and data science.",
+    "version": "1.4.0"
   },
   "plugins": [
     {
       "name": "tooluniverse",
       "source": "./plugin",
-      "description": "1000+ scientific tools (PubMed, UniProt, PubChem, TCGA, FAERS, ClinicalTrials.gov, etc.) + 114 research skills + MCP server + research slash commands.",
+      "description": "1000+ scientific tools (PubMed, UniProt, PubChem, TCGA, FAERS, ClinicalTrials.gov, etc.) + 120+ research skills + MCP server + research slash commands.",
       "category": "science",
       "strict": false
     }

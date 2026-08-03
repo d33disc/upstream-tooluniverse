@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-protein-structure-prediction
-description: Predict and analyze protein 3D structure from amino acid sequence using ESMFold and AlphaFold. Covers de novo structure prediction (ESMFold for sequences up to ~800 residues), AlphaFold model retrieval, quality assessment (pLDDT scores), experimental structure comparison (RCSB), variant structural impact (ProtVar), and sequence physicochemical property calculation (ProtParam). Use when asked to predict protein structure from sequence, assess structure quality, compare predictions to experimental structures, or evaluate how mutations affect protein structure.
+description: Protein 3D structure prediction from sequence — ESMFold de novo prediction, AlphaFold database retrieval, experimental structures from RCSB, ProtVar variant impact assessment, ProtParam sequence properties. Use for structure prediction when no experimental structure exists, fold-confidence scoring, and structure-guided variant interpretation.
+disable-model-invocation: true
 ---
 
 # Protein Structure Prediction and Analysis
@@ -171,6 +172,11 @@ Retrieve sequence from `UniProt_get_entry_by_accession`:
 **alphafold_get_annotations** (optional):
 - `qualifier`: UniProt accession
 - Returns: functional region annotations overlaid on structure (binding sites, active sites)
+
+**AlphaFill_get_transplants** (optional, ligands/cofactors):
+- `uniprot`: UniProt accession (e.g., `"P00520"` ABL1)
+- Returns: ligands, cofactors, and ions transplanted onto the AlphaFold model by homology, with per-transplant local RMSD and source PDB IDs
+- When to use it: the apo AlphaFold model omits bound ligands/metals; run this to recover the likely cofactor/ligand/ion environment (e.g., ABL1 → STI/imatinib) for structure-guided binding-site interpretation
 
 ### Workflow
 

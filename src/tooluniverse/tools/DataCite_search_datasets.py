@@ -10,11 +10,11 @@ from ._shared_client import get_shared_client
 
 def DataCite_search_datasets(
     query: str,
-    resource_type: Optional[str | Any] = "Dataset",
-    publisher: Optional[str | Any] = None,
-    year: Optional[int | Any] = None,
-    page_size: Optional[int | Any] = 10,
-    page_number: Optional[int | Any] = None,
+    resource_type: Optional[str] = "Dataset",
+    publisher: Optional[str] = None,
+    year: Optional[int] = None,
+    page_size: Optional[int] = 10,
+    page_number: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -27,15 +27,15 @@ def DataCite_search_datasets(
     ----------
     query : str
         Search query for datasets (e.g., 'iron intake physical function older adults'...
-    resource_type : str | Any
+    resource_type : str
         Override resource type filter. Defaults to 'Dataset'. Other options: 'Softwar...
-    publisher : str | Any
+    publisher : str
         Filter by publisher/repository name (e.g., 'Zenodo', 'Dryad', 'figshare'). No...
-    year : int | Any
+    year : int
         Filter by publication year (e.g., 2024, 2023). Returns datasets published in ...
-    page_size : int | Any
+    page_size : int
         Number of results per page (default 10, max 100)
-    page_number : int | Any
+    page_number : int
         Page number for pagination (default 1)
     stream_callback : Callable, optional
         Callback for streaming output

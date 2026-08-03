@@ -51,68 +51,132 @@
       "oneOf": [
         {
           "type": "object",
-          "description": "Art search results",
           "properties": {
+            "preference": {
+              "type": "null"
+            },
             "pagination": {
               "type": "object",
               "properties": {
                 "total": {
-                  "type": "integer",
-                  "description": "Total matching artworks"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 },
                 "limit": {
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 },
                 "offset": {
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
+                },
+                "total_pages": {
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
+                },
+                "current_page": {
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 }
               }
             },
             "data": {
               "type": "array",
-              "description": "List of artwork records",
               "items": {
                 "type": "object",
                 "properties": {
+                  "_score": {
+                    "type": "number"
+                  },
                   "id": {
-                    "type": "integer",
-                    "description": "Artwork ID for use with ArtIC_get_artwork"
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "api_model": {
+                    "type": "string"
+                  },
+                  "api_link": {
+                    "type": "string"
+                  },
+                  "is_boosted": {
+                    "type": "boolean"
                   },
                   "title": {
                     "type": "string"
                   },
-                  "artist_display": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Artist name with nationality and dates"
+                  "thumbnail": {
+                    "type": "object",
+                    "properties": {
+                      "lqip": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "height": {
+                        "type": [
+                          "integer",
+                          "number"
+                        ]
+                      },
+                      "alt_text": {
+                        "type": "string"
+                      }
+                    }
                   },
-                  "date_display": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Date or date range of creation"
-                  },
-                  "medium_display": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Medium (e.g., Oil on canvas, Woodblock print)"
-                  },
-                  "image_id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Image identifier for IIIF image URL"
+                  "timestamp": {
+                    "type": "string"
                   }
                 }
               }
+            },
+            "info": {
+              "type": "object",
+              "properties": {
+                "license_text": {
+                  "type": "string"
+                },
+                "license_links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            },
+            "config": {
+              "type": "object",
+              "properties": {
+                "iiif_url": {
+                  "type": "string"
+                },
+                "website_url": {
+                  "type": "string"
+                }
+              }
             }
-          }
+          },
+          "required": [
+            "preference"
+          ]
         },
         {
           "type": "object",
@@ -170,79 +234,81 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "number"
+                  ]
                 },
                 "title": {
                   "type": "string"
                 },
-                "artist_display": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
                 "date_display": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
-                "medium_display": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "dimensions": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                "artist_display": {
+                  "type": "string"
                 },
                 "place_of_origin": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
-                "style_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                "description": {
+                  "type": "string"
                 },
-                "artwork_type_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                "dimensions": {
+                  "type": "string"
+                },
+                "medium_display": {
+                  "type": "string"
                 },
                 "credit_line": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": "string"
                 },
                 "is_public_domain": {
                   "type": "boolean"
                 },
+                "artwork_type_title": {
+                  "type": "string"
+                },
+                "style_title": {
+                  "type": "string"
+                },
                 "image_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Use with https://www.artic.edu/iiif/2/{image_id}/full/843,/0/default.jpg for image URL"
+                  "type": "string"
+                }
+              }
+            },
+            "info": {
+              "type": "object",
+              "properties": {
+                "license_text": {
+                  "type": "string"
+                },
+                "license_links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            },
+            "config": {
+              "type": "object",
+              "properties": {
+                "iiif_url": {
+                  "type": "string"
+                },
+                "website_url": {
+                  "type": "string"
                 }
               }
             }
           },
-          "description": "Detailed artwork record"
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",

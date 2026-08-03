@@ -60,7 +60,10 @@
               "type": "string"
             },
             "result_count": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "results": {
               "type": "array",
@@ -76,13 +79,17 @@
                 }
               }
             },
+            "truncated": {
+              "type": "boolean",
+              "description": "True if more than 500 mapped results exist and were cut off from the results array (result_count still reflects the true total)."
+            },
             "failed_ids": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "type": "array"
             }
-          }
+          },
+          "required": [
+            "from_db"
+          ]
         },
         {
           "type": "object",
@@ -134,7 +141,10 @@
               "type": "string"
             },
             "result_count": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "results": {
               "type": "array",
@@ -149,8 +159,15 @@
                   }
                 }
               }
+            },
+            "truncated": {
+              "type": "boolean",
+              "description": "True if more than 500 mapped results exist and were cut off from the results array (result_count still reflects the true total)."
             }
-          }
+          },
+          "required": [
+            "query_ids"
+          ]
         },
         {
           "type": "object",
@@ -217,10 +234,16 @@
               "type": "string"
             },
             "species_taxid": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "result_count": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "results": {
               "type": "array",
@@ -235,8 +258,15 @@
                   }
                 }
               }
+            },
+            "truncated": {
+              "type": "boolean",
+              "description": "True if more than 500 mapped results exist and were cut off from the results array (result_count still reflects the true total)."
             }
-          }
+          },
+          "required": [
+            "gene_names"
+          ]
         },
         {
           "type": "object",
@@ -265,10 +295,7 @@
     },
     "type": "UniProtIDMappingTool",
     "test_examples": [
-      {},
-      {
-        "note": "Returns 100+ databases including UniProtKB, Gene_Name, Ensembl, RefSeq, PDB, ChEMBL"
-      }
+      {}
     ],
     "return_schema": {
       "oneOf": [
@@ -276,7 +303,10 @@
           "type": "object",
           "properties": {
             "group_count": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "number"
+              ]
             },
             "groups": {
               "type": "array",
@@ -306,7 +336,10 @@
                 }
               }
             }
-          }
+          },
+          "required": [
+            "group_count"
+          ]
         },
         {
           "type": "object",

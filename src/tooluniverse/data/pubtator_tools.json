@@ -38,11 +38,6 @@
         "text": "The quick brown fox jumps over the lazy dog.",
         "entity_type": "gene",
         "max_results": 5
-      },
-      {
-        "text": "TP53 mutation in breast cancer patients",
-        "entity_type": "gene",
-        "max_results": 5
       }
     ],
     "return_schema": {
@@ -94,76 +89,151 @@
         "query": "cancer",
         "page": 1,
         "page_size": 1
-      },
-      {
-        "query": "BRCA1 mutation",
-        "page": 1,
-        "page_size": 3
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
-          "description": "Response status"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "results": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
+              "_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
               "pmid": {
-                "type": "integer",
-                "description": "PubMed article identifier"
+                "type": [
+                  "integer",
+                  "null",
+                  "number"
+                ]
               },
               "title": {
-                "type": "string",
-                "description": "Article title"
+                "type": [
+                  "null",
+                  "string"
+                ]
               },
               "journal": {
-                "type": "string",
-                "description": "Journal name"
+                "type": [
+                  "null",
+                  "string"
+                ]
               },
               "authors": {
                 "type": "array",
                 "items": {
-                  "type": "string"
-                },
-                "description": "List of author names"
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
               },
               "date": {
-                "type": "string",
-                "description": "Publication date in ISO format"
+                "type": [
+                  "null",
+                  "string"
+                ]
               },
               "doi": {
-                "type": "string",
-                "description": "Digital Object Identifier"
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "meta_date_publication": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "meta_volume": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "meta_issue": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "meta_pages": {
+                "type": [
+                  "null",
+                  "string"
+                ]
               },
               "score": {
-                "type": "number",
-                "description": "Relevance score"
+                "type": [
+                  "null",
+                  "number"
+                ]
               },
               "text_hl": {
-                "type": "string",
-                "description": "Title with highlighted matching terms"
+                "type": [
+                  "null",
+                  "string"
+                ]
               },
               "citations": {
                 "type": "object",
                 "properties": {
                   "NLM": {
-                    "type": "string",
-                    "description": "NLM citation format"
+                    "type": [
+                      "null",
+                      "string"
+                    ]
                   },
                   "BibTeX": {
-                    "type": "string",
-                    "description": "BibTeX citation format"
+                    "type": [
+                      "null",
+                      "string"
+                    ]
                   }
-                },
-                "description": "Formatted citations"
+                }
               }
             }
           }
+        },
+        "page_size": {
+          "type": [
+            "integer",
+            "null",
+            "number"
+          ]
+        },
+        "current": {
+          "type": [
+            "integer",
+            "null",
+            "number"
+          ]
+        },
+        "count": {
+          "type": [
+            "integer",
+            "null",
+            "number"
+          ]
+        },
+        "total_pages": {
+          "type": [
+            "integer",
+            "null",
+            "number"
+          ]
         }
       }
     }

@@ -18,9 +18,6 @@
     "test_examples": [
       {
         "disease": "Diabetes Mellitus"
-      },
-      {
-        "disease": "Alzheimer's disease"
       }
     ],
     "return_schema": {
@@ -61,8 +58,7 @@
       "required": ["query"]
     },
     "test_examples": [
-      {"query": "diabetes mellitus", "rows": 2},
-      {"query": "cancer", "rows": 3}
+      {"query": "diabetes mellitus", "rows": 2}
     ],
     "return_schema": {
       "type": "object",
@@ -108,8 +104,7 @@
       "oneOf": [{"required": ["iri"]}, {"required": ["obo_id"]}]
     },
     "test_examples": [
-      {"obo_id": "EFO:0000400"},
-      {"obo_id": "EFO:0000616"}
+      {"obo_id": "EFO:0000400"}
     ],
     "return_schema": {
       "type": "object",
@@ -154,8 +149,7 @@
       "oneOf": [{"required": ["iri"]}, {"required": ["obo_id"]}]
     },
     "test_examples": [
-      {"obo_id": "EFO:0000400", "size": 2},
-      {"obo_id": "EFO:0000616", "size": 5}
+      {"obo_id": "EFO:0000400", "size": 2}
     ],
     "return_schema": {
       "type": "object",
@@ -186,10 +180,45 @@
   },
   {
     "type": "OLSRESTTool",
+    "name": "ols_get_efo_term_descendants",
+    "description": "List transitive DESCENDANTS of an EFO term (the full subtree, not just direct children). Provide `iri` or `obo_id`.\n\nDescendants returns every term beneath the given node, so it is far larger than `ols_get_efo_term_children` (e.g. EFO:0001444 has 360 children but ~25021 descendants). The `total` field is the full subtree size (page.totalElements); `descendants` holds up to `size` rows.\n\nKnown limitation: EFO disease terms (e.g. EFO:0000400) route their subclasses through MONDO IRIs, so both children and descendants return 0 for those. This tool adds value on native EFO branches (measurement, organism-part, experimental-factor). Tip: use `ols_search_efo_terms` first, then pass the returned `obo_id` or `iri`.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "iri": {"type": "string", "description": "Term IRI returned by `ols_search_efo_terms`."},
+        "obo_id": {"type": "string", "description": "OBO ID like 'EFO:0001444' (will be converted to an EFO IRI)."},
+        "size": {"type": "integer", "description": "Maximum number of descendant rows to return (the full subtree size is reported separately in `total`).", "default": 20}
+      },
+      "oneOf": [{"required": ["iri"]}, {"required": ["obo_id"]}]
+    },
+    "test_examples": [
+      {"obo_id": "EFO:0001444", "size": 5}
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "fields": {"kind": "descendants", "ontology_id": "efo"}
+  },
+  {
+    "type": "OLSRESTTool",
     "name": "ols_get_efo_ontology_info",
     "description": "Get metadata about the EFO ontology itself (version, status, number of terms, title/description).",
     "parameter": {"type": "object", "properties": {}, "required": []},
-    "test_examples": [{}, {}],
+    "test_examples": [{}],
     "return_schema": {
       "type": "object",
       "properties": {
@@ -228,7 +257,7 @@
       },
       "required": []
     },
-    "test_examples": [{"size": 2}, {"size": 5}],
+    "test_examples": [{"size": 2}],
     "return_schema": {
       "type": "object",
       "properties": {

@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-binder-discovery
-description: Discover novel small molecule binders for protein targets using structure-based and ligand-based approaches. Creates actionable reports with candidate compounds, ADMET profiles, and synthesis feasibility. Use when users ask to find small molecules for a target, identify novel binders, perform virtual screening, or need hit-to-lead compound identification.
+description: Discover novel small-molecule binders for protein targets using structure-based and ligand-based screening. Covers druggability assessment, known-ligand mining (ChEMBL, BindingDB), similarity expansion, ADMET filtering, and synthesis feasibility. Use for hit identification, virtual screening, target-to-compounds workflows, and lead-finding before commit-to-medchem.
+disable-model-invocation: true
 ---
 
 # Small Molecule Binder Discovery Strategy
@@ -88,8 +89,8 @@ tool_info = tu.tools.get_tool_info(tool_name="ChEMBL_get_target_activities")
 
 Common parameter corrections (verify with `get_tool_info` if uncertain):
 - `OpenTargets_*`: `ensemblId` (camelCase); `ADMETAI_*`: `smiles` must be a list
-- `NvidiaNIM_alphafold2`: `sequence` not `seq`; `NvidiaNIM_genmol`: SMILES must contain `[*{min-max}]`
-- `NvidiaNIM_boltz2`: `polymers=[{"molecule_type": "protein", "sequence": "..."}]`
+- `NvidiaNIM_alphafold2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)*: `sequence` not `seq`; `NvidiaNIM_genmol` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)*: SMILES must contain `[*{min-max}]`
+- `NvidiaNIM_boltz2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)*: `polymers=[{"molecule_type": "protein", "sequence": "..."}]`
 
 ---
 
@@ -103,7 +104,7 @@ Resolve all IDs upfront and store for downstream queries:
 1. UniProt_search(query=target_name, organism="human") -> UniProt accession
 2. MyGene_query_genes(q=gene_symbol, species="human") -> Ensembl gene ID
 3. ChEMBL_search_targets(query=target_name, organism="Homo sapiens") -> ChEMBL target ID
-4. GtoPdb_get_targets(query=target_name) -> GtoPdb ID (if GPCR/channel/enzyme)
+4. GtoPdb_search_targets(query=target_name) -> GtoPdb ID (if GPCR/channel/enzyme)
 ```
 
 ### 1.2 Druggability Assessment
@@ -157,7 +158,7 @@ Tools:
 - `get_protein_metadata_by_pdb_id(pdb_id)` - resolution, method
 - `get_binding_affinity_by_pdb_id(pdb_id)` - co-crystal ligand affinities
 - `get_ligand_smiles_by_chem_comp_id(chem_comp_id)` - ligand SMILES from PDB
-- `emdb_search(query)` - cryo-EM structures (prefer for GPCRs, ion channels)
+- `EMDB_search_structures(query)` - cryo-EM structures (prefer for GPCRs, ion channels)
 - `alphafold_get_prediction(qualifier)` - AlphaFold DB fallback
 
 ### Phase 3.5: Docking Validation (NVIDIA NIM)
@@ -233,15 +234,15 @@ Deliver top 20 candidates with: Rank, ID, SMILES, docking score, ADMET score, ov
 ## Fallback Chains
 
 ```
-Target ID:     ChEMBL_search_targets -> GtoPdb_get_targets -> "Not in databases"
+Target ID:     ChEMBL_search_targets -> GtoPdb_search_targets -> "Not in databases"
 Druggability:  OpenTargets tractability -> DGIdb druggability -> target class proxy
 Bioactivity:   ChEMBL -> BindingDB -> GtoPdb -> PubChem BioAssay -> "No data"
-Structure:     PDB -> EMDB (membrane) -> NvidiaNIM_alphafold2 -> NvidiaNIM_esmfold -> AlphaFold DB -> "None"
+Structure:     PDB -> EMDB (membrane) -> alphafold_get_prediction -> NvidiaNIM_esmfold -> AlphaFold DB -> "None"
 Similarity:    ChEMBL similar -> PubChem similar -> "Search failed"
 Docking:       get_diffdock_info -> NvidiaNIM_boltz2 -> similarity-based scoring
 Generation:    NvidiaNIM_genmol -> NvidiaNIM_molmim -> similarity search only
 Literature:    PubMed -> EuropePMC (preprints) -> OpenAlex
-GPCR data:     GPCRdb_get_protein -> GtoPdb_get_targets
+GPCR data:     GPCRdb_get_protein -> GtoPdb_search_targets
 ```
 
 ---

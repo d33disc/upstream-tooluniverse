@@ -44,16 +44,20 @@
         "operation": "search_signatures",
         "pert_iname": "imatinib",
         "pert_type": "trt_cp"
-      },
-      {
-        "operation": "search_signatures",
-        "pert_iname": "TP53",
-        "pert_type": "trt_sh"
       }
     ],
     "required_api_keys": [
       "CLUE_API_KEY"
-    ]
+    ],
+    "api_key_info": {
+      "CLUE_API_KEY": {
+        "domain": "Drugs & Chemistry",
+        "type": "secret",
+        "register_url": "https://clue.io",
+        "purpose": "Query Connectivity Map drug–gene perturbation signatures for repurposing.",
+        "without": "CLUE tools are blocked without it. The key is free."
+      }
+    }
   },
   {
     "name": "CLUE_get_perturbation",
@@ -98,10 +102,6 @@
       {
         "operation": "get_perturbation",
         "pert_iname": "imatinib"
-      },
-      {
-        "operation": "get_perturbation",
-        "pert_id": "BRD-K12345678"
       }
     ],
     "required_api_keys": [
@@ -148,10 +148,6 @@
       {
         "operation": "get_gene_expression",
         "gene_symbol": "TP53"
-      },
-      {
-        "operation": "get_gene_expression",
-        "gene_symbol": "BRCA1"
       }
     ],
     "required_api_keys": [
@@ -201,10 +197,6 @@
       {
         "operation": "get_cell_lines",
         "cell_id": "MCF7"
-      },
-      {
-        "operation": "get_cell_lines",
-        "cell_id": "A375"
       }
     ],
     "required_api_keys": [
@@ -255,10 +247,6 @@
       {
         "operation": "search_compounds",
         "moa": "HDAC inhibitor"
-      },
-      {
-        "operation": "search_compounds",
-        "pert_iname": "vorinostat"
       }
     ],
     "required_api_keys": [

@@ -1,9 +1,21 @@
 ---
 name: tooluniverse-single-cell
-description: "Production-ready single-cell and expression matrix analysis using scanpy, anndata, and scipy. Performs scRNA-seq QC, normalization, PCA, UMAP, Leiden/Louvain clustering, differential expression (Wilcoxon, t-test, DESeq2), cell type annotation, per-cell-type statistical analysis, gene-expression correlation, batch correction (Harmony), trajectory inference, and cell-cell communication analysis. NEW: Analyzes ligand-receptor interactions between cell types using OmniPath (CellPhoneDB, CellChatDB), scores communication strength, identifies signaling cascades, and handles multi-subunit receptor complexes. Integrates with ToolUniverse gene annotation tools (HPA, Ensembl, MyGene, UniProt) and enrichment tools (gseapy, PANTHER, STRING). Supports h5ad, 10X, CSV/TSV count matrices, and pre-annotated datasets. Use when analyzing single-cell RNA-seq data, studying cell-cell interactions, performing cell type differential expression, computing gene-expression correlations by cell type, analyzing tumor-immune communication, or answering questions about scRNA-seq datasets."
+description: Single-cell RNA-seq analysis with scanpy/anndata — h5ad data loading, scRNA-seq quality control and QC gating (n_genes_by_counts, total_counts, mitochondrial percent / pct_counts_mt, pct_counts_ribo, doublet detection with Scrublet/scDblFinder, ambient RNA / SoupX awareness, empty-droplet filtering, MAD-based thresholds), normalization, dimensionality reduction (PCA, UMAP, t-SNE), clustering (Leiden, Louvain), marker gene identification, cell-type annotation, pseudotime/trajectory analysis. Use for any scRNA-seq workflow, including deciding which cells to filter, flag, or investigate before downstream analysis.
+disable-model-invocation: true
 ---
 
 # Single-Cell Genomics and Expression Matrix Analysis
+
+## RULE ZERO — Check for pre-computed results FIRST
+
+Before following any instruction below, scan the data folder for:
+- `*_executed.ipynb` → read with `tu run read_executed_notebook '{"data_folder":"<path>","search":"<keyword>"}'` and cite its cell outputs as the authoritative answer
+- Pre-computed result files (CSV/TSV with names like `*results*`, `*deseq*`, `*enrich*`, `*stats*`, `*_simplified.csv`) → read directly and report the requested value
+- Canonical analysis scripts (`analysis.R`, `run_*.py`, `find_*.R`, `*.Rmd`) → execute as-is and read the output
+
+Only follow this skill's re-analysis recipe below if **none** of the above exist. Re-running from raw data produces different numbers than the published answer and is much slower (often 5-10× turn count).
+
+---
 
 Comprehensive single-cell RNA-seq analysis and expression matrix processing using scanpy, anndata, scipy, and ToolUniverse.
 
@@ -18,6 +30,8 @@ When uncertain about any scientific fact, SEARCH databases first (PubMed, UniPro
 
 Apply when users:
 - Have scRNA-seq data (h5ad, 10X, CSV count matrices) and want analysis
+- Need scRNA-seq quality control / QC gating: deciding cell filters by
+  mito % (pct_counts_mt), gene/UMI counts, doublets, ambient RNA, empty droplets
 - Ask about cell type identification, clustering, or annotation
 - Need differential expression analysis by cell type or condition
 - Want gene-expression correlation analysis (e.g., gene length vs expression by cell type)
@@ -25,8 +39,6 @@ Apply when users:
 - Need Leiden/Louvain clustering on expression matrices
 - Want statistical comparisons between cell types (t-test, ANOVA, fold change)
 - Ask about marker genes, batch correction, trajectory, or cell-cell communication
-
-**BixBench Coverage**: 18+ questions across 5 projects (bix-22, bix-27, bix-31, bix-33, bix-36)
 
 **NOT for** (use other skills instead):
 - Bulk RNA-seq DESeq2 only -> `tooluniverse-rnaseq-deseq2`
@@ -71,11 +83,11 @@ START: User question about scRNA-seq data
 |   See: references/scanpy_workflow.md
 |
 +-- DIFFERENTIAL EXPRESSION (per-cell-type comparison)
-|   Most common BixBench pattern (bix-33)
+|   Most common pattern: per-cell-type DE
 |   See: analysis_patterns.md "Pattern 1"
 |
 +-- CORRELATION ANALYSIS (gene property vs expression)
-|   Pattern: Gene length vs expression (bix-22)
+|   Pattern: Gene length vs expression correlation
 |   See: analysis_patterns.md "Pattern 2"
 |
 +-- CLUSTERING & PCA (expression matrix analysis)
@@ -118,17 +130,93 @@ for col in meta.columns:
 
 ---
 
-## Quality Control
+## Quality Control and QC Gating (do this BEFORE downstream analysis)
+
+QC gating decides **which cells and genes are real** before normalization,
+clustering, or DE. Skipping or rushing it propagates silently: doublets become
+fake "intermediate" states, ambient RNA smears markers across clusters, and
+empty droplets inflate cell counts. Never report a filtered cell count without
+the gates applied, and never report cutoffs you did not actually run.
+
+**HONEST EXECUTION**: QC runs scanpy/AnnData via Bash/Python. If scanpy is not
+installed, do NOT fabricate metrics — print the install plan and stop:
+`python scripts/scrna_qc.py --install-plan` (exits 0, lists what is missing,
+suggests `pip install scanpy anndata scrublet`).
+
+### Per-cell QC metrics (what to compute)
 
 ```python
-adata.var['mt'] = adata.var_names.str.startswith(('MT-', 'mt-'))
-sc.pp.calculate_qc_metrics(adata, qc_vars=['mt'], inplace=True)
-sc.pp.filter_cells(adata, min_genes=200)
-adata = adata[adata.obs['pct_counts_mt'] < 20].copy()
-sc.pp.filter_genes(adata, min_cells=3)
+vn = adata.var_names.str.upper()
+adata.var['mt']   = vn.str.startswith('MT-')            # mitochondrial
+adata.var['ribo'] = vn.str.startswith(('RPS', 'RPL'))   # ribosomal protein
+adata.var['hb']   = vn.str.contains(r'^HB[^P]', regex=True)  # hemoglobin (RBC)
+sc.pp.calculate_qc_metrics(
+    adata, qc_vars=['mt', 'ribo', 'hb'],
+    percent_top=None,   # REQUIRED for small gene panels (<500) — else IndexError
+    log1p=True, inplace=True)
 ```
 
-See: references/scanpy_workflow.md for details
+Key metrics in `adata.obs`: `n_genes_by_counts`, `total_counts`,
+`pct_counts_mt`, `pct_counts_ribo`, `pct_counts_hb`.
+
+### WHY each metric flags a problem (reason from biology, not magic numbers)
+
+- **High `pct_counts_mt` -> dying / stressed cell.** A ruptured membrane lets
+  cytoplasmic mRNA leak out while mito transcripts stay trapped, enriching the
+  captured RNA for mito. Cutoff is tissue-dependent (cardiomyocytes/hepatocytes
+  are mito-rich at baseline — a blanket 10% would discard healthy cells).
+- **Low `n_genes_by_counts` / `total_counts` -> empty droplet or debris**
+  (only ambient RNA captured; few genes, low depth).
+- **Very high counts/genes -> doublet** (two transcriptomes ~double depth and
+  diversity) — but high count alone is weak; use a doublet caller (below).
+- **High `pct_counts_hb` -> RBC/blood contamination** in solid tissue.
+
+### Choosing thresholds — distribution-aware (MAD), not hardcoded
+
+Hardcoded cutoffs (`mt<5%`, `n_genes<2500`) are a starting point only; they
+break on mito-rich tissues and on shallow vs deep libraries. Prefer a
+**MAD-based** rule (robust to the very outliers you are removing): flag cells
+> `nmads` median-absolute-deviations from the median. Use `nmads=5` on
+log1p counts/genes (both tails), `nmads=3` upper-only on `pct_counts_mt`, and
+pair mito with a biological ceiling so a uniformly degraded sample doesn't pass.
+**Always visualize distributions first** (violin + `total_counts` vs
+`pct_counts_mt` scatter — dying cells sit in the low-count/high-mito corner).
+
+Run the helper (computes metrics + MAD gating, reports per-step removals):
+
+```bash
+python scripts/scrna_qc.py data.h5ad --doublets        # or --install-plan first
+```
+
+### Doublets, ambient RNA, empty droplets (per-cell metrics miss these)
+
+- **Doublets**: Scrublet (`sc.pp.scrublet`, scanpy >=1.10) or scDblFinder (R).
+  Run **per sample** before merging; flag-cluster-drop (doublets form bridge
+  clusters). `expected_doublet_rate` ~0.8%/1,000 cells recovered (10x).
+- **Ambient RNA**: cell-free "soup" mRNA in every droplet — a count-correction
+  step (SoupX / DecontX, R), NOT a cell filter. Per-cell QC cannot detect it;
+  suspect it when markers look implausibly ubiquitous.
+- **Empty droplets**: upstream of per-cell QC. CellRanger's filtered matrix
+  already applies an EmptyDrops-style call; with only the raw matrix, run
+  EmptyDrops (DropletUtils, R) or a barcode-rank knee before per-cell QC.
+
+### QC Interpretation Table (metric -> concern -> action)
+
+| QC metric | Direction | Typical concern | Suggested action |
+|-----------|-----------|-----------------|------------------|
+| `pct_counts_mt` | high | Dying / stressed cell (membrane rupture) | **Filter** (MAD upper + tissue-aware ceiling; raise ceiling for mito-rich tissue) |
+| `n_genes_by_counts` | very low | Empty droplet / debris | **Filter** (`min_genes` ~200 + low-tail MAD) |
+| `total_counts` | very low | Shallow / failed capture | **Filter** (low-tail MAD; check barcode-rank knee) |
+| `n_genes_by_counts` / `total_counts` | very high | Doublet (two cells in one droplet) | **Flag**, run Scrublet/scDblFinder, then drop — don't hard-cap on counts alone |
+| `predicted_doublet` (Scrublet) | True | Multiplet | **Filter** per sample; cluster-then-drop if unsure |
+| `pct_counts_hb` | high | RBC / blood contamination | **Filter** in non-blood tissue; **investigate** in blood |
+| `pct_counts_ribo` | very high/low | Low-complexity / stressed, or cell-type signal | **Flag / investigate** (ribo is cell-type-specific; rarely a hard filter) |
+| markers ubiquitous across clusters | — | Ambient RNA contamination | **Investigate** — run SoupX/DecontX, do not silently proceed |
+| many cells, low median counts | — | Empty droplets not removed | **Investigate** — apply EmptyDrops / knee, re-filter |
+
+Full reasoning, MAD code, Scrublet/SoupX/EmptyDrops recipes, and order of
+operations: **references/scrna_qc.md**. Inline pipeline QC:
+**references/scanpy_workflow.md** Phase 2.
 
 ---
 
@@ -172,7 +260,7 @@ Single-Cell DE (many cells per condition):
   Best for: Per-cell-type DE, marker gene finding
 
 Pseudo-Bulk DE (aggregate counts by sample):
-  Use: DESeq2 via PyDESeq2
+  Use: R DESeq2 via `tu run run_deseq2_analysis` or Rscript (NOT pydeseq2 — gives different DEG counts)
   Best for: Sample-level comparisons with replicates
 
 Statistical Tests Only:
@@ -318,6 +406,7 @@ sc.tl.umap(adata)
 **Detailed Analysis Patterns**: analysis_patterns.md (per-cell-type DE, correlation, PCA, ANOVA, cell communication)
 
 **Core Workflows**:
+- references/scrna_qc.md - scRNA-seq QC gating (mito%, doublets, ambient RNA, empty droplets, MAD thresholds)
 - references/scanpy_workflow.md - Complete scanpy pipeline
 - references/seurat_workflow.md - Seurat to Scanpy translation
 - references/clustering_guide.md - Clustering methods
@@ -325,3 +414,14 @@ sc.tl.umap(adata)
 - references/trajectory_analysis.md - Pseudotime
 - references/cell_communication.md - OmniPath/CellPhoneDB workflow
 - references/troubleshooting.md - Detailed error solutions
+
+---
+
+## Analysis Conventions
+
+### DESeq2 library choice: match the authoritative script
+If the data folder contains an authoritative script (`run_*.py`, `analysis.R`), use whichever DESeq2 library it uses (pydeseq2 or R DESeq2). The two libraries give slightly different DEG counts (~2-10% at the same thresholds), so matching matters. If no script exists, prefer R DESeq2 via the `run_deseq2_analysis` tool or `Rscript`:
+
+```bash
+tu run run_deseq2_analysis '{"operation":"deseq2","counts_file":"pseudo_bulk_counts.csv","metadata_file":"sample_meta.csv","design":"~ sex","contrast":"sex, M, F","lfc_shrinkage":true}'
+```

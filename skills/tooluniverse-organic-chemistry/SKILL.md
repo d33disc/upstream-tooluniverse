@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-organic-chemistry
-description: Teaches reasoning strategies for organic chemistry problems — reaction product prediction, spectroscopy interpretation, stereochemistry, and quantitative calculations. Use when users ask about reaction products, spectra, mechanisms, stereochemistry, or molecular formulas.
+description: Organic chemistry reasoning guide for reaction product prediction, mechanism analysis (electrophilic/nucleophilic substitution, addition, elimination, pericyclic, radical), and spectroscopy interpretation (1H/13C NMR, IR, MS). Reasons from first principles (electron flow, kinetic vs thermodynamic) rather than pattern-matching named reactions. Use for organic synthesis problems and mechanism explanations.
+disable-model-invocation: true
 ---
 
 # Organic Chemistry Reasoning Guide
@@ -325,6 +326,7 @@ python molecular_formula.py --formula C6H6
 - Molecular point group and symmetry elements: `chemistry_facts.py --type point_group --molecule "name"`
 - Reagent function, selectivity, or key distinction: `chemistry_facts.py --type common_reagents --reagent "name"`
 - Specific physical constants (boiling points, pKa values, solubility): `PubChem_get_CID_by_compound_name` then `PubChem_get_compound_properties_by_CID`
+- Systematic (IUPAC) name → structure: `OPSIN_name_to_structure` (param `name`) — deterministic parser returning SMILES/InChI/InChIKey, the go-to for turning a systematic name (e.g. "2-acetoxybenzoic acid") into a structure you can then `SMILES_verify`. Trade/trivial names return `parsed=false` → use `PubChem_get_CID_by_compound_name` instead.
 - Whether a compound exists and its canonical SMILES/InChI: `PubChem_get_CID_by_compound_name` or `PubChem_get_compound_properties_by_CID`
 - Drug-likeness, bioactivity data, assay results: `ChEMBL_get_molecule` or `ChEMBL_search_molecules`
 - Metabolite pathways and biological context: `HMDB_get_metabolite`

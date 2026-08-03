@@ -157,14 +157,14 @@ class ADMETAITool(BaseTool):
                 for col in columns:
                     expanded_columns.append(col)
                     percentile_col = f"{col}_drugbank_approved_percentile"
-                    if percentile_col in predictions.columns:  # type: ignore[attr-defined]
+                    if percentile_col in predictions.columns:
                         expanded_columns.append(percentile_col)
                 predictions = predictions[expanded_columns]
 
             # Organize output: {smiles: {col: value, ...}, ...}
             result = {}
-            for idx, row in predictions.iterrows():  # type: ignore[attr-defined]
-                result[idx] = {col: row[col] for col in predictions.columns}  # type: ignore[attr-defined]
+            for idx, row in predictions.iterrows():
+                result[idx] = {col: row[col] for col in predictions.columns}
             return result
         except Exception as e:
             return {"status": "error", "error": f"An unexpected error occurred: {e}"}

@@ -1,11 +1,7 @@
 ---
 name: tooluniverse-proteomics-data-retrieval
-description: >
-  Find and retrieve proteomics datasets from public repositories including MassIVE and ProteomeXchange
-  (which aggregates PRIDE, PeptideAtlas, jPOST, and iProX). Search by species, keyword, or accession.
-  Get detailed dataset metadata including instruments, publications, species, modifications, and file counts.
-  Use when asked to find proteomics datasets, search for mass spectrometry data, look up ProteomeXchange
-  or MassIVE accessions, or discover publicly available proteomics experiments for a given organism or topic.
+description: Find and retrieve proteomics datasets from MassIVE and ProteomeXchange. Search by species, keyword, or accession; retrieve detailed metadata (instruments, publications, species, PTMs studied). Use for locating public proteomics datasets to reanalyze, comparing instrument/protocol coverage across studies, and pre-download dataset evaluation.
+disable-model-invocation: true
 ---
 
 # Proteomics Data Retrieval

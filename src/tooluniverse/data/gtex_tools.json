@@ -22,32 +22,56 @@
       "format": "json"
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "geneExpression": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "tissueSiteDetailId": {
-                "type": "string"
-              },
-              "median": {
-                "type": "number"
-              },
-              "geneSymbol": {
-                "type": "string"
-              },
-              "gencodeId": {
-                "type": "string"
-              },
-              "unit": {
-                "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "geneExpression": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "median": {
+                    "type": "number"
+                  },
+                  "tissueSiteDetailId": {
+                    "type": "string"
+                  },
+                  "ontologyId": {
+                    "type": "string"
+                  },
+                  "datasetId": {
+                    "type": "string"
+                  },
+                  "gencodeId": {
+                    "type": "string"
+                  },
+                  "geneSymbol": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "geneExpression"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     },
     "test_examples": [
       {
@@ -123,32 +147,77 @@
       "format": "json"
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "singleTissueEqtl": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "variantId": {
-                "type": "string"
-              },
-              "pValue": {
-                "type": "number"
-              },
-              "slope": {
-                "type": "number"
-              },
-              "tissueSiteDetailId": {
-                "type": "string"
-              },
-              "geneSymbol": {
-                "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "singleTissueEqtl": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "snpId": {
+                    "type": "string"
+                  },
+                  "pos": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "snpIdUpper": {
+                    "type": "string"
+                  },
+                  "variantId": {
+                    "type": "string"
+                  },
+                  "geneSymbol": {
+                    "type": "string"
+                  },
+                  "pValue": {
+                    "type": "number"
+                  },
+                  "geneSymbolUpper": {
+                    "type": "string"
+                  },
+                  "datasetId": {
+                    "type": "string"
+                  },
+                  "tissueSiteDetailId": {
+                    "type": "string"
+                  },
+                  "ontologyId": {
+                    "type": "string"
+                  },
+                  "chromosome": {
+                    "type": "string"
+                  },
+                  "gencodeId": {
+                    "type": "string"
+                  },
+                  "nes": {
+                    "type": "number"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "singleTissueEqtl"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     },
     "test_examples": [
       {

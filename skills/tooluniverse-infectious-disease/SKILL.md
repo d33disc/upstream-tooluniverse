@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-infectious-disease
-description: Rapid pathogen characterization and drug repurposing analysis for infectious disease outbreaks. Identifies pathogen taxonomy, essential proteins, predicts structures, and screens existing drugs via docking. Use when facing novel pathogens, emerging infections, or needing rapid therapeutic options during outbreaks.
+description: Rapid pathogen characterization and drug repurposing for outbreaks. Combines pathogen genomics (NCBI, BVBRC), host immune response (IEDB), drug-target databases (ChEMBL, DGIdb), and literature surveillance (PubMed/EuropePMC). Use for emerging-pathogen profiling, antiviral candidate identification, and outbreak intelligence reporting.
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE
@@ -134,6 +135,10 @@ Phase 6: Report Synthesis
 ### Phase 1: Pathogen Identification
 Classify via NCBI Taxonomy (query param). Identify related pathogens with existing drugs for knowledge transfer. Determine genome/proteome availability.
 
+**Genome assembly availability and QC**: After classifying the pathogen, use `NCBIDatasets_list_genomes_by_taxon` (params `taxon` as tax_id, `limit`, `reference_only`) to find the reference genome, `NCBIDatasets_get_genome_assembly` (param `accession`, e.g. "GCF_000005845.2") for assembly metrics (length, N50, GC%, contig/chromosome counts), and `NCBIDatasets_get_sequence_reports` (param `accession`) to map replicons (chromosomes/plasmids with RefSeq/GenBank accessions). For the full assembly-QC-to-characterization workflow, see the `tooluniverse-microbial-genome-characterization` skill.
+
+**Open pathogen genomic surveillance**: For the priority pathogens covered by Pathoplexus (west-nile, ebola-zaire, ebola-sudan, cchf, mpox), use `Pathoplexus_count_sequences` (params `organism`, `group_by` e.g. `geoLocCountry` or lineage) to gauge sequencing volume and geographic/lineage spread, and `Pathoplexus_get_mutations` (params `organism`, `min_proportion` e.g. 0.95) to pull characteristic high-prevalence mutations for the circulating population. Use early to quantify outbreak footprint and flag conserved mutations before target selection.
+
 **Knowledge transfer principle**: Drugs effective against related pathogens are the highest-priority repurposing candidates. A protease inhibitor for SARS-CoV-1 is immediately relevant to SARS-CoV-2. Look up the related pathogen's approved drugs in ChEMBL before generating candidates from first principles.
 
 ### Phase 2: Target Identification
@@ -207,8 +212,8 @@ Aggregate all findings into final report. Grade every candidate. Provide 3+ imme
 
 | Primary Tool | Fallback 1 | Fallback 2 |
 |--------------|------------|------------|
-| `NvidiaNIM_alphafold2` | `alphafold_get_prediction` | `ESMFold_predict_structure` |
-| `get_diffdock_info` | `NvidiaNIM_boltz2` | Manual docking |
+| `NvidiaNIM_alphafold2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | `alphafold_get_prediction` (AlphaFold DB by UniProt) | `ESMFold_predict_structure` |
+| `get_diffdock_info` | `NvidiaNIM_boltz2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | Manual docking |
 | `NCBIDatasets_suggest_taxonomy` | `UniProtTaxonomy_get_taxon` | Manual classification |
 | `ChEMBL_search_drugs` | `drugbank_vocab_search` | PubChem bioassays |
 

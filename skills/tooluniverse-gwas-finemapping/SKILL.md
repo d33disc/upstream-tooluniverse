@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-gwas-finemapping
-description: Identify and prioritize causal variants at GWAS loci using statistical fine-mapping and locus-to-gene predictions. Computes posterior probabilities for causal variants, links variants to genes via L2G predictions, annotates functional consequences, and suggests validation strategies. Use when asked to fine-map GWAS loci, prioritize causal variants, identify credible sets, or link GWAS signals to causal genes.
+description: Statistical fine-mapping of GWAS loci using credible sets (SuSiE, FINEMAP) and locus-to-gene scoring (Open Targets L2G). Identifies likely causal variants and target genes — distinct from positional 'nearest gene' which is often wrong. Use for prioritizing causal variants at GWAS hits, comparing fine-mapping methods, and converting lead SNPs to target genes.
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE

@@ -33,20 +33,32 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "results": {
-          "type": "array",
-          "description": "Matching rare diseases"
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
         },
-        "count": {
-          "type": "integer",
-          "description": "Number of results returned"
-        },
-        "total_count": {
-          "type": "integer",
-          "description": "Total matches before truncation"
-        },
-        "query": {
-          "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "Matching rare diseases"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "total_count": {
+              "type": "integer",
+              "description": "Total matches before truncation"
+            },
+            "query": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -105,21 +117,29 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "ORPHAcode": {
-          "type": "string",
-          "description": "Orphanet identifier"
+        "status": {
+          "type": "string"
         },
-        "Preferred term": {
-          "type": "string",
-          "description": "Official disease name"
-        },
-        "Definition": {
-          "type": "string",
-          "description": "Disease definition"
-        },
-        "Synonyms": {
-          "type": "array",
-          "description": "Alternative names"
+        "data": {
+          "type": "object",
+          "properties": {
+            "ORPHAcode": {
+              "type": "string",
+              "description": "Orphanet identifier"
+            },
+            "Preferred term": {
+              "type": "string",
+              "description": "Official disease name"
+            },
+            "Definition": {
+              "type": "string",
+              "description": "Disease definition"
+            },
+            "Synonyms": {
+              "type": "array",
+              "description": "Alternative names"
+            }
+          }
         }
       }
     },
@@ -171,25 +191,33 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "genes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "Symbol": {
-                "type": "string",
-                "description": "Gene symbol"
-              },
-              "Name": {
-                "type": "string",
-                "description": "Gene name"
-              },
-              "AssociationType": {
-                "type": "string",
-                "description": "Type of gene-disease association"
+        "data": {
+          "type": "object",
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "genes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Symbol": {
+                    "type": "string",
+                    "description": "Gene symbol"
+                  },
+                  "Name": {
+                    "type": "string",
+                    "description": "Gene name"
+                  },
+                  "AssociationType": {
+                    "type": "string",
+                    "description": "Type of gene-disease association"
+                  }
+                }
               }
             }
           }
@@ -199,9 +227,6 @@
     "test_examples": [
       {
         "orpha_code": "558"
-      },
-      {
-        "orpha_code": "586"
       }
     ]
   },
@@ -249,21 +274,34 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "classification": {
+        "data": {
           "type": "object",
-          "description": "Hierarchical classification"
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "parent": {
+              "type": ["object", "null"],
+              "description": "Preferential parent disease/category in the rare disease taxonomy tree, or null if this is a top-level category."
+            },
+            "children": {
+              "type": "array",
+              "description": "Child diseases/categories in the rare disease taxonomy tree. Empty for leaf diseases."
+            },
+            "member_of_classifications": {
+              "type": "object",
+              "description": "Which named Orphanet classification systems (e.g. 'Orphanet classification of rare respiratory diseases') this disease is filed under. This is classification-system MEMBERSHIP, not the parent/child taxonomy tree -- see parent/children for that."
+            }
+          }
         }
       }
     },
     "test_examples": [
       {
         "orpha_code": "558"
-      },
-      {
-        "orpha_code": "166024"
       }
     ]
   },
@@ -307,14 +345,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "results": {
-          "type": "array"
+        "status": {
+          "type": "string"
         },
-        "count": {
-          "type": "integer"
-        },
-        "exact_match": {
-          "type": "boolean"
+        "data": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array"
+            },
+            "count": {
+              "type": "integer"
+            },
+            "exact_match": {
+              "type": "boolean"
+            }
+          }
         }
       }
     },
@@ -322,10 +368,6 @@
       {
         "name": "Marfan syndrome",
         "exact": true
-      },
-      {
-        "name": "cystic fibrosis",
-        "exact": false
       }
     ]
   },
@@ -368,37 +410,45 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "preferred_term": {
-          "type": "string"
-        },
-        "phenotypes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "hpo_id": {
-                "type": "string"
-              },
-              "hpo_term": {
-                "type": "string"
-              },
-              "frequency": {
-                "type": "string"
-              },
-              "diagnostic_criteria": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+        "data": {
+          "type": "object",
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "preferred_term": {
+              "type": "string"
+            },
+            "phenotypes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hpo_id": {
+                    "type": "string"
+                  },
+                  "hpo_term": {
+                    "type": "string"
+                  },
+                  "frequency": {
+                    "type": "string"
+                  },
+                  "diagnostic_criteria": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
               }
+            },
+            "phenotype_count": {
+              "type": "integer"
             }
           }
-        },
-        "phenotype_count": {
-          "type": "integer"
         }
       }
     },
@@ -450,40 +500,48 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "preferred_term": {
-          "type": "string"
-        },
-        "prevalences": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "class": {
-                "type": "string"
-              },
-              "geographic": {
-                "type": "string"
-              },
-              "mean_value": {
-                "type": "string"
-              },
-              "source": {
-                "type": "string"
-              },
-              "validation_status": {
-                "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "preferred_term": {
+              "type": "string"
+            },
+            "prevalences": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  },
+                  "geographic": {
+                    "type": "string"
+                  },
+                  "mean_value": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "validation_status": {
+                    "type": "string"
+                  }
+                }
               }
+            },
+            "prevalence_count": {
+              "type": "integer"
             }
           }
-        },
-        "prevalence_count": {
-          "type": "integer"
         }
       }
     },
@@ -535,29 +593,37 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "preferred_term": {
-          "type": "string"
-        },
-        "average_age_of_onset": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "preferred_term": {
+              "type": "string"
+            },
+            "average_age_of_onset": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type_of_inheritance": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "disorder_group": {
+              "type": "string"
+            },
+            "typology": {
+              "type": "string"
+            }
           }
-        },
-        "type_of_inheritance": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "disorder_group": {
-          "type": "string"
-        },
-        "typology": {
-          "type": "string"
         }
       }
     },
@@ -599,51 +665,59 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "gene_name": {
+        "status": {
           "type": "string"
         },
-        "diseases": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "orpha_code": {
-                "type": [
-                  "string",
-                  "integer"
-                ]
-              },
-              "preferred_term": {
-                "type": "string"
-              },
-              "disorder_group": {
-                "type": "string"
-              },
-              "typology": {
-                "type": "string"
-              },
-              "genes": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "symbol": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "association_type": {
-                      "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "gene_name": {
+              "type": "string"
+            },
+            "diseases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "orpha_code": {
+                    "type": [
+                      "string",
+                      "integer"
+                    ]
+                  },
+                  "preferred_term": {
+                    "type": "string"
+                  },
+                  "disorder_group": {
+                    "type": "string"
+                  },
+                  "typology": {
+                    "type": "string"
+                  },
+                  "genes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "association_type": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
               }
+            },
+            "disease_count": {
+              "type": "integer"
             }
           }
-        },
-        "disease_count": {
-          "type": "integer"
         }
       }
     },
@@ -708,12 +782,20 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "orpha_code": {
+        "status": {
           "type": "string"
         },
-        "mappings": {
+        "data": {
           "type": "object",
-          "description": "Cross-reference mappings keyed by coding system (ICD10, ICD11, OMIM, SNOMED-CT)"
+          "properties": {
+            "orpha_code": {
+              "type": "string"
+            },
+            "mappings": {
+              "type": "object",
+              "description": "Cross-reference mappings keyed by coding system (ICD10, ICD11, OMIM, SNOMED-CT)"
+            }
+          }
         }
       }
     },

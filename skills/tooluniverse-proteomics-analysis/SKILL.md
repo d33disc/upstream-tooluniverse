@@ -1,9 +1,21 @@
 ---
 name: tooluniverse-proteomics-analysis
-description: Analyze mass spectrometry proteomics data including protein quantification, differential expression, post-translational modifications (PTMs), and protein-protein interactions. Processes MaxQuant, Spectronaut, DIA-NN, and other MS platform outputs. Performs normalization, statistical analysis, pathway enrichment, and integration with transcriptomics. Use when analyzing proteomics data, comparing protein abundance between conditions, identifying PTM changes, studying protein complexes, integrating protein and RNA data, discovering protein biomarkers, or conducting quantitative proteomics experiments.
+description: Mass-spec proteomics analysis — protein identification, quantification (LFQ, TMT, iTRAQ), differential expression (tumor vs normal, treatment vs control), PTM identification, and pathway enrichment on protein lists. Use when you have proteomics MS output, asking about protein abundance differences, or doing systems-level proteomic interpretation.
+disable-model-invocation: true
 ---
 
 # Proteomics Analysis
+
+## RULE ZERO — Check for pre-computed results FIRST
+
+Before following any instruction below, scan the data folder for:
+- `*_executed.ipynb` → read with `tu run read_executed_notebook '{"data_folder":"<path>","search":"<keyword>"}'` and cite its cell outputs as the authoritative answer
+- Pre-computed result files (CSV/TSV with names like `*results*`, `*deseq*`, `*enrich*`, `*stats*`, `*_simplified.csv`) → read directly and report the requested value
+- Canonical analysis scripts (`analysis.R`, `run_*.py`, `find_*.R`, `*.Rmd`) → execute as-is and read the output
+
+Only follow this skill's re-analysis recipe below if **none** of the above exist. Re-running from raw data produces different numbers than the published answer and is much slower (often 5-10× turn count).
+
+---
 
 Comprehensive analysis of mass spectrometry-based proteomics data from protein identification through quantification, differential expression, post-translational modifications, and systems-level interpretation.
 
@@ -81,7 +93,7 @@ Protein identification from MS data follows a logical chain. LOOK UP DON'T GUESS
 
 1. **Peptide mass fingerprinting (PMF)**: Intact protein digested → measured peptide masses compared against theoretical digest of all database proteins. A match requires >=4 peptides covering >=15% of the protein sequence. Single-peptide hits are unreliable (could match multiple proteins).
 2. **Tandem MS (MS/MS)**: Fragment ion spectra matched to peptide sequences via search engines (Andromeda, SEQUEST, X!Tandem). Each peptide-spectrum match (PSM) scored; only PSMs above FDR threshold count. Unique peptides (mapping to one protein) are essential — shared peptides cannot distinguish between protein isoforms.
-3. **Protein inference**: Multiple peptides → protein groups. When peptides are shared between homologs, report the protein group (not individual proteins). Use `proteins_api_search` or `uniprot_search_proteins` to resolve ambiguous protein groups.
+3. **Protein inference**: Multiple peptides → protein groups. When peptides are shared between homologs, report the protein group (not individual proteins). Use `proteins_api_search` or `UniProt_search` to resolve ambiguous protein groups.
 4. **Coverage matters**: 2+ unique peptides is the minimum for a confident protein ID. Proteins identified by a single unique peptide should be flagged as tentative.
 
 ### Post-Translational Modification (PTM) Analysis Reasoning

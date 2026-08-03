@@ -1,17 +1,17 @@
 [
   {
     "name": "disease_target_score",
-    "description": "Extract disease-target association scores from a specific data source using GraphQL API. This tool retrieves all targets associated with a disease and their scores from a specified datasource (e.g., chembl, eva, cancer_gene_census, etc.).",
+    "description": "Extract disease-target association scores from a specific data source using GraphQL API. This tool retrieves all targets associated with a disease and their scores from a specified datasource (e.g., clinical_precedence, eva, cancer_gene_census, etc.).",
     "parameter": {
       "type": "object",
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "datasourceId": {
           "type": "string",
-          "description": "The datasource ID to extract scores from. Available options: 'chembl', 'eva', 'eva_somatic', 'cancer_gene_census', 'cancer_biomarkers', 'europepmc', 'expression_atlas', 'genomics_england', 'impc', 'reactome', 'uniprot_literature', 'uniprot_variants'"
+          "description": "The datasource ID to extract scores from. Available options: 'clinical_precedence', 'eva', 'eva_somatic', 'cancer_gene_census', 'cancer_biomarkers', 'europepmc', 'expression_atlas', 'genomics_england', 'impc', 'reactome', 'uniprot_literature', 'uniprot_variants'"
         },
         "pageSize": {
           "type": "integer",
@@ -21,8 +21,7 @@
       },
       "required": [
         "efoId",
-        "datasourceId",
-        "pageSize"
+        "datasourceId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -36,7 +35,7 @@
           "properties": {
             "disease_id": {
               "type": "string",
-              "description": "EFO disease ID (e.g., 'EFO_0000339')"
+              "description": "EFO disease ID (e.g., 'MONDO_0011996')"
             },
             "disease_name": {
               "type": "string",
@@ -46,7 +45,7 @@
         },
         "datasource": {
           "type": "string",
-          "description": "The data source that was queried (e.g., 'chembl', 'eva')"
+          "description": "The data source that was queried (e.g., 'clinical_precedence', 'eva')"
         },
         "total_targets_with_scores": {
           "type": "integer",
@@ -81,21 +80,23 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "datasourceId": "chembl", "pageSize": 100},
-      {"efoId": "EFO_0000401", "datasourceId": "eva", "pageSize": 50},
-      {"efoId": "EFO_0000616", "datasourceId": "cancer_gene_census", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "datasourceId": "clinical_precedence",
+        "pageSize": 100
+      }
     ]
   },
   {
     "name": "chembl_disease_target_score",
     "description": "Extract disease-target association scores specifically from ChEMBL database. ChEMBL provides bioactivity data for drug-target interactions.",
-    "datasource_id": "chembl",
+    "datasource_id": "clinical_precedence",
     "parameter": {
       "type": "object",
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -104,8 +105,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -129,7 +129,7 @@
         },
         "datasource": {
           "type": "string",
-          "description": "Always 'chembl' for this tool"
+          "description": "Always 'clinical_precedence' for this tool"
         },
         "total_targets_with_scores": {
           "type": "integer",
@@ -151,7 +151,7 @@
               },
               "datasource": {
                 "type": "string",
-                "description": "Always 'chembl'"
+                "description": "Always 'clinical_precedence'"
               },
               "score": {
                 "type": "number",
@@ -164,9 +164,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -178,7 +179,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -187,8 +188,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -239,9 +239,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -253,7 +254,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -262,8 +263,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -314,9 +314,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -328,7 +329,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -337,8 +338,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -389,9 +389,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -403,7 +404,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -412,8 +413,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -464,9 +464,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -478,7 +479,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -487,8 +488,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -539,9 +539,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -553,7 +554,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -562,8 +563,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -614,9 +614,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   },
   {
@@ -628,7 +629,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -637,8 +638,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -690,7 +690,7 @@
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
       {
-        "efoId": "EFO_0000339",
+        "efoId": "MONDO_0011996",
         "pageSize": 100
       }
     ]
@@ -704,7 +704,7 @@
       "properties": {
         "efoId": {
           "type": "string",
-          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+          "description": "The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'MONDO_0011996' for chronic myelogenous leukemia"
         },
         "pageSize": {
           "type": "integer",
@@ -713,8 +713,7 @@
         }
       },
       "required": [
-        "efoId",
-        "pageSize"
+        "efoId"
       ]
     },
     "query_schema": "query getTargets($efoId: String!, $index: Int!, $size: Int!) { disease(efoId: $efoId) { id name associatedTargets(page: { index: $index, size: $size }) { count rows { target { approvedSymbol id } datasourceScores { id score } } } } }",
@@ -765,9 +764,10 @@
     },
     "type": "DiseaseTargetScoreTool",
     "test_examples": [
-      {"efoId": "EFO_0000339", "pageSize": 100},
-      {"efoId": "EFO_0000401", "pageSize": 50},
-      {"efoId": "EFO_0000616", "pageSize": 100}
+      {
+        "efoId": "MONDO_0011996",
+        "pageSize": 100
+      }
     ]
   }
 ]

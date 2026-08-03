@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-gwas-drug-discovery
-description: Transform GWAS signals into actionable drug targets and repurposing opportunities. Performs locus-to-gene mapping, target druggability assessment, existing drug identification, safety profile evaluation, and clinical trial matching. Use when discovering drug targets from GWAS data, finding drug repurposing opportunities from genetic associations, or translating GWAS findings into therapeutic leads.
+description: Transform GWAS signals into drug targets and repurposing opportunities. Connects GWAS-significant loci to causal genes via fine-mapping/eQTL, then to druggable proteins via DGIdb/OpenTargets, then to existing drugs via ChEMBL. Use for GWAS-to-target hypothesis generation, druggable-fraction analysis of disease loci, and human-genetics-validated drug-repurposing prioritization.
+disable-model-invocation: true
 ---
 
 # GWAS-to-Drug Target Discovery
@@ -149,8 +150,8 @@ drugs = tu.tools.DGIdb_get_drug_gene_interactions(genes=["TCF7L2"])
 | GWAS trait param | `gwas_get_associations_for_trait(trait=...)` | `disease_trait=...` (no `trait` param exists) |
 | GWAS p-value filter | `p_value_threshold=5e-8` | No such param; filter client-side after fetching results |
 | OpenTargets ensembl case | `ensemblID="ENSG..."` | `ensemblId="ENSG..."` (lowercase 'd') |
-| ClinicalTrials tool name | `ClinicalTrials_search(...)` | `ClinicalTrials_search_studies(...)` |
-| DGIdb tool name | `DGIdb_get_interactions(...)` | `DGIdb_get_drug_gene_interactions(genes=[...])` |
+| ClinicalTrials tool name | `ClinicalTrials_search_studies(...)` | `ClinicalTrials_search_studies(...)` |
+| DGIdb tool name | `DGIdb_get_drug_gene_interactions(...)` | `DGIdb_get_drug_gene_interactions(genes=[...])` |
 | OpenTargets disease drugs | `OpenTargets_get_associated_drugs_by_disease_efoId` may return HTTP 400 | Fall back to `DGIdb_get_drug_gene_interactions` per gene |
 | GWAS study search param | `gwas_search_studies(disease_trait=...)` | Use `efo_trait=...` for studies (disease_trait works for associations only) |
 

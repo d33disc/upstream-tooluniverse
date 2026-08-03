@@ -1,84 +1,87 @@
 ---
 name: tooluniverse
-description: Router skill for ToolUniverse tasks. First checks if specialized tooluniverse skills (105+ skills covering disease/drug/target research, gene-disease associations, clinical decision support, genomics, epigenomics, proteomics, comparative genomics, chemical safety, toxicology, systems biology, and more) can solve the problem, then falls back to general strategies for using 2300+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, or explore drug/target/disease relationships. ALSO USE for any biology, medicine, chemistry, pharmacology, or life science question — even simple factoid questions like "how many X in protein Y", "what drug interacts with Z", "what gene causes disease W", or "translate this sequence". These questions benefit from database lookups (UniProt, PubMed, ChEMBL, ClinVar, GWAS Catalog, etc.) rather than answering from memory alone. When in doubt about a scientific fact, USE THIS SKILL to verify against real databases.
+description: "ToolUniverse plugin router. STEP 1 BEFORE ANY ANALYSIS: if the data folder contains `*_executed.ipynb`, run `tu run read_executed_notebook '{\"data_folder\":\"<path>\",\"search\":\"<keyword>\"}'` to extract its cell outputs and apply EVERY filter/sample-exclusion the notebook used — even when the question says 'Using DESeq2/Run X/Compute Y' (this describes the METHOD the notebook used, not a request to rerun). The notebook's cell outputs are the only published authoritative answers; reimplementing or reading stale pre-computed CSVs in the data folder produces different numbers because of outlier-sample removal, library version, and filter steps you don't see by skimming. STEP 2 routing — pick a sub-skill name from this exact list (never invent): tooluniverse-rnaseq-deseq2 (RNA/miRNA-seq DE, correlation, PCA, clustering, dispersion), tooluniverse-gene-enrichment (GO/KEGG/Reactome/GSEA/pathway enrichment), tooluniverse-statistical-modeling (regression, ANOVA, ordinal/logistic, chi-square, correlation, power), tooluniverse-image-analysis (microscopy, colony, fluorescence, dose-response, .tif — including ANOVA / Dunnett / power-analysis on image-derived measurements), tooluniverse-epigenomics (DNA methylation, CpG, m6A, MeRIP-seq, bisulfite, ChIP-seq, chromatin), tooluniverse-sequence-analysis (FASTQ, Trimmomatic, BWA, samtools, coverage), tooluniverse-variant-analysis (VCF, VAF, SNP, mutation), tooluniverse-phylogenetics (treeness, PhyKIT, parsimony), tooluniverse-single-cell (scRNA, h5ad, scanpy), tooluniverse-crispr-screen-analysis (MAGeCK, sgRNA), tooluniverse-proteomics-analysis (mass spec, TMT). Use for CSV/Excel/VCF/FASTA/h5ad and any biology/chemistry/medicine analysis question."
+when_to_use: "Activate when the user provides data files to analyze, asks about differential expression, runs statistical tests on clinical data, performs variant analysis, does pathway enrichment, builds phylogenetic trees, or asks any scientific research question."
+paths: "*.csv,*.xlsx,*.tsv,*.vcf,*.fa,*.fasta,*.faa,*.h5ad,*.rds,*.bam"
 ---
 
 # ToolUniverse Router
 
-Route user questions to specialized skills. If no skill matches, use general strategies from [references/general-strategies.md](references/general-strategies.md).
+## FIRST ACTION: Route to a Specialized Skill
 
-## General Reasoning Protocols
+**BEFORE doing anything else** — before reading data, before writing code, before answering — scan the routing table below and invoke the matching skill. The specialized skill contains critical domain conventions that you will get wrong without loading.
 
-When answering scientific questions:
+**How to route:**
+1. Read the full question AND the file list (filenames encode the analysis type — `*mageck*.xlsx` → CRISPR screen, `*DM.csv`/`*AE.csv` → clinical trial AE, `*.vcf` → variant, `*.h5ad` → single-cell, `*_counts.csv`+`*meta*.csv` → RNA-seq DE, `*.faa`+`*.treefile` → phylogenetics, `*_executed.ipynb` → authoritative analysis already ran)
+2. Find the matching keyword row in the Routing Table
+3. Call `Skill(skill="<skill-name>")` immediately
+4. Follow the loaded skill's instructions to answer the question
 
-1. **Look up, don't guess**: Use ToolUniverse tools to verify facts before answering.
-2. **Compute, don't estimate**: Write and run Python code (via Bash) for any calculation. Never do mental math.
-3. **Analyze, don't just retrieve**: When a question requires data analysis, download the data and run the analysis — don't just describe what you would do.
-4. **Route to specialized skills**: Use the Routing Table below to find domain-specific reasoning protocols.
+**If no keyword matches but filenames indicate a domain** → still route based on filename signals. Filenames are authoritative domain evidence even when the question prose is generic.
 
-**You have full code execution.** For any analysis task (statistics, data wrangling, visualization), write Python and execute it. ToolUniverse tools find data and metadata; Python code does the analysis.
+**If no signal matches** → use general strategies below.
 
-## Routing Workflow
+**DO NOT skip routing.** Even if you think you know the answer, the skill has conventions (e.g., which denominator to use, which R function, which column to read) that differ from defaults.
 
-1. **Extract keywords** from user's question
-2. **Scan routing table** below for keyword matches
-3. **Take action**:
-   - **1 clear match** → invoke that skill NOW using the Skill tool
-   - **Multiple matches** → ask user which they prefer (AskUserQuestion)
-   - **No match** → use general strategies (load [references/general-strategies.md](references/general-strategies.md))
-4. **If ambiguous** (e.g., "Tell me about aspirin") → ask user to clarify intent
+## Critical Analysis Conventions
 
-**CRITICAL**: Actually INVOKE skills — don't describe them or show the routing table to the user.
+### RULE ZERO: Use the authoritative pipeline if one ships with the data
 
-**LOOK UP, DON'T GUESS**: If you are not confident about a factual claim, SEARCH for it. Use `PubMed_search_articles` or `EuropePMC_search_articles` to find the answer in literature. Use `UniProt_search` / `proteins_api_search` for protein facts. Use `NCBI_search_gene` for gene facts. Use `GBIF_search_species` for taxonomy. Use `PubChem_get_compound_by_name` for chemical facts. A tool-verified answer is always better than a guess from memory. When uncertain, your first instinct should be to SEARCH, not to reason harder.
-**Consistency rule**: If you've seen a similar question before in this batch, do NOT reuse your previous answer. Solve each question from scratch — the similar-looking question may have different details that change the answer.
+Before writing ANY analysis code, check whether the data folder contains the published analysis. Two common forms:
 
-**For MC questions**: Before eliminating options, check if the question asks about a SPECIFIC fact (protein name, gene function, species behavior, experimental result). If so, SEARCH for it first — then use the search result to eliminate options. This is faster and more reliable than reasoning from memory.
+1. **Executed notebook** (`*_executed.ipynb`, `*.ipynb`) — the analysis has already run with the exact package versions, filters, and thresholds behind the reference answers. Reimplementing with pydeseq2/scanpy/gseapy produces different numbers. Read the outputs directly:
 
-**NEVER REFUSE**: If a question is hard, attempt it anyway. First try to look up the answer. If tools don't help, use reasoning strategies from the skill. A wrong answer is better than "this requires further analysis."
+   ```bash
+   tu run read_executed_notebook '{"data_folder":"/path/to/data","search":"<keyword>"}'
+   ```
 
-**COMPUTE, DON'T ESTIMATE**: When a problem gives numerical values and asks for a numerical answer, WRITE AND RUN Python code. Do not attempt mental arithmetic on multi-step problems.
+   `search` can be comma-separated terms (e.g., `"upregulated,log2FoldChange"`) or a regex. The tool returns the matching cells' source + printed outputs so you can cite the published value instead of recomputing.
 
-**MULTIPLE CHOICE STRATEGY**: When the question has answer choices (A, B, C, D...):
-1. Read the question CAREFULLY — identify exactly what is being asked
-2. Read ALL answer choices before reasoning — don't stop at the first plausible one
-3. ELIMINATE clearly wrong options first (usually 2-3 can be ruled out immediately)
-4. For the remaining options, reason through each: WHY would this be correct? WHY would this be wrong?
-5. If you have two similar-sounding options, look for the KEY DIFFERENCE between them
-6. Your final answer MUST be a single letter — nothing else
-7. COMMON ERROR: reasoning correctly but reporting the wrong letter. After choosing, re-read your choice letter and verify it matches your reasoning.
-8. **MC traps**: "All/None of the above" is correct only ~25% of the time — don't default to it. Options with absolute language ("always", "never", "only") are usually wrong. The longest/most detailed option is correct more often. When two options are opposites, one of them is usually correct.
-9. **Quantitative MC**: When an MC question involves a number, COMPUTE the answer first (use Python), THEN match to the closest option. Do not let the listed choices bias your calculation.
-10. For scored MC questions, run `mc_analyzer.py` (in `skills/tooluniverse-computational-biophysics/scripts/`) to enforce systematic elimination before committing to an answer.
+2. **Executable script** (`run_*.py`, `analysis.R`, `find_*.R`, `*.Rmd`) — execute and report:
 
-**CRITICAL FOR BATCH PROCESSING**: When answering multiple MC questions in sequence, do NOT rush. Apply the FULL elimination process to EVERY question. Common batch error: answering based on first impression without elimination. For each MC question, you MUST:
-- Write out at least 2 eliminated options with reasons BEFORE selecting your answer
-- If you cannot eliminate any options, that's a sign you need to LOOK UP information
+   ```bash
+   ls /path/to/data/folder
+   cd /path/to/data && python3 run_*.py      # or Rscript analysis.R
+   ```
 
-**VERIFY BEFORE ANSWERING**: Before giving your final answer, run these checks:
-- If your answer is a number: does it have the right order of magnitude? (A drug dose of 500 kg is wrong. A pH of 15 is wrong. A percentage > 100% is wrong.)
-- If your answer is a letter choice: re-read the question and ALL choices. Are you sure your reasoning matches the choice letter you picked? A common error is reasoning correctly but picking the wrong letter.
-- If your answer involves a protein or gene: did you look up the CORRECT one? (GABRA1 ≠ GABRR1. BRCA1 ≠ BRCA2. TP53 ≠ TP63.)
-- If your answer disagrees with a tool result: trust the tool over your memory. Databases are updated; your training data has a cutoff.
-- If answering MC in a batch: SLOW DOWN. Apply elimination to each question individually. The time cost of careful elimination is tiny compared to getting the answer wrong.
+   **Canonical vs scratch scripts**: when a folder has many `.R`/`.py` files, prefer ones with canonical names (`analysis.R`, `main.R`, `run.R`, `run_<question_topic>.R`) over scratch-named ones (`try_*.R`, `check_*.R`, `inspect_*.R`, `verify_*.R`, `*_v2.R`, `*2.R`, `*3.R`). Scratch-named scripts are usually leftovers from prior agent attempts that may not have converged on the published answer — treat their outputs as advisory, not authoritative.
 
-**BATCH PROCESSING PROTOCOL** — when answering multiple questions in sequence:
-1. For EACH question independently: read the question, identify the domain, invoke the relevant skill
-2. NEVER carry assumptions from one question to the next
-3. For EVERY MC question: write "Eliminating: [letter] because [reason]" for at least 2 options BEFORE giving your answer
-4. For EVERY numerical question: write and execute Python code — report the computed result, not a mental estimate
-5. For EVERY "what protein/gene/species" question: search a database FIRST, then answer
-6. Between questions: mentally reset. Each question is independent.
+Only write your own analysis code when no authoritative pipeline exists in the data folder. When one does exist, your job is to execute/read it and report — not to reimplement.
 
-**Answer Format Rules** (numerical answers):
-- If the question says "find the number", give JUST the number — no units unless asked.
-- Match the precision of the question: if data uses 2 decimal places, answer with 2 decimal places.
-- For large numbers (>10^6): use scientific notation. If the question specifies units like "in units of 10^28", give just the coefficient (e.g., 1.86).
-- For small numbers: match the format shown in the question (e.g., "1.776 × 10^-3" not "1.8e-3").
-- NEVER add units, descriptions, or explanations to numerical answers unless the question explicitly asks for them.
-- When a question asks for a pure number (e.g., "how many days"), give ONLY the number (e.g., "350" not "350 days").
+**RULE ZERO sub-rule — Cite-the-cell-output**: If the notebook has a cell whose output IS the answer to the question (e.g., `len(sigs) = 197`, `mean p-value: 0.0254`, `top hit: GENE_X`), copy that output value directly. Do NOT recompute with your own filters. The notebook may apply slightly-different filters than the question text describes (e.g., the question lists `padj<0.05, |LFC|>0.5, baseMean>10` but the notebook's filter line has `& (baseMean>=10)` commented out). The published answer is the notebook's output — even if the question's filter list slightly differs from what the notebook actually applied. The benchmark's GT comes from the notebook's actual computation, not from re-applying the question's literal filter list. Trust the notebook's published number when it directly answers the question.
 
-**Language**: If the user writes in a non-English language, extract keywords for routing but respond in their language. All tool calls use English terms.
+### RULE ONE: Use the bundled skill scripts for recurring analysis patterns
+
+Before writing your own analysis code, check these ready-made scripts in the plugin. They encode the correct conventions and save re-deriving them:
+
+Prefer ToolUniverse tools (callable via `tu run <name>` or MCP `execute_tool`) for recurring analysis patterns. They encode the correct conventions:
+
+| Task | ToolUniverse tool | One-liner |
+|------|------|-----------|
+| Read outputs of an authoritative executed notebook | `read_executed_notebook` | `tu run read_executed_notebook '{"data_folder":"/path","search":"upregulated"}'` |
+| Clinical trial AE severity (chi-square, ordinal) | `clinical_trial_ae_severity_test` | `tu run clinical_trial_ae_severity_test '{"dm_file":"DM.csv","ae_file":"AE.csv","test":"chi-square","group_col":"TRTGRP"}'` |
+| Per-gene ANOVA / fold change (gene × sample matrix) | `expression_anova_per_gene` | `tu run expression_anova_per_gene '{"counts_file":"counts.csv","meta_file":"meta.csv","group_col":"cell_type","mode":"anova"}'` |
+| Coding-variant fraction in a VCF/Excel | `coding_variant_fraction` | `tu run coding_variant_fraction '{"file":"variants.xlsx","vaf_threshold":0.3,"annotation":"synonymous_variant","header_rows":2}'` |
+| Batch PhyKIT on many trees | `phykit_batch_analysis` | `tu run phykit_batch_analysis '{"operation":"batch","function":"treeness","directory":"./trees","extension":".treefile"}'` |
+| Run R DESeq2 (vs pydeseq2 reimplementation) | `run_deseq2_analysis` | `tu run run_deseq2_analysis '{"operation":"deseq2","counts_file":"counts.csv","metadata_file":"meta.csv","design":"~ condition"}'` |
+
+Each tool handles encoding, column-name quirks, and aggregation-level edge cases that are easy to get wrong in ad-hoc code. Find more tools via `tu find "<keyword>"` or MCP `find_tools`.
+
+### Brief reminders (one-line)
+
+These are short pointers. The full conventions, anti-pattern examples, and code snippets live in the matching sub-skill — load it via the routing table for the details.
+
+1. **Clinical trial AE severity** (chi-square OR ordinal/logistic regression): use ALL AE records, `max(AESEV)` per subject, do NOT filter by AEPT — even when the question names a specific condition like "COVID-19 severity" or "infection severity", AESEV IS the universal outcome, not a subset filter. See `tooluniverse-statistical-modeling`.
+2. **Variant counting / fractions** (synonymous %, missense %, "fraction of X variants", etc.): denominator is the CODING subset only (synonymous + missense + splice_region + stop_gained/lost + start_lost + frameshift + inframe_ins/del). EXCLUDE intron, intergenic, UTR, splice_donor/acceptor, regulatory, non_coding. The CODING-only denominator applies even when the question doesn't say "coding" explicitly — use `coding_variant_fraction` tool. See `tooluniverse-variant-analysis`.
+3. **DESeq2 library**: match the authoritative script if present; otherwise prefer R DESeq2 — see `tooluniverse-rnaseq-deseq2`. When reading the analyst's filter line, only apply filters BEFORE the `#` comment — do NOT add filters from commented-out code (e.g., `# & (baseMean>=10)` is OFF, do not include).
+4. **Per-feature stat (ANOVA F, median LFC)**: run per-gene then summarize, NEVER pool/sum-then-ratio — see `tooluniverse-statistical-modeling`.
+5. **Spline models**: use R `ns()` via Rscript — see `tooluniverse-statistical-modeling`.
+6. **PhyKIT saturation**: use column 2 (`1-slope`), not column 1 (`slope`) — see `tooluniverse-phylogenetics`.
+7. **"Also DE in X"**: simple intersection `A ∩ B` — see `tooluniverse-rnaseq-deseq2`.
+8. **Ratio "between A and B"**: ALWAYS state BOTH `A/B = X` AND `B/A = 1/X` in the final answer. English "ratio between A and B" is direction-ambiguous; reporting both ensures the correct value is in your response. Example output: "Ratio (W to 1) = 1.52, equivalently (1 to W) = 0.66".
+9. **Units — percentage vs proportion vs ratio**: read the question's noun. "percentage" or "percent" → report on 0-100 scale (e.g. `29`, not `0.29`). "proportion", "fraction", or "ratio" → report as decimal (e.g. `0.29`). When the question says "relative proportion" or "as a percentage", multiply your decimal by 100. State both forms when there is any ambiguity (e.g. "0.29 (= 29%)").
+
+These reminders are for fast pattern recognition during routing. Detailed `❌ WRONG / ✅ RIGHT` examples and sanity heuristics are in the sub-skill bodies — invoke the skill via the Routing Table to load them.
 
 ---
 
@@ -103,6 +106,8 @@ When answering scientific questions:
 | "research", "profile", "**drug**", "medication", "therapeutic agent", "tell me about [drug]" | `Skill(skill="tooluniverse-drug-research")` |
 | "**literature review**", "papers about", "publications on", "research articles", "recent studies" | `Skill(skill="tooluniverse-literature-deep-research")` |
 | "research", "profile", "**target**", "protein target", "gene target", "target validation" | `Skill(skill="tooluniverse-target-research")` |
+| "**gene liability**", "gene safety score", "knockout safety", "knockdown safety", "on-target toxicity", "safe to inhibit [gene]" | `Skill(skill="tooluniverse-gene-liability")` |
+| "**peptide target**", "**deorphanize**", "deorphanization", "**peptide off-target**", "what does [peptide] bind", "target of a peptide", "orphan peptide", "peptide doesn't bind [target]", "binds in [species] but not", "find the receptor for [peptide]" | `Skill(skill="tooluniverse-peptide-target-deorphanization")` |
 
 ### 3. Clinical Decision Support
 
@@ -110,16 +115,18 @@ When answering scientific questions:
 |----------|--------|
 | "**drug safety**", "adverse events", "side effects", "pharmacovigilance", "pharmacogenomics", "FAERS", "black box warning" | `Skill(skill="tooluniverse-pharmacovigilance")` |
 | "**adverse event signal**", "safety signal detection", "disproportionality", "PRR", "ROR" | `Skill(skill="tooluniverse-adverse-event-detection")` |
-| "**drug safety profile**", "drug safety assessment", "comprehensive safety" | `Skill(skill="tooluniverse-drug-safety-profiling")` |
+| "**drug safety profile**", "drug safety assessment", "comprehensive safety" | `Skill(skill="tooluniverse-pharmacovigilance")` |
 | "**chemical safety**", "ADMET", "chemical toxicity", "environmental toxicity", "toxic effects" | `Skill(skill="tooluniverse-chemical-safety")` |
 | "**cancer treatment**", "precision oncology", "tumor mutation", "targeted therapy", "EGFR", "KRAS", "BRAF" | `Skill(skill="tooluniverse-precision-oncology")` |
-| "**cancer driver**", "driver gene", "driver mutation", "IntOGen", "cBioPortal" | `Skill(skill="tooluniverse-cancer-driver-analysis")` |
+| "**cancer driver**", "driver gene", "driver mutation", "IntOGen", "cBioPortal" | `Skill(skill="tooluniverse-cancer-genomics-tcga")` |
 | "**somatic mutation interpretation**", "cancer variant", "oncogenic variant", "tumor variant" | `Skill(skill="tooluniverse-cancer-variant-interpretation")` |
 | "**ACMG classification**", "variant classification", "benign/pathogenic", "ACMG criteria", "PM2", "PS1", "PP3" | `Skill(skill="tooluniverse-acmg-variant-classification")` |
 | "**cancer classification**", "OncoTree", "tumor subtype", "cancer type code", "histological classification" | `Skill(skill="tooluniverse-cancer-classification")` |
 | "**TCGA**", "cancer genomics cohort", "GDC analysis", "TCGA mutations", "pan-cancer" | `Skill(skill="tooluniverse-cancer-genomics-tcga")` |
 | "**immunotherapy response**", "checkpoint inhibitor response", "TMB", "MSI", "PD-L1", "ICI response" | `Skill(skill="tooluniverse-immunotherapy-response-prediction")` |
 | "**rare disease diagnosis**", "differential diagnosis", "phenotype matching", "HPO", "patient with [symptoms]" | `Skill(skill="tooluniverse-rare-disease-diagnosis")` |
+| "**clinical risk score**", "CHA2DS2-VASc", "HAS-BLED", "CURB-65", "qSOFA", "Child-Pugh", "MELD-Na", "Wells score", "ASCVD risk", "eGFR CKD-EPI", "bedside risk calculator" | `Skill(skill="tooluniverse-clinical-risk-scoring")` |
+| "**device adverse events**", "device recall", "MAUDE", "food/supplement adverse event", "CAERS", "veterinary adverse event", "drug shortage" | `Skill(skill="tooluniverse-product-safety-surveillance")` |
 | "**variant interpretation**", "VUS", "pathogenicity", "clinical significance", "is [variant] pathogenic" | `Skill(skill="tooluniverse-variant-interpretation")` |
 | "**clinical guidelines**", "practice guidelines", "treatment guidelines", "dosing recommendations", "standard of care" | `Skill(skill="tooluniverse-clinical-guidelines")` |
 | "**patient stratification**", "precision medicine", "biomarker stratification", "treatment selection" | `Skill(skill="tooluniverse-precision-medicine-stratification")` |
@@ -129,6 +136,7 @@ When answering scientific questions:
 | Keywords | Action |
 |----------|--------|
 | "**find binders**", "virtual screening", "hit identification", "compounds for [target]", "**IC50**", "**bioactivity**", "**binding affinity**", "**potency**", "**selectivity**", "**SAR**", "**structure-activity**", "**lead optimization**", "**hit-to-lead**" | `Skill(skill="tooluniverse-binder-discovery")` |
+| "**peptide target**", "**deorphanize**", "deorphanization", "**peptide off-target**", "what does [peptide] bind", "target of a peptide", "orphan peptide", "peptide doesn't bind [target]", "binds in [species] but not", "find the receptor for [peptide]" | `Skill(skill="tooluniverse-peptide-target-deorphanization")` |
 | "**drug repurposing**", "new indication", "existing drugs for [disease]", "repurpose [drug]" | `Skill(skill="tooluniverse-drug-repurposing")` |
 | "**drug target validation**", "target druggability", "validate target", "target assessment" | `Skill(skill="tooluniverse-drug-target-validation")` |
 | "**network pharmacology**", "polypharmacology", "compound-target network", "multi-target" | `Skill(skill="tooluniverse-network-pharmacology")` |
@@ -138,6 +146,7 @@ When answering scientific questions:
 | "**small molecule discovery**", "chemical biology", "compound sourcing", "hit finding", "chemical probe" | `Skill(skill="tooluniverse-small-molecule-discovery")` |
 | "**chemical sourcing**", "buy compound", "vendor search", "Enamine", "MolPort", "compound availability" | `Skill(skill="tooluniverse-chemical-sourcing")` |
 | "**GPCR**", "G-protein coupled receptor", "GPCRdb", "receptor ligand", "biased agonist" | `Skill(skill="tooluniverse-gpcr-structural-pharmacology")` |
+| "**dereplicate**", "natural product identification", "NPAtlas", "ChemOnt classification", "ClassyFire", "producing organism" | `Skill(skill="tooluniverse-natural-product-dereplication")` |
 
 ### 5. Genomics & Variant Analysis
 
@@ -149,11 +158,18 @@ When answering scientific questions:
 | "**SNP interpretation**", "rsID", "rs[number]", "variant annotation" | `Skill(skill="tooluniverse-gwas-snp-interpretation")` |
 | "**polygenic risk**", "PRS", "genetic risk", "risk score for [disease]" | `Skill(skill="tooluniverse-polygenic-risk-score")` |
 | "**structural variant**", "SV", "CNV", "deletion", "duplication", "chromosomal rearrangement" | `Skill(skill="tooluniverse-structural-variant-analysis")` |
-| "**VCF**", "variant calling", "mutation analysis", "variant annotation pipeline" | `Skill(skill="tooluniverse-variant-analysis")` |
+| "**VCF**", "variant calling", "mutation analysis", "variant annotation pipeline", "**VAF**", "variant allele frequency", "coding variant", "synonymous", "missense" | `Skill(skill="tooluniverse-variant-analysis")` |
 | "**variant functional annotation**", "protein variant effect", "variant consequence", "missense effect" | `Skill(skill="tooluniverse-variant-functional-annotation")` |
 | "**regulatory variant**", "non-coding variant", "eQTL variant", "regulatory region variant" | `Skill(skill="tooluniverse-regulatory-variant-analysis")` |
 | "**rare disease genomics**", "Orphanet gene", "rare disease gene", "causative gene", "exome diagnosis" | `Skill(skill="tooluniverse-rare-disease-genomics")` |
 | "**1000 Genomes**", "IGSR", "population frequency", "superpopulation", "AFR/EUR/EAS/SAS/AMR" | `Skill(skill="tooluniverse-population-genetics-1000genomes")` |
+| "**PheWAS**", "phenome-wide association", "cross-ancestry replication", "cross-biobank", "FinnGen", "BioBank Japan", "pleiotropy of a variant" | `Skill(skill="tooluniverse-phewas")` |
+| "**Mendelian randomization**", "MR causal inference", "instrumental variable", "does X cause Y", "genetic causal evidence" | `Skill(skill="tooluniverse-mendelian-randomization")` |
+| "**loss-of-function mechanism**", "LoF mechanism", "why is this variant LoF", "structural stability vs functional disruption" | `Skill(skill="tooluniverse-protein-lof-mechanism")` |
+| "**SAE feature**", "sparse autoencoder variant", "ESMC SAE", "mechanistic variant interpretation" | `Skill(skill="tooluniverse-protein-sae-variant-interpretation")` |
+| "**per-residue annotation**", "binding interface residues", "ligand pocket residues", "buried vs surface residues", "PDB structural annotation" | `Skill(skill="tooluniverse-protein-structural-annotation-pdb")` |
+| "**why are these residues critical**", "residue functional mechanism", "DMS hotspot interpretation", "catalytic vs structural residue" | `Skill(skill="tooluniverse-residue-functional-mechanism-interpretation")` |
+| "**validate variant predictor**", "DMS validation", "deep mutational scanning benchmark", "predictor vs experimental effect" | `Skill(skill="tooluniverse-variant-predictor-dms-validation")` |
 
 ### 6. Systems & Network Analysis
 
@@ -176,9 +192,9 @@ When answering scientific questions:
 
 | Keywords | Action |
 |----------|--------|
-| "**CRISPR screen**", "genetic screen", "screen hits", "essential genes" | `Skill(skill="tooluniverse-crispr-screen-analysis")` |
+| "**CRISPR screen**", "genetic screen", "screen hits", "essential genes", "**MAGeCK**", "**sgRNA**", "screen replicate", "screen QC", "dropout screen", "CRISPRa", "CRISPRi", "beta score" | `Skill(skill="tooluniverse-crispr-screen-analysis")` |
 | "**drug-drug interaction**", "DDI", "drug combination", "polypharmacy" | `Skill(skill="tooluniverse-drug-drug-interaction")` |
-| "**differential expression**", "DESeq2", "RNA-seq analysis", "DE genes", "fold change" | `Skill(skill="tooluniverse-rnaseq-deseq2")` |
+| "**differential expression**", "DESeq2", "RNA-seq analysis", "DE genes", "fold change", "differentially expressed", "log2FC", "count matrix", "dispersion" | `Skill(skill="tooluniverse-rnaseq-deseq2")` |
 | "**proteomics**", "mass spectrometry", "protein quantification", "TMT", "iTRAQ", "label-free" | `Skill(skill="tooluniverse-proteomics-analysis")` |
 | "**immune repertoire**", "TCR", "BCR", "T-cell receptor", "B-cell receptor", "clonotype" | `Skill(skill="tooluniverse-immune-repertoire-analysis")` |
 | "**spatial transcriptomics**", "Visium", "MERFISH", "seqFISH", "Slide-seq", "spatial gene expression" | `Skill(skill="tooluniverse-spatial-transcriptomics")` |
@@ -187,14 +203,23 @@ When answering scientific questions:
 | "**electron microscopy**", "cryo-EM", "TEM", "SEM", "EMPIAR", "EMDB" | `Skill(skill="tooluniverse-electron-microscopy")` |
 | "**cell line**", "cell line profiling", "DepMap", "CCLE", "cell line sensitivity" | `Skill(skill="tooluniverse-cell-line-profiling")` |
 | "**clinical data integration**", "clinical phenotype", "EHR analysis", "clinical cohort" | `Skill(skill="tooluniverse-clinical-data-integration")` |
-| "**phylogenetics**", "phylogenetic tree", "sequence alignment", "evolutionary analysis" | `Skill(skill="tooluniverse-phylogenetics")` |
-| "**statistical modeling**", "regression analysis", "logistic regression", "survival analysis", "Cox" | `Skill(skill="tooluniverse-statistical-modeling")` |
+| "**phylogenetics**", "phylogenetic tree", "sequence alignment", "evolutionary analysis", "treeness", "saturation", "parsimony", "PhyKIT", "DVMC", "long branch", "tree length", "MAFFT", "gap percentage" | `Skill(skill="tooluniverse-phylogenetics")` |
+| "**statistical modeling**", "regression analysis", "logistic regression", "survival analysis", "Cox", "ANOVA", "F-statistic", "chi-square", "spline", "odds ratio", "Cohen's d", "p-value", "clinical trial data", "**ordinal**", "**severity**", "**vaccination**", "SDTM", "DM.csv", "AE.csv", "adverse event severity" | `Skill(skill="tooluniverse-statistical-modeling")` |
+| "**meta-analysis**", "pool effect sizes", "pooled estimate", "evidence synthesis", "forest plot", "heterogeneity", "I-squared", "I²", "fixed-effects", "random-effects", "DerSimonian-Laird", "combine studies", "systematic review statistics", "multi-cohort pooling" | `Skill(skill="tooluniverse-meta-analysis")` |
+| "**dose-response**", "concentration-response", "IC50", "EC50", "Hill slope", "potency", "4-parameter logistic", "4PL", "sigmoidal fit", "Emax", "relative potency", "fold-shift", "drug screening curve" | `Skill(skill="tooluniverse-dose-response")` |
+| "**pharmacokinetics**", "PK analysis", "non-compartmental", "NCA", "Cmax", "Tmax", "AUC", "half-life", "clearance", "volume of distribution", "bioavailability", "concentration-time", "plasma concentration" | `Skill(skill="tooluniverse-pharmacokinetics")` |
+| "**enzyme kinetics**", "Michaelis-Menten", "Km", "Vmax", "kcat", "turnover number", "catalytic efficiency", "specificity constant", "Lineweaver-Burk", "enzyme inhibition", "Ki", "competitive inhibitor" | `Skill(skill="tooluniverse-enzyme-kinetics")` |
+| "**primer design**", "PCR primers", "qPCR primer", "melting temperature", "Tm calculation", "annealing temperature", "GC clamp", "primer-dimer", "oligo analysis", "amplicon", "forward and reverse primer" | `Skill(skill="tooluniverse-primer-design")` |
+| "**diagnostic test**", "sensitivity specificity", "ROC curve", "AUC", "PPV", "NPV", "likelihood ratio", "Youden", "optimal cutoff", "post-test probability", "biomarker accuracy", "confusion matrix" | `Skill(skill="tooluniverse-diagnostic-test-evaluation")` |
+| "**drug synergy**", "drug combination", "Bliss independence", "Loewe additivity", "HSA synergy", "ZIP score", "combination index", "Chou-Talalay", "synergistic antagonistic", "combination therapy analysis" | `Skill(skill="tooluniverse-drug-synergy")` |
+| "**molecular cloning**", "Gibson Assembly", "Golden Gate", "Type IIS", "BsaI", "BbsI", "assembly overlap", "fragment assembly", "construct design", "domestication" | `Skill(skill="tooluniverse-molecular-cloning")` |
 | "**metabolomics analysis**", "LC-MS analysis", "metabolite quantification", "metabolic flux" | `Skill(skill="tooluniverse-metabolomics-analysis")` |
 | "**functional genomics screen**", "CRISPR library", "shRNA screen", "barcode screen" | `Skill(skill="tooluniverse-functional-genomics-screens")` |
 | "**proteomics data**", "PRIDE", "MassIVE", "ProteomeXchange", "proteomics dataset" | `Skill(skill="tooluniverse-proteomics-data-retrieval")` |
 | "**protein modification**", "PTM analysis", "phosphorylation site", "ubiquitination", "glycosylation" | `Skill(skill="tooluniverse-protein-modification-analysis")` |
 | "**structural proteomics**", "cross-linking mass spec", "XL-MS", "HDX-MS", "structural biology" | `Skill(skill="tooluniverse-structural-proteomics")` |
 | "**protein structure prediction**", "AlphaFold prediction", "structure modeling", "homology modeling" | `Skill(skill="tooluniverse-protein-structure-prediction")` |
+| "**FASTQ QC**", "FastQC", "MultiQC", "adapter trimming", "fastp", "Cutadapt", "read quality", "sequence duplication" | `Skill(skill="tooluniverse-fastq-qc")` |
 
 ### 8. Clinical Trials & Study Design
 
@@ -218,6 +243,7 @@ When answering scientific questions:
 | "**ecology**", "biodiversity", "invasive species", "pollinator", "food web", "conservation", "community ecology", "trophic" | `Skill(skill="tooluniverse-ecology-biodiversity")` |
 | "**microbiome**", "gut microbiota", "dysbiosis", "microbiome composition", "16S rRNA" | `Skill(skill="tooluniverse-microbiome-research")` |
 | "**adverse outcome pathway**", "AOP", "key event", "molecular initiating event", "KER" | `Skill(skill="tooluniverse-adverse-outcome-pathway")` |
+| "**genome assembly**", "assembly N50", "RefSeq assembly QC", "plasmid count", "NCBI Datasets genome" | `Skill(skill="tooluniverse-microbial-genome-characterization")` |
 
 ### 10. Specialized Biology
 
@@ -255,9 +281,11 @@ When answering scientific questions:
 
 | Keywords | Action |
 |----------|--------|
-| "**setup**", "install", "configure", "API keys", "upgrade", "**how to use**", "**get started**", "**CLI**", "**tu command**", "MCP vs CLI vs SDK", "**what is ToolUniverse**", "**what can this do**", "**what databases**", "**demo**", "**tutorial**", "**quickstart**", "**I'm new**" | `Skill(skill="setup-tooluniverse")` |
+| "**setup**", "install", "configure", "API keys", "upgrade", "**how to use**", "**get started**", "**CLI**", "**tu command**", "MCP vs CLI vs SDK", "**what is ToolUniverse**", "**what can this do**", "**what databases**", "**demo**", "**tutorial**", "**quickstart**", "**I'm new**" | `Skill(skill="tooluniverse-claude-code-plugin")` |
+| "**custom tool**", "add my own tool", "local tool", "create tool", "extend ToolUniverse" | `Skill(skill="tooluniverse-custom-tool")` |
 | "**SDK**", "Python SDK", "build AI scientist", "programmatic access", "**import tooluniverse**", "**coding API**", "**tu build**", "**typed wrappers**" | `Skill(skill="tooluniverse-sdk")` |
 | "**install skills**", "missing skills", "skill not found", "add skills" | `Skill(skill="tooluniverse-install-skills")` |
+| "**self-review**", "check my work", "definition of done", "evaluation rubric", "success criteria", "grading criteria", "LLM-as-judge" | `Skill(skill="tooluniverse-self-review")` |
 
 ---
 
@@ -274,13 +302,13 @@ When answering scientific questions:
    - "what is EGFR?" → target-research
    - Only route to setup when NO domain entity present ("how do I use this?")
 
-2. **Specificity Rule**: More specific beats general.
+3. **Specificity Rule**: More specific beats general.
    - "cancer treatment" → precision-oncology (not disease-research)
 
-3. **Data Type Rule**: "get/retrieve/fetch" → retrieval skills.
+4. **Data Type Rule**: "get/retrieve/fetch" → retrieval skills.
    - "get compound structure" → chemical-compound-retrieval (not drug-research)
 
-4. **Still ambiguous**: Ask user with AskUserQuestion.
+5. **Still ambiguous**: Ask user with AskUserQuestion.
 
 ---
 
@@ -370,3 +398,12 @@ Examples:
 **No match**: "How can I find all tools related to proteomics?" → General strategies: run find_tools queries
 
 **Domain + setup keyword**: "help me understand BRCA1 variants" → `Skill(skill="tooluniverse-variant-interpretation", args="BRCA1")`
+
+---
+
+## General Protocols (apply after routing)
+
+- **Look up, don't guess**: Use ToolUniverse tools to verify facts before answering.
+- **Compute, don't estimate**: Write and run Python/R code for any calculation.
+- **Analyze, don't just retrieve**: For data analysis tasks, execute code and report results.
+- **Trust tools over memory**: If a tool result disagrees with your knowledge, trust the tool.

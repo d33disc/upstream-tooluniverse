@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-protein-therapeutic-design
-description: Design novel protein therapeutics (binders, enzymes, scaffolds) using AI-guided de novo design. Uses RFdiffusion for backbone generation, ProteinMPNN for sequence design, ESMFold/AlphaFold2 for validation. Use when asked to design protein binders, therapeutic proteins, or engineer protein function.
+description: AI-guided de novo protein design — RFdiffusion backbone generation, ProteinMPNN sequence design, structure validation (pLDDT, pTM, MPNN scores). Use for designing therapeutic protein binders, novel scaffolds, enzyme variants, and miniprotein/protein-interface design before experimental validation.
+disable-model-invocation: true
 ---
 
 # Therapeutic Protein Designer
@@ -76,20 +77,20 @@ Every design MUST include: Sequence, Length, Target, Method, and Quality Metrics
 
 | Tool | Purpose | Key Parameter |
 |------|---------|---------------|
-| `NvidiaNIM_rfdiffusion` | Backbone generation | `diffusion_steps` (NOT `num_steps`) |
-| `NvidiaNIM_proteinmpnn` | Sequence design | `pdb_string` (NOT `pdb`) |
+| `NvidiaNIM_rfdiffusion` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | Backbone generation | `diffusion_steps` (NOT `num_steps`) |
+| `NvidiaNIM_proteinmpnn` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | Sequence design | `pdb_string` (NOT `pdb`) |
 | `ESMFold_predict_structure` | Fast validation | `sequence` (NOT `seq`) |
-| `NvidiaNIM_alphafold2` | High-accuracy validation | `sequence`, `algorithm` |
-| `NvidiaNIM_esm2_650m` | Sequence embeddings | `sequences`, `format` |
+| `NvidiaNIM_alphafold2` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | High-accuracy structure inference from sequence | `sequence`, `algorithm` |
+| `NvidiaNIM_esm2_650m` *(requires NVIDIA_API_KEY env var; free key at build.nvidia.com)* | Sequence embeddings | `sequences`, `format` |
 
 ### Common Parameter Mistakes
 
 | Tool | Wrong | Correct |
 |------|-------|---------|
-| `NvidiaNIM_rfdiffusion` | `num_steps=50` | `diffusion_steps=50` |
-| `NvidiaNIM_proteinmpnn` | `pdb=content` | `pdb_string=content` |
+| `NvidiaNIM_rfdiffusion` *(requires NVIDIA_API_KEY)* | `num_steps=50` | `diffusion_steps=50` |
+| `NvidiaNIM_proteinmpnn` *(requires NVIDIA_API_KEY)* | `pdb=content` | `pdb_string=content` |
 | `ESMFold_predict_structure` | `seq="MVLS..."` | `sequence="MVLS..."` |
-| `NvidiaNIM_alphafold2` | `seq="MVLS..."` | `sequence="MVLS..."` |
+| `NvidiaNIM_alphafold2` *(requires NVIDIA_API_KEY)* | `seq="MVLS..."` | `sequence="MVLS..."` |
 
 ### NVIDIA NIM Requirements
 - **API Key**: `NVIDIA_API_KEY` environment variable required
@@ -105,8 +106,8 @@ Every design MUST include: Sequence, Length, Target, Method, and Quality Metrics
 | `PDBe_get_uniprot_mappings` | Find PDB structures | `uniprot_id` |
 | `RCSBData_get_entry` | Download PDB file | `pdb_id` |
 | `alphafold_get_prediction` | Get AlphaFold DB structure | `accession` |
-| `emdb_search` | Search cryo-EM maps | `query` |
-| `emdb_get_entry` | Get entry details | `entry_id` |
+| `EMDB_search_structures` | Search cryo-EM maps | `query` |
+| `EMDB_get_structure` | Get entry details | `entry_id` |
 | `UniProt_get_entry_by_accession` | Get target sequence | `accession` |
 | `InterPro_get_protein_domains` | Get domains | `accession` |
 

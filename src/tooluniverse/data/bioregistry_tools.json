@@ -20,25 +20,30 @@
           "description": "Database identifier (e.g., 'P04637' for UniProt, '17234' for ChEBI, '0006915' for GO)"
         }
       },
-      "required": [
-        "prefix",
-        "identifier"
-      ]
+      "required": ["prefix", "identifier"]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "prefix": {
+        "status": {
           "type": "string"
         },
-        "identifier": {
-          "type": "string"
-        },
-        "providers": {
-          "type": "object"
-        },
-        "provider_count": {
-          "type": "integer"
+        "data": {
+          "type": "object",
+          "properties": {
+            "prefix": {
+              "type": "string"
+            },
+            "identifier": {
+              "type": "string"
+            },
+            "providers": {
+              "type": "object"
+            },
+            "provider_count": {
+              "type": "integer"
+            }
+          }
         }
       }
     },
@@ -70,33 +75,39 @@
           "description": "Bioregistry prefix (e.g., 'uniprot', 'chebi', 'go', 'pdb', 'ensembl', 'hgnc', 'pubmed')"
         }
       },
-      "required": [
-        "prefix"
-      ]
+      "required": ["prefix"]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "prefix": {
+        "status": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "homepage": {
-          "type": "string"
-        },
-        "pattern": {
-          "type": "string"
-        },
-        "uri_format": {
-          "type": "string"
-        },
-        "example": {
-          "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "prefix": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "homepage": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "string"
+            },
+            "uri_format": {
+              "type": "string"
+            },
+            "example": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -104,6 +115,61 @@
       {
         "prefix": "uniprot"
       },
+      {
+        "prefix": "chebi"
+      }
+    ]
+  },
+  {
+    "name": "Bioregistry_get_prefix_mappings",
+    "description": "Get cross-registry prefix mappings for a Bioregistry prefix. Maps a prefix (e.g. 'chebi', 'go', 'mondo') to its equivalent prefix/identifier in other registries: OBO Foundry, MIRIAM/identifiers.org, OLS, Name-to-Thing (N2T), BioPortal, FAIRsharing, BioContext, AberOWL, BARTOC, Wikidata, and more. Use this to translate a registry prefix between metadata systems (distinct from resolve_reference, which maps a specific data identifier to provider URLs). The standard Bioregistry_get_registry tool omits these mappings.",
+    "type": "BioregistryTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_prefix_mappings",
+          "description": "Operation type (fixed: get_prefix_mappings)"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Bioregistry prefix (e.g., 'chebi', 'go', 'mondo', 'uniprot', 'hgnc')"
+        }
+      },
+      "required": ["prefix"]
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "Success: the `data` payload with cross-registry prefix mappings.",
+          "properties": {
+            "prefix": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "mappings": {
+              "type": "object"
+            }
+          },
+          "required": ["prefix", "mappings"]
+        },
+        {
+          "type": "object",
+          "description": "Error: run() returns {status: error, error: <message>} with no data payload.",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    },
+    "test_examples": [
       {
         "prefix": "chebi"
       }
@@ -131,35 +197,41 @@
           "default": 10
         }
       },
-      "required": [
-        "query"
-      ]
+      "required": ["query"]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "query": {
+        "status": {
           "type": "string"
         },
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "prefix": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "prefix": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
               }
+            },
+            "total": {
+              "type": "integer"
             }
           }
-        },
-        "total": {
-          "type": "integer"
         }
       }
     },

@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-data-wrangling
-description: Universal data access reference for scientific research. Teaches how to download bulk data, parse any scientific file format (VCF, h5ad, mzML, PDB, FASTA, XPT, NIfTI, and 30+ more), paginate REST APIs, and handle authentication. Covers 24 domain API patterns across ALL life science data sources — genomics, proteomics, clinical, imaging, ecology, and more. Use this skill whenever you need to download raw data, parse a file format, access a bulk API, write a multi-step data retrieval workflow, or when a ToolUniverse tool returns metadata but you need the actual data. Also use when the data source has no ToolUniverse tool at all. Even if the user doesn't say "data wrangling" — if their task requires getting data from a scientific database or parsing a scientific file format, this is the skill to use.
+description: Universal data access patterns for downloading and parsing scientific data when ToolUniverse tools don't cover the source, only return metadata, or you need bulk records. Use for VCF/h5ad/BAM/SDF/GCT parsing, multi-step API workflows (search to filter to download to parse), thousands of records at once, or sources with no dedicated tool. Write Python code via Bash for every step.
+disable-model-invocation: true
 ---
 
 # Data Wrangling: Universal Access Patterns
@@ -158,7 +159,7 @@ with tarfile.open("archive.tar.gz") as t:                     # tar.gz
 Each category shows: which ToolUniverse tools exist, and how to go beyond them with direct API calls.
 
 ### 1. NCBI E-utilities (Gene, Nucleotide, Protein, SRA, GEO)
-Tools: `NCBI_search_gene`, `NCBI_search_nucleotide`, `SRA_search_runs`, `GEO_search_datasets`
+Tools: `NCBIGene_search`, `NCBI_search_nucleotide`, `SRA_search_experiments`, `geo_search_datasets`
 ```python
 import requests
 base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
@@ -226,7 +227,7 @@ props = requests.get(url).json()["PropertyTable"]["Properties"]
 ```
 
 ### 7. Expression (GEO, ArrayExpress, GTEx)
-Tools: `GEO_search_datasets`, `ArrayExpress_search`
+Tools: `geo_search_datasets`, `arrayexpress_search_experiments`
 ```python
 # GEO series matrix direct download
 geo_id = "GSE12345"

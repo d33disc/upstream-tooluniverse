@@ -1,11 +1,12 @@
 ---
 name: tooluniverse-gwas-snp-interpretation
-description: Interpret genetic variants (SNPs) from GWAS studies by aggregating evidence from multiple databases (GWAS Catalog, Open Targets Genetics, ClinVar). Retrieves variant annotations, GWAS trait associations, fine-mapping evidence, locus-to-gene predictions, and clinical significance. Use when asked to interpret a SNP by rsID, find disease associations for a variant, assess clinical significance, or answer questions like "What diseases is rs429358 associated with?" or "Interpret rs7903146".
+description: Interpret a single GWAS SNP across multiple databases — GWAS Catalog hits, LD/haplotype context, eQTL evidence, regulatory annotation, ClinVar pathogenicity, gnomAD frequency. Use for 'what does this SNP do', SNP-to-mechanism tracing, and resolving lead-SNP-vs-causal-variant ambiguity. Always considers LD structure before claiming a SNP is mechanistically responsible.
+disable-model-invocation: true
 ---
 
 # GWAS SNP Interpretation Skill
 
-**SNP interpretation**: a GWAS hit is a REGION, not a single causal variant. The lead SNP may not be causal — it may be in LD with the causal variant. Always check LD structure and functional annotation before concluding a specific SNP is mechanistically responsible. Fine-mapping (SuSiE, FINEMAP credible sets) narrows the causal set but rarely identifies a single variant with certainty. L2G scores integrate eQTL, chromatin interaction, and distance data to predict the causal gene — a lead SNP mapping to gene A may actually regulate gene B 500 kb away via a distal enhancer.
+**SNP interpretation**: a GWAS hit is a REGION, not a single causal variant. The lead SNP may not be causal — it may be in LD with the causal variant. Always check LD structure and functional annotation before concluding a specific SNP is mechanistically responsible. Use `LDlink_get_proxies(variant="rs...", population="EUR")` to retrieve the high-R² LD proxies (needs a free LDLINK_TOKEN) — a proxy in a coding/regulatory region is a better mechanistic candidate than the lead SNP itself. Fine-mapping (SuSiE, FINEMAP credible sets) narrows the causal set but rarely identifies a single variant with certainty. L2G scores integrate eQTL, chromatin interaction, and distance data to predict the causal gene — a lead SNP mapping to gene A may actually regulate gene B 500 kb away via a distal enhancer.
 
 **LOOK UP DON'T GUESS**: never assume a SNP's functional consequence, mapped gene, or population frequency — always call `gwas_get_snp_by_id` and `OpenTargets_get_variant_info` to retrieve current annotations.
 

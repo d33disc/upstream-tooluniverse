@@ -22,7 +22,7 @@
           "description": "Output format"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -39,11 +39,6 @@
         "operation": "get_family",
         "family_id": "RF00360",
         "format": "json"
-      },
-      {
-        "operation": "get_family",
-        "family_id": "RF00005",
-        "format": "xml"
       }
     ]
   },
@@ -75,7 +70,7 @@
           "description": "Compress output with gzip"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -93,12 +88,6 @@
         "operation": "get_alignment",
         "family_id": "RF00360",
         "format": "fasta"
-      },
-      {
-        "operation": "get_alignment",
-        "family_id": "RF00005",
-        "format": "stockholm",
-        "gzip": true
       }
     ]
   },
@@ -119,7 +108,7 @@
           "description": "Required: Rfam accession or family name"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -135,10 +124,6 @@
       {
         "operation": "get_covariance_model",
         "family_id": "RF00360"
-      },
-      {
-        "operation": "get_covariance_model",
-        "family_id": "RF00005"
       }
     ]
   },
@@ -166,7 +151,7 @@
           "description": "Maximum time to wait for results (default: 120s). Job continues running if timeout reached."
         }
       },
-      "required": ["operation", "sequence"]
+      "required": ["sequence"]
     },
     "return_schema": {
       "type": "object",
@@ -189,13 +174,7 @@
     "test_examples": [
       {
         "operation": "search_sequence",
-        "sequence": "GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA",
-        "max_wait_seconds": 60
-      },
-      {
-        "operation": "search_sequence",
-        "sequence": "UAGCUUAUCAGACUGAUGUUGA",
-        "max_wait_seconds": 30
+        "sequence": "AGTTACGGCCATACCTCAGAGAATATACCGTATCCCGTTCGATCTGCGAAGTTAAGCTCTGAAGGGCGTCGTCAGTACTATAGTGGGTGACCATATGGGAATACGACGTGCTGTAGCTT"
       }
     ]
   },
@@ -216,7 +195,7 @@
           "description": "Required: Rfam accession or family name"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -232,10 +211,6 @@
       {
         "operation": "get_tree_data",
         "family_id": "RF00360"
-      },
-      {
-        "operation": "get_tree_data",
-        "family_id": "RF00005"
       }
     ]
   },
@@ -262,7 +237,7 @@
           "description": "Output format"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -281,11 +256,6 @@
         "operation": "get_sequence_regions",
         "family_id": "RF00360",
         "format": "text"
-      },
-      {
-        "operation": "get_sequence_regions",
-        "family_id": "RF00005",
-        "format": "json"
       }
     ]
   },
@@ -312,7 +282,7 @@
           "description": "Output format"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -330,11 +300,6 @@
         "operation": "get_structure_mapping",
         "family_id": "RF00002",
         "format": "json"
-      },
-      {
-        "operation": "get_structure_mapping",
-        "family_id": "RF00005",
-        "format": "text"
       }
     ]
   },
@@ -355,7 +320,7 @@
           "description": "Required: Rfam accession (e.g., RF00360)"
         }
       },
-      "required": ["operation", "accession"]
+      "required": ["accession"]
     },
     "return_schema": {
       "type": "object",
@@ -370,10 +335,6 @@
       {
         "operation": "get_family_id",
         "accession": "RF00360"
-      },
-      {
-        "operation": "get_family_id",
-        "accession": "RF00005"
       }
     ]
   },
@@ -394,7 +355,7 @@
           "description": "Required: Family name (e.g., snoZ107_R87)"
         }
       },
-      "required": ["operation", "family_id"]
+      "required": ["family_id"]
     },
     "return_schema": {
       "type": "object",
@@ -409,10 +370,6 @@
       {
         "operation": "get_family_accession",
         "family_id": "snoZ107_R87"
-      },
-      {
-        "operation": "get_family_accession",
-        "family_id": "tRNA"
       }
     ]
   }

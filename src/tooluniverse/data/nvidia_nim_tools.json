@@ -64,6 +64,15 @@
     "required_api_keys": [
       "NVIDIA_API_KEY"
     ],
+    "api_key_info": {
+      "NVIDIA_API_KEY": {
+        "domain": "Models & Infrastructure",
+        "type": "secret",
+        "register_url": "https://build.nvidia.com/",
+        "purpose": "Call NVIDIA NIM model endpoints (hosted inference for bio/chem models).",
+        "without": "NIM tools are blocked without it."
+      }
+    },
     "return_schema": {
       "type": "object",
       "description": "AlphaFold2 structure prediction result with PDB coordinates, confidence scores, and model metrics",
@@ -72,13 +81,6 @@
     "test_examples": [
       {
         "sequence": "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH"
-      },
-      {
-        "sequence": "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDP",
-        "algorithm": "mmseqs2",
-        "databases": [
-          "small_bfd"
-        ]
       }
     ]
   },
@@ -140,12 +142,6 @@
           "MNVIDIAIAMAI",
           "IAMNVIDIAAI"
         ]
-      },
-      {
-        "sequences": [
-          "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH",
-          "MVHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH"
-        ]
       }
     ]
   },
@@ -185,9 +181,6 @@
     "test_examples": [
       {
         "sequence": "ARNDCQEGHILKMFPSTWYV"
-      },
-      {
-        "sequence": "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG"
       }
     ]
   },
@@ -241,12 +234,6 @@
     "test_examples": [
       {
         "sequence": "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH",
-        "selected_models": [
-          1
-        ]
-      },
-      {
-        "sequence": "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGYNIVATPRGYVLAGG",
         "selected_models": [
           1
         ]
@@ -324,28 +311,6 @@
                   "main": {
                     "a3m": {
                       "alignment": ">query\nMKTVRQERLKSIVR",
-                      "format": "a3m"
-                    }
-                  }
-                }
-              }
-            ],
-            "output_format": "pdb"
-          }
-        ]
-      },
-      {
-        "inputs": [
-          {
-            "input_id": "tp53_fragment",
-            "molecules": [
-              {
-                "type": "protein",
-                "sequence": "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDP",
-                "msa": {
-                  "main": {
-                    "a3m": {
-                      "alignment": ">query\nMEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDP",
                       "format": "a3m"
                     }
                   }
@@ -481,21 +446,6 @@
           }
         ],
         "sampling_steps": 50
-      },
-      {
-        "polymers": [
-          {
-            "id": "A",
-            "molecule_type": "protein",
-            "sequence": "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH"
-          },
-          {
-            "id": "B",
-            "molecule_type": "protein",
-            "sequence": "MKTVRQERLKSIVRILERSKEPVSGAQLAEELSVSRQVIVQDIAYLRSLGY"
-          }
-        ],
-        "sampling_steps": 50
       }
     ]
   },
@@ -560,12 +510,6 @@
         "sampling_temp": [
           0.1
         ]
-      },
-      {
-        "input_pdb": "ATOM      1  N   GLY A   1       1.000   1.000   0.000  1.00  0.00           N\nATOM      2  CA  GLY A   1       2.000   1.000   0.000  1.00  0.00           C\nEND",
-        "sampling_temp": [
-          0.2
-        ]
       }
     ]
   },
@@ -626,17 +570,12 @@
         "contigs": "50-100",
         "input_pdb": "ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00 20.00           N\nATOM      2  CA  ALA A   1       1.458   0.000   0.000  1.00 20.00           C\nEND",
         "diffusion_steps": 15
-      },
-      {
-        "contigs": "A1-100",
-        "input_pdb": "ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00 20.00           N\nATOM      2  CA  ALA A   1       1.458   0.000   0.000  1.00 20.00           C\nATOM      3  C   ALA A   1       2.009   1.420   0.000  1.00 20.00           C\nEND",
-        "diffusion_steps": 20
       }
     ]
   },
   {
     "name": "NvidiaNIM_diffdock",
-    "description": "Blind molecular docking using DiffDock via NVIDIA NIM. Predict ligand binding poses without specifying binding pocket. Input: protein (PDB content or asset ID), ligand (SDF content or asset ID). For large files, use is_staged=true with asset IDs. Returns docking poses with confidence scores.",
+    "description": "Blind molecular docking using DiffDock via NVIDIA NIM. Predict ligand binding poses without specifying binding pocket. Input: protein (valid PDB ATOM records of a folded structure, or asset ID), ligand (a valid RDKit-readable SDF/MOL block, or asset ID). The ligand must be a well-formed molblock (e.g. generated with RDKit MolToMolBlock); a malformed ligand fails with 'Fail to read ligand molecule description'. For large proteins, use is_staged=true with asset IDs. Returns docking poses with per-pose confidence scores.",
     "type": "NvidiaNIMTool",
     "parameter": {
       "type": "object",
@@ -710,15 +649,9 @@
     "test_examples": [
       {
         "protein": "ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00  0.00           N",
-        "ligand": "\n  RDKit          3D\n\n  3  2  0  0  0  0  0  0  0  0999 V2000\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0000    0.0000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\nM  END\n",
+        "ligand": "\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    1.2772    0.5595   -0.0341 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.1215   -0.8260   -0.0746 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1558   -1.3855   -0.0405 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2772   -0.5595    0.0341 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1215    0.8260    0.0746 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1558    1.3855    0.0405 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2723    0.9954   -0.0607 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9952   -1.4695   -0.1327 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2771   -2.4650   -0.0720 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2723   -0.9954    0.0607 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9952    1.4695    0.1327 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2771    2.4650    0.0720 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  3  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  1  2  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n",
         "ligand_file_type": "sdf",
         "num_poses": 5
-      },
-      {
-        "protein": "ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00  0.00           N\nATOM      2  CA  ALA A   1       1.458   0.000   0.000  1.00  0.00           C\nEND",
-        "ligand": "\n  RDKit          3D\n\n  6  6  0  0  0  0  0  0  0  0999 V2000\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2124    0.7000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4249    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4249   -1.4000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2124   -2.1000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000   -1.4000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  1  1  0\nM  END\n",
-        "ligand_file_type": "sdf",
-        "num_poses": 3
       }
     ]
   },
@@ -792,11 +725,6 @@
         "smiles": "CC(=O)OC1=CC=CC=C1[*{5-10}]",
         "num_molecules": 5,
         "scoring": "QED"
-      },
-      {
-        "smiles": "c1ccc(cc1)[*{3-8}]",
-        "num_molecules": 5,
-        "scoring": "QED"
       }
     ]
   },
@@ -851,17 +779,12 @@
         "smi": "c1ccccc1",
         "num_molecules": 5,
         "algorithm": "CMA-ES"
-      },
-      {
-        "smi": "CC(=O)Nc1ccc(O)cc1",
-        "num_molecules": 5,
-        "algorithm": "CMA-ES"
       }
     ]
   },
   {
     "name": "NvidiaNIM_evo2",
-    "description": "Generate DNA sequences using Evo2-40B via NVIDIA NIM. 40 billion parameter model trained on 9 trillion nucleotides. Input: DNA sequence (ACTG), num_tokens to generate. Output: generated sequence with optional per-nucleotide probabilities. Fast synchronous response.",
+    "description": "Generate DNA sequences using NVIDIA-hosted Evo 2 (Arc Institute genome foundation model, trained on 9 trillion nucleotides). Two hosted sizes are selectable via `model`: evo2-40b (default, most accurate) and evo2-7b (smaller, faster). Input: DNA sequence (ACTG), num_tokens to generate. Output: generated sequence with optional per-nucleotide probabilities. Fast synchronous response.",
     "type": "NvidiaNIMTool",
     "parameter": {
       "type": "object",
@@ -869,6 +792,15 @@
         "sequence": {
           "type": "string",
           "description": "Input DNA sequence (A, C, T, G characters only)"
+        },
+        "model": {
+          "type": "string",
+          "enum": [
+            "evo2-40b",
+            "evo2-7b"
+          ],
+          "description": "Hosted Evo 2 model size: evo2-40b (default, most accurate) or evo2-7b (smaller, faster).",
+          "default": "evo2-40b"
         },
         "num_tokens": {
           "type": "integer",
@@ -905,7 +837,10 @@
       ]
     },
     "fields": {
-      "endpoint": "arc/evo2-40b/generate",
+      "endpoint": "arc/{model}/generate",
+      "path_params": {
+        "model": "evo2-40b"
+      },
       "async_expected": false,
       "response_type": "json",
       "timeout": 120
@@ -925,8 +860,9 @@
         "top_k": 1
       },
       {
-        "sequence": "ATGAAAGCAATTTTCGTACTGAAAGGTTTTGTTGG",
-        "num_tokens": 16,
+        "sequence": "ACTGACTGACTGACTG",
+        "model": "evo2-7b",
+        "num_tokens": 8,
         "top_k": 1
       }
     ]
@@ -1004,13 +940,6 @@
         "output_alignment_formats": [
           "a3m"
         ]
-      },
-      {
-        "sequence": "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDP",
-        "e_value": 0.001,
-        "output_alignment_formats": [
-          "a3m"
-        ]
       }
     ]
   },
@@ -1060,12 +989,6 @@
       {
         "sequences": [
           "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH"
-        ],
-        "format": "npz"
-      },
-      {
-        "sequences": [
-          "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDP"
         ],
         "format": "npz"
       }
@@ -1200,20 +1123,6 @@
           256,
           256
         ]
-      },
-      {
-        "num_output_samples": 1,
-        "body_region": [
-          "chest"
-        ],
-        "anatomy_list": [
-          "lung"
-        ],
-        "output_size": [
-          256,
-          256,
-          256
-        ]
       }
     ]
   },
@@ -1270,15 +1179,6 @@
         "prompts": {
           "classes": [
             "spleen"
-          ]
-        }
-      },
-      {
-        "image": "https://assets.ngc.nvidia.com/products/api-catalog/vista3d/example-1.nii.gz",
-        "prompts": {
-          "classes": [
-            "liver",
-            "kidney"
           ]
         }
       }

@@ -32,10 +32,75 @@
       "additionalProperties": false
     },
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "full_name": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "design": {
+                "type": "string"
+              },
+              "sample_size": {
+                "type": "integer"
+              },
+              "sample_size_note": {
+                "type": "string"
+              },
+              "age_range": {
+                "type": "string"
+              },
+              "start_year": {
+                "type": "integer"
+              },
+              "waves_or_follow_up": {
+                "type": "string"
+              },
+              "key_variable_categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "access_method": {
+                "type": "string"
+              },
+              "access_url": {
+                "type": "string"
+              },
+              "key_publications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     },
     "test_examples": [
       {"query": "iron intake longitudinal"},

@@ -10,14 +10,26 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List, Tuple
 
 
+# Keyword-only parameters the generator injects into every wrapper signature.
+# A tool whose own parameter sanitizes to one of these would otherwise emit a
+# duplicate argument (e.g. "duplicate argument 'use_cache'") — a hard
+# SyntaxError that breaks importing the entire tools package.
+_INJECTED_PARAM_NAMES = frozenset({"stream_callback", "use_cache", "validate"})
+
+
 def sanitize_param_name(name: str) -> str:
     """Convert an API parameter name to a valid Python identifier.
 
     Handles dots (query.cond -> query_cond), hyphens (from-date -> from_date),
-    and Python reserved keywords (for -> for_, in -> in_).
+    Python reserved keywords (for -> for_, in -> in_), and collisions with the
+    generator's injected keyword-only params (use_cache -> use_cache_).
     """
     sanitized = re.sub(r"[.\-]", "_", name)
-    if keyword.iskeyword(sanitized) or keyword.issoftkeyword(sanitized):
+    if (
+        keyword.iskeyword(sanitized)
+        or keyword.issoftkeyword(sanitized)
+        or sanitized in _INJECTED_PARAM_NAMES
+    ):
         sanitized = sanitized + "_"
     return sanitized
 
@@ -108,21 +120,25 @@ def prop_to_python_type(prop: Dict[str, Any]) -> str:
     Returns:
         Python type annotation as string (e.g., "str", "str | list[str]")
     """
-    # Handle oneOf schemas (e.g., string or array)
+    # Handle oneOf schemas (e.g., string or array). Drop "null" entries: a
+    # nullable field's optionality is already conveyed by the Optional[...]
+    # wrapper, so keeping "null" only yielded noise like Optional[str | Any].
     if "oneOf" in prop:
         types = [
             _resolve_single_type(item.get("type", ""), item)
             for item in prop["oneOf"]
-            if item.get("type")
+            if item.get("type") and item.get("type") != "null"
         ]
         return _deduplicate_types(types)
 
     # Fall back to regular type handling
     json_type = prop.get("type", "string")
 
-    # Handle when type is a list (e.g., ["string", "array"])
+    # Handle when type is a list (e.g., ["string", "array"], ["string", "null"]).
+    # Exclude "null" for the same reason as above — ["string", "null"] is a
+    # nullable string and should annotate as str, not "str | Any".
     if isinstance(json_type, list):
-        types = [_resolve_single_type(t, prop) for t in json_type if t]
+        types = [_resolve_single_type(t, prop) for t in json_type if t and t != "null"]
         return _deduplicate_types(types)
 
     if json_type == "array":
@@ -208,8 +224,6 @@ def generate_tool_file(
     for name, prop in properties.items():
         py_type = prop_to_python_type(prop)
         desc = prop.get("description", "")
-        # Escape backslashes to avoid Unicode escape errors in docstrings
-        desc = desc.replace("\\", "\\\\")
         # Sanitize parameter name to be a valid Python identifier
         py_name = sanitize_param_name(name)
 
@@ -236,9 +250,16 @@ def generate_tool_file(
 
         # Use original name as the API key, but sanitized py_name as the variable
         kwargs.append(f'"{name}": {py_name}')
-        # Wrap long descriptions
+        # Wrap long descriptions. Truncate the raw text FIRST, then escape
+        # backslashes: escaping first can leave a truncation boundary in the
+        # middle of an escaped "\\" pair, emitting a lone trailing backslash
+        # that Python reads as an invalid escape sequence in the docstring
+        # (e.g. a FASTA example "...'>seq1\n..." truncated to "...'>seq1\..."
+        # made `import tooluniverse.tools` print a SyntaxWarning).
         if len(desc) > 80:
             desc = desc[:77] + "..."
+        # Escape backslashes to avoid Unicode escape errors in docstrings
+        desc = desc.replace("\\", "\\\\")
         doc_params.append(f"    {py_name} : {py_type}\n        {desc}")
 
     # Combine required and optional parameters

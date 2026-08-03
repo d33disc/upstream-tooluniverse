@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-drug-research
-description: Generates comprehensive drug research reports with compound disambiguation, evidence grading, and mandatory completeness sections. Covers identity, chemistry, pharmacology, targets, clinical trials, safety, pharmacogenomics, and ADMET properties. Use when users ask about drugs, medications, therapeutics, or need drug profiling, safety assessment, or clinical development research.
+description: Comprehensive drug profiling — mechanism, primary/secondary targets, drug interactions, clinical-trial status, adverse events (FAERS), pharmacogenomics, and approval history. Use for full drug investigation reports, 'tell me about drug X' queries, and assembling drug profiles for clinicians, researchers, or regulatory work.
+disable-model-invocation: true
 ---
 
 # Drug Research Strategy
@@ -80,7 +81,7 @@ Step 12: Document all sources -> Update Section 11 (Data Sources)
 1. PubChem_get_CID_by_compound_name(compound_name)
    -> Extract: CID, canonical SMILES, formula
 
-2. ChEMBL_search_compounds(query=drug_name)
+2. ChEMBL_search_molecules(query=drug_name)
    -> Extract: ChEMBL ID, pref_name
 
 3. DailyMed_search_spls(drug_name)

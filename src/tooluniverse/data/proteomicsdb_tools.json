@@ -95,14 +95,14 @@
                   "number",
                   "null"
                 ],
-                "description": "Log10 normalized intensity (main value)"
+                "description": "Log10 NORMALIZED intensity - the main, cross-tissue-comparable value, and the one bounded by min_expression/max_expression"
               },
-              "median_expression": {
+              "unnormalized_intensity": {
                 "type": [
                   "number",
                   "null"
                 ],
-                "description": "Median log10 normalized intensity"
+                "description": "Log10 un-normalized intensity, as reported upstream. Not comparable across tissues; do not rank on this."
               },
               "min_expression": {
                 "type": [
@@ -322,7 +322,7 @@
                   "null"
                 ]
               },
-              "median_expression": {
+              "unnormalized_intensity": {
                 "type": [
                   "number",
                   "null"
@@ -387,46 +387,229 @@
         "operation"
       ]
     },
-    "test_examples": [
-      {
-        "operation": "list_tissues",
-        "tissue_category": "fluid"
-      },
-      {
-        "operation": "list_tissues",
-        "tissue_category": "cell line"
-      }
-    ],
     "return_schema": {
       "type": "object",
       "properties": {
         "filter_category": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Category filter applied (null if none)"
         },
         "total_sources": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Total number of sources returned"
         },
         "category_counts": {
           "type": "object",
-          "properties": {
-            "fluid": {
-              "type": "integer"
-            }
-          }
+          "description": "Count of sources per category"
         },
         "tissues": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "tissue_id": {},
-              "name": {},
-              "category": {},
-              "group": {}
+              "tissue_id": {
+                "type": "string",
+                "description": "BTO tissue ontology ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Tissue/cell line/fluid name"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category: tissue, cell line, or fluid"
+              },
+              "group": {
+                "type": "string",
+                "description": "Anatomical grouping (e.g., brain, liver)"
+              }
             }
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "operation": "list_tissues",
+        "tissue_category": "fluid"
+      }
+    ]
+  },
+  {
+    "name": "ProteomicsDB_get_peptides_for_protein",
+    "type": "ProteomicsDBTool",
+    "description": "Get peptide-level mass spectrometry identification evidence for a protein from ProteomicsDB. Given a UniProt accession (e.g. 'P00533' for EGFR), returns per-peptide records: peptide sequence, uniqueness (is_unique), peptide and protein q-values (FDR), peptide score, search engine, sequence start/end positions, and the source experiment / project / PubMed ID. This is identification-level evidence that the tissue-level expression tools (ProteomicsDB_get_protein_expression) do not provide. Use ProteomicsDB_search_proteins to find the correct UniProt accession first.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "get_peptides_for_protein"
+          ],
+          "description": "Operation type"
+        },
+        "uniprot_id": {
+          "type": "string",
+          "description": "UniProt accession for the protein (e.g. 'P00533' for EGFR, 'P04637' for TP53)."
+        },
+        "max_results": {
+          "type": "integer",
+          "default": 50,
+          "description": "Maximum number of peptide identification rows to return (default 50)."
+        }
+      },
+      "required": [
+        "operation",
+        "uniprot_id"
+      ]
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "uniprot_id": {
+              "type": "string"
+            },
+            "gene_name": {
+              "type": "string"
+            },
+            "protein_name": {
+              "type": "string"
+            },
+            "entry_name": {
+              "type": "string"
+            },
+            "num_peptides": {
+              "type": "integer"
+            },
+            "peptides": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "peptide_sequence": {
+                    "type": "string"
+                  },
+                  "peptide_mass": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "is_unique": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "is_unique_to_protein": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "peptide_q_value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "protein_q_value": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "peptide_score": {
+                    "type": [
+                      "number",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "search_engine": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_position": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "end_position": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "experiment_id": {
+                    "type": [
+                      "string",
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "experiment_name": {
+                    "type": "string"
+                  },
+                  "project_name": {
+                    "type": "string"
+                  },
+                  "project_description": {
+                    "type": "string"
+                  },
+                  "pubmed_id": {
+                    "type": [
+                      "string",
+                      "integer",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "uniprot_id",
+            "num_peptides",
+            "peptides"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "operation": "get_peptides_for_protein",
+        "uniprot_id": "P00533",
+        "max_results": 5
+      }
+    ]
   }
 ]

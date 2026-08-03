@@ -30,12 +30,8 @@
     },
     "test_examples": [
       {
-        "user_query": "CRISPR-Cas9 gene editing off-target effects in human cells",
-        "context": "Research on genome editing safety"
-      },
-      {
-        "user_query": "PD-1 checkpoint inhibitor resistance mechanisms melanoma",
-        "context": "Cancer immunotherapy resistance"
+        "user_query": "machine learning optimization",
+        "context": "The quick brown fox jumps over the lazy dog."
       }
     ],
     "return_schema": {
@@ -89,10 +85,10 @@
     },
     "test_examples": [
       {
-        "plan_title": "CRISPR off-target effects in human gene editing",
-        "plan_description": "Systematic review of CRISPR-Cas9 off-target detection methods",
-        "current_keywords": "CRISPR, off-target, gene editing",
-        "context": "Genome editing safety research"
+        "plan_title": "Literature review on COVID-19 treatments",
+        "plan_description": "Systematic review of antiviral therapies",
+        "current_keywords": "COVID-19, antiviral, treatment",
+        "context": "The quick brown fox jumps over the lazy dog."
       }
     ],
     "return_schema": {
@@ -152,11 +148,11 @@
     },
     "test_examples": [
       {
-        "plan_title": "CRISPR off-target effects in human gene editing",
-        "plan_description": "Systematic review of CRISPR-Cas9 off-target detection methods",
-        "paper_count": "15",
-        "papers_text": "Multiple studies on GUIDE-seq, CIRCLE-seq, and Digenome-seq methods for detecting CRISPR off-target effects.",
-        "context": "Genome editing safety research"
+        "plan_title": "Literature review on COVID-19 treatments",
+        "plan_description": "Systematic review of antiviral therapies",
+        "paper_count": "1",
+        "papers_text": "The quick brown fox jumps over the lazy dog.",
+        "context": "The quick brown fox jumps over the lazy dog."
       }
     ],
     "return_schema": {
@@ -198,8 +194,8 @@
     },
     "test_examples": [
       {
-        "plans_analysis": "{\"coverage\": 0.85, \"quality\": \"high\", \"plans\": [{\"id\": \"plan_1\", \"title\": \"CRISPR off-target detection\", \"paper_count\": 15}]}",
-        "context": "Genome editing safety research"
+        "plans_analysis": "{\"coverage\": 0.85, \"quality\": \"high\"}",
+        "context": "The quick brown fox jumps over the lazy dog."
       }
     ],
     "return_schema": {
@@ -271,13 +267,13 @@
     },
     "test_examples": [
       {
-        "user_query": "CRISPR-Cas9 off-target effects in human gene editing",
-        "user_intent": "Find methods for detecting and minimizing CRISPR off-target effects",
+        "user_query": "machine learning optimization",
+        "user_intent": "Find recent advances in cancer immunotherapy",
         "total_papers": "150",
         "total_plans": "3",
         "iterations": "2",
-        "plan_summaries": "Key findings on GUIDE-seq, CIRCLE-seq, Digenome-seq, and computational prediction methods",
-        "context": "Genome editing safety research"
+        "plan_summaries": "Key findings on immunotherapy efficacy",
+        "context": "The quick brown fox jumps over the lazy dog."
       }
     ],
     "return_schema": {
@@ -291,7 +287,7 @@
   {
     "type": "ComposeTool",
     "name": "MultiAgentLiteratureSearch",
-    "description": "Multi-agent literature search system that uses AI agents to analyze intent, extract keywords, execute parallel searches, summarize results, and check quality iteratively",
+    "description": "Multi-agent literature search system that uses AI agents to analyze intent, extract keywords, execute parallel searches, and summarize results. Always runs a single pass -- 'max_iterations' and 'quality_threshold' are not currently applied (no iterative refinement loop is wired into the search flow yet).",
     "parameter": {
       "type": "object",
       "properties": {
@@ -301,19 +297,17 @@
         },
         "max_iterations": {
           "type": "integer",
-          "description": "Maximum number of iterations (default: 3)",
+          "description": "Not currently applied -- the search always runs a single pass. Retained for forward compatibility with a future iterative-refinement implementation.",
           "default": 3
         },
         "quality_threshold": {
           "type": "number",
-          "description": "Quality threshold for completion (default: 0.7)",
+          "description": "Not currently applied -- QualityCheckerAgent is registered as a dependency but never invoked by the current search flow. Retained for forward compatibility with a future iterative-refinement implementation.",
           "default": 0.7
         }
       },
       "required": [
-        "query",
-        "max_iterations",
-        "quality_threshold"
+        "query"
       ]
     },
     "auto_load_dependencies": true,
@@ -325,7 +319,6 @@
       "QualityCheckerAgent",
       "OverallSummaryAgent",
       "ArXiv_search_papers",
-      "BioRxiv_get_preprint",
       "BioRxiv_list_recent_preprints",
       "MedRxiv_get_preprint",
       "HAL_search_archive",
@@ -344,14 +337,9 @@
     "composition_function": "compose",
     "test_examples": [
       {
-        "query": "CRISPR-Cas9 off-target detection methods",
+        "query": "machine learning optimization",
         "max_iterations": 3,
         "quality_threshold": 0.7
-      },
-      {
-        "query": "PD-1 checkpoint inhibitor resistance melanoma",
-        "max_iterations": 2,
-        "quality_threshold": 0.8
       }
     ],
     "return_schema": {

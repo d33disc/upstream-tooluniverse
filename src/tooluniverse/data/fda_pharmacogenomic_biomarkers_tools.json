@@ -22,28 +22,23 @@
       },
       "required": []
     },
-    "test_examples": [
-      {
-        "drug_name": "Warfarin"
-      },
-      {
-        "biomarker": "CYP2C9"
-      }
-    ],
     "return_schema": {
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
-          "description": "Success or error status"
+          "type": "string"
         },
         "count": {
-          "type": "integer",
-          "description": "Total number of matching biomarker entries"
+          "type": [
+            "integer",
+            "number"
+          ]
         },
         "shown": {
-          "type": "integer",
-          "description": "Number of entries shown"
+          "type": [
+            "integer",
+            "number"
+          ]
         },
         "results": {
           "type": "array",
@@ -51,26 +46,29 @@
             "type": "object",
             "properties": {
               "Drug": {
-                "type": "string",
-                "description": "Drug name with entry number"
+                "type": "string"
               },
               "TherapeuticArea": {
-                "type": "string",
-                "description": "Therapeutic area (e.g. Hematology)"
+                "type": "string"
               },
               "Biomarker": {
-                "type": "string",
-                "description": "Pharmacogenomic biomarker gene (e.g. CYP2C9)"
+                "type": "string"
               },
               "LabelingSection": {
-                "type": "string",
-                "description": "FDA labeling sections mentioning the biomarker"
+                "type": "string"
               }
             }
-          },
-          "description": "Pharmacogenomic biomarker entries for the drug"
+          }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "drug_name": "Warfarin"
+      },
+      {
+        "biomarker": "CYP2C9"
+      }
+    ]
   }
 ]

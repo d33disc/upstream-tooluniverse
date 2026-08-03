@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-metabolomics-analysis
-description: Analyze metabolomics data including metabolite identification, quantification, pathway analysis, and metabolic flux. Processes LC-MS, GC-MS, NMR data from targeted and untargeted experiments. Performs normalization, statistical analysis, pathway enrichment, metabolite-enzyme integration, and biomarker discovery. Use when analyzing metabolomics datasets, identifying differential metabolites, studying metabolic pathways, integrating with transcriptomics/proteomics, discovering metabolic biomarkers, performing flux balance analysis, or characterizing metabolic phenotypes in disease, drug response, or physiological conditions.
+description: Analyze metabolomics data end-to-end — metabolite identification, quantification (TIC normalization, batch correction), differential analysis, and pathway interpretation. Use for processing mass-spec metabolomics output, normalization choice, untargeted metabolomics workflows, and integrating with other omics layers.
+disable-model-invocation: true
 ---
 
 # Metabolomics Analysis

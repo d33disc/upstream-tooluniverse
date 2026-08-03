@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-pharmacogenomics
-description: Guide pharmacogenomics (PGx) research -- drug-gene interaction lookup, CPIC guideline retrieval, variant-drug annotation, allele function status, FDA biomarker labeling, and clinical dosing recommendations. Covers the full CPIC-to-PharmGKB-to-clinical-recommendation workflow. Use when users ask about pharmacogenomics, drug-gene interactions, CPIC guidelines, genotype-guided dosing, PGx biomarkers, CYP enzyme phenotypes, or star allele interpretation.
+description: Pharmacogenomics (PGx) research — drug-gene interactions (CPIC, PharmGKB), CPIC dosing guidelines, variant-drug-response associations, ethnic-allele-frequency considerations, and metabolizer-status scoring. Use for PGx-informed dosing recommendations, CYP/HLA pharmacogenomic allele interpretation, and clinically-actionable PGx report generation.
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE

@@ -1,13 +1,7 @@
 ---
 name: tooluniverse-variant-to-mechanism
-description: >
-  End-to-end variant-to-mechanism analysis: given a genetic variant (rsID or coordinates),
-  trace its functional impact from regulatory context (GWAS, eQTL, RegulomeDB, ENCODE) through
-  target gene identification (GTEx, OpenTargets L2G) to downstream pathway and disease biology
-  (STRING, Reactome, GO enrichment, disease associations). Produces an evidence-graded
-  mechanistic narrative linking genotype to phenotype. Use when asked "how does this variant
-  cause disease?", "what is the mechanism of rs7903146?", "trace variant to pathway", or
-  "connect this GWAS hit to biology".
+description: End-to-end variant-to-mechanism analysis — trace a variant (rsID/coordinates) through regulatory context, target gene(s), molecular pathway(s), and phenotypic consequences. Integrates 7+ databases across 3 evidence layers (regulatory, molecular, disease) for a mechanistic model. Use for GWAS-hit-to-mechanism, eQTL-causal-gene tracing, and full causal-chain reports.
+disable-model-invocation: true
 ---
 
 # Variant-to-Mechanism Analysis Skill
@@ -93,6 +87,12 @@ myvar = tu.tools.MyVariant_query_variants(
 # Step 3: Confirm gene context
 gwas_snp = tu.tools.gwas_search_snps(rs_id="rs7903146")
 # Returns: SNP location, mapped genes, functional class
+
+# Optional one-call shortcut (when a GRCh38 coordinate is available):
+favor = tu.tools.FAVOR_annotate_variant(variant="19-44908822-C-T")
+# Returns freq (BRAVO/gnomAD-by-ancestry/1000G) + CADD/SIFT/PolyPhen/AlphaMissense
+# + conservation + ClinVar + regulatory annotation in a single call — a fast way to
+# populate most of Phase 1 (and the regulatory block of Phase 2) before drilling in.
 ```
 
 ---

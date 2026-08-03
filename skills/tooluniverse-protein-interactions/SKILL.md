@@ -1,6 +1,7 @@
 ---
-name: Protein Interaction Network Analysis
-description: Analyze protein-protein interaction networks using STRING, BioGRID, and SASBDB databases. Maps protein identifiers, retrieves interaction networks with confidence scores, performs functional enrichment analysis (GO/KEGG/Reactome), and optionally includes structural data. No API key required for core functionality (STRING). Use when analyzing protein networks, discovering interaction partners, identifying functional modules, or studying protein complexes.
+name: tooluniverse-protein-interactions
+description: Protein-protein interaction (PPI) network analysis — STRING (predicted + experimental), BioGRID (curated), SASBDB (small-angle scattering). Distinguishes physical interactions (binding) from functional associations (co-expression, co-regulation). Use for interactome queries, complex partner identification, and pathway-level interaction analysis.
+disable-model-invocation: true
 ---
 
 # Protein Interaction Network Analysis
@@ -91,7 +92,7 @@ IntAct tools accept `protein_name` as an alias parameter in addition to the orig
 
 ## Domain Reasoning: Multimeric Assemblies & Binding Valency
 
-LOOK UP DON'T GUESS: oligomeric state, subunit stoichiometry, and binding valency. Use RCSB PDB (`RCSB_search_structures`, `RCSB_get_entry_info`) or UniProt (`UniProt_get_function_by_accession`) to confirm whether a protein is a monomer, dimer, trimer, etc. Do not assume from gene name alone.
+LOOK UP DON'T GUESS: oligomeric state, subunit stoichiometry, and binding valency. Use RCSB PDB (`RCSBAdvSearch_search_structures`, `RCSBData_get_entry`) or UniProt (`UniProt_get_function_by_accession`) to confirm whether a protein is a monomer, dimer, trimer, etc. Do not assume from gene name alone.
 
 ### Calculating Multimer Valency from Binding Data
 

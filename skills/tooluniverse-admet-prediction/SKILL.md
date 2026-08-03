@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-admet-prediction
-description: Comprehensive ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) profiling of drug candidates using ADMETAI predictions, SwissADME drug-likeness, PubChemTox experimental toxicity, ChEMBL clinical data, and PubChem properties. Generates a structured ADMET scorecard with pass/fail verdicts per category. Use when asked about drug-likeness, ADMET properties, bioavailability, toxicity prediction, BBB penetration, CYP interactions, pharmacokinetic profiling, Lipinski rule of five, or ADME/PK assessment of a compound.
+description: Comprehensive ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) profiling for drug candidates. Integrates ADMET-AI predictions, SwissADME drug-likeness, PubChemTox experimental toxicity, ChEMBL clinical data, Lipinski rule-of-five, and CYP interaction data. Use for drug-likeness assessment, BBB penetration, bioavailability, hepatotoxicity prediction, ADME/PK profiling, or screening compound libraries before lab testing.
+disable-model-invocation: true
 ---
 
 # ADMET Prediction & Drug Candidate Profiling
@@ -25,6 +26,26 @@ Comprehensive pharmacokinetic and toxicity profiling integrating AI-based ADMET 
 - "What is the LD50 / hERG liability of [molecule]?"
 
 **Input**: Drug name (e.g., "ibuprofen") OR SMILES string (e.g., "CC(C)Cc1ccc(cc1)C(C)C(=O)O")
+
+## Before You Run
+
+ADMETAI tools run a local model, so they need the `ml` extra:
+
+```bash
+uv pip install 'tooluniverse[ml]'
+```
+
+Without it the tools still appear in `tu list` (the config loads) but fail at
+call time with `ADMETModel requires 'admet-ai' package`. Run
+`tooluniverse-doctor` to confirm which optional groups are installed.
+
+**Expected console noise — not errors.** The first ADMETAI call loads PyTorch
+and prints warnings such as missing-GPU / `Trainer` messages from
+PyTorch Lightning, and `TypedStorage is deprecated` from PyTorch. These are
+emitted by the underlying libraries during normal CPU inference. Predictions
+are unaffected — do not report them to the user as failures and do not retry
+the call because of them. Only treat output as a failure if the tool returns an
+`error` field or no predictions.
 
 ---
 

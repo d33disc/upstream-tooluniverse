@@ -1,7 +1,7 @@
 """
 get_patent_overview_by_text_query
 
-Search for patent application overviews using a query string of the format 'applicationMetaData.i...
+Search for patent application overviews using a query string of the format 'field:value', where va...
 """
 
 from typing import Any, Optional, Callable
@@ -21,7 +21,7 @@ def get_patent_overview_by_text_query(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search for patent application overviews using a query string of the format 'applicationMetaData.i...
+    Search for patent application overviews using a query string of the format 'field:value', where va...
 
     Parameters
     ----------
@@ -50,23 +50,17 @@ def get_patent_overview_by_text_query(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "query": query,
-            "exact_match": exact_match,
-            "sort": sort,
-            "offset": offset,
-            "limit": limit,
-            "rangeFilters": rangeFilters,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "get_patent_overview_by_text_query",
-            "arguments": _args,
+            "arguments": {
+                "query": query,
+                "exact_match": exact_match,
+                "sort": sort,
+                "offset": offset,
+                "limit": limit,
+                "rangeFilters": rangeFilters,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

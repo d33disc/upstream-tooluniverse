@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-protein-structure-retrieval
-description: Retrieves protein structure data from RCSB PDB, PDBe, and AlphaFold with protein disambiguation, quality assessment, and comprehensive structural profiles. Creates detailed structure reports with experimental metadata, ligand information, and download links. Use when users need protein structures, 3D models, crystallography data, or mention PDB IDs (4-character codes like 1ABC) or UniProt accessions.
+description: Protein structure retrieval from RCSB PDB, PDBe, and AlphaFold with disambiguation, quality assessment (resolution, R-factor, pLDDT), and metadata. Distinguishes high-quality experimental (X-ray under 2 Angstrom) vs predicted vs medium-quality structures. Use for fetching protein structures, structure-quality comparison, and selecting structures for drug design or modeling.
+disable-model-invocation: true
 ---
 
 # Protein Structure Data Retrieval
@@ -132,6 +133,6 @@ Present as a **Structure Profile Report**. Hide search process. Include:
 
 **RCSB PDB**: `PDBeSearch_search_structures` (search), `get_protein_metadata_by_pdb_id` (basic info), `RCSBData_get_entry` (details), `PDBeValidation_get_quality_scores` (quality), `PDBe_KB_get_ligand_sites` (ligands), `PDBeSIFTS_get_all_structures` (homologs)
 
-**PDBe**: `pdbe_get_entry_summary` (overview), `pdbe_get_entry_molecules` (entities), `pdbe_get_experiment_info` (experimental), `PDBe_KB_get_ligand_sites` (pockets)
+**PDBe**: `pdbe_get_entry_summary` (overview), `pdbe_get_entry_molecules` (entities), `pdbe_get_entry_experiment` (experimental), `PDBe_KB_get_ligand_sites` (pockets)
 
 **AlphaFold**: `alphafold_get_prediction` (get prediction), `alphafold_get_summary` (search)

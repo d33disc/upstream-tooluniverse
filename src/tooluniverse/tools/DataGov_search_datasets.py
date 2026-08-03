@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def DataGov_search_datasets(
     query: str,
-    organization: Optional[str | Any] = None,
+    organization: Optional[str] = None,
     rows: Optional[int] = 10,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -24,7 +24,7 @@ def DataGov_search_datasets(
     ----------
     query : str
         Search keywords for dataset discovery. Searches across dataset titles, descri...
-    organization : str | Any
+    organization : str
         Optional CKAN organization slug to filter by federal agency. Examples: 'epa-g...
     rows : int
         Number of results to return. Default 10, maximum 100.

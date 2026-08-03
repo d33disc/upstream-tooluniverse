@@ -52,35 +52,54 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "destinationEntities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "score": {
-                "type": "number"
-              },
-              "chapter": {
-                "type": "string"
-              },
-              "theCode": {
-                "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "destinationEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "chapter": {
+                    "type": "string"
+                  },
+                  "theCode": {
+                    "type": "string"
+                  }
+                }
               }
+            },
+            "guessType": {
+              "type": [
+                "integer",
+                "object",
+                "null"
+              ]
             }
           }
         },
-        "guessType": {
-          "type": [
-            "integer",
-            "object",
-            "null"
-          ]
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "endpoint": {
+              "type": "string"
+            },
+            "linearization": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -103,7 +122,27 @@
         "useFlexisearch": true,
         "language": "en"
       }
-    ]
+    ],
+    "optional_api_keys": [
+      "ICD_CLIENT_ID",
+      "ICD_CLIENT_SECRET"
+    ],
+    "api_key_info": {
+      "ICD_CLIENT_ID": {
+        "domain": "Clinical & Safety",
+        "type": "secret",
+        "register_url": "https://icd.who.int/icdapi",
+        "purpose": "WHO ICD-11 API client ID (OAuth) for disease classification lookups.",
+        "without": "ICD-11 tools are blocked without it (paired with the client secret)."
+      },
+      "ICD_CLIENT_SECRET": {
+        "domain": "Clinical & Safety",
+        "type": "secret",
+        "register_url": "https://icd.who.int/icdapi",
+        "purpose": "WHO ICD-11 API client secret (OAuth), used with the client ID.",
+        "without": "Required together with ICD_CLIENT_ID."
+      }
+    }
   },
   {
     "name": "ICD11_get_entity",
@@ -148,41 +187,46 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "@id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "object"
-        },
-        "definition": {
-          "type": "object"
-        },
-        "longDefinition": {
-          "type": "object"
-        },
-        "fullySpecifiedName": {
-          "type": "object"
-        },
-        "parent": {
-          "type": "array"
-        },
-        "child": {
-          "type": "array"
-        },
-        "inclusion": {
-          "type": "array"
-        },
-        "exclusion": {
-          "type": "array"
-        },
-        "browserUrl": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
-        },
-        "codingNote": {
-          "type": "object"
+        "data": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "object"
+            },
+            "definition": {
+              "type": "object"
+            },
+            "longDefinition": {
+              "type": "object"
+            },
+            "fullySpecifiedName": {
+              "type": "object"
+            },
+            "parent": {
+              "type": "array"
+            },
+            "child": {
+              "type": "array"
+            },
+            "inclusion": {
+              "type": "array"
+            },
+            "exclusion": {
+              "type": "array"
+            },
+            "browserUrl": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            },
+            "codingNote": {
+              "type": "object"
+            }
+          }
         }
       }
     },
@@ -201,7 +245,7 @@
   },
   {
     "name": "ICD11_browse_hierarchy",
-    "description": "Navigate the ICD-11 disease classification hierarchy by retrieving child entities of a parent category. ICD-11 organizes diseases in a hierarchical tree structure (chapters \u2192 categories \u2192 subcategories). This tool returns all child entities under a specified parent, showing the disease classification taxonomy. Useful for exploring disease categories and understanding relationships. Requires ICD_CLIENT_ID and ICD_CLIENT_SECRET.",
+    "description": "Navigate the ICD-11 disease classification hierarchy by retrieving child entities of a parent category. ICD-11 organizes diseases in a hierarchical tree structure (chapters → categories → subcategories). This tool returns all child entities under a specified parent, showing the disease classification taxonomy. Useful for exploring disease categories and understanding relationships. Requires ICD_CLIENT_ID and ICD_CLIENT_SECRET.",
     "type": "ICDTool",
     "parameter": {
       "type": "object",
@@ -242,18 +286,23 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "child": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Child entity URI"
+        "data": {
+          "type": "object",
+          "properties": {
+            "child": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Child entity URI"
+              }
+            },
+            "title": {
+              "type": "object"
+            },
+            "code": {
+              "type": "string"
+            }
           }
-        },
-        "title": {
-          "type": "object"
-        },
-        "code": {
-          "type": "string"
         }
       }
     },
@@ -294,20 +343,36 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "total": {
-          "type": "integer"
-        },
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
               }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
             }
           }
         }
@@ -356,19 +421,24 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "total": {
-          "type": "integer"
-        },
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }

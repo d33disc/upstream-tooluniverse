@@ -140,6 +140,7 @@ class TestBRENDAGetEnzymeKineticsIntegration:
         assert "BRENDA_get_enzyme_kinetics" in tu.all_tool_dict
 
     @pytest.mark.integration
+    @pytest.mark.network
     def test_ec_number_real(self, tu):
         """Test with real EC 1.1.1.1 (alcohol dehydrogenase)."""
         result = tu.run_one_function(

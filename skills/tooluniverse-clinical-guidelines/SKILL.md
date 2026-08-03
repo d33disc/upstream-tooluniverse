@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-clinical-guidelines
-description: Search and retrieve clinical practice guidelines across 12+ authoritative sources including NICE, WHO, ADA, AHA/ACC, NCCN, SIGN, CPIC, CMA, CTFPHC, GIN, MAGICapp, PubMed, EuropePMC, TRIP, and OpenAlex. Use when users ask about clinical guidelines, treatment recommendations, standard of care, evidence-based medicine, or drug-gene dosing recommendations.
+description: Search and retrieve clinical practice guidelines from 12+ authoritative sources — NICE, WHO, NCCN, AHA, ADA, SIGN, USPSTF, IDSA, NIH consensus, ESMO/ESC/EASL European societies, and US specialty associations. Use for evidence-graded treatment recommendations, dosing protocols, screening guidance, and authoritative-source-prioritized clinical guidance (NICE/WHO ranked above society guidelines).
+disable-model-invocation: true
 ---
 
 # Clinical Guidelines Search & Retrieval

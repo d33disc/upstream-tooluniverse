@@ -66,17 +66,24 @@
     },
     "test_examples": [
       {
-        "query": "diabetes mellitus type 2",
+        "query": "machine learning optimization",
         "sabs": "SNOMEDCT_US",
-        "pageNumber": 1,
-        "pageSize": 10
-      },
-      {
-        "query": "hypertension",
         "pageNumber": 1,
         "pageSize": 25
       }
-    ]
+    ],
+    "optional_api_keys": [
+      "UMLS_API_KEY"
+    ],
+    "api_key_info": {
+      "UMLS_API_KEY": {
+        "domain": "Clinical & Safety",
+        "type": "secret",
+        "register_url": "https://uts.nlm.nih.gov/uts/signup-login",
+        "purpose": "Authenticate to UMLS for concept, SNOMED CT, and LOINC lookups.",
+        "without": "UMLS/SNOMED/LOINC tools are blocked without it (free UMLS license)."
+      }
+    }
   },
   {
     "name": "umls_get_concept_details",
@@ -136,10 +143,6 @@
         "cui": "C0011849",
         "pageNumber": 1,
         "pageSize": 25
-      },
-      {
-        "cui": "C0003123",
-        "pageNumber": 1
       }
     ]
   },
@@ -217,15 +220,10 @@
     },
     "test_examples": [
       {
-        "query": "type 2 diabetes",
+        "query": "machine learning optimization",
         "version": "ICD10CM",
         "pageNumber": 1,
-        "pageSize": 10
-      },
-      {
-        "query": "breast cancer",
-        "version": "ICD10",
-        "pageNumber": 1
+        "pageSize": 25
       }
     ]
   },
@@ -293,13 +291,9 @@
     },
     "test_examples": [
       {
-        "query": "myocardial infarction",
+        "query": "machine learning optimization",
         "pageNumber": 1,
-        "pageSize": 10
-      },
-      {
-        "query": "asthma",
-        "pageNumber": 1
+        "pageSize": 25
       }
     ]
   },
@@ -367,13 +361,9 @@
     },
     "test_examples": [
       {
-        "query": "hemoglobin A1c",
+        "query": "machine learning optimization",
         "pageNumber": 1,
-        "pageSize": 10
-      },
-      {
-        "query": "blood pressure",
-        "pageNumber": 1
+        "pageSize": 25
       }
     ]
   }

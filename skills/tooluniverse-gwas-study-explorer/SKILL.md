@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-gwas-study-explorer
-description: Compare GWAS studies, perform meta-analyses, and assess replication across cohorts. Integrates NHGRI-EBI GWAS Catalog and Open Targets Genetics to compare study designs, effect sizes, ancestry diversity, and heterogeneity statistics. Use when comparing GWAS studies for a trait, performing meta-analysis of genetic loci, assessing replication across cohorts, or exploring the genetic architecture of complex diseases.
+description: Compare GWAS studies, perform meta-analyses across cohorts, and assess signal replication. Uses GWAS Catalog metadata, study-level statistics, and cross-cohort comparison. Use for evaluating GWAS reproducibility for a trait, meta-analysis sample size and effect-size aggregation, and detecting study heterogeneity (population, design, ancestry).
+disable-model-invocation: true
 ---
 
 
@@ -59,6 +60,8 @@ LOOK UP DON'T GUESS: effect sizes, p-values, allele frequencies, and LD structur
 - Interpret heterogeneity level
 
 **Outcome**: Quantitative assessment of effect size consistency with heterogeneity interpretation
+
+> **Honesty rule (important)**: A real inverse-variance meta-analysis needs each study's **beta + 95% CI**. `python_implementation.py` parses these from the GWAS Catalog `beta`/`or_value` + `range` fields and only then pools effect sizes and computes Cochran's-Q I². When the matched associations don't report usable effect sizes (common), it returns `method="descriptive"`, `combined_beta=None`, `heterogeneity_i2=None`, and `combined_p_value` = the **smallest reported p (not a pooled p)** — do NOT present a descriptive result as a formal meta-analysis or invent an I².
 
 ### 3. Replication Analysis
 **Scenario**: "Which findings from the discovery cohort replicated in the independent sample?"

@@ -134,7 +134,7 @@
   },
   {
     "name": "Metabolite_get_diseases",
-    "description": "Get curated disease associations for a metabolite using CTD (Comparative Toxicogenomics Database). Accepts HMDB ID, compound name, or PubChem CID. Resolves the identifier to PubChem to get the canonical compound name, then queries CTD for chemical-disease associations with direct evidence. Returns disease name, disease ID (MeSH), disease categories, direct evidence type (marker/mechanism), and supporting PubMed IDs.",
+    "description": "Get curated disease associations for a metabolite using CTD (Comparative Toxicogenomics Database), served via the RENCI Automat CTD mirror since CTD's own batchQuery.go endpoint is CAPTCHA-blocked. Accepts HMDB ID, compound name, or PubChem CID. Resolves the identifier to PubChem to get the canonical compound name, then queries the mirror for chemical-disease associations. Returns disease name, disease ID (MONDO), and supporting PubMed IDs. Note: direct_evidence (CTD's own therapeutic/marker-mechanism classification) and disease_categories are always null -- the mirror's edge data does not carry either field, only the disease link and its citations.",
     "type": "MetaboliteTool",
     "parameter": {
       "type": "object",
@@ -201,7 +201,7 @@
   },
   {
     "name": "HMDB_search",
-    "description": "PubChem-backed HMDB alias for metabolite name or synonym lookup. Returns candidate compounds with PubChem CID, formula, molecular weight, and SMILES.",
+    "description": "Alias for Metabolite_search. Search for metabolites by compound name or molecular formula via PubChem. Accepts common names, synonyms (e.g., 'glucosylceramide', 'glucose', 'ATP').",
     "type": "MetaboliteTool",
     "parameter": {
       "type": "object",
@@ -215,82 +215,85 @@
           "description": "Compound name or molecular formula to search"
         }
       },
-      "required": [
-        "query"
-      ]
+      "required": ["query"]
     },
-    "test_examples": [
-      {
-        "query": "glucose"
-      },
-      {
-        "query": "glucosylceramide"
-      }
-    ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Success or error status"
-        },
-        "data": {
+      "oneOf": [
+        {
           "type": "object",
           "properties": {
             "query": {
               "type": "string",
-              "description": "Original search query"
+              "description": "The search query that was submitted"
             },
             "results": {
               "type": "array",
+              "description": "Matching compounds from PubChem",
               "items": {
                 "type": "object",
                 "properties": {
                   "pubchem_cid": {
-                    "type": "integer",
-                    "description": "PubChem compound ID"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "name": {
-                    "type": "string",
-                    "description": "Metabolite name"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "formula": {
-                    "type": "string",
-                    "description": "Molecular formula"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "molecular_weight": {
-                    "type": "string",
-                    "description": "Molecular weight"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "smiles": {
-                    "type": "string",
-                    "description": "SMILES string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
-              },
-              "description": "Matching metabolite results"
+              }
             },
             "count": {
               "type": "integer",
-              "description": "Number of results"
+              "description": "Number of compounds returned"
             }
-          }
+          },
+          "required": [
+            "query",
+            "results",
+            "count"
+          ]
         },
-        "metadata": {
+        {
           "type": "object",
           "properties": {
-            "source": {
-              "type": "string",
-              "description": "Data source attribution"
+            "error": {
+              "type": "string"
             }
-          }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
-    }
+      ]
+    },
+    "test_examples": [{"query": "glucose"}]
   },
   {
     "name": "HMDB_get_metabolite",
-    "description": "PubChem-backed HMDB alias that resolves an HMDB ID or metabolite name to compound details including formula, molecular weight, SMILES, and InChIKey.",
+    "description": "Alias for Metabolite_get_info. Get compound information by HMDB ID, compound name, or PubChem CID.",
     "type": "MetaboliteTool",
     "parameter": {
       "type": "object",
@@ -310,73 +313,76 @@
       },
       "required": []
     },
-    "test_examples": [
-      {
-        "hmdb_id": "HMDB0000122"
-      },
-      {
-        "compound_name": "caffeine"
-      }
-    ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Success or error status"
-        },
-        "data": {
+      "oneOf": [
+        {
           "type": "object",
           "properties": {
             "pubchem_cid": {
-              "type": "integer",
-              "description": "PubChem compound ID"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "name": {
-              "type": "string",
-              "description": "Metabolite name"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "iupac_name": {
-              "type": "string",
-              "description": "IUPAC systematic name"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "formula": {
-              "type": "string",
-              "description": "Molecular formula"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "molecular_weight": {
-              "type": "string",
-              "description": "Molecular weight"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "smiles": {
-              "type": "string",
-              "description": "SMILES string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "inchikey": {
-              "type": "string",
-              "description": "InChIKey identifier"
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          }
+          },
+          "required": [
+            "pubchem_cid"
+          ]
         },
-        "metadata": {
+        {
           "type": "object",
           "properties": {
-            "source": {
-              "type": "string",
-              "description": "Data source attribution"
-            },
-            "pubchem_url": {
-              "type": "string",
-              "description": "URL to PubChem compound page"
+            "error": {
+              "type": "string"
             }
-          }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
-    }
+      ]
+    },
+    "test_examples": [{"hmdb_id": "HMDB0000122"}]
   },
   {
     "name": "HMDB_get_diseases",
-    "description": "CTD-backed HMDB alias that resolves a metabolite to curated disease associations with disease IDs, evidence types, and supporting PubMed IDs.",
+    "description": "Alias for Metabolite_get_diseases. Get disease associations for a metabolite via CTD database.",
     "type": "MetaboliteTool",
     "parameter": {
       "type": "object",
@@ -392,44 +398,105 @@
         "compound_name": {
           "type": "string",
           "description": "Compound name (e.g., glucose)"
+        },
+        "pubchem_cid": {
+          "type": "string",
+          "description": "PubChem CID as an alternative identifier to hmdb_id or compound_name."
+        },
+        "limit": {
+          "type": "integer",
+          "default": 50,
+          "description": "Maximum number of disease associations to return (default 50)."
         }
       },
       "required": []
     },
-    "test_examples": [
-      {
-        "hmdb_id": "HMDB0000122"
-      },
-      {
-        "compound_name": "cholesterol"
-      }
-    ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "disease_name": {
-            "type": "string",
-            "description": "Disease name"
-          },
-          "disease_id": {
-            "type": "string",
-            "description": "Disease identifier (MESH/OMIM)"
-          },
-          "evidence": {
-            "type": "string",
-            "description": "Evidence type"
-          },
-          "pubmed_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "description": "The identifier that was submitted"
             },
-            "description": "Supporting PubMed IDs"
-          }
+            "compound_name": {
+              "type": "string",
+              "description": "Canonical compound name resolved via PubChem"
+            },
+            "pubchem_cid": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "ctd_query_term": {
+              "type": "string",
+              "description": "The name variant used to query CTD"
+            },
+            "disease_count": {
+              "type": "integer"
+            },
+            "diseases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "disease_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "disease_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "disease_categories": {
+                    "type": [
+                      "string",
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "direct_evidence": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "pubmed_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "identifier",
+            "compound_name",
+            "disease_count",
+            "diseases"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
-    }
+      ]
+    },
+    "test_examples": [{"hmdb_id": "HMDB0000122", "limit": 5}]
   }
 ]

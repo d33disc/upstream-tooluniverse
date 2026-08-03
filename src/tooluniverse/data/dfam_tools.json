@@ -39,51 +39,54 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "accession": {
-            "type": "string",
-            "description": "Dfam accession (e.g., DF000000003)"
-          },
-          "name": {
-            "type": "string",
-            "description": "Family name (e.g., AluSc)"
-          },
-          "title": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "description": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "length": {
-            "type": "integer",
-            "description": "Consensus sequence length in bp"
-          },
-          "repeat_type": {
-            "type": "string",
-            "description": "Major type (SINE, LINE, DNA, LTR, etc.)"
-          },
-          "repeat_subtype": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Subtype (Alu, L1, ERV, etc.)"
-          },
-          "classification": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "length": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "repeat_type": {
+                "type": "string"
+              },
+              "repeat_subtype": {
+                "type": "string"
+              },
+              "classification": {
+                "type": "string"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      },
-      "description": "List of matching TE families"
+      ]
     }
   },
   {
@@ -114,105 +117,109 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "accession": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "title": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "length": {
-          "type": "integer"
-        },
-        "classification": {
-          "type": "string"
-        },
-        "repeat_type": {
-          "type": "string"
-        },
-        "repeat_subtype": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "consensus_sequence": {
-          "type": "string",
-          "description": "Full consensus nucleotide sequence"
-        },
-        "author": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "date_created": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "date_modified": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "curation_state": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "clades": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "citations": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "pmid": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "title": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "authors": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "accession": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "length": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "classification": {
+              "type": "string"
+            },
+            "repeat_type": {
+              "type": "string"
+            },
+            "repeat_subtype": {
+              "type": "string"
+            },
+            "consensus_sequence": {
+              "type": "string"
+            },
+            "author": {
+              "type": "string"
+            },
+            "date_created": {
+              "type": "string"
+            },
+            "date_modified": {
+              "type": "string"
+            },
+            "curation_state": {
+              "type": "string"
+            },
+            "clades": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pmid": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "authors": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "aliases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "database": {
+                    "type": "string"
+                  },
+                  "alias": {
+                    "type": "string"
+                  }
+                }
               }
             }
-          }
+          },
+          "required": [
+            "accession"
+          ]
         },
-        "aliases": {
-          "type": "array"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -268,52 +275,84 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "accession": {
-            "type": "string",
-            "description": "Dfam family accession"
-          },
-          "query": {
-            "type": "string",
-            "description": "Family name (e.g., AluSx, L1M5)"
-          },
-          "type": {
-            "type": "string",
-            "description": "Repeat type (SINE, LINE, DNA, LTR, Satellite, etc.)"
-          },
-          "strand": {
-            "type": "string"
-          },
-          "bit_score": {
-            "type": "string"
-          },
-          "e_value": {
-            "type": "string"
-          },
-          "seq_start": {
-            "type": "string"
-          },
-          "seq_end": {
-            "type": "string"
-          },
-          "ali_start": {
-            "type": "string"
-          },
-          "ali_end": {
-            "type": "string"
-          },
-          "model_start": {
-            "type": "string"
-          },
-          "model_end": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": "string"
+              },
+              "query": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "strand": {
+                "type": "string"
+              },
+              "bit_score": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "e_value": {
+                "type": "string"
+              },
+              "seq_start": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "seq_end": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "ali_start": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "ali_end": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "model_start": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              },
+              "model_end": {
+                "type": [
+                  "integer",
+                  "number"
+                ]
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      },
-      "description": "TE annotation hits in the genomic region"
+      ]
     }
   }
 ]

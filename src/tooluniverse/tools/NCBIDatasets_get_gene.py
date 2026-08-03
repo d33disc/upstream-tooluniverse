@@ -1,7 +1,7 @@
 """
 NCBIDatasets_get_gene
 
-Get comprehensive gene information from NCBI by Gene ID. Returns gene symbol, description, chromo...
+Get comprehensive gene information from the National Center for Biotechnology Information by Gene ID.
 """
 
 from typing import Any, Optional, Callable
@@ -14,9 +14,9 @@ def NCBIDatasets_get_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Get comprehensive gene information from NCBI by Gene ID. Returns gene symbol, description, chromo...
+    Get comprehensive NCBI gene information by numeric Gene ID.
 
     Parameters
     ----------
@@ -31,7 +31,7 @@ def NCBIDatasets_get_gene(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

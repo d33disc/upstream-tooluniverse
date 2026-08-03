@@ -71,6 +71,10 @@ class PubChemToxTool(BaseTool):
             return self._get_ghs_classification(arguments)
         elif self.endpoint == "toxicity_values":
             return self._get_toxicity_values(arguments)
+        elif self.endpoint == "ecotoxicity_values":
+            return self._get_ecotoxicity_values(arguments)
+        elif self.endpoint == "human_toxicity_values":
+            return self._get_human_toxicity_values(arguments)
         elif self.endpoint == "carcinogen_classification":
             return self._get_carcinogen_classification(arguments)
         elif self.endpoint == "target_organs":
@@ -94,6 +98,15 @@ class PubChemToxTool(BaseTool):
 
         url = f"{PUG_BASE_URL}/name/{compound_name}/cids/JSON"
         response = requests.get(url, timeout=self.timeout)
+        # PubChem's name->CID lookup itself 404s when the name doesn't
+        # resolve at all (confirmed live) -- raise that as a distinct
+        # ValueError here, before it can reach run()'s generic
+        # HTTPError(404) handler, which otherwise conflates "compound name
+        # never resolved" with "compound resolved fine but this specific
+        # toxicity heading is absent for it" into the identical misleading
+        # "This heading may not exist for this compound" message.
+        if response.status_code == 404:
+            raise ValueError(f"No compound found for name: {compound_name}")
         response.raise_for_status()
         data = response.json()
         cids = data.get("IdentifierList", {}).get("CID", [])
@@ -122,21 +135,28 @@ class PubChemToxTool(BaseTool):
     def _extract_info_from_sections(
         self, sections: List[Dict], heading: str
     ) -> List[Dict]:
-        """Find sections matching heading recursively and extract their Information entries."""
+        """Find sections matching heading recursively and extract their Information entries.
+
+        PubChem packs every statement of one notification group into a single
+        Information entry holding N StringWithMarkup elements, so reading only
+        element 0 dropped the rest. Because GHS codes are ordered numerically
+        and physical hazards (H2xx) sort ahead of health hazards (H3xx), that
+        systematically discarded carcinogenicity and mutagenicity: benzene came
+        back as H225/H401 -- flammable and toxic to aquatic life -- with H350
+        "May cause cancer" among the fourteen statements silently lost.
+        """
         matched = self._find_sections_recursive(sections, heading)
         results = []
         for section in matched:
             for info in section.get("Information", []):
                 name = info.get("Name", "")
                 val = info.get("Value", {})
-                sws = val.get("StringWithMarkup", [])
-                if sws:
-                    text = sws[0].get("String", "")
-                    markups = sws[0].get("Markup", [])
+                for sw in val.get("StringWithMarkup", []):
+                    markups = sw.get("Markup", [])
                     extras = [m.get("Extra", "") for m in markups if m.get("Extra")]
                     entry = {
                         "name": name,
-                        "value": self._strip_html(text),
+                        "value": self._strip_html(sw.get("String", "")),
                     }
                     if extras:
                         entry["pictogram_labels"] = extras
@@ -199,6 +219,61 @@ class PubChemToxTool(BaseTool):
             },
             "metadata": {
                 "source": "PubChem PUG View (Non-Human Toxicity Values)",
+                "cid": cid,
+            },
+        }
+
+    def _get_ecotoxicity_values(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Get aquatic/environmental ecotoxicity values (LC50/EC50 for fish,
+        crustaceans, protozoa, etc.) from the 'Ecotoxicity Values' heading."""
+        cid = self._resolve_cid(arguments)
+
+        data = self._get_pugview_data(cid, "Ecotoxicity Values")
+        record = data.get("Record", {})
+        title = record.get("RecordTitle", "")
+
+        sections = record.get("Section", [])
+        raw_info = self._extract_info_from_sections(sections, "Ecotoxicity Values")
+        eco_values = [item["value"] for item in raw_info if item.get("value")]
+
+        return {
+            "status": "success",
+            "data": {
+                "cid": cid,
+                "compound_name": title,
+                "ecotoxicity_values_count": len(eco_values),
+                "ecotoxicity_values": eco_values[:30],
+            },
+            "metadata": {
+                "source": "PubChem PUG View (Ecotoxicity Values)",
+                "cid": cid,
+            },
+        }
+
+    def _get_human_toxicity_values(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Get human toxicity values (lethal oral doses, IDLH air
+        concentrations, fatal exposure thresholds) from the
+        'Human Toxicity Values' heading."""
+        cid = self._resolve_cid(arguments)
+
+        data = self._get_pugview_data(cid, "Human Toxicity Values")
+        record = data.get("Record", {})
+        title = record.get("RecordTitle", "")
+
+        sections = record.get("Section", [])
+        raw_info = self._extract_info_from_sections(sections, "Human Toxicity Values")
+        human_values = [item["value"] for item in raw_info if item.get("value")]
+
+        return {
+            "status": "success",
+            "data": {
+                "cid": cid,
+                "compound_name": title,
+                "human_toxicity_values_count": len(human_values),
+                "human_toxicity_values": human_values[:30],
+            },
+            "metadata": {
+                "source": "PubChem PUG View (Human Toxicity Values)",
                 "cid": cid,
             },
         }

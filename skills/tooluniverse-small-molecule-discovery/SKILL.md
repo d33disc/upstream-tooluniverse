@@ -1,11 +1,7 @@
 ---
 name: tooluniverse-small-molecule-discovery
-description: >
-  Find, characterize, and source small molecules for chemical biology and drug
-  discovery. Covers compound identification (PubChem, ChEMBL), structure search,
-  binding affinity data, ADMET/drug-likeness prediction, and commercial availability
-  (eMolecules, Enamine). Use when asked to find compounds, assess drug-likeness,
-  search by structure, retrieve binding affinities, or source chemicals.
+description: Small molecule identification, characterization, and procurement — PubChem, ChEMBL, BindingDB, ADMET-AI, SwissADME, eMolecules, Enamine. Covers compound name to structure to activity to ADMET properties to commercial sourcing. Use for chemical biology, lead identification, probe selection, and the full small-molecule discovery pipeline.
+disable-model-invocation: true
 ---
 
 # Small Molecule Discovery Skill

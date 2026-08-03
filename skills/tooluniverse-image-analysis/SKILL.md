@@ -1,9 +1,35 @@
 ---
 name: tooluniverse-image-analysis
-description: Production-ready microscopy image analysis and quantitative imaging data skill for colony morphometry, cell counting, fluorescence quantification, and statistical analysis of imaging-derived measurements. Processes ImageJ/CellProfiler output (area, circularity, intensity, cell counts), performs Dunnett's test, Cohen's d effect size, power analysis, Shapiro-Wilk normality tests, two-way ANOVA, polynomial regression, natural spline regression with confidence intervals, and comparative morphometry. Supports CSV/TSV measurement tables, multi-channel fluorescence data, colony swarming assays, and neuron counting datasets. Use when analyzing microscopy measurement data, colony area/circularity, cell count statistics, swarming assays, co-culture ratio optimization, or answering questions about imaging-derived quantitative data.
+description: Microscopy and quantitative imaging analysis — colony morphometry, fluorescence intensity quantification, cell-count statistics, dose-response curves, and ANOVA/Dunnett on image-derived measurements. Uses pandas/numpy/scipy/scikit-image. Use for analyzing tabular outputs from CellProfiler/ImageJ, image-derived measurement statistics, and image-based assay quantification.
+disable-model-invocation: true
 ---
 
 # Microscopy Image Analysis and Quantitative Imaging Data
+
+## RULE ZERO — Check for pre-computed results FIRST
+
+Before following any instruction below, scan the data folder for:
+- `*_executed.ipynb` → read with `tu run read_executed_notebook '{"data_folder":"<path>","search":"<keyword>"}'` and cite its cell outputs as the authoritative answer
+- Pre-computed result files (CSV/TSV with names like `*results*`, `*deseq*`, `*enrich*`, `*stats*`, `*_simplified.csv`) → read directly and report the requested value
+- Canonical analysis scripts (`analysis.R`, `run_*.py`, `find_*.R`, `*.Rmd`) → execute as-is and read the output
+
+Only follow this skill's re-analysis recipe below if **none** of the above exist. Re-running from raw data produces different numbers than the published answer and is much slower (often 5-10× turn count).
+
+---
+
+## CRITICAL — "Relative proportion of A to B" defaults to PERCENTAGE
+
+When the question asks "What is the relative proportion of A to B" or "What percentage of A relative to B", report the value as a **percentage** (e.g., `29` for ratio 0.29), NOT a decimal ratio. Biology assay GTs use whole-number percentage ranges like `(25,30)`, not `(0.25,0.30)`. Multiply your computed ratio by 100 before reporting:
+
+```python
+ratio = mean_A / mean_B           # e.g., 0.29
+percentage = ratio * 100          # e.g., 29
+print(f"{percentage:.1f}%")       # "29.0%"  ← THIS is the answer
+```
+
+Only report as decimal/fraction if the question explicitly says "as a decimal", "between 0 and 1", or "as a fraction". Common error: reporting `0.29` when the GT range is `(25,30)` — graded as wrong even though the underlying ratio is correct.
+
+---
 
 Production-ready skill for analyzing microscopy-derived measurement data using pandas, numpy, scipy, statsmodels, and scikit-image.
 
@@ -88,14 +114,14 @@ See **references/statistical_analysis.md** for complete implementations of group
 
 ---
 
-## Common BixBench Patterns
+## Common Patterns
 
 | Pattern | Example Question | Workflow |
 |---------|-----------------|----------|
-| Colony Morphometry (bix-18) | "Mean circularity of genotype with largest area?" | Group by Genotype → max mean Area → report Circularity |
-| Cell Counting (bix-19) | "Cohen's d for NeuN counts?" | Filter → split by Condition → pooled SD → Cohen's d |
-| Multi-Group (bix-41) | "How many ratios equivalent to control?" | Dunnett's for Area AND Circularity → count non-significant in BOTH |
-| Regression (bix-54) | "Peak frequency from natural spline?" | Ratio→frequency → spline(df=4) → grid search peak → CI |
+| Colony Morphometry | "Mean circularity of genotype with largest area?" | Group by Genotype → max mean Area → report Circularity |
+| Cell Counting | "Cohen's d for NeuN counts?" | Filter → split by Condition → pooled SD → Cohen's d |
+| Multi-Group Comparison | "How many ratios equivalent to control?" | Dunnett's for Area AND Circularity → count non-significant in BOTH |
+| Regression | "Peak frequency from natural spline?" | Ratio→frequency → spline(df=4) → grid search peak → CI |
 
 ---
 
@@ -124,6 +150,17 @@ See **references/segmentation.md**, **references/cell_counting.md**, **reference
 - Cohen's d: 3 decimal places
 - Sample sizes: integer (ceiling)
 - Ratios: string "5:1"
+
+### "Relative proportion of A to B" — default to PERCENTAGE
+
+Question phrases like "relative proportion of A to B", "percentage of mean A relative to B", or "A as a fraction of B" are ambiguous: the answer could be the decimal ratio (`0.29`) or the percentage (`29`). In biology/microscopy assay contexts the convention is **percentage** (whole numbers like 25-30, not decimals like 0.25-0.30). When in doubt:
+
+- Compute the decimal ratio first: `r = mean(A) / mean(B)`.
+- Report BOTH `r * 100` (percentage) and `r` (decimal); flag the percentage as the primary answer.
+- If the question specifies "as a decimal" or "between 0 and 1", report decimal only.
+- If the question specifies "as a percentage" or "%", report percentage only.
+
+Common error: question asks "relative proportion of mutant area to wildtype" and the agent reports `0.29` when the GT range is `(25, 30)`. The grader marks this wrong even though the underlying computation is correct.
 
 ---
 

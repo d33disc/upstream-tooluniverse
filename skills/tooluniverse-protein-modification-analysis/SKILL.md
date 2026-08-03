@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-protein-modification-analysis
-description: Analyze post-translational modifications (PTMs) of proteins — modification sites, types, proteoforms, functional effects at PTM sites, and PTM-dependent protein interactions. Integrates iPTMnet, ProtVar, UniProt, and STRING databases. Use when asked about protein phosphorylation, ubiquitination, acetylation, glycosylation, methylation, SUMOylation, or other PTMs; proteoform diversity; PTM-regulated interactions; or functional impact of PTM sites.
+description: Post-translational modification (PTM) analysis — phosphorylation, ubiquitination, acetylation, glycosylation, methylation. Uses iPTMnet (sites + enzymes), ProtVar (functional consequences), UniProt (baseline), STRING, ELM (linear motifs), MassIVE/ProteomeXchange (experimental). Use for PTM site annotation, kinase-substrate identification, and PTM-disease associations.
+disable-model-invocation: true
 ---
 
 # Protein Post-Translational Modification Analysis

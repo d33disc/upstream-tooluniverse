@@ -1,6 +1,7 @@
 ---
 name: tooluniverse-data-integration-analysis
-description: Integrate statistical analysis results with biological knowledge from ToolUniverse tools. After computing associations or differential expression, use pathway analysis, literature search, drug-target databases, and variant annotation to interpret findings biologically. Use when statistical results need biological context, when users want to go beyond p-values to understand mechanisms, or when combining data analysis with literature evidence.
+description: Integrate computed statistical results (DEGs, GWAS hits, associations) with biological context from ToolUniverse databases (UniProt, GO, Reactome, ClinVar, OpenTargets). Use for adding gene function/pathway/disease annotations to a result list, building biological narrative around statistical findings, and going beyond p-values to mechanism.
+disable-model-invocation: true
 ---
 
 ## COMPUTE, DON'T DESCRIBE

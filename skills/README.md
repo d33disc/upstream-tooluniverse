@@ -1,6 +1,6 @@
 # ToolUniverse Skills
 
-68 pre-built research skills for AI agents. Skills are automatically available — just ask naturally.
+69 pre-built research skills for AI agents. Skills are automatically available — just ask naturally.
 
 ```
 "Find the E. coli K-12 genome"           → tooluniverse-sequence-retrieval
@@ -41,6 +41,7 @@ npx skills add mims-harvard/ToolUniverse
 | `tooluniverse-epigenomics` | Epigenomics and gene regulation (ENCODE, JASPAR, methylation) |
 | `tooluniverse-expression-data-retrieval` | Gene expression datasets from ArrayExpress and BioStudies |
 | `tooluniverse-gene-enrichment` | Gene enrichment and pathway analysis (gseapy, PANTHER, STRING, etc.) |
+| `tooluniverse-gene-liability` | Human safety liability scoring for gene inhibition or loss of function |
 | `tooluniverse-gwas-drug-discovery` | GWAS signals to drug targets and repurposing opportunities |
 | `tooluniverse-gwas-finemapping` | Causal variant prioritization via statistical fine-mapping |
 | `tooluniverse-gwas-snp-interpretation` | Genetic variant interpretation from GWAS studies |
@@ -85,6 +86,7 @@ npx skills add mims-harvard/ToolUniverse
 | Skill | Description |
 |-------|-------------|
 | `setup-tooluniverse` | Install and configure ToolUniverse (MCP, CLI, or SDK) |
+| `tooluniverse-cs-setup` | Install/update ToolUniverse in **Claude Science** (conda env + pip package + native skill; not MCP) |
 | `create-tooluniverse-skill` | Create new skills with test-driven methodology |
 | `devtu-auto-discover-apis` | Discover life science APIs and create tools automatically |
 | `devtu-create-tool` | Create new scientific tools with proper structure and testing |
@@ -110,4 +112,7 @@ skill-name/
 1. Create `skill-name/SKILL.md` with proper frontmatter
 2. Keep SKILL.md concise (<500 lines)
 3. Add examples for common use cases
-4. See `create-tooluniverse-skill` for the full workflow
+4. Keep canonical skills host-agnostic. Do not add client-specific metadata such
+   as `agents/openai.yaml`; generate host-specific files in the corresponding
+   plugin packaging layer instead.
+5. See `create-tooluniverse-skill` for the full workflow

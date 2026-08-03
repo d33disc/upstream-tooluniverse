@@ -19,6 +19,37 @@
       "endpoint": "/find/pathway",
       "return_format": "TEXT"
     },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathway_id": {
+                "type": "string",
+                "description": "KEGG pathway identifier"
+              },
+              "description": {
+                "type": "string",
+                "description": "Pathway description"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
     "test_examples": [
       {
         "keyword": "diabetes"
@@ -40,12 +71,6 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
-    },
-    "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
     }
   },
   {
@@ -72,17 +97,31 @@
       "type": "object",
       "description": "KEGG pathway information",
       "properties": {
-        "pathway_id": {
+        "status": {
           "type": "string",
-          "description": "KEGG pathway identifier"
+          "description": "Status of the request"
         },
-        "raw_data": {
+        "data": {
+          "type": "object",
+          "description": "Pathway information",
+          "properties": {
+            "pathway_id": {
+              "type": "string",
+              "description": "KEGG pathway identifier"
+            },
+            "raw_data": {
+              "type": "string",
+              "description": "Raw pathway data from KEGG"
+            },
+            "line_count": {
+              "type": "integer",
+              "description": "Number of data lines"
+            }
+          }
+        },
+        "url": {
           "type": "string",
-          "description": "Raw pathway data from KEGG"
-        },
-        "line_count": {
-          "type": "integer",
-          "description": "Number of data lines"
+          "description": "API URL used"
         }
       }
     },
@@ -134,6 +173,37 @@
       "endpoint": "/find/genes",
       "return_format": "TEXT"
     },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_id": {
+                "type": "string",
+                "description": "KEGG gene identifier"
+              },
+              "description": {
+                "type": "string",
+                "description": "Gene description"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
     "test_examples": [
       {
         "keyword": "insulin"
@@ -156,12 +226,6 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
-    },
-    "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
     }
   },
   {
@@ -188,17 +252,31 @@
       "type": "object",
       "description": "KEGG gene information",
       "properties": {
-        "gene_id": {
+        "status": {
           "type": "string",
-          "description": "KEGG gene identifier"
+          "description": "Status of the request"
         },
-        "raw_data": {
+        "data": {
+          "type": "object",
+          "description": "Gene information",
+          "properties": {
+            "gene_id": {
+              "type": "string",
+              "description": "KEGG gene identifier"
+            },
+            "raw_data": {
+              "type": "string",
+              "description": "Raw gene data from KEGG"
+            },
+            "line_count": {
+              "type": "integer",
+              "description": "Number of data lines"
+            }
+          }
+        },
+        "url": {
           "type": "string",
-          "description": "Raw gene data from KEGG"
-        },
-        "line_count": {
-          "type": "integer",
-          "description": "Number of data lines"
+          "description": "API URL used"
         }
       }
     },
@@ -238,6 +316,41 @@
       "endpoint": "/list/organism",
       "return_format": "TEXT"
     },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "organism_code": {
+                "type": "string",
+                "description": "KEGG organism code (e.g., 'hsa', 'mmu')"
+              },
+              "organism_name": {
+                "type": "string",
+                "description": "Organism scientific name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Organism description"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    },
     "test_examples": [
       {}
     ],
@@ -254,23 +367,6 @@
       ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
-    },
-    "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "organism_code": {
-            "type": "string"
-          },
-          "organism_name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        }
-      }
     }
   }
 ]
