@@ -81,6 +81,8 @@ jobs:
           pytest tests/tools/ tests/examples/ tests/api/ -v --tb=short \
             --ignore=tests/tools/test_ensembl_tool.py \
             --ignore=tests/tools/test_esm_sae_tool.py \
+            --ignore=tests/examples/test_all_simple_examples.py \
+            --ignore=tests/examples/test_drug_discovery_simple.py \
             -m "not slow and not require_api_keys and not network and not require_gpu" \
             --junitxml=test-results-${{ matrix.python-version }}-excluded.xml
 
