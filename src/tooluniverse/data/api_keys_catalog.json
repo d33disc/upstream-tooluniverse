@@ -509,6 +509,10 @@
     "purpose": "Search US patents and patent-application full text.",
     "without": "USPTO patent tools are blocked without it.",
     "used_by": [
+      "dsapi_tools.json",
+      "patent_claims_tools.json",
+      "patent_deep_lookup_tools.json",
+      "patent_resolver_tools.json",
       "uspto_tools.json"
     ]
   },
