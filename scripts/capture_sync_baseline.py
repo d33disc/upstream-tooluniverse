@@ -40,6 +40,10 @@ PRESERVATION_CLASSES = (
     "other_review_required",
 )
 FINAL_FLAGS = ("ci_evidence", "publish_root", "result_json")
+EXPECTED_CI_JOB_NAMES = tuple(
+    f"Python {version} compatibility"
+    for version in ("3.10", "3.11", "3.12", "3.13", "3.14")
+)
 
 
 class BaselineValidationError(ValueError):
@@ -742,21 +746,92 @@ def create_isolated_worktree(
 
 
 def validate_capture_mode(args: argparse.Namespace) -> None:
-    """Enforce the disposable-only parser contract for Plan 01-01."""
+    """Enforce the mutually exclusive disposable and final contracts."""
     if not args.repo or not args.worktree_dir:
         raise ValueError("--repo and --worktree-dir are required")
     supplied = [name for name in FINAL_FLAGS if getattr(args, name, None)]
-    if supplied:
-        raise ValueError("final-publication flags are reserved for Plan 01-04")
-    if not args.output_dir:
-        raise ValueError("--output-dir is required in disposable mode")
+    if args.output_dir and supplied:
+        raise ValueError("--output-dir cannot be combined with final flags")
+    if not args.output_dir and not supplied:
+        raise ValueError("exactly one capture mode is required")
+    if args.output_dir and supplied:
+        raise ValueError("mixed capture modes are not allowed")
+    if args.output_dir:
+        mode_output = args.output_dir
+    else:
+        if len(supplied) != len(FINAL_FLAGS):
+            raise ValueError("--ci-evidence, --publish-root, and --result-json are required together")
+        mode_output = None
     repo = Path(args.repo).resolve()
     worktree = Path(args.worktree_dir).resolve()
-    output = Path(args.output_dir).resolve()
-    if output == worktree or worktree in output.parents:
-        raise ValueError("output directory must be outside isolated worktree")
-    if output == repo or repo in output.parents:
-        raise ValueError("output directory must not be inside original checkout")
+    if mode_output:
+        output = Path(mode_output).resolve()
+        if output == worktree or worktree in output.parents:
+            raise ValueError("output directory must be outside isolated worktree")
+        if output == repo or repo in output.parents:
+            raise ValueError("output directory must not be inside original checkout")
+
+
+def _gh_json(argv: list[str], run_command=_run_command) -> Any:
+    code, stdout, stderr = run_command(argv, timeout=60.0)
+    if code:
+        raise GitCaptureError(f"GitHub command failed ({argv[1]}): {stderr[:240]}")
+    try:
+        return json.loads(stdout or "null")
+    except json.JSONDecodeError as exc:
+        raise GitCaptureError("GitHub command returned invalid JSON") from exc
+
+
+def validate_ci_jobs(
+    run: dict[str, Any], expected_job_names: Iterable[str] = EXPECTED_CI_JOB_NAMES
+) -> dict[str, Any]:
+    """Reject incomplete, duplicate, failed, or unexpected Actions jobs."""
+    expected = tuple(expected_job_names)
+    if run.get("conclusion") not in (None, "success"):
+        raise GitCaptureError(f"Actions run conclusion is not successful: {run.get('conclusion')}")
+    jobs = run.get("jobs")
+    if not isinstance(jobs, list):
+        raise GitCaptureError("Actions run has no jobs")
+    names = [job.get("name") for job in jobs if isinstance(job, dict)]
+    if any(names.count(name) != 1 for name in expected) or set(names) != set(expected):
+        raise GitCaptureError("Actions run does not contain exactly the approved jobs")
+    for job in jobs:
+        if job.get("name") in expected and (
+            job.get("status") != "completed" or job.get("conclusion") != "success"
+        ):
+            raise GitCaptureError(f"Actions job is not successful: {job.get('name')}")
+    return {
+        "headSha": run.get("headSha"),
+        "conclusion": run.get("conclusion"),
+        "url": run.get("url"),
+        "event": run.get("event"),
+        "jobs": [{key: job.get(key) for key in ("name", "status", "conclusion")} for job in jobs],
+        "comprehensive_job": "Python 3.12 compatibility",
+    }
+
+
+def collect_ci_evidence(repo: Path | str, head_sha: str, run_command=_run_command) -> dict[str, Any]:
+    """Collect read-only Actions evidence tied to one exact full commit SHA."""
+    root = Path(repo).resolve()
+    listing = _gh_json(
+        ["gh", "run", "list", "--repo", str(root), "--workflow", "tests.yml", "--commit", head_sha,
+         "--json", "databaseId,headSha,status,conclusion,event,url,name,createdAt"], run_command
+    )
+    if not isinstance(listing, list):
+        raise GitCaptureError("Actions run list is not an array")
+    matches = [item for item in listing if item.get("headSha") == head_sha]
+    if len(matches) != 1:
+        raise GitCaptureError("exactly one matching full-SHA Actions run is required")
+    run_id = matches[0].get("databaseId")
+    if not run_id:
+        raise GitCaptureError("Actions run has no databaseId")
+    code, _, stderr = run_command(["gh", "run", "watch", str(run_id), "--repo", str(root), "--exit-status"], timeout=60.0)
+    if code:
+        raise GitCaptureError(f"Actions run did not complete successfully: {stderr[:240]}")
+    run = _gh_json(["gh", "run", "view", str(run_id), "--repo", str(root), "--json", "headSha,conclusion,jobs,url,event"], run_command)
+    if run.get("headSha") != head_sha:
+        raise GitCaptureError("Actions run headSha changed or does not match requested commit")
+    return validate_ci_jobs(run)
 
 
 def classify_preservation_path(path: str) -> str:
@@ -1343,11 +1418,25 @@ def main(argv: list[str] | None = None) -> int:
                 evidence["preservation"] = collect_preservation_inventory(
                     repo, before["upstream_local_oid"], before["head"]
                 )
-            output = Path(args.output_dir).resolve()
-            output.mkdir(parents=True, exist_ok=True)
-            (output / "git.json").write_text(
-                json.dumps(evidence, indent=2, sort_keys=True) + "\n"
-            )
+            if args.output_dir:
+                output = Path(args.output_dir).resolve()
+                output.mkdir(parents=True, exist_ok=True)
+                (output / "git.json").write_text(
+                    json.dumps(evidence, indent=2, sort_keys=True) + "\n"
+                )
+            else:
+                ci = collect_ci_evidence(repo, before["head"])
+                ci_path = Path(args.ci_evidence).resolve()
+                ci_path.parent.mkdir(parents=True, exist_ok=True)
+                ci_path.write_text(json.dumps(ci, indent=2, sort_keys=True) + "\n")
+                evidence["ci"] = ci
+                output = Path(args.publish_root).resolve() / before["head"]
+                publish_evidence(evidence, output, worktree_root=worktree)
+                result_path = Path(args.result_json).resolve()
+                result_path.parent.mkdir(parents=True, exist_ok=True)
+                result_path.write_text(
+                    json.dumps({"fork_oid": before["head"], "output_dir": str(output)}, sort_keys=True) + "\n"
+                )
         finally:
             run_git(["worktree", "remove", "--force", str(worktree)], repo)
         after = capture_git_snapshot(repo)
