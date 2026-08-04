@@ -63,7 +63,7 @@ def capture_git_snapshot(repo: Path | str) -> dict[str, Any]:
     status_raw = run_git(["status", "--porcelain=v2", "-z", "--branch", "--untracked-files=all"], root)
     staged_raw = run_git(["diff", "--cached", "--raw", "-z", "--no-renames"], root)
     unstaged_raw = run_git(["diff", "--raw", "-z", "--no-renames"], root)
-    untracked = [r[2:] if r.startswith("??") else r for r in _nul_records(status_raw) if r.startswith("??")]
+    untracked = [r[2:] for r in _nul_records(status_raw) if r.startswith("? ")]
     upstream_local = None
     try:
         upstream_local = _oid(root, "upstream/main")
@@ -187,11 +187,18 @@ def collect_preservation_inventory(repo: Path | str, upstream_oid: str, fork_oid
     root = Path(repo).resolve()
     raw = run_git(["diff", "--raw", "-z", "--find-renames", upstream_oid, fork_oid], root)
     paths: list[dict[str, Any]] = []
-    for rec in _nul_records(raw):
-        parts = rec.split("\t", 1)
-        if len(parts) != 2:
+    tokens = _nul_records(raw)
+    index = 0
+    while index < len(tokens):
+        rec = tokens[index]
+        index += 1
+        if "\t" in rec:
+            meta, path = rec.split("\t", 1)
+        elif rec.startswith(":") and index < len(tokens):
+            meta, path = rec, tokens[index]
+            index += 1
+        else:
             continue
-        meta, path = parts
         fields = meta.split()
         if len(fields) < 5:
             continue
