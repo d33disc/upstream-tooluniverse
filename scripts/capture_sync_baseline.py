@@ -465,6 +465,31 @@ def publish_evidence(evidence: dict[str, Any], output_root: Path | str, secrets:
         raise
 
 
+def verify_checksums(bundle_root: Path | str) -> bool:
+    """Verify every sorted SHA256SUMS entry and reject missing/extra artifacts."""
+    root = Path(bundle_root).expanduser().resolve()
+    manifest = root / "SHA256SUMS"
+    if not manifest.is_file():
+        raise EvidencePublicationError("SHA256SUMS is missing")
+    entries = []
+    for line in manifest.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        digest, separator, relative = line.partition("  ")
+        if not separator or len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest.lower()):
+            raise EvidencePublicationError("malformed SHA256SUMS entry")
+        path = (root / relative).resolve()
+        if root not in path.parents or not path.is_file() or relative == "SHA256SUMS":
+            raise EvidencePublicationError("checksum path escapes bundle or names manifest")
+        entries.append((relative, digest))
+        if hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            raise EvidencePublicationError(f"checksum mismatch: {relative}")
+    expected = sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file() and path.name != "SHA256SUMS")
+    if [relative for relative, _ in entries] != expected:
+        raise EvidencePublicationError("SHA256SUMS does not cover exactly the evidence files")
+    return True
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", required=True)

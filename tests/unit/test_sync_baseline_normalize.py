@@ -18,6 +18,7 @@ normalize_probe_result = _MODULE.normalize_probe_result
 publish_evidence = _MODULE.publish_evidence
 run_with_retry = _MODULE.run_with_retry
 select_catalog_sample = _MODULE.select_catalog_sample
+verify_checksums = _MODULE.verify_checksums
 validate_probe_invariants = _MODULE.validate_probe_invariants
 
 
@@ -90,5 +91,9 @@ def test_publish_evidence_writes_canonical_checksums_and_rejects_secret(tmp_path
     assert "baseline.json" in sums and "SHA256SUMS" not in sums
     original = (result / "baseline.json").read_bytes()
     assert original == (result / "baseline.json").read_bytes()
+    assert verify_checksums(result)
+    (result / "baseline.json").write_text("tampered\n")
+    with pytest.raises(EvidencePublicationError):
+        verify_checksums(result)
     with pytest.raises(EvidencePublicationError):
         publish_evidence({"secret": {"token": "secret-value"}, "stages": {"unit": "green"}}, tmp_path / "secret", ["secret-value"], ["unit"])
