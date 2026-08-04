@@ -138,6 +138,7 @@ def run_python_probe() -> dict[str, Any]:
     started = time.monotonic()
     universe = ToolUniverse()
     try:
+        universe.load_tools(include_tools=[REFERENCE_TOOL])
         found = universe.find_tools_by_pattern(
             REFERENCE_TOOL, search_in="name", case_sensitive=True
         )

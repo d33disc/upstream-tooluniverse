@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Fetch authoritative upstream ref
+        run: |
+          git remote add upstream https://github.com/mims-harvard/ToolUniverse.git
+          git fetch --no-tags --depth=1 upstream main
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
