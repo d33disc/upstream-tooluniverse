@@ -96,3 +96,15 @@ def test_plugin_mapping_requires_authoritative_ancestry(tmp_path: Path) -> None:
     r = repo(tmp_path)
     with pytest.raises(GitCaptureError):
         prove_plugin_link_mapping(r, git(r, "rev-parse", "HEAD"), {"a": "skills/missing"})
+
+
+@pytest.mark.integration
+def test_authoritative_plugin_mapping_is_proven_in_checkout() -> None:
+    root = Path(__file__).parents[2]
+    mapping = {
+        "computational": "skills/tooluniverse-computational-biophysics",
+        "organic": "skills/tooluniverse-organic-chemistry",
+        "interaction": "skills/tooluniverse-drug-drug-interaction",
+    }
+    proof = prove_plugin_link_mapping(root, git(root, "rev-parse", "upstream/main"), mapping)
+    assert proof["proven"] is True
