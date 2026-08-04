@@ -8,10 +8,15 @@ secondary worktree and caller-provided output directory.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -22,6 +27,18 @@ PRESERVATION_CLASSES = (
     "other_review_required",
 )
 FINAL_FLAGS = ("ci_evidence", "publish_root", "result_json")
+
+
+class BaselineValidationError(ValueError):
+    """A probe result or evidence bundle violates the baseline contract."""
+
+
+class RetryExhaustedError(RuntimeError):
+    """A retryable probe failed on every bounded attempt."""
+
+
+class EvidencePublicationError(ValueError):
+    """Evidence cannot be published safely or completely."""
 
 
 class GitCaptureError(RuntimeError):
@@ -226,6 +243,226 @@ def prove_plugin_link_mapping(repo: Path | str, authoritative_oid: str, mappings
     if not any(os.readlink(p).startswith("../../skills/") for p in siblings):
         raise GitCaptureError("no conforming sibling plugin link")
     return {"authoritative_oid": authoritative_oid, "pr161_merge_oid": PR161_MERGE, "mappings": mappings, "proven": True}
+
+
+# The following helpers are deliberately stdlib-only.  Baseline evidence is a
+# contract consumed by later sync phases, so normalization must be explicit,
+# conservative, and independent of the live provider implementation.
+_VOLATILE_PARTS = re.compile(r"(?:^|\.)([^.\[\]]+)|\[([^\]]+)\]")
+
+
+def _path_parts(path: str | Iterable[Any]) -> tuple[Any, ...]:
+    if not isinstance(path, str):
+        return tuple(path)
+    value = path[2:] if path.startswith("$.") else path.lstrip(".")
+    parts: list[Any] = []
+    for match in _VOLATILE_PARTS.finditer(value):
+        token = match.group(1) if match.group(1) is not None else match.group(2)
+        parts.append(int(token) if token.isdigit() else token.strip("'\""))
+    return tuple(parts)
+
+
+def _path_matches(path: tuple[Any, ...], pattern: tuple[Any, ...]) -> bool:
+    return len(path) == len(pattern) and all(a == b or b == "*" for a, b in zip(path, pattern))
+
+
+def normalize_probe_result(value: Any, volatile_paths: Iterable[str | Iterable[Any]] = (), unordered_arrays: dict[str, str] | Iterable[str | Iterable[Any]] = ()) -> Any:
+    """Return a conservative, deterministic copy of a JSON-compatible result.
+
+    Volatile values are replaced only at exact allowlisted paths.  Mappings are
+    rebuilt in key order; arrays retain order unless explicitly listed as
+    unordered, in which case the configured identity key is used.
+    """
+    volatile = [_path_parts(path) for path in volatile_paths]
+    if isinstance(unordered_arrays, dict):
+        unordered = {_path_parts(path): key for path, key in unordered_arrays.items()}
+    else:
+        unordered = {_path_parts(path): "id" for path in unordered_arrays}
+
+    def walk(item: Any, path: tuple[Any, ...]) -> Any:
+        if any(_path_matches(path, pattern) for pattern in volatile):
+            return "<volatile>"
+        if isinstance(item, dict):
+            return {key: walk(item[key], path + (key,)) for key in sorted(item)}
+        if isinstance(item, list):
+            result = [walk(child, path + (index,)) for index, child in enumerate(item)]
+            key = next((identity for pattern, identity in unordered.items() if _path_matches(path, pattern)), None)
+            if key:
+                try:
+                    result.sort(key=lambda child: (str(child.get(key)), json.dumps(child, sort_keys=True, default=str)))
+                except (AttributeError, TypeError):
+                    raise BaselineValidationError(f"unordered array at {path} must contain mapping items")
+            return result
+        if item is None or isinstance(item, (str, int, float, bool)):
+            return item
+        raise BaselineValidationError(f"result is not JSON serializable at {path}")
+
+    return walk(value, ())
+
+
+def _type_matches(value: Any, expected: str | type) -> bool:
+    if isinstance(expected, type):
+        return isinstance(value, expected) and not (expected is int and isinstance(value, bool))
+    return {"object": dict, "array": list, "string": str, "number": (int, float), "integer": int, "boolean": bool, "null": type(None)}.get(expected, object) is type(value) or (expected == "number" and isinstance(value, (int, float)) and not isinstance(value, bool))
+
+
+def validate_probe_invariants(spec: dict[str, Any], raw: Any, normalized: Any, expected: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Validate schema/status/domain invariants and return a typed outcome."""
+    if not isinstance(normalized, dict) or not isinstance(raw, dict):
+        raise BaselineValidationError("probe result must be a JSON object")
+    if json.dumps(normalized, sort_keys=True, ensure_ascii=False) is None:
+        raise BaselineValidationError("probe result is not JSON serializable")
+    status = normalized.get("status", "success" if "data" in normalized else "error" if "error" in normalized else None)
+    allowed = spec.get("statuses", ("success", "error"))
+    if status not in allowed:
+        raise BaselineValidationError(f"unexpected structured status: {status!r}")
+    if status == "error" and not spec.get("expects_error", False):
+        raise BaselineValidationError("unexpected structured error")
+    required = spec.get("required_keys", ())
+    missing = [key for key in required if key not in normalized]
+    if missing:
+        raise BaselineValidationError(f"missing required keys: {missing}")
+    for key, kind in spec.get("types", {}).items():
+        if key in normalized and not _type_matches(normalized[key], kind):
+            raise BaselineValidationError(f"key {key!r} has wrong type")
+    expected = expected or {}
+    for path, wanted in expected.get("equals", {}).items():
+        actual: Any = normalized
+        for part in _path_parts(path):
+            try:
+                actual = actual[part]
+            except (KeyError, IndexError, TypeError) as exc:
+                raise BaselineValidationError(f"missing invariant path: {path}") from exc
+        if actual != wanted:
+            raise BaselineValidationError(f"invariant drift at {path}: {actual!r} != {wanted!r}")
+    for check in expected.get("checks", ()):
+        if not check(normalized):
+            raise BaselineValidationError("domain invariant failed")
+    return {"status": status, "valid": True, "normalized": normalized}
+
+
+def classify_retryable(outcome: Any) -> bool:
+    """Classify transient failures without retrying auth/schema/domain errors."""
+    status = outcome if isinstance(outcome, int) else outcome.get("status_code") if isinstance(outcome, dict) else getattr(outcome, "status_code", None)
+    if status in {408, 429, 500, 502, 503, 504}:
+        return True
+    if isinstance(outcome, (TimeoutError, ConnectionError, TimeoutError)):
+        return True
+    if isinstance(outcome, BaseException):
+        return outcome.__class__.__name__.lower() in {"timeouterror", "connectionerror", "connecterror"}
+    return False
+
+
+def run_with_retry(run_once, sleep=time.sleep, attempts: int = 3, delay: float = 2.0) -> Any:
+    """Run a probe at most three times, with exactly fixed-delay retries."""
+    if attempts != 3:
+        raise ValueError("baseline retry policy requires exactly three attempts")
+    diagnostics = []
+    for attempt in range(1, attempts + 1):
+        try:
+            result = run_once()
+        except Exception as exc:  # provider exceptions are evidence, not leaks
+            result = exc
+        diagnostics.append({"attempt": attempt, "retryable": classify_retryable(result), "outcome": _safe_diagnostic(result)})
+        if not classify_retryable(result):
+            if isinstance(result, BaseException):
+                raise result
+            return result
+        if attempt < attempts:
+            sleep(delay)
+    raise RetryExhaustedError(json.dumps({"attempts": diagnostics}, sort_keys=True))
+
+
+def _safe_diagnostic(value: Any) -> dict[str, Any] | str:
+    if isinstance(value, BaseException):
+        return {"type": value.__class__.__name__, "message": str(value)[:240]}
+    if isinstance(value, dict):
+        return {"status_code": value.get("status_code"), "status": value.get("status"), "error_type": value.get("error_type")}
+    return str(value)[:240]
+
+
+def build_provider_manifest(tool_definitions: Iterable[dict[str, Any]], credential_specs: dict[str, Any] | None = None, environment: dict[str, str] | None = None) -> dict[str, Any]:
+    """Project credential specs to names/booleans and require mappings."""
+    try:
+        from tooluniverse.config_env import ToolUniverseConfig
+        specs = credential_specs or ToolUniverseConfig.CREDENTIAL_SPECS
+    except ImportError:
+        specs = credential_specs or {}
+    environment = environment or os.environ
+    tools = list(tool_definitions)
+    manifest = []
+    for env_name, spec in sorted(specs.items()):
+        service = spec.get("service", env_name) if isinstance(spec, dict) else env_name
+        category = spec.get("category") if isinstance(spec, dict) else None
+        matches = [str(tool.get("name")) for tool in tools if category and category.lower() in json.dumps(tool, sort_keys=True).lower() or service.lower() in json.dumps(tool, sort_keys=True).lower()]
+        configured = bool(environment.get(env_name))
+        manifest.append({"credential_name": env_name, "service": service, "category": category, "configured": configured, "selected_tools": sorted(set(matches))[:3], "blocking": configured and not matches})
+    return {"providers": manifest, "configured_families": [item["credential_name"] for item in manifest if item["configured"]], "value_free": True}
+
+
+def select_catalog_sample(tool_definitions: Iterable[dict[str, Any]], fork_oid: str, categories: Iterable[str] | None = None) -> dict[str, Any]:
+    """Choose one stable representative per category using SHA-256 scoring."""
+    tools = [tool for tool in tool_definitions if tool.get("name")]
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for tool in tools:
+        category = str(tool.get("category") or tool.get("type") or "uncategorized")
+        grouped.setdefault(category, []).append(tool)
+    if categories is not None:
+        grouped = {category: grouped[category] for category in sorted(set(categories)) if category in grouped}
+    choices = {}
+    for category, candidates in sorted(grouped.items()):
+        eligible = sorted(candidates, key=lambda item: str(item["name"]))
+        scored = [(hashlib.sha256(f"{fork_oid}{category}{item['name']}".encode()).hexdigest(), str(item["name"])) for item in eligible]
+        choices[category] = min(scored)[1]
+    return {"seed": fork_oid, "candidate_counts": {key: len(value) for key, value in sorted(grouped.items())}, "choices": choices, "tier": "catalog_category"}
+
+
+def _canonical_json(path: Path, value: Any) -> None:
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _contains_secret(path: Path, secrets: Iterable[str]) -> bool:
+    data = path.read_bytes()
+    return any(secret and secret.encode() in data for secret in secrets)
+
+
+def publish_evidence(evidence: dict[str, Any], output_root: Path | str, secrets: Iterable[str] = (), required_stages: Iterable[str] = ()) -> Path:
+    """Validate and atomically publish a canonical evidence tree."""
+    output = Path(output_root).expanduser().resolve()
+    if output.exists() and output.is_symlink():
+        raise EvidencePublicationError("output root must not be a symlink")
+    if any(part.is_symlink() for part in [output, *output.parents]):
+        raise EvidencePublicationError("output path contains symlink component")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    stage = Path(tempfile.mkdtemp(prefix="baseline-", dir=output.parent))
+    try:
+        for name, value in sorted(evidence.items()):
+            target = stage / (name if name.endswith(".json") else f"{name}.json")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            _canonical_json(target, value)
+        stages = evidence.get("stages", {})
+        missing = sorted(set(required_stages) - set(stages))
+        if missing or any(stages.get(name) != "green" for name in required_stages):
+            raise EvidencePublicationError(f"required stages incomplete: {missing or required_stages}")
+        for path in stage.rglob("*"):
+            if path.is_file() and _contains_secret(path, secrets):
+                raise EvidencePublicationError(f"credential canary found in {path.name}")
+        entries = []
+        for path in sorted(p for p in stage.rglob("*") if p.is_file()):
+            rel = path.relative_to(stage).as_posix()
+            entries.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {rel}")
+        (stage / "SHA256SUMS").write_text("\n".join(entries) + "\n", encoding="utf-8")
+        if output.exists():
+            if output.is_dir() and any(output.iterdir()):
+                raise EvidencePublicationError("output root must be empty")
+            if output.is_file():
+                raise EvidencePublicationError("output root is a file")
+            output.rmdir()
+        stage.rename(output)
+        return output
+    except Exception:
+        shutil.rmtree(stage, ignore_errors=True)
+        raise
 
 
 def _parser() -> argparse.ArgumentParser:
