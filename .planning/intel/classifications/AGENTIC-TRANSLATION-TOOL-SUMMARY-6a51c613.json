@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md",
+  "type": "DOC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Agentic Translation Tool 实现总结",
+  "summary": "Summarizes the AgenticTool-based PO translation implementation, features, configuration, usage, test results, file structure, advantages, and possible extensions.",
+  "scope": [
+    "AgenticTool",
+    "PO file translation",
+    "translation_agentic_tool.py",
+    "batch_translate_po.py",
+    "Chinese documentation"
+  ],
+  "cross_refs": [
+    "TRANSLATION_AGENTIC_TOOL_GUIDE.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/Adding_Tools_Tutorial.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Adding Tools to ToolUniverse - Complete Tutorial",
+  "summary": "Tutorial for adding custom tools to ToolUniverse through decorator-based automatic registration or manual registration.",
+  "scope": [
+    "ToolUniverse",
+    "custom tools",
+    "tool registration",
+    "automatic discovery",
+    "tool configuration"
+  ],
+  "cross_refs": [
+    "../api/tooluniverse.exceptions.rst"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

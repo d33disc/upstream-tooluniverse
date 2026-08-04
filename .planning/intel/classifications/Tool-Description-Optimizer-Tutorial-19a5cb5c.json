@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/Tool_Description_Optimizer_Tutorial.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Tool Description Optimizer - Complete Tutorial",
+  "summary": "Tutorial for configuring, running, evaluating, troubleshooting, and integrating ToolDescriptionOptimizer workflows for single or batched ToolUniverse tools.",
+  "scope": [
+    "ToolDescriptionOptimizer",
+    "tool descriptions",
+    "parameter descriptions",
+    "quality scoring",
+    "optimization reports",
+    "batch optimization",
+    "ToolOptimizationManager"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

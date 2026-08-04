@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/TEST_WRITING_GUIDE.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Test Writing Guide for ToolUniverse",
+  "summary": "Guide to writing ToolUniverse tests that handle nested and legacy flat responses, status values, errors, and integration-test concerns.",
+  "scope": [
+    "ToolUniverse",
+    "tests",
+    "response structures",
+    "status handling",
+    "error responses"
+  ],
+  "cross_refs": [
+    "TEST_FIXES_SUMMARY.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

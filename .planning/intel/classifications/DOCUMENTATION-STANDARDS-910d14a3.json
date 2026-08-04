@@ -1,0 +1,40 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/DOCUMENTATION_STANDARDS.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Documentation standards",
+  "summary": "Maintainer standards for keeping ToolUniverse documentation accurate, durable, consistently organized, and safely generated.",
+  "scope": [
+    "documentation sources of truth",
+    "generated documentation",
+    "documentation structure",
+    "commands and examples",
+    "MCP terminology",
+    "documentation review"
+  ],
+  "cross_refs": [
+    "TOOL_MANIFEST.json",
+    "docs/api/tooluniverse.*.rst",
+    "docs/tools/*_tools.rst",
+    "docs/guide/skills_showcase.rst",
+    "docs/locale/",
+    "README.md",
+    "AGENTS.md",
+    "plugin/README.md",
+    "docs/index.rst",
+    "docs/guide/",
+    "docs/reference/",
+    "docs/expand_tooluniverse/",
+    "docs/help/",
+    "docs/about/",
+    "docs/dev_docs/",
+    "docs/tools/",
+    "docs/api/",
+    "docs/sitemap.rst",
+    "docs/dev_docs/VALIDATION_GUIDE.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

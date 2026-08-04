@@ -1,0 +1,22 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/superpowers/specs/2026-04-17-patent-tools-tier1-design.md",
+  "type": "SPEC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Patent Tools Tier 1 -- Design Spec",
+  "summary": "Specifies six USPTO patent-analysis tools, a DSAPI base class, implementation decisions, code standards, build order, and test patents.",
+  "scope": [
+    "USPTO ODP tools",
+    "patent number resolver",
+    "patent assignments",
+    "patent claims",
+    "enriched citations",
+    "DSAPITool"
+  ],
+  "cross_refs": [
+    "python-library.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

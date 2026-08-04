@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/uspto_downloader.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "USPTO Downloader Tool Setup",
+  "summary": "Tutorial for configuring and running the GPU-backed USPTO patent downloader MCP server and connecting to it from ToolUniverse.",
+  "scope": [
+    "USPTO downloader",
+    "patent documents",
+    "MCP server",
+    "ToolUniverse",
+    "GPU optical character recognition",
+    "environment configuration"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

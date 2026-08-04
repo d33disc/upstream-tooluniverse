@@ -1,0 +1,19 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/mcp_tool_registration_en.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "MCP Tool Registration Tutorial - Register Local Tools as MCP Tools",
+  "summary": "Tutorial for registering local ToolUniverse tools, exposing them through MCP servers, loading them remotely, testing integrations, and applying production practices.",
+  "scope": [
+    "MCP tools",
+    "register_mcp_tool",
+    "MCP servers",
+    "remote tool loading",
+    "ToolUniverse"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

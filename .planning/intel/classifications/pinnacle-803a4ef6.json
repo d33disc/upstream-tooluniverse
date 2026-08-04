@@ -1,0 +1,19 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/pinnacle.md",
+  "type": "DOC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "PINNACLE Protein-Protein Interaction Tool",
+  "summary": "Guides PINNACLE embedding acquisition, environment configuration, tool inputs and outputs, embedding properties, and MCP server setup.",
+  "scope": [
+    "PINNACLE",
+    "protein-protein interaction embeddings",
+    "cell types",
+    "PINNACLE_DATA_PATH",
+    "MCP server"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": "Contains input and output specifications, but its dominant structure is a data acquisition and server setup guide."
+}
