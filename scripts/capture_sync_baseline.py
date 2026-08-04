@@ -426,9 +426,13 @@ def _contains_secret(path: Path, secrets: Iterable[str]) -> bool:
     return any(secret and secret.encode() in data for secret in secrets)
 
 
-def publish_evidence(evidence: dict[str, Any], output_root: Path | str, secrets: Iterable[str] = (), required_stages: Iterable[str] = ()) -> Path:
+def publish_evidence(evidence: dict[str, Any], output_root: Path | str, secrets: Iterable[str] = (), required_stages: Iterable[str] = (), worktree_root: Path | str | None = None) -> Path:
     """Validate and atomically publish a canonical evidence tree."""
     output = Path(output_root).expanduser().resolve()
+    if worktree_root is not None:
+        worktree = Path(worktree_root).expanduser().resolve()
+        if output == worktree or worktree in output.parents:
+            raise EvidencePublicationError("output root must be outside the isolated worktree")
     if output.exists() and output.is_symlink():
         raise EvidencePublicationError("output root must not be a symlink")
     if any(part.is_symlink() for part in [output, *output.parents]):

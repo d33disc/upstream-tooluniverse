@@ -97,3 +97,5 @@ def test_publish_evidence_writes_canonical_checksums_and_rejects_secret(tmp_path
         verify_checksums(result)
     with pytest.raises(EvidencePublicationError):
         publish_evidence({"secret": {"token": "secret-value"}, "stages": {"unit": "green"}}, tmp_path / "secret", ["secret-value"], ["unit"])
+    with pytest.raises(EvidencePublicationError):
+        publish_evidence({"stages": {"unit": "green"}}, tmp_path / "worktree" / "bundle", worktree_root=tmp_path / "worktree", required_stages=["unit"])
