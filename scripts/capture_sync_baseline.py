@@ -274,8 +274,6 @@ def run_mcp_stdio_probe() -> dict[str, Any]:
         "tooluniverse.smcp_server",
         "--transport",
         "stdio",
-        "--include-tools",
-        REFERENCE_TOOL,
         "--compact-mode",
     ]
     proc = subprocess.Popen(
@@ -447,8 +445,6 @@ def run_mcp_http_probe() -> dict[str, Any]:
             "127.0.0.1",
             "--port",
             str(port),
-            "--include-tools",
-            REFERENCE_TOOL,
             "--compact-mode",
         ],
         stdout=subprocess.PIPE,
@@ -543,6 +539,13 @@ def run_rest_probe() -> dict[str, Any]:
             )
             with urllib.request.urlopen(request, timeout=60) as response:
                 return json.loads(response.read())
+
+        post(
+            {
+                "method": "load_tools",
+                "kwargs": {"include_tools": [REFERENCE_TOOL]},
+            }
+        )
 
         discover = {
             "name": "discover",
