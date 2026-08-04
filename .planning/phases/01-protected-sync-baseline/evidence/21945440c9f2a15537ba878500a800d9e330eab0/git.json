@@ -1,0 +1,39 @@
+{
+  "branch": "docs/gsd-codebase-map",
+  "detached": false,
+  "divergence": {
+    "fork_only": 122,
+    "upstream_only": 0
+  },
+  "head": "21945440c9f2a15537ba878500a800d9e330eab0",
+  "merge_base": "56adcfd9c299078d0c40fde642b0be006510ccf3",
+  "pr161_ancestor": true,
+  "pr161_merge_oid": "16af425c053c306a658c96e254b4c4114338dd11",
+  "repo": "/Users/davis/code/ToolUniverse",
+  "staged_records": [],
+  "status_records": [
+    "# branch.oid 21945440c9f2a15537ba878500a800d9e330eab0",
+    "# branch.head docs/gsd-codebase-map",
+    "# branch.upstream origin/docs/gsd-codebase-map",
+    "# branch.ab +0 -0",
+    "? .planning/config.json",
+    "? ralph-specs/fleet/results/cas-checkdigit.json",
+    "? ralph-specs/fleet/results/ensembl-format.json",
+    "? ralph-specs/fleet/results/hgnc-format.json",
+    "? ralph-specs/fleet/results/inchikey-format.json",
+    "? ralph-specs/fleet/results/mondo-format.json",
+    "? ralph-specs/fleet/results/nct-format.json"
+  ],
+  "unstaged_records": [],
+  "untracked_paths": [
+    ".planning/config.json",
+    "ralph-specs/fleet/results/cas-checkdigit.json",
+    "ralph-specs/fleet/results/ensembl-format.json",
+    "ralph-specs/fleet/results/hgnc-format.json",
+    "ralph-specs/fleet/results/inchikey-format.json",
+    "ralph-specs/fleet/results/mondo-format.json",
+    "ralph-specs/fleet/results/nct-format.json"
+  ],
+  "upstream_local_oid": "56adcfd9c299078d0c40fde642b0be006510ccf3",
+  "upstream_remote_oid": "56adcfd9c299078d0c40fde642b0be006510ccf3"
+}

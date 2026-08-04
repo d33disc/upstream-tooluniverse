@@ -1,0 +1,268 @@
+{
+  "configured_families": [
+    "DEEPSEEK_API_KEY",
+    "FDA_API_KEY",
+    "HF_TOKEN",
+    "ICD_CLIENT_ID",
+    "JINA_API_KEY",
+    "NCBI_API_KEY",
+    "NVIDIA_API_KEY",
+    "OPENAI_API_KEY",
+    "OPENROUTER_API_KEY",
+    "SEMANTIC_SCHOLAR_API_KEY",
+    "TAVILY_API_KEY",
+    "USPTO_API_KEY"
+  ],
+  "providers": [
+    {
+      "blocking": false,
+      "category": "Plasmid Repository",
+      "configured": false,
+      "credential_name": "ADDGENE_API_KEY",
+      "selected_tools": [],
+      "service": "Addgene"
+    },
+    {
+      "blocking": false,
+      "category": "Financial Data",
+      "configured": false,
+      "credential_name": "ALPHA_VANTAGE_API_KEY",
+      "selected_tools": [],
+      "service": "Alpha Vantage"
+    },
+    {
+      "blocking": false,
+      "category": "LLM",
+      "configured": false,
+      "credential_name": "ANTHROPIC_API_KEY",
+      "selected_tools": [],
+      "service": "Anthropic"
+    },
+    {
+      "blocking": false,
+      "category": "Protein Interactions",
+      "configured": false,
+      "credential_name": "BIOGRID_ACCESS_KEY",
+      "selected_tools": [],
+      "service": "BioGRID"
+    },
+    {
+      "blocking": false,
+      "category": "Search Engine",
+      "configured": false,
+      "credential_name": "BRAVE_API_KEY",
+      "selected_tools": [],
+      "service": "Brave"
+    },
+    {
+      "blocking": false,
+      "category": "Enzyme Database",
+      "configured": false,
+      "credential_name": "BRENDA_EMAIL",
+      "selected_tools": [],
+      "service": "BRENDA"
+    },
+    {
+      "blocking": false,
+      "category": "Enzyme Database",
+      "configured": false,
+      "credential_name": "BRENDA_PASSWORD",
+      "selected_tools": [],
+      "service": "BRENDA"
+    },
+    {
+      "blocking": false,
+      "category": "Drug Repurposing",
+      "configured": false,
+      "credential_name": "CLUE_API_KEY",
+      "selected_tools": [],
+      "service": "CLUE.io"
+    },
+    {
+      "blocking": false,
+      "category": "Academic Data",
+      "configured": false,
+      "credential_name": "CORE_API_KEY",
+      "selected_tools": [],
+      "service": "CORE"
+    },
+    {
+      "blocking": true,
+      "category": "LLM",
+      "configured": true,
+      "credential_name": "DEEPSEEK_API_KEY",
+      "selected_tools": [],
+      "service": "DeepSeek"
+    },
+    {
+      "blocking": false,
+      "category": "Gene-Disease",
+      "configured": false,
+      "credential_name": "DISGENET_API_KEY",
+      "selected_tools": [],
+      "service": "DisGeNET"
+    },
+    {
+      "blocking": false,
+      "category": "AI Search",
+      "configured": false,
+      "credential_name": "EXA_API_KEY",
+      "selected_tools": [],
+      "service": "Exa"
+    },
+    {
+      "blocking": true,
+      "category": "Regulatory",
+      "configured": true,
+      "credential_name": "FDA_API_KEY",
+      "selected_tools": [],
+      "service": "OpenFDA"
+    },
+    {
+      "blocking": false,
+      "category": "LLM",
+      "configured": false,
+      "credential_name": "GEMINI_API_KEY",
+      "selected_tools": [],
+      "service": "Google Gemini"
+    },
+    {
+      "blocking": true,
+      "category": "LLM/Embeddings",
+      "configured": true,
+      "credential_name": "HF_TOKEN",
+      "selected_tools": [],
+      "service": "Hugging Face"
+    },
+    {
+      "blocking": true,
+      "category": "Disease Classification",
+      "configured": true,
+      "credential_name": "ICD_CLIENT_ID",
+      "selected_tools": [],
+      "service": "WHO ICD-11"
+    },
+    {
+      "blocking": true,
+      "category": "Web Reading",
+      "configured": true,
+      "credential_name": "JINA_API_KEY",
+      "selected_tools": [],
+      "service": "Jina AI"
+    },
+    {
+      "blocking": false,
+      "category": "Compound Sourcing",
+      "configured": false,
+      "credential_name": "MCULE_API_KEY",
+      "selected_tools": [],
+      "service": "MCule"
+    },
+    {
+      "blocking": true,
+      "category": "Biomedical Data",
+      "configured": true,
+      "credential_name": "NCBI_API_KEY",
+      "selected_tools": [],
+      "service": "NCBI"
+    },
+    {
+      "blocking": false,
+      "category": "Vector Visualization",
+      "configured": false,
+      "credential_name": "NOMIC_API_KEY",
+      "selected_tools": [],
+      "service": "Nomic"
+    },
+    {
+      "blocking": true,
+      "category": "GPU Inference",
+      "configured": true,
+      "credential_name": "NVIDIA_API_KEY",
+      "selected_tools": [],
+      "service": "NVIDIA NIM"
+    },
+    {
+      "blocking": false,
+      "category": "Local LLM",
+      "configured": false,
+      "credential_name": "OLLAMA_API_KEY",
+      "selected_tools": [],
+      "service": "Ollama"
+    },
+    {
+      "blocking": false,
+      "category": "Genetic Database",
+      "configured": false,
+      "credential_name": "OMIM_API_KEY",
+      "selected_tools": [],
+      "service": "OMIM"
+    },
+    {
+      "blocking": false,
+      "category": "Cancer Variants",
+      "configured": false,
+      "credential_name": "ONCOKB_API_TOKEN",
+      "selected_tools": [],
+      "service": "OncoKB"
+    },
+    {
+      "blocking": true,
+      "category": "LLM",
+      "configured": true,
+      "credential_name": "OPENAI_API_KEY",
+      "selected_tools": [],
+      "service": "OpenAI"
+    },
+    {
+      "blocking": true,
+      "category": "LLM",
+      "configured": true,
+      "credential_name": "OPENROUTER_API_KEY",
+      "selected_tools": [],
+      "service": "OpenRouter"
+    },
+    {
+      "blocking": false,
+      "category": "Pharmacogenomics",
+      "configured": false,
+      "credential_name": "PHARMVAR_API_KEY",
+      "selected_tools": [],
+      "service": "PharmVar"
+    },
+    {
+      "blocking": true,
+      "category": "Academic Search",
+      "configured": true,
+      "credential_name": "SEMANTIC_SCHOLAR_API_KEY",
+      "selected_tools": [],
+      "service": "Semantic Scholar"
+    },
+    {
+      "blocking": true,
+      "category": "Web Search",
+      "configured": true,
+      "credential_name": "TAVILY_API_KEY",
+      "selected_tools": [],
+      "service": "Tavily"
+    },
+    {
+      "blocking": true,
+      "category": "Patents",
+      "configured": true,
+      "credential_name": "USPTO_API_KEY",
+      "selected_tools": [],
+      "service": "USPTO"
+    },
+    {
+      "blocking": false,
+      "category": "Citation Management",
+      "configured": false,
+      "credential_name": "ZOTERO_API_KEY",
+      "selected_tools": [],
+      "service": "Zotero"
+    }
+  ],
+  "status": "green",
+  "value_free": true
+}

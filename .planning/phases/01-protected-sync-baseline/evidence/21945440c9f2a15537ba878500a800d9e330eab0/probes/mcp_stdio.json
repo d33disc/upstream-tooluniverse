@@ -1,0 +1,89 @@
+{
+  "arguments": [
+    "formula",
+    "operation"
+  ],
+  "assert": {
+    "duration_ms": 0.086,
+    "name": "assert",
+    "outcome": {
+      "normalized": {
+        "data": {
+          "C": 6,
+          "H": 6,
+          "N": 0,
+          "O": 0,
+          "S": 0,
+          "calculation": "(2*6 + 2 + 0 - 6 - 0) / 2 = 4.0",
+          "degrees_of_unsaturation": 4.0,
+          "formula": "C6H6",
+          "halogens": 0,
+          "interpretation": "Four degrees — consistent with a benzene ring (3 C=C + 1 ring).",
+          "is_integer": true
+        },
+        "status": "success"
+      },
+      "status": "success",
+      "valid": true
+    },
+    "status": "success"
+  },
+  "discover": {
+    "name": "discover",
+    "outcome": {
+      "tools": [
+        "list_tools",
+        "grep_tools",
+        "get_tool_info",
+        "execute_tool",
+        "find_tools"
+      ]
+    },
+    "status": "success"
+  },
+  "execute": {
+    "name": "execute",
+    "outcome": {
+      "data": {
+        "C": 6,
+        "H": 6,
+        "N": 0,
+        "O": 0,
+        "S": 0,
+        "calculation": "(2*6 + 2 + 0 - 6 - 0) / 2 = 4.0",
+        "degrees_of_unsaturation": 4.0,
+        "formula": "C6H6",
+        "halogens": 0,
+        "interpretation": "Four degrees — consistent with a benzene ring (3 C=C + 1 ring).",
+        "is_integer": true
+      },
+      "status": "success"
+    },
+    "status": "success"
+  },
+  "inspect": {
+    "name": "inspect",
+    "outcome": {
+      "content": [
+        {
+          "text": "2 validation errors for call[get_tool_info]\ntool_names\n  Missing required argument [type=missing_argument, input_value={'tool_name': 'DegreesOfUnsaturation_calculate'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing_argument\ntool_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='DegreesOfUnsaturation_calculate', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/unexpected_keyword_argument",
+          "type": "text"
+        }
+      ],
+      "isError": true
+    },
+    "status": "success"
+  },
+  "schema_inspected": true,
+  "structured_error": {
+    "name": "structured_error",
+    "outcome": {
+      "error": "{'content': [{'type': 'text', 'text': '{\"status\": \"error\", \"error\": \"Parameter validation failed for \\'operation\\': \\'invalid\\' is not one of [\\'calculate\\']. Allowed values: [\\'calculate\\'].\", \"error_details\": {\"type\": \"ToolValidationError",
+      "status": "error"
+    },
+    "status": "success"
+  },
+  "surface": "mcp-stdio",
+  "tier": "local",
+  "tool": "DegreesOfUnsaturation_calculate"
+}

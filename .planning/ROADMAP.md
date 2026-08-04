@@ -13,7 +13,7 @@ This milestone moves from a protected, measurable fork baseline to a staged upst
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Protected Sync Baseline** - Establish exact revisions, measurable behavior, and the fork-specific preservation contract
+- [x] **Phase 1: Protected Sync Baseline** - Establish exact revisions, measurable behavior, and the fork-specific preservation contract
 - [ ] **Phase 2: Upstream Main Integration** - Integrate upstream main while retaining custom behavior and resolving conflicts deliberately
 - [ ] **Phase 3: Follow-up and Catalog Reconciliation** - Resolve PR #161 status and restore a coherent, fully registered runtime catalog
 - [ ] **Phase 4: Documentation and Semantic Index** - Align documentation and embeddings with the synchronized loadable catalog
@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Maintainer can rerun the recorded test, catalog-load, discovery, and representative execution checks and reproduce the pre-sync result set.
   3. Maintainer can inspect a preservation inventory covering custom code, tool definitions, plugins, generated assets, and symlink targets before resolving any conflict.
 
-**Plans**: 2/5 plans executed
+**Plans**: 5/5 plans executed
 
 Plans:
 **Wave 1**
@@ -53,7 +53,7 @@ Plans:
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
-- [ ] 01-05-PLAN.md — Pass the remote-availability checkpoint and publish the exact-commit fully green baseline.
+- [x] 01-05-PLAN.md — Pass the remote-availability checkpoint and publish the exact-commit fully green baseline.
 
 ### Phase 2: Upstream Main Integration
 
@@ -118,7 +118,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Protected Sync Baseline | 2/5 | In Progress|  |
+| 1. Protected Sync Baseline | 5/5 | Complete | 2026-08-04 |
 | 2. Upstream Main Integration | 0/TBD | Not started | - |
 | 3. Follow-up and Catalog Reconciliation | 0/TBD | Not started | - |
 | 4. Documentation and Semantic Index | 0/TBD | Not started | - |

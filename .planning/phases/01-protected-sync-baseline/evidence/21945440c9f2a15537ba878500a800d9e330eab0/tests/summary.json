@@ -1,0 +1,32 @@
+{
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "Python 3.13 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.10 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.12 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.14 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.11 compatibility",
+      "status": "completed"
+    }
+  ],
+  "run_id": 30938185985,
+  "source": "Actions run",
+  "status": "green"
+}
