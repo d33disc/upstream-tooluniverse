@@ -28,7 +28,23 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Maintainer can name the exact fork and upstream revisions, review their divergence, and distinguish pre-existing worktree changes from synchronization work.
   2. Maintainer can rerun the recorded test, catalog-load, discovery, and representative execution checks and reproduce the pre-sync result set.
   3. Maintainer can inspect a preservation inventory covering custom code, tool definitions, plugins, generated assets, and symlink targets before resolving any conflict.
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+**Wave 1**
+- [ ] 01-01-PLAN.md — Capture immutable Git provenance, inventory protected assets, and repair three plugin links from authoritative PR #161 evidence.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 01-02-PLAN.md — Normalize evidence, map configured providers, bound retries, and publish tamper-evident artifacts.
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 01-03-PLAN.md — Certify discover → inspect → execute across Python, CLI, MCP stdio/HTTP, and REST.
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 01-04-PLAN.md — Define Python 3.10–3.14 hosted CI and fail-closed exact-head evidence collection.
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [ ] 01-05-PLAN.md — Pass the remote-availability checkpoint and publish the exact-commit fully green baseline.
 
 ### Phase 2: Upstream Main Integration
 **Goal**: The fork contains the selected upstream-main revision without losing its custom capabilities

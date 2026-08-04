@@ -554,27 +554,24 @@ Security enforcement is enabled because `.planning/config.json` does not explici
 | A5 | Python 3.10 through 3.14 represent the current stable declared range for CI. | Test matrix | A newly stable interpreter could appear before implementation; planner should query current setup-python availability and append it. |
 | A6 | The three broken tracked links should block preservation sign-off. | Git inventory / Wave 0 | Maintainers may explicitly classify them as intentionally dangling, but silent acceptance is unsafe. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **What is the disposition of the three broken tracked plugin workspace links?**
-   - What we know: all three are tracked mode-`120000` paths and their relative targets do not exist. [VERIFIED: Git/filesystem scan]
-   - What is unclear: whether targets were accidentally omitted or links are intentionally reserved.
-   - Recommendation: treat as blocking; either restore tracked target directories or document and test an intentional removal before the baseline is green.
+1. **Resolved — repair the three broken tracked plugin workspace links only from authoritative PR #161 evidence.**
+   - The three current entries remain verified tracked mode-`120000` links whose `-workspace` targets do not exist. [VERIFIED: Git/filesystem scan]
+   - Read-only history establishes that each link was introduced in or represented by PR #161 ancestry. The authoritative PR #161 merge commit `16af425c053c306a658c96e254b4c4114338dd11` tracks populated sibling directories without the `-workspace` suffix: `skills/tooluniverse-computational-biophysics`, `skills/tooluniverse-organic-chemistry`, and `skills/tooluniverse-drug-drug-interaction`. [VERIFIED: `git merge-base --is-ancestor`, `git ls-tree`, and GitHub PR #161 metadata] [CITED: https://github.com/mims-harvard/ToolUniverse/pull/161]
+   - Resolution: before mutation, prove the merge-commit ancestry, authoritative tree entries, populated tracked targets, and existing sibling plugin convention `../../skills/<directory>`. Then change only the three link blobs to `../../skills/tooluniverse-computational-biophysics`, `../../skills/tooluniverse-organic-chemistry`, and `../../skills/tooluniverse-drug-drug-interaction`. Never create or infer target content. If any proof fails, leave all links unchanged and halt at an explicit disposition checkpoint. [VERIFIED: authoritative tree/path evidence described above]
 
-2. **Should the Phase 1 pin remain `56adcfd9...` if upstream moves during planning?**
-   - What we know: it was canonical main on 2026-08-03 and is already contained by the fork. [VERIFIED: live Git/GitHub checks]
-   - What is unclear: whether maintainers want the milestone target frozen at research time or refreshed immediately before execution.
-   - Recommendation: refresh exactly once at Phase 1 execution start, record the selected OID, then freeze it for all later phases.
+2. **Resolved — refresh upstream exactly once at Phase 1 execution start, then freeze it.**
+   - The research-time canonical main OID `56adcfd9c299078d0c40fde642b0be006510ccf3` remains dated evidence from 2026-08-03, not a timeless target. [VERIFIED: live Git/GitHub checks performed 2026-08-03]
+   - Resolution: at Phase 1 execution start, perform one explicit remote refresh, require the fetched local upstream ref to equal the remote full OID, and record URL, timestamp, and full OID in `git.json`. Reuse that immutable OID throughout Phase 1 and every later synchronization phase. Any later upstream movement is reported as drift and cannot silently retarget the milestone. [CITED: https://git-scm.com/docs/git-ls-remote] [CITED: https://git-scm.com/docs/git-rev-parse]
 
-3. **Which exact live test maps to every configured provider family?**
-   - What we know: twelve known credential names are configured in the current process; marker discipline is heterogeneous. [VERIFIED: safe name-only audit and test scan]
-   - What is unclear: some keys may support many tools or no reliable bounded smoke test.
-   - Recommendation: make provider→credential names→tool→test node a checked manifest; missing mappings block before live calls.
+3. **Resolved — require a checked provider manifest before any live call.**
+   - Twelve credential names were configured in the research process, and current marker/test coverage is heterogeneous. [VERIFIED: safe name-only environment audit and test scan]
+   - Resolution: generate and validate a value-free `credential family → credential variable names → selected tool → exact test/probe node → invariant` manifest. Every currently configured family must have at least one bounded selected probe; a missing or ambiguous mapping blocks before network execution. Unconfigured families remain recorded as unconfigured and do not become failures. Selected configured-provider probes retain D-03's three total attempts, fixed two-second backoff, finite deadlines, and persistent-failure block. [VERIFIED: D-03 and `ToolUniverseConfig.CREDENTIAL_SPECS`]
 
-4. **How much raw provider output may be committed?**
-   - What we know: reproducibility requires diagnostics, while provider payloads may be volatile or sensitive. [VERIFIED: D-03/D-07]
-   - What is unclear: repository retention policy for sanitized live payloads.
-   - Recommendation: commit normalized summaries and invariant results; retain bounded sanitized raw excerpts only when needed to diagnose failure, never credentials or full large payloads.
+4. **Resolved — commit normalized summaries and only bounded sanitized excerpts needed for diagnosis.**
+   - Reproducibility requires outcome/invariant diagnostics, while remote payloads can be volatile, large, proprietary, or sensitive. [VERIFIED: D-03/D-07]
+   - Resolution: commit normalized summaries, schemas/invariant verdicts, timings, retry classifications, and bounded sanitized excerpts only when needed to diagnose a failure. Never commit full provider payloads, credential values, headers, query-string secrets, environment dumps, or user-owned untracked contents. Apply explicit size bounds and pre-publication secret scanning to JSON, JUnit, stdout, stderr, and probe artifacts. [VERIFIED: project secrets constraint and D-07]
 
 ## Sources
 
