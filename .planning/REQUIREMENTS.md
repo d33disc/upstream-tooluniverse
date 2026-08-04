@@ -10,7 +10,7 @@ Requirements for the upstream synchronization milestone. Each maps to exactly on
 ### Baseline and Preservation
 
 - [ ] **BASE-01**: Maintainer can identify the exact fork revision, upstream revision, divergence, worktree state, and staged integration targets before synchronization begins
-- [ ] **BASE-02**: Maintainer has a reproducible pre-sync baseline for relevant tests, catalog loading, and representative discovery/execution behavior
+- [x] **BASE-02**: Maintainer has a reproducible pre-sync baseline for relevant tests, catalog loading, and representative discovery/execution behavior
 - [ ] **PRES-01**: Maintainer has an explicit inventory of fork-specific code, tools, plugins, generated assets, and symlinks that must survive synchronization
 
 ### Upstream Integration
@@ -67,7 +67,7 @@ Deferred beyond this synchronization milestone.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | BASE-01 | Phase 1 | Pending |
-| BASE-02 | Phase 1 | Pending |
+| BASE-02 | Phase 1 | Complete |
 | PRES-01 | Phase 1 | Pending |
 | SYNC-01 | Phase 2 | Pending |
 | SYNC-02 | Phase 2 | Pending |
@@ -83,6 +83,7 @@ Deferred beyond this synchronization milestone.
 | REL-01 | Phase 5 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 15 total
 - Mapped to phases: 15
 - Unmapped: 0 ✓

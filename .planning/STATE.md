@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 01
 current_phase_name: Protected Sync Baseline
 status: executing
-stopped_at: Phase 1 context gathered
-last_updated: "2026-08-04T14:32:00.000Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-08-04T14:25:18.945Z"
 last_activity: 2026-08-04
-last_activity_desc: Plan 01 completed
+last_activity_desc: Phase 01 execution started
 progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-08-03)
 ## Current Position
 
 Phase: 01 (Protected Sync Baseline) — EXECUTING
-Plan: 1 of 5
-Status: Executing Phase 01
+Plan: 2 of 5
+Status: Ready to execute
 Last activity: 2026-08-04 — Phase 01 execution started
 
-Progress: [██░░░░░░░░] 20%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
@@ -65,6 +65,9 @@ Recent decisions affecting current work:
 - [Roadmap]: Treat the synchronized loadable runtime catalog as authoritative rather than a dated manifest snapshot.
 - [Roadmap]: Integrate upstream main and the PR #161 follow-up as separately reviewable stages when the follow-up is not already upstream.
 - [Roadmap]: Preserve fork-specific additions while accepting canonical upstream replacements for shared definitions.
+- [Phase ?]: Normalization uses exact volatile paths and preserves ordered arrays.
+- [Phase ?]: Credentials are projected to names/booleans and transient failures have a fixed three-attempt budget.
+- [Phase ?]: Evidence is published via temporary sibling tree with sorted SHA256SUMS.
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-04T14:32:00.000Z
-Stopped at: Plan 01 completed
-Resume file: .planning/phases/01-protected-sync-baseline/01-CONTEXT.md
+Last session: 2026-08-04T14:25:08.378Z
+Stopped at: Completed 01-02-PLAN.md
+Resume file: None
