@@ -43,6 +43,11 @@ def _assert_probe(probe: dict) -> None:
         == 4.0
     )
     assert probe["assert"]["outcome"]["normalized"]["data"]["is_integer"] is True
+    assert probe["structured_error"]["status"] == "success"
+    assert (
+        "error" in probe["structured_error"]["outcome"]
+        or probe["structured_error"]["outcome"].get("status") == "error"
+    )
 
 
 @pytest.mark.integration
@@ -75,3 +80,12 @@ def test_deterministic_surface_matrix():
     }
     for probe in matrix["surfaces"]:
         _assert_probe(probe)
+
+
+@pytest.mark.integration
+def test_structured_error_contract_is_not_a_skip():
+    """An invalid operation remains visible as a structured matrix outcome."""
+    matrix = run_surface_matrix()
+    assert all(
+        item["structured_error"]["status"] == "success" for item in matrix["surfaces"]
+    )
