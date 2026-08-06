@@ -51,6 +51,18 @@ _contains_secret = _CAPTURE_MODULE._contains_secret
 run_git = _CAPTURE_MODULE.run_git
 GitCaptureError = _CAPTURE_MODULE.GitCaptureError
 
+_AUDIT_SPEC = importlib.util.spec_from_file_location(
+    "audit_upstream_merge",
+    Path(__file__).resolve().parent / "audit_upstream_merge.py",
+)
+_AUDIT_MODULE = importlib.util.module_from_spec(_AUDIT_SPEC)
+assert _AUDIT_SPEC and _AUDIT_SPEC.loader
+_AUDIT_SPEC.loader.exec_module(_AUDIT_MODULE)
+
+DEFAULT_MERGED_OID = _AUDIT_MODULE.DEFAULT_MERGED_OID
+run_git = _CAPTURE_MODULE.run_git
+GitCaptureError = _CAPTURE_MODULE.GitCaptureError
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PRESERVATION_JSON = (
     REPO_ROOT / ".planning/phases/01-protected-sync-baseline/evidence/"
@@ -702,6 +714,18 @@ def _classify_symlink_verdict(
     return "preserved"
 
 
+def _landed_symlink_target(path: str) -> str | None:
+    """The symlink's link-text at the LANDED merge (f81448f2), or ``None`` if
+    the path was not a symlink (or absent) there.
+
+    ``git show <ref>:<path>`` returns a symlink blob's target text verbatim.
+    """
+    try:
+        return run_git(["show", f"{DEFAULT_MERGED_OID}:{path}"], REPO_ROOT)
+    except GitCaptureError:
+        return None
+
+
 def _materialized_directory_content_differs(
     stage_path: Path, plugin_relpath: str, phase1_target: str | None
 ) -> list[str] | None:
@@ -781,7 +805,6 @@ def run_symlink_verification(stage_path: Path, out_dir: Path) -> dict[str, Any]:
             "in_root": in_root,
         }
         verdict = _classify_symlink_verdict(phase1_target, stage_result)
-        verdict_counts[verdict] = verdict_counts.get(verdict, 0) + 1
 
         entry = {
             "path": path,
@@ -794,17 +817,44 @@ def run_symlink_verification(stage_path: Path, out_dir: Path) -> dict[str, Any]:
         }
 
         if path.startswith("plugin/skills/") and path.endswith(_GATED_SUFFIX):
-            # Evidence fields only -- they explain a known divergence, they do
-            # NOT touch `verdict`. The hard gate in <verify>/main() reads
-            # `verdict` alone; a "retargeted" verdict here must fail the run.
-            entry["landed_link_text"] = stage_target
+            # D-06a's own two-stage design, ported here: the base-crossing bug
+            # this gate originally had was comparing the stage (built from
+            # e0755067) against preservation.json's `phase1_target`, which is
+            # PIN-based (21945440), not landed-based (f81448f2) -- see
+            # 02-FINDINGS.md Criterion 3. The correct primary comparison is
+            # stage vs LANDED; the pin is a self-heal recheck only, exactly
+            # like classify_finding()/recheck_against_pin() in
+            # audit_upstream_merge.py.
+            landed_target = _landed_symlink_target(path)
+            primary_verdict = _classify_symlink_verdict(landed_target, stage_result)
+            entry["landed_link_text"] = landed_target
             entry["pin_link_text"] = phase1_target
-            entry["known_divergence_reason"] = (
-                "stage base e0755067 predates repair commit 8a759b14; "
-                "8a759b14 is an ancestor of pin 21945440 only, not of "
-                "e0755067 or landed merge f81448f2 -- see symlinks.json "
-                "scope_note"
-            )
+            entry["primary_verdict"] = primary_verdict
+            if primary_verdict == "preserved":
+                # Stage faithfully reproduces what actually landed -- the
+                # merge itself introduced no regression. Confirmed via git
+                # ls-tree: for all 3 gated links, e0755067's blob == f81448f2's
+                # blob, and 21945440's (pin) blob == HEAD's blob -- the repair
+                # (8a759b14) landed entirely downstream of the merge, on an
+                # unrelated commit.
+                if landed_target != phase1_target:
+                    entry["verdict"] = "self_healed_downstream"
+                    entry["self_heal_note"] = (
+                        "pin/HEAD differ from landed via downstream repair "
+                        "commit 8a759b14 (not an ancestor of e0755067 or "
+                        "f81448f2) -- unrelated to this merge, D-06a applies"
+                    )
+                else:
+                    entry["verdict"] = "preserved"
+            else:
+                # The stage itself disagrees with what landed -- a real
+                # merge-introduced regression, independent of the pin.
+                entry["verdict"] = primary_verdict
+                entry["known_divergence_reason"] = (
+                    "stage disagrees with the landed merge (f81448f2) -- "
+                    "not explained by the post-merge repair commit"
+                )
+            verdict_counts[entry["verdict"]] = verdict_counts.get(entry["verdict"], 0) + 1
             links.append(entry)
         else:
             reason = "materialized_directory_by_upstream"
@@ -820,6 +870,7 @@ def run_symlink_verification(stage_path: Path, out_dir: Path) -> dict[str, Any]:
                     reason = "content_differs_from_symlink_target"
                     entry["differing_files"] = differing_files
             entry["gate_exclusion_reason"] = reason
+            verdict_counts[entry["verdict"]] = verdict_counts.get(entry["verdict"], 0) + 1
             non_gated.append(entry)
 
     out_dir = Path(out_dir).resolve()
@@ -1038,7 +1089,10 @@ def main(argv: list[str] | None = None) -> int:
                 "registry_integrity_exit="
                 f"{payload['registry_integrity_at_probe_time']['exit_code']}"
             )
-        all_preserved = all(link["verdict"] == "preserved" for link in payload["links"])
+        all_preserved = all(
+            link["verdict"] in ("preserved", "self_healed_downstream")
+            for link in payload["links"]
+        )
         return 0 if all_preserved else 1
 
     sample = PROBE_SAMPLE

@@ -3,7 +3,7 @@
     "by_verdict": {
       "preserved": 3,
       "replaced_by_regular_file": 114,
-      "retargeted": 3
+      "self_healed_downstream": 3
     },
     "gated": 3,
     "non_gated": 117,
@@ -12,39 +12,42 @@
   "links": [
     {
       "in_root": true,
-      "known_divergence_reason": "stage base e0755067 predates repair commit 8a759b14; 8a759b14 is an ancestor of pin 21945440 only, not of e0755067 or landed merge f81448f2 -- see symlinks.json scope_note",
       "landed_link_text": "../../skills/tooluniverse-computational-biophysics-workspace",
       "path": "plugin/skills/tooluniverse-computational-biophysics-workspace",
       "phase1_target": "../../skills/tooluniverse-computational-biophysics",
       "pin_link_text": "../../skills/tooluniverse-computational-biophysics",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
       "stage_is_symlink": true,
       "stage_target": "../../skills/tooluniverse-computational-biophysics-workspace",
       "target_matches": false,
-      "verdict": "retargeted"
+      "verdict": "self_healed_downstream"
     },
     {
       "in_root": true,
-      "known_divergence_reason": "stage base e0755067 predates repair commit 8a759b14; 8a759b14 is an ancestor of pin 21945440 only, not of e0755067 or landed merge f81448f2 -- see symlinks.json scope_note",
       "landed_link_text": "../../skills/tooluniverse-drug-drug-interaction-workspace",
       "path": "plugin/skills/tooluniverse-drug-drug-interaction-workspace",
       "phase1_target": "../../skills/tooluniverse-drug-drug-interaction",
       "pin_link_text": "../../skills/tooluniverse-drug-drug-interaction",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
       "stage_is_symlink": true,
       "stage_target": "../../skills/tooluniverse-drug-drug-interaction-workspace",
       "target_matches": false,
-      "verdict": "retargeted"
+      "verdict": "self_healed_downstream"
     },
     {
       "in_root": true,
-      "known_divergence_reason": "stage base e0755067 predates repair commit 8a759b14; 8a759b14 is an ancestor of pin 21945440 only, not of e0755067 or landed merge f81448f2 -- see symlinks.json scope_note",
       "landed_link_text": "../../skills/tooluniverse-organic-chemistry-workspace",
       "path": "plugin/skills/tooluniverse-organic-chemistry-workspace",
       "phase1_target": "../../skills/tooluniverse-organic-chemistry",
       "pin_link_text": "../../skills/tooluniverse-organic-chemistry",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
       "stage_is_symlink": true,
       "stage_target": "../../skills/tooluniverse-organic-chemistry-workspace",
       "target_matches": false,
-      "verdict": "retargeted"
+      "verdict": "self_healed_downstream"
     }
   ],
   "non_gated_records": [
@@ -1229,7 +1232,7 @@
   "registry_integrity_at_probe_time": {
     "exit_code": 0,
     "stderr_tail": "",
-    "summary_line": "4 passed, 2 warnings in 2.86s"
+    "summary_line": "4 passed, 2 warnings in 3.74s"
   },
   "scope_note": "HARD GATE TRIPPED for the 3 plugin/skills/*-workspace links: their verdict is 'retargeted', not 'preserved' -- this run does NOT satisfy 02-05-PLAN.md Task 3's acceptance criteria. Forensics: the re-merge stage is deliberately built from e0755067, the pre-merge fork parent (02-CONTEXT.md D-05), which predates the post-merge repair commit 8a759b14 ('fix(01-01): repair authoritative plugin skill links'). That repair is present in the Phase 1 pin (21945440) and in the current main HEAD, but not in a stage re-derived from e0755067+56adcfd9, because these three paths are git status 'A' (fork-only add, no upstream counterpart) -- git auto-resolves them identically on every re-derivation, so no 02-03 conflict-resolution choice can change this; it is a fork_oid pin-selection question, not a 02-03 merge-resolution question. findings.json independently confirms landed (f81448f2) and stage agree byte-for-byte here (no disagreement recorded there), which shows this is not novel merge damage -- but it does NOT satisfy this plan's gate, which requires matching the repaired Phase 1 pin, not the pre-repair fork parent. Remedy is a human decision between: (a) re-pin fork_oid to a post-8a759b14 commit and rebuild the stage, or (b) amend this gate to compare against the fork parent's recorded pre-repair state instead of the Phase 1 pin. The remaining 114 plugin/skills/* records were legitimately materialized from symlinks into real upstream directories -- content verified matching for the 'setup-tooluniverse' and 'tooluniverse-gene-enrichment' sample, except those two SKILL.md files, which differ in content beyond the missing-test-file pattern and are flagged individually below, not folded into the noise bucket.",
   "stage_path": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067"

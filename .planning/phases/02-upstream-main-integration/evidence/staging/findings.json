@@ -13,11 +13,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "other_review_required",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": "5e92d8cc40ce7e5dd5ed3db265a1174f0e0b65d3",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "ae297ee41ee7593f6eadf2c0426f0edd56e234a8",
@@ -7840,13 +7841,14 @@
       "pin_matches_landed": false,
       "pin_present": true,
       "preservation_class": "documentation",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD differs from landed, but a repair commit already covers this path (4b2c1c38 fix: harden sync, discovery, cache lifecycle, and docs); current content is post-repair, not a live gap.",
       "remerge_blob": "89aae673b6c5216814b1b8ca78294598595910e9",
       "remerge_present": true,
       "repair_commits": [
         "4b2c1c38 fix: harden sync, discovery, cache lifecycle, and docs"
       ],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "repaired_at_head"
     },
     {
       "landed_blob": "d4c243448c4439550b2f6a578ac1b0c3ee544422",
@@ -7856,11 +7858,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "documentation",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": "6d86b6ac825611300ce7df9169a30d5c89939c29",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "ef86cc7324861e83da6067ea03bfe59758540677",
@@ -7870,11 +7873,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "skill",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": null,
       "remerge_present": false,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "4c4810e12d8e070734d41b6cea7ffb3a02b60798",
@@ -7884,11 +7888,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "documentation",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": null,
       "remerge_present": false,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "8b2bb3c6e412913bd9ec4df45a860bede38c405f",
@@ -7898,11 +7903,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "documentation",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": null,
       "remerge_present": false,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "016204816d1de7a96c9b20231a36b5c2e78df536",
@@ -7925,11 +7931,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "76f705e6af44dfe4fe373e91b6b5e40f615183f6",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "1074f3fb302280c9f75db1214cb446f1c16d9527",
@@ -7939,11 +7946,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "763df3ffe0632d4662f87efc55fbd34d18098100",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "6dea7d34609d72763877f0a126c953cc4ec6ddc1",
@@ -7953,11 +7961,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "9980107b536ccba4306650e8cf681d2bc6972945",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "08edefcde43e37d0f01bc5a8ff7511312c2168fe",
@@ -7967,11 +7976,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "072266aebfc004cf1a6cf026856f0770bdf5a3f3",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "75ef5f629e794038cc732d81bddff5248c7608d2",
@@ -7981,11 +7991,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "CTD_BASE_URL pointed at ctdbase.org; HEAD replaced the whole backend with RENCI_BASE = 'https://automat.renci.org/ctd', a documented NIH-NCATS-Translator-funded mirror (see module docstring). Deliberate downstream re-implementation, not a merge drop.",
       "remerge_blob": "c8cbb06cd3ef53179768b22308e1102b5e4faa04",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "false_positive_superseded"
     },
     {
       "landed_blob": "df2b8debc8604a8e959279159b3e5f6d33ac9cb3",
@@ -8216,11 +8227,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": "12e294e4b6c1c5e3d07b2ef2e8673aa5bf3f42d1",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "8110d00e5a908477fe773504880e266b0b573f1e",
@@ -9881,11 +9893,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state.",
       "remerge_blob": null,
       "remerge_present": false,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "head_matches_landed"
     },
     {
       "landed_blob": "5c02b1952760f25f789a9bdf3bd18afc6b771721",
@@ -10766,11 +10779,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "81ac09a5ba1a78e62ffff8fdc8b8da64db3bc96a",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "60a4f248fc473c4bbfe9a342ebe0f74f7338a08a",
@@ -10780,13 +10794,14 @@
       "pin_matches_landed": false,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "1db93e395de69d2fa8d4674540840cba89c9c71e",
       "remerge_present": true,
       "repair_commits": [
         "4b2c1c38 fix: harden sync, discovery, cache lifecycle, and docs"
       ],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "3fa5b1ce41dc7d3282491a91baca611961becd0f",
@@ -10796,11 +10811,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "057b0bd48ae34f34eda9da483fa5641a633c9851",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "8420ae42b847624d4ceb77bceb84119a8a6d85e0",
@@ -10810,11 +10826,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "GWASRESTTool._label_overlaps has zero call sites anywhere in the repo, including the re-derived stage itself -- it was already unreferenced dead code pre-merge. Its absence from landed has no functional impact.",
       "remerge_blob": "94c764e0189246ab6ac7389353a6cb99baf0fdbf",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "dead_code_drop_no_functional_impact"
     },
     {
       "landed_blob": "80a54630d26ebe30e15037b16710acef2ad446b8",
@@ -10824,11 +10841,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "GeminiClient._build_model (a 2-line wrapper around google.generativeai.GenerativeModel) has zero call sites even in the stage. HEAD's GeminiClient uses the newer google-genai SDK (genai.Client(...)) entirely -- a deliberate SDK migration, not a merge drop.",
       "remerge_blob": "3a65a5b9f4732b61d8740e246475d99ad340cc0f",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "false_positive_superseded"
     },
     {
       "landed_blob": "64c80038eb02960c56758b993c401b5ab775e718",
@@ -10838,11 +10856,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "4320cf2e1f4dc206884c69029cffbb387ede7d7e",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "4fd9672fa4154891c8d22e02bcf75601c1b628f0",
@@ -10852,11 +10871,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "40a4708745fe3633409d5416a861f7a1d6ab42e3",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "9493222f35c65710a8606ae95ddd46e7cf5ed627",
@@ -10866,11 +10886,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "938d8303a553c13991b711c8362defd55f0c123f",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "c4ae7760f730d3c2abe270431486babb724ab19f",
@@ -10880,11 +10901,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "generated_asset",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "c613558ec0035e1c7cad5f9c6aa3584640b3bb8c",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "1dcce0c9592948ad8e9c67dd183b5980233cdec5",
@@ -44746,11 +44768,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "8b4820f14930e72cd3ea2cb5a0cb38faaf5c200d",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "2840aea2fec314012bbf2f0acefc0d99beaa51ec",
@@ -44760,11 +44783,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "UniProtRESTTool._summarize_entry was renamed to _compact_entry (present at HEAD line 56, called at line 710 for the same compact-mode purpose); the 4 dropped constants (_DISEASE_LIMIT/_FEATURE_SAMPLE_SIZE/_GO_TERM_LIMIT/_XREF_SAMPLE_SIZE) were inlined as literal slice bounds in the same rewrite (text_values[:3], features[:100], comment_summaries[:25]), which also fixed a real COFACTOR-field bug (see inline comment re: P00439's Fe(2+) cofactor). Superseding rewrite, not a loss.",
       "remerge_blob": "0fc2353481b7d30c59dc2d422cc7b5cb10dc3794",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "false_positive_renamed"
     },
     {
       "landed_blob": "4bbc261d1ea614bf8695afb84062eaff504c6bee",
@@ -44774,11 +44798,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "custom_code",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "7a38d1e6aae31f72218ff76c95ae81fb43694d1a",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "23b637c7217dc4a14b65dbe94ccc5084348d6365",
@@ -44788,11 +44813,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "test",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "c5796c526a5f2854e9f43bac677da7e564145105",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "11bc2bbbdd4ac6f40fa2c2da651fb184836de9df",
@@ -44802,11 +44828,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "test",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "ab0d3e20524ab8599fc24ddcec4cf11635128979",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "15d6d3876e1ef32d8eed8e158bc91f2e4d4a705b",
@@ -44816,11 +44843,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "test",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss.",
       "remerge_blob": "23c1adb8cb091f88f8b472acc1824c57560b6fac",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "no_definition_delta"
     },
     {
       "landed_blob": "6d56726f0edad4fb8c03c25e12806251df3f45d2",
@@ -44830,11 +44858,12 @@
       "pin_matches_landed": true,
       "pin_present": true,
       "preservation_class": "test",
-      "rationale": "landed disagrees with the re-derived tree and the pinned tree does not corroborate a downstream repair -- candidate for 02-06 review",
+      "rationale": "The OPENROUTER-primary-falls-back-to-CLAUDE_CLI code path is live and exercised at HEAD (agentic_tool.py supports both api_types and per-tool fallback_api_type), but the regression test covering 'missing OPENROUTER_API_KEY falls back to configured CLAUDE_CLI' was dropped during merge resolution and has no replacement. Real, narrow gap: missing test coverage for a live behavior, not a functional or data loss. Candidate for a follow-up test, not a corrective source-code commit.",
       "remerge_blob": "6b7a8a6431712161c91206127dfef567ca0995e3",
       "remerge_present": true,
       "repair_commits": [],
-      "verdict": "landed_dropped_or_altered"
+      "verdict": "landed_dropped_or_altered",
+      "forensic_verdict": "confirmed_gap_test_coverage_only"
     }
   ],
   "self_heal_recheck": {
@@ -44849,6 +44878,8 @@
     "landed_dropped_or_altered": 29,
     "remerge_only_artifact": 3205,
     "self_healed_downstream": 0,
-    "unclassified": 0
+    "unclassified": 0,
+    "forensics_applied": true,
+    "forensics_note": "landed_dropped_or_altered rationale fields replaced with per-file forensic verdicts (scripts/forensic_trace_findings.py + manual escalation for 5 ambiguous cases); see findings-forensics.json for the full trace."
   }
 }

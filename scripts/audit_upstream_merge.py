@@ -2349,18 +2349,20 @@ def render_findings_markdown(
         )
         lines.append("")
         lines.append(
-            "| Path | Landed blob | Remerge blob | Pin blob | Pin matches landed | Repair commits |"
+            "| Path | Landed blob | Remerge blob | Pin blob | Pin matches landed | "
+            "Repair commits | Forensic verdict |"
         )
-        lines.append("| --- | --- | --- | --- | --- | --- |")
+        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
         for r in candidates:
             landed_b = (r["landed_blob"] or "-")[:12]
             remerge_b = (r["remerge_blob"] or "-")[:12]
             pin_b = (r["pin_blob"] or "-")[:12]
             pin_matches_landed = r.get("pin_matches_landed", False)
             repair = "; ".join(r.get("repair_commits", [])[:2]) or "none"
+            forensic = r.get("forensic_verdict", "unverified")
             lines.append(
                 f"| {r['path']} | {landed_b} | {remerge_b} | {pin_b} | "
-                f"{pin_matches_landed} | {repair} |"
+                f"{pin_matches_landed} | {repair} | {forensic} |"
             )
         lines.append("")
         lines.append(
@@ -2370,6 +2372,18 @@ def render_findings_markdown(
             "its own git-auto-merge artifact (the same class of bug as F-02-03-01/"
             "F-02-03-02 in remerge.json), not evidence of a real fork-content loss. Treat "
             "those rows as informational, not corrective-commit candidates."
+        )
+        lines.append("")
+        lines.append(
+            "**Forensic verdict** (per-file trace, see `findings-forensics.json` for the "
+            "full definition-diff / reference trace, `scripts/forensic_trace_findings.py`): "
+            "`no_definition_delta` / `head_matches_landed` / `repaired_at_head` mean HEAD "
+            "already carries no gap. `false_positive_renamed` / `false_positive_superseded` "
+            "mean the apparent drop is a rename or a deliberate downstream rewrite (SDK "
+            "migration, endpoint replacement), manually confirmed against HEAD source. "
+            "`dead_code_drop_no_functional_impact` means the dropped definition had zero "
+            "callers anywhere in the repo, including the re-derived stage itself. Only "
+            "`confirmed_gap*` rows are live, actionable candidates for 02-06."
         )
     lines.append("")
 
@@ -2507,14 +2521,29 @@ def render_findings_markdown(
             "additional risk."
         )
         lines.append("")
+        forensic_gaps = [
+            r for r in candidates
+            if str(r.get("forensic_verdict", "")).startswith("confirmed_gap")
+        ]
         lines.append(
-            "**Bottom line: this sweep found no unambiguous case of the landed "
-            "merge silently dropping fork-only content that is not otherwise "
-            "explained (self-healed, superseded per D-08, or an artifact of this "
-            "audit's own re-derivation tooling). The corrective-commit candidate "
-            "list for plan 02-06 is effectively empty** -- consistent with plan "
-            "02-03's own two discovered findings (F-02-03-01, F-02-03-02), both of "
-            "which independently resolved to non-issues under the same recheck."
+            "**Bottom line, after per-file forensic tracing (not just pattern-level "
+            "boilerplate -- see the Forensic verdict column and "
+            "`findings-forensics.json`): of the 29 candidates, "
+            f"{len(candidates) - len(forensic_gaps)} are false positives with a "
+            "specific traced explanation each (rename, deliberate downstream "
+            "rewrite/SDK migration, dead code with zero callers, or HEAD already "
+            f"matching landed).** "
+            + (
+                (
+                    f"The remaining {len(forensic_gaps)} "
+                    + ("survives" if len(forensic_gaps) == 1 else "survive")
+                    + " as genuine, narrow candidates for 02-06: "
+                    + "; ".join(f"`{r['path']}` -- {r['rationale']}" for r in forensic_gaps)
+                )
+                if forensic_gaps
+                else "None survive as a functional or data loss requiring a "
+                "corrective source-code commit."
+            )
         )
     else:
         lines.append(

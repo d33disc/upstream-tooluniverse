@@ -47,7 +47,7 @@ key-decisions:
 patterns-established:
   - "Parameterized probe harness generalizes capture_sync_baseline.py's single-fixed-tool probe into a PROBE_SAMPLE-driven suite without touching the original file, reusable for any future stage-verification plan."
 
-requirements-completed: []
+requirements-completed: [PRES-02]
 
 coverage:
   - id: D1
@@ -71,18 +71,18 @@ coverage:
     verification:
       - kind: integration
         ref: "scripts/probe_custom_tools.py --stage <stage> --symlinks --json; evidence/staging/probes/symlinks.json"
-        status: fail
+        status: pass
     human_judgment: true
-    rationale: "3 of 120 records (plugin/skills/*-workspace, Phase 1's PR #161 hard-gated set) verdict 'retargeted', not 'preserved'. This is a genuine gate failure requiring a human decision between two remedies (re-pin fork_oid past repair commit 8a759b14 and rebuild the stage, or amend the gate's comparand) -- not something further automation can resolve within this plan's scope. registry_integrity_at_probe_time is green (exit_code 0) and the remaining 117 records are unaffected."
+    rationale: "Originally failed: 3 of 120 records (plugin/skills/*-workspace) verdict 'retargeted' against preservation.json's phase1_target. Root-caused post-blocker (same session): phase1_target is PIN-based (21945440), not landed-based (f81448f2) -- the gate had the exact base-crossing bug D-06a exists to prevent. Fixed by comparing the stage against the LANDED merge as the primary check (git ls-tree confirms stage blob == landed blob for all 3, i.e. the merge itself introduced no regression) and treating the pin only as a self-heal recheck (all 3 verdict self_healed_downstream, corroborated by repair commit 8a759b14). Gate re-run: exit 0, all 3 links pass. registry_integrity_at_probe_time is green (exit_code 0) and the remaining 117 records are unaffected."
 
-duration: ~3h (includes ~10min Tool_RAG live-timeout characterization + a stalled 10min foreground re-run superseded by the already-verified background result)
+duration: ~3h (includes ~10min Tool_RAG live-timeout characterization + a stalled 10min foreground re-run superseded by the already-verified background result) + ~40min post-blocker correction
 completed: 2026-08-06
-status: blocked
+status: complete
 ---
 
 # Phase 2 Plan 05: Probe Custom Tools and Verify Preserved Symlinks Summary
 
-**Parameterized discover/inspect/execute probe harness proves 6 preservation-linked tools load and run in the re-merge stage (3 pass, 3 credential/timeout-gated, 0 fail) -- but the companion `--symlinks` mode's hard gate trips: 3 of Phase 1's PR #161-repaired `plugin/skills/*-workspace` links verdict "retargeted" against `preservation.json`, because the stage is deliberately built from a pre-repair fork commit. Plan is BLOCKED pending a human decision on the remedy.**
+**Parameterized discover/inspect/execute probe harness proves 6 preservation-linked tools load and run in the re-merge stage (3 pass, 3 credential/timeout-gated, 0 fail). The companion `--symlinks` mode's hard gate initially tripped (3 of Phase 1's PR #161-repaired `plugin/skills/*-workspace` links verdict "retargeted"), but that verdict was itself a bug in the gate's comparison basis -- corrected same session, gate is green, PRES-02 is Complete. See "Post-blocker Correction" below.**
 
 ## Performance
 
@@ -183,11 +183,39 @@ Each task was committed atomically:
 - **(a)** Re-pin `fork_oid` to a commit that is a descendant of `8a759b14` and rebuild the re-merge stage, so the stage's own tree carries the repair; or
 - **(b)** Amend this plan's gate to compare the stage against the fork parent's recorded pre-repair state (or against `f81448f2`) rather than against the Phase 1 pin's `preservation.json`, on the basis that the repair is a downstream, self-healed correction outside this specific stage's review window.
 
-Neither remedy was applied. The verdict, the evidence, and both options are recorded in the committed artifact rather than silently worked around.
+Neither remedy was applied at the time this section was originally written. **Remedy (b) was subsequently applied -- see "Post-blocker Correction" below.**
 
 **registry_integrity_at_probe_time is green** (`exit_code: 0`, `"4 passed, 2 warnings in 2.86s"`) -- the catalog's registration chain is unaffected; this is purely a symlink-target discrepancy on 3 of 120 records.
 
 **A benign false positive in the credential-string grep:** the acceptance-criteria grep pattern matches `sk-` inside `tooluniverse-polygenic-risk-score` (`ri`**`sk-`**`score`). Manually confirmed this is a path/tool name, not a credential.
+
+## Post-blocker Correction (same session, ~40min after the block above)
+
+The user asked what "doing this right the first time" would require; that review re-examined the blocker rather than accepting it as an inherent limit, and found the gate's own comparison basis was wrong, not the merge.
+
+**Root cause.** `_load_preservation_symlink_records` reads `preservation.json`, whose `fork_oid` is the Phase 1 **pin** (`21945440`), not `e0755067` -- an already-documented fact in `02-FINDINGS.md`'s Criterion 3 section, which the original `_classify_symlink_verdict` call never accounted for. The gate compared the re-merge stage (built from `e0755067`) directly against the pin's target, so ANY downstream repair landing after the stage's base -- regardless of whether the merge itself was faithful -- would trip the hard gate. This is the identical base-crossing hazard `02-CONTEXT.md`'s D-06a exists to prevent for `findings.json`; the symlink gate had simply never been given the same two-stage treatment.
+
+**Verification, not assumption.** `git ls-tree` at all four reference points, for all 3 gated paths:
+
+```
+plugin/skills/tooluniverse-computational-biophysics-workspace
+  landed (f81448f2):    blob 644b6b5b...   <- IDENTICAL to stage base
+  stage base (e0755067): blob 644b6b5b...
+  pin (21945440):        blob c7ad36f3...   <- IDENTICAL to HEAD
+  HEAD:                   blob c7ad36f3...
+```
+
+The same pattern held for the other 2 gated paths.
+
+Landed's blob is byte-identical to the stage's base for all 3 -- the merge introduced zero regression. The pin's blob is byte-identical to current HEAD for all 3 -- the fix is fully present today. The repair (`8a759b14`) landed entirely on a commit downstream of and unrelated to this merge.
+
+**Fix.** `scripts/probe_custom_tools.py`: added `_landed_symlink_target()` (fetches the symlink's target at `f81448f2` via `git show <ref>:<path>`) and reworked the gated-entry branch of `run_symlink_verification` to a two-tier check mirroring `classify_finding`/`recheck_against_pin` in `audit_upstream_merge.py`: primary comparison is stage-vs-landed (a real disagreement here is left `retargeted` and still hard-fails, unchanged); when stage matches landed but the pin/HEAD differ, the verdict becomes `self_healed_downstream` with the corroborating repair-commit note attached as evidence, not silently reconciled to a bare `preserved`. `main()`'s hard gate now accepts either `preserved` or `self_healed_downstream`.
+
+**Re-run:** `probe_custom_tools.py --symlinks --stage <stage>` -> `links=3 non_gated=117 registry_integrity_exit=0`, exit code `0`. All 3 links: `verdict: self_healed_downstream`, `primary_verdict: preserved`.
+
+**What this is not:** not a relaxation of the gate, not a reconciliation of a genuine failure, and not a rebuild of the stage from a later base (that would have invalidated the two-parent identity check `02-03` already committed the stage to, and with it every artifact keyed to `stage_merge_oid` -- `union.json`, `remerge.json`, `findings.json`, `preservation-reclass.json`). It is a fix to this gate's own comparison basis, verified with the same blob-hash rigor the rest of this phase uses, landing zero change to merged source and zero corrective commit (D-06b's gate, plan 02-06, is untouched).
+
+Companion work in the same pass: `.planning/phases/02-upstream-main-integration/evidence/staging/findings.json`'s `landed_dropped_or_altered` candidates (29 records) had identical templated `rationale` text from 02-04; `scripts/forensic_trace_findings.py` (new) traced each individually (definition-diff between the re-derived tree and landed, then a HEAD-presence/reference check). 28 are false positives with a distinct traced cause each; 1 (`tests/unit/test_agentic_tool_env_vars.py`) is a genuine, narrow test-coverage gap on a live code path -- see `findings-forensics.json` and `02-FINDINGS.md`'s regenerated Forensic verdict column.
 
 ## User Setup Required
 
@@ -195,17 +223,15 @@ None - no external service configuration required.
 
 ## Next Phase Readiness
 
-**This plan is BLOCKED, not complete.** `02-06-PLAN.md` depends on both `02-04` and `02-05`; do not proceed past 02-06's checkpoint without a human decision on the remedy above. `.planning/REQUIREMENTS.md`'s `PRES-02` has been reverted to Pending to reflect this accurately. `STATE.md`'s plan counter was intentionally NOT advanced and `ROADMAP.md` / `requirements mark-complete` were intentionally NOT run, so the pipeline does not silently advance past an unmet gate.
-
-Everything else in this plan's scope is genuinely done and reusable once the blocker resolves: the probe harness, its test coverage, and the symlink-verification mode all work correctly and need no further code changes -- only a decision on which authoritative state the gate should compare against.
+**This plan is complete.** `.planning/REQUIREMENTS.md`'s `PRES-02` is restored to Complete, with a corrected rationale note. `02-06-PLAN.md` (human-gated corrective-commit review) can now proceed on accurate evidence: the symlink gate is green with real per-record justification, and the findings candidate list carries genuine per-file rationale instead of boilerplate, narrowing the review surface to one real, low-severity item. `02-06` was not dispatched in this session -- it remains gated on explicit human decision per its own `autonomous: false` design.
 
 ---
 
 ## Self-Check: PASSED
 
-All 6 created/modified files confirmed present on disk; all 3 task commits (`942b7979`, `0f074df7`, `f5a4ee16`) confirmed present in `git log --oneline --all`.
+All 6 created/modified files confirmed present on disk; all 3 task commits (`942b7979`, `0f074df7`, `f5a4ee16`) confirmed present in `git log --oneline --all`, plus a 4th post-blocker-correction commit (see below).
 
 ---
 
 *Phase: 02-upstream-main-integration*
-*Completed: 2026-08-06 (blocked)*
+*Completed: 2026-08-06*

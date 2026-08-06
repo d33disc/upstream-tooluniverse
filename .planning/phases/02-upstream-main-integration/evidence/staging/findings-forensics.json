@@ -1,0 +1,295 @@
+{
+  "records": [
+    {
+      "path": ".gitignore",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "skills/setup-tooluniverse/SKILL.md",
+      "kind": "text",
+      "forensic_verdict": "repaired_at_head",
+      "forensic_rationale": "HEAD differs from landed, but a repair commit already covers this path (4b2c1c38 fix: harden sync, discovery, cache lifecycle, and docs); current content is post-repair, not a live gap."
+    },
+    {
+      "path": "skills/tooluniverse-gene-enrichment/SKILL.md",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "skills/tooluniverse/.env.template",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "skills/tooluniverse/CHECKLIST.md",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "skills/tooluniverse/references/general-strategies.md",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "src/tooluniverse/admetai_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/agentic_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/brenda_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/cli.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/ctd_tool.py",
+      "kind": "python",
+      "stage_only_defs": [
+        "CTD_BASE_URL"
+      ],
+      "landed_only_defs": [],
+      "real_losses": [
+        "CTD_BASE_URL"
+      ],
+      "renamed_or_present": [],
+      "forensic_verdict": "false_positive_superseded",
+      "forensic_rationale": "CTD_BASE_URL pointed at ctdbase.org; HEAD replaced the whole backend with RENCI_BASE = 'https://automat.renci.org/ctd', a documented NIH-NCATS-Translator-funded mirror (see module docstring). Deliberate downstream re-implementation, not a merge drop.",
+      "manually_escalated": true
+    },
+    {
+      "path": "src/tooluniverse/data/broken_apis/oxo_tools.json",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "src/tooluniverse/data/oxo_tools.json",
+      "kind": "text",
+      "forensic_verdict": "head_matches_landed",
+      "forensic_rationale": "HEAD's current content is byte-identical to what landed; the disagreement is fully contained in the re-derived stage and does not reflect current repo state."
+    },
+    {
+      "path": "src/tooluniverse/default_config.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/execute_function.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/foldseek_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/gwas_tool.py",
+      "kind": "python",
+      "stage_only_defs": [
+        "GWASRESTTool._label_overlaps"
+      ],
+      "landed_only_defs": [],
+      "real_losses": [
+        "GWASRESTTool._label_overlaps"
+      ],
+      "renamed_or_present": [],
+      "forensic_verdict": "dead_code_drop_no_functional_impact",
+      "forensic_rationale": "GWASRESTTool._label_overlaps has zero call sites anywhere in the repo, including the re-derived stage itself -- it was already unreferenced dead code pre-merge. Its absence from landed has no functional impact.",
+      "manually_escalated": true
+    },
+    {
+      "path": "src/tooluniverse/llm_clients.py",
+      "kind": "python",
+      "stage_only_defs": [
+        "GeminiClient._build_model"
+      ],
+      "landed_only_defs": [],
+      "real_losses": [
+        "GeminiClient._build_model"
+      ],
+      "renamed_or_present": [],
+      "forensic_verdict": "false_positive_superseded",
+      "forensic_rationale": "GeminiClient._build_model (a 2-line wrapper around google.generativeai.GenerativeModel) has zero call sites even in the stage. HEAD's GeminiClient uses the newer google-genai SDK (genai.Client(...)) entirely -- a deliberate SDK migration, not a merge drop.",
+      "manually_escalated": true
+    },
+    {
+      "path": "src/tooluniverse/rdkit_cheminfo_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/sabdab_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/therasabdab_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/tool_finder_embedding.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/unified_guideline_tools.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "src/tooluniverse/uniprot_tool.py",
+      "kind": "python",
+      "stage_only_defs": [
+        "UniProtRESTTool._summarize_entry",
+        "_DISEASE_LIMIT",
+        "_FEATURE_SAMPLE_SIZE",
+        "_GO_TERM_LIMIT",
+        "_XREF_SAMPLE_SIZE"
+      ],
+      "landed_only_defs": [],
+      "real_losses": [
+        "UniProtRESTTool._summarize_entry",
+        "_DISEASE_LIMIT",
+        "_FEATURE_SAMPLE_SIZE",
+        "_GO_TERM_LIMIT",
+        "_XREF_SAMPLE_SIZE"
+      ],
+      "renamed_or_present": [],
+      "forensic_verdict": "false_positive_renamed",
+      "forensic_rationale": "UniProtRESTTool._summarize_entry was renamed to _compact_entry (present at HEAD line 56, called at line 710 for the same compact-mode purpose); the 4 dropped constants (_DISEASE_LIMIT/_FEATURE_SAMPLE_SIZE/_GO_TERM_LIMIT/_XREF_SAMPLE_SIZE) were inlined as literal slice bounds in the same rewrite (text_values[:3], features[:100], comment_summaries[:25]), which also fixed a real COFACTOR-field bug (see inline comment re: P00439's Fe(2+) cofactor). Superseding rewrite, not a loss.",
+      "manually_escalated": true
+    },
+    {
+      "path": "src/tooluniverse/xml_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "tests/integration/test_compose_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "tests/integration/test_tool_integration.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "tests/tools/test_brenda_tool.py",
+      "kind": "python",
+      "stage_only_defs": [],
+      "landed_only_defs": [],
+      "real_losses": [],
+      "renamed_or_present": [],
+      "forensic_verdict": "no_definition_delta",
+      "forensic_rationale": "No definitions present in the re-derived tree are missing from landed; the disagreement flagged by the aggregate sweep is at the byte/formatting level, not a definition loss."
+    },
+    {
+      "path": "tests/unit/test_agentic_tool_env_vars.py",
+      "kind": "python",
+      "stage_only_defs": [
+        "TestAgenticToolEnvironmentVariables.test_openrouter_primary_falls_back_to_claude_cli"
+      ],
+      "landed_only_defs": [],
+      "real_losses": [
+        "TestAgenticToolEnvironmentVariables.test_openrouter_primary_falls_back_to_claude_cli"
+      ],
+      "renamed_or_present": [],
+      "forensic_verdict": "confirmed_gap_test_coverage_only",
+      "forensic_rationale": "The OPENROUTER-primary-falls-back-to-CLAUDE_CLI code path is live and exercised at HEAD (agentic_tool.py supports both api_types and per-tool fallback_api_type), but the regression test covering 'missing OPENROUTER_API_KEY falls back to configured CLAUDE_CLI' was dropped during merge resolution and has no replacement. Real, narrow gap: missing test coverage for a live behavior, not a functional or data loss. Candidate for a follow-up test, not a corrective source-code commit.",
+      "manually_escalated": true
+    }
+  ]
+}
