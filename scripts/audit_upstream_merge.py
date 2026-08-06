@@ -1616,7 +1616,9 @@ def _resolve_blob(repo: Path, ref: str, path: str) -> tuple[bool, str | None]:
         return False, None
 
 
-def _finding_rationale(verdict: str, remerge_present: bool, landed_present: bool) -> str:
+def _finding_rationale(
+    verdict: str, remerge_present: bool, landed_present: bool
+) -> str:
     if verdict == "landed_correct":
         if not remerge_present and not landed_present:
             return "path absent from both the landed merge and the re-derived tree"
@@ -1678,7 +1680,9 @@ def build_findings(
     entries = _diff_entries(diff_records)
 
     union_ok_paths = {
-        f["path"] for f in union_evidence.get("files", []) if f.get("verdict") == "union_ok"
+        f["path"]
+        for f in union_evidence.get("files", [])
+        if f.get("verdict") == "union_ok"
     }
     # NOTE: remerge.json's own `resolutions` array (D-08's real content decisions --
     # entry_union, key_union, upstream_canonical_fork_additive, line_union, etc. over
@@ -1754,7 +1758,9 @@ def build_findings(
             )
         else:
             pin_present, pin_blob = _resolve_blob(repo, pin_oid, path)
-            resolution_paths = frozenset({path}) if path in lazy_missing else frozenset()
+            resolution_paths = (
+                frozenset({path}) if path in lazy_missing else frozenset()
+            )
             verdict = classify_finding(
                 path,
                 remerge_present,
@@ -1781,7 +1787,10 @@ def build_findings(
             "repair_commits": [],
         }
 
-        if verdict in ("landed_dropped_or_altered", "self_healed_downstream") and pin_present:
+        if (
+            verdict in ("landed_dropped_or_altered", "self_healed_downstream")
+            and pin_present
+        ):
             recheck = recheck_against_pin(
                 repo, path, remerge_blob, pin_oid, landed_oid=landed_oid
             )
@@ -2002,7 +2011,10 @@ def _detailed_disposition(
         )
 
     if stage is None and pin is None:
-        return "lost", "absent from both git ls-tree <stage_oid> and git ls-tree <pin_oid>"
+        return (
+            "lost",
+            "absent from both git ls-tree <stage_oid> and git ls-tree <pin_oid>",
+        )
 
     return (
         "lost",
@@ -2113,7 +2125,11 @@ def join_preservation(
         )
 
         repair_commits: list[str] = []
-        if finding_verdict == "landed_dropped_or_altered" and stage is None and pin is not None:
+        if (
+            finding_verdict == "landed_dropped_or_altered"
+            and stage is None
+            and pin is not None
+        ):
             log = run_git(
                 [
                     "log",
@@ -2167,7 +2183,9 @@ def join_preservation(
             "symlink": entry.get("symlink"),
             "phase2_disposition": disposition,
             "finding_ref": finding_verdict,
-            "union_verdict": union_by_path[path]["verdict"] if path in union_by_path else None,
+            "union_verdict": union_by_path[path]["verdict"]
+            if path in union_by_path
+            else None,
             "evidence": evidence,
         }
         if entry.get("symlink") is not None:
@@ -2175,7 +2193,9 @@ def join_preservation(
 
         records.append(record)
         disposition_summary[disposition] = disposition_summary.get(disposition, 0) + 1
-        class_distribution[entry["class"]] = class_distribution.get(entry["class"], 0) + 1
+        class_distribution[entry["class"]] = (
+            class_distribution.get(entry["class"], 0) + 1
+        )
 
     untracked_out_of_scope = [
         {
@@ -2246,9 +2266,7 @@ def render_findings_markdown(
     lines.append("")
     lines.append(f"Generated: {stamp}")
     lines.append("")
-    lines.append(
-        "Related: [[02-CONTEXT]] [[02-RESEARCH]] [[01-VERIFICATION]]"
-    )
+    lines.append("Related: [[02-CONTEXT]] [[02-RESEARCH]] [[01-VERIFICATION]]")
     lines.append("")
     lines.append(
         "This is the human review surface for Phase 2's criterion 2 (fork behavior "
@@ -2263,12 +2281,16 @@ def render_findings_markdown(
     lines.append("")
     lines.append("| Tree | OID | Role |")
     lines.append("| --- | --- | --- |")
-    lines.append(f"| landed merge | {prim['left_oid']} | f81448f2 -- what actually shipped |")
+    lines.append(
+        f"| landed merge | {prim['left_oid']} | f81448f2 -- what actually shipped |"
+    )
     lines.append(
         f"| re-merge stage | {prim['right_oid']} | this audit's independent D-08 "
         "re-derivation, throwaway, never merged |"
     )
-    lines.append(f"| pin | {heal['left_oid']} | 21945440 -- 31 commits downstream of landed |")
+    lines.append(
+        f"| pin | {heal['left_oid']} | 21945440 -- 31 commits downstream of landed |"
+    )
     lines.append(
         f"| upstream | {DEFAULT_UPSTREAM_OID} | 56adcfd9 -- the merged-in upstream revision |"
     )
@@ -2326,7 +2348,9 @@ def render_findings_markdown(
             "findings-only posture)."
         )
         lines.append("")
-        lines.append("| Path | Landed blob | Remerge blob | Pin blob | Pin matches landed | Repair commits |")
+        lines.append(
+            "| Path | Landed blob | Remerge blob | Pin blob | Pin matches landed | Repair commits |"
+        )
         lines.append("| --- | --- | --- | --- | --- | --- |")
         for r in candidates:
             landed_b = (r["landed_blob"] or "-")[:12]
@@ -2376,7 +2400,9 @@ def render_findings_markdown(
                 f"{name} -> {', '.join(dests) if dests else 'UNRELOCATED'}"
                 for name, dests in item["relocated_to"].items()
             )
-            lines.append(f"| {item['path']} | {', '.join(item['missing_names'])} | {relocated} |")
+            lines.append(
+                f"| {item['path']} | {', '.join(item['missing_names'])} | {relocated} |"
+            )
     lines.append("")
 
     lines.append("## Criterion 3: Preservation Disposition (1,392 of 1,392)")
@@ -2400,7 +2426,9 @@ def render_findings_markdown(
     lines.append("")
     lines.append("| Class | Count |")
     lines.append("| --- | --- |")
-    for key in sorted(reclass["class_distribution"], key=lambda k: -reclass["class_distribution"][k]):
+    for key in sorted(
+        reclass["class_distribution"], key=lambda k: -reclass["class_distribution"][k]
+    ):
         lines.append(f"| {key} | {reclass['class_distribution'][key]} |")
     lines.append("")
 
@@ -2416,7 +2444,9 @@ def render_findings_markdown(
     )
     lines.append("")
 
-    lines.append("### Blocker Paths (Phase 1's inventory-completeness gate, secondary breakdown)")
+    lines.append(
+        "### Blocker Paths (Phase 1's inventory-completeness gate, secondary breakdown)"
+    )
     lines.append("")
     lines.append(
         f"`blocking: {reclass['blocking']}`, {reclass['blockers_total']} blocker paths -- "
@@ -2446,7 +2476,9 @@ def render_findings_markdown(
 
     pin_true_landed_count = sum(1 for r in candidates if r.get("pin_matches_landed"))
     preservation_lost = reclass["disposition_summary"].get("lost", 0)
-    preservation_superseded = reclass["disposition_summary"].get("superseded_by_upstream", 0)
+    preservation_superseded = reclass["disposition_summary"].get(
+        "superseded_by_upstream", 0
+    )
     lines.append("## Overall Assessment")
     lines.append("")
     if candidates:
@@ -2775,7 +2807,9 @@ def _run_findings(args: argparse.Namespace) -> dict[str, Any]:
     if not out_dir.is_absolute():
         out_dir = repo / out_dir
 
-    remerge_evidence = json.loads((out_dir / "remerge.json").read_text(encoding="utf-8"))
+    remerge_evidence = json.loads(
+        (out_dir / "remerge.json").read_text(encoding="utf-8")
+    )
     if remerge_evidence.get("handoff_state") != "merged_complete":
         raise GitCaptureError(
             "refusing findings: remerge.json handoff_state is "
