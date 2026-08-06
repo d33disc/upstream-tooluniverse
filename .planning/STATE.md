@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 02
 current_phase_name: Upstream Main Integration
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-08-06T17:04:15.324Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-08-06T17:49:55.970Z"
 last_activity: 2026-08-06
 last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 11
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-08-03)
 ## Current Position
 
 Phase: 02 (Upstream Main Integration) — EXECUTING
-Plan: 3 of 6
+Plan: 4 of 6
 Status: Ready to execute
 Last activity: 2026-08-06 — Phase 02 execution started
 
-Progress: [██████░░░░] 64%
+Progress: [███████░░░] 73%
 
 ## Performance Metrics
 
@@ -60,6 +60,7 @@ Progress: [██████░░░░] 64%
 |------|----------|-------|-------|
 | Phase 02 P01 | 24min | 2 tasks | 5 files |
 | Phase 02-upstream-main-integration P02 | 62min | 3 tasks | 4 files |
+| Phase 02 P03 | 3h40min | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,9 @@ Recent decisions affecting current work:
 - [Phase ?]: pyproject.toml resolved as upstream-plus-fork-additive-tables (not wholesale) after measuring the landed merge f81448f2 preserved the fork-only [tool.mypy] table
 - [Phase ?]: Raw re-derived conflict set is 285 paths vs the 22 git diff-tree --cc reports for f81448f2 -- diff-tree --cc prunes TREESAME-to-parent paths, undercounting conflicts resolved by taking one side wholesale; recorded verbatim per D-07
 - [Phase ?]: unresolved_paths (160) classified via classify_unresolved_paths into source_modules/tests/generated/symlink_workspaces/packaging/ci_docs since the plan's literal acceptance-criterion pattern does not match measured reality -- plan 02-03's scope is larger than the plan text anticipated
+- [Phase ?]: Resolved the real 16+3 file scope (source_modules+tests), not the plan's literally-named 11+5, per 02-02-SUMMARY's flagged CONTEXT.md diff-tree undercount
+- [Phase ?]: Resolved 141 out-of-declared-scope conflicts (symlinks/packaging/ci_docs) under explicit mechanical rules, separate from D-08's resolutions array, because git blocks commit with any unmerged path present
+- [Phase ?]: Fixed a silent git auto-merge data-loss bug (llm_clients.py dropped AzureOpenAIClient with zero conflict markers) and a test-scope gap (api_keys_catalog.json exclusion, self-healed downstream per D-06a), both recorded as discovered_findings for plan 02-04
 
 ### Pending Todos
 
@@ -102,6 +106,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-06T17:04:15.313Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-08-06T17:49:55.959Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None

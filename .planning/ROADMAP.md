@@ -67,7 +67,7 @@ Plans:
   3. Maintainer can compare the result with the Phase 1 preservation inventory and account for every custom code, tool, plugin, registration, and symlink asset.
   4. Representative preserved custom tools still load and execute after the upstream-main integration.
 
-**Plans**: 1/6 plans executed
+**Plans**: 3/6 plans executed
 
 Plans:
 **Wave 1**
@@ -80,7 +80,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 02-03-PLAN.md -- Source-layer resolution (11 modules, 5 test files), stage commit pinned at `refs/audit/remerge`, lazy-registry regeneration.
+- [x] 02-03-PLAN.md -- Source-layer resolution (11 modules, 5 test files), stage commit pinned at `refs/audit/remerge`, lazy-registry regeneration.
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
@@ -141,7 +141,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Protected Sync Baseline | 5/5 | Complete | 2026-08-04 |
-| 2. Upstream Main Integration | 1/6 | In Progress|  |
+| 2. Upstream Main Integration | 3/6 | In Progress|  |
 | 3. Follow-up and Catalog Reconciliation | 0/TBD | Not started | - |
 | 4. Documentation and Semantic Index | 0/TBD | Not started | - |
 | 5. Cross-Surface Certification | 0/TBD | Not started | - |
