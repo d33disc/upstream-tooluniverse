@@ -67,7 +67,25 @@ Plans:
   3. Maintainer can compare the result with the Phase 1 preservation inventory and account for every custom code, tool, plugin, registration, and symlink asset.
   4. Representative preserved custom tools still load and execute after the upstream-main integration.
 
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Entry-level tool-name union sweep over all 213 both-sides `data/*.json` files, with checksummed evidence (tracer slice).
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 02-02-PLAN.md — Isolated re-merge stage at `e0755067`, D-08 conflict re-derivation, lazy-registry regeneration.
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 02-03-PLAN.md — Full-tree diff against `f81448f2`, finding classification with D-06a pin recheck, 1,392-path preservation join.
+- [ ] 02-04-PLAN.md — Fresh criterion-4 probes for the recorded custom-tool sample plus symlink preservation checks.
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
+- [ ] 02-05-PLAN.md — Corrective-commit decision checkpoint, evidence publication, traceability update.
 
 ### Phase 3: Follow-up and Catalog Reconciliation
 
