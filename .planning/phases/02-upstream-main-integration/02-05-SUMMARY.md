@@ -229,7 +229,7 @@ None - no external service configuration required.
 
 ## Self-Check: PASSED
 
-All 6 created/modified files confirmed present on disk; all 3 task commits (`942b7979`, `0f074df7`, `f5a4ee16`) confirmed present in `git log --oneline --all`, plus a 4th post-blocker-correction commit (see below).
+All 6 created/modified files confirmed present on disk; all 3 task commits (`942b7979`, `0f074df7`, `f5a4ee16`) confirmed present in `git log --oneline --all`, plus a 4th post-blocker-correction commit (`b7f01c5c`).
 
 ---
 
