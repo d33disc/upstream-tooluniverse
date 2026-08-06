@@ -586,6 +586,41 @@ class TestAgenticToolEnvironmentVariables:
             with pytest.raises(ValueError, match="finite numeric"):
                 AgenticTool(tool_config)
 
+    def test_openrouter_primary_falls_back_to_claude_cli(self):
+        """Missing OPENROUTER_API_KEY should use configured Claude fallback."""
+        tool_config = {
+            "name": "test_tool",
+            "prompt": "Test prompt: {input}",
+            "input_arguments": ["input"],
+            "parameter": {
+                "type": "object",
+                "properties": {"input": {"type": "string"}},
+                "required": ["input"],
+            },
+            "configs": {
+                "api_type": "OPENROUTER",
+                "model_id": "openai/gpt-5",
+                "validate_api_key": True,
+                "fallback_api_type": "CLAUDE_CLI",
+                "fallback_model_id": "sonnet",
+                "use_global_fallback": False,
+            },
+        }
+
+        with (
+            patch("tooluniverse.agentic_tool.OpenRouterClient") as mock_openrouter,
+            patch("tooluniverse.agentic_tool.ClaudeCliClient") as mock_claude,
+        ):
+            mock_openrouter.side_effect = ValueError("OPENROUTER_API_KEY not set")
+            mock_claude_client = MagicMock()
+            mock_claude.return_value = mock_claude_client
+
+            tool = AgenticTool(tool_config)
+
+            assert tool._is_available is True
+            assert tool._current_api_type == "CLAUDE_CLI"
+            assert tool._current_model_id == "sonnet"
+
 
 if __name__ == "__main__":
     pytest.main([__file__])
