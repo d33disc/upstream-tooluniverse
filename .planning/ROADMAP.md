@@ -76,7 +76,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 02-02-PLAN.md -- Isolated re-merge stage at `e0755067`; merge started and the data/config layer resolved under D-08.
+- [x] 02-02-PLAN.md -- Isolated re-merge stage at `e0755067`; merge started and the data/config layer resolved under D-08.
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
