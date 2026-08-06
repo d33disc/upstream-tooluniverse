@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 01
-current_phase_name: Protected Sync Baseline
+current_phase: 02
+current_phase_name: Upstream Main Integration
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-08-06T12:41:35.660Z"
-last_activity: 2026-08-04
-last_activity_desc: Exact-head CI and GSD verification passed
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-08-06T15:36:30.217Z"
+last_activity: 2026-08-06
+last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 11
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-03)
 
 **Core value:** Synchronize the fork with upstream without losing custom behavior or allowing its tested, documented, and searchable tool catalog to drift.
-**Current focus:** Phase 01 — Protected Sync Baseline
+**Current focus:** Phase 02 — Upstream Main Integration
 
 ## Current Position
 
-Phase: 01 (Protected Sync Baseline) — COMPLETE
-Plan: 5 of 5
+Phase: 02 (Upstream Main Integration) — EXECUTING
+Plan: 2 of 6
 Status: Ready to execute
-Last activity: 2026-08-04 — Exact-head CI and GSD verification passed
+Last activity: 2026-08-06 — Phase 02 execution started
 
-Progress: [██████████] 100%
+Progress: [██████░░░░] 55%
 
 ## Performance Metrics
 
@@ -54,6 +54,11 @@ Progress: [██████████] 100%
 - Trend: No execution data yet
 
 *Updated after each plan completion*
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 02 P01 | 24min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -68,6 +73,9 @@ Recent decisions affecting current work:
 - [Phase ?]: Normalization uses exact volatile paths and preserves ordered arrays.
 - [Phase ?]: Credentials are projected to names/booleans and transient failures have a fixed three-attempt budget.
 - [Phase ?]: Evidence is published via temporary sibling tree with sorted SHA256SUMS.
+- [Phase ?]: classify_union's signature keeps three name sets + presence triple as primary params (per plan key_link), extended with keyword-only merged_name_list/unparseable channels so duplicate-name and JSON-decode-failure verdicts are reachable without losing pure-testability.
+- [Phase ?]: derive_both_sides_paths takes expected_base=DEFAULT_BASE_OID as a parameter (not a hardcoded literal), so the real run hard-asserts against 4d668698... while unit tests pass expected_base=None against a synthetic repo.
+- [Phase ?]: assert_safe_working_context's concurrency guard is scoped to untracked paths (plus this script's own declared output); tracked STATE.md edits from the GSD workflow are ordinary housekeeping, not a hazard for a read-only sweep.
 
 ### Pending Todos
 
@@ -90,6 +98,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-06T10:49:14.339Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-upstream-main-integration/02-CONTEXT.md
+Last session: 2026-08-06T15:36:30.207Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None

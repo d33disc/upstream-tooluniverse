@@ -16,7 +16,7 @@ Requirements for the upstream synchronization milestone. Each maps to exactly on
 ### Upstream Integration
 
 - [ ] **SYNC-01**: Maintainer can integrate the selected `mims-harvard/ToolUniverse` main revision on an isolated synchronization branch without incorporating unrelated local changes
-- [ ] **SYNC-02**: Shared canonical tool definitions follow upstream while structural conflicts retain both upstream additions and fork-specific behavior
+- [x] **SYNC-02**: Shared canonical tool definitions follow upstream while structural conflicts retain both upstream additions and fork-specific behavior
 - [ ] **PRES-02**: Fork-specific code, tools, plugin assets, and registration contracts remain present and functional after the upstream-main integration
 - [ ] **SYNC-03**: Maintainer can determine whether historical PR #161 is already represented by the selected upstream revision and, when needed, integrate it as a separate verified stage
 
@@ -70,7 +70,7 @@ Deferred beyond this synchronization milestone.
 | BASE-02 | Phase 1 | Complete |
 | PRES-01 | Phase 1 | Complete |
 | SYNC-01 | Phase 2 | Pending |
-| SYNC-02 | Phase 2 | Pending |
+| SYNC-02 | Phase 2 | Complete |
 | PRES-02 | Phase 2 | Pending |
 | SYNC-03 | Phase 3 | Pending |
 | CAT-01 | Phase 3 | Pending |
