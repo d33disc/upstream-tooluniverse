@@ -4,16 +4,16 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 02
 current_phase_name: Upstream Main Integration
-status: executing
-stopped_at: 02-05 corrected (symlink gate base-crossing bug fixed, gate now green) and 02-04 findings given real per-file forensics -- awaiting human decision at 02-06, see 02-05-SUMMARY.md
-last_updated: "2026-08-06T21:00:48.844Z"
+status: complete
+stopped_at: Phase 2 complete. 02-06 checkpoint resolved (approve-subset, 1 of 29 candidates), corrective commit landed (d08ae18d), evidence bundle published and verified, SYNC-01/SYNC-02/PRES-02 all Complete. See 02-06-SUMMARY.md.
+last_updated: "2026-08-06T22:00:30.354Z"
 last_activity: 2026-08-06
-last_activity_desc: 02-05 symlink gate corrected (self_healed_downstream tier added); 02-04 findings.json rationale replaced with per-file forensic verdicts
+last_activity_desc: 02-06 executed end-to-end -- human checkpoint, 1 corrective commit, evidence bundle publish, ROADMAP/REQUIREMENTS traceability. Phase 2 closed.
 progress:
   total_phases: 2
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 10  # 02-05 corrected in-phase: the symlink hard gate's base-crossing bug (compared stage vs pin instead of vs landed) is fixed, re-run is green, PRES-02 is Complete. Corrective-commit gate (D-06b, plan 02-06) remains untouched -- this was a fix to the AUDIT'S OWN tooling, not a corrective commit to merged source.
+  completed_plans: 11
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-03)
 
 **Core value:** Synchronize the fork with upstream without losing custom behavior or allowing its tested, documented, and searchable tool catalog to drift.
-**Current focus:** Phase 02 — Upstream Main Integration
+**Current focus:** Phase 03 — Follow-up and Catalog Reconciliation (Phase 02 complete)
 
 ## Current Position
 
-Phase: 02 (Upstream Main Integration) — EXECUTING
-Plan: 5 of 6
-Status: Ready to execute
-Last activity: 2026-08-06 — Phase 02 execution started
+Phase: 02 (Upstream Main Integration) — COMPLETE
+Plan: 6 of 6
+Status: Complete; Phase 3 not yet started
+Last activity: 2026-08-06 — Phase 02 closed (02-06 checkpoint, corrective commit, evidence bundle, traceability)
 
-Progress: [████████░░] 82%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -92,6 +92,8 @@ Recent decisions affecting current work:
 - [Phase ?]: 02-05: reverted PRES-02 from Complete to Pending in REQUIREMENTS.md -- 02-03 marked it complete before 02-05's execution-time verification ran, and that verification found it does not currently hold
 - [Phase ?]: Post-blocker correction (same session, 2026-08-06T21:00Z): the symlink 'retargeted' verdict was itself a bug, not a real gap -- the gate compared the stage against preservation.json's PIN-based target instead of the LANDED merge's target (the exact base-crossing hazard D-06a exists to prevent). `git ls-tree` confirms stage blob == landed blob for all 3 flagged links; pin/HEAD differ only via unrelated downstream repair commit 8a759b14. Fixed in probe_custom_tools.py (`_landed_symlink_target` + a `self_healed_downstream` tier mirroring `classify_finding`'s two-stage design), re-ran, gate is green, PRES-02 restored to Complete. See 02-05-SUMMARY.md "Symlink gate correction".
 - [Phase ?]: Ran per-file forensic tracing (definition-diff + HEAD-reference check, scripts/forensic_trace_findings.py) on all 29 landed_dropped_or_altered candidates, replacing the identical templated rationale 02-04 had left on every record. 28 are false positives with a specific traced cause each (rename, deliberate downstream SDK/endpoint rewrite, dead code with zero callers anywhere in the repo, or HEAD already matching landed). 1 survives as a genuine but narrow gap: tests/unit/test_agentic_tool_env_vars.py is missing regression coverage for a live OPENROUTER-to-CLAUDE_CLI fallback code path -- a test-coverage gap, not a functional or data loss. See findings-forensics.json and 02-FINDINGS.md's updated Forensic verdict column.
+- [Phase ?]: 02-06 checkpoint (human, via AskUserQuestion, 2026-08-06T21:16Z): approve-subset -- 1 of 29 candidates approved (missing OPENROUTER->CLAUDE_CLI fallback test, restored verbatim from remerge_blob and re-verified against present-day source), 28 rejected as false positives, all 3 flagged assumptions (A1/A2/A3) accepted as resolved. Commit d08ae18d, alone, one finding.
+- [Phase ?]: Phase 2 closed 2026-08-06T22:00Z. Evidence bundle published to evidence/a4d3d95a096a14ce4d147faa20334d24f8db9f9a/ (the refs/audit/remerge OID), verified two ways (verify_checksums() + independent shasum -a 256 -c). Full default pytest suite surfaced 3 pre-existing, unrelated failures (RuntimeError: no running event loop in ToolCallable.__call__, execute_function.py -- confirmed via git log to predate this phase); routed to a separate follow-up task (task_43fff30b) rather than treated as blocking or silently accepted.
 
 ### Pending Todos
 
@@ -115,6 +117,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-06T21:00:48.844Z
-Stopped at: 02-05 corrected + 02-04 findings given real per-file forensics -- ready for 02-06's human-gated review, not yet dispatched
-Resume file: .planning/phases/02-upstream-main-integration/02-05-SUMMARY.md
+Last session: 2026-08-06T22:00:30.354Z
+Stopped at: Phase 2 complete -- 02-06 checkpoint resolved, 1 corrective commit landed, evidence published, traceability updated. Next: Phase 3 (SYNC-03, PR #161).
+Resume file: .planning/phases/02-upstream-main-integration/02-06-SUMMARY.md
