@@ -67,7 +67,7 @@ Plans:
   3. Maintainer can compare the result with the Phase 1 preservation inventory and account for every custom code, tool, plugin, registration, and symlink asset.
   4. Representative preserved custom tools still load and execute after the upstream-main integration.
 
-**Plans**: 4/6 plans executed
+**Plans**: 5 plans executed
 
 Plans:
 **Wave 1**
@@ -85,11 +85,11 @@ Plans:
 **Wave 4** *(blocked on Wave 3 completion)*
 
 - [x] 02-04-PLAN.md -- Full-tree diff against `f81448f2`, finding classification with D-06a pin recheck, 1,392-path preservation join.
-- [ ] 02-05-PLAN.md -- Fresh criterion-4 probes for the recorded custom-tool sample plus symlink preservation checks.
+- [x] 02-05-PLAN.md -- Fresh criterion-4 probes for the recorded custom-tool sample plus symlink preservation checks; symlink gate's base-crossing bug found and corrected in the same plan.
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
-- [ ] 02-06-PLAN.md -- Corrective-commit decision checkpoint, evidence publication, traceability update.
+- [x] 02-06-PLAN.md -- Corrective-commit decision checkpoint (1 approved: restored a missing regression test), evidence bundle published at `evidence/a4d3d95a096a14ce4d147faa20334d24f8db9f9a/`, traceability updated.
 
 ### Phase 3: Follow-up and Catalog Reconciliation
 

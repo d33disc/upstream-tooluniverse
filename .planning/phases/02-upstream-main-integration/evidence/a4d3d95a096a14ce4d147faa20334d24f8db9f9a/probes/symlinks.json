@@ -1,0 +1,1239 @@
+{
+  "counts": {
+    "by_verdict": {
+      "preserved": 3,
+      "replaced_by_regular_file": 114,
+      "self_healed_downstream": 3
+    },
+    "gated": 3,
+    "non_gated": 117,
+    "preservation_symlink_records": 120
+  },
+  "links": [
+    {
+      "in_root": true,
+      "landed_link_text": "../../skills/tooluniverse-computational-biophysics-workspace",
+      "path": "plugin/skills/tooluniverse-computational-biophysics-workspace",
+      "phase1_target": "../../skills/tooluniverse-computational-biophysics",
+      "pin_link_text": "../../skills/tooluniverse-computational-biophysics",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
+      "stage_is_symlink": true,
+      "stage_target": "../../skills/tooluniverse-computational-biophysics-workspace",
+      "target_matches": false,
+      "verdict": "self_healed_downstream"
+    },
+    {
+      "in_root": true,
+      "landed_link_text": "../../skills/tooluniverse-drug-drug-interaction-workspace",
+      "path": "plugin/skills/tooluniverse-drug-drug-interaction-workspace",
+      "phase1_target": "../../skills/tooluniverse-drug-drug-interaction",
+      "pin_link_text": "../../skills/tooluniverse-drug-drug-interaction",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
+      "stage_is_symlink": true,
+      "stage_target": "../../skills/tooluniverse-drug-drug-interaction-workspace",
+      "target_matches": false,
+      "verdict": "self_healed_downstream"
+    },
+    {
+      "in_root": true,
+      "landed_link_text": "../../skills/tooluniverse-organic-chemistry-workspace",
+      "path": "plugin/skills/tooluniverse-organic-chemistry-workspace",
+      "phase1_target": "../../skills/tooluniverse-organic-chemistry",
+      "pin_link_text": "../../skills/tooluniverse-organic-chemistry",
+      "primary_verdict": "preserved",
+      "self_heal_note": "pin/HEAD differ from landed via downstream repair commit 8a759b14 (not an ancestor of e0755067 or f81448f2) -- unrelated to this merge, D-06a applies",
+      "stage_is_symlink": true,
+      "stage_target": "../../skills/tooluniverse-organic-chemistry-workspace",
+      "target_matches": false,
+      "verdict": "self_healed_downstream"
+    }
+  ],
+  "non_gated_records": [
+    {
+      "differing_files": [
+        "SKILL.md"
+      ],
+      "gate_exclusion_reason": "content_differs_from_symlink_target",
+      "in_root": false,
+      "path": "plugin/skills/setup-tooluniverse",
+      "phase1_target": "../../skills/setup-tooluniverse",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse",
+      "phase1_target": "../../skills/tooluniverse",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-acmg-variant-classification",
+      "phase1_target": "../../skills/tooluniverse-acmg-variant-classification",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-admet-prediction",
+      "phase1_target": "../../skills/tooluniverse-admet-prediction",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-adverse-event-detection",
+      "phase1_target": "../../skills/tooluniverse-adverse-event-detection",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-adverse-outcome-pathway",
+      "phase1_target": "../../skills/tooluniverse-adverse-outcome-pathway",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-aging-senescence",
+      "phase1_target": "../../skills/tooluniverse-aging-senescence",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-antibody-engineering",
+      "phase1_target": "../../skills/tooluniverse-antibody-engineering",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-binder-discovery",
+      "phase1_target": "../../skills/tooluniverse-binder-discovery",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-cancer-classification",
+      "phase1_target": "../../skills/tooluniverse-cancer-classification",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-cancer-genomics-tcga",
+      "phase1_target": "../../skills/tooluniverse-cancer-genomics-tcga",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-cancer-variant-interpretation",
+      "phase1_target": "../../skills/tooluniverse-cancer-variant-interpretation",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-cell-line-profiling",
+      "phase1_target": "../../skills/tooluniverse-cell-line-profiling",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-chemical-compound-retrieval",
+      "phase1_target": "../../skills/tooluniverse-chemical-compound-retrieval",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-chemical-safety",
+      "phase1_target": "../../skills/tooluniverse-chemical-safety",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-chemical-sourcing",
+      "phase1_target": "../../skills/tooluniverse-chemical-sourcing",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-clinical-data-integration",
+      "phase1_target": "../../skills/tooluniverse-clinical-data-integration",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-clinical-guidelines",
+      "phase1_target": "../../skills/tooluniverse-clinical-guidelines",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-clinical-trial-design",
+      "phase1_target": "../../skills/tooluniverse-clinical-trial-design",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-clinical-trial-matching",
+      "phase1_target": "../../skills/tooluniverse-clinical-trial-matching",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-comparative-genomics",
+      "phase1_target": "../../skills/tooluniverse-comparative-genomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-computational-biophysics",
+      "phase1_target": "../../skills/tooluniverse-computational-biophysics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-crispr-screen-analysis",
+      "phase1_target": "../../skills/tooluniverse-crispr-screen-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-custom-tool",
+      "phase1_target": "../../skills/tooluniverse-custom-tool",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-data-integration-analysis",
+      "phase1_target": "../../skills/tooluniverse-data-integration-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-data-wrangling",
+      "phase1_target": "../../skills/tooluniverse-data-wrangling",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-dataset-discovery",
+      "phase1_target": "../../skills/tooluniverse-dataset-discovery",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-disease-research",
+      "phase1_target": "../../skills/tooluniverse-disease-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-drug-interaction",
+      "phase1_target": "../../skills/tooluniverse-drug-drug-interaction",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-mechanism-research",
+      "phase1_target": "../../skills/tooluniverse-drug-mechanism-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-regulatory",
+      "phase1_target": "../../skills/tooluniverse-drug-regulatory",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-repurposing",
+      "phase1_target": "../../skills/tooluniverse-drug-repurposing",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-research",
+      "phase1_target": "../../skills/tooluniverse-drug-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-drug-target-validation",
+      "phase1_target": "../../skills/tooluniverse-drug-target-validation",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-ecology-biodiversity",
+      "phase1_target": "../../skills/tooluniverse-ecology-biodiversity",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-electron-microscopy",
+      "phase1_target": "../../skills/tooluniverse-electron-microscopy",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-epidemiological-analysis",
+      "phase1_target": "../../skills/tooluniverse-epidemiological-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-epigenomics",
+      "phase1_target": "../../skills/tooluniverse-epigenomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-epigenomics-chromatin",
+      "phase1_target": "../../skills/tooluniverse-epigenomics-chromatin",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-expression-data-retrieval",
+      "phase1_target": "../../skills/tooluniverse-expression-data-retrieval",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-functional-genomics-screens",
+      "phase1_target": "../../skills/tooluniverse-functional-genomics-screens",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gene-disease-association",
+      "phase1_target": "../../skills/tooluniverse-gene-disease-association",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "differing_files": [
+        "SKILL.md"
+      ],
+      "gate_exclusion_reason": "content_differs_from_symlink_target",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gene-enrichment",
+      "phase1_target": "../../skills/tooluniverse-gene-enrichment",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gene-regulatory-networks",
+      "phase1_target": "../../skills/tooluniverse-gene-regulatory-networks",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gpcr-structural-pharmacology",
+      "phase1_target": "../../skills/tooluniverse-gpcr-structural-pharmacology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gwas-drug-discovery",
+      "phase1_target": "../../skills/tooluniverse-gwas-drug-discovery",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gwas-finemapping",
+      "phase1_target": "../../skills/tooluniverse-gwas-finemapping",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gwas-snp-interpretation",
+      "phase1_target": "../../skills/tooluniverse-gwas-snp-interpretation",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gwas-study-explorer",
+      "phase1_target": "../../skills/tooluniverse-gwas-study-explorer",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-gwas-trait-to-gene",
+      "phase1_target": "../../skills/tooluniverse-gwas-trait-to-gene",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-hla-immunogenomics",
+      "phase1_target": "../../skills/tooluniverse-hla-immunogenomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-image-analysis",
+      "phase1_target": "../../skills/tooluniverse-image-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-immune-repertoire-analysis",
+      "phase1_target": "../../skills/tooluniverse-immune-repertoire-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-immunology",
+      "phase1_target": "../../skills/tooluniverse-immunology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-immunotherapy-response-prediction",
+      "phase1_target": "../../skills/tooluniverse-immunotherapy-response-prediction",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-infectious-disease",
+      "phase1_target": "../../skills/tooluniverse-infectious-disease",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-inorganic-physical-chemistry",
+      "phase1_target": "../../skills/tooluniverse-inorganic-physical-chemistry",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-install-skills",
+      "phase1_target": "../../skills/tooluniverse-install-skills",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-kegg-disease-drug",
+      "phase1_target": "../../skills/tooluniverse-kegg-disease-drug",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-lipidomics",
+      "phase1_target": "../../skills/tooluniverse-lipidomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-literature-deep-research",
+      "phase1_target": "../../skills/tooluniverse-literature-deep-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-metabolomics",
+      "phase1_target": "../../skills/tooluniverse-metabolomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-metabolomics-analysis",
+      "phase1_target": "../../skills/tooluniverse-metabolomics-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-metabolomics-pathway",
+      "phase1_target": "../../skills/tooluniverse-metabolomics-pathway",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-metagenomics-analysis",
+      "phase1_target": "../../skills/tooluniverse-metagenomics-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-microbiome-research",
+      "phase1_target": "../../skills/tooluniverse-microbiome-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-model-organism-genetics",
+      "phase1_target": "../../skills/tooluniverse-model-organism-genetics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-multi-omics-integration",
+      "phase1_target": "../../skills/tooluniverse-multi-omics-integration",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-multiomic-disease-characterization",
+      "phase1_target": "../../skills/tooluniverse-multiomic-disease-characterization",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-network-pharmacology",
+      "phase1_target": "../../skills/tooluniverse-network-pharmacology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-neuroscience",
+      "phase1_target": "../../skills/tooluniverse-neuroscience",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-noncoding-rna",
+      "phase1_target": "../../skills/tooluniverse-noncoding-rna",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-organic-chemistry",
+      "phase1_target": "../../skills/tooluniverse-organic-chemistry",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-pathway-disease-genetics",
+      "phase1_target": "../../skills/tooluniverse-pathway-disease-genetics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-pharmacogenomics",
+      "phase1_target": "../../skills/tooluniverse-pharmacogenomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-pharmacovigilance",
+      "phase1_target": "../../skills/tooluniverse-pharmacovigilance",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-phylogenetics",
+      "phase1_target": "../../skills/tooluniverse-phylogenetics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-plant-genomics",
+      "phase1_target": "../../skills/tooluniverse-plant-genomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-polygenic-risk-score",
+      "phase1_target": "../../skills/tooluniverse-polygenic-risk-score",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-population-genetics",
+      "phase1_target": "../../skills/tooluniverse-population-genetics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-population-genetics-1000genomes",
+      "phase1_target": "../../skills/tooluniverse-population-genetics-1000genomes",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-precision-medicine-stratification",
+      "phase1_target": "../../skills/tooluniverse-precision-medicine-stratification",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-precision-oncology",
+      "phase1_target": "../../skills/tooluniverse-precision-oncology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-protein-interactions",
+      "phase1_target": "../../skills/tooluniverse-protein-interactions",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-protein-modification-analysis",
+      "phase1_target": "../../skills/tooluniverse-protein-modification-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-protein-structure-prediction",
+      "phase1_target": "../../skills/tooluniverse-protein-structure-prediction",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-protein-structure-retrieval",
+      "phase1_target": "../../skills/tooluniverse-protein-structure-retrieval",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-protein-therapeutic-design",
+      "phase1_target": "../../skills/tooluniverse-protein-therapeutic-design",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-proteomics-analysis",
+      "phase1_target": "../../skills/tooluniverse-proteomics-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-proteomics-data-retrieval",
+      "phase1_target": "../../skills/tooluniverse-proteomics-data-retrieval",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-rare-disease-diagnosis",
+      "phase1_target": "../../skills/tooluniverse-rare-disease-diagnosis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-rare-disease-genomics",
+      "phase1_target": "../../skills/tooluniverse-rare-disease-genomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-regulatory-genomics",
+      "phase1_target": "../../skills/tooluniverse-regulatory-genomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-regulatory-variant-analysis",
+      "phase1_target": "../../skills/tooluniverse-regulatory-variant-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-rnaseq-deseq2",
+      "phase1_target": "../../skills/tooluniverse-rnaseq-deseq2",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-sdk",
+      "phase1_target": "../../skills/tooluniverse-sdk",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-sequence-analysis",
+      "phase1_target": "../../skills/tooluniverse-sequence-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-sequence-retrieval",
+      "phase1_target": "../../skills/tooluniverse-sequence-retrieval",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-single-cell",
+      "phase1_target": "../../skills/tooluniverse-single-cell",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-small-molecule-discovery",
+      "phase1_target": "../../skills/tooluniverse-small-molecule-discovery",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-spatial-omics-analysis",
+      "phase1_target": "../../skills/tooluniverse-spatial-omics-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-spatial-transcriptomics",
+      "phase1_target": "../../skills/tooluniverse-spatial-transcriptomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-statistical-modeling",
+      "phase1_target": "../../skills/tooluniverse-statistical-modeling",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-stem-cell-organoid",
+      "phase1_target": "../../skills/tooluniverse-stem-cell-organoid",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-structural-proteomics",
+      "phase1_target": "../../skills/tooluniverse-structural-proteomics",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-structural-variant-analysis",
+      "phase1_target": "../../skills/tooluniverse-structural-variant-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-systems-biology",
+      "phase1_target": "../../skills/tooluniverse-systems-biology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-target-research",
+      "phase1_target": "../../skills/tooluniverse-target-research",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-toxicology",
+      "phase1_target": "../../skills/tooluniverse-toxicology",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-vaccine-design",
+      "phase1_target": "../../skills/tooluniverse-vaccine-design",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-variant-analysis",
+      "phase1_target": "../../skills/tooluniverse-variant-analysis",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-variant-functional-annotation",
+      "phase1_target": "../../skills/tooluniverse-variant-functional-annotation",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-variant-interpretation",
+      "phase1_target": "../../skills/tooluniverse-variant-interpretation",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "materialized_directory_by_upstream",
+      "in_root": false,
+      "path": "plugin/skills/tooluniverse-variant-to-mechanism",
+      "phase1_target": "../../skills/tooluniverse-variant-to-mechanism",
+      "stage_is_symlink": false,
+      "stage_target": null,
+      "target_matches": false,
+      "verdict": "replaced_by_regular_file"
+    },
+    {
+      "gate_exclusion_reason": "pre_existing_out_of_root_blocker",
+      "in_root": false,
+      "path": "skills/company-research",
+      "phase1_target": "/Users/davis/code/upstream_skills/skills/company-research",
+      "stage_is_symlink": true,
+      "stage_target": "/Users/davis/code/upstream_skills/skills/company-research",
+      "target_matches": true,
+      "verdict": "preserved"
+    },
+    {
+      "gate_exclusion_reason": "pre_existing_out_of_root_blocker",
+      "in_root": false,
+      "path": "skills/tooluniverse-deep-research",
+      "phase1_target": "/Users/davis/code/upstream_skills/skills/tooluniverse-deep-research",
+      "stage_is_symlink": true,
+      "stage_target": "/Users/davis/code/upstream_skills/skills/tooluniverse-deep-research",
+      "target_matches": true,
+      "verdict": "preserved"
+    },
+    {
+      "gate_exclusion_reason": "pre_existing_out_of_root_blocker",
+      "in_root": false,
+      "path": "skills/tu-llm",
+      "phase1_target": "/Users/davis/code/upstream_skills/skills/tu-llm",
+      "stage_is_symlink": true,
+      "stage_target": "/Users/davis/code/upstream_skills/skills/tu-llm",
+      "target_matches": true,
+      "verdict": "preserved"
+    }
+  ],
+  "preservation_source": "/Users/davis/code/ToolUniverse/.planning/phases/01-protected-sync-baseline/evidence/21945440c9f2a15537ba878500a800d9e330eab0/preservation.json",
+  "registry_integrity_at_probe_time": {
+    "exit_code": 0,
+    "stderr_tail": "",
+    "summary_line": "4 passed, 2 warnings in 3.74s"
+  },
+  "scope_note": "HARD GATE TRIPPED for the 3 plugin/skills/*-workspace links: their verdict is 'retargeted', not 'preserved' -- this run does NOT satisfy 02-05-PLAN.md Task 3's acceptance criteria. Forensics: the re-merge stage is deliberately built from e0755067, the pre-merge fork parent (02-CONTEXT.md D-05), which predates the post-merge repair commit 8a759b14 ('fix(01-01): repair authoritative plugin skill links'). That repair is present in the Phase 1 pin (21945440) and in the current main HEAD, but not in a stage re-derived from e0755067+56adcfd9, because these three paths are git status 'A' (fork-only add, no upstream counterpart) -- git auto-resolves them identically on every re-derivation, so no 02-03 conflict-resolution choice can change this; it is a fork_oid pin-selection question, not a 02-03 merge-resolution question. findings.json independently confirms landed (f81448f2) and stage agree byte-for-byte here (no disagreement recorded there), which shows this is not novel merge damage -- but it does NOT satisfy this plan's gate, which requires matching the repaired Phase 1 pin, not the pre-repair fork parent. Remedy is a human decision between: (a) re-pin fork_oid to a post-8a759b14 commit and rebuild the stage, or (b) amend this gate to compare against the fork parent's recorded pre-repair state instead of the Phase 1 pin. The remaining 114 plugin/skills/* records were legitimately materialized from symlinks into real upstream directories -- content verified matching for the 'setup-tooluniverse' and 'tooluniverse-gene-enrichment' sample, except those two SKILL.md files, which differ in content beyond the missing-test-file pattern and are flagged individually below, not folded into the noise bucket.",
+  "stage_path": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067"
+}

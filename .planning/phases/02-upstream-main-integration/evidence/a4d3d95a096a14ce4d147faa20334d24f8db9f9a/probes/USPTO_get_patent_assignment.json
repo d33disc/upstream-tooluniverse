@@ -1,0 +1,80 @@
+{
+  "arguments": {
+    "applicationNumberText": "14966067"
+  },
+  "cli": {
+    "discover": {
+      "found": false
+    },
+    "execute": {
+      "error": "Tool 'USPTO_get_patent_assignment' requires API key(s) not set: USPTO_API_KEY. Set them as environment variables and retry.",
+      "error_type": null,
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "result": {
+        "error": "Tool 'USPTO_get_patent_assignment' requires API key(s) not set: USPTO_API_KEY. Set them as environment variables and retry.",
+        "error_details": {
+          "details": {},
+          "message": "Tool 'USPTO_get_patent_assignment' requires API key(s) not set: USPTO_API_KEY. Set them as environment variables and retry.",
+          "next_steps": [
+            "Set the environment variable(s): USPTO_API_KEY",
+            "Run `tu status` to check which API keys are configured"
+          ],
+          "retriable": false,
+          "type": "ToolUnavailableError"
+        },
+        "status": "error"
+      },
+      "status": "error"
+    },
+    "inspect": {
+      "spec": null
+    },
+    "surface": "cli",
+    "tool": "USPTO_get_patent_assignment"
+  },
+  "contract": {
+    "cli": {
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "reason": "tool excluded for missing credential(s)",
+      "verdict": "gated"
+    },
+    "missing_keys": [
+      "USPTO_API_KEY"
+    ],
+    "name": "USPTO_get_patent_assignment",
+    "python": {
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "reason": "tool excluded for missing credential(s)",
+      "verdict": "gated"
+    },
+    "selection_rule": "rule_1_fork_only_hand_resolved_array",
+    "verdict": "gated"
+  },
+  "name": "USPTO_get_patent_assignment",
+  "python": {
+    "discover": {
+      "found": false
+    },
+    "duration_ms": 321.133,
+    "execute": {
+      "error": "tool excluded: missing API key(s) USPTO_API_KEY",
+      "error_type": null,
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "result": null,
+      "status": "error"
+    },
+    "inspect": {
+      "spec": null
+    },
+    "surface": "python",
+    "tool": "USPTO_get_patent_assignment"
+  }
+}

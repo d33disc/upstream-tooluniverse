@@ -156,3 +156,31 @@ Decided: 2026-08-06T21:16:24.796Z
 
 `git status --porcelain -- src/ tests/ pyproject.toml uv.lock` was empty at the moment this decision was recorded.
 
+## Success Criteria Evidence
+
+Generated: 2026-08-06T21:31:45.832Z
+
+Each ROADMAP.md Phase 2 success criterion and each of SYNC-01 / SYNC-02 / PRES-02, mapped to a specific artifact assertion -- the exact command whose output backs it, not a prose claim.
+
+| Criterion | Requirement | Assertion | Result |
+| --- | --- | --- | --- |
+| 1. Isolated integration stage contains the selected upstream-main revision, excludes unrelated worktree changes | SYNC-01 | `git rev-list --parents -n 1 refs/audit/remerge` | `a4d3d95a... e0755067ebe7cc5374f033c5c28160980c5eddfa 56adcfd9c299078d0c40fde642b0be006510ccf3` -- exactly the fork-parent and upstream OIDs, two parents, no third |
+| 1. (isolation) | SYNC-01 | `git branch --contains refs/audit/remerge` | empty -- the stage was never merged into any branch |
+| 2. Shared canonical definitions follow upstream; fork-only definitions retained in combined structural files | SYNC-02 | `jq '.summary.net_removed_fork_entries, .summary.duplicate_name_files' union.json` | `0, 0` across all 213 both-sides `data/*.json` files (211 `union_ok`, 2 `upstream_deleted` both relocated with `unrelocated_lost_names: []`) |
+| 3. Every custom code, tool, plugin, registration, and symlink asset accounted for against the Phase 1 preservation inventory | PRES-02 | `jq '.summary' preservation-reclass.json` | 1,392 of 1,392 preservation.json paths classified; `lost: 9`, `superseded_by_upstream: 6` -- the same small set already itemized in the Corrective-commit Candidates table above, not additional unaccounted risk |
+| 3. (symlinks specifically) | PRES-02 | `python3 scripts/probe_custom_tools.py --symlinks --stage <stage>; echo $?` | exit `0` -- all 3 gated `plugin/skills/*-workspace` links `self_healed_downstream` (git-ls-tree-confirmed: stage blob == landed blob; merge introduced no regression), remaining 117 non-gated records individually reasoned in `symlinks.json` |
+| 4. Representative preserved custom tools still load and execute | PRES-02 | `jq '.failed, .passed, .gated' probes/summary.json` | `0, 3, 3` -- zero failures across the 6-tool `PROBE_SAMPLE` on both the Python SDK and `tu` CLI surfaces inside the stage |
+| 4. (registration chain) | PRES-02 | `jq '.registry_integrity_at_probe_time.exit_code' probes/symlinks.json` | `0` (`"4 passed, 2 warnings"`) |
+
+**Corrective-commit outcome:** 1 of 29 `landed_dropped_or_altered` candidates approved and landed (`d08ae18d`, restoring `tests/unit/test_agentic_tool_env_vars.py::test_openrouter_primary_falls_back_to_claude_cli`); 28 rejected as false positives with individually traced causes (see Corrective-commit Candidates table above and `findings-forensics.json`).
+
+**Flagged edge coverage (named, not silently treated as covered):**
+
+| ID | Coverage gap | Disposition |
+| --- | --- | --- |
+| EC-SYNC-01 | `unclassified`/`unresolved` edge cases for the isolation criterion | UNRESOLVED -- the two-parent identity check and the never-merged-branch check are this criterion's sole edge evidence; no additional adversarial isolation testing was performed in this phase |
+| EC-SYNC-02 | `unclassified`/`unresolved` edge cases for the union-sweep criterion | UNRESOLVED -- the union sweep, the D-08 resolution record, and the full-tree diff are this criterion's edge evidence; no fuzzing or synthetic-conflict injection was performed |
+| EC-PRES-02 | `unclassified`/`unresolved` edge cases for the preservation criterion | UNRESOLVED -- the preservation join, the 6-tool probe suite, and the symlink verification are this criterion's edge evidence; the probe sample is representative, not exhaustive, over the full custom-tool surface |
+
+These three were explicitly flagged in `02-06-PLAN.md` rather than silently treated as covered, and remain open at phase close. They do not block SYNC-01/SYNC-02/PRES-02 completion -- each requirement's stated success condition is met by the assertions above -- but a future phase auditing the full custom-tool surface (beyond the 6-tool sample) would close them.
+

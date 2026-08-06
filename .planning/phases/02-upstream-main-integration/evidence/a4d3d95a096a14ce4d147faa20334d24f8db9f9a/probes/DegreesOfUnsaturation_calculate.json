@@ -1,0 +1,340 @@
+{
+  "arguments": {
+    "formula": "C6H6",
+    "operation": "calculate"
+  },
+  "cli": {
+    "discover": {
+      "found": true
+    },
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "data": {
+          "C": 6,
+          "H": 6,
+          "N": 0,
+          "O": 0,
+          "S": 0,
+          "calculation": "(2*6 + 2 + 0 - 6 - 0) / 2 = 4.0",
+          "degrees_of_unsaturation": 4.0,
+          "formula": "C6H6",
+          "halogens": 0,
+          "interpretation": "Four degrees — consistent with a benzene ring (3 C=C + 1 ring).",
+          "is_integer": true
+        },
+        "status": "success"
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "degrees_of_unsaturation",
+        "description": "Calculate degrees of unsaturation (DoU, also called index of hydrogen deficiency or degree of unsaturation) from a molecular formula. Uses the formula DoU = (2C + 2 + N - H - X) / 2 where X = total halogens (F, Cl, Br, I). Oxygen and sulfur do not affect DoU. Accepts either a formula string (e.g., 'C6H6') or explicit atom counts. Returns DoU value with structural interpretation: 0 = saturated, 1 = one ring or double bond, 4 = benzene ring, etc. Half-integer DoU indicates a formula error for neutral molecules.",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "DegreesOfUnsaturation_calculate",
+        "parameters": {
+          "properties": {
+            "Br": {
+              "description": "Number of bromine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "C": {
+              "description": "Number of carbon atoms (use if formula not provided)",
+              "required": false,
+              "type": "integer"
+            },
+            "Cl": {
+              "description": "Number of chlorine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "F": {
+              "description": "Number of fluorine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "H": {
+              "description": "Number of hydrogen atoms (use if formula not provided)",
+              "required": false,
+              "type": "integer"
+            },
+            "N": {
+              "description": "Number of nitrogen atoms (default 0)",
+              "required": false,
+              "type": "integer"
+            },
+            "S": {
+              "description": "Number of sulfur atoms (does not affect DoU)",
+              "required": false,
+              "type": "integer"
+            },
+            "formula": {
+              "description": "Molecular formula string (e.g., 'C6H6', 'C8H15ClN2O2'). Alternative to explicit atom counts.",
+              "required": false,
+              "type": "string"
+            },
+            "iodine": {
+              "description": "Number of iodine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "operation": {
+              "description": "Operation type",
+              "enum": [
+                "calculate"
+              ],
+              "required": true,
+              "type": "string"
+            },
+            "oxygen": {
+              "description": "Number of oxygen atoms (does not affect DoU, tracked for formula display)",
+              "required": false,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "operation"
+          ],
+          "type": "object"
+        },
+        "return_schema": {
+          "oneOf": [
+            {
+              "properties": {
+                "data": {
+                  "properties": {
+                    "calculation": {
+                      "type": "string"
+                    },
+                    "degrees_of_unsaturation": {
+                      "type": "number"
+                    },
+                    "formula": {
+                      "type": "string"
+                    },
+                    "interpretation": {
+                      "type": "string"
+                    },
+                    "is_integer": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/degrees_of_unsaturation_tools.json",
+        "test_examples": [
+          {
+            "formula": "C6H6",
+            "operation": "calculate"
+          },
+          {
+            "formula": "C8H15ClN2O2",
+            "operation": "calculate"
+          }
+        ],
+        "type": "DegreesOfUnsaturationTool"
+      }
+    },
+    "surface": "cli",
+    "tool": "DegreesOfUnsaturation_calculate"
+  },
+  "contract": {
+    "cli": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "missing_keys": [],
+    "name": "DegreesOfUnsaturation_calculate",
+    "python": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "selection_rule": "rule_3_offline_control",
+    "verdict": "pass"
+  },
+  "name": "DegreesOfUnsaturation_calculate",
+  "python": {
+    "discover": {
+      "found": true
+    },
+    "duration_ms": 333.68,
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "data": {
+          "C": 6,
+          "H": 6,
+          "N": 0,
+          "O": 0,
+          "S": 0,
+          "calculation": "(2*6 + 2 + 0 - 6 - 0) / 2 = 4.0",
+          "degrees_of_unsaturation": 4.0,
+          "formula": "C6H6",
+          "halogens": 0,
+          "interpretation": "Four degrees — consistent with a benzene ring (3 C=C + 1 ring).",
+          "is_integer": true
+        },
+        "status": "success"
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "degrees_of_unsaturation",
+        "description": "Calculate degrees of unsaturation (DoU, also called index of hydrogen deficiency or degree of unsaturation) from a molecular formula. Uses the formula DoU = (2C + 2 + N - H - X) / 2 where X = total halogens (F, Cl, Br, I). Oxygen and sulfur do not affect DoU. Accepts either a formula string (e.g., 'C6H6') or explicit atom counts. Returns DoU value with structural interpretation: 0 = saturated, 1 = one ring or double bond, 4 = benzene ring, etc. Half-integer DoU indicates a formula error for neutral molecules.",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "DegreesOfUnsaturation_calculate",
+        "parameter": {
+          "properties": {
+            "Br": {
+              "description": "Number of bromine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "C": {
+              "description": "Number of carbon atoms (use if formula not provided)",
+              "required": false,
+              "type": "integer"
+            },
+            "Cl": {
+              "description": "Number of chlorine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "F": {
+              "description": "Number of fluorine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "H": {
+              "description": "Number of hydrogen atoms (use if formula not provided)",
+              "required": false,
+              "type": "integer"
+            },
+            "N": {
+              "description": "Number of nitrogen atoms (default 0)",
+              "required": false,
+              "type": "integer"
+            },
+            "S": {
+              "description": "Number of sulfur atoms (does not affect DoU)",
+              "required": false,
+              "type": "integer"
+            },
+            "formula": {
+              "description": "Molecular formula string (e.g., 'C6H6', 'C8H15ClN2O2'). Alternative to explicit atom counts.",
+              "required": false,
+              "type": "string"
+            },
+            "iodine": {
+              "description": "Number of iodine atoms",
+              "required": false,
+              "type": "integer"
+            },
+            "operation": {
+              "description": "Operation type",
+              "enum": [
+                "calculate"
+              ],
+              "required": true,
+              "type": "string"
+            },
+            "oxygen": {
+              "description": "Number of oxygen atoms (does not affect DoU, tracked for formula display)",
+              "required": false,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "operation"
+          ],
+          "type": "object"
+        },
+        "return_schema": {
+          "oneOf": [
+            {
+              "properties": {
+                "data": {
+                  "properties": {
+                    "calculation": {
+                      "type": "string"
+                    },
+                    "degrees_of_unsaturation": {
+                      "type": "number"
+                    },
+                    "formula": {
+                      "type": "string"
+                    },
+                    "interpretation": {
+                      "type": "string"
+                    },
+                    "is_integer": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            {
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/degrees_of_unsaturation_tools.json",
+        "test_examples": [
+          {
+            "formula": "C6H6",
+            "operation": "calculate"
+          },
+          {
+            "formula": "C8H15ClN2O2",
+            "operation": "calculate"
+          }
+        ],
+        "type": "DegreesOfUnsaturationTool"
+      }
+    },
+    "surface": "python",
+    "tool": "DegreesOfUnsaturation_calculate"
+  }
+}

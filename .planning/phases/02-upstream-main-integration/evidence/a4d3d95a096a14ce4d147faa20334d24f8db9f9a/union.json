@@ -1,0 +1,2170 @@
+{
+  "base_oid": "4d668698a1116a6aa18a8dfeef83b7c9715f7a8b",
+  "both_sides_total": 297,
+  "files": [
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/addgene_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 23,
+      "merged_name_count": 23,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/agentic_tools.json",
+      "upstream_name_count": 23,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/aging_cohort_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/alliance_genome_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/alphafold_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/alphamissense_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/aopwiki_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/artic_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/arxiv_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/bigg_models_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/bindingdb_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/bioimage_archive_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/bioregistry_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/biosamples_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/biothings_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/boltz_mcp_loader_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/brenda_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 13,
+      "merged_name_count": 13,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/bvbrc_tools.json",
+      "upstream_name_count": 13,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cath_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 13,
+      "merged_name_count": 14,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cbioportal_tools.json",
+      "upstream_name_count": 14,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cdc_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cellxgene_census_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/chebi_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 29,
+      "merged_name_count": 29,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/chembl_tools.json",
+      "upstream_name_count": 29,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/chipatlas_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 12,
+      "merged_name_count": 12,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/civic_tools.json",
+      "upstream_name_count": 12,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/clingen_ar_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/clinical_guidelines_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 16,
+      "merged_name_count": 16,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/clinicaltrials_gov_tools.json",
+      "upstream_name_count": 16,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/clue_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/complex_portal_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/compose_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/compound_disease_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/compound_gene_disease_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/compound_variant_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 9,
+      "merged_name_count": 9,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cpic_tools.json",
+      "upstream_name_count": 9,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/crossref_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/cryoet_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 9,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/dailymed_tools.json",
+      "upstream_name_count": 9,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/dataset_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/depmap_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/dfam_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 10,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/disease_target_score_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/diseasesh_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/disgenet_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/dynamut2_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ebi_proteins_coordinates_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 11,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ebi_proteins_ext_tools.json",
+      "upstream_name_count": 11,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ebi_search_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/efo_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/embedding_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ena_portal_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/encode_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/enrichr_ext_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/enrichr_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ensembl_compara_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ensembl_ld_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ensembl_phenotype_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 21,
+      "merged_name_count": 22,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ensembl_tools.json",
+      "upstream_name_count": 22,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 17,
+      "merged_name_count": 17,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/epigenomics_tools.json",
+      "upstream_name_count": 17,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/esm_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/europe_pmc_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/expert_feedback_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/expression_atlas_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 15,
+      "merged_name_count": 18,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/fda_drug_adverse_event_tools.json",
+      "upstream_name_count": 18,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/fda_gsrs_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/fda_pharmacogenomic_biomarkers_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/finder_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/flybase_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/foldseek_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/fourdn_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 9,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gdc_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gene_ontology_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/genome_nexus_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 10,
+      "merged_name_count": 11,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gnomad_tools.json",
+      "upstream_name_count": 11,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gnps_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gprofiler_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gtex_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 10,
+      "merged_name_count": 14,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gtex_v2_tools.json",
+      "upstream_name_count": 14,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 13,
+      "merged_name_count": 13,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/gwas_tools.json",
+      "upstream_name_count": 13,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/harmonizome_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/hca_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/hgnc_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 14,
+      "merged_name_count": 14,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/hpa_tools.json",
+      "upstream_name_count": 14,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/hpo_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/hubmap_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/icd_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/idmap_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/idr_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/iedb_prediction_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/imgt_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/impc_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/intact_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/interpro_domain_arch_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/interpro_entry_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/interpro_ext_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/interpro_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/interproscan_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/jaspar_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/kegg_ext_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/kegg_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/literature_search_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/lncrna_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/markitdown_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mcp_auto_loader_esm.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mcule_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/medlineplus_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 9,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/metabolights_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/metabolite_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/metabolomics_workbench_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/metacyc_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 9,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mgnify_expanded_tools.json",
+      "upstream_name_count": 9,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mgnify_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mibig_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/mirna_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/molecule_2d_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/monarch_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/monarch_v3_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/msigdb_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ncbi_datasets_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ncbi_variation_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/nci_cactus_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/nci_thesaurus_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/neuromorpho_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/nhanes_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 16,
+      "merged_name_count": 16,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/nvidia_nim_tools.json",
+      "upstream_name_count": 16,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/obis_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/odphp_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ols_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/oma_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/omim_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 9,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/omnipath_tools.json",
+      "upstream_name_count": 9,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/oncokb_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/oncotree_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/openalex_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/openfda_label_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/openneuro_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/opentarget_genetics_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 55,
+      "merged_name_count": 61,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/opentarget_tools.json",
+      "upstream_name_count": 61,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/optimizer_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/orcid_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 10,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/orphanet_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/orthodb_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/output_summarization_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/package_discovery_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 20,
+      "merged_name_count": 20,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/packages/machine_learning_tools.json",
+      "upstream_name_count": 20,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 0,
+      "missing_names": [
+        "pc_get_interactions",
+        "pc_search_pathways"
+      ],
+      "path": "src/tooluniverse/data/pathway_commons_tools.json",
+      "relocated_to": {
+        "pc_get_interactions": [
+          "src/tooluniverse/data/broken_apis/pathway_commons_tools.json"
+        ],
+        "pc_search_pathways": [
+          "src/tooluniverse/data/broken_apis/pathway_commons_tools.json"
+        ]
+      },
+      "upstream_name_count": 0,
+      "verdict": "upstream_deleted"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pathwaycommons_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pdbe_sifts_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pdc_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pharmacodb_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pharmgkb_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pharmvar_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pharos_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/plant_reactome_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pombase_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 10,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/proteins_api_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/proteinsplus_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/proteomexchange_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/proteomicsdb_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pubchem_bioassay_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 18,
+      "merged_name_count": 21,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pubchem_tools.json",
+      "upstream_name_count": 21,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pubchem_tox_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/pubtator_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rcsb_advanced_search_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rcsb_data_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 39,
+      "merged_name_count": 39,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rcsb_pdb_tools.json",
+      "upstream_name_count": 39,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/reactome_analysis_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 9,
+      "merged_name_count": 9,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rfam_tools.json",
+      "upstream_name_count": 9,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rgd_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rnacentral_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rxclass_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/rxnorm_extended_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/sabdab_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/sasbdb_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/screen_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/semantic_scholar_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/sgd_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 0,
+      "missing_names": [
+        "SoilGrids_get_properties"
+      ],
+      "path": "src/tooluniverse/data/soilgrids_tools.json",
+      "relocated_to": {
+        "SoilGrids_get_properties": [
+          "src/tooluniverse/data/broken_apis/soilgrids_tools.json"
+        ]
+      },
+      "upstream_name_count": 0,
+      "verdict": "upstream_deleted"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/special_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/stitch_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/swiss_target_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/swissadme_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/swissdock_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/swissmodel_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/synbiohub_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/synergxdb_tools.json",
+      "upstream_name_count": 8,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/tcdb_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 10,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/tcia_tools.json",
+      "upstream_name_count": 10,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/therasabdab_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/three_d_beacons_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/tool_composition_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/txagent_client_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/ucsc_genome_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/umls_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/unichem_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 14,
+      "merged_name_count": 14,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/unified_guideline_tools.json",
+      "upstream_name_count": 14,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 4,
+      "merged_name_count": 4,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uniprot_idmapping_tools.json",
+      "upstream_name_count": 4,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uniprot_locations_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 6,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uniprot_ref_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uniprot_taxonomy_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 17,
+      "merged_name_count": 18,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uniprot_tools.json",
+      "upstream_name_count": 18,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 2,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/url_fetch_tools.json",
+      "upstream_name_count": 2,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uspto_downloader_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 8,
+      "merged_name_count": 8,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/uspto_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/veupathdb_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/waqi_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 1,
+      "merged_name_count": 1,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/wikidata_sparql_tools.json",
+      "upstream_name_count": 1,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 2,
+      "merged_name_count": 3,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/wikipathways_ext_tools.json",
+      "upstream_name_count": 3,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 3,
+      "merged_name_count": 6,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/wormbase_tools.json",
+      "upstream_name_count": 6,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 19,
+      "merged_name_count": 19,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/xml_tools.json",
+      "upstream_name_count": 19,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 7,
+      "merged_name_count": 7,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/zfin_tools.json",
+      "upstream_name_count": 7,
+      "verdict": "union_ok"
+    },
+    {
+      "duplicate_names": [],
+      "extra_names": [],
+      "fork_name_count": 5,
+      "merged_name_count": 5,
+      "missing_names": [],
+      "path": "src/tooluniverse/data/zinc_tools.json",
+      "upstream_name_count": 5,
+      "verdict": "union_ok"
+    }
+  ],
+  "fork_oid": "e0755067ebe7cc5374f033c5c28160980c5eddfa",
+  "merged_oid": "f81448f2047a6f35bd552956a0d9990019a39eb1",
+  "summary": {
+    "duplicate_name_files": 0,
+    "files_checked": 213,
+    "fork_deleted_files": 0,
+    "net_removed_fork_entries": 0,
+    "net_removed_upstream_entries": 0,
+    "not_an_array_files": 0,
+    "unexpected_added_entries": 0,
+    "union_ok": 211,
+    "unparseable_files": 0,
+    "unrelocated_lost_names": [],
+    "upstream_deleted_files": 2
+  },
+  "upstream_oid": "56adcfd9c299078d0c40fde642b0be006510ccf3"
+}
