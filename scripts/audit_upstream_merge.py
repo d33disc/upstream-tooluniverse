@@ -71,6 +71,10 @@ _PHASE1_GIT_JSON = (
 
 _LAZY_REGISTRY_PATH = "src/tooluniverse/_lazy_registry_static.py"
 
+REMERGE_REF = "refs/audit/remerge"
+"""Where the committed, pinned re-merge stage lives -- outside ``refs/heads/`` so no
+branch operation can pick it up and garbage collection cannot reclaim it (D-06, D-09)."""
+
 _UNPARSEABLE = object()
 
 _FAILING_SUMMARY_KEYS = (
@@ -965,6 +969,247 @@ def resolve_gitignore_conflict(fork_src: str, upstream_src: str) -> dict[str, An
     }
 
 
+# ---------------------------------------------------------------------------
+# Re-merge stage: source-module and test conflicts (Tasks 1-2, plan 02-03)
+# ---------------------------------------------------------------------------
+
+
+def _decorated_span(node: ast.stmt) -> tuple[int, int]:
+    """``(start_line, end_line)``, 1-indexed inclusive, covering *node*'s own decorators.
+
+    ``ast.get_source_segment`` anchors on ``node.lineno`` alone, which for a
+    decorated function/class is the ``def``/``class`` line -- decorators sit
+    on earlier lines with their own ``lineno`` and are silently dropped. This
+    walks ``decorator_list`` (absent on ``Assign``/``AnnAssign``, hence the
+    ``getattr`` default) so a decorated fork-only method is spliced with its
+    decorator intact.
+    """
+    starts = [node.lineno]
+    starts.extend(d.lineno for d in getattr(node, "decorator_list", []))
+    return min(starts), node.end_lineno
+
+
+def _segment(source_lines: list[str], node: ast.stmt) -> str:
+    """Verbatim source text for *node* (decorators included), from pre-split *source_lines*."""
+    start, end = _decorated_span(node)
+    return "".join(source_lines[start - 1 : end])
+
+
+def _index_module(
+    source: str,
+) -> tuple[ast.Module, dict[str, ast.stmt], dict[str, dict[str, ast.stmt]]]:
+    """Index one module's top-level and class-level definitions.
+
+    Returns ``(tree, top_level, class_members)``: ``top_level`` maps a
+    module-level function/class/assignment-target name to its node;
+    ``class_members`` maps each top-level class name to a ``{member_name:
+    node}`` dict of its own function/assignment members (one level deep --
+    matches the plan's "top-level and class-level" scope, not arbitrary
+    nesting).
+    """
+    tree = ast.parse(source)
+    top: dict[str, ast.stmt] = {}
+    class_members: dict[str, dict[str, ast.stmt]] = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            top[node.name] = node
+            if isinstance(node, ast.ClassDef):
+                members: dict[str, ast.stmt] = {}
+                for sub in node.body:
+                    if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        members[sub.name] = sub
+                    elif isinstance(sub, ast.Assign):
+                        for target in sub.targets:
+                            if isinstance(target, ast.Name):
+                                members[target.id] = sub
+                    elif isinstance(sub, ast.AnnAssign) and isinstance(
+                        sub.target, ast.Name
+                    ):
+                        members[sub.target.id] = sub
+                class_members[node.name] = members
+        elif isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    top[target.id] = node
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            top[node.target.id] = node
+    return tree, top, class_members
+
+
+def extract_definition_names(source: str) -> set[str]:
+    """Every top-level and class-level (``Class.member``) definition name in *source*.
+
+    This is the set Task 1/2's per-file union check compares against
+    ``fork_only_retained | shared_taken_from_upstream | upstream_only_added``.
+    """
+    _tree, top, class_members = _index_module(source)
+    names = set(top)
+    for class_name, members in class_members.items():
+        names.update(f"{class_name}.{member}" for member in members)
+    return names
+
+
+def _insert_class_members(
+    text: str, node: ast.ClassDef, member_segments: list[str]
+) -> str:
+    """Splice *member_segments* (fork-only methods/assignments) onto the end of *node*'s body.
+
+    Insertion point is ``node.end_lineno`` against *text*'s current line
+    numbering -- valid only when no earlier-in-file edit has already
+    shifted lines above it, which is why callers process classes in
+    descending ``end_lineno`` order (see ``resolve_source_module_conflict``).
+    """
+    lines = text.splitlines(keepends=True)
+    insert_at = node.end_lineno
+    segs = [seg if seg.endswith("\n") else seg + "\n" for seg in member_segments]
+    block = "\n" + "".join(segs)
+    return "".join(lines[:insert_at]) + block + "".join(lines[insert_at:])
+
+
+def resolve_source_module_conflict(
+    stage: Path, path: str, fork_oid: str, upstream_oid: str
+) -> dict[str, Any]:
+    """D-08's ``upstream_canonical_fork_additive`` rule, definition by definition.
+
+    Base is upstream's file verbatim (imports, ordering, every shared and
+    upstream-only definition). A fork-only *module-level* definition is
+    appended at file end. A fork-only *class-level* member whose class is
+    shared (present on both sides) is spliced onto the end of upstream's
+    version of that class -- never hand-blended hunk by hunk. A fork-only
+    definition whose class does not exist upstream at all is unreachable
+    here: the whole class is itself a fork-only top-level name and is
+    covered by the module-level append.
+    """
+    fork_src = read_text_at(stage, fork_oid, path)
+    upstream_src = read_text_at(stage, upstream_oid, path)
+
+    _fork_tree, fork_top, fork_classes = _index_module(fork_src)
+    _upstream_tree, upstream_top, upstream_classes = _index_module(upstream_src)
+
+    fork_names = extract_definition_names(fork_src)
+    upstream_names = extract_definition_names(upstream_src)
+
+    fork_only = sorted(fork_names - upstream_names)
+    shared = sorted(fork_names & upstream_names)
+    upstream_only = sorted(upstream_names - fork_names)
+
+    fork_lines = fork_src.splitlines(keepends=True)
+
+    class_insertions: dict[str, list[str]] = {}
+    module_level_segments: dict[
+        int, str
+    ] = {}  # keyed by id(node), dedups tuple-targets
+
+    for name in fork_only:
+        if "." in name:
+            class_name, member = name.split(".", 1)
+            if class_name in upstream_classes and member in fork_classes.get(
+                class_name, {}
+            ):
+                seg = _segment(fork_lines, fork_classes[class_name][member])
+                class_insertions.setdefault(class_name, []).append(seg)
+                continue
+            # class_name absent from upstream entirely: the whole class is a
+            # fork-only top-level name and is handled by the branch below.
+        node = fork_top.get(name)
+        if node is not None:
+            module_level_segments[id(node)] = _segment(fork_lines, node)
+
+    result_text = upstream_src
+    for class_name in sorted(
+        class_insertions, key=lambda c: upstream_top[c].end_lineno, reverse=True
+    ):
+        result_text = _insert_class_members(
+            result_text, upstream_top[class_name], class_insertions[class_name]
+        )
+
+    append_order = [
+        seg
+        for _id, seg in sorted(
+            module_level_segments.items(),
+            key=lambda kv: next(n.lineno for n in fork_top.values() if id(n) == kv[0]),
+        )
+    ]
+    if append_order:
+        if not result_text.endswith("\n"):
+            result_text += "\n"
+        result_text += "\n\n" + "\n\n".join(
+            seg if seg.endswith("\n") else seg + "\n" for seg in append_order
+        )
+
+    target = stage / path
+    target.write_text(result_text, encoding="utf-8")
+    run_git(["add", "--", path], stage)
+
+    resolved_names = extract_definition_names(result_text)
+    expected_names = set(fork_only) | set(shared) | set(upstream_only)
+    fork_only_dropped = sorted(set(fork_only) - resolved_names)
+
+    return {
+        "path": path,
+        "rule": "upstream_canonical_fork_additive",
+        "decision": "definition_level_upstream_canonical_fork_additive",
+        "rationale": (
+            "base is upstream's file verbatim; fork-only module-level definitions "
+            "appended at file end; fork-only class-level members spliced onto the "
+            "end of the corresponding shared class body; shared definitions take "
+            "upstream's body outright"
+        ),
+        "fork_only_retained": fork_only,
+        "shared_taken_from_upstream": shared,
+        "upstream_only_added": upstream_only,
+        "fork_only_dropped": fork_only_dropped,
+        "resolved_name_set_matches_expected": resolved_names == expected_names,
+    }
+
+
+def resolve_source_layer(
+    stage: Path, fork_oid: str, upstream_oid: str, paths: Iterable[str]
+) -> list[dict[str, Any]]:
+    """Resolve every path in *paths* (source modules or tests) under D-08.
+
+    One rule, applied uniformly: production modules and test files differ
+    only in what their "definitions" are (functions/classes vs. test
+    functions/fixtures), which ``resolve_source_module_conflict`` does not
+    need to distinguish.
+    """
+    return [
+        resolve_source_module_conflict(stage, path, fork_oid, upstream_oid)
+        for path in sorted(paths)
+    ]
+
+
+def resolve_generated_conflict(stage: Path, path: str, fork_oid: str) -> dict[str, Any]:
+    """Clear one GENERATED file's conflict without hand-resolution -- same treatment
+    as ``_lazy_registry_static.py`` in ``resolve_data_config_layer``.
+
+    ``src/tooluniverse/tools/*.py`` per-tool wrapper stubs are produced
+    wholesale by ``generate_tools.main()`` from the resolved
+    ``src/tooluniverse/data/*.json`` tree; their pairwise diffs (measured:
+    both true UU content conflicts and AA add/add conflicts, all present on
+    both sides) are an artifact of independent regeneration, not a decision
+    a human or D-08's definition-level rule should make. Fork's content is
+    staged as a placeholder purely so the index is unmerged-clean; Task 3's
+    ``generate_tools.main(output_dir=None)`` run against the fully-resolved
+    stage overwrites every one of these wholesale.
+    """
+    text = read_text_at(stage, fork_oid, path)
+    (stage / path).write_text(text, encoding="utf-8")
+    run_git(["add", "--", path], stage)
+    return {
+        "path": path,
+        "rule": "regenerate",
+        "decision": "deferred_to_regeneration",
+        "rationale": (
+            "GENERATED FILE (per-tool coding-API wrapper stub); never hand-merged. "
+            "Conflict cleared with fork content as a placeholder only -- real "
+            "regeneration via generate_tools.main(output_dir=None) happens in "
+            "Task 3 after the whole source tree settles, same treatment as "
+            "_lazy_registry_static.py"
+        ),
+    }
+
+
 def resolve_data_config_layer(
     stage: Path, fork_oid: str, upstream_oid: str, conflicts_raw: Iterable[str]
 ) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
@@ -1196,7 +1441,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     remerge.add_argument("--pin", default=DEFAULT_PIN_OID)
     remerge.add_argument("--worktree", default=None)
     remerge.add_argument("--stage-only", action="store_true")
-    remerge.add_argument("--layer", choices=["data-config"], default=None)
+    remerge.add_argument("--layer", choices=["data-config", "source"], default=None)
     remerge.add_argument(
         "--out",
         default=".planning/phases/02-upstream-main-integration/evidence/staging",
@@ -1272,6 +1517,67 @@ def _run_remerge(args: argparse.Namespace) -> dict[str, Any]:
         payload["default_config"] = {}
         payload["unresolved_paths"] = []
         payload["unresolved_by_class"] = {}
+    elif args.layer == "source":
+        # The source layer resumes a merge-in-progress stage plan 02-02 (or a
+        # prior --layer data-config run) already left behind. Which paths
+        # are "source" is read from the *persisted* unresolved_by_class --
+        # not re-derived from a fresh `git diff --diff-filter=U`, because by
+        # the time this runs some of those paths may already be resolved and
+        # staged (no longer `U`), which would make a live re-derivation see
+        # nothing left to do on a second invocation. resolve_source_layer
+        # itself reads fork_oid/upstream_oid content directly, so re-running
+        # it against an already-resolved path is idempotent and safe.
+        if not evidence_path.exists():
+            raise GitCaptureError(
+                "remerge --layer source requires an existing remerge.json from a "
+                "prior --layer data-config run (needs stage_path and "
+                "unresolved_by_class)"
+            )
+        existing = json.loads(evidence_path.read_text(encoding="utf-8"))
+        if existing.get("handoff_state") != "merge_in_progress":
+            raise GitCaptureError(
+                "refusing --layer source: existing remerge.json handoff_state is "
+                f"{existing.get('handoff_state')!r}, expected 'merge_in_progress'"
+            )
+        unresolved_by_class = existing.get("unresolved_by_class") or {}
+        source_paths = sorted(
+            set(unresolved_by_class.get("source_modules", []))
+            | set(unresolved_by_class.get("tests", []))
+        )
+        # `src/tooluniverse/tools/*.py` per-tool stubs fall inside Task 1's own
+        # `src/tooluniverse/*.py` pathspec gate (git pathspec `*` crosses `/`
+        # without `:(glob)` magic), so they must be conflict-free for that
+        # gate to pass even though they are classified "generated", not
+        # "source_modules". Resolved the same way as `_lazy_registry_static.py`
+        # -- deferred to Task 3's regeneration, never hand-merged.
+        generated_paths = sorted(unresolved_by_class.get("generated", []))
+        if not source_paths and not generated_paths:
+            raise GitCaptureError(
+                "refusing --layer source: no source_modules/tests/generated paths "
+                "recorded in remerge.json's unresolved_by_class -- nothing to resolve"
+            )
+        new_resolutions = resolve_source_layer(
+            stage_path, fork_oid, upstream_oid, source_paths
+        ) + [
+            resolve_generated_conflict(stage_path, path, fork_oid)
+            for path in generated_paths
+        ]
+        already_resolved_paths = {r["path"] for r in existing.get("resolutions", [])}
+        resolved_now = {r["path"] for r in new_resolutions} - already_resolved_paths
+        payload["conflicts_raw"] = existing.get("conflicts_raw", [])
+        payload["conflicts_landed"] = existing.get("conflicts_landed", [])
+        payload["resolutions"] = [
+            r
+            for r in existing.get("resolutions", [])
+            if r["path"] not in {nr["path"] for nr in new_resolutions}
+        ] + new_resolutions
+        payload["default_config"] = existing.get("default_config", {})
+        remaining_unresolved = sorted(
+            set(existing.get("unresolved_paths", [])) - resolved_now
+        )
+        payload["unresolved_paths"] = remaining_unresolved
+        payload["unresolved_by_class"] = classify_unresolved_paths(remaining_unresolved)
+        payload["handoff_state"] = "merge_in_progress"
     else:
         _start_or_continue_merge(stage_path, upstream_oid)
         conflicts_raw = sorted(

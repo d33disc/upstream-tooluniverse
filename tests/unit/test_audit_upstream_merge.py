@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import subprocess
@@ -23,6 +24,9 @@ create_remerge_stage = _MODULE.create_remerge_stage
 resolve_data_json_conflict = _MODULE.resolve_data_json_conflict
 union_default_config_keys = _MODULE.union_default_config_keys
 classify_unresolved_path = _MODULE.classify_unresolved_path
+extract_definition_names = _MODULE.extract_definition_names
+resolve_source_module_conflict = _MODULE.resolve_source_module_conflict
+resolve_generated_conflict = _MODULE.resolve_generated_conflict
 
 
 def git(path: Path, *args: str) -> str:
@@ -649,3 +653,168 @@ def test_union_default_config_keys_handles_call_node_values() -> None:
 )
 def test_classify_unresolved_path(path: str, expected: str) -> None:
     assert classify_unresolved_path(path) == expected
+
+
+# ---------------------------------------------------------------------------
+# extract_definition_names / resolve_source_module_conflict (plan 02-03
+# Tasks 1-2 -- the definition-level D-08 rule applied to source modules and
+# test files)
+# ---------------------------------------------------------------------------
+
+
+def _build_module_conflict_repo(
+    tmp_path: Path, fork_src: str, upstream_src: str, path: str = "mod.py"
+) -> tuple[Path, str, str]:
+    r = repo(tmp_path)
+    (r / path).write_text("")
+    base = _commit(r, "base")
+
+    git(r, "checkout", "-b", "fork-side")
+    (r / path).write_text(fork_src)
+    fork_oid = _commit(r, "fork edit")
+
+    git(r, "checkout", base, "-b", "upstream-side")
+    (r / path).write_text(upstream_src)
+    upstream_oid = _commit(r, "upstream edit")
+
+    git(r, "checkout", fork_oid)
+    return r, fork_oid, upstream_oid
+
+
+def test_extract_definition_names_includes_module_and_class_level() -> None:
+    src = (
+        "TOP_CONST = 1\n\n"
+        "def top_func():\n"
+        "    pass\n\n"
+        "class Widget:\n"
+        "    CLASS_CONST = 2\n\n"
+        "    def method(self):\n"
+        "        pass\n"
+    )
+    names = extract_definition_names(src)
+    assert names == {
+        "TOP_CONST",
+        "top_func",
+        "Widget",
+        "Widget.CLASS_CONST",
+        "Widget.method",
+    }
+
+
+def test_resolve_source_module_conflict_shared_def_takes_upstream_body(
+    tmp_path: Path,
+) -> None:
+    fork_src = "def shared():\n    return 'fork'\n"
+    upstream_src = "def shared():\n    return 'upstream'\n"
+    r, fork_oid, upstream_oid = _build_module_conflict_repo(
+        tmp_path, fork_src, upstream_src
+    )
+
+    result = resolve_source_module_conflict(r, "mod.py", fork_oid, upstream_oid)
+
+    resolved = (r / "mod.py").read_text()
+    assert "return 'upstream'" in resolved
+    assert "return 'fork'" not in resolved
+    assert result["shared_taken_from_upstream"] == ["shared"]
+    assert result["fork_only_retained"] == []
+    assert result["fork_only_dropped"] == []
+    assert result["resolved_name_set_matches_expected"] is True
+
+
+def test_resolve_source_module_conflict_fork_only_module_level_retained(
+    tmp_path: Path,
+) -> None:
+    fork_src = (
+        "def shared():\n    return 'fork'\n\n\ndef fork_only_helper():\n    return 42\n"
+    )
+    upstream_src = "def shared():\n    return 'upstream'\n"
+    r, fork_oid, upstream_oid = _build_module_conflict_repo(
+        tmp_path, fork_src, upstream_src
+    )
+
+    result = resolve_source_module_conflict(r, "mod.py", fork_oid, upstream_oid)
+
+    resolved_names = extract_definition_names((r / "mod.py").read_text())
+    assert "fork_only_helper" in resolved_names
+    assert result["fork_only_retained"] == ["fork_only_helper"]
+    assert result["fork_only_dropped"] == []
+    ast.parse((r / "mod.py").read_text())  # no residual conflict markers
+
+
+def test_resolve_source_module_conflict_fork_only_class_member_spliced(
+    tmp_path: Path,
+) -> None:
+    # Mirrors the real agentic_tool.py / gwas_tool.py / uniprot_tool.py shape:
+    # a shared class exists on both sides, but the fork adds an extra method
+    # upstream's version of the same class does not have.
+    fork_src = (
+        "class Widget:\n"
+        "    def shared_method(self):\n"
+        "        return 'fork'\n\n"
+        "    def fork_only_method(self):\n"
+        "        return 'fork-only'\n"
+    )
+    upstream_src = (
+        "class Widget:\n    def shared_method(self):\n        return 'upstream'\n"
+    )
+    r, fork_oid, upstream_oid = _build_module_conflict_repo(
+        tmp_path, fork_src, upstream_src
+    )
+
+    result = resolve_source_module_conflict(r, "mod.py", fork_oid, upstream_oid)
+
+    resolved_src = (r / "mod.py").read_text()
+    tree = ast.parse(resolved_src)  # must parse cleanly -- no markers, one class
+    classes = [n for n in tree.body if isinstance(n, ast.ClassDef)]
+    assert len(classes) == 1
+    resolved_names = extract_definition_names(resolved_src)
+    assert resolved_names == {
+        "Widget",
+        "Widget.shared_method",
+        "Widget.fork_only_method",
+    }
+    assert "return 'upstream'" in resolved_src  # shared method took upstream's body
+    assert result["fork_only_retained"] == ["Widget.fork_only_method"]
+    assert result["fork_only_dropped"] == []
+    assert result["resolved_name_set_matches_expected"] is True
+
+
+def test_resolve_source_module_conflict_stages_the_file(tmp_path: Path) -> None:
+    fork_src = "def shared():\n    return 'fork'\n"
+    upstream_src = "def shared():\n    return 'upstream'\n"
+    r, fork_oid, upstream_oid = _build_module_conflict_repo(
+        tmp_path, fork_src, upstream_src
+    )
+
+    resolve_source_module_conflict(r, "mod.py", fork_oid, upstream_oid)
+
+    status = git(r, "status", "--porcelain", "--", "mod.py")
+    assert status.startswith("M "), f"expected staged modify, got: {status!r}"
+
+
+# ---------------------------------------------------------------------------
+# resolve_generated_conflict (plan 02-03 Task 1 -- src/tooluniverse/tools/*.py
+# per-tool wrapper stubs, deferred to Task 3's regeneration like
+# _lazy_registry_static.py)
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_generated_conflict_stages_fork_content_as_placeholder(
+    tmp_path: Path,
+) -> None:
+    fork_src = "# fork stub\n"
+    upstream_src = "# upstream stub\n"
+    r, fork_oid, _upstream_oid = _build_module_conflict_repo(
+        tmp_path, fork_src, upstream_src, path="stub.py"
+    )
+
+    result = resolve_generated_conflict(r, "stub.py", fork_oid)
+
+    # HEAD is already at fork_oid (per _build_module_conflict_repo), so writing
+    # fork's own content back is a content no-op -- `git add` succeeds without
+    # raising, which is what matters (the real callsite runs mid-merge, where
+    # the working-tree file carries conflict markers, not fork's clean content).
+    assert (r / "stub.py").read_text() == fork_src
+    assert result["rule"] == "regenerate"
+    assert result["decision"] == "deferred_to_regeneration"
+    git(r, "diff", "--cached", "--name-only")  # `git add` did not raise
