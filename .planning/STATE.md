@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 02
 current_phase_name: Upstream Main Integration
 status: executing
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-08-06T17:49:55.970Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-08-06T18:36:04.721Z"
 last_activity: 2026-08-06
 last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 11
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 # Project State
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-08-03)
 ## Current Position
 
 Phase: 02 (Upstream Main Integration) — EXECUTING
-Plan: 4 of 6
+Plan: 5 of 6
 Status: Ready to execute
 Last activity: 2026-08-06 — Phase 02 execution started
 
-Progress: [███████░░░] 73%
+Progress: [████████░░] 82%
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [███████░░░] 73%
 | Phase 02 P01 | 24min | 2 tasks | 5 files |
 | Phase 02-upstream-main-integration P02 | 62min | 3 tasks | 4 files |
 | Phase 02 P03 | 3h40min | 3 tasks | 4 files |
+| Phase 02 P04 | 2h30min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,9 @@ Recent decisions affecting current work:
 - [Phase ?]: Resolved the real 16+3 file scope (source_modules+tests), not the plan's literally-named 11+5, per 02-02-SUMMARY's flagged CONTEXT.md diff-tree undercount
 - [Phase ?]: Resolved 141 out-of-declared-scope conflicts (symlinks/packaging/ci_docs) under explicit mechanical rules, separate from D-08's resolutions array, because git blocks commit with any unmerged path present
 - [Phase ?]: Fixed a silent git auto-merge data-loss bug (llm_clients.py dropped AzureOpenAIClient with zero conflict markers) and a test-scope gap (api_keys_catalog.json exclusion, self-healed downstream per D-06a), both recorded as discovered_findings for plan 02-04
+- [Phase ?]: classify_finding's 5-verdict precedence (dependency_scope > remerge_only_artifact > landed_correct > self_healed_downstream > landed_dropped_or_altered) separates noise-bucket audit-tooling artifacts (2,604 regenerated stubs + 600 symlink-materializations) from real candidates without exempting genuine D-08 resolutions from review
+- [Phase ?]: join_preservation's disposition consults findings.json's verdict as the primary signal rather than re-deriving from a raw stage-vs-pin blob comparison, avoiding the same noise misattribution twice (339 then 495 false lost verdicts before the fix)
+- [Phase ?]: Corrective-commit candidate list for plan 02-06 is effectively empty: 27 of 29 landed_dropped_or_altered candidates carry pin_matches_landed=true, direct evidence the disagreement is this audit's own re-derivation tooling, not a real fork-content loss
 
 ### Pending Todos
 
@@ -106,6 +110,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-06T17:49:55.959Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-08-06T18:36:04.711Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None

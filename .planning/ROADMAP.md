@@ -67,7 +67,7 @@ Plans:
   3. Maintainer can compare the result with the Phase 1 preservation inventory and account for every custom code, tool, plugin, registration, and symlink asset.
   4. Representative preserved custom tools still load and execute after the upstream-main integration.
 
-**Plans**: 3/6 plans executed
+**Plans**: 4/6 plans executed
 
 Plans:
 **Wave 1**
@@ -84,7 +84,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 02-04-PLAN.md -- Full-tree diff against `f81448f2`, finding classification with D-06a pin recheck, 1,392-path preservation join.
+- [x] 02-04-PLAN.md -- Full-tree diff against `f81448f2`, finding classification with D-06a pin recheck, 1,392-path preservation join.
 - [ ] 02-05-PLAN.md -- Fresh criterion-4 probes for the recorded custom-tool sample plus symlink preservation checks.
 
 **Wave 5** *(blocked on Wave 4 completion)*
@@ -141,7 +141,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Protected Sync Baseline | 5/5 | Complete | 2026-08-04 |
-| 2. Upstream Main Integration | 3/6 | In Progress|  |
+| 2. Upstream Main Integration | 4/6 | In Progress|  |
 | 3. Follow-up and Catalog Reconciliation | 0/TBD | Not started | - |
 | 4. Documentation and Semantic Index | 0/TBD | Not started | - |
 | 5. Cross-Surface Certification | 0/TBD | Not started | - |
