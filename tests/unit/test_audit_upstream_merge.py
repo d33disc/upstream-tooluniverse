@@ -27,6 +27,10 @@ classify_unresolved_path = _MODULE.classify_unresolved_path
 extract_definition_names = _MODULE.extract_definition_names
 resolve_source_module_conflict = _MODULE.resolve_source_module_conflict
 resolve_generated_conflict = _MODULE.resolve_generated_conflict
+classify_finding = _MODULE.classify_finding
+full_tree_diff = _MODULE.full_tree_diff
+recheck_against_pin = _MODULE.recheck_against_pin
+_parse_raw_diff_output = _MODULE._parse_raw_diff_output
 
 
 def git(path: Path, *args: str) -> str:
@@ -818,3 +822,263 @@ def test_resolve_generated_conflict_stages_fork_content_as_placeholder(
     assert result["rule"] == "regenerate"
     assert result["decision"] == "deferred_to_regeneration"
     git(r, "diff", "--cached", "--name-only")  # `git add` did not raise
+
+
+# ---------------------------------------------------------------------------
+# classify_finding (plan 02-04 Task 1 -- D-07 primary comparison + D-06a
+# self-heal recheck verdicts)
+# ---------------------------------------------------------------------------
+
+_BLOB_A = "a" * 40
+_BLOB_B = "b" * 40
+_BLOB_C = "c" * 40
+
+
+@pytest.mark.parametrize(
+    (
+        "path",
+        "remerge_present",
+        "landed_present",
+        "pin_present",
+        "remerge_blob",
+        "landed_blob",
+        "pin_blob",
+        "resolution_paths",
+        "expected",
+    ),
+    [
+        pytest.param(
+            "src/tooluniverse/foo.py",
+            True,
+            True,
+            False,
+            _BLOB_A,
+            _BLOB_A,
+            None,
+            frozenset(),
+            "landed_correct",
+            id="landed_correct-equal-blobs",
+        ),
+        pytest.param(
+            "src/tooluniverse/gone.py",
+            False,
+            False,
+            False,
+            None,
+            None,
+            None,
+            frozenset(),
+            "landed_correct",
+            id="landed_correct-absent-from-both",
+        ),
+        pytest.param(
+            "src/tooluniverse/dropped.py",
+            True,
+            False,
+            False,
+            _BLOB_A,
+            None,
+            None,
+            frozenset(),
+            "landed_dropped_or_altered",
+            id="landed_dropped_or_altered-landed-and-pin-both-lack-it",
+        ),
+        pytest.param(
+            "src/tooluniverse/healed.py",
+            True,
+            False,
+            True,
+            _BLOB_A,
+            None,
+            _BLOB_A,
+            frozenset(),
+            "self_healed_downstream",
+            id="self_healed_downstream-pin-matches-remerge",
+        ),
+        pytest.param(
+            "src/tooluniverse/pin_mismatch.py",
+            True,
+            False,
+            True,
+            _BLOB_A,
+            None,
+            _BLOB_B,
+            frozenset(),
+            "landed_dropped_or_altered",
+            id="landed_dropped_or_altered-pin-present-but-matches-neither-side",
+        ),
+        pytest.param(
+            "pyproject.toml",
+            True,
+            True,
+            True,
+            _BLOB_A,
+            _BLOB_B,
+            _BLOB_C,
+            frozenset(),
+            "dependency_scope",
+            id="dependency_scope-pyproject",
+        ),
+        pytest.param(
+            "uv.lock",
+            True,
+            False,
+            False,
+            _BLOB_A,
+            None,
+            None,
+            frozenset(),
+            "dependency_scope",
+            id="dependency_scope-uv-lock",
+        ),
+        pytest.param(
+            "src/tooluniverse/tools/new_stub.py",
+            True,
+            False,
+            False,
+            _BLOB_A,
+            None,
+            None,
+            frozenset({"src/tooluniverse/tools/new_stub.py"}),
+            "remerge_only_artifact",
+            id="remerge_only_artifact-present-only-in-remerge-and-in-resolution-set",
+        ),
+    ],
+)
+def test_classify_finding_verdicts(
+    path: str,
+    remerge_present: bool,
+    landed_present: bool,
+    pin_present: bool,
+    remerge_blob: str | None,
+    landed_blob: str | None,
+    pin_blob: str | None,
+    resolution_paths: frozenset[str],
+    expected: str,
+) -> None:
+    assert (
+        classify_finding(
+            path,
+            remerge_present,
+            landed_present,
+            pin_present,
+            remerge_blob,
+            landed_blob,
+            pin_blob,
+            resolution_paths=resolution_paths,
+        )
+        == expected
+    )
+
+
+def test_classify_finding_dependency_scope_wins_regardless_of_blob_state() -> None:
+    # Same blob on all three sides -- would otherwise be landed_correct -- but
+    # pyproject.toml/uv.lock always route to dependency_scope (D-07 OQ1).
+    assert (
+        classify_finding("pyproject.toml", True, True, True, _BLOB_A, _BLOB_A, _BLOB_A)
+        == "dependency_scope"
+    )
+
+
+# ---------------------------------------------------------------------------
+# _parse_raw_diff_output / full_tree_diff (plan 02-04 Task 1 -- NUL-safe raw
+# diff parser, deterministic against a literal payload rather than a live
+# git invocation)
+# ---------------------------------------------------------------------------
+
+
+def test_full_tree_diff_parses_path_with_embedded_space() -> None:
+    old_oid = "1" * 40
+    new_oid = "2" * 40
+    payload = f":100644 100644 {old_oid} {new_oid} M\0path with space/file.py\0"
+
+    records = _parse_raw_diff_output(payload)
+
+    assert len(records) == 1
+    record = records[0]
+    assert record["path"] == "path with space/file.py"
+    assert record["status"] == "M"
+    assert record["old_path"] is None
+    assert record["left_oid"] == old_oid
+    assert record["right_oid"] == new_oid
+
+
+def test_full_tree_diff_preserves_both_operands_of_a_rename_record() -> None:
+    blob_oid = "3" * 40
+    payload = (
+        f":100644 100644 {blob_oid} {blob_oid} R100\0"
+        "old/path/name.py\0"
+        "new/path/name.py\0"
+    )
+
+    records = _parse_raw_diff_output(payload)
+
+    assert len(records) == 1
+    record = records[0]
+    assert record["status"] == "R100"
+    assert record["old_path"] == "old/path/name.py"
+    assert record["path"] == "new/path/name.py"
+    assert record["left_oid"] == blob_oid
+    assert record["right_oid"] == blob_oid
+
+
+def test_full_tree_diff_live_against_a_synthetic_repo(tmp_path: Path) -> None:
+    """End-to-end sanity check that full_tree_diff wires the parser to real git."""
+    r = repo(tmp_path)
+    (r / "a.txt").write_text("one\n")
+    left = _commit(r, "left")
+    (r / "a.txt").write_text("two\n")
+    (r / "b.txt").write_text("new\n")
+    right = _commit(r, "right")
+
+    records = full_tree_diff(r, left, right)
+
+    paths = {rec["path"] for rec in records}
+    assert paths == {"a.txt", "b.txt"}
+    a_record = next(rec for rec in records if rec["path"] == "a.txt")
+    assert a_record["status"] == "M"
+    b_record = next(rec for rec in records if rec["path"] == "b.txt")
+    assert b_record["status"] == "A"
+    assert len(b_record["left_oid"]) == 40 and set(b_record["left_oid"]) == {"0"}
+
+
+# ---------------------------------------------------------------------------
+# recheck_against_pin (plan 02-04 Task 1 -- D-06a self-heal corroboration)
+# ---------------------------------------------------------------------------
+
+
+def test_recheck_against_pin_reports_absent_when_path_missing_at_pin(
+    tmp_path: Path,
+) -> None:
+    r = repo(tmp_path)
+    (r / "a.txt").write_text("one\n")
+    landed = _commit(r, "landed")
+    pin = landed  # no further commits -- path never existed
+
+    result = recheck_against_pin(
+        r, "never_existed.txt", _BLOB_A, pin, landed_oid=landed
+    )
+
+    assert result["pin_present"] is False
+    assert result["pin_blob"] is None
+    assert result["matches_remerge"] is False
+    assert result["repair_commits"] == []
+
+
+def test_recheck_against_pin_finds_repair_commit_in_ancestry_range(
+    tmp_path: Path,
+) -> None:
+    r = repo(tmp_path)
+    (r / "a.txt").write_text("landed content\n")
+    landed = _commit(r, "landed")
+    (r / "a.txt").write_text("repaired content\n")
+    pin = _commit(r, "fix: repair a.txt")
+
+    pin_blob = git(r, "rev-parse", f"{pin}:a.txt")
+    result = recheck_against_pin(r, "a.txt", pin_blob, pin, landed_oid=landed)
+
+    assert result["pin_present"] is True
+    assert result["pin_blob"] == pin_blob
+    assert result["matches_remerge"] is True
+    assert len(result["repair_commits"]) == 1
+    assert "repair a.txt" in result["repair_commits"][0]

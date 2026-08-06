@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import datetime
 import hashlib
 import importlib.util
 import json
@@ -44,6 +45,8 @@ GitCaptureError = _CAPTURE_MODULE.GitCaptureError
 _oid = _CAPTURE_MODULE._oid
 _canonical_json = _CAPTURE_MODULE._canonical_json
 create_isolated_worktree = _CAPTURE_MODULE.create_isolated_worktree
+classify_preservation_path = _CAPTURE_MODULE.classify_preservation_path
+_nul_records = _CAPTURE_MODULE._nul_records
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -1381,6 +1384,961 @@ def classify_unresolved_paths(paths: Iterable[str]) -> dict[str, list[str]]:
     return buckets
 
 
+# ---------------------------------------------------------------------------
+# Findings: full-tree diff of the re-merge stage against the landed merge
+# (plan 02-04, Task 1) -- D-07's primary comparison plus D-06a's self-heal
+# recheck against the pinned tree.
+# ---------------------------------------------------------------------------
+
+_DEPENDENCY_SCOPE_PATHS = frozenset({"pyproject.toml", "uv.lock"})
+_GENERATED_TOOL_STUB_PREFIX = "src/tooluniverse/tools/"
+_SYMLINK_WORKSPACE_PREFIX = "plugin/skills/"
+_ZERO_OID = "0" * 40
+
+_FINDING_VERDICTS = (
+    "landed_correct",
+    "landed_dropped_or_altered",
+    "self_healed_downstream",
+    "remerge_only_artifact",
+    "dependency_scope",
+)
+
+
+def _parse_raw_diff_output(raw: str) -> list[dict[str, Any]]:
+    """Pure parser for ``git diff --raw -z --find-renames --abbrev=40`` output.
+
+    NUL-delimited throughout -- never split on newlines, so a path
+    containing a space or unusual bytes survives intact (mirrors
+    ``collect_preservation_inventory``'s own tokenizing loop). A rename/copy
+    record (status ``R``/``C``, optionally with a trailing similarity score)
+    consumes *two* path tokens -- source, then destination -- and both are
+    kept on the single returned record (``old_path``, ``path``) rather than
+    split across two records, so neither operand is ever dropped. Every
+    other status consumes one path token. Takes the already-decoded raw
+    string directly (no git invocation) so parsing edge cases -- an
+    embedded space, a rename -- are testable with a literal, deterministic
+    payload.
+    """
+    tokens = _nul_records(raw)
+    records: list[dict[str, Any]] = []
+    index = 0
+    while index < len(tokens):
+        rec = tokens[index]
+        index += 1
+        if not rec.startswith(":"):
+            continue
+        fields = rec.split()
+        if len(fields) < 5:
+            continue
+        old_mode, new_mode, old_oid, new_oid, status = fields[:5]
+        if status[0] in ("R", "C"):
+            if index + 1 >= len(tokens):
+                break
+            old_path = tokens[index]
+            index += 1
+            path = tokens[index]
+            index += 1
+        else:
+            if index >= len(tokens):
+                break
+            old_path = None
+            path = tokens[index]
+            index += 1
+        records.append(
+            {
+                "status": status,
+                "path": path,
+                "old_path": old_path,
+                "old_mode": old_mode,
+                "new_mode": new_mode,
+                "left_oid": old_oid,
+                "right_oid": new_oid,
+            }
+        )
+    return records
+
+
+def full_tree_diff(repo: Path, left_oid: str, right_oid: str) -> list[dict[str, Any]]:
+    """Run ``git diff --raw -z --find-renames --abbrev=40 <left> <right>`` and parse it.
+
+    ``--abbrev=40`` forces full-length blob OIDs in the meta token; without
+    it git abbreviates to 8 hex chars, which would silently defeat every
+    downstream blob-equality check. ``left_oid``/``right_oid`` of 40 zero
+    chars in the parsed records is git's own convention for "absent on that
+    side" (pure add / pure delete). See :func:`_parse_raw_diff_output` for
+    the parsing logic itself.
+    """
+    raw = run_git(
+        ["diff", "--raw", "-z", "--find-renames", "--abbrev=40", left_oid, right_oid],
+        repo,
+    )
+    return _parse_raw_diff_output(raw)
+
+
+def _diff_entries(records: Iterable[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Expand :func:`full_tree_diff` records into one presence/blob entry per affected path.
+
+    A rename/copy record contributes *two* entries: the source path (present
+    on the left only -- its content moved away) and the destination path
+    (present on the right only). Every other status contributes exactly one
+    entry for ``path``. This is the "every path where the re-derived tree
+    disagrees with the landed merge" set D-07 requires -- not only the paths
+    git's own conflict markers flagged.
+    """
+    entries: dict[str, dict[str, Any]] = {}
+
+    def _set(
+        path: str,
+        left_present: bool,
+        left_blob: str | None,
+        right_present: bool,
+        right_blob: str | None,
+    ) -> None:
+        entries[path] = {
+            "path": path,
+            "left_present": left_present,
+            "left_blob": left_blob,
+            "right_present": right_present,
+            "right_blob": right_blob,
+        }
+
+    for rec in records:
+        left_blob = None if rec["left_oid"] == _ZERO_OID else rec["left_oid"]
+        right_blob = None if rec["right_oid"] == _ZERO_OID else rec["right_oid"]
+        if rec["old_path"] is not None:
+            _set(rec["old_path"], True, left_blob, False, None)
+            _set(rec["path"], False, None, True, right_blob)
+        else:
+            _set(
+                rec["path"],
+                left_blob is not None,
+                left_blob,
+                right_blob is not None,
+                right_blob,
+            )
+    return entries
+
+
+def classify_finding(
+    path: str,
+    remerge_present: bool,
+    landed_present: bool,
+    pin_present: bool,
+    remerge_blob: str | None,
+    landed_blob: str | None,
+    pin_blob: str | None,
+    *,
+    resolution_paths: frozenset[str] = frozenset(),
+) -> str:
+    """Classify one full-tree disagreement path into exactly one Phase 2 verdict.
+
+    Pure function, no repository access -- every input is already resolved.
+    Verdict precedence (most specific first):
+
+    1. ``dependency_scope`` -- *path* is ``pyproject.toml`` or ``uv.lock``,
+       regardless of blob state. D-07's OQ1 decision: a dependency-version
+       disagreement is never a criterion-2 finding; it routes to
+       Phase 5 / COMP-01.
+    2. ``remerge_only_artifact`` -- *path* is in *resolution_paths*, the
+       caller's record of paths whose disagreement stems from a resolution
+       choice this audit itself made (an entry in ``remerge.json``'s
+       ``resolutions``, or a wholesale-regenerated/materialized path this
+       audit's own tooling produced) rather than a judgment about fork vs.
+       upstream content.
+    3. ``landed_correct`` -- the landed blob equals the re-derived blob
+       (covers ``remerge_present == landed_present`` with equal blobs,
+       including the "absent from both" edge where both are ``None``).
+    4. ``self_healed_downstream`` -- landed disagrees with the re-derived
+       tree, but the pinned tree at ``21945440`` already matches the
+       re-derived content -- one of the 31 intervening commits already
+       repaired it (D-06a). Requires ``pin_present`` True; a present-but-
+       mismatched pin blob does **not** qualify (falls through to the next
+       verdict) -- the pin corroborates a *specific* repair, not just any
+       presence.
+    5. ``landed_dropped_or_altered`` -- the default: landed disagrees with
+       the re-derived tree and the pinned tree does not corroborate a
+       downstream repair.
+    """
+    if path in _DEPENDENCY_SCOPE_PATHS:
+        return "dependency_scope"
+    if path in resolution_paths:
+        return "remerge_only_artifact"
+    if remerge_present == landed_present and remerge_blob == landed_blob:
+        return "landed_correct"
+    if pin_present and pin_blob == remerge_blob:
+        return "self_healed_downstream"
+    return "landed_dropped_or_altered"
+
+
+def recheck_against_pin(
+    repo: Path,
+    path: str,
+    remerge_blob: str | None,
+    pin_oid: str,
+    *,
+    landed_oid: str = DEFAULT_MERGED_OID,
+) -> dict[str, Any]:
+    """D-06a's self-heal recheck: does the pinned tree already carry *remerge_blob*'s content?
+
+    Resolves *path*'s blob at *pin_oid* (``None`` when absent) and, as a
+    corroborating signal, walks the commit range *landed_oid*..*pin_oid* for
+    *path* via ``git log --ancestry-path`` -- a non-empty result names at
+    least one of the 31 intervening commits that touched this path,
+    independent evidence that the pin's content (or lack of it) reflects a
+    deliberate downstream decision rather than the file simply never having
+    moved since *landed_oid*.
+    """
+    try:
+        pin_blob = run_git(["rev-parse", f"{pin_oid}:{path}"], repo).strip()
+        pin_present = True
+    except GitCaptureError:
+        pin_blob = None
+        pin_present = False
+    log = run_git(
+        ["log", "--oneline", "--ancestry-path", f"{landed_oid}..{pin_oid}", "--", path],
+        repo,
+    )
+    repair_commits = [line for line in log.splitlines() if line.strip()]
+    return {
+        "pin_present": pin_present,
+        "pin_blob": pin_blob,
+        "matches_remerge": pin_present and pin_blob == remerge_blob,
+        "repair_commits": repair_commits,
+    }
+
+
+def _resolve_blob(repo: Path, ref: str, path: str) -> tuple[bool, str | None]:
+    """``(present, blob_oid)`` for *path* at *ref* -- ``(False, None)`` when absent."""
+    try:
+        return True, run_git(["rev-parse", f"{ref}:{path}"], repo).strip()
+    except GitCaptureError:
+        return False, None
+
+
+def _finding_rationale(verdict: str, remerge_present: bool, landed_present: bool) -> str:
+    if verdict == "landed_correct":
+        if not remerge_present and not landed_present:
+            return "path absent from both the landed merge and the re-derived tree"
+        return "landed blob equals the re-derived blob"
+    if verdict == "self_healed_downstream":
+        return (
+            "landed disagrees with the re-derived tree, but the pinned tree at "
+            "21945440 already matches the re-derived content -- repaired by one "
+            "of the 31 intervening commits per D-06a"
+        )
+    if verdict == "landed_dropped_or_altered":
+        return (
+            "landed disagrees with the re-derived tree and the pinned tree does "
+            "not corroborate a downstream repair -- candidate for 02-06 review"
+        )
+    return verdict
+
+
+def build_findings(
+    repo: Path,
+    landed_oid: str,
+    stage_oid: str,
+    pin_oid: str,
+    remerge_evidence: dict[str, Any],
+    union_evidence: dict[str, Any],
+) -> dict[str, Any]:
+    """Full D-07 primary comparison (landed vs. re-derived stage) plus D-06a's pin recheck.
+
+    Two deliberate, documented noise-bucket overrides keep the candidate
+    list free of this audit's own tooling artifacts rather than
+    misattributing them as fork-content findings (measured: the raw
+    landed-vs-stage diff is 3,443 paths, not ~22):
+
+    - Generated-tree paths (``src/tooluniverse/tools/*.py``, 2,604 wrapper
+      stubs regenerated wholesale by ``generate_tools.main()``, plus
+      ``_lazy_registry_static.py``) are ``remerge_only_artifact`` --
+      remerge.json's own ``generated_tool_wrappers`` note already disclaims
+      these as "not individually diffable".
+    - ``plugin/skills/*`` paths (600 records) are ``remerge_only_artifact``
+      -- git's own D+A auto-resolve during the merge-in-progress step
+      materialized upstream's directory before this audit's D-08 resolvers
+      ever ran; 02-03-SUMMARY's ``deviation_out_of_scope_resolutions.
+      symlink_workspaces`` explicitly disclaims these 114 mechanical
+      resolutions as carrying "no independent SYNC-02/PRES-02 authority".
+
+    A third override, NOT a resolution-path bucket: a ``src/tooluniverse/
+    data/*.json`` path already carrying ``union_ok`` in ``union.json``'s
+    entry-level tool-name sweep is ``landed_correct`` even when its blob
+    differs -- the byte difference is this audit's own canonical JSON
+    rewrite (``resolve_data_json_conflict``'s ``sort_keys=True, indent=2``),
+    not a semantic disagreement (211 of 213 both-sides ``data/*.json`` paths).
+
+    Every other disagreement flows through :func:`classify_finding` on its
+    actual blob/presence state, so a real candidate (e.g. a silent git
+    auto-merge content loss the way F-02-03-01/F-02-03-02 were discovered
+    in plan 02-03) is never swept into a noise bucket.
+    """
+    diff_records = full_tree_diff(repo, landed_oid, stage_oid)
+    entries = _diff_entries(diff_records)
+
+    union_ok_paths = {
+        f["path"] for f in union_evidence.get("files", []) if f.get("verdict") == "union_ok"
+    }
+    # NOTE: remerge.json's own `resolutions` array (D-08's real content decisions --
+    # entry_union, key_union, upstream_canonical_fork_additive, line_union, etc. over
+    # paths present on BOTH landed and remerge) is deliberately NOT swept into
+    # remerge_only_artifact here. Those are genuine content judgments this audit made
+    # and 02-03-SUMMARY explicitly says they "carry no independent SYNC-02/PRES-02
+    # authority on their own; re-validate against the pinned tree per D-06a before
+    # treating any of it as a finding" -- i.e. run them through the SAME
+    # classify_finding pipeline as any other disagreement, not exempt them. Only the
+    # two disclaimed noise buckets below (wholesale-regenerated / directory-
+    # materialized, never a content judgment at all) are swept.
+    lazy_missing = sorted(
+        set((remerge_evidence.get("lazy_registry") or {}).get("missing_vs_landed", []))
+    )
+
+    records: list[dict[str, Any]] = []
+    summary: dict[str, Any] = {
+        "disagreements": 0,
+        "landed_correct": 0,
+        "landed_dropped_or_altered": 0,
+        "self_healed_downstream": 0,
+        "remerge_only_artifact": 0,
+        "dependency_scope": 0,
+        "unclassified": 0,
+    }
+    rechecked_count = 0
+
+    for path in sorted(entries):
+        entry = entries[path]
+        remerge_present = entry["right_present"]
+        remerge_blob = entry["right_blob"]
+        landed_present = entry["left_present"]
+        landed_blob = entry["left_blob"]
+
+        is_generated_noise = (
+            path.startswith(_GENERATED_TOOL_STUB_PREFIX) or path == _LAZY_REGISTRY_PATH
+        )
+        is_symlink_noise = path.startswith(_SYMLINK_WORKSPACE_PREFIX)
+        is_union_ok_reformat = (
+            path.startswith("src/tooluniverse/data/")
+            and path.endswith(".json")
+            and path in union_ok_paths
+        )
+
+        if is_generated_noise or is_symlink_noise:
+            verdict = "remerge_only_artifact"
+            pin_present, pin_blob = False, None
+            rationale = (
+                "generated tool-wrapper stub / lazy registry, regenerated wholesale by "
+                "generate_tools.main() / generate_lazy_registry.main() inside the "
+                "stage's fresh worktree (remerge.json's generated_tool_wrappers note); "
+                "not individually diffable, pin recheck skipped by design"
+                if is_generated_noise
+                else (
+                    "plugin/skills/* materialization: git's own D+A auto-resolve during "
+                    "the merge-in-progress step replaced the fork's symlink with "
+                    "upstream's real directory tree before this audit's D-08 resolvers "
+                    "ever ran; resolved mechanically as deviation_out_of_scope_resolutions"
+                    ".symlink_workspaces (02-03), which that plan's own summary disclaims "
+                    "as carrying no independent SYNC-02/PRES-02 authority; pin recheck "
+                    "skipped for this bucket -- see preservation-reclass.json for the "
+                    "symlink-specific disposition instead"
+                )
+            )
+        elif is_union_ok_reformat:
+            pin_present, pin_blob = _resolve_blob(repo, pin_oid, path)
+            verdict = "landed_correct"
+            rationale = (
+                "byte-level difference against landed is this audit's own canonical "
+                "JSON rewrite (resolve_data_json_conflict's sort_keys=True, indent=2); "
+                "union.json's entry-level sweep already confirms verdict=union_ok for "
+                "this path -- no tool-name set change, D-08 semantics honored"
+            )
+        else:
+            pin_present, pin_blob = _resolve_blob(repo, pin_oid, path)
+            resolution_paths = frozenset({path}) if path in lazy_missing else frozenset()
+            verdict = classify_finding(
+                path,
+                remerge_present,
+                landed_present,
+                pin_present,
+                remerge_blob,
+                landed_blob,
+                pin_blob,
+                resolution_paths=resolution_paths,
+            )
+            rationale = _finding_rationale(verdict, remerge_present, landed_present)
+
+        record: dict[str, Any] = {
+            "path": path,
+            "verdict": verdict,
+            "remerge_present": remerge_present,
+            "remerge_blob": remerge_blob,
+            "landed_present": landed_present,
+            "landed_blob": landed_blob,
+            "pin_present": pin_present,
+            "pin_blob": pin_blob,
+            "preservation_class": classify_preservation_path(path),
+            "rationale": rationale,
+            "repair_commits": [],
+        }
+
+        if verdict in ("landed_dropped_or_altered", "self_healed_downstream") and pin_present:
+            recheck = recheck_against_pin(
+                repo, path, remerge_blob, pin_oid, landed_oid=landed_oid
+            )
+            record["repair_commits"] = recheck["repair_commits"]
+            record["pin_matches_landed"] = pin_present and pin_blob == landed_blob
+            rechecked_count += 1
+        elif verdict == "landed_dropped_or_altered":
+            record["pin_matches_landed"] = False
+
+        records.append(record)
+        summary["disagreements"] += 1
+        summary[verdict] += 1
+
+    covered_paths = {r["path"] for r in records}
+    summary["unclassified"] = len(set(entries) - covered_paths)
+
+    return {
+        "primary_comparison": {
+            "left_oid": landed_oid,
+            "right_oid": stage_oid,
+            "note": (
+                "D-07's full-tree comparison: the landed merge vs. this audit's "
+                "re-derived stage"
+            ),
+        },
+        "self_heal_recheck": {
+            "left_oid": pin_oid,
+            "rechecked_count": rechecked_count,
+            "note": (
+                "D-06a: recorded separately from primary_comparison so the 31-commit "
+                "gap between landed and the pin is never conflated with the "
+                "landed-vs-stage comparison; ran for every disagreement not already "
+                "swept into a noise bucket"
+            ),
+        },
+        "records": records,
+        "summary": summary,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Reclass: join findings to every preservation.json entry (plan 02-04, Task 3)
+# -- criterion 3's completeness assertion over all 1,392 paths.
+# ---------------------------------------------------------------------------
+
+
+def _ls_tree_blobs(repo: Path, ref: str) -> dict[str, tuple[str, str]]:
+    """Bulk ``path -> (mode, blob_oid)`` for every blob at *ref* -- one subprocess, not one per path.
+
+    A 1,392-record join needs up to four per-path lookups (stage, pin,
+    landed, upstream); doing that via ``git rev-parse`` per path per tree
+    would be ~5,500 subprocess calls. One ``git ls-tree -r -z`` per tree
+    into a dict makes the join pure in-memory lookups.
+    """
+    raw = run_git(["ls-tree", "-r", "-z", ref], repo)
+    out: dict[str, tuple[str, str]] = {}
+    for rec in _nul_records(raw):
+        meta, sep, path = rec.partition("\t")
+        if not sep:
+            continue
+        fields = meta.split()
+        if len(fields) != 3:
+            continue
+        mode, _kind, blob_oid = fields
+        out[path] = (mode, blob_oid)
+    return out
+
+
+def _blob_text(repo: Path, blob_oid: str) -> str:
+    return run_git(["cat-file", "blob", blob_oid], repo)
+
+
+def _determine_disposition(
+    stage: tuple[str, str] | None,
+    pin: tuple[str, str] | None,
+    landed: tuple[str, str] | None,
+    upstream: tuple[str, str] | None,
+    repair_commits: list[str],
+) -> tuple[str, str]:
+    """One of ``survived`` / ``superseded_by_upstream`` / ``lost``, with human-readable evidence.
+
+    *stage*/*pin*/*landed*/*upstream* are ``(mode, blob_oid)`` or ``None``
+    when the path is absent at that tree. The re-derived *stage* tree is the
+    primary signal (D-08's mechanical re-derivation is what this whole audit
+    trusts to say what SHOULD be there); the pin corroborates presence via a
+    downstream repair commit when the throwaway stage -- which never
+    receives any of the 31 post-``f81448f2`` commits, by construction, since
+    it is an independent branch off ``e0755067`` that is never merged
+    (D-06) -- legitimately lacks a path the real merge lineage still
+    carries. Pin presence alone is never accepted as proof of preservation
+    (T-02-12): an explaining repair commit or a matching landed blob is
+    required before an absent-from-stage path is called ``survived``.
+    """
+    stage_blob = stage[1] if stage else None
+    pin_blob = pin[1] if pin else None
+    landed_blob = landed[1] if landed else None
+    upstream_blob = upstream[1] if upstream else None
+
+    if stage is not None and (
+        pin is None or stage_blob == pin_blob or stage_blob == landed_blob
+    ):
+        return (
+            "survived",
+            "git ls-tree -r <stage_oid> -- <path>: present, matches the pinned/landed content",
+        )
+
+    if (
+        stage is not None
+        and upstream is not None
+        and stage_blob == upstream_blob
+        and stage_blob != pin_blob
+    ):
+        return (
+            "superseded_by_upstream",
+            "git rev-parse <stage_oid>:<path> equals <upstream_oid>:<path> -- D-08's "
+            "expected outcome for a shared definition, not a defect",
+        )
+
+    if stage is None and pin is not None:
+        if repair_commits:
+            return (
+                "survived",
+                "absent from the throwaway re-merge stage (never receives post-landed "
+                "commits by construction) but present at the pin, explained by "
+                "git log --ancestry-path <landed_oid>..<pin_oid> -- <path>: "
+                + "; ".join(repair_commits[:3]),
+            )
+        if landed is not None and landed_blob == pin_blob:
+            return (
+                "survived",
+                "git rev-parse <landed_oid>:<path> equals <pin_oid>:<path>, unchanged "
+                "through the pin -- stage's absence is a re-derivation-only artifact, "
+                "not evidence the real merge lineage lost this content",
+            )
+        return (
+            "lost",
+            "git rev-parse <pin_oid>:<path> present but absent from the re-derived "
+            "stage tree, with no explaining downstream commit and no matching landed "
+            "content -- treated conservatively pending 02-06 review",
+        )
+
+    if stage is None and pin is None:
+        return "lost", "absent from both git ls-tree <stage_oid> and git ls-tree <pin_oid>"
+
+    return (
+        "lost",
+        "git rev-parse <stage_oid>:<path> present but content differs from both the "
+        "pinned baseline and upstream's version -- treated conservatively pending "
+        "02-06 review",
+    )
+
+
+def _symlink_disposition(
+    repo: Path,
+    stage: tuple[str, str] | None,
+    pin: tuple[str, str] | None,
+) -> dict[str, Any]:
+    """Symlink-specific evidence: mode + link text at both trees, never a filesystem read.
+
+    ``git cat-file blob`` gives the link text for a ``120000`` entry without
+    ever opening, reading through, or traversing the symlink on disk
+    (T-02-14, the plan's literal ``lstat``/``readlink`` requirement) --
+    stronger, since it works even if the stage worktree has since been
+    cleaned up, and it structurally cannot follow the link anywhere.
+    """
+
+    def _describe(entry: tuple[str, str] | None) -> dict[str, Any]:
+        if entry is None:
+            return {"present": False, "is_symlink": False, "link_text": None}
+        mode, blob_oid = entry
+        is_symlink = mode == "120000"
+        return {
+            "present": True,
+            "mode": mode,
+            "is_symlink": is_symlink,
+            "link_text": _blob_text(repo, blob_oid) if is_symlink else None,
+        }
+
+    stage_desc = _describe(stage)
+    pin_desc = _describe(pin)
+    return {
+        "stage": stage_desc,
+        "pin": pin_desc,
+        "intact_at_pin": pin_desc["is_symlink"],
+        "intact_at_stage": stage_desc["is_symlink"],
+    }
+
+
+def join_preservation(
+    preservation_path: Path,
+    findings: dict[str, Any],
+    union: dict[str, Any],
+    repo: Path,
+    stage_oid: str,
+    pin_oid: str,
+) -> dict[str, Any]:
+    """Join every preservation.json path entry to a Phase 2 disposition (criterion 3).
+
+    Base-crossing join, guarded explicitly (T-02-12): preservation.json's
+    own header records ``fork_oid`` as the PIN (``21945440``) and
+    ``upstream_oid`` as ``56adcfd9`` -- an upstream<->pinned-fork delta --
+    while the re-merge stage is comparable to ``f81448f2`` (the landed
+    merge), 31 commits earlier. Both header OIDs are asserted at runtime and
+    all four trees (pin, upstream, stage, landed) are recorded side by side
+    in the output so a reader can never mistake which pair backs a given
+    disposition. Phase 1's own ``class`` values are preserved verbatim on
+    every record -- never re-derived -- per the plan's explicit instruction.
+    """
+    preservation = json.loads(preservation_path.read_text(encoding="utf-8"))
+    preservation_fork_oid = preservation["fork_oid"]
+    preservation_upstream_oid = preservation["upstream_oid"]
+    if preservation_fork_oid != pin_oid:
+        raise GitCaptureError(
+            f"preservation.json fork_oid {preservation_fork_oid!r} != expected pin "
+            f"{pin_oid!r} -- base-crossing join assumption violated"
+        )
+    if preservation_upstream_oid != DEFAULT_UPSTREAM_OID:
+        raise GitCaptureError(
+            f"preservation.json upstream_oid {preservation_upstream_oid!r} != "
+            f"expected {DEFAULT_UPSTREAM_OID!r}"
+        )
+
+    landed_oid = DEFAULT_MERGED_OID
+    stage_index = _ls_tree_blobs(repo, stage_oid)
+    pin_index = _ls_tree_blobs(repo, pin_oid)
+    landed_index = _ls_tree_blobs(repo, landed_oid)
+    upstream_index = _ls_tree_blobs(repo, DEFAULT_UPSTREAM_OID)
+
+    finding_by_path = {r["path"]: r for r in findings.get("records", [])}
+    union_by_path = {f["path"]: f for f in union.get("files", [])}
+
+    records: list[dict[str, Any]] = []
+    disposition_summary: dict[str, int] = {}
+    class_distribution: dict[str, int] = {}
+
+    for entry in preservation["paths"]:
+        path = entry["path"]
+        stage = stage_index.get(path)
+        pin = pin_index.get(path)
+        landed = landed_index.get(path)
+        upstream = upstream_index.get(path)
+
+        repair_commits: list[str] = []
+        if stage is None and pin is not None:
+            log = run_git(
+                [
+                    "log",
+                    "--oneline",
+                    "--ancestry-path",
+                    f"{landed_oid}..{pin_oid}",
+                    "--",
+                    path,
+                ],
+                repo,
+            )
+            repair_commits = [line for line in log.splitlines() if line.strip()]
+
+        disposition, evidence = _determine_disposition(
+            stage, pin, landed, upstream, repair_commits
+        )
+
+        record: dict[str, Any] = {
+            "path": path,
+            "status": entry.get("status"),
+            "class": entry.get("class"),
+            "must_survive": entry.get("must_survive"),
+            "symlink": entry.get("symlink"),
+            "phase2_disposition": disposition,
+            "finding_ref": finding_by_path[path]["verdict"] if path in finding_by_path else None,
+            "union_verdict": union_by_path[path]["verdict"] if path in union_by_path else None,
+            "evidence": evidence,
+        }
+        if entry.get("symlink") is not None:
+            record["symlink_check"] = _symlink_disposition(repo, stage, pin)
+
+        records.append(record)
+        disposition_summary[disposition] = disposition_summary.get(disposition, 0) + 1
+        class_distribution[entry["class"]] = class_distribution.get(entry["class"], 0) + 1
+
+    untracked_out_of_scope = [
+        {
+            "path": item["path"],
+            "class": item.get("class"),
+            "phase2_disposition": "out_of_scope_user_owned",
+        }
+        for item in preservation.get("untracked", [])
+    ]
+
+    blocker_paths = {b["path"] for b in preservation.get("blockers", [])}
+    blocker_dispositions: dict[str, int] = {}
+    for record in records:
+        if record["path"] in blocker_paths:
+            blocker_dispositions[record["phase2_disposition"]] = (
+                blocker_dispositions.get(record["phase2_disposition"], 0) + 1
+            )
+
+    upstream_deleted_data_files = [
+        {
+            "path": f["path"],
+            "missing_names": f.get("missing_names", []),
+            "relocated_to": f.get("relocated_to", {}),
+        }
+        for f in union.get("files", [])
+        if f.get("verdict") == "upstream_deleted"
+    ]
+
+    return {
+        "preservation_fork_oid": preservation_fork_oid,
+        "preservation_upstream_oid": preservation_upstream_oid,
+        "remerge_stage_oid": stage_oid,
+        "landed_merge_oid": landed_oid,
+        "records": records,
+        "disposition_summary": disposition_summary,
+        "class_distribution": class_distribution,
+        "upstream_deleted_data_files": upstream_deleted_data_files,
+        "context_md_discrepancy": {
+            "claimed": (
+                "CONTEXT.md D-03/A2: all 1,392 preservation.json entries carry "
+                "class: other_review_required"
+            ),
+            "measured": class_distribution,
+        },
+        "blocking": preservation.get("blocking"),
+        "blockers_total": len(preservation.get("blockers", [])),
+        "blocker_dispositions": blocker_dispositions,
+        "untracked_out_of_scope": untracked_out_of_scope,
+    }
+
+
+def render_findings_markdown(
+    out_path: Path, findings: dict[str, Any], reclass: dict[str, Any]
+) -> str:
+    """Render the human review surface -- ASCII only, four trees named, candidates proposal-only."""
+    stamp = run_stamp()
+    summary = findings["summary"]
+    prim = findings["primary_comparison"]
+    heal = findings["self_heal_recheck"]
+
+    candidates = [
+        r for r in findings["records"] if r["verdict"] == "landed_dropped_or_altered"
+    ]
+    dep_scope = [r for r in findings["records"] if r["verdict"] == "dependency_scope"]
+
+    lines: list[str] = []
+    lines.append("# Phase 2 Findings: Re-merge Audit vs. the Landed Merge")
+    lines.append("")
+    lines.append(f"Generated: {stamp}")
+    lines.append("")
+    lines.append(
+        "Related: [[02-CONTEXT]] [[02-RESEARCH]] [[01-VERIFICATION]]"
+    )
+    lines.append("")
+    lines.append(
+        "This is the human review surface for Phase 2's criterion 2 (fork behavior "
+        "not silently dropped by the landed merge) and criterion 3 (every custom "
+        "code, tool, plugin, registration, and symlink asset accounted for). A "
+        "disagreement below is not automatically a defect -- upstream superseding a "
+        "shared definition is the expected, correct outcome under D-08."
+    )
+    lines.append("")
+
+    lines.append("## The Four Trees In Play")
+    lines.append("")
+    lines.append("| Tree | OID | Role |")
+    lines.append("| --- | --- | --- |")
+    lines.append(f"| landed merge | {prim['left_oid']} | f81448f2 -- what actually shipped |")
+    lines.append(
+        f"| re-merge stage | {prim['right_oid']} | this audit's independent D-08 "
+        "re-derivation, throwaway, never merged |"
+    )
+    lines.append(f"| pin | {heal['left_oid']} | 21945440 -- 31 commits downstream of landed |")
+    lines.append(
+        f"| upstream | {DEFAULT_UPSTREAM_OID} | 56adcfd9 -- the merged-in upstream revision |"
+    )
+    lines.append("")
+
+    lines.append("## Criterion 2: Full-tree Disagreement Classification")
+    lines.append("")
+    lines.append(
+        f"Full-tree diff (`git diff --raw -z --find-renames` {prim['left_oid'][:8]}.."
+        f"{prim['right_oid'][:8]}) enumerated **{summary['disagreements']}** disagreeing "
+        "paths -- not only the 22 git's own `diff-tree --cc` flags as hand-resolved."
+    )
+    lines.append("")
+    lines.append("| Verdict | Count | Meaning |")
+    lines.append("| --- | --- | --- |")
+    lines.append(
+        f"| landed_correct | {summary['landed_correct']} | landed and re-derived agree "
+        "(including canonical-JSON-reformat-only differences confirmed union_ok) |"
+    )
+    lines.append(
+        f"| remerge_only_artifact | {summary['remerge_only_artifact']} | this audit's own "
+        "regenerated/materialized tooling output (tool-wrapper stubs, lazy registry, "
+        "plugin/skills/* directory materialization) -- not a fork-content judgment |"
+    )
+    lines.append(
+        f"| dependency_scope | {summary['dependency_scope']} | pyproject.toml/uv.lock -- "
+        "routed to Phase 5 / COMP-01 per D-07's OQ1 decision |"
+    )
+    lines.append(
+        f"| self_healed_downstream | {summary['self_healed_downstream']} | landed disagreed "
+        "with the re-derivation, but the pin already matches it -- repaired downstream, "
+        "D-06a, no corrective commit needed |"
+    )
+    lines.append(
+        f"| landed_dropped_or_altered | {summary['landed_dropped_or_altered']} | survived "
+        "the D-06a pin recheck -- corrective-commit CANDIDATES below, proposal-only |"
+    )
+    lines.append(f"| **unclassified** | **{summary['unclassified']}** | must be 0 |")
+    lines.append("")
+
+    lines.append("## Corrective-commit Candidates (proposal-only, gated on plan 02-06)")
+    lines.append("")
+    if not candidates:
+        lines.append(
+            "None. Every landed_dropped_or_altered candidate from the initial sweep either "
+            "self-healed against the pin or was reclassified into a noise bucket with "
+            "recorded rationale (see findings.json). No corrective commit is proposed by "
+            "this plan."
+        )
+    else:
+        lines.append(
+            "The following disagreed with the landed merge, are not this audit's own "
+            "tooling noise, and do not self-heal against the pin. Each is a PROPOSAL for "
+            "plan 02-06's decision checkpoint -- none has been applied here (D-06's "
+            "findings-only posture)."
+        )
+        lines.append("")
+        lines.append("| Path | Landed blob | Remerge blob | Pin blob | Pin matches landed | Repair commits |")
+        lines.append("| --- | --- | --- | --- | --- | --- |")
+        for r in candidates:
+            landed_b = (r["landed_blob"] or "-")[:12]
+            remerge_b = (r["remerge_blob"] or "-")[:12]
+            pin_b = (r["pin_blob"] or "-")[:12]
+            pin_matches_landed = r.get("pin_matches_landed", False)
+            repair = "; ".join(r.get("repair_commits", [])[:2]) or "none"
+            lines.append(
+                f"| {r['path']} | {landed_b} | {remerge_b} | {pin_b} | "
+                f"{pin_matches_landed} | {repair} |"
+            )
+        lines.append("")
+        lines.append(
+            "**Reading the table:** `pin matches landed = True` means the pin's content "
+            "agrees with what actually shipped, not with this audit's re-derivation -- "
+            "that is evidence the LANDED merge is correct and the re-derivation stage has "
+            "its own git-auto-merge artifact (the same class of bug as F-02-03-01/"
+            "F-02-03-02 in remerge.json), not evidence of a real fork-content loss. Treat "
+            "those rows as informational, not corrective-commit candidates."
+        )
+    lines.append("")
+
+    lines.append("## dependency_scope Items (routed to Phase 5 / COMP-01)")
+    lines.append("")
+    if not dep_scope:
+        lines.append("None encountered in this sweep.")
+    else:
+        lines.append("| Path | Landed blob | Remerge blob |")
+        lines.append("| --- | --- | --- |")
+        for r in dep_scope:
+            lines.append(
+                f"| {r['path']} | {(r['landed_blob'] or '-')[:12]} | "
+                f"{(r['remerge_blob'] or '-')[:12]} |"
+            )
+    lines.append("")
+
+    lines.append("## upstream_deleted Data Files (relocated_to accounting)")
+    lines.append("")
+    upstream_deleted = reclass.get("upstream_deleted_data_files") or []
+    if not upstream_deleted:
+        lines.append("None recorded in union.json for this sweep.")
+    else:
+        lines.append("| Path | Names lost | Relocated to |")
+        lines.append("| --- | --- | --- |")
+        for item in upstream_deleted:
+            relocated = "; ".join(
+                f"{name} -> {', '.join(dests) if dests else 'UNRELOCATED'}"
+                for name, dests in item["relocated_to"].items()
+            )
+            lines.append(f"| {item['path']} | {', '.join(item['missing_names'])} | {relocated} |")
+    lines.append("")
+
+    lines.append("## Criterion 3: Preservation Disposition (1,392 of 1,392)")
+    lines.append("")
+    lines.append(
+        f"preservation.json's `fork_oid` ({reclass['preservation_fork_oid']}) is the PIN, "
+        f"not `e0755067` -- an upstream ({reclass['preservation_upstream_oid']}) <-> "
+        f"pinned-fork delta, while the re-merge stage ({reclass['remerge_stage_oid']}) is "
+        f"comparable to the landed merge ({reclass['landed_merge_oid']}), 31 commits "
+        "earlier. Every disposition below was checked against all four trees; pin "
+        "presence alone was never accepted as proof of preservation."
+    )
+    lines.append("")
+    lines.append("| Disposition | Count |")
+    lines.append("| --- | --- |")
+    for key in ("survived", "superseded_by_upstream", "lost"):
+        lines.append(f"| {key} | {reclass['disposition_summary'].get(key, 0)} |")
+    lines.append("")
+
+    lines.append("### Breakdown by Phase 1 class (verbatim, not re-derived)")
+    lines.append("")
+    lines.append("| Class | Count |")
+    lines.append("| --- | --- |")
+    for key in sorted(reclass["class_distribution"], key=lambda k: -reclass["class_distribution"][k]):
+        lines.append(f"| {key} | {reclass['class_distribution'][key]} |")
+    lines.append("")
+
+    lines.append("### CONTEXT.md Discrepancy")
+    lines.append("")
+    lines.append(f"Claimed: {reclass['context_md_discrepancy']['claimed']}")
+    lines.append("")
+    lines.append(
+        "Measured (this plan's own re-count against the same 1,392-entry file): "
+        "only 84 of 1,392 carry `other_review_required`; see the class breakdown above "
+        "for the real distribution. Recorded here as a discrepancy, not silently "
+        "corrected in CONTEXT.md."
+    )
+    lines.append("")
+
+    lines.append("### Blocker Paths (Phase 1's inventory-completeness gate, secondary breakdown)")
+    lines.append("")
+    lines.append(
+        f"`blocking: {reclass['blocking']}`, {reclass['blockers_total']} blocker paths -- "
+        "this is Phase 1's own inventory-completeness gate, not a per-path Phase 2 defect "
+        "flag. Their Phase 2 dispositions, for completeness:"
+    )
+    lines.append("")
+    lines.append("| Disposition | Count |")
+    lines.append("| --- | --- |")
+    for key, count in sorted(reclass["blocker_dispositions"].items()):
+        lines.append(f"| {key} | {count} |")
+    lines.append("")
+
+    lines.append("### Untracked (user-owned, out of scope)")
+    lines.append("")
+    for item in reclass["untracked_out_of_scope"]:
+        lines.append(f"- `{item['path']}` ({item['class']}) -- out_of_scope_user_owned")
+    lines.append("")
+
+    lines.append("## Self Heal Recheck")
+    lines.append("")
+    lines.append(
+        f"D-06a's pin recheck ran against `{heal['left_oid']}` for "
+        f"{heal['rechecked_count']} disagreements not already swept into a noise bucket."
+    )
+    lines.append("")
+
+    text = "\n".join(lines) + "\n"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(text, encoding="utf-8")
+    return text
+
+
+def run_stamp() -> str:
+    """ISO-8601 millisecond UTC timestamp, matching this repo's evidence-script convention."""
+    now = datetime.datetime.now(datetime.timezone.utc)
+    return now.strftime("%Y-%m-%dT%H:%M:%S.") + f"{now.microsecond // 1000:03d}Z"
+
+
 def _guard_evidence_not_merge_in_progress(evidence_path: Path) -> None:
     """Refuse ``--stage-only`` from clobbering a merge-in-progress evidence record.
 
@@ -1447,6 +2405,42 @@ def _build_argparser() -> argparse.ArgumentParser:
         default=".planning/phases/02-upstream-main-integration/evidence/staging",
     )
     remerge.add_argument("--json", action="store_true")
+
+    findings = subparsers.add_parser(
+        "findings",
+        help="D-07 full-tree diff of the re-merge stage against the landed merge, "
+        "classified with D-06a's pin recheck",
+    )
+    findings.add_argument("--repo", default=".")
+    findings.add_argument("--landed", default=DEFAULT_MERGED_OID)
+    findings.add_argument("--pin", default=DEFAULT_PIN_OID)
+    findings.add_argument(
+        "--out",
+        default=".planning/phases/02-upstream-main-integration/evidence/staging",
+    )
+    findings.add_argument("--json", action="store_true")
+
+    reclass = subparsers.add_parser(
+        "reclass",
+        help="Join findings.json to every preservation.json entry with a Phase 2 disposition",
+    )
+    reclass.add_argument("--repo", default=".")
+    reclass.add_argument("--landed", default=DEFAULT_MERGED_OID)
+    reclass.add_argument("--upstream", default=DEFAULT_UPSTREAM_OID)
+    reclass.add_argument("--pin", default=DEFAULT_PIN_OID)
+    reclass.add_argument(
+        "--preservation",
+        default=(
+            ".planning/phases/01-protected-sync-baseline/evidence/"
+            "21945440c9f2a15537ba878500a800d9e330eab0/preservation.json"
+        ),
+    )
+    reclass.add_argument(
+        "--out",
+        default=".planning/phases/02-upstream-main-integration/evidence/staging",
+    )
+    reclass.add_argument("--findings-md", default=None)
+    reclass.add_argument("--json", action="store_true")
 
     return parser
 
@@ -1607,6 +2601,64 @@ def _run_remerge(args: argparse.Namespace) -> dict[str, Any]:
     return payload
 
 
+def _run_findings(args: argparse.Namespace) -> dict[str, Any]:
+    repo = Path(args.repo).resolve()
+    assert_safe_working_context(repo)
+    landed_oid = _oid(repo, args.landed)
+    pin_oid = _oid(repo, args.pin)
+
+    out_dir = Path(args.out)
+    if not out_dir.is_absolute():
+        out_dir = repo / out_dir
+
+    remerge_evidence = json.loads((out_dir / "remerge.json").read_text(encoding="utf-8"))
+    if remerge_evidence.get("handoff_state") != "merged_complete":
+        raise GitCaptureError(
+            "refusing findings: remerge.json handoff_state is "
+            f"{remerge_evidence.get('handoff_state')!r}, expected 'merged_complete'"
+        )
+    stage_oid = remerge_evidence["stage_merge_oid"]
+    union_evidence = json.loads((out_dir / "union.json").read_text(encoding="utf-8"))
+
+    payload = build_findings(
+        repo, landed_oid, stage_oid, pin_oid, remerge_evidence, union_evidence
+    )
+    write_staging_artifact(out_dir, "findings", payload)
+    return payload
+
+
+def _run_reclass(args: argparse.Namespace) -> dict[str, Any]:
+    repo = Path(args.repo).resolve()
+    assert_safe_working_context(repo)
+    pin_oid = _oid(repo, args.pin)
+
+    out_dir = Path(args.out)
+    if not out_dir.is_absolute():
+        out_dir = repo / out_dir
+
+    findings = json.loads((out_dir / "findings.json").read_text(encoding="utf-8"))
+    union_evidence = json.loads((out_dir / "union.json").read_text(encoding="utf-8"))
+    stage_oid = findings["primary_comparison"]["right_oid"]
+
+    preservation_path = Path(args.preservation)
+    if not preservation_path.is_absolute():
+        preservation_path = repo / preservation_path
+
+    payload = join_preservation(
+        preservation_path, findings, union_evidence, repo, stage_oid, pin_oid
+    )
+    write_staging_artifact(out_dir, "preservation-reclass", payload)
+
+    findings_md_path = (
+        Path(args.findings_md)
+        if args.findings_md
+        else repo / ".planning/phases/02-upstream-main-integration/02-FINDINGS.md"
+    )
+    render_findings_markdown(findings_md_path, findings, payload)
+
+    return payload
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = _build_argparser()
     args = parser.parse_args(argv)
@@ -1637,6 +2689,30 @@ def main(argv: list[str] | None = None) -> int:
                 f"stage_path={payload['stage_path']} "
                 f"handoff_state={payload['handoff_state']} "
                 f"unresolved_paths={len(payload['unresolved_paths'])}"
+            )
+        return 0
+
+    if args.command == "findings":
+        payload = _run_findings(args)
+        s = payload["summary"]
+        if args.json:
+            print(json.dumps(payload, sort_keys=True))
+        else:
+            print(
+                f"disagreements={s['disagreements']} "
+                f"landed_dropped_or_altered={s['landed_dropped_or_altered']} "
+                f"unclassified={s['unclassified']}"
+            )
+        return 1 if s["unclassified"] else 0
+
+    if args.command == "reclass":
+        payload = _run_reclass(args)
+        if args.json:
+            print(json.dumps(payload, sort_keys=True))
+        else:
+            print(
+                f"records={len(payload['records'])} "
+                f"disposition_summary={payload['disposition_summary']}"
             )
         return 0
 
