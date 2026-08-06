@@ -67,7 +67,7 @@ Plans:
   3. Maintainer can compare the result with the Phase 1 preservation inventory and account for every custom code, tool, plugin, registration, and symlink asset.
   4. Representative preserved custom tools still load and execute after the upstream-main integration.
 
-**Plans**: 6 plans
+**Plans**: 0/6 plans executed
 
 Plans:
 **Wave 1**
@@ -141,7 +141,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Protected Sync Baseline | 5/5 | Complete | 2026-08-04 |
-| 2. Upstream Main Integration | 0/TBD | Not started | - |
+| 2. Upstream Main Integration | 0/6 | Planned    |  |
 | 3. Follow-up and Catalog Reconciliation | 0/TBD | Not started | - |
 | 4. Documentation and Semantic Index | 0/TBD | Not started | - |
 | 5. Cross-Surface Certification | 0/TBD | Not started | - |
