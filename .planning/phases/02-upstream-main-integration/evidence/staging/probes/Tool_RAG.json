@@ -1,0 +1,63 @@
+{
+  "arguments": {
+    "description": "protein structure prediction",
+    "limit": 3
+  },
+  "cli": {
+    "discover": {
+      "found": true
+    },
+    "execute": {
+      "error": "probe exceeded 480.0s time budget",
+      "error_type": null,
+      "gate_reason": "resource_timeout",
+      "missing_keys": [],
+      "result": null,
+      "status": "error"
+    },
+    "inspect": {
+      "spec": {
+        "parameter": {}
+      }
+    },
+    "surface": "cli",
+    "tool": "Tool_RAG"
+  },
+  "contract": {
+    "cli": {
+      "missing_keys": [],
+      "reason": "resource_timeout",
+      "verdict": "gated"
+    },
+    "missing_keys": [],
+    "name": "Tool_RAG",
+    "python": {
+      "missing_keys": [],
+      "reason": "resource_timeout",
+      "verdict": "gated"
+    },
+    "selection_rule": "rule_2_tool_definition_class",
+    "verdict": "gated"
+  },
+  "name": "Tool_RAG",
+  "python": {
+    "discover": {
+      "found": true
+    },
+    "execute": {
+      "error": "probe exceeded 480.0s time budget",
+      "error_type": null,
+      "gate_reason": "resource_timeout",
+      "missing_keys": [],
+      "result": null,
+      "status": "error"
+    },
+    "inspect": {
+      "spec": {
+        "parameter": {}
+      }
+    },
+    "surface": "python",
+    "tool": "Tool_RAG"
+  }
+}

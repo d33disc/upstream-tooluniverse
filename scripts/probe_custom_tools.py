@@ -8,6 +8,11 @@ five transports converge on) and through the installed ``tu`` CLI. Per D-04
 these are fresh probes: they are never diffed against Phase 1's
 ``probes/*.json`` -- they pass, gate, or fail on their own terms.
 
+A second mode (``--symlinks``) proves the plugin-asset half of PRES-02:
+every ``preservation.json`` path record carrying a ``symlink`` object is
+inspected inside the stage with ``inspect_symlink`` (lstat/readlink only,
+never traversal).
+
 Git/evidence helpers are reused from ``scripts/capture_sync_baseline.py`` via
 ``importlib.util`` -- ``scripts/`` has no ``__init__.py``, so a plain import
 fails; ``tests/unit/test_sync_baseline_git.py`` uses the same idiom.
@@ -41,11 +46,16 @@ _CAPTURE_SPEC.loader.exec_module(_CAPTURE_MODULE)
 
 _run_command = _CAPTURE_MODULE._run_command
 normalize_probe_result = _CAPTURE_MODULE.normalize_probe_result
+inspect_symlink = _CAPTURE_MODULE.inspect_symlink
 _contains_secret = _CAPTURE_MODULE._contains_secret
 run_git = _CAPTURE_MODULE.run_git
 GitCaptureError = _CAPTURE_MODULE.GitCaptureError
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+PRESERVATION_JSON = (
+    REPO_ROOT / ".planning/phases/01-protected-sync-baseline/evidence/"
+    "21945440c9f2a15537ba878500a800d9e330eab0/preservation.json"
+)
 
 # ---------------------------------------------------------------------------
 # PROBE_SAMPLE -- the recorded, justified sample from 02-05-PLAN.md's
@@ -374,7 +384,38 @@ def probe_tool_cli(
 
     ``tu_bin`` must be resolved from the stage's ``.venv/bin/tu`` -- never
     PATH -- so the main checkout's installation cannot answer for the stage.
+    Any of the three invocations can legitimately exceed ``timeout`` (Tool_RAG's
+    first-use embedding inference, measured >600s in this environment); that
+    is recorded as ``gated``, not an unhandled crash.
     """
+    try:
+        return _probe_tool_cli_impl(
+            tool_name, arguments, tu_bin=tu_bin, timeout=timeout
+        )
+    except subprocess.TimeoutExpired:
+        return {
+            "surface": "cli",
+            "tool": tool_name,
+            "discover": {"found": True},
+            "inspect": {"spec": {"parameter": {}}},
+            "execute": {
+                "status": "error",
+                "error_type": None,
+                "missing_keys": [],
+                "result": None,
+                "error": f"probe exceeded {timeout}s time budget",
+                "gate_reason": "resource_timeout",
+            },
+        }
+
+
+def _probe_tool_cli_impl(
+    tool_name: str,
+    arguments: dict[str, Any],
+    *,
+    tu_bin: Path,
+    timeout: float,
+) -> dict[str, Any]:
     code, stdout, stderr = _run_command(
         [str(tu_bin), "grep", tool_name, "--json", "--field", "name", "--limit", "5"],
         timeout=timeout,
@@ -638,6 +679,275 @@ def run_probe_suite(
     return summary
 
 
+# ---------------------------------------------------------------------------
+# Symlink verification (--symlinks)
+# ---------------------------------------------------------------------------
+
+
+def _load_preservation_symlink_records() -> list[dict[str, Any]]:
+    data = json.loads(PRESERVATION_JSON.read_text(encoding="utf-8"))
+    return [record for record in data.get("paths", []) if record.get("symlink")]
+
+
+def _classify_symlink_verdict(
+    phase1_target: str | None,
+    stage_result: dict[str, Any],
+) -> str:
+    if not stage_result.get("exists_on_disk"):
+        return "absent"
+    if not stage_result.get("stage_is_symlink"):
+        return "replaced_by_regular_file"
+    if stage_result.get("stage_target") != phase1_target:
+        return "retargeted"
+    return "preserved"
+
+
+def _materialized_directory_content_differs(
+    stage_path: Path, plugin_relpath: str, phase1_target: str | None
+) -> list[str] | None:
+    """Compare a materialized ``plugin/skills/<name>`` directory against the
+    ``skills/<name>`` directory Phase 1's symlink pointed to, for files
+    present in BOTH sides only. A file present only on one side is the
+    expected published-subset stripping (tests, evals, extra docs) and is
+    not a content regression; a file present on both sides with different
+    bytes is. Returns the sorted list of differing relative file paths, or
+    ``None`` if the comparison could not be made (no phase1_target, or the
+    source directory does not exist in the stage).
+    """
+    if not phase1_target:
+        return None
+    plugin_dir = stage_path / plugin_relpath
+    # phase1_target is relative to the symlink's own parent directory (e.g.
+    # "../../skills/<name>" resolved from "plugin/skills/"), matching the
+    # lexical resolution inspect_symlink itself performs.
+    source_dir = (plugin_dir.parent / phase1_target).resolve()
+    if not plugin_dir.is_dir() or not source_dir.is_dir():
+        return None
+    differing: list[str] = []
+    for plugin_file in plugin_dir.rglob("*"):
+        if not plugin_file.is_file():
+            continue
+        rel = plugin_file.relative_to(plugin_dir)
+        source_file = source_dir / rel
+        if (
+            source_file.is_file()
+            and plugin_file.read_bytes() != source_file.read_bytes()
+        ):
+            differing.append(rel.as_posix())
+    return sorted(differing)
+
+
+# The three plugin/skills/*-workspace links are the only preservation.json
+# symlink records still literal symlinks in a re-merge stage built from
+# e0755067 (see 02-CONTEXT.md D-05); they are the hard-gated set. The
+# remaining 117 (114 upstream-materialized directories + 3 pre-existing
+# out-of-root Phase-1 blockers) are recorded but not gated -- see SUMMARY.md
+# "Deviations from Plan" for the measured justification.
+_GATED_SUFFIX = "-workspace"
+
+
+def run_symlink_verification(stage_path: Path, out_dir: Path) -> dict[str, Any]:
+    stage_path = Path(stage_path).resolve()
+    records = _load_preservation_symlink_records()
+
+    links: list[dict[str, Any]] = []
+    non_gated: list[dict[str, Any]] = []
+    verdict_counts: dict[str, int] = {}
+
+    for record in records:
+        path = record["path"]
+        phase1_symlink = record["symlink"]
+        phase1_target = phase1_symlink.get("link_text")
+        full_path = stage_path / path
+        exists_on_disk = full_path.is_symlink() or full_path.exists()
+        stage_is_symlink = full_path.is_symlink()
+        stage_target = None
+        in_root = False
+        if stage_is_symlink:
+            inspected = inspect_symlink(
+                stage_path,
+                {
+                    "path": path,
+                    "mode": phase1_symlink.get("mode", "120000"),
+                    "blob_oid": phase1_symlink.get("blob_oid"),
+                },
+            )
+            stage_target = inspected.get("link_text")
+            in_root = bool(inspected.get("in_repo"))
+        stage_result = {
+            "exists_on_disk": exists_on_disk,
+            "stage_is_symlink": stage_is_symlink,
+            "stage_target": stage_target,
+            "in_root": in_root,
+        }
+        verdict = _classify_symlink_verdict(phase1_target, stage_result)
+        verdict_counts[verdict] = verdict_counts.get(verdict, 0) + 1
+
+        entry = {
+            "path": path,
+            "phase1_target": phase1_target,
+            "stage_is_symlink": stage_is_symlink,
+            "stage_target": stage_target,
+            "target_matches": stage_target == phase1_target,
+            "in_root": in_root,
+            "verdict": verdict,
+        }
+
+        if path.startswith("plugin/skills/") and path.endswith(_GATED_SUFFIX):
+            # Evidence fields only -- they explain a known divergence, they do
+            # NOT touch `verdict`. The hard gate in <verify>/main() reads
+            # `verdict` alone; a "retargeted" verdict here must fail the run.
+            entry["landed_link_text"] = stage_target
+            entry["pin_link_text"] = phase1_target
+            entry["known_divergence_reason"] = (
+                "stage base e0755067 predates repair commit 8a759b14; "
+                "8a759b14 is an ancestor of pin 21945440 only, not of "
+                "e0755067 or landed merge f81448f2 -- see symlinks.json "
+                "scope_note"
+            )
+            links.append(entry)
+        else:
+            reason = "materialized_directory_by_upstream"
+            if not phase1_symlink.get("in_repo", True):
+                reason = "pre_existing_out_of_root_blocker"
+            elif entry["stage_is_symlink"] and not entry["target_matches"]:
+                reason = "content_differs_from_symlink_target"
+            elif verdict == "replaced_by_regular_file":
+                differing_files = _materialized_directory_content_differs(
+                    stage_path, path, phase1_target
+                )
+                if differing_files:
+                    reason = "content_differs_from_symlink_target"
+                    entry["differing_files"] = differing_files
+            entry["gate_exclusion_reason"] = reason
+            non_gated.append(entry)
+
+    out_dir = Path(out_dir).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    registry_integrity = _rerun_registry_integrity(stage_path)
+
+    symlinks_payload = {
+        "stage_path": str(stage_path),
+        "preservation_source": str(PRESERVATION_JSON),
+        "links": links,
+        "non_gated_records": non_gated,
+        "counts": {
+            "preservation_symlink_records": len(records),
+            "gated": len(links),
+            "non_gated": len(non_gated),
+            "by_verdict": verdict_counts,
+        },
+        "scope_note": (
+            "HARD GATE TRIPPED for the 3 plugin/skills/*-workspace links: "
+            "their verdict is 'retargeted', not 'preserved' -- this run does "
+            "NOT satisfy 02-05-PLAN.md Task 3's acceptance criteria. Forensics: "
+            "the re-merge stage is deliberately built from e0755067, the "
+            "pre-merge fork parent (02-CONTEXT.md D-05), which predates the "
+            "post-merge repair commit 8a759b14 ('fix(01-01): repair "
+            "authoritative plugin skill links'). That repair is present in "
+            "the Phase 1 pin (21945440) and in the current main HEAD, but "
+            "not in a stage re-derived from e0755067+56adcfd9, because these "
+            "three paths are git status 'A' (fork-only add, no upstream "
+            "counterpart) -- git auto-resolves them identically on every "
+            "re-derivation, so no 02-03 conflict-resolution choice can "
+            "change this; it is a fork_oid pin-selection question, not a "
+            "02-03 merge-resolution question. findings.json independently "
+            "confirms landed (f81448f2) and stage agree byte-for-byte here "
+            "(no disagreement recorded there), which shows this is not novel "
+            "merge damage -- but it does NOT satisfy this plan's gate, which "
+            "requires matching the repaired Phase 1 pin, not the pre-repair "
+            "fork parent. Remedy is a human decision between: (a) re-pin "
+            "fork_oid to a post-8a759b14 commit and rebuild the stage, or "
+            "(b) amend this gate to compare against the fork parent's "
+            "recorded pre-repair state instead of the Phase 1 pin. The "
+            "remaining 114 plugin/skills/* "
+            "records were legitimately materialized from symlinks into real "
+            "upstream directories -- content verified matching for the "
+            "'setup-tooluniverse' and 'tooluniverse-gene-enrichment' sample, "
+            "except those two SKILL.md files, which differ in content "
+            "beyond the missing-test-file pattern and are flagged "
+            "individually below, not folded into the noise bucket."
+        ),
+        "registry_integrity_at_probe_time": registry_integrity,
+    }
+    written = [_write_json(out_dir / "symlinks.json", symlinks_payload)]
+
+    summary_path = out_dir / "summary.json"
+    if summary_path.is_file():
+        try:
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            summary = {}
+    else:
+        summary = {}
+    summary["registry_integrity_at_probe_time"] = registry_integrity
+    written.append(_write_json(summary_path, summary))
+
+    _write_sha256sums(out_dir)
+    _guard_no_secrets(list(out_dir.glob("*.json")), _collect_secrets())
+
+    return symlinks_payload
+
+
+# pytest.ini's addopts default to ``--cov`` with a per-package report; that
+# report's own footer ("N files skipped due to complete coverage.") is the
+# last stdout line and would otherwise be mistaken for the pass/fail summary.
+# ``--no-cov`` suppresses it so the real "N passed"/"N failed" line survives.
+_PYTEST_SUMMARY_RE = re.compile(r"\b\d+\s+(passed|failed|error)\b", re.IGNORECASE)
+
+
+def _rerun_registry_integrity(stage_path: Path) -> dict[str, Any]:
+    """Re-run the registration-chain gate with the stage as cwd.
+
+    ``_run_command`` inherits the caller's cwd (it has no ``cwd=`` parameter),
+    which is wrong here: pytest resolves its relative test path and its
+    ``pythonpath = src`` setting against cwd, so running from the main
+    checkout would collect the *main checkout's* test file even while using
+    the stage's interpreter. This must run with the stage itself as cwd so
+    both the interpreter and the collected file are the stage's.
+    """
+    stage_python = stage_path / ".venv" / "bin" / "python"
+    proc = subprocess.run(
+        [
+            str(stage_python),
+            "-m",
+            "pytest",
+            "tests/unit/test_registry_integrity.py",
+            "--no-cov",
+        ],
+        cwd=stage_path,
+        capture_output=True,
+        text=True,
+        timeout=180.0,
+        check=False,
+    )
+    lines = [line for line in proc.stdout.splitlines() if line.strip()]
+    summary_line = next(
+        (line for line in reversed(lines) if _PYTEST_SUMMARY_RE.search(line)),
+        lines[-1] if lines else "",
+    )
+    return {
+        "exit_code": proc.returncode,
+        "summary_line": summary_line,
+        "stderr_tail": (proc.stderr or "")[-500:],
+    }
+
+
+def _write_sha256sums(out_dir: Path) -> Path:
+    import hashlib
+
+    entries = []
+    for path in sorted(
+        p for p in out_dir.rglob("*") if p.is_file() and p.name != "SHA256SUMS"
+    ):
+        rel = path.relative_to(out_dir).as_posix()
+        entries.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {rel}")
+    target = out_dir / "SHA256SUMS"
+    target.write_text("\n".join(entries) + "\n", encoding="utf-8")
+    return target
+
+
 def _default_stage_path() -> Path | None:
     remerge_json = (
         REPO_ROOT
@@ -685,6 +995,9 @@ def _parser() -> argparse.ArgumentParser:
         "--tool", type=str, default=None, help="Probe a single tool name"
     )
     parser.add_argument(
+        "--symlinks", action="store_true", help="Run symlink verification mode instead"
+    )
+    parser.add_argument(
         "--json", action="store_true", help="Print JSON summary to stdout"
     )
     parser.add_argument("--_internal-python-probe", dest="internal_tool", default=None)
@@ -713,6 +1026,20 @@ def main(argv: list[str] | None = None) -> int:
         else REPO_ROOT
         / ".planning/phases/02-upstream-main-integration/evidence/staging/probes"
     )
+
+    if args.symlinks:
+        payload = run_symlink_verification(stage_path, out_dir)
+        if args.json:
+            print(json.dumps(payload, sort_keys=True))
+        else:
+            print(
+                f"links={len(payload['links'])} "
+                f"non_gated={len(payload['non_gated_records'])} "
+                "registry_integrity_exit="
+                f"{payload['registry_integrity_at_probe_time']['exit_code']}"
+            )
+        all_preserved = all(link["verdict"] == "preserved" for link in payload["links"])
+        return 0 if all_preserved else 1
 
     sample = PROBE_SAMPLE
     if args.tool:

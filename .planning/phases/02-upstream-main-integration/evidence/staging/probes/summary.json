@@ -1,0 +1,189 @@
+{
+  "contract": [
+    {
+      "cli": {
+        "missing_keys": [
+          "USPTO_API_KEY"
+        ],
+        "reason": "tool excluded for missing credential(s)",
+        "verdict": "gated"
+      },
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "name": "USPTO_get_patent_assignment",
+      "python": {
+        "missing_keys": [
+          "USPTO_API_KEY"
+        ],
+        "reason": "tool excluded for missing credential(s)",
+        "verdict": "gated"
+      },
+      "selection_rule": "rule_1_fork_only_hand_resolved_array",
+      "verdict": "gated"
+    },
+    {
+      "cli": {
+        "missing_keys": [
+          "USPTO_API_KEY"
+        ],
+        "reason": "tool excluded for missing credential(s)",
+        "verdict": "gated"
+      },
+      "missing_keys": [
+        "USPTO_API_KEY"
+      ],
+      "name": "USPTO_get_patent_transactions",
+      "python": {
+        "missing_keys": [
+          "USPTO_API_KEY"
+        ],
+        "reason": "tool excluded for missing credential(s)",
+        "verdict": "gated"
+      },
+      "selection_rule": "rule_1_fork_only_hand_resolved_array",
+      "verdict": "gated"
+    },
+    {
+      "cli": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "missing_keys": [],
+      "name": "Tool_Finder_Keyword",
+      "python": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "selection_rule": "rule_2_tool_definition_class",
+      "verdict": "pass"
+    },
+    {
+      "cli": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "missing_keys": [],
+      "name": "Tool_Finder_LLM",
+      "python": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "selection_rule": "rule_2_tool_definition_class",
+      "verdict": "pass"
+    },
+    {
+      "cli": {
+        "missing_keys": [],
+        "reason": "resource_timeout",
+        "verdict": "gated"
+      },
+      "missing_keys": [],
+      "name": "Tool_RAG",
+      "python": {
+        "missing_keys": [],
+        "reason": "resource_timeout",
+        "verdict": "gated"
+      },
+      "selection_rule": "rule_2_tool_definition_class",
+      "verdict": "gated"
+    },
+    {
+      "cli": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "missing_keys": [],
+      "name": "DegreesOfUnsaturation_calculate",
+      "python": {
+        "missing_keys": [],
+        "reason": "discover -> inspect -> execute completed",
+        "verdict": "pass"
+      },
+      "selection_rule": "rule_3_offline_control",
+      "verdict": "pass"
+    }
+  ],
+  "exclusions": [
+    "512 custom_code preservation.json entries -- covered by plan 02-04's path-level disposition (findings.json / preservation-reclass.json), not by execution probes",
+    "240 plugin_asset preservation.json entries -- covered by plan 02-04's path-level disposition, not by execution probes",
+    "Full cross-surface certification across Python, CLI, MCP stdio, MCP HTTP, and REST -- Phase 5 / SURF-01; this plan probes Python plus the tu CLI only",
+    "Catalog-wide and test-level regression certification -- Phase 5 / TEST-01"
+  ],
+  "failed": 0,
+  "gated": 3,
+  "passed": 3,
+  "registry_integrity_at_probe_time": {
+    "exit_code": 0,
+    "stderr_tail": "",
+    "summary_line": "4 passed, 2 warnings in 2.86s"
+  },
+  "sample": [
+    {
+      "arguments": {
+        "applicationNumberText": "14966067"
+      },
+      "credential_expectation": "gated on USPTO_API_KEY; a gated result is a pass for registration-chain purposes",
+      "name": "USPTO_get_patent_assignment",
+      "preservation_linkage": "fork-only entry in the hand-resolved data/uspto_tools.json array; type USPTOOpenDataPortalTool",
+      "selection_rule": "rule_1_fork_only_hand_resolved_array"
+    },
+    {
+      "arguments": {
+        "applicationNumberText": "14966067"
+      },
+      "credential_expectation": "gated on USPTO_API_KEY; a gated result is a pass for registration-chain purposes",
+      "name": "USPTO_get_patent_transactions",
+      "preservation_linkage": "second fork-only entry in the same hand-resolved data/uspto_tools.json array",
+      "selection_rule": "rule_1_fork_only_hand_resolved_array"
+    },
+    {
+      "arguments": {
+        "description": "protein structure prediction",
+        "limit": 3
+      },
+      "credential_expectation": "none -- offline BM25",
+      "name": "Tool_Finder_Keyword",
+      "preservation_linkage": "implemented by src/tooluniverse/tool_finder_keyword.py; class: tool_definition, status: M",
+      "selection_rule": "rule_2_tool_definition_class"
+    },
+    {
+      "arguments": {
+        "description": "protein structure prediction",
+        "limit": 3
+      },
+      "credential_expectation": "LLM backend may be gated; schema load must still succeed",
+      "name": "Tool_Finder_LLM",
+      "preservation_linkage": "implemented by src/tooluniverse/tool_finder_llm.py; class: tool_definition, status: M",
+      "selection_rule": "rule_2_tool_definition_class"
+    },
+    {
+      "arguments": {
+        "description": "protein structure prediction",
+        "limit": 3
+      },
+      "credential_expectation": "embedding assets may be absent, or first-use CPU embedding inference over the full catalog may exceed the probe time budget; either is recorded as gated, not fail",
+      "name": "Tool_RAG",
+      "preservation_linkage": "defined in data/finder_tools.json; exercises the discovery layer implemented by src/tooluniverse/tool_discovery_tools.py (class: tool_definition, status: M, one of the 22 hand-resolved files)",
+      "selection_rule": "rule_2_tool_definition_class",
+      "timeout": 480.0
+    },
+    {
+      "arguments": {
+        "formula": "C6H6",
+        "operation": "calculate"
+      },
+      "credential_expectation": "none -- a failure here means the environment, not the merge",
+      "name": "DegreesOfUnsaturation_calculate",
+      "preservation_linkage": "Phase 1's reference tool; fully offline, deterministic, no credentials",
+      "selection_rule": "rule_3_offline_control"
+    }
+  ],
+  "stage_merge_oid": "a4d3d95a096a14ce4d147faa20334d24f8db9f9a",
+  "stage_path": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067"
+}

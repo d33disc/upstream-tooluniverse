@@ -1,0 +1,474 @@
+{
+  "arguments": {
+    "description": "protein structure prediction",
+    "limit": 3
+  },
+  "cli": {
+    "discover": {
+      "found": true
+    },
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "result": [
+          {
+            "description": "Visualize 3D protein structures using py3Dmol. Supports PDB IDs, PDB file content, and various visualization styles including cartoon, surface, and stick representations. Prerequisites: Requires 'py3Dmol' package (install: pip install tooluniverse[visualization]).",
+            "name": "visualize_protein_structure_3d",
+            "parameter": {
+              "properties": {
+                "color_scheme": {
+                  "default": "spectrum",
+                  "description": "Color scheme for the structure",
+                  "enum": [
+                    "spectrum",
+                    "rainbow",
+                    "ssPyMOL",
+                    "ssJmol",
+                    "Jmol",
+                    "amino",
+                    "shapely",
+                    "nucleic",
+                    "chain",
+                    "default"
+                  ],
+                  "required": false,
+                  "type": "string"
+                },
+                "height": {
+                  "default": 600,
+                  "description": "Height of the visualization in pixels",
+                  "required": false,
+                  "type": "integer"
+                },
+                "pdb_content": {
+                  "description": "Raw PDB file content as string. Either pdb_id or pdb_content must be provided.",
+                  "required": true,
+                  "type": "string"
+                },
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1CRN', '7CGO'). Either pdb_id or pdb_content must be provided.",
+                  "required": true,
+                  "type": "string"
+                },
+                "show_sidechains": {
+                  "default": false,
+                  "description": "Whether to show sidechain atoms",
+                  "required": false,
+                  "type": "boolean"
+                },
+                "show_surface": {
+                  "default": false,
+                  "description": "Whether to show molecular surface",
+                  "required": false,
+                  "type": "boolean"
+                },
+                "style": {
+                  "default": "cartoon",
+                  "description": "Visualization style",
+                  "enum": [
+                    "cartoon",
+                    "stick",
+                    "sphere",
+                    "line"
+                  ],
+                  "required": false,
+                  "type": "string"
+                },
+                "width": {
+                  "default": 800,
+                  "description": "Width of the visualization in pixels",
+                  "required": false,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "pdb_id",
+                "pdb_content"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Comprehensive protein structure quality assessment and protein-ligand complex profiling using StructureProfiler. Performs thorough validation of protein structures including geometry checks, stereochemistry analysis, clash detection, and ligand binding site quality assessment. Supports multiple validation settings: 'astex' (Astex diverse set criteria), 'iridium' (Iridium validation), 'platinum' (PlatinumQuality set), or 'combined' (comprehensive analysis). Returns detailed quality reports covering protein structure integrity, active site geometry, ligand binding quality, and structural anomalies. Essential for validating structures before molecular modeling, identifying potential artifacts, and ensuring reliability of structure-based drug design results. Example: Use 'combined' setting on 1KZK to assess overall structure quality before docking studies.",
+            "name": "ProteinsPlus_profile_structure_quality",
+            "parameter": {
+              "properties": {
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1KZK', '2OZR', '4HHB'). Required.",
+                  "required": true,
+                  "type": "string"
+                },
+                "setting": {
+                  "description": "Validation setting: 'astex' (Astex diverse set criteria), 'iridium' (Iridium validation rules), 'platinum' (PlatinumQuality standards), or 'combined' (all checks). Default: 'combined'. Example: Use 'combined' for thorough validation, 'astex' for docking benchmark standards.",
+                  "enum": [
+                    "astex",
+                    "iridium",
+                    "platinum",
+                    "combined"
+                  ],
+                  "required": false,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pdb_id"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Add hydrogens and optimize protonation states of a protein-ligand complex using ProtoSS (Protonation Structure Solver) on ProteinsPlus. ProtoSS places hydrogen atoms, assigns tautomers and protonation states, and optimizes the hydrogen-bond network of the protein and any co-crystallized ligands. Protonation is the standard prerequisite step before molecular docking, interaction-fingerprint analysis, or binding-energy calculations, because raw PDB structures lack hydrogen positions. Input a PDB ID (or raw PDB content). Returns URLs to the protonated protein (PDB), protonated ligand(s) (SDF), and a log file. Example: pdbCode '1cbs' returns protein=.../1cbs.pdb (protonated), ligands=.../1cbs.sdf, log=.../1cbs_log.txt.",
+            "name": "ProteinsPlus_protonate_structure",
+            "parameter": {
+              "properties": {
+                "ligand_content": {
+                  "description": "Optional raw ligand SDF content to protonate alongside the protein. Only used with pdb_content uploads.",
+                  "required": false,
+                  "type": "string"
+                },
+                "pdb_content": {
+                  "description": "Raw PDB file content as a string (multi-line text). Use either pdb_id or pdb_content, not both.",
+                  "required": false,
+                  "type": "string"
+                },
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1cbs', '1KZK', '4HHB'). Use either pdb_id or pdb_content, not both.",
+                  "required": false,
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "type": "object"
+            }
+          }
+        ]
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "tool_finder",
+        "configs": {
+          "exclude_tools": [
+            "Tool_RAG",
+            "Tool_Finder",
+            "Finish",
+            "CallAgent",
+            "Tool_Finder_LLM",
+            "Tool_Finder_Keyword"
+          ],
+          "return_json": true,
+          "return_list_only": true
+        },
+        "description": "LLM-based tool finder that uses natural language processing to intelligently select relevant tools based on user queries. This tool analyzes all available tool descriptions and uses an LLM to determine which tools would be most helpful for a given task or question.",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "Tool_Finder_LLM",
+        "parameters": {
+          "properties": {
+            "categories": {
+              "description": "Optional list of tool categories to filter by",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "description": {
+              "description": "The description of the tool capability required.",
+              "required": true,
+              "type": "string"
+            },
+            "limit": {
+              "description": "The number of tools to retrieve (default: 10)",
+              "required": false,
+              "type": "integer"
+            },
+            "picked_tool_names": {
+              "description": "Pre-selected tool names to process. If provided, tool selection will skip these tools.",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "return_call_result": {
+              "description": "Whether to return both prompts and tool names. If false, returns only tool prompts.",
+              "required": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "description"
+          ],
+          "type": "object"
+        },
+        "return_schema": {
+          "description": "Output of the tool execution.",
+          "properties": {},
+          "type": "object"
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/finder_tools.json",
+        "test_examples": [
+          {
+            "categories": [],
+            "description": "Find tools for analyzing gene expression data",
+            "limit": 1,
+            "picked_tool_names": [],
+            "return_call_result": true
+          }
+        ],
+        "type": "ToolFinderLLM"
+      }
+    },
+    "surface": "cli",
+    "tool": "Tool_Finder_LLM"
+  },
+  "contract": {
+    "cli": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "missing_keys": [],
+    "name": "Tool_Finder_LLM",
+    "python": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "selection_rule": "rule_2_tool_definition_class",
+    "verdict": "pass"
+  },
+  "name": "Tool_Finder_LLM",
+  "python": {
+    "discover": {
+      "found": true
+    },
+    "duration_ms": 1184.439,
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "value": [
+          {
+            "description": "Visualize 3D protein structures using py3Dmol. Supports PDB IDs, PDB file content, and various visualization styles including cartoon, surface, and stick representations. Prerequisites: Requires 'py3Dmol' package (install: pip install tooluniverse[visualization]).",
+            "name": "visualize_protein_structure_3d",
+            "parameter": {
+              "properties": {
+                "color_scheme": {
+                  "default": "spectrum",
+                  "description": "Color scheme for the structure",
+                  "enum": [
+                    "spectrum",
+                    "rainbow",
+                    "ssPyMOL",
+                    "ssJmol",
+                    "Jmol",
+                    "amino",
+                    "shapely",
+                    "nucleic",
+                    "chain",
+                    "default"
+                  ],
+                  "required": false,
+                  "type": "string"
+                },
+                "height": {
+                  "default": 600,
+                  "description": "Height of the visualization in pixels",
+                  "required": false,
+                  "type": "integer"
+                },
+                "pdb_content": {
+                  "description": "Raw PDB file content as string. Either pdb_id or pdb_content must be provided.",
+                  "required": true,
+                  "type": "string"
+                },
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1CRN', '7CGO'). Either pdb_id or pdb_content must be provided.",
+                  "required": true,
+                  "type": "string"
+                },
+                "show_sidechains": {
+                  "default": false,
+                  "description": "Whether to show sidechain atoms",
+                  "required": false,
+                  "type": "boolean"
+                },
+                "show_surface": {
+                  "default": false,
+                  "description": "Whether to show molecular surface",
+                  "required": false,
+                  "type": "boolean"
+                },
+                "style": {
+                  "default": "cartoon",
+                  "description": "Visualization style",
+                  "enum": [
+                    "cartoon",
+                    "stick",
+                    "sphere",
+                    "line"
+                  ],
+                  "required": false,
+                  "type": "string"
+                },
+                "width": {
+                  "default": 800,
+                  "description": "Width of the visualization in pixels",
+                  "required": false,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "pdb_id",
+                "pdb_content"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Comprehensive protein structure quality assessment and protein-ligand complex profiling using StructureProfiler. Performs thorough validation of protein structures including geometry checks, stereochemistry analysis, clash detection, and ligand binding site quality assessment. Supports multiple validation settings: 'astex' (Astex diverse set criteria), 'iridium' (Iridium validation), 'platinum' (PlatinumQuality set), or 'combined' (comprehensive analysis). Returns detailed quality reports covering protein structure integrity, active site geometry, ligand binding quality, and structural anomalies. Essential for validating structures before molecular modeling, identifying potential artifacts, and ensuring reliability of structure-based drug design results. Example: Use 'combined' setting on 1KZK to assess overall structure quality before docking studies.",
+            "name": "ProteinsPlus_profile_structure_quality",
+            "parameter": {
+              "properties": {
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1KZK', '2OZR', '4HHB'). Required.",
+                  "required": true,
+                  "type": "string"
+                },
+                "setting": {
+                  "description": "Validation setting: 'astex' (Astex diverse set criteria), 'iridium' (Iridium validation rules), 'platinum' (PlatinumQuality standards), or 'combined' (all checks). Default: 'combined'. Example: Use 'combined' for thorough validation, 'astex' for docking benchmark standards.",
+                  "enum": [
+                    "astex",
+                    "iridium",
+                    "platinum",
+                    "combined"
+                  ],
+                  "required": false,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pdb_id"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Add hydrogens and optimize protonation states of a protein-ligand complex using ProtoSS (Protonation Structure Solver) on ProteinsPlus. ProtoSS places hydrogen atoms, assigns tautomers and protonation states, and optimizes the hydrogen-bond network of the protein and any co-crystallized ligands. Protonation is the standard prerequisite step before molecular docking, interaction-fingerprint analysis, or binding-energy calculations, because raw PDB structures lack hydrogen positions. Input a PDB ID (or raw PDB content). Returns URLs to the protonated protein (PDB), protonated ligand(s) (SDF), and a log file. Example: pdbCode '1cbs' returns protein=.../1cbs.pdb (protonated), ligands=.../1cbs.sdf, log=.../1cbs_log.txt.",
+            "name": "ProteinsPlus_protonate_structure",
+            "parameter": {
+              "properties": {
+                "ligand_content": {
+                  "description": "Optional raw ligand SDF content to protonate alongside the protein. Only used with pdb_content uploads.",
+                  "required": false,
+                  "type": "string"
+                },
+                "pdb_content": {
+                  "description": "Raw PDB file content as a string (multi-line text). Use either pdb_id or pdb_content, not both.",
+                  "required": false,
+                  "type": "string"
+                },
+                "pdb_id": {
+                  "description": "PDB identifier (e.g., '1cbs', '1KZK', '4HHB'). Use either pdb_id or pdb_content, not both.",
+                  "required": false,
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "type": "object"
+            }
+          }
+        ]
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "tool_finder",
+        "configs": {
+          "exclude_tools": [
+            "Tool_RAG",
+            "Tool_Finder",
+            "Finish",
+            "CallAgent",
+            "Tool_Finder_LLM",
+            "Tool_Finder_Keyword"
+          ],
+          "return_json": true,
+          "return_list_only": true
+        },
+        "description": "LLM-based tool finder that uses natural language processing to intelligently select relevant tools based on user queries. This tool analyzes all available tool descriptions and uses an LLM to determine which tools would be most helpful for a given task or question.",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "Tool_Finder_LLM",
+        "parameter": {
+          "properties": {
+            "categories": {
+              "description": "Optional list of tool categories to filter by",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "description": {
+              "description": "The description of the tool capability required.",
+              "required": true,
+              "type": "string"
+            },
+            "limit": {
+              "description": "The number of tools to retrieve (default: 10)",
+              "required": false,
+              "type": "integer"
+            },
+            "picked_tool_names": {
+              "description": "Pre-selected tool names to process. If provided, tool selection will skip these tools.",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "return_call_result": {
+              "description": "Whether to return both prompts and tool names. If false, returns only tool prompts.",
+              "required": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "description"
+          ],
+          "type": "object"
+        },
+        "return_schema": {
+          "description": "Output of the tool execution.",
+          "properties": {},
+          "type": "object"
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/finder_tools.json",
+        "test_examples": [
+          {
+            "categories": [],
+            "description": "Find tools for analyzing gene expression data",
+            "limit": 1,
+            "picked_tool_names": [],
+            "return_call_result": true
+          }
+        ],
+        "type": "ToolFinderLLM"
+      }
+    },
+    "surface": "python",
+    "tool": "Tool_Finder_LLM"
+  }
+}
