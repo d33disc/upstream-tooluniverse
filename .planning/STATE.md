@@ -5,15 +5,15 @@ milestone_name: milestone
 current_phase: 02
 current_phase_name: Upstream Main Integration
 status: executing
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-08-06T18:36:04.721Z"
+stopped_at: 02-05 BLOCKED at Task 3 hard gate (symlink verdicts) -- awaiting human decision, see 02-05-SUMMARY.md
+last_updated: "2026-08-06T20:17:32.822Z"
 last_activity: 2026-08-06
 last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 9  # NOT auto-advanced: 02-05-SUMMARY.md exists but carries status:blocked (hard gate unmet, see Blockers). The tool's disk-scan counts SUMMARY.md presence regardless of status -- corrected by hand here so the progress bar does not overstate completion.
 ---
 
 # Project State
@@ -88,6 +88,8 @@ Recent decisions affecting current work:
 - [Phase ?]: classify_finding's 5-verdict precedence (dependency_scope > remerge_only_artifact > landed_correct > self_healed_downstream > landed_dropped_or_altered) separates noise-bucket audit-tooling artifacts (2,604 regenerated stubs + 600 symlink-materializations) from real candidates without exempting genuine D-08 resolutions from review
 - [Phase ?]: join_preservation's disposition consults findings.json's verdict as the primary signal rather than re-deriving from a raw stage-vs-pin blob comparison, avoiding the same noise misattribution twice (339 then 495 false lost verdicts before the fix)
 - [Phase ?]: Corrective-commit candidate list for plan 02-06 is effectively empty: 27 of 29 landed_dropped_or_altered candidates carry pin_matches_landed=true, direct evidence the disagreement is this audit's own re-derivation tooling, not a real fork-content loss
+- [Phase ?]: 02-05: left symlink verdict 'retargeted' standing rather than reconciling to 'preserved' -- plan's hard gate requires a human decision, not automated laundering
+- [Phase ?]: 02-05: reverted PRES-02 from Complete to Pending in REQUIREMENTS.md -- 02-03 marked it complete before 02-05's execution-time verification ran, and that verification found it does not currently hold
 
 ### Pending Todos
 
@@ -98,6 +100,7 @@ None yet.
 - The current repository worktree is dirty on `docs/gsd-codebase-map`; Phase 1 must isolate and preserve those pre-existing changes before synchronization.
 - Historical PR #161 may already be represented by the selected upstream revision; Phase 3 must establish ancestry/content before attempting integration.
 - Default pytest selection excludes tool, API, and example suites; affected paths need explicit validation in Phase 5.
+- 02-05 BLOCKED: --symlinks hard gate trips -- 3 of 120 preservation.json symlinks (plugin/skills/*-workspace) verdict 'retargeted', not 'preserved', in the re-merge stage (stage built from pre-repair fork commit e0755067; repair commit 8a759b14 is only an ancestor of the Phase 1 pin, not of e0755067 or landed f81448f2). Needs human decision: (a) re-pin fork_oid past 8a759b14 and rebuild stage, or (b) amend gate comparand. See 02-05-SUMMARY.md.
 
 ## Deferred Items
 
@@ -110,6 +113,6 @@ Items acknowledged and carried forward from roadmap scope:
 
 ## Session Continuity
 
-Last session: 2026-08-06T18:36:04.711Z
-Stopped at: Completed 02-04-PLAN.md
-Resume file: None
+Last session: 2026-08-06T20:17:25.195Z
+Stopped at: 02-05 BLOCKED at Task 3 hard gate (symlink verdicts) -- awaiting human decision, see 02-05-SUMMARY.md
+Resume file: .planning/phases/02-upstream-main-integration/02-05-SUMMARY.md
