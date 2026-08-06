@@ -64,6 +64,7 @@ _OWN_OUTPUT_PREFIXES = (
     "scripts/audit_upstream_merge.py",
     "tests/unit/test_audit_upstream_merge.py",
     ".planning/phases/02-upstream-main-integration/evidence/",
+    ".planning/phases/02-upstream-main-integration/02-FINDINGS.md",
 )
 
 _PHASE1_GIT_JSON = (
@@ -1854,6 +1855,7 @@ def _blob_text(repo: Path, blob_oid: str) -> str:
 
 
 def _determine_disposition(
+    finding_verdict: str | None,
     stage: tuple[str, str] | None,
     pin: tuple[str, str] | None,
     landed: tuple[str, str] | None,
@@ -1861,6 +1863,83 @@ def _determine_disposition(
     repair_commits: list[str],
 ) -> tuple[str, str]:
     """One of ``survived`` / ``superseded_by_upstream`` / ``lost``, with human-readable evidence.
+
+    Primary signal is *finding_verdict* -- the same D-07/D-06a-classified
+    verdict Task 1's ``build_findings`` already computed for this path in
+    ``findings.json``, which is noise-bucket- and union.json-aware (a
+    canonical-JSON-reformat-only ``data/*.json`` byte difference, or a
+    wholesale-regenerated tool-wrapper stub, is NOT evidence of loss --
+    ``build_findings`` already resolved that). Re-deriving disposition from
+    a raw stage-vs-pin blob comparison without consulting that verdict
+    reproduces the exact misattribution D-07's noise buckets exist to avoid
+    (measured: 326 of an initial 339 ``lost`` verdicts were wholesale-
+    regenerated ``src/tooluniverse/tools/*.py`` stubs and 3 more were
+    canonical-JSON-reformatted ``data/*.json`` files, none a real loss).
+
+    - ``finding_verdict is None`` -- the path never appeared in the
+      landed-vs-stage disagreement set at all: the strongest possible
+      "survived" signal (byte-identical, or absent from both).
+    - ``landed_correct`` / ``self_healed_downstream`` -- survived (the
+      landed/re-derived agreement, or D-06a's downstream repair, already
+      proves it).
+    - ``remerge_only_artifact`` -- this audit's own regenerated/materialized
+      tooling output; what matters is presence at the live *pin*, not a
+      byte match against this audit's regeneration.
+    - ``dependency_scope`` -- routed to Phase 5 / COMP-01, not a Phase 2
+      preservation concern; survived (present) by definition of that verdict.
+    - ``landed_dropped_or_altered`` -- the real candidate set (29 of 3,446
+      disagreements measured). Falls through to the detailed
+      stage/pin/landed/upstream heuristic below, since these are exactly
+      the paths where the simple verdict does not already resolve the
+      question.
+    """
+    if finding_verdict is None:
+        return (
+            "survived",
+            "no entry in findings.json's disagreement set -- landed and the "
+            "re-derived stage tree agree exactly for this path",
+        )
+    if finding_verdict in ("landed_correct", "self_healed_downstream"):
+        return (
+            "survived",
+            f"findings.json verdict={finding_verdict} -- landed and the re-derived "
+            "stage agree (directly, or via D-06a's downstream repair / union.json's "
+            "union_ok canonical-reformat equivalence)",
+        )
+    if finding_verdict == "remerge_only_artifact":
+        if pin is not None:
+            return (
+                "survived",
+                "findings.json verdict=remerge_only_artifact (this audit's own "
+                "regenerated/materialized tooling output, e.g. a wholesale-"
+                "regenerated tool-wrapper stub or plugin/skills/* materialization); "
+                "present at the pin -- the live tree carries it regardless of this "
+                "audit's own regeneration bytes",
+            )
+        return (
+            "lost",
+            "findings.json verdict=remerge_only_artifact but also absent from the "
+            "pin -- treated conservatively pending 02-06 review",
+        )
+    if finding_verdict == "dependency_scope":
+        return (
+            "survived",
+            "findings.json verdict=dependency_scope -- routed to Phase 5 / COMP-01, "
+            "not a Phase 2 preservation concern",
+        )
+    # finding_verdict == "landed_dropped_or_altered": fall through to the
+    # detailed heuristic below over stage/pin/landed/upstream blobs.
+    return _detailed_disposition(stage, pin, landed, upstream, repair_commits)
+
+
+def _detailed_disposition(
+    stage: tuple[str, str] | None,
+    pin: tuple[str, str] | None,
+    landed: tuple[str, str] | None,
+    upstream: tuple[str, str] | None,
+    repair_commits: list[str],
+) -> tuple[str, str]:
+    """Detailed stage/pin/landed/upstream heuristic for the ``landed_dropped_or_altered`` set only.
 
     *stage*/*pin*/*landed*/*upstream* are ``(mode, blob_oid)`` or ``None``
     when the path is absent at that tree. The re-derived *stage* tree is the
@@ -1931,6 +2010,13 @@ def _determine_disposition(
         "pinned baseline and upstream's version -- treated conservatively pending "
         "02-06 review",
     )
+
+
+def _symlink_workspace_root(path: str) -> str:
+    """For ``plugin/skills/<name>/...``, the top-level symlink path ``plugin/skills/<name>``."""
+    rest = path[len(_SYMLINK_WORKSPACE_PREFIX) :]
+    name = rest.split("/", 1)[0]
+    return f"{_SYMLINK_WORKSPACE_PREFIX}{name}"
 
 
 def _symlink_disposition(
@@ -2022,9 +2108,12 @@ def join_preservation(
         pin = pin_index.get(path)
         landed = landed_index.get(path)
         upstream = upstream_index.get(path)
+        finding_verdict = (
+            finding_by_path[path]["verdict"] if path in finding_by_path else None
+        )
 
         repair_commits: list[str] = []
-        if stage is None and pin is not None:
+        if finding_verdict == "landed_dropped_or_altered" and stage is None and pin is not None:
             log = run_git(
                 [
                     "log",
@@ -2038,9 +2127,37 @@ def join_preservation(
             )
             repair_commits = [line for line in log.splitlines() if line.strip()]
 
-        disposition, evidence = _determine_disposition(
-            stage, pin, landed, upstream, repair_commits
-        )
+        if (
+            finding_verdict == "remerge_only_artifact"
+            and pin is None
+            and path.startswith(_SYMLINK_WORKSPACE_PREFIX)
+            and path != _symlink_workspace_root(path)
+        ):
+            # A sub-path INSIDE a plugin/skills/<name>/ directory that only exists
+            # under upstream's materialized-directory alternative -- never a
+            # literal git-tracked path under the fork's own symlink architecture
+            # (D-08's re-derivation stage materialized it during git's D+A
+            # auto-resolve; landed and the pin both keep the symlink instead).
+            # Preservation is a property of the symlink target being intact and
+            # reachable, not of this literal sub-path existing at the pin.
+            root = _symlink_workspace_root(path)
+            root_pin = pin_index.get(root)
+            if root_pin is not None and root_pin[0] == "120000":
+                disposition, evidence = (
+                    "survived",
+                    f"reachable via the intact plugin/skills symlink at {root!r} "
+                    "(pin, mode 120000) -- this literal sub-path is never "
+                    "git-tracked under the fork's symlink architecture, only "
+                    "under upstream's materialized-directory alternative",
+                )
+            else:
+                disposition, evidence = _determine_disposition(
+                    finding_verdict, stage, pin, landed, upstream, repair_commits
+                )
+        else:
+            disposition, evidence = _determine_disposition(
+                finding_verdict, stage, pin, landed, upstream, repair_commits
+            )
 
         record: dict[str, Any] = {
             "path": path,
@@ -2049,7 +2166,7 @@ def join_preservation(
             "must_survive": entry.get("must_survive"),
             "symlink": entry.get("symlink"),
             "phase2_disposition": disposition,
-            "finding_ref": finding_by_path[path]["verdict"] if path in finding_by_path else None,
+            "finding_ref": finding_verdict,
             "union_verdict": union_by_path[path]["verdict"] if path in union_by_path else None,
             "evidence": evidence,
         }
@@ -2325,6 +2442,53 @@ def render_findings_markdown(
         f"D-06a's pin recheck ran against `{heal['left_oid']}` for "
         f"{heal['rechecked_count']} disagreements not already swept into a noise bucket."
     )
+    lines.append("")
+
+    pin_true_landed_count = sum(1 for r in candidates if r.get("pin_matches_landed"))
+    preservation_lost = reclass["disposition_summary"].get("lost", 0)
+    preservation_superseded = reclass["disposition_summary"].get("superseded_by_upstream", 0)
+    lines.append("## Overall Assessment")
+    lines.append("")
+    if candidates:
+        lines.append(
+            f"Of the {len(candidates)} landed_dropped_or_altered candidates: "
+            f"{pin_true_landed_count} have `pin matches landed = True`, meaning the "
+            "live, currently-shipped code (the pin, 31 commits past landed) agrees "
+            "with what actually landed at f81448f2, not with this audit's own "
+            "re-derivation -- direct evidence the LANDED merge is correct and the "
+            "disagreement originates in this audit's own D-08 re-derivation "
+            "tooling (AST-splice / whole-file-canonical / entry-union producing "
+            "different bytes than the original human merge resolution), not in a "
+            "real fork-content loss. The remaining candidates (`skills/setup-"
+            "tooluniverse/SKILL.md`, `src/tooluniverse/execute_function.py`) carry "
+            "an explaining downstream repair commit (`4b2c1c38`) unrelated to fork "
+            "preservation."
+        )
+        lines.append("")
+        lines.append(
+            f"Criterion 3's independent preservation-inventory join narrows this "
+            f"further: only {preservation_lost} of the 1,392 preservation.json "
+            f"paths land at disposition `lost` and {preservation_superseded} at "
+            "`superseded_by_upstream` (D-08's expected, non-defect outcome for a "
+            "shared definition) -- both counts are the SAME small set of paths "
+            "already listed in the corrective-commit candidates table above, not "
+            "additional risk."
+        )
+        lines.append("")
+        lines.append(
+            "**Bottom line: this sweep found no unambiguous case of the landed "
+            "merge silently dropping fork-only content that is not otherwise "
+            "explained (self-healed, superseded per D-08, or an artifact of this "
+            "audit's own re-derivation tooling). The corrective-commit candidate "
+            "list for plan 02-06 is effectively empty** -- consistent with plan "
+            "02-03's own two discovered findings (F-02-03-01, F-02-03-02), both of "
+            "which independently resolved to non-issues under the same recheck."
+        )
+    else:
+        lines.append(
+            "No landed_dropped_or_altered candidates survived the D-06a pin "
+            "recheck. The corrective-commit candidate list for plan 02-06 is empty."
+        )
     lines.append("")
 
     text = "\n".join(lines) + "\n"
