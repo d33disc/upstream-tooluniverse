@@ -41,6 +41,9 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
+import time
+import uuid
 from collections.abc import Iterable
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -64,6 +67,7 @@ _contains_secret = _CAPTURE_MODULE._contains_secret
 publish_evidence = _CAPTURE_MODULE.publish_evidence
 verify_checksums = _CAPTURE_MODULE.verify_checksums
 EvidencePublicationError = _CAPTURE_MODULE.EvidencePublicationError
+create_isolated_worktree = _CAPTURE_MODULE.create_isolated_worktree
 
 _AUDIT_MERGE_SPEC = importlib.util.spec_from_file_location(
     "audit_upstream_merge",
@@ -231,6 +235,334 @@ def fingerprint_worktree(repo_root: Path | str) -> dict[str, Any]:
         "by_prefix": dict(sorted(by_prefix.items())),
         "max_mtime_src_tools": {"epoch": epoch, "iso": iso},
         "captured_at": _now_iso(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# D-05: credential-aware regeneration guard, run only inside a disposable
+# worktree. See ``compare_import_sets`` (pure) and ``run_regeneration_guard``
+# (the worktree orchestration) below.
+# ---------------------------------------------------------------------------
+
+_IMPORT_LINE_RE = re.compile(
+    r"^from \.(?P<name>[A-Za-z_][A-Za-z0-9_]*) import \(?\s*(?:\n\s*)?(?P=name)\b",
+    re.MULTILINE,
+)
+
+# One generator per key; both write to ``src/tooluniverse/tools/`` by
+# default (confirmed by reading each script), so both are directly
+# comparable to the committed HEAD baseline and to the dirty working tree at
+# that same path. ``generate_coding_api`` is canonical for this guard -- it
+# has no output-directory parameter at all, so it can only ever target that
+# path; ``generate_tools`` is run for comparison because research measured
+# the two scripts as diverged.
+_REGEN_GENERATORS: dict[str, dict[str, str]] = {
+    "generate_coding_api": {
+        "module": "generate_coding_api",
+        "call": "generate_coding_api.main()",
+        "rationale": (
+            "canonical for this guard: generate_coding_api.py has no "
+            "output-directory parameter, so _TOOLS_DIR is always "
+            "Path(__file__).parent / 'tools' -- it can only target the "
+            "same src/tooluniverse/tools/ path the dirty working tree and "
+            "the committed HEAD baseline both live at."
+        ),
+    },
+    "generate_tools": {
+        "module": "generate_tools",
+        "call": "generate_tools.main(output_dir=None)",
+        "rationale": (
+            "comparison generator, not canonical: generate_tools.main() "
+            "defaults to the same src/tooluniverse/tools/ path when "
+            "output_dir=None (the Phase 2 stage-rebuild idiom), but "
+            "RESEARCH.md measured the two scripts as diverged, so its "
+            "output is recorded independently rather than assumed identical."
+        ),
+    },
+}
+
+_REGEN_ENVIRONMENTS = ("ambient", "credentialed")
+_REGEN_TIMEOUT_SECONDS = 600.0
+
+
+def _parse_import_names(init_text: str | None) -> set[str]:
+    """Every ``from .<Name> import <Name>`` name in a ``tools/__init__.py`` text.
+
+    Handles both the single-line form (``from .X import X``) and the
+    parenthesized, line-wrapped form ruff emits for long module names
+    (``from .X import (\\n    X,\\n)``) -- roughly a tenth of HEAD's own
+    import lines use the wrapped form, so matching only the single-line
+    shape would silently undercount every produced set by the same margin.
+    """
+    return {m.group("name") for m in _IMPORT_LINE_RE.finditer(init_text or "")}
+
+
+def compare_import_sets(left_init_text: str, right_init_text: str) -> dict[str, Any]:
+    """Pure diff of two ``tools/__init__.py`` texts' imported-name sets.
+
+    No filesystem access and no package import -- unit-testable directly.
+    ``decreased`` is true when the right side is missing a name the left
+    side had, which is the single condition this guard exists to catch.
+    """
+    left = _parse_import_names(left_init_text)
+    right = _parse_import_names(right_init_text)
+    only_left = sorted(left - right)
+    only_right = sorted(right - left)
+    return {
+        "only_left": only_left,
+        "only_right": only_right,
+        "common": sorted(left & right),
+        "left_count": len(left),
+        "right_count": len(right),
+        "decreased": bool(only_left),
+    }
+
+
+def _redact(text: str, secrets: Iterable[str]) -> str:
+    """Replace every occurrence of each non-empty *secrets* value in *text*."""
+    for value in secrets:
+        if value:
+            text = text.replace(value, "***REDACTED***")
+    return text
+
+
+def _probe_credentialed_env_diff(
+    env_sh: Path, base_env: dict[str, str]
+) -> dict[str, str]:
+    """Best-effort: source *env_sh* in a throwaway subshell, return only the
+    env vars it newly set (name -> value).
+
+    Used solely to redact secret values out of captured subprocess output
+    before it is ever written to disk -- never persisted itself. Never
+    raises; returns ``{}`` on any failure (missing script, ``op`` not
+    authenticated, timeout), which is itself the common case on a machine
+    with no 1Password session.
+    """
+    if not env_sh.is_file():
+        return {}
+    try:
+        proc = subprocess.run(
+            ["bash", "-c", f'source "{env_sh}" >/dev/null 2>&1; env -0'],
+            capture_output=True,
+            timeout=30,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return {}
+    if proc.returncode != 0:
+        return {}
+    child_env: dict[str, str] = {}
+    for pair in proc.stdout.split(b"\x00"):
+        if b"=" not in pair:
+            continue
+        key, _, value = pair.partition(b"=")
+        try:
+            child_env[key.decode()] = value.decode()
+        except UnicodeDecodeError:
+            continue
+    return {k: v for k, v in child_env.items() if base_env.get(k) != v}
+
+
+def _run_one_generation(
+    python_bin: Path,
+    worktree_dir: Path,
+    generator_key: str,
+    environment: str,
+    env_sh: Path,
+    secrets: Iterable[str],
+    timeout_seconds: float,
+) -> dict[str, Any]:
+    """Run one generator, in one environment variant, inside *worktree_dir*.
+
+    ``cwd`` is pinned to *worktree_dir* so no workspace-local
+    ``.tooluniverse/`` profile from the main checkout (untracked, so absent
+    from a fresh worktree) leaks into the loaded tool set -- only
+    ``PYTHONPATH`` isolation would not catch that. ``environment ==
+    'credentialed'`` sources *env_sh* first via the repository's own
+    credential loader; a subshell that fails before ``exec`` (e.g. ``op``
+    not authenticated) is a normal, recorded outcome, never a crash here.
+    """
+    spec = _REGEN_GENERATORS[generator_key]
+    snippet = f"from tooluniverse import {spec['module']}\n{spec['call']}\n"
+    if environment == "credentialed":
+        argv = ["bash", str(env_sh), str(python_bin), "-c", snippet]
+    else:
+        argv = [str(python_bin), "-c", snippet]
+
+    run_env = dict(os.environ)
+    run_env["PYTHONPATH"] = str(worktree_dir / "src")
+
+    start = time.monotonic()
+    timed_out = False
+    try:
+        proc = subprocess.run(
+            argv,
+            cwd=worktree_dir,
+            env=run_env,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        exit_code, stderr = proc.returncode, proc.stderr
+    except subprocess.TimeoutExpired as exc:
+        timed_out = True
+        exit_code = -1
+        stderr = (exc.stderr or "") + "\n[regeneration guard] timed out"
+    elapsed_seconds = time.monotonic() - start
+
+    # A nonzero exit means the generator never completed (or, for the
+    # credentialed variant, never even started -- e.g. `op` unauthenticated
+    # aborts the sourced loader before `exec`). In that case the worktree's
+    # tools/__init__.py is still just the pristine HEAD checkout the
+    # worktree was created from, never touched by this run; reading it
+    # would silently report "identical to HEAD" for a run that produced
+    # nothing at all. Treat a failed run as producing no output.
+    init_path = worktree_dir / "src" / "tooluniverse" / "tools" / "__init__.py"
+    generation_ran = exit_code == 0
+    produced_init_text = (
+        init_path.read_text(encoding="utf-8")
+        if generation_ran and init_path.is_file()
+        else ""
+    )
+
+    return {
+        "generator": generator_key,
+        "generator_rationale": spec["rationale"],
+        "environment": environment,
+        "exit_code": exit_code,
+        "generation_ran": generation_ran,
+        "timed_out": timed_out,
+        "elapsed_seconds": round(elapsed_seconds, 3),
+        "stderr_tail": _redact(stderr[-1000:], secrets) if exit_code != 0 else "",
+        "_produced_init_text": produced_init_text,
+    }
+
+
+def run_regeneration_guard(
+    repo_root: Path | str,
+    scratch_root: Path | str,
+    env_sh: Path | str | None = None,
+    timeout_seconds: float = _REGEN_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    """Run every generator x environment combination inside disposable worktrees.
+
+    Never runs a generator in the main checkout: each combination gets its
+    own detached ``git worktree`` at HEAD, created under *scratch_root*
+    (which must be outside *repo_root*), removed in a ``finally`` block
+    regardless of outcome. Compares every produced ``tools/__init__.py``
+    against the committed HEAD baseline (``compare_import_sets``), and
+    separately compares the canonical generator's ambient-environment
+    output against the dirty working tree's current (uncommitted, read-only)
+    ``tools/__init__.py`` -- the mechanical answer to RESEARCH.md Open
+    Question 1. Writes nothing into the main checkout.
+    """
+    repo_root = Path(repo_root).resolve()
+    scratch_root = Path(scratch_root).resolve()
+    if scratch_root == repo_root or repo_root in scratch_root.parents:
+        raise ValueError(
+            "run_regeneration_guard: scratch_root must be outside repo_root"
+        )
+
+    env_sh = (
+        Path(env_sh) if env_sh else repo_root / ".tooluniverse" / "tooluniverse-env.sh"
+    )
+
+    head_oid = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    head_init_text = (
+        _git_show(repo_root, "HEAD", "src/tooluniverse/tools/__init__.py") or ""
+    )
+    head_import_count = len(_parse_import_names(head_init_text))
+
+    venv_python = repo_root / ".venv" / "bin" / "python"
+    python_bin = venv_python if venv_python.is_file() else Path(sys.executable)
+
+    credential_secrets = tuple(
+        _probe_credentialed_env_diff(env_sh, dict(os.environ)).values()
+    )
+
+    runs: list[dict[str, Any]] = []
+    canonical_ambient_text = ""
+    for generator_key in _REGEN_GENERATORS:
+        for environment in _REGEN_ENVIRONMENTS:
+            worktree_dir = (
+                scratch_root
+                / f"regen-stage-{generator_key}-{environment}-{uuid.uuid4().hex[:8]}"
+            )
+            try:
+                create_isolated_worktree(repo_root, head_oid, worktree_dir)
+                result = _run_one_generation(
+                    python_bin,
+                    worktree_dir,
+                    generator_key,
+                    environment,
+                    env_sh,
+                    credential_secrets,
+                    timeout_seconds,
+                )
+            finally:
+                subprocess.run(
+                    ["git", "worktree", "remove", "--force", str(worktree_dir)],
+                    cwd=repo_root,
+                    capture_output=True,
+                    text=True,
+                )
+                subprocess.run(
+                    ["git", "worktree", "prune"], cwd=repo_root, capture_output=True
+                )
+                if worktree_dir.exists():
+                    shutil.rmtree(worktree_dir, ignore_errors=True)
+
+            produced_text = result.pop("_produced_init_text")
+            result["comparison"] = compare_import_sets(head_init_text, produced_text)
+            result["produced_import_count"] = result["comparison"]["right_count"]
+            runs.append(result)
+            if generator_key == "generate_coding_api" and environment == "ambient":
+                canonical_ambient_text = produced_text
+
+    dirty_init_path = repo_root / "src" / "tooluniverse" / "tools" / "__init__.py"
+    dirty_init_text = (
+        dirty_init_path.read_text(encoding="utf-8") if dirty_init_path.is_file() else ""
+    )
+    dirty_diff = compare_import_sets(canonical_ambient_text, dirty_init_text)
+    dirty_tree_comparison = {
+        "matches": not dirty_diff["only_left"] and not dirty_diff["only_right"],
+        "only_head": dirty_diff["only_left"],
+        "only_dirty": dirty_diff["only_right"],
+        "regenerated_import_count": dirty_diff["left_count"],
+        "dirty_import_count": dirty_diff["right_count"],
+        "generator_used": "generate_coding_api",
+        "environment_used": "ambient",
+        "note": (
+            "'only_head' is present in a fresh generate_coding_api "
+            "regeneration of this exact HEAD commit (ambient environment) "
+            "but absent from the pre-existing dirty tree; 'only_dirty' is "
+            "the reverse. matches=true is mechanical evidence the dirty "
+            "state is a credential-gated regeneration of this same commit "
+            "(RESEARCH.md Open Question 1)."
+        ),
+    }
+
+    main_checkout_after = fingerprint_worktree(repo_root)
+    blocking = any(run["comparison"]["decreased"] for run in runs)
+
+    return {
+        "head_oid": head_oid,
+        "head_import_count": head_import_count,
+        "generators": {k: v["rationale"] for k, v in _REGEN_GENERATORS.items()},
+        "runs": runs,
+        "dirty_tree_comparison": dirty_tree_comparison,
+        "main_checkout_after": {
+            "digest": main_checkout_after["digest"],
+            "count": main_checkout_after["count"],
+            "max_mtime_src_tools": main_checkout_after["max_mtime_src_tools"],
+        },
+        "generated_at": _now_iso(),
+        "blocking": blocking,
     }
 
 
@@ -1158,6 +1490,30 @@ def _parser() -> argparse.ArgumentParser:
         action="store_true",
         help="classify duplicate names as live_collision/archived_duplicate (chain mode)",
     )
+    parser.add_argument(
+        "--regen-guard",
+        action="store_true",
+        help=(
+            "run the credential-aware regeneration guard inside disposable "
+            "worktrees and write regeneration_guard.json (D-05)"
+        ),
+    )
+    parser.add_argument(
+        "--regen-scratch",
+        default=None,
+        help=(
+            "scratch root outside the repository for disposable regeneration "
+            "worktrees (default: a fresh mktemp -d)"
+        ),
+    )
+    parser.add_argument(
+        "--with-env",
+        default=None,
+        help=(
+            "path to the credential-loader script sourced for the "
+            "credentialed run variant (default: .tooluniverse/tooluniverse-env.sh)"
+        ),
+    )
     parser.add_argument("--out", required=True, help="evidence output directory")
     parser.add_argument(
         "--repo", default=None, help="repository root (default: this script's own repo)"
@@ -1168,11 +1524,51 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _run_regen_guard_mode(args: argparse.Namespace, repo_root: Path) -> int:
+    """CLI handler for ``--regen-guard``.
+
+    Writes ``regeneration_guard.json`` directly into ``--out`` (the shared
+    staging directory also holding ``tracer/``, ``chain/``, and
+    ``discovery/``), rather than through ``publish_evidence``'s
+    empty-directory atomic-rename convention -- this is a single findings
+    file composed alongside evidence other invocations already staged
+    there, not a self-contained evidence subtree of its own. Exits 0
+    whenever the report is written, regardless of the report's own
+    ``blocking`` verdict: this is a findings-first guard whose review gate
+    is the next task's checkpoint.
+    """
+    scratch_root = (
+        Path(args.regen_scratch).resolve()
+        if args.regen_scratch
+        else Path(tempfile.mkdtemp(prefix="tu-regen-guard-")).resolve()
+    )
+    env_sh = Path(args.with_env).resolve() if args.with_env else None
+
+    report = run_regeneration_guard(repo_root, scratch_root, env_sh=env_sh)
+
+    out_dir = Path(args.out)
+    if not out_dir.is_absolute():
+        out_dir = (Path.cwd() / out_dir).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    report_path = out_dir / "regeneration_guard.json"
+    _canonical_json(report_path, report)
+
+    summary = {"out": str(report_path), "blocking": report["blocking"]}
+    if args.json:
+        print(json.dumps(summary, indent=2, sort_keys=True))
+    else:
+        print(f"regeneration guard -> {report_path} (blocking={report['blocking']})")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     repo_root = Path(args.repo).resolve() if args.repo else REPO_ROOT_DEFAULT
 
     _ensure_capable_interpreter(repo_root)
+
+    if args.regen_guard:
+        return _run_regen_guard_mode(args, repo_root)
 
     if args.tier1 or args.tier2 or getattr(args, "duplicates", False):
         return _run_chain_mode(args, repo_root)
