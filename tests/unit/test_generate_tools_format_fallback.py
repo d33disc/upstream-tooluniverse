@@ -82,8 +82,62 @@ class TestFormatFilesFallback:
             f"expected ruff format + ruff check after pre-commit failure, "
             f"got calls: {calls}"
         )
-        assert ruff_calls[0][:2] == ["/fake/bin/ruff", "format"]
-        assert ruff_calls[1][:2] == ["/fake/bin/ruff", "check"]
+        assert ruff_calls[0] == ["/fake/bin/ruff", "format", "a.py"]
+        assert ruff_calls[1] == ["/fake/bin/ruff", "check", "--fix", "a.py"]
+
+    def test_precommit_failure_stops_submitting_batches(self):
+        """After the first failed batch, remaining batches are not submitted."""
+        # 100 paths -> 2 batches of 80/20; first batch fails.
+        paths = [f"f{i}.py" for i in range(100)]
+        calls = []
+
+        def fake_run(cmd, **kwargs):
+            calls.append(cmd)
+            if cmd[0].endswith("pre-commit"):
+                return _completed(127)
+            return _completed(0)
+
+        with (
+            mock.patch(
+                "tooluniverse.generate_tools.shutil.which",
+                _which_factory({"pre-commit", "ruff"}),
+            ),
+            mock.patch(
+                "tooluniverse.generate_tools.subprocess.run", side_effect=fake_run
+            ),
+        ):
+            _format_files(paths)
+
+        pre_commit_calls = [c for c in calls if c[0].endswith("pre-commit")]
+        assert len(pre_commit_calls) == 1, "should break after first failed batch"
+        ruff_calls = [c for c in calls if c[0].endswith("ruff")]
+        assert len(ruff_calls) == 2
+
+    def test_precommit_raises_falls_back_to_ruff(self):
+        """An OSError from launching pre-commit must also fall through to ruff."""
+        calls = []
+
+        def fake_run(cmd, **kwargs):
+            if cmd[0].endswith("pre-commit"):
+                raise OSError("exec format error")
+            calls.append(cmd)
+            return _completed(0)
+
+        with (
+            mock.patch(
+                "tooluniverse.generate_tools.shutil.which",
+                _which_factory({"pre-commit", "ruff"}),
+            ),
+            mock.patch(
+                "tooluniverse.generate_tools.subprocess.run", side_effect=fake_run
+            ),
+        ):
+            _format_files(["a.py"])
+
+        assert [c[:2] for c in calls] == [
+            ["/fake/bin/ruff", "format"],
+            ["/fake/bin/ruff", "check"],
+        ]
 
     def test_no_precommit_uses_ruff(self):
         """Without pre-commit on PATH, the ruff fallback runs (format + check)."""
@@ -112,8 +166,6 @@ class TestFormatFilesFallback:
     def test_skip_env_var_short_circuits(self, monkeypatch):
         """TOOLUNIVERSE_SKIP_FORMAT=1 disables formatting entirely."""
         monkeypatch.setenv("TOOLUNIVERSE_SKIP_FORMAT", "1")
-        with mock.patch(
-            "tooluniverse.generate_tools.subprocess.run"
-        ) as fake_run:
+        with mock.patch("tooluniverse.generate_tools.subprocess.run") as fake_run:
             _format_files(["a.py"])
         fake_run.assert_not_called()
