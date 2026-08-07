@@ -16,7 +16,7 @@ def gProfiler_enrichment(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Perform functional enrichment analysis on a gene list using g:Profiler (g:GOSt) from the Universi...
 
@@ -37,7 +37,7 @@ def gProfiler_enrichment(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def HPO_get_term(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a Human Phenotype Ontology (HPO) term by its ID. HPO provides stan...
 
@@ -31,7 +31,7 @@ def HPO_get_term(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

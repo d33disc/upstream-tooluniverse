@@ -14,7 +14,7 @@ def GenomeNexus_annotate_variant(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Annotate a genomic variant using Genome Nexus (Memorial Sloan Kettering), which aggregates varian...
 
@@ -31,7 +31,7 @@ def GenomeNexus_annotate_variant(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,19 +9,19 @@ from ._shared_client import get_shared_client
 
 
 def ChEBI_get_ontology_children(
-    chebi_id: int,
+    chebi_id: int | str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the ontology children (is-a, has-part, has-functional-parent, etc.) of a ChEBI compound. ChEB...
 
     Parameters
     ----------
-    chebi_id : int
-        ChEBI numeric identifier (without 'CHEBI:' prefix). Examples: 15365 (aspirin)...
+    chebi_id : int | str
+        ChEBI numeric identifier (with or without the 'CHEBI:' prefix). Examples: 153...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def ChEBI_get_ontology_children(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_get_expression_data(
-    operation: str,
+    operation: Optional[str] = "get_anndata",
     organism: Optional[str] = "Homo sapiens",
     obs_value_filter: Optional[str] = None,
     var_value_filter: Optional[str] = None,

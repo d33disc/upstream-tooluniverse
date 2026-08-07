@@ -1,7 +1,7 @@
 """
 Tool_Finder
 
-Retrieve related tools from the toolbox based on the provided description using embedding-based s...
+Retrieve related tools from the toolbox based on the provided description, advanced version with ...
 """
 
 from typing import Any, Optional, Callable
@@ -14,13 +14,14 @@ def Tool_Finder(
     picked_tool_names: Optional[list[str]] = None,
     return_call_result: Optional[bool] = None,
     categories: Optional[list[str]] = None,
+    embedding_model: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve related tools from the toolbox based on the provided description using embedding-based s...
+    Retrieve related tools from the toolbox based on the provided description, advanced version with ...
 
     Parameters
     ----------
@@ -34,6 +35,8 @@ def Tool_Finder(
         Whether to return both prompts and tool names. If false, returns only tool pr...
     categories : list[str]
         Optional list of tool categories to filter by
+    embedding_model : str
+        Optional: embedding encoder to use for this search. 'default' = the fine-tune...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -56,6 +59,7 @@ def Tool_Finder(
             "picked_tool_names": picked_tool_names,
             "return_call_result": return_call_result,
             "categories": categories,
+            "embedding_model": embedding_model,
         }.items()
         if v is not None
     }

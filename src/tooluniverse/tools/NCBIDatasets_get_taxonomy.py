@@ -14,7 +14,7 @@ def NCBIDatasets_get_taxonomy(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed taxonomy information from NCBI by taxonomy ID. Returns organism name, rank, full lin...
 
@@ -31,7 +31,7 @@ def NCBIDatasets_get_taxonomy(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

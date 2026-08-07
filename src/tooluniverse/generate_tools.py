@@ -549,17 +549,36 @@ def _format_files(paths: List[str]) -> None:
 
     pre_commit = shutil.which("pre-commit")
     if pre_commit:
-        # Run pre-commit on specific files to match repo config filters
+        # Run pre-commit on specific files to match repo config filters.
+        # A resolvable pre-commit can still fail at runtime -- e.g. a pyenv
+        # shim whose tool is absent from the active version prints
+        # "pyenv: pre-commit: command not found" and exits 127 (observed
+        # empirically; 127 is the POSIX command-not-found status). Only
+        # trust pre-commit if every batch succeeded; otherwise stop
+        # submitting batches and fall through to the ruff fallback below.
+        # Exit-code heuristic: pre-commit exits 1 both when hooks modified
+        # files (success for us) and when a hook failed outright, which we
+        # cannot distinguish here without re-checking formatting; rc > 1
+        # (127 shim miss, 2 usage error) is treated as a broken runner.
+        # Deliberately NOT running ruff after a trusted pre-commit pass:
+        # pre-commit pins its own ruff version, and a differing system ruff
+        # would reintroduce format drift. The repo-level guard for the
+        # residual rc==1 ambiguity is CI's format check, not this function.
+        pre_commit_ok = True
         for batch in _chunked(paths, 80):
             try:
-                subprocess.run(
+                result = subprocess.run(
                     [pre_commit, "run", "--files", *batch],
                     check=False,
                 )
+                if result.returncode > 1:
+                    pre_commit_ok = False
             except Exception:
-                # Best-effort; continue to fallback below
-                pass
-        return
+                pre_commit_ok = False
+            if not pre_commit_ok:
+                break
+        if pre_commit_ok:
+            return
 
     # Fallback to ruff formatter and linter to match pre-commit hooks
     # Pre-commit uses: ruff-format and ruff-check with --fix

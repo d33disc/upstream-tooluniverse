@@ -14,7 +14,7 @@ def EMDB_get_structure(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Get 3D electron microscopy (EM) structure data from the Electron Microscopy Data Bank (EMDB). Ret...
 
@@ -31,7 +31,7 @@ def EMDB_get_structure(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

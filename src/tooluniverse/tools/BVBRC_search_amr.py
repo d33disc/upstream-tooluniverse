@@ -9,27 +9,27 @@ from ._shared_client import get_shared_client
 
 
 def BVBRC_search_amr(
-    antibiotic: Optional[str | Any] = None,
-    genome_id: Optional[str | Any] = None,
-    resistant_phenotype: Optional[str | Any] = None,
-    limit: Optional[int | Any] = None,
+    antibiotic: Optional[str] = None,
+    genome_id: Optional[str] = None,
+    resistant_phenotype: Optional[str] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for antimicrobial resistance (AMR) phenotype data in BV-BRC. Returns resistance/susceptibi...
 
     Parameters
     ----------
-    antibiotic : str | Any
+    antibiotic : str
         Antibiotic name to search for. Examples: 'methicillin', 'vancomycin', 'ciprof...
-    genome_id : str | Any
+    genome_id : str
         BV-BRC genome ID to get AMR data for a specific genome. Example: '83332.12'.
-    resistant_phenotype : str | Any
+    resistant_phenotype : str
         Filter by resistance phenotype. Options: 'Resistant', 'Susceptible', 'Interme...
-    limit : int | Any
+    limit : int
         Maximum number of results. Default: 25. Max: 100.
     stream_callback : Callable, optional
         Callback for streaming output
@@ -40,7 +40,7 @@ def BVBRC_search_amr(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

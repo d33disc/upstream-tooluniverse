@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def HGNC_search_genes(
     query: str,
-    search_field: Optional[str | Any] = None,
+    search_field: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for human genes in HGNC by symbol, name, or alias. Supports wildcards (e.g., 'BRCA*' finds...
 
@@ -23,7 +23,7 @@ def HGNC_search_genes(
     ----------
     query : str
         Search query - gene symbol, partial name, or keyword. Supports wildcards (*)....
-    search_field : str | Any
+    search_field : str
         Field to search in. Options: 'symbol', 'name', 'alias_symbol', 'prev_symbol',...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def HGNC_search_genes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

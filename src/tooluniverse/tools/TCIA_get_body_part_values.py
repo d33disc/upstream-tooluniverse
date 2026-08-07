@@ -9,21 +9,21 @@ from ._shared_client import get_shared_client
 
 
 def TCIA_get_body_part_values(
-    Collection: Optional[str | Any] = None,
-    Modality: Optional[str | Any] = None,
+    Collection: Optional[str] = None,
+    Modality: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the body parts examined in TCIA imaging collections. Returns body part names for filtering se...
 
     Parameters
     ----------
-    Collection : str | Any
+    Collection : str
         Collection name to filter by (e.g., 'TCGA-GBM')
-    Modality : str | Any
+    Modality : str
         Imaging modality to filter by (e.g., 'CT', 'MR')
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def TCIA_get_body_part_values(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_get_embeddings(
-    operation: str,
+    operation: Optional[str] = "get_embeddings",
     organism: Optional[str] = "Homo sapiens",
     embedding_name: Optional[str] = None,
     census_version: Optional[str] = "stable",

@@ -14,7 +14,7 @@ def InterPro_get_protein_domain_architecture(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the complete Pfam domain architecture for a protein with exact residue positions using the In...
 
@@ -31,7 +31,7 @@ def InterPro_get_protein_domain_architecture(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

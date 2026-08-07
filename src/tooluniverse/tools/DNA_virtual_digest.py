@@ -11,8 +11,8 @@ from ._shared_client import get_shared_client
 def DNA_virtual_digest(
     operation: str,
     sequence: str,
-    enzymes: Optional[list[str] | Any] = None,
-    circular: Optional[bool | Any] = False,
+    enzymes: Optional[list[str]] = None,
+    circular: Optional[bool] = False,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -27,9 +27,9 @@ def DNA_virtual_digest(
         Operation type
     sequence : str
         DNA sequence (A, T, G, C, N only). Case insensitive.
-    enzymes : list[str] | Any
+    enzymes : list[str]
         List of enzyme names to use for digestion (e.g., ['EcoRI', 'BamHI']). If null...
-    circular : bool | Any
+    circular : bool
         Treat sequence as circular DNA (e.g., plasmid). Default: false (linear).
     stream_callback : Callable, optional
         Callback for streaming output

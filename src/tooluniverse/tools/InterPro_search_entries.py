@@ -16,7 +16,7 @@ def InterPro_search_entries(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search InterPro entries (domains, families, sites) by keyword. Returns matching InterPro entries ...
 
@@ -37,7 +37,7 @@ def InterPro_search_entries(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

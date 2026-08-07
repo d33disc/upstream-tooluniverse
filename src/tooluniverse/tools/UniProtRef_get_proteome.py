@@ -14,7 +14,7 @@ def UniProtRef_get_proteome(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get reference proteome information from UniProt by proteome ID. Returns the proteome description,...
 
@@ -31,7 +31,7 @@ def UniProtRef_get_proteome(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

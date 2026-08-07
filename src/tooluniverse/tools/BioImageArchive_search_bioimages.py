@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def BioImageArchive_search_bioimages(
     query: str,
-    page_size: Optional[int | Any] = None,
+    page_size: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search the BioImage Archive specifically for biological image datasets (BioImages collection). Th...
 
@@ -23,7 +23,7 @@ def BioImageArchive_search_bioimages(
     ----------
     query : str
         Search query for biological imaging data. Examples: 'cell division', 'neuron ...
-    page_size : int | Any
+    page_size : int
         Number of results per page. Default: 10. Max: 100.
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def BioImageArchive_search_bioimages(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

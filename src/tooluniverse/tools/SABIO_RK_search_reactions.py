@@ -16,7 +16,7 @@ def SABIO_RK_search_reactions(
     organism: Optional[str] = None,
     product: Optional[str] = None,
     parameter_type: Optional[str] = None,
-    limit: Optional[int | Any] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -41,7 +41,7 @@ def SABIO_RK_search_reactions(
         Product name (e.g., acetaldehyde, pyruvate)
     parameter_type : str
         Filter by kinetic parameter type (e.g., Km, kcat, Vmax, Ki)
-    limit : int | Any
+    limit : int
         Maximum number of kinetic laws to return (default 20, max 100)
     stream_callback : Callable, optional
         Callback for streaming output

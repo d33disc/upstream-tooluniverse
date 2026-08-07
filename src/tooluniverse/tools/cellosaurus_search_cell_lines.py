@@ -16,7 +16,7 @@ def cellosaurus_search_cell_lines(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Search Cellosaurus cell lines using the /search/cell-line endpoint. Supports Solr query syntax fo...
 
@@ -37,7 +37,7 @@ def cellosaurus_search_cell_lines(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

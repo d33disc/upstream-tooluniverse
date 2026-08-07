@@ -13,7 +13,7 @@ def ClinicalTrials_get_database_stats(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get aggregate statistics about the ClinicalTrials.gov database, including total number of registe...
 
@@ -29,7 +29,7 @@ def ClinicalTrials_get_database_stats(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

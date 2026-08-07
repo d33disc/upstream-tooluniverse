@@ -15,7 +15,7 @@ def LNCipedia_get_lncrna_xrefs(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get cross-references for a long non-coding RNA from RNAcentral. Returns database links from LNCip...
 
@@ -34,7 +34,7 @@ def LNCipedia_get_lncrna_xrefs(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

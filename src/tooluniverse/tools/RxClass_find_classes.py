@@ -10,13 +10,13 @@ from ._shared_client import get_shared_client
 
 def RxClass_find_classes(
     query: str,
-    class_type: Optional[str | Any] = None,
-    limit: Optional[int | Any] = None,
+    class_type: Optional[str] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search NLM RxClass drug classification database by keyword. Returns matching class IDs, names, an...
 
@@ -24,9 +24,9 @@ def RxClass_find_classes(
     ----------
     query : str
         Keyword to search in class names. Examples: 'analgesic', 'beta blocker', 'ant...
-    class_type : str | Any
+    class_type : str
         Filter by class type. Options: 'ATC1-4' (ATC codes), 'EPC' (Established Pharm...
-    limit : int | Any
+    limit : int
         Maximum results to return (default 20).
     stream_callback : Callable, optional
         Callback for streaming output
@@ -37,7 +37,7 @@ def RxClass_find_classes(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

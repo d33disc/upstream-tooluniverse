@@ -15,7 +15,7 @@ def EnsemblCompara_get_paralogues(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Find paralogous genes (genes within the same species that arose from gene duplication events) usi...
 
@@ -34,7 +34,7 @@ def EnsemblCompara_get_paralogues(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

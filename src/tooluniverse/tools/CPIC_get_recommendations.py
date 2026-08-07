@@ -12,13 +12,15 @@ def CPIC_get_recommendations(
     guideline_id: Optional[int] = None,
     drug: Optional[str] = None,
     drug_name: Optional[str] = None,
-    limit: Optional[int | Any] = None,
-    offset: Optional[int | Any] = None,
+    gene: Optional[str] = None,
+    phenotype: Optional[str] = None,
+    limit: Optional[int] = None,
+    offset: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get drug dosing recommendations from a CPIC pharmacogenomic guideline. Returns clinically actiona...
 
@@ -30,10 +32,14 @@ def CPIC_get_recommendations(
         Drug name to auto-resolve guideline_id (e.g., 'codeine', 'abacavir', 'tamoxif...
     drug_name : str
         Alias for drug.
-    limit : int | Any
-        Maximum number of recommendations to return (default 50)
-    offset : int | Any
-        Number of recommendations to skip for pagination (default 0)
+    gene : str
+        Filter to recommendation rows for this pharmacogene (e.g. 'CYP2C19', 'CYP2D6'...
+    phenotype : str
+        Filter to recommendation rows whose phenotype exactly matches this CPIC term ...
+    limit : int
+        Maximum number of recommendations to return (default 50). Applied after gene/...
+    offset : int
+        Number of recommendations to skip for pagination (default 0). Applied after g...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +49,7 @@ def CPIC_get_recommendations(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
@@ -54,6 +60,8 @@ def CPIC_get_recommendations(
             "guideline_id": guideline_id,
             "drug": drug,
             "drug_name": drug_name,
+            "gene": gene,
+            "phenotype": phenotype,
             "limit": limit,
             "offset": offset,
         }.items()

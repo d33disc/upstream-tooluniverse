@@ -1,7 +1,7 @@
 """
 GTDB_search_genomes
 
-Search for prokaryotic genomes in GTDB by organism name. Returns genome accessions with both NCBI...
+Search for prokaryotic genomes in GTDB by organism name. This matches against the whole taxonomic...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def GTDB_search_genomes(
     validate: bool = True,
 ) -> Any:
     """
-    Search for prokaryotic genomes in GTDB by organism name. Returns genome accessions with both NCBI...
+    Search for prokaryotic genomes in GTDB by organism name. This matches against the whole taxonomic...
 
     Parameters
     ----------

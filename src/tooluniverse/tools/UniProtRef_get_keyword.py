@@ -14,7 +14,7 @@ def UniProtRef_get_keyword(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a specific UniProt keyword by its ID. Returns the full definition,...
 
@@ -31,7 +31,7 @@ def UniProtRef_get_keyword(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

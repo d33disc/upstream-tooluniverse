@@ -14,7 +14,7 @@ def FDAGSRS_get_substance(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get full FDA substance record by UNII (Unique Ingredient Identifier) code. Returns complete subst...
 
@@ -31,7 +31,7 @@ def FDAGSRS_get_substance(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def EBIProteins_get_antigen(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get predicted antigenic regions for a protein from the EBI Proteins API. Returns regions of the p...
 
@@ -31,7 +31,7 @@ def EBIProteins_get_antigen(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

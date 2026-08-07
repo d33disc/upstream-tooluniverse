@@ -17,7 +17,7 @@ def Dfam_search_families(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search Dfam for transposable element (TE) / repeat element families by name prefix, taxonomic cla...
 
@@ -40,7 +40,7 @@ def Dfam_search_families(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

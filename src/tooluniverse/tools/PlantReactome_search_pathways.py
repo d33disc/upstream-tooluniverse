@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def PlantReactome_search_pathways(
     query: str,
-    species: Optional[str | Any] = None,
+    species: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for plant biological pathways in Plant Reactome (Gramene). Plant Reactome is a curated res...
 
@@ -23,7 +23,7 @@ def PlantReactome_search_pathways(
     ----------
     query : str
         Search query for plant pathways. Examples: 'photosynthesis', 'Calvin cycle', ...
-    species : str | Any
+    species : str
         Species name to filter results. Examples: 'Oryza sativa', 'Arabidopsis thalia...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def PlantReactome_search_pathways(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

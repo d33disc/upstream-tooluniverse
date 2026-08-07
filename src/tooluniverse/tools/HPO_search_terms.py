@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def HPO_search_terms(
     query: str,
-    max_results: Optional[int | Any] = None,
+    max_results: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for Human Phenotype Ontology (HPO) terms by keyword. HPO contains over 18,000 standardized...
 
@@ -23,7 +23,7 @@ def HPO_search_terms(
     ----------
     query : str
         Search keyword for phenotype terms. Examples: 'seizure', 'intellectual disabi...
-    max_results : int | Any
+    max_results : int
         Maximum number of results to return (default 10, max 50).
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def HPO_search_terms(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

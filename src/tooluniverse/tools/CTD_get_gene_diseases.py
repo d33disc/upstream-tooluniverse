@@ -1,7 +1,7 @@
 """
 CTD_get_gene_diseases
 
-Get curated gene-disease associations from CTD. Given a gene symbol, returns diseases associated ...
+Gene -> disease relationships are NOT served by the RENCI CTD mirror (chemical-centric snapshot)....
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def CTD_get_gene_diseases(
     validate: bool = True,
 ) -> Any:
     """
-    Get curated gene-disease associations from CTD. Given a gene symbol, returns diseases associated ...
+    Gene -> disease relationships are NOT served by the RENCI CTD mirror (chemical-centric snapshot)....
 
     Parameters
     ----------

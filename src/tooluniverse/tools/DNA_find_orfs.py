@@ -12,7 +12,7 @@ def DNA_find_orfs(
     operation: str,
     sequence: str,
     min_length: Optional[int] = 100,
-    strand: Optional[str | Any] = "both",
+    strand: Optional[str] = "both",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -29,7 +29,7 @@ def DNA_find_orfs(
         DNA sequence (A, T, G, C, N only)
     min_length : int
         Minimum ORF length in nucleotides (default: 100 nt = ~33 amino acids)
-    strand : str | Any
+    strand : str
         Which strand to search: 'forward', 'reverse', or 'both' (default)
     stream_callback : Callable, optional
         Callback for streaming output

@@ -1,7 +1,7 @@
 """
 visualize_molecule_2d
 
-Render a 2D molecule with RDKit from SMILES, InChI, and name fields. Returns HTML plus PNG or SVG...
+Visualize 2D molecular structures using RDKit. Supports SMILES, InChI, molecule names, and variou...
 """
 
 from typing import Any, Optional, Callable
@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def visualize_molecule_2d(
-    smiles: str,
-    inchi: str,
-    molecule_name: str,
+    smiles: Optional[str] = None,
+    inchi: Optional[str] = None,
+    molecule_name: Optional[str] = None,
     width: Optional[int] = 400,
     height: Optional[int] = 400,
     output_format: Optional[str] = "png",
@@ -24,7 +24,7 @@ def visualize_molecule_2d(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Render a 2D molecule with RDKit from SMILES, InChI, and name fields. Returns HTML plus PNG or SVG...
+    Visualize 2D molecular structures using RDKit. Supports SMILES, InChI, molecule names, and variou...
 
     Parameters
     ----------

@@ -15,7 +15,7 @@ def GTEx_get_dataset_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get GTEx dataset metadata and version information. Returns dataset details including GENCODE vers...
 
@@ -34,7 +34,7 @@ def GTEx_get_dataset_info(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

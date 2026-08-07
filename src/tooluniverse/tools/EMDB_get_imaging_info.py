@@ -14,7 +14,7 @@ def EMDB_get_imaging_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Get electron microscopy imaging parameters for an EMDB entry including microscope model, detector...
 
@@ -31,7 +31,7 @@ def EMDB_get_imaging_info(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

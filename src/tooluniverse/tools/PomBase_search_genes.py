@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def PomBase_search_genes(
     query: str,
-    limit: Optional[int | Any] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search PomBase for fission yeast (S. pombe) genes by name, systematic ID, or protein product keyw...
 
@@ -23,7 +23,7 @@ def PomBase_search_genes(
     ----------
     query : str
         Search query - gene name, systematic ID prefix, or product keyword. Examples:...
-    limit : int | Any
+    limit : int
         Maximum results to return (1-50, default 10).
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def PomBase_search_genes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 HMDB_search
 
-PubChem-backed HMDB alias for metabolite name or synonym lookup. Returns candidate compounds with...
+Alias for Metabolite_search. Search for metabolites by compound name or molecular formula via Pub...
 """
 
 from typing import Any, Optional, Callable
@@ -15,9 +15,9 @@ def HMDB_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    PubChem-backed HMDB alias for metabolite name or synonym lookup. Returns candidate compounds with...
+    Alias for Metabolite_search. Search for metabolites by compound name or molecular formula via Pub...
 
     Parameters
     ----------
@@ -34,7 +34,7 @@ def HMDB_search(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

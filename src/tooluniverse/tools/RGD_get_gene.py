@@ -14,7 +14,7 @@ def RGD_get_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed rat gene information from the Rat Genome Database by RGD ID. Returns gene symbol, na...
 
@@ -31,7 +31,7 @@ def RGD_get_gene(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

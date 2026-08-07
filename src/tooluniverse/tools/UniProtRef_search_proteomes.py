@@ -15,7 +15,7 @@ def UniProtRef_search_proteomes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search UniProt reference proteomes by organism name, taxon ID, or keyword. Returns proteome IDs, ...
 
@@ -34,7 +34,7 @@ def UniProtRef_search_proteomes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

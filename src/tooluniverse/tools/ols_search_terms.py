@@ -1,7 +1,7 @@
 """
 ols_search_terms
 
-Search biomedical ontology terms in EBI's Ontology Lookup Service (OLS). Covers GO, HP, MONDO, EF...
+Search for terms in OLS (Ontology Lookup Service)
 """
 
 from typing import Any, Optional, Callable
@@ -16,14 +16,14 @@ def ols_search_terms(
     ontology: Optional[str] = None,
     exact_match: Optional[bool] = False,
     include_obsolete: Optional[bool] = False,
-    limit: Optional[int | Any] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search biomedical ontology terms in EBI's Ontology Lookup Service (OLS). Covers GO, HP, MONDO, EF...
+    Search for terms in OLS (Ontology Lookup Service)
 
     Parameters
     ----------
@@ -41,7 +41,7 @@ def ols_search_terms(
         Search for exact matches only (default: false)
     include_obsolete : bool
         Include obsolete terms (default: false)
-    limit : int | Any
+    limit : int
         Alias for rows. Maximum number of results to return (default: 10, max: 100).
     stream_callback : Callable, optional
         Callback for streaming output

@@ -15,7 +15,7 @@ def UniProtRef_search_diseases(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the UniProt controlled disease vocabulary for disease definitions. Returns disease entries...
 
@@ -34,7 +34,7 @@ def UniProtRef_search_diseases(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

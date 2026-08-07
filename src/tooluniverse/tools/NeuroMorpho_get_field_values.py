@@ -9,14 +9,14 @@ from ._shared_client import get_shared_client
 
 
 def NeuroMorpho_get_field_values(
-    field_name: str,
+    field_name: Optional[str] = "species",
     page: Optional[int] = 0,
     size: Optional[int] = 500,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get available values for a neuron metadata field in NeuroMorpho.Org. Useful for discovering what ...
 
@@ -37,7 +37,7 @@ def NeuroMorpho_get_field_values(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

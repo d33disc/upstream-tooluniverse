@@ -15,7 +15,7 @@ def gProfiler_annotate_snps(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Map SNP rsIDs to genes and annotate their functional consequences using g:Profiler (g:SNPense) fr...
 
@@ -34,7 +34,7 @@ def gProfiler_annotate_snps(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def EBIProteins_get_features(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get protein features filtered by category from the EBI Proteins API. Categories include DOMAINS_A...
 
@@ -34,7 +34,7 @@ def EBIProteins_get_features(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

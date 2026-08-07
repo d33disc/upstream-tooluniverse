@@ -16,7 +16,7 @@ def miRBase_search_mirna(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search for microRNAs (miRNAs) by name, accession, or keyword using EBI Search over RNAcentral. RN...
 
@@ -37,7 +37,7 @@ def miRBase_search_mirna(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

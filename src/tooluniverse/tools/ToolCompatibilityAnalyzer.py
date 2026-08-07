@@ -11,7 +11,7 @@ from ._shared_client import get_shared_client
 def ToolCompatibilityAnalyzer(
     source_tool: str,
     target_tool: str,
-    analysis_depth: str,
+    analysis_depth: Optional[str] = "detailed",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

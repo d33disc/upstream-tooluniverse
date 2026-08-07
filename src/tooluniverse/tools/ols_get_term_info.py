@@ -1,7 +1,7 @@
 """
 ols_get_term_info
 
-Get detailed information about a specific ontology term in EBI OLS by term ID or IRI. Returns lab...
+Get detailed information about a specific term in OLS
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def ols_get_term_info(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get detailed information about a specific ontology term in EBI OLS by term ID or IRI. Returns lab...
+    Get detailed information about a specific term in OLS
 
     Parameters
     ----------

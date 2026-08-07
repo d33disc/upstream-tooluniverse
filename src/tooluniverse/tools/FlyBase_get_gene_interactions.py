@@ -17,7 +17,7 @@ def FlyBase_get_gene_interactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get molecular or genetic interactions for a Drosophila gene from the Alliance of Genome Resources...
 
@@ -40,7 +40,7 @@ def FlyBase_get_gene_interactions(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

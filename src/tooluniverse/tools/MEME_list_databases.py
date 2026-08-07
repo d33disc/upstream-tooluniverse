@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def MEME_list_databases(
     operation: str,
-    category_filter: Optional[str | Any] = None,
+    category_filter: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -23,7 +23,7 @@ def MEME_list_databases(
     ----------
     operation : str
         Operation type
-    category_filter : str | Any
+    category_filter : str
         Filter categories by name or description substring. E.g., 'JASPAR', 'human', ...
     stream_callback : Callable, optional
         Callback for streaming output

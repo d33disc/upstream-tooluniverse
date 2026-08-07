@@ -9,15 +9,15 @@ from ._shared_client import get_shared_client
 
 
 def CryoET_list_runs(
-    operation: str,
     dataset_id: int,
+    operation: Optional[str] = "list_runs",
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     List the experimental tilt-series acquisition runs within a specific CryoET Data Portal dataset. ...
 
@@ -40,7 +40,7 @@ def CryoET_list_runs(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

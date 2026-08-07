@@ -14,7 +14,7 @@ def EMDB_get_publications(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get publication information for an EMDB entry including journal articles, preprints, and citation...
 
@@ -31,7 +31,7 @@ def EMDB_get_publications(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

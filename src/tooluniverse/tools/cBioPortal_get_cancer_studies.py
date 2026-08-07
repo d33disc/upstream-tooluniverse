@@ -1,7 +1,7 @@
 """
 cBioPortal_get_cancer_studies
 
-Get list of cancer studies from cBioPortal including TCGA, Pan-Cancer Atlas, and other studies. R...
+Get list of cancer studies from cBioPortal
 """
 
 from typing import Any, Optional, Callable
@@ -16,7 +16,7 @@ def cBioPortal_get_cancer_studies(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get list of cancer studies from cBioPortal including TCGA, Pan-Cancer Atlas, and other studies. R...
+    Get list of cancer studies from cBioPortal
 
     Parameters
     ----------

@@ -14,12 +14,12 @@ def UCSC_get_track(
     chrom: str,
     start: int,
     end: int,
-    maxItemsOutput: Optional[int | Any] = None,
+    maxItemsOutput: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get annotation track data from the UCSC Genome Browser for a specified genomic region. Retrieves ...
 
@@ -35,7 +35,7 @@ def UCSC_get_track(
         0-based start position (inclusive).
     end : int
         End position (exclusive). Must be > start.
-    maxItemsOutput : int | Any
+    maxItemsOutput : int
         Maximum number of items to return. Default: 100. Set to limit large result sets.
     stream_callback : Callable, optional
         Callback for streaming output
@@ -46,7 +46,7 @@ def UCSC_get_track(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

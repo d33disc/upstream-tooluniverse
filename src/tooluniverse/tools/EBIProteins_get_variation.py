@@ -10,13 +10,13 @@ from ._shared_client import get_shared_client
 
 def EBIProteins_get_variation(
     accession: str,
-    source_type: Optional[str | Any] = None,
+    source_type: Optional[str] = None,
     disease_only: Optional[bool] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get all known protein sequence variants for a UniProt protein from the EBI Proteins API. Returns ...
 
@@ -24,7 +24,7 @@ def EBIProteins_get_variation(
     ----------
     accession : str
         UniProt accession. Examples: 'P04637' (TP53), 'P00533' (EGFR), 'P38398' (BRCA1).
-    source_type : str | Any
+    source_type : str
         Filter by variant source. Options: 'large_scale_study' (COSMIC, gnomAD), 'mix...
     disease_only : bool
         If true, return only variants with disease associations. Default: false.
@@ -37,7 +37,7 @@ def EBIProteins_get_variation(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def RGD_get_annotations(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get disease, phenotype, pathway, and GO annotations for a rat gene from RGD. Returns curated anno...
 
@@ -34,7 +34,7 @@ def RGD_get_annotations(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

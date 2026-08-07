@@ -19,7 +19,7 @@ def GTEx_get_multi_tissue_eqtls(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get multi-tissue eQTL meta-analysis results (Metasoft). Returns m-values (posterior probability o...
 
@@ -46,7 +46,7 @@ def GTEx_get_multi_tissue_eqtls(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

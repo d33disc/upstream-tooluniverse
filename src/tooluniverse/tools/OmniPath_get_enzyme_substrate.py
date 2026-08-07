@@ -9,30 +9,30 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_enzyme_substrate(
-    enzymes: Optional[str | Any] = None,
-    substrates: Optional[str | Any] = None,
-    types: Optional[str | Any] = None,
-    organisms: Optional[int | Any] = None,
-    limit: Optional[int | Any] = None,
+    enzymes: Optional[str] = None,
+    substrates: Optional[str] = None,
+    types: Optional[str] = None,
+    organisms: Optional[int] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get enzyme-substrate (post-translational modification) interactions from OmniPath. Integrates dat...
 
     Parameters
     ----------
-    enzymes : str | Any
+    enzymes : str
         Gene symbol(s) or UniProt ID(s) for enzyme/kinase. Comma-separated for multip...
-    substrates : str | Any
+    substrates : str
         Gene symbol(s) or UniProt ID(s) for substrate. Examples: 'STAT3', 'P40763'.
-    types : str | Any
+    types : str
         Modification type filter. Options include: phosphorylation, ubiquitination, a...
-    organisms : int | Any
+    organisms : int
         NCBI taxonomy ID. Default: 9606 (human).
-    limit : int | Any
+    limit : int
         Maximum number of results to return.
     stream_callback : Callable, optional
         Callback for streaming output
@@ -43,7 +43,7 @@ def OmniPath_get_enzyme_substrate(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

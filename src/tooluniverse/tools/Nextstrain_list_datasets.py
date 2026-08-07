@@ -9,18 +9,18 @@ from ._shared_client import get_shared_client
 
 
 def Nextstrain_list_datasets(
-    pathogen: Optional[str | Any] = None,
+    pathogen: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> list[Any]:
     """
     List available pathogen phylogenetic datasets from Nextstrain. Returns datasets grouped by pathog...
 
     Parameters
     ----------
-    pathogen : str | Any
+    pathogen : str
         Optional pathogen name filter. Examples: 'flu', 'ebola', 'zika', 'dengue', 'm...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -31,7 +31,7 @@ def Nextstrain_list_datasets(
 
     Returns
     -------
-    dict[str, Any]
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

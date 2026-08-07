@@ -1,7 +1,7 @@
 """
 HMDB_get_metabolite
 
-PubChem-backed HMDB alias that resolves an HMDB ID or metabolite name to compound details includi...
+Alias for Metabolite_get_info. Get compound information by HMDB ID, compound name, or PubChem CID.
 """
 
 from typing import Any, Optional, Callable
@@ -16,9 +16,9 @@ def HMDB_get_metabolite(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    PubChem-backed HMDB alias that resolves an HMDB ID or metabolite name to compound details includi...
+    Alias for Metabolite_get_info. Get compound information by HMDB ID, compound name, or PubChem CID.
 
     Parameters
     ----------
@@ -37,7 +37,7 @@ def HMDB_get_metabolite(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

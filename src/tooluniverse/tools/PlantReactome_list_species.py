@@ -13,7 +13,7 @@ def PlantReactome_list_species(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     List all plant species available in Plant Reactome with their taxonomy IDs. Returns the complete ...
 
@@ -29,7 +29,7 @@ def PlantReactome_list_species(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
