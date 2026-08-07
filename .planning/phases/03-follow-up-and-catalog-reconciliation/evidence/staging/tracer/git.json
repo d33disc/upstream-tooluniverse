@@ -1,0 +1,8 @@
+{
+  "derived_at": "2026-08-07T12:34:33.583Z",
+  "exit_code": 0,
+  "head_oid": "8fb0eba24a65506570f2c722dc58e51dd2042788",
+  "is_ancestor": true,
+  "pr161_ancestor": true,
+  "pr161_merge_oid": "16af425c053c306a658c96e254b4c4114338dd11"
+}

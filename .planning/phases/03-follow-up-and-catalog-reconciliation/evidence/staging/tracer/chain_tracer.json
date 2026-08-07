@@ -1,0 +1,49 @@
+{
+  "discovery": {
+    "gated": false,
+    "grep_found": true,
+    "missing_keys": [],
+    "schema_has_parameters": true,
+    "tool": "DegreesOfUnsaturation_calculate"
+  },
+  "links": [
+    {
+      "evidence": "/Users/davis/code/ToolUniverse/src/tooluniverse/data/degrees_of_unsaturation_tools.json",
+      "link": "definition",
+      "ok": true
+    },
+    {
+      "evidence": "class DegreesOfUnsaturationTool defined in src/tooluniverse/degrees_of_unsaturation_tool.py",
+      "link": "implementation",
+      "ok": true
+    },
+    {
+      "archived": false,
+      "evidence": "category 'degrees_of_unsaturation' is live in default_config.py",
+      "link": "category",
+      "ok": true
+    },
+    {
+      "evidence": "STATIC_LAZY_REGISTRY['DegreesOfUnsaturationTool'] = 'degrees_of_unsaturation_tool'",
+      "link": "lazy_metadata",
+      "ok": true
+    },
+    {
+      "evidence": "src/tooluniverse/tools/DegreesOfUnsaturation_calculate.py at HEAD; tools/__init__.py: from .DegreesOfUnsaturation_calculate import DegreesOfUnsaturation_calculate",
+      "link": "generated_module",
+      "ok": true
+    },
+    {
+      "evidence": "tests/unit/test_probe_custom_tools.py:193: entry[\"name\"] == \"DegreesOfUnsaturation_calculate\" for entry in PROBE_SAMPLE",
+      "link": "tests",
+      "ok": true
+    }
+  ],
+  "missing_keys": [],
+  "source_paths": [
+    "src/tooluniverse/data/degrees_of_unsaturation_tools.json"
+  ],
+  "tool": "DegreesOfUnsaturation_calculate",
+  "type": "DegreesOfUnsaturationTool",
+  "verdict": "intact"
+}
