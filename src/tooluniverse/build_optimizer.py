@@ -6,8 +6,12 @@ from pathlib import Path
 from typing import Dict, Any, Set, Tuple
 
 # Fields excluded from hash calculation and comparison (metadata/timestamp fields)
+# source_file is excluded because the loader injects it as an ABSOLUTE path
+# to the defining JSON config: it differs per checkout/machine while never
+# affecting generated output, so including it makes every fresh clone or CI
+# runner see all tools as "changed" and rewrite .tool_metadata.json wholesale.
 _EXCLUDED_FIELDS = frozenset(
-    {"timestamp", "last_updated", "created_at", "_cache", "_metadata"}
+    {"timestamp", "last_updated", "created_at", "_cache", "_metadata", "source_file"}
 )
 
 
