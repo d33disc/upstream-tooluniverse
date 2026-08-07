@@ -799,6 +799,71 @@ def _colon_excluded_count(repo_root: Path) -> int:
     return sum(1 for name in load_definitions(data_dir, recursive=True) if ":" in name)
 
 
+def find_duplicate_names(repo_root: Path | str) -> list[dict[str, Any]]:
+    """Classify every tool name defined in more than one ``data/**/*.json`` file.
+
+    A name is ``live_collision`` when two or more of its defining files
+    resolve to a *live* ``default_config.py`` category -- a genuine runtime
+    collision, since two simultaneously-loadable definitions of the same
+    public name is the failure D-05 exists to catch. Otherwise the name is
+    ``archived_duplicate``: hygiene debt, since at most one copy could ever
+    load. This covers both the "exactly one defining file is live"
+    shape (the HMDB_* names: one live copy in ``metabolite_tools.json``, one
+    orphaned copy in ``broken_apis/hmdb_tools.json`` with no category entry
+    at all) and the "zero defining files are live" shape (the OxO_* names:
+    the top-level copy's category is commented out with an archived marker,
+    and the ``broken_apis/`` copy has no category entry referencing it
+    either) -- neither shape can ever produce two simultaneously-loadable
+    copies, so both land on ``archived_duplicate``. Only ``live_count >= 2``
+    is a genuine collision.
+    """
+    repo_root = Path(repo_root)
+    data_dir = repo_root / "src" / "tooluniverse" / "data"
+    config_path = repo_root / "src" / "tooluniverse" / "default_config.py"
+
+    definitions = load_definitions(data_dir, recursive=True)
+    live, archived = load_live_categories(config_path)
+    live_by_path = {path: key for key, path in live.items()}
+    archived_by_path = {path: key for key, path in archived.items()}
+
+    records: list[dict[str, Any]] = []
+    for name, entries in definitions.items():
+        defining_paths = sorted({entry["path"] for entry in entries})
+        if len(defining_paths) < 2:
+            continue
+
+        per_path = []
+        live_count = 0
+        for path in defining_paths:
+            rel = (
+                path.relative_to(repo_root).as_posix()
+                if repo_root in path.parents
+                else str(path)
+            )
+            if path in live_by_path:
+                per_path.append(
+                    {"path": rel, "category": live_by_path[path], "live": True}
+                )
+                live_count += 1
+            elif path in archived_by_path:
+                per_path.append(
+                    {"path": rel, "category": archived_by_path[path], "live": False}
+                )
+            else:
+                per_path.append({"path": rel, "category": None, "live": False})
+
+        records.append(
+            {
+                "name": name,
+                "paths": per_path,
+                "class": "live_collision" if live_count >= 2 else "archived_duplicate",
+            }
+        )
+
+    records.sort(key=lambda r: r["name"])
+    return records
+
+
 def _verdict_summary(registration_chain: dict[str, Any]) -> dict[str, dict[str, int]]:
     """Per-tier verdict-count rollup: ``intact``/``gated``/``archived``/``broken``."""
     summary: dict[str, dict[str, int]] = {}
@@ -853,12 +918,14 @@ def _load_existing_chain_evidence(out_dir: Path) -> dict[str, Any]:
 
 
 def _run_chain_mode(args: argparse.Namespace, repo_root: Path) -> int:
-    """CLI handler for ``--tier1``/``--tier2``.
+    """CLI handler for ``--tier1``/``--tier2``/``--duplicates``.
 
     Writes into the ``chain/`` evidence directory, composing with whatever
     an earlier invocation already published there (see
-    ``_load_existing_chain_evidence``) rather than requiring both flags in
-    one run.
+    ``_load_existing_chain_evidence``) rather than requiring all three flags
+    in one run. ``--tier1``/``--tier2`` write ``registration_chain.json``;
+    ``--duplicates`` is the only trigger for ``duplicates.json`` -- neither
+    writes the other's file as a side effect.
     """
     out_dir = Path(args.out)
     if not out_dir.is_absolute():
@@ -891,6 +958,32 @@ def _run_chain_mode(args: argparse.Namespace, repo_root: Path) -> int:
             "rule": EXCLUSION_RULE,
         }
         new_evidence["registration_chain"] = registration_chain
+
+    if getattr(args, "duplicates", False):
+        dup_records = find_duplicate_names(repo_root)
+        live_collisions = sorted(
+            r["name"] for r in dup_records if r["class"] == "live_collision"
+        )
+        archived_duplicates = sorted(
+            r["name"] for r in dup_records if r["class"] == "archived_duplicate"
+        )
+        new_evidence["duplicates"] = {
+            "records": dup_records,
+            "summary": {
+                "live_collision": len(live_collisions),
+                "archived_duplicate": len(archived_duplicates),
+                "note": (
+                    "test_no_duplicate_names_across_live_categories in "
+                    "tests/unit/test_registry_integrity.py is currently "
+                    "pytest.mark.xfail(strict=True) for the live_collision "
+                    "names above ("
+                    + ", ".join(live_collisions)
+                    + "), pending plan 03-04's D-05 review gate. Do not "
+                    "auto-resolve: a collision is recorded as a finding, "
+                    "never a winner picked."
+                ),
+            },
+        }
 
     merged = {**existing, **new_evidence}
     if not merged:
@@ -1059,6 +1152,11 @@ def _parser() -> argparse.ArgumentParser:
         "--tier2",
         action="store_true",
         help="audit every tool in the catalog, mechanically (chain mode)",
+    )
+    parser.add_argument(
+        "--duplicates",
+        action="store_true",
+        help="classify duplicate names as live_collision/archived_duplicate (chain mode)",
     )
     parser.add_argument("--out", required=True, help="evidence output directory")
     parser.add_argument(

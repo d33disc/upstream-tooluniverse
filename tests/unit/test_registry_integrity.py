@@ -228,6 +228,54 @@ def _load_currently_drifting_names() -> set[str]:
     }
 
 
+_LIVE_CATEGORY_ENTRY_RE = re.compile(
+    r"^\s*[\"'][A-Za-z0-9_]+[\"']\s*:\s*os\.path\.join\(\s*(?P<args>[^)]*?)\s*\)",
+    re.MULTILINE,
+)
+
+
+def _load_live_collisions() -> dict[str, list[str]]:
+    """Names defined in 2+ ``data/**/*.json`` files where 2+ of those files
+    resolve to a *live* (non-commented) ``default_config.py`` category --
+    a genuine simultaneous-load collision, not hygiene debt. Deliberately
+    re-parses ``default_config.py`` locally rather than importing
+    ``scripts/audit_registration_chain.py``: none of this file's other
+    tests depend on ``scripts/``, and a standing regression gate must not
+    break when a phase-scoped audit script or evidence directory moves.
+    """
+    by_name: dict[str, list[Path]] = {}
+    for jf in DATA_DIR.glob("**/*.json"):
+        if jf.name == "api_keys_catalog.json":
+            continue
+        try:
+            data = json.loads(jf.read_text())
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        items = (
+            data if isinstance(data, list) else [data] if isinstance(data, dict) else []
+        )
+        for item in items:
+            if isinstance(item, dict) and "name" in item:
+                by_name.setdefault(item["name"], []).append(jf.resolve())
+
+    config_text = (SRC / "default_config.py").read_text(encoding="utf-8")
+    live_paths: set[Path] = set()
+    for match in _LIVE_CATEGORY_ENTRY_RE.finditer(config_text):
+        segments = [s.strip().strip("'\"") for s in match.group("args").split(",")[1:]]
+        segments = [s for s in segments if s]
+        if segments:
+            live_paths.add(SRC.joinpath(*segments).resolve())
+
+    collisions: dict[str, list[str]] = {}
+    for name, paths in by_name.items():
+        unique_paths = sorted(set(paths))
+        if len(unique_paths) < 2:
+            continue
+        if sum(1 for p in unique_paths if p in live_paths) >= 2:
+            collisions[name] = [p.relative_to(REPO).as_posix() for p in unique_paths]
+    return collisions
+
+
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
@@ -358,4 +406,32 @@ class TestRegistryIntegrity:
             "these names no longer drift (they now have both a committed "
             "module and a committed tools/__init__.py import) and must be "
             "pruned from the baseline file:\n" + "\n".join(f"  {n}" for n in stale)
+        )
+
+    @pytest.mark.xfail(
+        strict=True,
+        reason=(
+            "Two genuine live tool-name collisions exist at HEAD: "
+            "UniProt_get_proteome (uniprot vs uniprot_proteomes) and "
+            "OpenMeteo_get_air_quality (open_meteo vs open_meteo_airquality) "
+            "-- each name is defined in two simultaneously-live "
+            "default_config.py categories. Renaming, deleting, or picking a "
+            "winner is a D-05 human review decision routed to plan 03-04, "
+            "never an automatic fix here. strict=True: remove this marker "
+            "once 03-04 resolves both, so an unresolved third collision "
+            "cannot slip in silently."
+        ),
+    )
+    def test_no_duplicate_names_across_live_categories(self):
+        """A tool name defined in two live categories is a genuine D-05
+        collision, held open as a loud finding rather than silently
+        reconciled -- see the xfail reason above."""
+        collisions = _load_live_collisions()
+        missing = [
+            f"  {name}  (defining paths: {', '.join(paths)})"
+            for name, paths in sorted(collisions.items())
+        ]
+        assert not missing, (
+            "Live tool-name collisions across 2+ live default_config.py "
+            "categories:\n" + "\n".join(missing)
         )
