@@ -14,7 +14,7 @@ def BVBRC_get_genome(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed genome information from BV-BRC (Bacterial and Viral Bioinformatics Resource Center, ...
 
@@ -31,7 +31,7 @@ def BVBRC_get_genome(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

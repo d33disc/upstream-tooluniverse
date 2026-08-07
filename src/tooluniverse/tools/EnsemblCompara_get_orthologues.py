@@ -17,7 +17,7 @@ def EnsemblCompara_get_orthologues(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Find orthologous genes (genes in different species that evolved from a common ancestor) using Ens...
 
@@ -40,7 +40,7 @@ def EnsemblCompara_get_orthologues(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

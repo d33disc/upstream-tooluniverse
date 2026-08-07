@@ -11,7 +11,7 @@ from ._shared_client import get_shared_client
 def DNA_gibson_design(
     operation: str,
     fragments: list[str],
-    overlap_length: Optional[int | Any] = 20,
+    overlap_length: Optional[int] = 20,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -26,7 +26,7 @@ def DNA_gibson_design(
         Operation type
     fragments : list[str]
         List of DNA fragment sequences (at least 2). Each must be longer than overlap...
-    overlap_length : int | Any
+    overlap_length : int
         Overlap length in bp for Gibson Assembly (default: 20 bp). Must be at least 1.
     stream_callback : Callable, optional
         Callback for streaming output

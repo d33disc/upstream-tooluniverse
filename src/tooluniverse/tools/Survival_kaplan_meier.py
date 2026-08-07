@@ -12,7 +12,7 @@ def Survival_kaplan_meier(
     operation: str,
     durations: list[Any],
     event_observed: list[Any],
-    group_labels: Optional[list[str] | Any] = None,
+    group_labels: Optional[list[str]] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -29,7 +29,7 @@ def Survival_kaplan_meier(
         Observed time durations (e.g., months to event or censoring). All values must...
     event_observed : list[Any]
         Event indicator: 1 = event occurred (death/relapse), 0 = censored. Same lengt...
-    group_labels : list[str] | Any
+    group_labels : list[str]
         Optional group labels for stratified KM analysis (e.g., ['high', 'low', 'high...
     stream_callback : Callable, optional
         Callback for streaming output

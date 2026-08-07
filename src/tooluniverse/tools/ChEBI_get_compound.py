@@ -9,19 +9,19 @@ from ._shared_client import get_shared_client
 
 
 def ChEBI_get_compound(
-    chebi_id: int,
+    chebi_id: int | str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a chemical entity from ChEBI (Chemical Entities of Biological Inte...
 
     Parameters
     ----------
-    chebi_id : int
-        ChEBI numeric identifier (without the 'CHEBI:' prefix). Examples: 15365 (aspi...
+    chebi_id : int | str
+        ChEBI identifier as a bare integer (e.g. 15365) or the 'CHEBI:15365' CURIE fo...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def ChEBI_get_compound(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

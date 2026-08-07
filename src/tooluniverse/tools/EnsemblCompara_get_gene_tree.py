@@ -15,7 +15,7 @@ def EnsemblCompara_get_gene_tree(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the phylogenetic gene tree showing evolutionary relationships of a gene family across species...
 
@@ -34,7 +34,7 @@ def EnsemblCompara_get_gene_tree(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,15 +9,15 @@ from ._shared_client import get_shared_client
 
 
 def CryoET_list_tomograms(
-    operation: str,
     run_id: int,
+    operation: Optional[str] = "list_tomograms",
     limit: Optional[int] = 10,
     offset: Optional[int] = 0,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     List tomographic reconstructions for a specific experimental run from the CryoET Data Portal. Ret...
 
@@ -40,7 +40,7 @@ def CryoET_list_tomograms(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

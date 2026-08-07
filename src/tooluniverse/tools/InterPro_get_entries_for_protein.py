@@ -14,7 +14,7 @@ def InterPro_get_entries_for_protein(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get all InterPro domain and family entries annotated on a specific protein. Performs a reverse lo...
 
@@ -31,7 +31,7 @@ def InterPro_get_entries_for_protein(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

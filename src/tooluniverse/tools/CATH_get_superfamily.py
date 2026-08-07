@@ -14,7 +14,7 @@ def CATH_get_superfamily(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get CATH protein structure superfamily information by CATH ID. CATH classifies protein domain str...
 
@@ -31,7 +31,7 @@ def CATH_get_superfamily(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

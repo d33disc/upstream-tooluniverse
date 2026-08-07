@@ -10,13 +10,13 @@ from ._shared_client import get_shared_client
 
 def ReactomeInteractors_search_entity(
     query: str,
-    species: Optional[str | Any] = None,
-    types: Optional[str | Any] = None,
+    species: Optional[str] = None,
+    types: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> list[Any]:
     """
     Search Reactome for biological entities (proteins, complexes, reactions, pathways) by name or ide...
 
@@ -24,9 +24,9 @@ def ReactomeInteractors_search_entity(
     ----------
     query : str
         Search query - gene name, protein name, pathway name, or Reactome ID. Example...
-    species : str | Any
+    species : str
         Species name filter (default: 'Homo sapiens'). Examples: 'Homo sapiens', 'Mus...
-    types : str | Any
+    types : str
         Entity type filter. Options: 'Protein', 'Complex', 'Reaction', 'Pathway', 'Sm...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -37,7 +37,7 @@ def ReactomeInteractors_search_entity(
 
     Returns
     -------
-    dict[str, Any]
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

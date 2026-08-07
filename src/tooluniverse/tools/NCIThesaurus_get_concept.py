@@ -14,7 +14,7 @@ def NCIThesaurus_get_concept(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about an NCI Thesaurus concept by its code. Returns the concept name, de...
 
@@ -31,7 +31,7 @@ def NCIThesaurus_get_concept(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

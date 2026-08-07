@@ -15,7 +15,7 @@ def UCSC_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search the UCSC Genome Browser for genes, transcripts, or genomic features by name. Returns posit...
 
@@ -34,7 +34,7 @@ def UCSC_search(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

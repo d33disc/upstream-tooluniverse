@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def OmniPath_get_complexes(
     proteins: str,
-    databases: Optional[str | Any] = None,
+    databases: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get protein complex compositions from OmniPath's comprehensive complex database. Integrates 22,00...
 
@@ -23,7 +23,7 @@ def OmniPath_get_complexes(
     ----------
     proteins : str
         UniProt accession(s), comma-separated. Note: gene symbols are NOT supported f...
-    databases : str | Any
+    databases : str
         Filter by source database(s), comma-separated. Options: CORUM, CellPhoneDB, C...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def OmniPath_get_complexes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

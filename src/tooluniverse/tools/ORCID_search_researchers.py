@@ -1,7 +1,7 @@
 """
 ORCID_search_researchers
 
-Search ORCID registry for researchers by keyword query. Returns ORCID iDs matching the search. Su...
+Search ORCID registry for researchers by keyword query. Returns each match's ORCID iD along with ...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def ORCID_search_researchers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search ORCID registry for researchers by keyword query. Returns ORCID iDs matching the search. Su...
+    Search ORCID registry for researchers by keyword query. Returns each match's ORCID iD along with ...
 
     Parameters
     ----------

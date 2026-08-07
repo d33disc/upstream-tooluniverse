@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_get_gene_metadata(
-    operation: str,
+    operation: Optional[str] = "get_var_metadata",
     organism: Optional[str] = "Homo sapiens",
     var_value_filter: Optional[str] = None,
     column_names: Optional[list[str]] = None,

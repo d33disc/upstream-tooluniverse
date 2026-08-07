@@ -21,7 +21,7 @@ def CTD_get_chemical_gene_interactions(
     Parameters
     ----------
     input_terms : str
-        Chemical name, MeSH name, synonym, CAS RN, or MeSH ID. Examples: 'bisphenol A...
+        Chemical name, CAS RN, or MeSH ID. Examples: 'bisphenol A', 'paracetamol' (th...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

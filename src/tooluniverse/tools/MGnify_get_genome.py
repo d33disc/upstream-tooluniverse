@@ -14,7 +14,7 @@ def MGnify_get_genome(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed genome information from the MGnify genome catalog. Returns assembly quality metrics ...
 
@@ -31,7 +31,7 @@ def MGnify_get_genome(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

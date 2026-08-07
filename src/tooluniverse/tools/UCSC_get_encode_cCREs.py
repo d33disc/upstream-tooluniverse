@@ -17,7 +17,7 @@ def UCSC_get_encode_cCREs(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get ENCODE4 candidate cis-Regulatory Elements (cCREs) for a genomic region from UCSC Genome Brows...
 
@@ -40,7 +40,7 @@ def UCSC_get_encode_cCREs(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

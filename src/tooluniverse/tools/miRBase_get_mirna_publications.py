@@ -15,7 +15,7 @@ def miRBase_get_mirna_publications(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Retrieve publications associated with a microRNA from RNAcentral. Returns publication titles, aut...
 
@@ -34,7 +34,7 @@ def miRBase_get_mirna_publications(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

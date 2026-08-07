@@ -15,7 +15,7 @@ def InterPro_get_clan_members(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get all member families in a Pfam clan (superfamily) using the InterPro API. Pfam clans group rel...
 
@@ -34,7 +34,7 @@ def InterPro_get_clan_members(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

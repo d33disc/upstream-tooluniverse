@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def PubChem_get_compound_2D_image_by_CID(
     cid: int,
-    image_size: str,
+    image_size: Optional[str] = "200x200",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get 2D structure image (PNG format) of compound by CID.
 
@@ -34,7 +34,7 @@ def PubChem_get_compound_2D_image_by_CID(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

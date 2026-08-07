@@ -1,7 +1,7 @@
 """
 ols_get_ontology_info
 
-Get metadata for a biomedical ontology in EBI OLS by ontology ID (e.g., 'hp', 'go', 'mondo'). Ret...
+Get detailed information about an ontology
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def ols_get_ontology_info(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get metadata for a biomedical ontology in EBI OLS by ontology ID (e.g., 'hp', 'go', 'mondo'). Ret...
+    Get detailed information about an ontology
 
     Parameters
     ----------

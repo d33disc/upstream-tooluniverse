@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def CryoET_list_annotations(
-    operation: str,
     run_id: int,
+    operation: Optional[str] = "list_annotations",
     curator_recommended_only: Optional[bool] = False,
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
@@ -18,7 +18,7 @@ def CryoET_list_annotations(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     List biological annotations (segmentations, point annotations, surface meshes) for a specific cry...
 
@@ -43,7 +43,7 @@ def CryoET_list_annotations(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

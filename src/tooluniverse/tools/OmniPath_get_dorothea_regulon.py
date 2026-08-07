@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def OmniPath_get_dorothea_regulon(
     tf_gene: str,
-    confidence_levels: Optional[str | Any] = None,
+    confidence_levels: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get the complete DoRothEA regulon for a transcription factor from OmniPath. Returns all target ge...
 
@@ -23,7 +23,7 @@ def OmniPath_get_dorothea_regulon(
     ----------
     tf_gene : str
         Transcription factor gene symbol (e.g., 'TP53', 'MYC', 'STAT3', 'NF2')
-    confidence_levels : str | Any
+    confidence_levels : str
         Comma-separated DoRothEA confidence levels to include (e.g., 'A,B' for high c...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def OmniPath_get_dorothea_regulon(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

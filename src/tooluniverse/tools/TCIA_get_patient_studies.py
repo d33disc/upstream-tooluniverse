@@ -9,24 +9,24 @@ from ._shared_client import get_shared_client
 
 
 def TCIA_get_patient_studies(
-    Collection: Optional[str | Any] = None,
-    PatientID: Optional[str | Any] = None,
-    StudyInstanceUID: Optional[str | Any] = None,
+    Collection: Optional[str] = None,
+    PatientID: Optional[str] = None,
+    StudyInstanceUID: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get study information for patients in The Cancer Imaging Archive (TCIA). Returns study metadata i...
 
     Parameters
     ----------
-    Collection : str | Any
+    Collection : str
         Collection name (e.g., 'TCGA-GBM', 'LIDC-IDRI')
-    PatientID : str | Any
+    PatientID : str
         Patient identifier
-    StudyInstanceUID : str | Any
+    StudyInstanceUID : str
         DICOM Study Instance UID
     stream_callback : Callable, optional
         Callback for streaming output
@@ -37,7 +37,7 @@ def TCIA_get_patient_studies(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

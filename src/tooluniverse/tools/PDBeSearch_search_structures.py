@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def PDBeSearch_search_structures(
     query: str,
-    limit: Optional[int | Any] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> list[Any]:
     """
     Search PDB structures through PDBe's Solr search interface by keyword, protein name, or gene name...
 
@@ -23,7 +23,7 @@ def PDBeSearch_search_structures(
     ----------
     query : str
         Search query - protein name, gene name, or keyword. Supports Solr syntax. Exa...
-    limit : int | Any
+    limit : int
         Maximum results to return (1-50, default 10).
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def PDBeSearch_search_structures(
 
     Returns
     -------
-    dict[str, Any]
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

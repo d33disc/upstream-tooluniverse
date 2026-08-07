@@ -18,7 +18,7 @@ def GTEx_calculate_eqtl(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Calculate custom eQTL for any gene-variant pair in any tissue. Dynamically calculates gene-varian...
 
@@ -43,7 +43,7 @@ def GTEx_calculate_eqtl(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def EBIProteins_get_proteomics_ptm(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get post-translational modification (PTM) evidence from mass spectrometry proteomics for a protei...
 
@@ -31,7 +31,7 @@ def EBIProteins_get_proteomics_ptm(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 MGnify_list_analyses
 
-List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and l...
+List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
 """
 
 from typing import Any, Optional, Callable
@@ -15,9 +15,9 @@ def MGnify_list_analyses(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    List MGnify analyses for a study accession. Returns analysis accessions, pipeline metadata, and l...
+    List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
 
     Parameters
     ----------
@@ -34,7 +34,7 @@ def MGnify_list_analyses(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

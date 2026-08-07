@@ -14,7 +14,7 @@ def HGNC_search_by_location(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search HGNC for genes at a specific chromosomal location. Returns all genes mapped to that cytoge...
 
@@ -31,7 +31,7 @@ def HGNC_search_by_location(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

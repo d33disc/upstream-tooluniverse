@@ -27,7 +27,7 @@ def drugbank_full_search(
     query : str
         Free-text query (e.g. 'DB00945', 'acetylsalicylic', 'Acarbosa').
     search_fields : list[str]
-        Columns to search in. Choose from: 'drugbank_id', 'name', 'synonyms'.
+        Columns to search in. Choose from: 'drugbank_id', 'name', 'synonyms'. Default...
     case_sensitive : bool
         Match text with exact case if true.
     exact_match : bool
@@ -46,8 +46,7 @@ def drugbank_full_search(
     dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
-    if search_fields is None:
-        search_fields = ["drugbank_id", "name", "synonyms"]
+
     # Strip None values so optional parameters don't trigger schema validation errors
     _args = {
         k: v

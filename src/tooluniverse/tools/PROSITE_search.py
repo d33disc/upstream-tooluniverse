@@ -15,7 +15,7 @@ def PROSITE_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> list[Any]:
     """
     Search the PROSITE database for protein motifs, domains, and functional site patterns by keyword....
 
@@ -34,7 +34,7 @@ def PROSITE_search(
 
     Returns
     -------
-    dict[str, Any]
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

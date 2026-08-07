@@ -14,7 +14,7 @@ def OncoTree_list_tissues(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     List all tissue categories in the OncoTree hierarchy. Returns the unique set of tissue/organ name...
 
@@ -31,7 +31,7 @@ def OncoTree_list_tissues(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

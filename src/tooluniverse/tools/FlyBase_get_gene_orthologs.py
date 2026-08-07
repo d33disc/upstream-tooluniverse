@@ -17,7 +17,7 @@ def FlyBase_get_gene_orthologs(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get orthologs of a Drosophila gene across other species from the Alliance of Genome Resources. Re...
 
@@ -40,7 +40,7 @@ def FlyBase_get_gene_orthologs(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

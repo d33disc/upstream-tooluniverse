@@ -1,7 +1,7 @@
 """
 MIBiG_get_stats
 
-Fetch MIBiG repository statistics: total biosynthetic gene clusters plus counts by status, biosyn...
+Get summary statistics from the MIBiG biosynthetic gene cluster repository. Returns total BGC cou...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def MIBiG_get_stats(
     validate: bool = True,
 ) -> Any:
     """
-    Fetch MIBiG repository statistics: total biosynthetic gene clusters plus counts by status, biosyn...
+    Get summary statistics from the MIBiG biosynthetic gene cluster repository. Returns total BGC cou...
 
     Parameters
     ----------

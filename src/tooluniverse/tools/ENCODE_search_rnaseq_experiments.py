@@ -9,10 +9,10 @@ from ._shared_client import get_shared_client
 
 
 def ENCODE_search_rnaseq_experiments(
-    biosample_term_name: Optional[str | Any] = None,
-    biosample: Optional[str | Any] = None,
-    cell_type: Optional[str | Any] = None,
-    tissue: Optional[str | Any] = None,
+    biosample_term_name: Optional[str] = None,
+    biosample: Optional[str] = None,
+    cell_type: Optional[str] = None,
+    tissue: Optional[str] = None,
     organism: Optional[str] = "Homo sapiens",
     assay_type: Optional[str] = "total RNA-seq",
     limit: Optional[int] = 25,
@@ -20,19 +20,19 @@ def ENCODE_search_rnaseq_experiments(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search ENCODE RNA-seq experiments by biosample (cell type or tissue), organism, and assay type (t...
 
     Parameters
     ----------
-    biosample_term_name : str | Any
+    biosample_term_name : str
         Biosample name from ENCODE ontology (e.g., 'K562', 'HepG2', 'GM12878', 'liver...
-    biosample : str | Any
+    biosample : str
         Alias for biosample_term_name. Cell type or tissue (e.g., 'K562', 'liver').
-    cell_type : str | Any
+    cell_type : str
         Alias for biosample_term_name. Cell type (e.g., 'K562', 'HepG2', 'GM12878').
-    tissue : str | Any
+    tissue : str
         Alias for biosample_term_name. Tissue type (e.g., 'liver', 'brain', 'heart').
     organism : str
         Organism scientific name (e.g., 'Homo sapiens', 'Mus musculus').
@@ -49,7 +49,7 @@ def ENCODE_search_rnaseq_experiments(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

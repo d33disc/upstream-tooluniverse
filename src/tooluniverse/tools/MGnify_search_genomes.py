@@ -10,23 +10,20 @@ from ._shared_client import get_shared_client
 
 def MGnify_search_genomes(
     taxonomy: Optional[str] = None,
-    genome_type: Optional[str] = None,
     page: Optional[int] = None,
     page_size: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the MGnify genome catalog for metagenome-assembled genomes (MAGs) and isolate genomes. Fil...
 
     Parameters
     ----------
     taxonomy : str
-        Taxonomy lineage filter. Examples: 'Firmicutes', 'Bacteroidetes', 'Proteobact...
-    genome_type : str
-        Filter by genome source type. Options: 'Isolate', 'MAG'.
+        GTDB taxonomy lineage filter, matched anywhere in the lineage. Examples: 'Bac...
     page : int
         Page number (default 1).
     page_size : int
@@ -40,19 +37,14 @@ def MGnify_search_genomes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     # Strip None values so optional parameters don't trigger schema validation errors
     _args = {
         k: v
-        for k, v in {
-            "taxonomy": taxonomy,
-            "genome_type": genome_type,
-            "page": page,
-            "page_size": page_size,
-        }.items()
+        for k, v in {"taxonomy": taxonomy, "page": page, "page_size": page_size}.items()
         if v is not None
     }
     return get_shared_client().run_one_function(

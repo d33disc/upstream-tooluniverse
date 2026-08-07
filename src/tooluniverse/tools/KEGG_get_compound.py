@@ -14,7 +14,7 @@ def KEGG_get_compound(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get KEGG compound/metabolite details including names, formula, molecular weight, associated pathw...
 
@@ -31,7 +31,7 @@ def KEGG_get_compound(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

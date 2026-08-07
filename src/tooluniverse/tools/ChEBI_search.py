@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def ChEBI_search(
     query: str,
-    limit: Optional[int | Any] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search the ChEBI database for chemical entities by name, formula, or keyword. Uses Elasticsearch-...
 
@@ -23,7 +23,7 @@ def ChEBI_search(
     ----------
     query : str
         Search query string - compound name, synonym, formula, or keyword. Examples: ...
-    limit : int | Any
+    limit : int
         Maximum number of results to return. Default: 10. Max: 100.
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def ChEBI_search(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

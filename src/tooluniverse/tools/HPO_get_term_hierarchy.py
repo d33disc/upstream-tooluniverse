@@ -10,12 +10,12 @@ from ._shared_client import get_shared_client
 
 def HPO_get_term_hierarchy(
     term_id: str,
-    direction: Optional[str | Any] = None,
+    direction: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get the parent or child terms of an HPO phenotype term in the ontology hierarchy. HPO is organize...
 
@@ -23,7 +23,7 @@ def HPO_get_term_hierarchy(
     ----------
     term_id : str
         HPO term identifier (e.g., 'HP:0001250'). Must start with 'HP:' followed by 7...
-    direction : str | Any
+    direction : str
         Direction to traverse: 'children' (more specific terms, default) or 'parents'...
     stream_callback : Callable, optional
         Callback for streaming output
@@ -34,7 +34,7 @@ def HPO_get_term_hierarchy(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 OpenTargets_get_target_expression_by_ensemblID
 
-Retrieve baseline RNA and protein expression for a target across ~119 tissues and cell types (Hum...
+Retrieve baseline expression summary statistics for a target across tissues and cell types (GTEx,...
 """
 
 from typing import Any, Optional, Callable
@@ -16,7 +16,7 @@ def OpenTargets_get_target_expression_by_ensemblID(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve baseline RNA and protein expression for a target across ~119 tissues and cell types (Hum...
+    Retrieve baseline expression summary statistics for a target across tissues and cell types (GTEx,...
 
     Parameters
     ----------

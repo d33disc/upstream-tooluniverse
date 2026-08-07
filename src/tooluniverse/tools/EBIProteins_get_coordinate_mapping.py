@@ -14,7 +14,7 @@ def EBIProteins_get_coordinate_mapping(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Map UniProt protein positions to genomic coordinates at exon-level resolution. Returns chromosome...
 
@@ -31,7 +31,7 @@ def EBIProteins_get_coordinate_mapping(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

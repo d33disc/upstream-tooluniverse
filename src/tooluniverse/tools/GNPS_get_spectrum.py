@@ -14,7 +14,7 @@ def GNPS_get_spectrum(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Retrieve a mass spectrometry (MS/MS) reference spectrum from the GNPS spectral library using a Un...
 
@@ -31,7 +31,7 @@ def GNPS_get_spectrum(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

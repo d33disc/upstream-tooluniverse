@@ -21,7 +21,7 @@ def CTD_get_disease_chemicals(
     Parameters
     ----------
     input_terms : str
-        Disease name, MeSH name, synonym, or MeSH/OMIM ID. Examples: 'Breast Neoplasm...
+        Disease name, MeSH/OMIM ID. Examples: 'breast neoplasm' (singular -- the plur...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

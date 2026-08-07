@@ -9,20 +9,20 @@ from ._shared_client import get_shared_client
 
 
 def GEO_search_rnaseq_datasets(
-    query: Optional[str | Any] = None,
+    query: Optional[str] = None,
     organism: Optional[str] = "Homo sapiens",
     limit: Optional[int] = 20,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search NCBI GEO for RNA-seq gene expression datasets by query keyword, disease, tissue, or gene o...
 
     Parameters
     ----------
-    query : str | Any
+    query : str
         Search query (e.g., 'BRCA1 breast cancer', 'T cell activation', 'Alzheimer di...
     organism : str
         Organism scientific name (e.g., 'Homo sapiens', 'Mus musculus').
@@ -37,7 +37,7 @@ def GEO_search_rnaseq_datasets(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

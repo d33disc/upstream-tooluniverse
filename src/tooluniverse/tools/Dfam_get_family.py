@@ -14,7 +14,7 @@ def Dfam_get_family(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information for a specific Dfam transposable element family by accession. Returns co...
 
@@ -31,7 +31,7 @@ def Dfam_get_family(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

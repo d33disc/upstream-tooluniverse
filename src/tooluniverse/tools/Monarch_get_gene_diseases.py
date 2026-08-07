@@ -1,7 +1,7 @@
 """
 Monarch_get_gene_diseases
 
-Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and...
+Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:1...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def Monarch_get_gene_diseases(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Fetch Monarch Initiative gene-to-disease associations for a gene CURIE. Returns disease links and...
+    Get diseases associated with a gene from Monarch Initiative. Input is a gene CURIE (e.g., 'HGNC:1...
 
     Parameters
     ----------

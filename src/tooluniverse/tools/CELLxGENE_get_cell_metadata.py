@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_get_cell_metadata(
-    operation: str,
     obs_value_filter: str,
+    operation: Optional[str] = "get_obs_metadata",
     organism: Optional[str] = "Homo sapiens",
     column_names: Optional[list[str]] = None,
     census_version: Optional[str] = "stable",

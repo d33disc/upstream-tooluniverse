@@ -46,8 +46,7 @@ def drugbank_vocab_search(
     dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
-    if search_fields is None:
-        search_fields = ["Common name", "Synonyms", "DrugBank ID"]
+
     # Strip None values so optional parameters don't trigger schema validation errors
     _args = {
         k: v

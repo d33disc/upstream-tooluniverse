@@ -10,13 +10,13 @@ from ._shared_client import get_shared_client
 
 def ClinicalTrials_get_field_values(
     field: str,
-    query_cond: Optional[str | Any] = None,
+    query_cond: Optional[str] = None,
     page_size: Optional[int] = 50,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get value distribution for a specific field across ClinicalTrials.gov studies. Returns all unique...
 
@@ -24,7 +24,7 @@ def ClinicalTrials_get_field_values(
     ----------
     field : str
         Field name to get value counts for. Common fields: 'OverallStatus' (trial sta...
-    query_cond : str | Any
+    query_cond : str
         Optional condition filter to restrict value counts to a specific disease area.
     page_size : int
         Number of field values to return (default 50).
@@ -37,7 +37,7 @@ def ClinicalTrials_get_field_values(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

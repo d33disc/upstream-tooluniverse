@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_download_h5ad(
-    operation: str,
     dataset_id: str,
+    operation: Optional[str] = "download_h5ad",
     output_path: Optional[str] = None,
     census_version: Optional[str] = "stable",
     *,

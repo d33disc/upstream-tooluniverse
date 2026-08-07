@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CELLxGENE_get_presence_matrix(
-    operation: str,
+    operation: Optional[str] = "get_presence_matrix",
     organism: Optional[str] = "Homo sapiens",
     census_version: Optional[str] = "stable",
     *,
