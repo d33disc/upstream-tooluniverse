@@ -4,6 +4,7 @@ Unit tests for NICE Clinical Guidelines Search tool.
 """
 
 import pytest
+import re
 import sys
 import os
 
@@ -223,12 +224,15 @@ class TestNICEGuidelinesTool:
                 if "/guidance/" in url:
                     # Extract guideline ID from URL
                     guideline_id = url.split("/guidance/")[-1].split("/")[0]
-                    # NICE guidance IDs aren't limited to ng/cg (technology
-                    # appraisals use "ta", quality standards "qs", etc.), and
-                    # not-yet-published guidance uses the literal segment
-                    # "indevelopment" instead of an ID. Just check extraction
-                    # produced something.
                     assert len(guideline_id) > 0
+                    # NICE guidance IDs aren't limited to ng/cg: technology
+                    # appraisals use "ta", quality standards "qs", public
+                    # health "ph", etc. (a letter prefix + digits). Not-yet-
+                    # published guidance uses the literal segment
+                    # "indevelopment" instead of an ID.
+                    assert guideline_id == "indevelopment" or re.match(
+                        r"^[a-z]{2,4}\d+$", guideline_id
+                    ), f"unexpected guideline ID shape: {guideline_id!r}"
 
 
 if __name__ == "__main__":
