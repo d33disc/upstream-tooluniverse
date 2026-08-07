@@ -14,7 +14,7 @@ This milestone moves from a protected, measurable fork baseline to a staged upst
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Protected Sync Baseline** - Establish exact revisions, measurable behavior, and the fork-specific preservation contract
-- [ ] **Phase 2: Upstream Main Integration** - Integrate upstream main while retaining custom behavior and resolving conflicts deliberately
+- [x] **Phase 2: Upstream Main Integration** - Integrate upstream main while retaining custom behavior and resolving conflicts deliberately
 - [ ] **Phase 3: Follow-up and Catalog Reconciliation** - Resolve PR #161 status and restore a coherent, fully registered runtime catalog
 - [ ] **Phase 4: Documentation and Semantic Index** - Align documentation and embeddings with the synchronized loadable catalog
 - [ ] **Phase 5: Cross-Surface Certification** - Prove runtime compatibility, regression safety, and representative behavior on every supported surface
