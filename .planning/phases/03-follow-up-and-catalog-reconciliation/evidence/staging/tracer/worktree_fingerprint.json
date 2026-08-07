@@ -1,18 +1,24 @@
 {
   "by_prefix": {
+    ".planning/phases/03-follow-up-and-catalog-reconciliation/evidence/staging/tracer/": 4,
     "ralph-specs/fleet/": 1,
     "scripts/": 1,
     "src/tooluniverse/": 1,
-    "src/tooluniverse/tools/": 2660
+    "src/tooluniverse/tools/": 2660,
+    "tests/unit/": 1
   },
-  "captured_at": "2026-08-07T12:34:33.696Z",
-  "count": 2663,
-  "digest": "65316ac281288d361f9cf9c1523c675285f29c8e28a0d04f978598ab0fc53b9f",
+  "captured_at": "2026-08-07T12:56:56.820Z",
+  "count": 2668,
+  "digest": "cc701e225a958dee03b1e9421675ea4053ce50bfca7a3285c6c7ff8058032dd7",
   "max_mtime_src_tools": {
     "epoch": 1786051950.4263816,
     "iso": "2026-08-06T21:32:30.426Z"
   },
   "paths": [
+    ".planning/phases/03-follow-up-and-catalog-reconciliation/evidence/staging/tracer/SHA256SUMS",
+    ".planning/phases/03-follow-up-and-catalog-reconciliation/evidence/staging/tracer/chain_tracer.json",
+    ".planning/phases/03-follow-up-and-catalog-reconciliation/evidence/staging/tracer/git.json",
+    ".planning/phases/03-follow-up-and-catalog-reconciliation/evidence/staging/tracer/worktree_fingerprint.json",
     "ralph-specs/fleet/results/",
     "scripts/audit_registration_chain.py",
     "src/tooluniverse/_lazy_registry_static.py",
@@ -2675,6 +2681,7 @@
     "src/tooluniverse/tools/visualize_molecule_3d.py",
     "src/tooluniverse/tools/visualize_protein_structure_3d.py",
     "src/tooluniverse/tools/web_api_documentation_search.py",
-    "src/tooluniverse/tools/web_search.py"
+    "src/tooluniverse/tools/web_search.py",
+    "tests/unit/test_audit_registration_chain.py"
   ]
 }

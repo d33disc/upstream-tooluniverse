@@ -3,8 +3,10 @@
     "gated": false,
     "grep_found": true,
     "missing_keys": [],
+    "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
     "schema_has_parameters": true,
-    "tool": "DegreesOfUnsaturation_calculate"
+    "tool": "DegreesOfUnsaturation_calculate",
+    "verdict": "pass"
   },
   "links": [
     {

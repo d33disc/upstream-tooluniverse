@@ -594,7 +594,14 @@ def classify_chain(links: list[dict[str, Any]], gated: list[str]) -> str:
     not all ok but *gated* (unmet ``required_api_keys``) -> ``gated``, never
     ``broken`` -- a credential gap must never be reported as catalog damage.
     Otherwise -> ``broken``.
+
+    An empty *links* list is rejected as ``broken`` rather than falling
+    through to Python's vacuous ``all([]) is True`` -- the same empty-as-
+    success trap this repository has a recorded history of, applied to the
+    chain verdict rather than a tool response.
     """
+    if not links:
+        return "broken"
     category_link = next(
         (link for link in links if link.get("link") == "category"), None
     )
@@ -658,13 +665,53 @@ def audit_names(names: Iterable[str], repo_root: Path | str) -> list[dict[str, A
 # ---------------------------------------------------------------------------
 
 
+def assert_discovery_contract(discovery: dict[str, Any]) -> dict[str, Any]:
+    """Pure verdict over an already-gathered discovery result.
+
+    Mirrors ``scripts/probe_custom_tools.py``'s ``assert_probe_contract``
+    split: this function only classifies facts ``probe_discovery`` already
+    gathered (``grep_found``, ``schema_has_parameters``, ``gated``,
+    ``missing_keys``) and never touches ``ToolUniverse`` itself, so it is
+    provable by ``tests/unit/test_audit_registration_chain.py`` without
+    importing the package. A gated tool always yields ``gated`` regardless
+    of the other fields -- the environment cannot masquerade as catalog
+    damage. Otherwise, an empty result (``grep_found`` and
+    ``schema_has_parameters`` both false) with no gating signal is a
+    failure, not a pass -- this repository has a recorded history of an
+    empty result masquerading as success past a health gate.
+    """
+    missing_keys = list(discovery.get("missing_keys") or [])
+    if discovery.get("gated"):
+        return {
+            "verdict": "gated",
+            "reason": "required_api_keys unmet",
+            "missing_keys": missing_keys,
+        }
+    if discovery.get("grep_found") and discovery.get("schema_has_parameters"):
+        return {
+            "verdict": "pass",
+            "reason": (
+                "grep_tools found the tool and get_tool_info returned a "
+                "parameter schema"
+            ),
+            "missing_keys": [],
+        }
+    return {
+        "verdict": "fail",
+        "reason": (
+            "empty discovery result (grep_tools/get_tool_info) with no gating signal"
+        ),
+        "missing_keys": [],
+    }
+
+
 def probe_discovery(tool_name: str, repo_root: Path | str) -> dict[str, Any]:
     """Instantiate ``ToolUniverse`` and probe the discovery surface for one tool.
 
-    An empty result with no gating signal is a failure, not a pass -- this
-    repository has a recorded history of empty-as-success passing a health
-    gate, so ``grep_found``/``schema_has_parameters`` are asserted explicitly
-    rather than inferred from the absence of an error.
+    Gathers ``grep_found``/``schema_has_parameters``/``gated``/
+    ``missing_keys`` from a live ``ToolUniverse`` instance, then defers the
+    pass/gated/fail conclusion to ``assert_discovery_contract`` so that
+    decision stays pure and independently testable.
     """
     repo_root = Path(repo_root)
     src_path = str(repo_root / "src")
@@ -678,30 +725,35 @@ def probe_discovery(tool_name: str, repo_root: Path | str) -> dict[str, Any]:
         tu.load_tools(include_tools=[tool_name])
         gated_map = getattr(tu, "_excluded_api_key_tools", {}) or {}
         if tool_name in gated_map:
-            return {
+            facts = {
                 "tool": tool_name,
                 "gated": True,
                 "missing_keys": sorted(gated_map[tool_name]),
                 "grep_found": False,
                 "schema_has_parameters": False,
             }
-
-        grep_found = bool(
-            tu.find_tools_by_pattern(tool_name, search_in="name", case_sensitive=True)
-        )
-        spec = tu.tool_specification(tool_name)
-        schema_has_parameters = bool(
-            isinstance(spec, dict) and ("parameter" in spec or "parameters" in spec)
-        )
-        return {
-            "tool": tool_name,
-            "gated": False,
-            "missing_keys": [],
-            "grep_found": grep_found,
-            "schema_has_parameters": schema_has_parameters,
-        }
+        else:
+            grep_found = bool(
+                tu.find_tools_by_pattern(
+                    tool_name, search_in="name", case_sensitive=True
+                )
+            )
+            spec = tu.tool_specification(tool_name)
+            schema_has_parameters = bool(
+                isinstance(spec, dict) and ("parameter" in spec or "parameters" in spec)
+            )
+            facts = {
+                "tool": tool_name,
+                "gated": False,
+                "missing_keys": [],
+                "grep_found": grep_found,
+                "schema_has_parameters": schema_has_parameters,
+            }
     finally:
         tu.close()
+
+    verdict_info = assert_discovery_contract(facts)
+    return {**facts, **verdict_info}
 
 
 # ---------------------------------------------------------------------------
