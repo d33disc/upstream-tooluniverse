@@ -83,6 +83,15 @@ REPO_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 PR161_MERGE_OID = "16af425c053c306a658c96e254b4c4114338dd11"
 EXCLUDED_DEFINITION_FILE = "api_keys_catalog.json"
 
+# Phase 2's landed merge (f81448f2) -- Tier 1's hand-resolved-file source.
+# Distinct from PR161_MERGE_OID above: that one is SYNC-03's ancestor check
+# for the single-tool tracer; this one is Wave 2's Tier 1 scope derivation.
+MERGED_OID = "f81448f2047a6f35bd552956a0d9990019a39eb1"
+UNION_JSON_DEFAULT_REL = (
+    ".planning/phases/02-upstream-main-integration/evidence/"
+    "a4d3d95a096a14ce4d147faa20334d24f8db9f9a/union.json"
+)
+
 # Base classes resolved outside the lazy registry -- mirrors
 # tests/unit/test_registry_integrity.py's ``special`` allowance set exactly.
 _SPECIAL_TYPES = frozenset(
@@ -661,6 +670,262 @@ def audit_names(names: Iterable[str], repo_root: Path | str) -> list[dict[str, A
 
 
 # ---------------------------------------------------------------------------
+# 03-02 Wave 2: two-tier full-catalog audit on one joinable verdict field.
+#
+# Tier 1 scopes to every tool Phase 2's merge actually touched (the hand-
+# resolved set plus the both-sides data/*.json set); Tier 2 runs mechanically
+# over the whole catalog. Both call audit_names/classify_chain unchanged, so
+# they share one verdict schema and join on tool name without re-derivation.
+# ---------------------------------------------------------------------------
+
+EXCLUSION_RULE = (
+    "names containing ':' are non-Python-module catalog entries (e.g. the "
+    "'skill:'-prefixed skill-catalog entries) -- they have no generated "
+    "module or implementing class to audit, so both tiers exclude them from "
+    "the six-link check rather than silently mis-scoring them as broken. "
+    "Counted here, not dropped without a trace."
+)
+
+
+def tier1_scope(repo_root: Path | str, union_json_path: Path | str) -> dict[str, Any]:
+    """Derive Tier 1's scope from Phase 2's own recorded artifacts.
+
+    Two independent sources, unioned -- never a list typed into this plan:
+
+    - ``hand_resolved_files``: every path ``git diff-tree --cc <MERGED_OID>
+      --name-only`` reports for Phase 2's landed merge, excluding that
+      command's own leading commit-OID header line.
+    - ``union_files``: the ``files[].path`` array Phase 2's own
+      ``union.json`` recorded for the both-sides ``data/*.json`` set (213 at
+      planning time).
+
+    Every ``src/tooluniverse/data/**/*.json`` path in either source
+    contributes its defined tool names to ``names`` via a *recursive*
+    ``load_definitions`` lookup -- confirmed necessary, not merely
+    defensive: one measured union.json path
+    (``data/packages/machine_learning_tools.json``) is nested one level
+    under ``data/``, which a non-recursive glob would silently miss.
+
+    Raises ``RuntimeError`` if either source resolves to zero paths -- a
+    silently empty Tier 1 would look green while proving nothing.
+    """
+    repo_root = Path(repo_root)
+
+    diff_tree = subprocess.run(
+        ["git", "diff-tree", "--cc", MERGED_OID, "--name-only"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    lines = [line for line in diff_tree.stdout.splitlines() if line]
+    if not lines or lines[0] != MERGED_OID:
+        raise RuntimeError(
+            "tier1_scope: expected `git diff-tree --cc "
+            f"{MERGED_OID} --name-only` to start with its own commit OID; "
+            f"got {lines[:1]!r}"
+        )
+    hand_resolved_files = sorted(lines[1:])
+    if not hand_resolved_files:
+        raise RuntimeError(
+            f"tier1_scope: git diff-tree --cc {MERGED_OID} yielded zero "
+            "hand-resolved paths -- Tier 1 would be silently empty"
+        )
+
+    union_data = json.loads(Path(union_json_path).read_text(encoding="utf-8"))
+    union_files = sorted(
+        entry["path"]
+        for entry in union_data.get("files", [])
+        if isinstance(entry, dict) and entry.get("path")
+    )
+    if not union_files:
+        raise RuntimeError(
+            f"tier1_scope: {union_json_path} yielded zero both-sides paths "
+            "-- Tier 1 would be silently empty"
+        )
+
+    scope_paths = sorted(set(hand_resolved_files) | set(union_files))
+    scope_json_paths = {
+        (repo_root / p).resolve()
+        for p in scope_paths
+        if p.startswith("src/tooluniverse/data/") and p.endswith(".json")
+    }
+
+    data_dir = repo_root / "src" / "tooluniverse" / "data"
+    definitions = load_definitions(data_dir, recursive=True)
+    names = sorted(
+        name
+        for name, entries in definitions.items()
+        if any(entry["path"] in scope_json_paths for entry in entries)
+    )
+
+    return {
+        "hand_resolved_files": hand_resolved_files,
+        "union_files": union_files,
+        "paths": scope_paths,
+        "names": names,
+    }
+
+
+def run_full_audit(repo_root: Path | str, tier: str) -> dict[str, Any]:
+    """Run the unchanged six-link audit over one tier's resolved name set.
+
+    ``tier1`` scopes to ``tier1_scope``'s resolved names; ``tier2`` scopes to
+    every name ``load_definitions(recursive=True)`` finds catalog-wide. Both
+    exclude colon-containing (non-Python-module) names before calling
+    ``audit_names``, so every emitted record carries the same six-link
+    ``verdict`` schema and the two tiers join on tool name with no
+    downstream re-derivation.
+    """
+    repo_root = Path(repo_root)
+    data_dir = repo_root / "src" / "tooluniverse" / "data"
+
+    if tier == "tier1":
+        scope = tier1_scope(repo_root, repo_root / UNION_JSON_DEFAULT_REL)
+        names = [n for n in scope["names"] if ":" not in n]
+        records = audit_names(names, repo_root)
+        return {"scope": scope, "records": records}
+    if tier == "tier2":
+        all_names = load_definitions(data_dir, recursive=True).keys()
+        names = [n for n in all_names if ":" not in n]
+        records = audit_names(names, repo_root)
+        return {"records": records}
+    raise ValueError(f"run_full_audit: unknown tier {tier!r}")
+
+
+def _colon_excluded_count(repo_root: Path) -> int:
+    """Catalog-wide count of colon-containing (non-Python-module) names."""
+    data_dir = repo_root / "src" / "tooluniverse" / "data"
+    return sum(1 for name in load_definitions(data_dir, recursive=True) if ":" in name)
+
+
+def _verdict_summary(registration_chain: dict[str, Any]) -> dict[str, dict[str, int]]:
+    """Per-tier verdict-count rollup: ``intact``/``gated``/``archived``/``broken``."""
+    summary: dict[str, dict[str, int]] = {}
+    for tier_name in ("tier1", "tier2"):
+        tier = registration_chain.get(tier_name)
+        if tier is None:
+            continue
+        counts = {"intact": 0, "gated": 0, "archived": 0, "broken": 0}
+        for record in tier["records"]:
+            counts[record["verdict"]] += 1
+        summary[tier_name] = counts
+    return summary
+
+
+def _collect_secrets(records: Iterable[dict[str, Any]]) -> tuple[str, ...]:
+    """Env-var values for any ``required_api_keys`` set across *records*.
+
+    Generalizes the single-tool tracer's own secret collection (``main``'s
+    ``set_keys``/``secrets`` pair) to the full catalog, so
+    ``publish_evidence``'s credential canary can reject a leaked value
+    across every record this run touched, not just one tool's.
+    """
+    set_keys: set[str] = set()
+    for record in records:
+        required = record.get("required_keys") or []
+        missing = set(record.get("missing_keys") or [])
+        set_keys.update(key for key in required if key not in missing)
+    return tuple(
+        value for value in (os.environ.get(key) for key in sorted(set_keys)) if value
+    )
+
+
+def _load_existing_chain_evidence(out_dir: Path) -> dict[str, Any]:
+    """Read back already-published ``chain/`` evidence (JSON files, not
+    ``SHA256SUMS``) so a flag-scoped invocation composes with earlier output
+    in the same directory instead of clobbering it.
+
+    ``publish_evidence`` requires an empty output directory (it stages then
+    atomically renames), so composing across independent ``--tier1``/
+    ``--tier2`` and ``--duplicates`` invocations into one ``chain/``
+    directory means reading whatever is already published there first and
+    re-including it in the next call's evidence dict.
+    """
+    existing: dict[str, Any] = {}
+    if out_dir.is_dir():
+        for path in sorted(out_dir.glob("*.json")):
+            try:
+                existing[path.stem] = json.loads(path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                continue
+    return existing
+
+
+def _run_chain_mode(args: argparse.Namespace, repo_root: Path) -> int:
+    """CLI handler for ``--tier1``/``--tier2``.
+
+    Writes into the ``chain/`` evidence directory, composing with whatever
+    an earlier invocation already published there (see
+    ``_load_existing_chain_evidence``) rather than requiring both flags in
+    one run.
+    """
+    out_dir = Path(args.out)
+    if not out_dir.is_absolute():
+        out_dir = (Path.cwd() / out_dir).resolve()
+
+    existing = _load_existing_chain_evidence(out_dir)
+    new_evidence: dict[str, Any] = {}
+    records_for_secrets: list[dict[str, Any]] = []
+
+    if args.tier1 or args.tier2:
+        head_oid = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        registration_chain: dict[str, Any] = {"head_oid": head_oid}
+        if args.tier1:
+            tier1_result = run_full_audit(repo_root, "tier1")
+            registration_chain["tier1"] = tier1_result
+            records_for_secrets.extend(tier1_result["records"])
+        if args.tier2:
+            tier2_result = run_full_audit(repo_root, "tier2")
+            registration_chain["tier2"] = tier2_result
+            records_for_secrets.extend(tier2_result["records"])
+        registration_chain["summary"] = _verdict_summary(registration_chain)
+        registration_chain["exclusions"] = {
+            "count": _colon_excluded_count(repo_root),
+            "rule": EXCLUSION_RULE,
+        }
+        new_evidence["registration_chain"] = registration_chain
+
+    merged = {**existing, **new_evidence}
+    if not merged:
+        print(
+            "error: chain mode requires at least one of --tier1/--tier2/--duplicates",
+            file=sys.stderr,
+        )
+        return 2
+
+    secrets = _collect_secrets(records_for_secrets)
+
+    if out_dir.exists():
+        if out_dir == repo_root or repo_root not in out_dir.parents:
+            print(
+                f"error: refusing to clear --out {out_dir} -- it is not a "
+                f"strict subdirectory of the repository root {repo_root}",
+                file=sys.stderr,
+            )
+            return 2
+        shutil.rmtree(out_dir)
+
+    published = publish_evidence(merged, out_dir, secrets=secrets)
+    verify_checksums(published)
+
+    summary = {"out": str(published), "wrote": sorted(new_evidence.keys())}
+    if args.json:
+        print(json.dumps(summary, indent=2, sort_keys=True))
+    else:
+        print(
+            f"chain evidence -> {published} ({', '.join(sorted(new_evidence.keys()))})"
+        )
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # CAT-02: discovery surface (grep_tools path + get_tool_info schema).
 # ---------------------------------------------------------------------------
 
@@ -785,6 +1050,16 @@ def _ensure_capable_interpreter(repo_root: Path) -> None:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tool", help="single tool name to audit (tracer mode)")
+    parser.add_argument(
+        "--tier1",
+        action="store_true",
+        help="audit every tool Phase 2's merge touched (chain mode)",
+    )
+    parser.add_argument(
+        "--tier2",
+        action="store_true",
+        help="audit every tool in the catalog, mechanically (chain mode)",
+    )
     parser.add_argument("--out", required=True, help="evidence output directory")
     parser.add_argument(
         "--repo", default=None, help="repository root (default: this script's own repo)"
@@ -800,6 +1075,9 @@ def main(argv: list[str] | None = None) -> int:
     repo_root = Path(args.repo).resolve() if args.repo else REPO_ROOT_DEFAULT
 
     _ensure_capable_interpreter(repo_root)
+
+    if args.tier1 or args.tier2 or getattr(args, "duplicates", False):
+        return _run_chain_mode(args, repo_root)
 
     if not args.tool:
         print("error: --tool is required (single-tool tracer mode)", file=sys.stderr)
