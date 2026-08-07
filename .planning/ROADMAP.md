@@ -103,7 +103,21 @@ Plans:
   3. Users can locate representative upstream and custom tools with `grep_tools` and inspect their exact schemas with `get_tool_info`.
   4. The runtime catalog loads without duplicate public names or stale generated registry references.
 
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — Tracer: re-derive PR #161 ancestry at the live HEAD, walk one credential-free tool through all six registration links plus `grep_tools`/`get_tool_info`, and fingerprint the pre-existing dirty working tree.
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 03-02-PLAN.md — Two-tier six-link audit (Phase 2's touched set plus the full catalog), links 5-6 gated in `test_registry_integrity.py` against a reviewed drift baseline, archived-aware duplicate-name classification.
+- [ ] 03-03-PLAN.md — Discovery smoke over a mechanically selected, credential-gated-aware sample spanning new-upstream and preserved-custom tools.
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 03-04-PLAN.md — Credential-aware regeneration guard in a disposable worktree, blocking decision checkpoint for the dirty working tree and the two live name collisions, published evidence bundle and traceability.
 
 ### Phase 4: Documentation and Semantic Index
 
@@ -142,6 +156,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Protected Sync Baseline | 5/5 | Complete | 2026-08-04 |
 | 2. Upstream Main Integration | 4/6 | In Progress|  |
-| 3. Follow-up and Catalog Reconciliation | 0/TBD | Not started | - |
+| 3. Follow-up and Catalog Reconciliation | 0/4 | Not started | - |
 | 4. Documentation and Semantic Index | 0/TBD | Not started | - |
 | 5. Cross-Surface Certification | 0/TBD | Not started | - |
