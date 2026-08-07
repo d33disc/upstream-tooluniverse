@@ -223,8 +223,12 @@ class TestNICEGuidelinesTool:
                 if "/guidance/" in url:
                     # Extract guideline ID from URL
                     guideline_id = url.split("/guidance/")[-1].split("/")[0]
+                    # NICE guidance IDs aren't limited to ng/cg (technology
+                    # appraisals use "ta", quality standards "qs", etc.), and
+                    # not-yet-published guidance uses the literal segment
+                    # "indevelopment" instead of an ID. Just check extraction
+                    # produced something.
                     assert len(guideline_id) > 0
-                    assert guideline_id.startswith("ng") or guideline_id.startswith("cg")
 
 
 if __name__ == "__main__":
