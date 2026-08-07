@@ -549,17 +549,27 @@ def _format_files(paths: List[str]) -> None:
 
     pre_commit = shutil.which("pre-commit")
     if pre_commit:
-        # Run pre-commit on specific files to match repo config filters
+        # Run pre-commit on specific files to match repo config filters.
+        # A resolvable pre-commit can still fail at runtime (e.g. a pyenv
+        # shim whose tool is absent from the active version exits 127), so
+        # only trust it if every batch actually succeeded; otherwise fall
+        # through to the ruff fallback below.
+        # Note: pre-commit exits 1 when hooks modify files, which is success
+        # for our purposes -- treat only rc > 1 (127 = shim miss, 2 = usage
+        # error) as a broken runner.
+        pre_commit_ok = True
         for batch in _chunked(paths, 80):
             try:
-                subprocess.run(
+                result = subprocess.run(
                     [pre_commit, "run", "--files", *batch],
                     check=False,
                 )
+                if result.returncode > 1:
+                    pre_commit_ok = False
             except Exception:
-                # Best-effort; continue to fallback below
-                pass
-        return
+                pre_commit_ok = False
+        if pre_commit_ok:
+            return
 
     # Fallback to ruff formatter and linter to match pre-commit hooks
     # Pre-commit uses: ruff-format and ruff-check with --fix
