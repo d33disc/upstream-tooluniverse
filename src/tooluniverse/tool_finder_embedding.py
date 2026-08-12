@@ -34,6 +34,10 @@ KNOWN_ENCODERS = {
         "tool_finder_model": "text-embedding-3-large",
         "embedding_backend": "openai",
     },
+    "hf-minilm": {
+        "tool_finder_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "embedding_backend": "huggingface",
+    },
     "openai-3-small": {
         "tool_finder_model": "text-embedding-3-small",
         "embedding_backend": "openai",
@@ -91,7 +95,7 @@ class ToolFinderEmbedding(BaseTool):
         )
         if _legacy:
             self.openai_embedding_model, _want_hosted = _legacy, True
-        elif _backend in ("openai", "azure", "hosted"):
+        elif _backend in ("openai", "azure", "hosted", "huggingface"):
             self.openai_embedding_model, _want_hosted = toolfinder_model, True
         else:
             self.openai_embedding_model, _want_hosted = None, False
@@ -109,10 +113,14 @@ class ToolFinderEmbedding(BaseTool):
             try:
                 from .database_setup.provider_resolver import resolve_provider
 
+                # Explicitly configured backend wins over credential-order
+                # autodetection (azure > openai > huggingface > local): a user
+                # who sets embedding_backend: huggingface gets HF even when an
+                # OPENAI_API_KEY also exists in the environment.
                 prov = resolve_provider(
-                    None
-                )  # azure > openai > huggingface > local, by creds
-                if prov in ("azure", "openai"):
+                    _backend if _backend in ("openai", "azure", "huggingface") else None
+                )
+                if prov in ("azure", "openai", "huggingface"):
                     self._embed_provider = prov
             except Exception as e:  # noqa: BLE001
                 logger.warning("Could not resolve hosted embedding provider: %s", e)

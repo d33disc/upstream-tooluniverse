@@ -22,36 +22,134 @@
           "default": 25
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
-    "required": ["query"],
-    "required_api_keys": ["USPTO_API_KEY"],
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "numFound": {"type": "integer"},
-        "start": {"type": "integer"},
+        "numFound": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "integer"
+        },
         "docs": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "patentApplicationNumber": {"type": "string"},
-              "citedDocumentIdentifier": {"type": "string"},
-              "citationCategoryCode": {"type": "string", "description": "X=anticipation, Y=obviousness, A=background"},
-              "relatedClaimNumberText": {"type": "string"},
-              "passageLocationText": {"type": "array"},
-              "examinerCitedReferenceIndicator": {"type": "boolean"},
-              "officeActionCategory": {"type": "string"},
-              "officeActionDate": {"type": "string"}
+              "officeActionDate": {
+                "type": "string",
+                "description": "The date the office action was recorded."
+              },
+              "relatedClaimNumberText": {
+                "type": "string",
+                "description": "(Key) A collection of claims related to current citation."
+              },
+              "applicantCitedExaminerReferenceIndicator": {
+                "type": "boolean",
+                "description": "Whether the citation was retrieved from Form PTO-1449 (applicant-submitted)."
+              },
+              "createUserIdentifier": {
+                "type": "string",
+                "description": "Job identifier that initiated the insert of the entity."
+              },
+              "kindCode": {
+                "type": "string",
+                "description": "Kind code of the cited document (e.g., A1, B2)."
+              },
+              "nplIndicator": {
+                "type": "boolean",
+                "description": "True if the citation is a non-patent literature (NPL) reference."
+              },
+              "workGroupNumber": {
+                "type": "string",
+                "description": "USPTO work group number."
+              },
+              "officeActionCategory": {
+                "type": "string",
+                "description": "Category of the office action (e.g., CTNF = non-final rejection)."
+              },
+              "patentApplicationNumber": {
+                "type": "string",
+                "description": "The application number the citation belongs to."
+              },
+              "inventorNameText": {
+                "type": "string",
+                "description": "Citation document title, may contain company name, inventor, or owner."
+              },
+              "groupArtUnitNumber": {
+                "type": "string",
+                "description": "Four-digit Group Art Unit code (first two digits = tech center)."
+              },
+              "qualitySummaryText": {
+                "type": "string",
+                "description": "Quality summary of the automated review."
+              },
+              "createDateTime": {
+                "type": "string",
+                "description": "Date and time the entity was inserted in the database."
+              },
+              "techCenter": {
+                "type": "string",
+                "description": "USPTO Technology Center."
+              },
+              "citedDocumentIdentifier": {
+                "type": "string",
+                "description": "(Key) Identification of the cited patent document."
+              },
+              "countryCode": {
+                "type": "string",
+                "description": "Country code of the cited document."
+              },
+              "passageLocationText": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Passage locations related to current citation (statute/claim/section references)."
+              },
+              "obsoleteDocumentIdentifier": {
+                "type": "string",
+                "description": "(Key) A unique identifier for a document stored in the IFW repository."
+              },
+              "citationCategoryCode": {
+                "type": "string",
+                "description": "Relevance category: X=anticipation, Y=obviousness combination, A=background."
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier."
+              },
+              "examinerCitedReferenceIndicator": {
+                "type": "boolean",
+                "description": "Whether the citation was retrieved from Form PTO-892 (examiner-cited)."
+              },
+              "publicationNumber": {
+                "type": "string",
+                "description": "Publication number of the cited document."
+              }
             }
           }
         }
       }
     },
     "test_examples": [
-      {"query": "patentApplicationNumber:14966067"},
-      {"query": "citationCategoryCode:X AND techCenter:1600", "limit": 10}
+      {
+        "query": "patentApplicationNumber:14966067"
+      },
+      {
+        "query": "citationCategoryCode:X AND techCenter:1600",
+        "limit": 10
+      }
     ]
   }
 ]

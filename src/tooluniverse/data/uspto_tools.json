@@ -873,14 +873,14 @@
   {
     "type": "USPTOOpenDataPortalTool",
     "name": "USPTO_get_patent_assignment",
-    "description": "Get the chain of title (ownership history) for a US patent application. Returns every assignment recorded with the USPTO: who transferred rights (assignor), who received them (assignee), when it was recorded, and the type of transfer (assignment, merger, security interest, etc.). Use this to determine who currently owns a patent and trace how ownership changed over time. Requires an application number — use USPTO_patent_number_to_application to convert patent numbers first.",
+    "description": "Get the chain of title (ownership history) for a US patent application. Returns every assignment recorded with the USPTO: who transferred rights (assignor), who received them (assignee), when it was recorded, and the type of transfer (assignment, merger, security interest, etc.). Use this to determine who currently owns a patent and trace how ownership changed over time. Requires an application number \u2014 use USPTO_patent_number_to_application to convert patent numbers first.",
     "api_endpoint": "patent/applications/{applicationNumberText}/assignment",
     "parameter": {
       "type": "object",
       "properties": {
         "applicationNumberText": {
           "type": "string",
-          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number — use USPTO_patent_number_to_application to convert."
+          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number \u2014 use USPTO_patent_number_to_application to convert."
         }
       },
       "required": [
@@ -1001,14 +1001,14 @@
   {
     "type": "USPTOOpenDataPortalTool",
     "name": "USPTO_get_patent_transactions",
-    "description": "Get the full prosecution history timeline for a US patent application. Returns every event recorded by the USPTO: office actions (rejections, allowances), applicant responses, fee payments, publication events, and more. Each event has a code, description, and date. Use this to understand what happened during examination and when. Requires an application number — use USPTO_patent_number_to_application to convert patent numbers first.",
+    "description": "Get the full prosecution history timeline for a US patent application. Returns every event recorded by the USPTO: office actions (rejections, allowances), applicant responses, fee payments, publication events, and more. Each event has a code, description, and date. Use this to understand what happened during examination and when. Requires an application number \u2014 use USPTO_patent_number_to_application to convert patent numbers first.",
     "api_endpoint": "patent/applications/{applicationNumberText}/transactions",
     "parameter": {
       "type": "object",
       "properties": {
         "applicationNumberText": {
           "type": "string",
-          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number — use USPTO_patent_number_to_application to convert."
+          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number \u2014 use USPTO_patent_number_to_application to convert."
         }
       },
       "required": [
@@ -1069,6 +1069,250 @@
       },
       {
         "applicationNumberText": "18045436"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_enriched_citation_fields",
+    "description": "List the searchable fields of the USPTO Enriched Citation dataset (enriched_cited_reference_metadata v3). Returns the field list, dataset status, and last data update date. Use this first to learn which fields are queryable before searching citations with USPTO_search_enriched_citations. The API is the USPTO Open Data Portal DSAPI; data covers office actions mailed from 2017-10-01 to 30 days before the current date.",
+    "api_endpoint": "patent/oa/enriched_cited_reference_metadata/v3/fields",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "required": [],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "apiVersionNumber": {
+          "type": "string"
+        },
+        "apiStatus": {
+          "type": "string"
+        },
+        "apiUrl": {
+          "type": "string"
+        },
+        "apiDocumentationUrl": {
+          "type": "string"
+        },
+        "fieldCount": {
+          "type": "integer"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastDataUpdatedDate": {
+          "type": "string"
+        }
+      }
+    },
+    "test_examples": [
+      {}
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_patent_application",
+    "description": "Get the full patent application record for an application number. Returns bibliographic data for the application. Requires an application number (e.g., '14966067') -- use USPTO_patent_number_to_application to convert patent numbers first.",
+    "api_endpoint": "patent/applications/{applicationNumberText}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "applicationNumberText": {
+          "type": "string",
+          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number -- use USPTO_patent_number_to_application to convert."
+        }
+      },
+      "required": [
+        "applicationNumberText"
+      ]
+    },
+    "required": [
+      "applicationNumberText"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "patentFileWrapperDataBag": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "applicationNumberText": {
+                "type": "string"
+              },
+              "applicationMetaData": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "14966067"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_patent_attorney",
+    "description": "Get the attorney/agent of record for a US patent application. Returns the registered attorney or agent associated with the application. Requires an application number (e.g., '14966067') -- use USPTO_patent_number_to_application to convert patent numbers first.",
+    "api_endpoint": "patent/applications/{applicationNumberText}/attorney",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "applicationNumberText": {
+          "type": "string",
+          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number -- use USPTO_patent_number_to_application to convert."
+        }
+      },
+      "required": [
+        "applicationNumberText"
+      ]
+    },
+    "required": [
+      "applicationNumberText"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "patentFileWrapperDataBag": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "applicationNumberText": {
+                "type": "string"
+              },
+              "recordAttorney": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "14966067"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_patent_documents",
+    "description": "Get document details for a US patent application. Returns metadata for documents in the application file wrapper (e.g., office actions, responses, fee worksheets). Optionally filter by document codes and official date range. Requires an application number (e.g., '14966067') -- use USPTO_patent_number_to_application to convert patent numbers first.",
+    "api_endpoint": "patent/applications/{applicationNumberText}/documents",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "applicationNumberText": {
+          "type": "string",
+          "description": "The application number of the patent (e.g., '14966067'). This is NOT the patent number -- use USPTO_patent_number_to_application to convert."
+        },
+        "documentCodes": {
+          "type": "string",
+          "description": "Single or multiple comma-separated document codes (e.g., 'SRFW,SRNT' for search reports, 'WFEE' for fee worksheet)."
+        },
+        "officialDateFrom": {
+          "type": "string",
+          "description": "Filter by document official date from, format yyyy-MM-dd."
+        },
+        "officialDateTo": {
+          "type": "string",
+          "description": "Filter by document official date to, format yyyy-MM-dd."
+        }
+      },
+      "required": [
+        "applicationNumberText"
+      ]
+    },
+    "required": [
+      "applicationNumberText"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "documentBag": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "14966067"
+      },
+      {
+        "applicationNumberText": "14966067",
+        "documentCodes": "WFEE"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_patent_status_codes",
+    "description": "Search USPTO patent application status codes and their descriptions. Returns the code-to-description mapping used in application status fields. Optionally filter with a query string.",
+    "api_endpoint": "patent/status-codes",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query string (e.g., 'Abandoned' or a status code)."
+        }
+      },
+      "required": []
+    },
+    "required": [],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "statusCodeBag": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "q": "Abandoned"
       }
     ]
   }
