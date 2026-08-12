@@ -256,18 +256,44 @@ class USPTOOpenDataPortalTool(BaseTool):
             )
             response.raise_for_status()
 
-            # Otherwise, assume the response is JSON
-            if self.tool_config.get("return_fields", []):
-                # Filter the JSON response to only include specified fields
-                pruned_patents = []
-                result = response.json()
-                for patent in result.get("patentFileWrapperDataBag", []):
-                    pruned_patents.append(
-                        self.prune_item(patent, self.tool_config.get("return_fields"))
-                    )
-                result["patentFileWrapperDataBag"] = pruned_patents
-            else:
-                result = response.json()
+            # Downloads return non-JSON bodies: format=csv gives text/csv;
+            # bulk dataset files 302-redirect to a signed data.uspto.gov URL
+            # whose final body is a zip. Detect by content-type, then fall
+            # back to raw text when JSON parsing fails.
+            content_type = response.headers.get("Content-Type", "")
+            is_download = self.tool_config.get("name", "").startswith("USPTO_download")
+
+            if "text/csv" in content_type or "text/plain" in content_type:
+                return {
+                    "status": "success",
+                    "data": {"csv": response.text},
+                }
+
+            try:
+                # Otherwise, assume the response is JSON
+                if self.tool_config.get("return_fields", []):
+                    # Filter the JSON response to only include specified fields
+                    pruned_patents = []
+                    result = response.json()
+                    for patent in result.get("patentFileWrapperDataBag", []):
+                        pruned_patents.append(
+                            self.prune_item(
+                                patent, self.tool_config.get("return_fields")
+                            )
+                        )
+                    result["patentFileWrapperDataBag"] = pruned_patents
+                else:
+                    result = response.json()
+            except ValueError:
+                # Non-JSON body (e.g. binary zip after redirect, empty CSV).
+                # Return raw text so the caller sees the payload instead of
+                # an unhelpful JSONDecodeError.
+                if is_download:
+                    return {
+                        "status": "success",
+                        "data": {"raw": response.text, "content_type": content_type},
+                    }
+                raise
 
             # Wrap response with data field for schema validation
             return {"status": "success", "data": result}
