@@ -469,6 +469,7 @@ STATIC_LAZY_REGISTRY = {
     "ODPHPOutlinkFetch": "odphp_tool",
     "ODPHPRESTTool": "odphp_tool",
     "ODPHPTopicSearch": "odphp_tool",
+    "ODPSearchTool": "odp_search_tool",
     "OLSRESTTool": "efo_tool",
     "OLSTool": "ols_tool",
     "OMATool": "oma_tool",
@@ -718,5 +719,5 @@ STATIC_LAZY_REGISTRY = {
     "iDigBioSearchTool": "idigbio_tool",
     "iPTMnetTool": "iptmnet_tool",
     "miRNAGetTool": "mirna_tool",
-    "miRNASearchTool": "mirna_tool",
+    "miRNASearchTool": "mirna_tool"
 }

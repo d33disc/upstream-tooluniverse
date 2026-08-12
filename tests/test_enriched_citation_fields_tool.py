@@ -81,6 +81,8 @@ class TestFieldsToolRequestConstruction:
 
             class FakeResponse:
                 status_code = 200
+                headers = {}
+
 
                 def raise_for_status(self):
                     pass
@@ -104,6 +106,8 @@ class TestFieldsToolRequestConstruction:
 
             class FakeResponse:
                 status_code = 200
+                headers = {}
+
 
                 def raise_for_status(self):
                     pass
@@ -128,6 +132,8 @@ class TestFieldsToolRequestConstruction:
         def fake_get(url, **kwargs):
             class FakeResponse:
                 status_code = 200
+                headers = {}
+
 
                 def raise_for_status(self):
                     pass
@@ -158,3 +164,70 @@ class TestEnrichedCitationSchemaCoverage:
             cfg["return_schema"]["properties"]["docs"]["items"]["properties"]
         )
         assert declared == set(RESPONSE_FIELDS)
+
+
+
+class TestCsvDownloadHandling:
+    """The download endpoints return text/csv; the class must pass it through."""
+
+    def test_csv_response_returned_as_text(self, monkeypatch):
+        monkeypatch.setenv("USPTO_API_KEY", "test-key-for-unit-tests")
+        from tooluniverse.uspto_tool import USPTOOpenDataPortalTool
+
+        config = {
+            "name": "USPTO_download_bulk_dataset_file",
+            "api_endpoint": "datasets/products/files/{productIdentifier}/{fileName}",
+        }
+        tool = USPTOOpenDataPortalTool(config)
+        csv_body = "col1,col2\n1,2\n"
+
+        def fake_get(url, **kwargs):
+            class FakeResponse:
+                status_code = 200
+                headers = {"Content-Type": "text/csv"}
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    raise ValueError("should not be called for CSV")
+
+                @property
+                def text(self):
+                    return csv_body
+
+            return FakeResponse()
+
+        monkeypatch.setattr(tool.session, "get", fake_get)
+        result = tool.run({"productIdentifier": "PTGRXML", "fileName": "x.csv"})
+        assert result["status"] == "success"
+        assert result["data"]["csv"] == csv_body
+
+    def test_json_response_unaffected_by_header_check(self, monkeypatch):
+        monkeypatch.setenv("USPTO_API_KEY", "test-key-for-unit-tests")
+        from tooluniverse.uspto_tool import USPTOOpenDataPortalTool
+
+        config = {
+            "name": "USPTO_get_patent_application",
+            "api_endpoint": "patent/applications/{applicationNumberText}",
+        }
+        tool = USPTOOpenDataPortalTool(config)
+        payload = {"count": 1, "patentFileWrapperDataBag": []}
+
+        def fake_get(url, **kwargs):
+            class FakeResponse:
+                status_code = 200
+                headers = {"Content-Type": "application/json"}
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return payload
+
+            return FakeResponse()
+
+        monkeypatch.setattr(tool.session, "get", fake_get)
+        result = tool.run({"applicationNumberText": "14966067"})
+        assert result["status"] == "success"
+        assert result["data"] == payload

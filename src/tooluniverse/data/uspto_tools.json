@@ -1315,5 +1315,999 @@
         "q": "Abandoned"
       }
     ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_patent_applications",
+    "description": "Search USPTO patent applications with a JSON-body POST (Lucene query). Returns application records matching the query. Use for complex queries that exceed GET URL limits. Query with Lucene syntax, e.g. 'applicationNumberText:14412875' or 'applicationMetaData.applicationTypeLabelName:Utility AND applicationMetaData.applicationStatusCode:150'. Response: count + patentFileWrapperDataBag.",
+    "api_endpoint": "patent/applications/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Lucene query string, e.g. 'applicationNumberText:14412875'."
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Position in the dataset to start from (default 0)."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of results to return (default 25)."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "patentFileWrapperDataBag": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "query": "applicationNumberText:14412875"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_patent_status_codes",
+    "description": "Search USPTO patent application status codes and descriptions with a JSON-body POST. Returns the code-to-description mapping (e.g. 165 = ABANDONED - RESTORED). Query with Lucene syntax, e.g. 'applicationStatusDescriptionText:Abandoned'.",
+    "api_endpoint": "patent/status-codes",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Lucene query string, e.g. 'applicationStatusDescriptionText:Abandoned'."
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Position in the dataset to start from (default 0)."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of results to return (default 25)."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "statusCodeBag": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "applicationStatusCode": {
+                "type": "integer"
+              },
+              "applicationStatusDescriptionText": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "query": "applicationStatusDescriptionText:Abandoned"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_search_bulk_datasets",
+    "description": "Search the USPTO Bulk Data Storage System (BDSS) product catalog. Returns available bulk dataset products (e.g. patent grants, trademark assignments) with identifiers and descriptions. Query with q (e.g. 'patent') or browse unfiltered.",
+    "api_endpoint": "datasets/products/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query, e.g. 'patent'."
+        }
+      },
+      "required": []
+    },
+    "required": [],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "q": "patent"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_bulk_dataset_product",
+    "description": "Get a bulk data product from the USPTO BDSS catalog by its identifier (shortName). Returns product metadata including available files and date ranges.",
+    "api_endpoint": "datasets/products/{productIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "productIdentifier": {
+          "type": "string",
+          "description": "Product identifier (shortName), e.g. 'PTGRXML' for patent grants XML."
+        }
+      },
+      "required": [
+        "productIdentifier"
+      ]
+    },
+    "required": [
+      "productIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "productIdentifier": "PTGRXML"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_bulk_dataset_file",
+    "description": "Download a bulk data product file from the USPTO BDSS. Returns the file content (CSV/XML, may be large).",
+    "api_endpoint": "datasets/products/files/{productIdentifier}/{fileName}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "productIdentifier": {
+          "type": "string",
+          "description": "Product identifier (shortName), e.g. 'PTGRXML'."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "File name within the product, e.g. 'ipg200908.zip'."
+        }
+      },
+      "required": [
+        "productIdentifier",
+        "fileName"
+      ]
+    },
+    "required": [
+      "productIdentifier",
+      "fileName"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "productIdentifier": "PTGRXML",
+        "fileName": "ipg200908.zip"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_petition_decisions",
+    "description": "Search USPTO petition decisions with a JSON-body POST (Lucene query). Returns petition decision records. Query with Lucene syntax, e.g. 'petitionDecisionRecordIdentifier:*'.",
+    "api_endpoint": "petition/decisions/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Lucene query string."
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Position to start from (default 0)."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum results (default 25)."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_petition_decision",
+    "description": "Get a USPTO petition decision record by its identifier.",
+    "api_endpoint": "petition/decisions/{petitionDecisionRecordIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "petitionDecisionRecordIdentifier": {
+          "type": "string",
+          "description": "Petition decision record identifier."
+        }
+      },
+      "required": [
+        "petitionDecisionRecordIdentifier"
+      ]
+    },
+    "required": [
+      "petitionDecisionRecordIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "petitionDecisionRecordIdentifier": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_petition_decisions",
+    "description": "Download USPTO petition decision search results as CSV or JSON. Large result sets may take longer.",
+    "api_endpoint": "petition/decisions/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query string."
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ],
+          "description": "Download format (default json)."
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_ptab_proceedings",
+    "description": "Search PTAB trial proceedings (inter partes review, covered business method, post-grant review) with a JSON-body POST (Lucene query). Returns proceeding records.",
+    "api_endpoint": "patent/trials/proceedings/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Lucene query string."
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_ptab_proceeding",
+    "description": "Get a PTAB trial proceeding by trial number (e.g. 'IPR2015-00001').",
+    "api_endpoint": "patent/trials/proceedings/{trialNumber}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "trialNumber": {
+          "type": "string",
+          "description": "Trial number, e.g. 'IPR2015-00001'."
+        }
+      },
+      "required": [
+        "trialNumber"
+      ]
+    },
+    "required": [
+      "trialNumber"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "trialNumber": "IPR2015-00001"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_ptab_proceedings",
+    "description": "Download PTAB proceeding search results as CSV or JSON.",
+    "api_endpoint": "patent/trials/proceedings/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_ptab_decisions",
+    "description": "Search PTAB trial decisions with a JSON-body POST (Lucene query). Returns decision records.",
+    "api_endpoint": "patent/trials/decisions/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_ptab_decision",
+    "description": "Get a PTAB trial decision by document identifier.",
+    "api_endpoint": "patent/trials/decisions/{documentIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "documentIdentifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentIdentifier"
+      ]
+    },
+    "required": [
+      "documentIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "documentIdentifier": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_trial_decisions",
+    "description": "Get all decisions filed in a PTAB trial by trial number.",
+    "api_endpoint": "patent/trials/{trialNumber}/decisions",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "trialNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "trialNumber"
+      ]
+    },
+    "required": [
+      "trialNumber"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "trialNumber": "IPR2015-00001"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_ptab_decisions",
+    "description": "Download PTAB decision search results as CSV or JSON.",
+    "api_endpoint": "patent/trials/decisions/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_ptab_documents",
+    "description": "Search PTAB trial documents with a JSON-body POST (Lucene query). Returns document records.",
+    "api_endpoint": "patent/trials/documents/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_ptab_document",
+    "description": "Get a PTAB trial document by document identifier.",
+    "api_endpoint": "patent/trials/documents/{documentIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "documentIdentifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentIdentifier"
+      ]
+    },
+    "required": [
+      "documentIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "documentIdentifier": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_trial_documents",
+    "description": "Get all documents filed in a PTAB trial by trial number.",
+    "api_endpoint": "patent/trials/{trialNumber}/documents",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "trialNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "trialNumber"
+      ]
+    },
+    "required": [
+      "trialNumber"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "trialNumber": "IPR2015-00001"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_ptab_documents",
+    "description": "Download PTAB document search results as CSV or JSON.",
+    "api_endpoint": "patent/trials/documents/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_appeal_decisions",
+    "description": "Search PTAB appeal decisions with a JSON-body POST (Lucene query). Returns decision records for ex parte appeals.",
+    "api_endpoint": "patent/appeals/decisions/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_appeal_decision",
+    "description": "Get a PTAB appeal decision by document identifier.",
+    "api_endpoint": "patent/appeals/decisions/{documentIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "documentIdentifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentIdentifier"
+      ]
+    },
+    "required": [
+      "documentIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "documentIdentifier": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_appeal_decisions",
+    "description": "Get all decisions filed in a PTAB appeal by appeal number.",
+    "api_endpoint": "patent/appeals/{appealNumber}/decisions",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "appealNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "appealNumber"
+      ]
+    },
+    "required": [
+      "appealNumber"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "appealNumber": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_appeal_decisions",
+    "description": "Download PTAB appeal decision search results as CSV or JSON.",
+    "api_endpoint": "patent/appeals/decisions/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
+  },
+  {
+    "type": "ODPSearchTool",
+    "name": "USPTO_search_interference_decisions",
+    "description": "Search PTAB interference decisions with a JSON-body POST (Lucene query). Returns decision records.",
+    "api_endpoint": "patent/interferences/decisions/search",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "required": [
+      "query"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "query": "*:*"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_interference_decision",
+    "description": "Get a PTAB interference decision by document identifier.",
+    "api_endpoint": "patent/interferences/decisions/{documentIdentifier}",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "documentIdentifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentIdentifier"
+      ]
+    },
+    "required": [
+      "documentIdentifier"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "documentIdentifier": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_get_interference_decisions",
+    "description": "Get all decisions filed in a PTAB interference by interference number.",
+    "api_endpoint": "patent/interferences/{interferenceNumber}/decisions",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "interferenceNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interferenceNumber"
+      ]
+    },
+    "required": [
+      "interferenceNumber"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "interferenceNumber": "1"
+      }
+    ]
+  },
+  {
+    "type": "USPTOOpenDataPortalTool",
+    "name": "USPTO_download_interference_decisions",
+    "description": "Download PTAB interference decision search results as CSV or JSON.",
+    "api_endpoint": "patent/interferences/decisions/search/download",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ]
+        }
+      },
+      "required": [
+        "q"
+      ]
+    },
+    "required": [
+      "q"
+    ],
+    "required_api_keys": [
+      "USPTO_API_KEY"
+    ],
+    "return_schema": {
+      "type": "object"
+    },
+    "test_examples": [
+      {
+        "q": "*:*",
+        "format": "json"
+      }
+    ]
   }
 ]
