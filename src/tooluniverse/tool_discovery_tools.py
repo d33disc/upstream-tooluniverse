@@ -167,6 +167,34 @@ class GrepToolsTool(BaseTool):
                         }
                     )
 
+        # Rank matches by BM25 relevance so common-term greps surface the
+        # most relevant tools first instead of dict order. Same substring
+        # match semantics; only the ordering changes. Falls back to the
+        # original order on any failure (ranking is best-effort).
+        try:
+            from tooluniverse.tool_finder_keyword import ToolFinderKeyword
+
+            _finder = ToolFinderKeyword({}, tooluniverse=self.tooluniverse)
+            _matched_configs = [
+                tool
+                for tool in self.tooluniverse.all_tool_dict.values()
+                if tool.get("name") in {t["name"] for t in matching_tools}
+            ]
+            if len(_matched_configs) > 1:
+                _finder._build_tool_index(_matched_configs)
+                _query_terms = _finder._extract_phrases(
+                    _finder._tokenize_and_normalize(pattern)
+                )
+                for _t in matching_tools:
+                    _t["_relevance"] = _finder._calculate_tfidf_score(
+                        _query_terms, _t["name"]
+                    )
+                matching_tools.sort(
+                    key=lambda t: t.get("_relevance", 0.0), reverse=True
+                )
+        except Exception:
+            pass
+
         # Annotate with health status, then sort live before stale before broken
         try:
             from tooluniverse.tool_health import ToolHealthCache
@@ -180,7 +208,12 @@ class GrepToolsTool(BaseTool):
                     if status in ("broken", "stale"):
                         tool["_health_warning"] = _hc.warn(name)
             _SORT_KEY = {"live": 0, "stale": 1, "broken": 2}
-            matching_tools.sort(key=lambda t: _SORT_KEY.get(t.get("_health", ""), 0))
+            matching_tools.sort(
+                key=lambda t: (
+                    _SORT_KEY.get(t.get("_health", ""), 0),
+                    -t.get("_relevance", 0.0),
+                )
+            )
         except Exception:
             pass
 
