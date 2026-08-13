@@ -242,5 +242,9 @@ skills/evals/*.log
 skills/evals/*/BENCHMARK_REPORT.md
 skills/evals/*/BIXBENCH_FULL_REPORT.md
 
+# Pi fabric session state + one-off fleet run outputs
+.pi/
+ralph-specs/fleet/results/
+
 # Keep the tracked fork implementation plan despite the general rule above.
 !IMPLEMENTATION_PLAN.md
