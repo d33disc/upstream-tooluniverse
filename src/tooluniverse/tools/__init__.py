@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2722 scientific tools.
+Type-safe Python interface to 2658 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -605,7 +605,6 @@ from .EuropePMC_get_fulltext_snippets import EuropePMC_get_fulltext_snippets
 from .EuropePMC_get_references import EuropePMC_get_references
 from .EuropePMC_search_articles import EuropePMC_search_articles
 from .Eurostat_get_dataset import Eurostat_get_dataset
-from .Evo2_score_variant import Evo2_score_variant
 from .ExperimentalDesignScorer import ExperimentalDesignScorer
 from .ExpressionAtlas_get_baseline import ExpressionAtlas_get_baseline
 from .ExpressionAtlas_get_experiment import ExpressionAtlas_get_experiment
@@ -1621,22 +1620,6 @@ from .Nominatim_geocode import Nominatim_geocode
 from .Nominatim_reverse_geocode import Nominatim_reverse_geocode
 from .Norine_get_peptide import Norine_get_peptide
 from .NoveltySignificanceReviewer import NoveltySignificanceReviewer
-from .NvidiaNIM_alphafold2 import NvidiaNIM_alphafold2
-from .NvidiaNIM_alphafold2_multimer import NvidiaNIM_alphafold2_multimer
-from .NvidiaNIM_boltz2 import NvidiaNIM_boltz2
-from .NvidiaNIM_diffdock import NvidiaNIM_diffdock
-from .NvidiaNIM_esm2_650m import NvidiaNIM_esm2_650m
-from .NvidiaNIM_esmfold import NvidiaNIM_esmfold
-from .NvidiaNIM_evo2 import NvidiaNIM_evo2
-from .NvidiaNIM_genmol import NvidiaNIM_genmol
-from .NvidiaNIM_maisi import NvidiaNIM_maisi
-from .NvidiaNIM_molmim import NvidiaNIM_molmim
-from .NvidiaNIM_msa_search import NvidiaNIM_msa_search
-from .NvidiaNIM_openfold2 import NvidiaNIM_openfold2
-from .NvidiaNIM_openfold3 import NvidiaNIM_openfold3
-from .NvidiaNIM_proteinmpnn import NvidiaNIM_proteinmpnn
-from .NvidiaNIM_rfdiffusion import NvidiaNIM_rfdiffusion
-from .NvidiaNIM_vista3d import NvidiaNIM_vista3d
 from .OBIS_search_occurrences import OBIS_search_occurrences
 from .OBIS_search_taxa import OBIS_search_taxa
 from .OMA_get_genome_pair_orthologs import OMA_get_genome_pair_orthologs
@@ -2457,7 +2440,6 @@ from .UCSC_get_track import UCSC_get_track
 from .UCSC_list_tracks import UCSC_list_tracks
 from .UCSC_search import UCSC_search
 from .UKBTOPMed_phewas_by_variant import UKBTOPMed_phewas_by_variant
-from .USCensus_get_population import USCensus_get_population
 from .USDA_plants_get_characteristics import USDA_plants_get_characteristics
 from .USDA_plants_get_invasive_status import USDA_plants_get_invasive_status
 from .USDA_plants_get_profile import USDA_plants_get_profile
@@ -2469,44 +2451,6 @@ from .USGSWater_get_water_level import USGSWater_get_water_level
 from .USGSWater_get_water_temperature import USGSWater_get_water_temperature
 from .USGS_get_earthquake_feed import USGS_get_earthquake_feed
 from .USGS_query_earthquakes import USGS_query_earthquakes
-from .USPTO_download_appeal_decisions import USPTO_download_appeal_decisions
-from .USPTO_download_bulk_dataset_file import USPTO_download_bulk_dataset_file
-from .USPTO_download_interference_decisions import USPTO_download_interference_decisions
-from .USPTO_download_petition_decisions import USPTO_download_petition_decisions
-from .USPTO_download_ptab_decisions import USPTO_download_ptab_decisions
-from .USPTO_download_ptab_documents import USPTO_download_ptab_documents
-from .USPTO_download_ptab_proceedings import USPTO_download_ptab_proceedings
-from .USPTO_get_appeal_decision import USPTO_get_appeal_decision
-from .USPTO_get_appeal_decisions import USPTO_get_appeal_decisions
-from .USPTO_get_bulk_dataset_product import USPTO_get_bulk_dataset_product
-from .USPTO_get_enriched_citation_fields import USPTO_get_enriched_citation_fields
-from .USPTO_get_interference_decision import USPTO_get_interference_decision
-from .USPTO_get_interference_decisions import USPTO_get_interference_decisions
-from .USPTO_get_patent_application import USPTO_get_patent_application
-from .USPTO_get_patent_assignment import USPTO_get_patent_assignment
-from .USPTO_get_patent_attorney import USPTO_get_patent_attorney
-from .USPTO_get_patent_claims import USPTO_get_patent_claims
-from .USPTO_get_patent_documents import USPTO_get_patent_documents
-from .USPTO_get_patent_status_codes import USPTO_get_patent_status_codes
-from .USPTO_get_patent_transactions import USPTO_get_patent_transactions
-from .USPTO_get_petition_decision import USPTO_get_petition_decision
-from .USPTO_get_ptab_decision import USPTO_get_ptab_decision
-from .USPTO_get_ptab_document import USPTO_get_ptab_document
-from .USPTO_get_ptab_proceeding import USPTO_get_ptab_proceeding
-from .USPTO_get_trial_decisions import USPTO_get_trial_decisions
-from .USPTO_get_trial_documents import USPTO_get_trial_documents
-from .USPTO_patent_deep_lookup import USPTO_patent_deep_lookup
-from .USPTO_patent_number_to_application import USPTO_patent_number_to_application
-from .USPTO_search_appeal_decisions import USPTO_search_appeal_decisions
-from .USPTO_search_bulk_datasets import USPTO_search_bulk_datasets
-from .USPTO_search_enriched_citations import USPTO_search_enriched_citations
-from .USPTO_search_interference_decisions import USPTO_search_interference_decisions
-from .USPTO_search_patent_applications import USPTO_search_patent_applications
-from .USPTO_search_patent_status_codes import USPTO_search_patent_status_codes
-from .USPTO_search_petition_decisions import USPTO_search_petition_decisions
-from .USPTO_search_ptab_decisions import USPTO_search_ptab_decisions
-from .USPTO_search_ptab_documents import USPTO_search_ptab_documents
-from .USPTO_search_ptab_proceedings import USPTO_search_ptab_proceedings
 from .UniBind_get_dataset import UniBind_get_dataset
 from .UniBind_list_tfs import UniBind_list_tfs
 from .UniBind_search_datasets import UniBind_search_datasets
@@ -2776,8 +2720,6 @@ from .ebi_search_with_facets import ebi_search_with_facets
 from .embedding_database_add import embedding_database_add
 from .embedding_database_create import embedding_database_create
 from .embedding_database_search import embedding_database_search
-from .embedding_sync_download import embedding_sync_download
-from .embedding_sync_upload import embedding_sync_upload
 from .ena_get_entry import ena_get_entry
 from .ena_get_entry_history import ena_get_entry_history
 from .ena_get_entry_summary import ena_get_entry_summary
@@ -2874,7 +2816,6 @@ from .get_arxiv_info import get_arxiv_info
 from .get_ase_info import get_ase_info
 from .get_assembly_info_by_pdb_id import get_assembly_info_by_pdb_id
 from .get_assembly_summary import get_assembly_summary
-from .get_associated_documents_metadata import get_associated_documents_metadata
 from .get_astropy_info import get_astropy_info
 from .get_binding_affinity_by_pdb_id import get_binding_affinity_by_pdb_id
 from .get_biopandas_info import get_biopandas_info
@@ -3001,11 +2942,6 @@ from .get_optlang_info import get_optlang_info
 from .get_optuna_info import get_optuna_info
 from .get_palantir_info import get_palantir_info
 from .get_pandas_info import get_pandas_info
-from .get_patent_application_metadata import get_patent_application_metadata
-from .get_patent_continuity_data import get_patent_continuity_data
-from .get_patent_foreign_priority_data import get_patent_foreign_priority_data
-from .get_patent_overview_by_text_query import get_patent_overview_by_text_query
-from .get_patent_term_adjustment_data import get_patent_term_adjustment_data
 from .get_patsy_info import get_patsy_info
 from .get_pdbfixer_info import get_pdbfixer_info
 from .get_phenotype_by_HPO_ID import get_phenotype_by_HPO_ID
@@ -3845,7 +3781,6 @@ __all__ = [
     "EuropePMC_get_references",
     "EuropePMC_search_articles",
     "Eurostat_get_dataset",
-    "Evo2_score_variant",
     "ExperimentalDesignScorer",
     "ExpressionAtlas_get_baseline",
     "ExpressionAtlas_get_experiment",
@@ -4617,22 +4552,6 @@ __all__ = [
     "Nominatim_reverse_geocode",
     "Norine_get_peptide",
     "NoveltySignificanceReviewer",
-    "NvidiaNIM_alphafold2",
-    "NvidiaNIM_alphafold2_multimer",
-    "NvidiaNIM_boltz2",
-    "NvidiaNIM_diffdock",
-    "NvidiaNIM_esm2_650m",
-    "NvidiaNIM_esmfold",
-    "NvidiaNIM_evo2",
-    "NvidiaNIM_genmol",
-    "NvidiaNIM_maisi",
-    "NvidiaNIM_molmim",
-    "NvidiaNIM_msa_search",
-    "NvidiaNIM_openfold2",
-    "NvidiaNIM_openfold3",
-    "NvidiaNIM_proteinmpnn",
-    "NvidiaNIM_rfdiffusion",
-    "NvidiaNIM_vista3d",
     "OBIS_search_occurrences",
     "OBIS_search_taxa",
     "OMA_get_genome_pair_orthologs",
@@ -5277,7 +5196,6 @@ __all__ = [
     "UCSC_list_tracks",
     "UCSC_search",
     "UKBTOPMed_phewas_by_variant",
-    "USCensus_get_population",
     "USDA_plants_get_characteristics",
     "USDA_plants_get_invasive_status",
     "USDA_plants_get_profile",
@@ -5289,44 +5207,6 @@ __all__ = [
     "USGSWater_get_water_temperature",
     "USGS_get_earthquake_feed",
     "USGS_query_earthquakes",
-    "USPTO_download_appeal_decisions",
-    "USPTO_download_bulk_dataset_file",
-    "USPTO_download_interference_decisions",
-    "USPTO_download_petition_decisions",
-    "USPTO_download_ptab_decisions",
-    "USPTO_download_ptab_documents",
-    "USPTO_download_ptab_proceedings",
-    "USPTO_get_appeal_decision",
-    "USPTO_get_appeal_decisions",
-    "USPTO_get_bulk_dataset_product",
-    "USPTO_get_enriched_citation_fields",
-    "USPTO_get_interference_decision",
-    "USPTO_get_interference_decisions",
-    "USPTO_get_patent_application",
-    "USPTO_get_patent_assignment",
-    "USPTO_get_patent_attorney",
-    "USPTO_get_patent_claims",
-    "USPTO_get_patent_documents",
-    "USPTO_get_patent_status_codes",
-    "USPTO_get_patent_transactions",
-    "USPTO_get_petition_decision",
-    "USPTO_get_ptab_decision",
-    "USPTO_get_ptab_document",
-    "USPTO_get_ptab_proceeding",
-    "USPTO_get_trial_decisions",
-    "USPTO_get_trial_documents",
-    "USPTO_patent_deep_lookup",
-    "USPTO_patent_number_to_application",
-    "USPTO_search_appeal_decisions",
-    "USPTO_search_bulk_datasets",
-    "USPTO_search_enriched_citations",
-    "USPTO_search_interference_decisions",
-    "USPTO_search_patent_applications",
-    "USPTO_search_patent_status_codes",
-    "USPTO_search_petition_decisions",
-    "USPTO_search_ptab_decisions",
-    "USPTO_search_ptab_documents",
-    "USPTO_search_ptab_proceedings",
     "UniBind_get_dataset",
     "UniBind_list_tfs",
     "UniBind_search_datasets",
@@ -5550,8 +5430,6 @@ __all__ = [
     "embedding_database_add",
     "embedding_database_create",
     "embedding_database_search",
-    "embedding_sync_download",
-    "embedding_sync_upload",
     "ena_get_entry",
     "ena_get_entry_history",
     "ena_get_entry_summary",
@@ -5630,7 +5508,6 @@ __all__ = [
     "get_ase_info",
     "get_assembly_info_by_pdb_id",
     "get_assembly_summary",
-    "get_associated_documents_metadata",
     "get_astropy_info",
     "get_binding_affinity_by_pdb_id",
     "get_biopandas_info",
@@ -5743,11 +5620,6 @@ __all__ = [
     "get_optuna_info",
     "get_palantir_info",
     "get_pandas_info",
-    "get_patent_application_metadata",
-    "get_patent_continuity_data",
-    "get_patent_foreign_priority_data",
-    "get_patent_overview_by_text_query",
-    "get_patent_term_adjustment_data",
     "get_patsy_info",
     "get_pdbfixer_info",
     "get_phenotype_by_HPO_ID",
