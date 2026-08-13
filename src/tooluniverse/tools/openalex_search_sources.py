@@ -17,7 +17,7 @@ def openalex_search_sources(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Search OpenAlex sources (journals, conferences, repositories) by name or ISSN and return JOURNAL-...
 
@@ -40,7 +40,7 @@ def openalex_search_sources(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

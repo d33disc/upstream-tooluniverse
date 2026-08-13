@@ -23,7 +23,7 @@ def openalex_search_works(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Search OpenAlex works (papers) via the /works endpoint. Supports both general search and optional...
 
@@ -58,7 +58,7 @@ def openalex_search_works(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

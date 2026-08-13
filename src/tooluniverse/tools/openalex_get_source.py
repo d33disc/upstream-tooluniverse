@@ -15,7 +15,7 @@ def openalex_get_source(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
     Fetch the full OpenAlex source (journal) record by Source ID (S...) or by ISSN, returning journal...
 
@@ -34,7 +34,7 @@ def openalex_get_source(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

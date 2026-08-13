@@ -15,7 +15,7 @@ def Crossref_list_funders(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[list[Any]]:
+) -> list[Any]:
     """
     Search and list research funding organizations in the Crossref database. Returns funder details i...
 
@@ -34,7 +34,7 @@ def Crossref_list_funders(
 
     Returns
     -------
-    Optional[list[Any]]
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

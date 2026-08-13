@@ -1,7 +1,7 @@
 """
 NvidiaNIM_evo2
 
-Generate DNA sequences using Evo2-40B via NVIDIA NIM. 40 billion parameter model trained on 9 tri...
+Generate DNA sequences using NVIDIA-hosted Evo 2 (Arc Institute genome foundation model, trained ...
 """
 
 from typing import Any, Optional, Callable
@@ -10,6 +10,7 @@ from ._shared_client import get_shared_client
 
 def NvidiaNIM_evo2(
     sequence: str,
+    model: Optional[str] = "evo2-40b",
     num_tokens: Optional[int] = 100,
     temperature: Optional[float] = 0.7,
     top_k: Optional[int] = 1,
@@ -22,12 +23,14 @@ def NvidiaNIM_evo2(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Generate DNA sequences using Evo2-40B via NVIDIA NIM. 40 billion parameter model trained on 9 tri...
+    Generate DNA sequences using NVIDIA-hosted Evo 2 (Arc Institute genome foundation model, trained ...
 
     Parameters
     ----------
     sequence : str
         Input DNA sequence (A, C, T, G characters only)
+    model : str
+        Hosted Evo 2 model size: evo2-40b (default, most accurate) or evo2-7b (smalle...
     num_tokens : int
         Number of nucleotides to generate
     temperature : float
@@ -58,6 +61,7 @@ def NvidiaNIM_evo2(
         k: v
         for k, v in {
             "sequence": sequence,
+            "model": model,
             "num_tokens": num_tokens,
             "temperature": temperature,
             "top_k": top_k,

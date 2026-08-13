@@ -11,9 +11,9 @@ from ._shared_client import get_shared_client
 def USCensus_get_population(
     get: str,
     for_: str,
-    dataset: Optional[str | Any] = None,
-    in_: Optional[str | Any] = None,
-    limit: Optional[int | Any] = None,
+    dataset: Optional[str] = None,
+    in_: Optional[str] = None,
+    limit: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -28,11 +28,11 @@ def USCensus_get_population(
         Comma-separated variable codes to retrieve plus NAME. For 2020 decennial: 'P1...
     for_ : str
         Geographic unit. Examples: 'state:*' (all states), 'county:*' (all counties),...
-    dataset : str | Any
+    dataset : str
         Dataset to query. Values: '2020/dec/pl' (2020 decennial), '2022/acs/acs5' (AC...
-    in_ : str | Any
+    in_ : str
         Geographic filter for sub-national queries. Examples: 'state:06' (within Cali...
-    limit : int | Any
+    limit : int
         Maximum number of results to return
     stream_callback : Callable, optional
         Callback for streaming output
