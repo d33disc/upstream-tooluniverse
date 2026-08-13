@@ -1,0 +1,15 @@
+{
+  "id": "inchikey-format",
+  "lane": "fast",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "task": "Create a new file src/tooluniverse/inchikey_check.py with a function inchikey_is_valid(value: str) -> bool that returns True only if value matches the InChIKey format: exactly 14 uppercase letters, a dash, exactly 10 uppercase letters, a dash, then exactly 1 uppercase letter. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts inchikey_is_valid returns True for 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N' and False for 'abc' and 'bsynrymutxbxsq-uhfffaosa-n' (lowercase), then prints 'PASS'. Run `python3 src/tooluniverse/inchikey_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 8.8,
+  "worker_tail": "[step 1] write_file({\"path\": \"src/tooluniverse/inchikey_check.py\", \"content\": \"import re\\n\\ndef inchikey_is_valid(value: str) -> bool:\\n    ) -> wrote /private/tmp/fleet/wt-inchikey-format/src/tooluniverse/inchikey_check.py (367 bytes)\n[step 2] run_shell({\"command\": \"python3 src/tooluniverse/inchikey_check.py\"}) -> exit=0\nSTDOUT:\nPASS\n\nSTDERR:\n\n[step 3] (no tool call) STATUS: DONE passed assertion for 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N', 'abc', and 'bsynrymutxbxsq-uhfffaosa-n'\n(max steps reached)\n",
+  "verify_rc": 0,
+  "verify_pass": true,
+  "verify_out": "PASS\n",
+  "diff": "diff --git a/src/tooluniverse/inchikey_check.py b/src/tooluniverse/inchikey_check.py\nnew file mode 100644\nindex 00000000..930c6f4c\n--- /dev/null\n+++ b/src/tooluniverse/inchikey_check.py\n@@ -0,0 +1,11 @@\n+import re\n+\n+def inchikey_is_valid(value: str) -> bool:\n+    pattern = r'^[A-Z]{14}-[A-Z]{10}-[A-Z]$'\n+    return bool(re.match(pattern, value))\n+\n+if __name__ == '__main__':\n+    assert inchikey_is_valid('BSYNRYMUTXBXSQ-UHFFFAOYSA-N') == True\n+    assert inchikey_is_valid('abc') == False\n+    assert inchikey_is_valid('bsynrymutxbxsq-uhfffaosa-n') == False\n+    print('PASS')\n\\ No newline at end of file\n",
+  "diff_bytes": 610,
+  "worktree": "/tmp/fleet/wt-inchikey-format",
+  "branch": "fleet/inchikey-format"
+}

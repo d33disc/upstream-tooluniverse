@@ -1,0 +1,15 @@
+{
+  "id": "hgnc-format",
+  "lane": "fast",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "task": "Create a new file src/tooluniverse/hgnc_check.py with a function hgnc_is_valid(value: str) -> bool that returns True only if value is an HGNC ID: the literal 'HGNC:' followed by one or more digits. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts True for 'HGNC:11998' and 'HGNC:1100', and False for 'HGNC:', 'hgnc:11998', and 'abc', then prints 'PASS'. Run `python3 src/tooluniverse/hgnc_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 18.0,
+  "worker_tail": " line 4\n    \\\"\"\\\"Check if value is a valid HGNC ID: 'HGNC:' followed by one or more digits.\\\"\"\\\"\\n    \n[step 3] write_file({\"path\": \"src/tooluniverse/hgnc_check.py\", \"content\": \"import re\\n\\ndef hgnc_is_valid(value: str) -> bool:\\n    \\\"\\\"\\\"Ch) -> wrote /private/tmp/fleet/wt-hgnc-format/src/tooluniverse/hgnc_check.py (513 bytes)\n[step 4] run_shell({\"command\": \"python3 src/tooluniverse/hgnc_check.py\"}) -> exit=0\nSTDOUT:\nPASS\n\nSTDERR:\n\n[step 5] (no tool call) STATUS: DONE PASS\n(max steps reached)\n",
+  "verify_rc": 0,
+  "verify_pass": true,
+  "verify_out": "PASS\n",
+  "diff": "diff --git a/src/tooluniverse/hgnc_check.py b/src/tooluniverse/hgnc_check.py\nnew file mode 100644\nindex 00000000..3b378cd3\n--- /dev/null\n+++ b/src/tooluniverse/hgnc_check.py\n@@ -0,0 +1,14 @@\n+import re\n+\n+def hgnc_is_valid(value: str) -> bool:\n+    \"\"\"Check if value is a valid HGNC ID: 'HGNC:' followed by one or more digits.\"\"\"\n+    return re.match(r'^HGNC:\\d+$', value) is not None\n+\n+if __name__ == '__main__':\n+    # Test cases\n+    assert hgnc_is_valid('HGNC:11998')  # True\n+    assert hgnc_is_valid('HGNC:1100')   # True\n+    assert not hgnc_is_valid('HGNC:')  # False (no digits)\n+    assert not hgnc_is_valid('hgnc:11998')  # False (lowercase)\n+    assert not hgnc_is_valid('abc')  # False\n+    print('PASS')\n\\ No newline at end of file\n",
+  "diff_bytes": 747,
+  "worktree": "/tmp/fleet/wt-hgnc-format",
+  "branch": "fleet/hgnc-format"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mondo-format",
+  "lane": "fast",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "task": "Create a new file src/tooluniverse/mondo_check.py with a function mondo_is_valid(value: str) -> bool that returns True only if value is a MONDO disease ID: the literal 'MONDO:' followed by exactly 7 digits. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts True for 'MONDO:0005148' and False for 'MONDO:123', 'MONDO0005148', and 'abc', then prints 'PASS'. Run `python3 src/tooluniverse/mondo_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 32.0,
+  "worker_tail": "mondo-format/src/tooluniverse/mondo_check.py\", line 3\n    def mondo_is_valid(value: str) -> bool:\\n    \"\"\"Return True only if value is a MONDO dis\n[step 9] (no tool call) STATUS: FAILED unable to execute Python script due to syntax error (line continuation character in multi-line string); issue persists despite multiple attempts to fix formatting. Problem is not in logic but in how the file is being parsed. Cannot resolve without further context or file structure inspection.\n(max steps reached)\n",
+  "verify_rc": 1,
+  "verify_pass": false,
+  "verify_out": "",
+  "diff": "diff --git a/src/tooluniverse/mondo_check.py b/src/tooluniverse/mondo_check.py\nnew file mode 100644\nindex 00000000..128f670f\n--- /dev/null\n+++ b/src/tooluniverse/mondo_check.py\n@@ -0,0 +1,3 @@\n+import re\n+\n+def mondo_is_valid(value: str) -> bool:\\n    \"\"\"Return True only if value is a MONDO disease ID: the literal 'MONDO:' followed by exactly 7 digits.\"\"\"\\n    return bool(re.match(r'^MONDO:\\d{7}$', value))\\n\\nif __name__ == '__main__':\\n    assert mondo_is_valid('MONDO:0005148')  # Valid MONDO ID\\n    assert not mondo_is_valid('MONDO:123')  # Too short\\n    assert not mondo_is_valid('MONDO0005148')  # Missing colon\\n    assert not mondo_is_valid('abc')  # Invalid format\\n    print('PASS')\n\\ No newline at end of file\n",
+  "diff_bytes": 726,
+  "worktree": "/tmp/fleet/wt-mondo-format",
+  "branch": "fleet/mondo-format"
+}

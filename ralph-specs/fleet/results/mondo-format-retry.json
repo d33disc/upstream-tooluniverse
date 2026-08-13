@@ -1,0 +1,15 @@
+{
+  "id": "mondo-format",
+  "lane": "retry",
+  "model": "mlx-community/Qwen3.5-35B-A3B-8bit",
+  "task": "Create a new file src/tooluniverse/mondo_check.py with a function mondo_is_valid(value: str) -> bool that returns True only if value is a MONDO disease ID: the literal 'MONDO:' followed by exactly 7 digits. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts True for 'MONDO:0005148' and False for 'MONDO:123', 'MONDO0005148', and 'abc', then prints 'PASS'. Run `python3 src/tooluniverse/mondo_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 30.0,
+  "worker_tail": "retried via local mlx_lm.generate after fast-lane miss",
+  "verify_rc": 0,
+  "verify_pass": true,
+  "verify_out": "PASS",
+  "diff": "import re\n\ndef mondo_is_valid(value: str) -> bool:\n    pattern = r'^MONDO:\\d{7}$'\n    return bool(re.match(pattern, value))\n\nif __name__ == '__main__':\n    assert mondo_is_valid('MONDO:0005148') == True\n    assert mondo_is_valid('MONDO:123') == False\n    assert mondo_is_valid('MONDO0005148') == False\n    assert mondo_is_valid('abc') == False\n    print('PASS')\n\n",
+  "diff_bytes": 363,
+  "worktree": null,
+  "branch": null
+}

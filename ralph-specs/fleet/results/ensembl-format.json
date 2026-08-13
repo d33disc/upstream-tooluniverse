@@ -1,0 +1,15 @@
+{
+  "id": "ensembl-format",
+  "lane": "fast",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "task": "Create a new file src/tooluniverse/ensembl_check.py with a function ensembl_gene_is_valid(value: str) -> bool that returns True only if value is an Ensembl gene ID: the literal 'ENSG' followed by exactly 11 digits. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts True for 'ENSG00000141510' and False for 'ENSG123', 'ENST00000269305', and 'abc', then prints 'PASS'. Run `python3 src/tooluniverse/ensembl_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 9.4,
+  "worker_tail": "[step 1] write_file({\"path\": \"src/tooluniverse/ensembl_check.py\", \"content\": \"import re\\n\\ndef ensembl_gene_is_valid(value: str) -> bool:\\n ) -> wrote /private/tmp/fleet/wt-ensembl-format/src/tooluniverse/ensembl_check.py (444 bytes)\n[step 2] run_shell({\"command\": \"python3 src/tooluniverse/ensembl_check.py\"}) -> exit=0\nSTDOUT:\nPASS\n\nSTDERR:\n\n[step 3] (no tool call) STATUS: DONE PASS\n(max steps reached)\n",
+  "verify_rc": 0,
+  "verify_pass": true,
+  "verify_out": "PASS\n",
+  "diff": "diff --git a/src/tooluniverse/ensembl_check.py b/src/tooluniverse/ensembl_check.py\nnew file mode 100644\nindex 00000000..a308e63f\n--- /dev/null\n+++ b/src/tooluniverse/ensembl_check.py\n@@ -0,0 +1,12 @@\n+import re\n+\n+def ensembl_gene_is_valid(value: str) -> bool:\n+    return bool(re.match(r'^ENSG\\d{11}$', value))\n+\n+if __name__ == '__main__':\n+    # Test cases\n+    assert ensembl_gene_is_valid('ENSG00000141510')  # True\n+    assert not ensembl_gene_is_valid('ENSG123')     # False (too short)\n+    assert not ensembl_gene_is_valid('ENST00000269305')  # False (ENST)\n+    assert not ensembl_gene_is_valid('abc')        # False (not ENSG)\n+    print('PASS')\n\\ No newline at end of file\n",
+  "diff_bytes": 685,
+  "worktree": "/tmp/fleet/wt-ensembl-format",
+  "branch": "fleet/ensembl-format"
+}

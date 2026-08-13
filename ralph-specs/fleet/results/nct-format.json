@@ -1,0 +1,15 @@
+{
+  "id": "nct-format",
+  "lane": "fast",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "task": "Create a new file src/tooluniverse/nct_check.py with a function nct_is_valid(value: str) -> bool that returns True only if value is a ClinicalTrials.gov NCT number: the literal 'NCT' followed by exactly 8 digits. Use a regular expression. Add an `if __name__ == '__main__'` block that asserts True for 'NCT01158625' and False for 'NCT123', 'nct01158625', and 'abc', then prints 'PASS'. Run `python3 src/tooluniverse/nct_check.py` and confirm it prints PASS, then finish.",
+  "duration_s": 17.5,
+  "worker_tail": ", line 4\n    \\\"\"\\\"Check if value is a valid ClinicalTrials.gov NCT number: NCT followed by exactly 8 digi\n[step 3] write_file({\"path\": \"src/tooluniverse/nct_check.py\", \"content\": \"import re\\n\\ndef nct_is_valid(value: str) -> bool:\\n    \\\"\\\"\\\"Chec) -> wrote /private/tmp/fleet/wt-nct-format/src/tooluniverse/nct_check.py (526 bytes)\n[step 4] run_shell({\"command\": \"python3 src/tooluniverse/nct_check.py\"}) -> exit=0\nSTDOUT:\nPASS\n\nSTDERR:\n\n[step 5] (no tool call) STATUS: DONE PASS\n(max steps reached)\n",
+  "verify_rc": 0,
+  "verify_pass": true,
+  "verify_out": "PASS\n",
+  "diff": "diff --git a/src/tooluniverse/nct_check.py b/src/tooluniverse/nct_check.py\nnew file mode 100644\nindex 00000000..831bba24\n--- /dev/null\n+++ b/src/tooluniverse/nct_check.py\n@@ -0,0 +1,14 @@\n+import re\n+\n+def nct_is_valid(value: str) -> bool:\n+    \"\"\"Check if value is a valid ClinicalTrials.gov NCT number: NCT followed by exactly 8 digits.\"\"\"\n+    pattern = r'^NCT\\d{8}$'\n+    return bool(re.match(pattern, value))\n+\n+if __name__ == '__main__':\n+    # Test cases\n+    assert nct_is_valid('NCT01158625') == True  # Valid NCT number\n+    assert nct_is_valid('NCT123') == False     # Too short\n+    assert nct_is_valid('nct01158625') == False # Wrong case\n+    assert nct_is_valid('abc') == False        # Invalid\n+    print('PASS')\n\\ No newline at end of file\n",
+  "diff_bytes": 757,
+  "worktree": "/tmp/fleet/wt-nct-format",
+  "branch": "fleet/nct-format"
+}
