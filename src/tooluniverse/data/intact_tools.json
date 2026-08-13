@@ -140,7 +140,17 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "Search results with interactions"
+      "description": "Search results with interactions",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interaction_name",
+          "interactor_descriptions",
+          "source"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
@@ -351,7 +361,17 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of interactions for the organism"
+      "description": "List of interactions for the organism",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "interaction_name",
+          "interactor_descriptions",
+          "source"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {

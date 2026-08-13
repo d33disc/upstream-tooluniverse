@@ -198,31 +198,18 @@
       "required": []
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "items": {
         "type": "object",
-        "properties": {
-          "feature_id": {
-            "type": "string",
-            "description": "Ensembl gene ID"
-          },
-          "feature_name": {
-            "type": "string",
-            "description": "Gene symbol"
-          },
-          "feature_length": {
-            "type": "integer"
-          },
-          "feature_biotype": {
-            "type": "string"
-          },
-          "soma_joinid": {
-            "type": "integer"
-          }
-        },
+        "required": [
+          "feature_id",
+          "feature_length",
+          "feature_name",
+          "feature_type",
+          "n_measured_obs",
+          "nnz",
+          "soma_joinid"
+        ],
         "additionalProperties": true
       }
     },

@@ -41,7 +41,10 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "object",
+      "required": [
+        "result"
+      ]
     }
   },
   {

@@ -59,12 +59,22 @@
         "fulltext_terms": {
           "type": "array",
           "description": "Optional list of terms that must occur in OpenAlex full-text index (adds fulltext.search:<term> filters and implicitly enables require_has_fulltext).",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "anyOf": [
-        {"required": ["search_keywords"]},
-        {"required": ["query"]}
+        {
+          "required": [
+            "search_keywords"
+          ]
+        },
+        {
+          "required": [
+            "query"
+          ]
+        }
       ]
     },
     "return_schema": {
@@ -225,7 +235,9 @@
         "fulltext_terms": {
           "type": "array",
           "description": "Optional list of terms to match in OpenAlex full-text index. Adds one or more fulltext.search:<term> filters and implicitly enables require_has_fulltext.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "per_page": {
           "type": "integer",
@@ -256,36 +268,71 @@
         }
       },
       "anyOf": [
-        {"required": ["search"]},
-        {"required": ["query"]}
+        {
+          "required": [
+            "search"
+          ]
+        },
+        {
+          "required": [
+            "query"
+          ]
+        }
       ]
     },
     "fields": {
       "path": "/works",
       "path_params": [],
-      "param_map": {"per_page": "per-page"},
+      "param_map": {
+        "per_page": "per-page"
+      },
       "default_params": {}
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex /works search response data.",
       "additionalProperties": true,
       "properties": {
-        "meta": {"type": "object", "additionalProperties": true},
+        "meta": {
+          "type": "object",
+          "additionalProperties": true
+        },
         "results": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": true,
             "properties": {
-              "id": {"type": "string"},
-              "title": {"type": ["string", "null"]},
-              "doi": {"type": ["string", "null"]},
-              "publication_year": {"type": ["integer", "null"]}
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "doi": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "publication_year": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
             }
           }
         }
-      }
+      },
+      "required": [
+        "group_by",
+        "meta",
+        "results"
+      ]
     },
     "test_examples": [
       {
@@ -314,25 +361,99 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["openalex_id"]
+      "required": [
+        "openalex_id"
+      ]
     },
     "fields": {
       "path": "/works/{openalex_id}",
-      "path_params": ["openalex_id"]
+      "path_params": [
+        "openalex_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex work (paper) data.",
       "additionalProperties": true,
       "properties": {
-        "id": {"type": "string"},
-        "title": {"type": ["string", "null"]},
-        "doi": {"type": ["string", "null"]},
-        "publication_year": {"type": ["integer", "null"]}
-      }
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publication_year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "abstract_inverted_index",
+        "apc_list",
+        "apc_paid",
+        "authorships",
+        "awards",
+        "best_oa_location",
+        "biblio",
+        "citation_normalized_percentile",
+        "cited_by_count",
+        "cited_by_percentile_year",
+        "concepts",
+        "content_urls",
+        "corresponding_author_ids",
+        "corresponding_institution_ids",
+        "countries_distinct_count",
+        "counts_by_year",
+        "created_date",
+        "display_name",
+        "doi",
+        "funders",
+        "fwci",
+        "has_content",
+        "has_fulltext",
+        "id",
+        "ids",
+        "indexed_in",
+        "institutions",
+        "institutions_distinct_count",
+        "is_paratext",
+        "is_retracted",
+        "is_xpac",
+        "keywords",
+        "language",
+        "locations",
+        "locations_count",
+        "mesh",
+        "open_access",
+        "primary_location",
+        "primary_topic",
+        "publication_date",
+        "publication_year",
+        "referenced_works",
+        "referenced_works_count",
+        "related_works",
+        "sustainable_development_goals",
+        "title",
+        "topics",
+        "type",
+        "updated_date"
+      ]
     },
     "test_examples": [
-      {"openalex_id": "W2626778328"}
+      {
+        "openalex_id": "W2626778328"
+      }
     ]
   },
   {
@@ -354,19 +475,76 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["doi"]
+      "required": [
+        "doi"
+      ]
     },
     "fields": {
       "path": "/works/https://doi.org/{doi}",
-      "path_params": ["doi"]
+      "path_params": [
+        "doi"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex work data from DOI lookup.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "abstract_inverted_index",
+        "apc_list",
+        "apc_paid",
+        "authorships",
+        "awards",
+        "best_oa_location",
+        "biblio",
+        "citation_normalized_percentile",
+        "cited_by_count",
+        "cited_by_percentile_year",
+        "concepts",
+        "content_urls",
+        "corresponding_author_ids",
+        "corresponding_institution_ids",
+        "countries_distinct_count",
+        "counts_by_year",
+        "created_date",
+        "display_name",
+        "doi",
+        "funders",
+        "fwci",
+        "has_content",
+        "has_fulltext",
+        "id",
+        "ids",
+        "indexed_in",
+        "institutions",
+        "institutions_distinct_count",
+        "is_paratext",
+        "is_retracted",
+        "is_xpac",
+        "keywords",
+        "language",
+        "locations",
+        "locations_count",
+        "mesh",
+        "open_access",
+        "primary_location",
+        "primary_topic",
+        "publication_date",
+        "publication_year",
+        "referenced_works",
+        "referenced_works_count",
+        "related_works",
+        "sustainable_development_goals",
+        "title",
+        "topics",
+        "type",
+        "updated_date"
+      ]
     },
     "test_examples": [
-      {"doi": "10.1145/3065386"}
+      {
+        "doi": "10.1145/3065386"
+      }
     ]
   },
   {
@@ -401,20 +579,32 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["search"]
+      "required": [
+        "search"
+      ]
     },
     "fields": {
       "path": "/authors",
       "path_params": [],
-      "param_map": {"per_page": "per-page"}
+      "param_map": {
+        "per_page": "per-page"
+      }
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex authors search response data.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "group_by",
+        "meta",
+        "results"
+      ]
     },
     "test_examples": [
-      {"search": "Yann LeCun", "per_page": 3}
+      {
+        "search": "Yann LeCun",
+        "per_page": 3
+      }
     ]
   },
   {
@@ -436,19 +626,47 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["author_id"]
+      "required": [
+        "author_id"
+      ]
     },
     "fields": {
       "path": "/authors/{author_id}",
-      "path_params": ["author_id"]
+      "path_params": [
+        "author_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex author data.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "affiliations",
+        "block_key",
+        "cited_by_count",
+        "counts_by_year",
+        "created_date",
+        "display_name",
+        "display_name_alternatives",
+        "full_name",
+        "id",
+        "ids",
+        "last_known_institutions",
+        "orcid",
+        "raw_author_names",
+        "summary_stats",
+        "topic_share",
+        "topics",
+        "updated_date",
+        "works_api_url",
+        "works_count",
+        "x_concepts"
+      ]
     },
     "test_examples": [
-      {"author_id": "A5001226970"}
+      {
+        "author_id": "A5001226970"
+      }
     ]
   },
   {
@@ -483,20 +701,32 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["search"]
+      "required": [
+        "search"
+      ]
     },
     "fields": {
       "path": "/institutions",
       "path_params": [],
-      "param_map": {"per_page": "per-page"}
+      "param_map": {
+        "per_page": "per-page"
+      }
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex institutions search response data.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "group_by",
+        "meta",
+        "results"
+      ]
     },
     "test_examples": [
-      {"search": "Harvard University", "per_page": 3}
+      {
+        "search": "Harvard University",
+        "per_page": 3
+      }
     ]
   },
   {
@@ -518,19 +748,56 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["institution_id"]
+      "required": [
+        "institution_id"
+      ]
     },
     "fields": {
       "path": "/institutions/{institution_id}",
-      "path_params": ["institution_id"]
+      "path_params": [
+        "institution_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex institution data.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "associated_institutions",
+        "cited_by_count",
+        "country_code",
+        "counts_by_year",
+        "created_date",
+        "display_name",
+        "display_name_acronyms",
+        "display_name_alternatives",
+        "geo",
+        "homepage_url",
+        "id",
+        "ids",
+        "image_thumbnail_url",
+        "image_url",
+        "international",
+        "is_super_system",
+        "lineage",
+        "repositories",
+        "roles",
+        "ror",
+        "status",
+        "summary_stats",
+        "topic_share",
+        "topics",
+        "type",
+        "type_id",
+        "updated_date",
+        "works_api_url",
+        "works_count"
+      ]
     },
     "test_examples": [
-      {"institution_id": "I136199984"}
+      {
+        "institution_id": "I136199984"
+      }
     ]
   },
   {
@@ -565,7 +832,9 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["search"]
+      "required": [
+        "search"
+      ]
     },
     "fields": {
       "path": "/sources",
@@ -575,13 +844,24 @@
       }
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex sources search response. results[].summary_stats contains h_index, i10_index, and 2yr_mean_citedness.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "group_by",
+        "meta",
+        "results"
+      ]
     },
     "test_examples": [
-      {"search": "nature", "per_page": 3},
-      {"search": "lancet", "per_page": 3}
+      {
+        "search": "nature",
+        "per_page": 3
+      },
+      {
+        "search": "lancet",
+        "per_page": 3
+      }
     ]
   },
   {
@@ -603,20 +883,68 @@
           "description": "Optional contact email for OpenAlex polite pool."
         }
       },
-      "required": ["source_id"]
+      "required": [
+        "source_id"
+      ]
     },
     "fields": {
       "path": "/sources/{source_id}",
-      "path_params": ["source_id"]
+      "path_params": [
+        "source_id"
+      ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "description": "OpenAlex source record. summary_stats contains h_index, i10_index, and 2yr_mean_citedness.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "alternate_titles",
+        "apc_prices",
+        "apc_usd",
+        "apc_usd_by_year",
+        "cited_by_count",
+        "country_code",
+        "counts_by_year",
+        "created_date",
+        "display_name",
+        "first_publication_year",
+        "homepage_url",
+        "host_organization",
+        "host_organization_lineage",
+        "host_organization_name",
+        "id",
+        "ids",
+        "is_core",
+        "is_high_oa_rate",
+        "is_high_oa_rate_since_year",
+        "is_in_doaj",
+        "is_in_doaj_since_year",
+        "is_in_scielo",
+        "is_oa",
+        "is_ojs",
+        "is_preprint_repository",
+        "issn",
+        "issn_l",
+        "last_publication_year",
+        "oa_flip_year",
+        "oa_works_count",
+        "societies",
+        "summary_stats",
+        "topic_share",
+        "topics",
+        "type",
+        "updated_date",
+        "works_api_url",
+        "works_count"
+      ]
     },
     "test_examples": [
-      {"source_id": "S137773608"},
-      {"source_id": "S49861241"}
+      {
+        "source_id": "S137773608"
+      },
+      {
+        "source_id": "S49861241"
+      }
     ]
   }
 ]

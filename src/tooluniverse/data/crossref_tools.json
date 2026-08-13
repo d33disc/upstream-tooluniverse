@@ -107,10 +107,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "DOI": {
@@ -149,7 +146,47 @@
         "funder": {
           "type": "array"
         }
-      }
+      },
+      "required": [
+        "DOI",
+        "ISSN",
+        "URL",
+        "author",
+        "container-title",
+        "content-domain",
+        "created",
+        "deposited",
+        "indexed",
+        "is-referenced-by-count",
+        "issn-type",
+        "issue",
+        "issued",
+        "journal-issue",
+        "language",
+        "license",
+        "link",
+        "member",
+        "original-title",
+        "page",
+        "prefix",
+        "published",
+        "published-online",
+        "publisher",
+        "reference",
+        "reference-count",
+        "references-count",
+        "relation",
+        "resource",
+        "score",
+        "short-container-title",
+        "short-title",
+        "source",
+        "subject",
+        "subtitle",
+        "title",
+        "type",
+        "volume"
+      ]
     },
     "test_examples": [
       {
@@ -181,10 +218,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "title": {
@@ -202,7 +236,20 @@
         "flags": {
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "ISSN",
+        "breakdowns",
+        "counts",
+        "coverage",
+        "coverage-type",
+        "flags",
+        "issn-type",
+        "last-status-check-time",
+        "publisher",
+        "subjects",
+        "title"
+      ]
     },
     "test_examples": [
       {
@@ -238,31 +285,21 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "description": "List of funders.",
       "items": {
         "type": "object",
-        "additionalProperties": true,
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          },
-          "alt-names": {
-            "type": "array"
-          },
-          "tokens": {
-            "type": "array"
-          }
-        }
+        "required": [
+          "alt-names",
+          "id",
+          "location",
+          "name",
+          "replaced-by",
+          "replaces",
+          "tokens",
+          "uri"
+        ],
+        "additionalProperties": true
       }
     },
     "test_examples": [
@@ -296,10 +333,7 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "additionalProperties": true,
       "properties": {
         "id": {
@@ -320,7 +354,22 @@
         "hierarchy": {
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "alt-names",
+        "descendant-work-count",
+        "descendants",
+        "hierarchy",
+        "hierarchy-names",
+        "id",
+        "location",
+        "name",
+        "replaced-by",
+        "replaces",
+        "tokens",
+        "uri",
+        "work-count"
+      ]
     },
     "test_examples": [
       {
@@ -344,22 +393,15 @@
       "method": "GET"
     },
     "return_schema": {
-      "type": [
-        "array",
-        "null"
-      ],
+      "type": "array",
       "description": "List of publication types.",
       "items": {
         "type": "object",
-        "additionalProperties": true,
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          }
-        }
+        "required": [
+          "id",
+          "label"
+        ],
+        "additionalProperties": true
       }
     },
     "test_examples": [

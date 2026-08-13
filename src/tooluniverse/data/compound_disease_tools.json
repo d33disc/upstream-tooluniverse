@@ -17,50 +17,13 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object",
-              "properties": {
-                "query": {
-                  "type": "string"
-                },
-                "sources_queried": {
-                  "type": "array"
-                },
-                "sources_failed": {
-                  "type": "array"
-                },
-                "profile": {
-                  "type": "object"
-                },
-                "per_source": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "properties": {
-            "status": {
-              "const": "error"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "per_source",
+        "profile",
+        "query",
+        "sources_failed",
+        "sources_queried"
       ]
     },
     "test_examples": [

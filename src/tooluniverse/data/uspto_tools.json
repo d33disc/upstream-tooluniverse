@@ -1489,7 +1489,11 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "bulkDataProductBag",
+        "count"
+      ]
     },
     "test_examples": [
       {
@@ -1568,7 +1572,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "petitionDecisionDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -1640,7 +1649,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "petitionDecisionData"
+      ]
     },
     "test_examples": [
       {
@@ -1679,7 +1691,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialProceedingDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -1711,7 +1728,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialProceedingDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -1749,7 +1771,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "patentTrialData"
+      ]
     },
     "test_examples": [
       {
@@ -1787,7 +1812,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -1887,7 +1917,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "patentTrialData"
+      ]
     },
     "test_examples": [
       {
@@ -1925,7 +1958,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -1987,7 +2025,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -2025,7 +2068,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "patentTrialData"
+      ]
     },
     "test_examples": [
       {
@@ -2063,7 +2109,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentAppealDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -2163,7 +2214,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "patentTrialData"
+      ]
     },
     "test_examples": [
       {
@@ -2201,7 +2255,12 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentInterferenceDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
@@ -2301,7 +2360,10 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "interferenceData"
+      ]
     },
     "test_examples": [
       {

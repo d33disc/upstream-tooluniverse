@@ -34,111 +34,26 @@
       "operation": "search_strains"
     },
     "return_schema": {
-      "type": "object",
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "rgd_id": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  },
-                  "symbol": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "full_strain_name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "substrain": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "strain_type": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "genetics": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "origin": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "source": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "background_strain_rgd_id": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  },
-                  "research_use": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "description": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
+      "type": "array",
+      "additionalProperties": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "background_strain_rgd_id",
+          "description",
+          "full_strain_name",
+          "genetics",
+          "name",
+          "origin",
+          "research_use",
+          "rgd_id",
+          "source",
+          "strain_type",
+          "substrain",
+          "symbol"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
@@ -176,106 +91,20 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object",
-              "properties": {
-                "rgd_id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "symbol": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "full_strain_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "substrain": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "strain_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "genetics": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "origin": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "source": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "background_strain_rgd_id": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "research_use": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "description": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "background_strain_rgd_id",
+        "description",
+        "full_strain_name",
+        "genetics",
+        "name",
+        "origin",
+        "research_use",
+        "rgd_id",
+        "source",
+        "strain_type",
+        "substrain",
+        "symbol"
       ]
     },
     "test_examples": [
@@ -317,87 +146,22 @@
       "operation": "get_strain_annotations"
     },
     "return_schema": {
-      "type": "object",
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "term": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "term_acc": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "category": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "aspect": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "qualifier": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "evidence": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "data_source": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "ref_rgd_id": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
+      "type": "array",
+      "additionalProperties": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "aspect",
+          "category",
+          "data_source",
+          "evidence",
+          "qualifier",
+          "ref_rgd_id",
+          "term",
+          "term_acc"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {

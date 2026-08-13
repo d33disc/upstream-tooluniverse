@@ -46,10 +46,7 @@
       }
     ],
     "return_schema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "connected_paths": {
           "type": "object",
@@ -59,7 +56,11 @@
           "type": "object",
           "description": "Per gene-to-term connectivity paths found in the enrichment graph."
         }
-      }
+      },
+      "required": [
+        "connected_paths",
+        "connections"
+      ]
     }
   }
 ]

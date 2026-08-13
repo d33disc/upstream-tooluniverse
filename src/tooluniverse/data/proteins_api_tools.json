@@ -105,7 +105,26 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of protein variations with positions, amino acid changes, disease associations, and evidence. Each variant includes fields like 'ftId', 'wildType', 'alternativeSequence', 'begin', 'end', 'somaticStatus', 'association', etc."
+      "description": "List of protein variations with positions, amino acid changes, disease associations, and evidence. Each variant includes fields like 'ftId', 'wildType', 'alternativeSequence', 'begin', 'end', 'somaticStatus', 'association', etc.",
+      "items": {
+        "type": "object",
+        "required": [
+          "accession",
+          "entryName",
+          "features",
+          "features_truncated",
+          "geneName",
+          "organismName",
+          "proteinExistence",
+          "proteinName",
+          "sequence",
+          "sequenceChecksum",
+          "sequenceVersion",
+          "taxid",
+          "total_features"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
@@ -270,7 +289,23 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "Array of protein objects matching the search query. Each protein contains accession, id, organism, protein names, gene names, features, and other annotations."
+      "description": "Array of protein objects matching the search query. Each protein contains accession, id, organism, protein names, gene names, features, and other annotations.",
+      "items": {
+        "type": "object",
+        "required": [
+          "accession",
+          "dbReferences",
+          "gene",
+          "id",
+          "info",
+          "organism",
+          "protein",
+          "proteinExistence",
+          "references",
+          "sequence"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
