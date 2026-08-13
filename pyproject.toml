@@ -81,6 +81,7 @@ dev = [
     "pytest-html>=3.0",
     "requests-mock>=1.12.1",
     "ruff>=0.14.5",
+    "scipy>=1.7.0",  # tests/integration/test_dms_pipeline_e2e_kras.py imports scipy.stats
 ]
 docs = [
     "sphinx>=4.0",
