@@ -62,6 +62,7 @@ def _run(cmds: List[List[str]]) -> Any:
     try:
         procs: List[subprocess.Popen] = []
         prev_stdout = None
+        last_err = b""
         for i, argv in enumerate(cmds):
             is_last = i == len(cmds) - 1
             p = subprocess.Popen(
@@ -76,13 +77,19 @@ def _run(cmds: List[List[str]]) -> Any:
             prev_stdout = p.stdout
             procs.append(p)
             if is_last:
-                out, _ = p.communicate(timeout=_BCFTOOLS_TIMEOUT)
+                # communicate() closes this process's pipes, so capture its
+                # stderr here; reading p.stderr afterwards raises
+                # ValueError("read of closed file") and masks the real error.
+                out, last_err = p.communicate(timeout=_BCFTOOLS_TIMEOUT)
         # Drain stderr of upstream processes and check their exit codes.
         for p in procs[:-1]:
             p.wait(timeout=_BCFTOOLS_TIMEOUT)
         for p in procs:
             if p.returncode not in (0, None):
-                stderr_txt = (p.stderr.read() if p.stderr else b"") or b""
+                if p is procs[-1]:
+                    stderr_txt = last_err
+                else:
+                    stderr_txt = (p.stderr.read() if p.stderr else b"") or b""
                 detail = stderr_txt.decode("utf-8", "replace").strip()
                 return _err(f"bcftools failed (exit {p.returncode}): {detail[:400]}")
         return out.decode("utf-8", "replace")

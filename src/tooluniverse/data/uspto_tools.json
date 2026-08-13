@@ -1609,11 +1609,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "petitionDecisionDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "petitionDecisionRecordIdentifier": "1"
+        "petitionDecisionRecordIdentifier": "7c0f6889-6a1b-590a-adf4-cb62ea58470c"
       }
     ]
   },
@@ -1737,7 +1742,7 @@
     },
     "test_examples": [
       {
-        "trialNumber": "IPR2015-00001"
+        "trialNumber": "IPR2025-00070"
       }
     ]
   },
@@ -1848,11 +1853,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "documentIdentifier": "1"
+        "documentIdentifier": "171359747"
       }
     ]
   },
@@ -1879,11 +1889,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "trialNumber": "IPR2015-00001"
+        "trialNumber": "IPR2025-00070"
       }
     ]
   },
@@ -1994,11 +2009,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentTrialDocumentDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "documentIdentifier": "1"
+        "documentIdentifier": "171359747"
       }
     ]
   },
@@ -2034,7 +2054,7 @@
     },
     "test_examples": [
       {
-        "trialNumber": "IPR2015-00001"
+        "trialNumber": "IPR2025-00070"
       }
     ]
   },
@@ -2145,11 +2165,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentAppealDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "documentIdentifier": "1"
+        "documentIdentifier": "69867983-87ed-4bac-b1dc-f04144767f3e"
       }
     ]
   },
@@ -2176,11 +2201,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentAppealDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "appealNumber": "1"
+        "appealNumber": "2026002671"
       }
     ]
   },
@@ -2291,11 +2321,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentInterferenceDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "documentIdentifier": "1"
+        "documentIdentifier": "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b"
       }
     ]
   },
@@ -2322,11 +2357,16 @@
       "USPTO_API_KEY"
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "count",
+        "patentInterferenceDataBag",
+        "requestIdentifier"
+      ]
     },
     "test_examples": [
       {
-        "interferenceNumber": "1"
+        "interferenceNumber": "106130"
       }
     ]
   },

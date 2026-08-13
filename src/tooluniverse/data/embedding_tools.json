@@ -77,7 +77,7 @@
         "type": "secret",
         "register_url": "https://portal.azure.com/",
         "purpose": "Use Azure-hosted OpenAI models for embeddings (enterprise alternative to OpenAI).",
-        "without": "Optional alternative to OpenAI — leave blank if you don't use Azure."
+        "without": "Optional alternative to OpenAI \u2014 leave blank if you don't use Azure."
       }
     },
     "optional_api_keys": [
@@ -99,7 +99,7 @@
           "Sample document for testing embeddings"
         ],
         "metadata": [],
-        "provider": "openai",
+        "provider": "local",
         "model": "all-MiniLM-L6-v2",
         "description": "Find tools for analyzing gene expression data"
       }
@@ -107,7 +107,15 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "database_name",
+        "db_path",
+        "dimensions",
+        "documents_added",
+        "embedding_model",
+        "index_path"
+      ]
     }
   },
   {
@@ -182,14 +190,22 @@
           "Sample document to add"
         ],
         "metadata": [],
-        "provider": "openai",
+        "provider": "local",
         "model": "all-MiniLM-L6-v2"
       }
     ],
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "database_name",
+        "db_path",
+        "documents_added",
+        "index_path",
+        "skipped_existing",
+        "total_vectors"
+      ]
     }
   },
   {
@@ -263,14 +279,20 @@
         "query": "machine learning optimization",
         "top_k": 5,
         "filters": {},
-        "provider": "openai",
+        "provider": "local",
         "model": "all-MiniLM-L6-v2"
       }
     ],
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "database_name",
+        "query",
+        "results",
+        "total_found"
+      ]
     }
   },
   {
