@@ -19,7 +19,18 @@
       "required": []
     },
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "category_id",
+          "gene_coverage",
+          "genes_per_term",
+          "library_name",
+          "num_terms"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
@@ -65,7 +76,13 @@
       ]
     },
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "enriched_terms",
+        "gene_count",
+        "library",
+        "total_terms"
+      ]
     },
     "test_examples": [
       {

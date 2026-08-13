@@ -139,7 +139,10 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "result"
+      ]
     }
   },
   {
@@ -204,7 +207,10 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "result"
+      ]
     }
   },
   {

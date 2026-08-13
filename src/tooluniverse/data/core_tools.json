@@ -51,9 +51,21 @@
         }
       },
       "anyOf": [
-        { "required": ["query"] },
-        { "required": ["search"] },
-        { "required": ["q"] }
+        {
+          "required": [
+            "query"
+          ]
+        },
+        {
+          "required": [
+            "search"
+          ]
+        },
+        {
+          "required": [
+            "q"
+          ]
+        }
       ]
     },
     "return_schema": {
@@ -82,7 +94,10 @@
             "description": "Publication year"
           },
           "doi": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Digital Object Identifier (DOI) of the paper"
           },
           "url": {
@@ -127,8 +142,7 @@
         "year_from": 2020
       }
     ]
-  }
-  ,
+  },
   {
     "type": "CorePDFSnippetsTool",
     "name": "CORE_get_fulltext_snippets",
@@ -147,7 +161,9 @@
         "terms": {
           "type": "array",
           "description": "Terms to search for in the extracted PDF text (case-insensitive).",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "window_chars": {
           "type": "integer",
@@ -173,7 +189,12 @@
         "extractor": {
           "type": "string",
           "description": "PDF text extraction backend: auto (default), fitz (PyMuPDF), pypdf, or markitdown.",
-          "enum": ["auto", "fitz", "pypdf", "markitdown"],
+          "enum": [
+            "auto",
+            "fitz",
+            "pypdf",
+            "markitdown"
+          ],
           "default": "auto"
         },
         "timeout": {
@@ -205,29 +226,74 @@
           "maximum": 2000000
         }
       },
-      "required": ["terms"],
+      "required": [
+        "terms"
+      ],
       "anyOf": [
-        { "required": ["pdf_url"] },
-        { "required": ["url"] }
+        {
+          "required": [
+            "pdf_url"
+          ]
+        },
+        {
+          "required": [
+            "url"
+          ]
+        }
       ]
     },
     "return_schema": {
-      "type": ["object", "null"],
+      "type": "object",
       "properties": {
-        "status": { "type": "string", "enum": ["success", "error"] },
-        "pdf_url": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "pdf_url": {
+          "type": "string"
+        },
         "retrieval_trace": {
           "type": "array",
           "description": "Machine-readable trace of attempts used to retrieve the PDF.",
           "items": {
             "type": "object",
             "properties": {
-              "attempt": { "type": "string" },
-              "url": { "type": ["string", "null"] },
-              "status_code": { "type": ["integer", "null"] },
-              "content_type": { "type": ["string", "null"] },
-              "content_length": { "type": ["string", "null"] },
-              "note": { "type": ["string", "null"] }
+              "attempt": {
+                "type": "string"
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status_code": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "content_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "content_length": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             }
           }
         },
@@ -236,30 +302,72 @@
           "items": {
             "type": "object",
             "properties": {
-              "term": { "type": "string" },
-              "snippet": { "type": "string" }
+              "term": {
+                "type": "string"
+              },
+              "snippet": {
+                "type": "string"
+              }
             }
           }
         },
-        "snippets_count": { "type": "integer" },
-        "truncated": { "type": "boolean" },
-        "extractor_used": { "type": ["string", "null"] },
-        "pages_scanned": { "type": ["integer", "null"] },
-        "text_chars_scanned": { "type": "integer" },
-        "error": { "type": "string" },
-        "status_code": { "type": "integer" },
-        "retryable": { "type": "boolean" }
-      }
+        "snippets_count": {
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "extractor_used": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pages_scanned": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "text_chars_scanned": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        },
+        "status_code": {
+          "type": "integer"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "extractor_used",
+        "pages_scanned",
+        "pdf_url",
+        "retrieval_trace",
+        "snippets",
+        "snippets_count",
+        "text_chars_scanned",
+        "truncated"
+      ]
     },
     "test_examples": [
       {
         "url": "https://arxiv.org/pdf/1706.03762.pdf",
-        "terms": ["transformer", "attention"],
+        "terms": [
+          "transformer",
+          "attention"
+        ],
         "window_chars": 200
       },
       {
         "pdf_url": "https://www.biorxiv.org/content/10.1101/2021.03.12.435116v1.full.pdf",
-        "terms": ["CRISPR", "Cas9"],
+        "terms": [
+          "CRISPR",
+          "Cas9"
+        ],
         "max_snippets_per_term": 5
       }
     ]

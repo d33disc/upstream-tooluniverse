@@ -52,7 +52,11 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "content_type",
+        "url"
+      ]
     },
     "test_examples": [
       {
@@ -117,7 +121,15 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "content_length",
+        "content_type",
+        "file_path",
+        "size",
+        "status_code",
+        "url"
+      ]
     },
     "test_examples": [
       {
@@ -170,7 +182,14 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "content",
+        "content_type",
+        "encoding",
+        "size",
+        "url"
+      ]
     },
     "test_examples": [
       {

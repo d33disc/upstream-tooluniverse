@@ -27,7 +27,20 @@
       }
     ],
     "return_schema": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "category",
+        "description",
+        "full_name",
+        "id",
+        "name",
+        "provided_by",
+        "symbol",
+        "synonyms",
+        "taxon",
+        "taxon_label",
+        "xrefs"
+      ]
     }
   },
   {
@@ -69,7 +82,22 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "category",
+          "negated",
+          "object",
+          "object_label",
+          "predicate",
+          "primary_knowledge_source",
+          "provided_by",
+          "subject",
+          "subject_label"
+        ],
+        "additionalProperties": true
+      }
     }
   },
   {
@@ -112,7 +140,20 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "category",
+          "description",
+          "id",
+          "name",
+          "symbol",
+          "taxon",
+          "taxon_label"
+        ],
+        "additionalProperties": true
+      }
     },
     "aliases": [
       "Monarch_search_diseases"
@@ -146,7 +187,16 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "body_system",
+          "id",
+          "phenotype_count"
+        ],
+        "additionalProperties": true
+      }
     }
   },
   {
@@ -182,7 +232,19 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "mapping_source",
+          "object_id",
+          "object_label",
+          "predicate",
+          "subject_id",
+          "subject_label"
+        ],
+        "additionalProperties": true
+      }
     }
   },
   {
@@ -235,7 +297,20 @@
       }
     ],
     "return_schema": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "average_score",
+          "best_score",
+          "disease_id",
+          "disease_name",
+          "matched_phenotypes",
+          "metric",
+          "score"
+        ],
+        "additionalProperties": true
+      }
     }
   },
   {

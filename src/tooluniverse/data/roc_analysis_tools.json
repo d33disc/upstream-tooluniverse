@@ -70,33 +70,15 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "properties": {
-            "status": {
-              "const": "error"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "auc",
+        "auc_ci95",
+        "n",
+        "n_negative",
+        "n_positive",
+        "roc_curve",
+        "youden_optimal"
       ]
     },
     "test_examples": [

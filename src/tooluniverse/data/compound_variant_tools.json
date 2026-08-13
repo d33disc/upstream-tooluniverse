@@ -32,50 +32,13 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object",
-              "properties": {
-                "query": {
-                  "type": "object"
-                },
-                "sources_queried": {
-                  "type": "array"
-                },
-                "sources_failed": {
-                  "type": "array"
-                },
-                "summary": {
-                  "type": "object"
-                },
-                "annotations": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "properties": {
-            "status": {
-              "const": "error"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "annotations",
+        "query",
+        "sources_failed",
+        "sources_queried",
+        "summary"
       ]
     },
     "test_examples": [
