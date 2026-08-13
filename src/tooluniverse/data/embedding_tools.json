@@ -352,7 +352,7 @@
       {
         "action": "upload",
         "database_name": "biomedical_tools",
-        "repository": "username/biomedical-embeddings",
+        "repository": "bigbiolearner/biomedical-embeddings",
         "description": "Find tools for analyzing gene expression data",
         "private": false,
         "commit_message": "Update embeddings"
@@ -361,7 +361,17 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "database_name",
+        "description",
+        "document_count",
+        "embedding_dimensions",
+        "embedding_model",
+        "repository",
+        "upload_url",
+        "uploaded_at"
+      ]
     }
   },
   {
@@ -409,7 +419,7 @@
     "test_examples": [
       {
         "action": "download",
-        "repository": "username/biomedical-embeddings",
+        "repository": "bigbiolearner/biomedical-embeddings",
         "local_name": "biomedical_tools",
         "overwrite": false
       }
@@ -417,7 +427,17 @@
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
-      "properties": {}
+      "properties": {},
+      "required": [
+        "db_path",
+        "document_count",
+        "downloaded_at",
+        "embedding_dimensions",
+        "embedding_model",
+        "index_path",
+        "local_name",
+        "repository"
+      ]
     }
   }
 ]
