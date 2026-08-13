@@ -1,60 +1,60 @@
-"""Format and check-digit validation for biomedical/chemical identifiers.
-
-These validators reject malformed or OCR-corrupted identifiers at the edge, so
-downstream code can trust an identifier's shape instead of re-checking it. The
-fixtures are real ToolUniverse identifiers (aspirin, water, TP53, ...).
-"""
-
-import re
-
-_CAS_RE = re.compile(r"^(\d{2,7})-(\d{2})-(\d)$")
-_INCHIKEY_RE = re.compile(r"^[A-Z]{14}-[A-Z]{10}-[A-Z]$")
-_ENSEMBL_GENE_RE = re.compile(r"^ENSG\d{11}$")
-_NCT_RE = re.compile(r"^NCT\d{8}$")
-_MONDO_RE = re.compile(r"^MONDO:\d{7}$")
-_HGNC_RE = re.compile(r"^HGNC:\d+$")
+"""CAS Registry Number validation."""
 
 
 def cas_is_valid(value: str) -> bool:
-    """Return True iff ``value`` is a valid CAS Registry Number.
+    """Validate a CAS Registry Number by its check digit.
 
-    Format: 2-7 digits, ``-``, 2 digits, ``-``, 1 check digit. The check digit
-    must equal the weighted sum of the preceding digits (read right-to-left with
-    weights 1, 2, 3, ...) modulo 10 — which catches single-digit substitutions and
-    transposition/OCR errors that a pure regex would accept (e.g. ``50-780-2``).
+    Format: XXXXX-YY-Z where:
+      - First block (XXXXX): 2 to 7 digits
+      - Middle block (YY): exactly 2 digits
+      - Check digit (Z): single digit, equals weighted sum of all preceding digits mod 10
+    
+    Weights are assigned right-to-left starting at 1 for the last digit before check.
+    
+    Returns True if valid, False otherwise.
     """
-    match = _CAS_RE.match(value)
+    # Must match pattern: first block (2-7 digits), dash, middle block (exactly 2 digits), dash, check digit (1 digit)
+    import re
+    
+    pattern = r'^(\d{2,7})-(\d{2})-(\d)$'
+    match = re.match(pattern, value)
+    
     if not match:
         return False
-    digits = match.group(1) + match.group(2)
-    checksum = sum(i * int(d) for i, d in enumerate(reversed(digits), start=1)) % 10
-    return checksum == int(match.group(3))
+    
+    first_block = match.group(1)
+    middle_block = match.group(2)
+    check_digit_str = match.group(3)
+    
+    # Combine all digits before the check digit (first block + middle block)
+    all_digits_before_check = first_block + middle_block
+    
+    if not all_digits_before_check.isdigit():
+        return False
+    
+    # Calculate weighted sum: read right-to-left with weights 1, 2, 3, ...
+    total = 0
+    weight = 1
+    for digit_char in reversed(all_digits_before_check):
+        digit = int(digit_char)
+        total += digit * weight
+        weight += 1
+    
+    expected_check_digit = str(total % 10)
+    
+    return check_digit_str == expected_check_digit
 
 
-def inchikey_is_valid(value: str) -> bool:
-    """Return True iff ``value`` matches the InChIKey format.
-
-    An InChIKey is 14 uppercase letters, ``-``, 10 uppercase letters, ``-``, then
-    a single uppercase letter (e.g. ``BSYNRYMUTXBXSQ-UHFFFAOYSA-N`` for aspirin).
-    """
-    return bool(_INCHIKEY_RE.match(value))
-
-
-def ensembl_gene_is_valid(value: str) -> bool:
-    """Return True iff ``value`` is an Ensembl gene ID (``ENSG`` + 11 digits)."""
-    return bool(_ENSEMBL_GENE_RE.match(value))
-
-
-def nct_is_valid(value: str) -> bool:
-    """Return True iff ``value`` is a ClinicalTrials.gov NCT number (``NCT`` + 8 digits)."""
-    return bool(_NCT_RE.match(value))
-
-
-def mondo_is_valid(value: str) -> bool:
-    """Return True iff ``value`` is a MONDO disease ID (``MONDO:`` + 7 digits)."""
-    return bool(_MONDO_RE.match(value))
-
-
-def hgnc_is_valid(value: str) -> bool:
-    """Return True iff ``value`` is an HGNC ID (``HGNC:`` + one or more digits)."""
-    return bool(_HGNC_RE.match(value))
+if __name__ == '__main__':
+    # Test cases that should be True
+    assert cas_is_valid('50-78-2'), "Failed: '50-78-2'"
+    assert cas_is_valid('7732-18-5'), "Failed: '7732-18-5'"
+    assert cas_is_valid('58-08-2'), "Failed: '58-08-2'"
+    assert cas_is_valid('134523-00-5'), "Failed: '134523-00-5'"
+    
+    # Test cases that should be False
+    assert not cas_is_valid('5O-78-2'), "Failed: '5O-78-2' (letter O instead of 0)"
+    assert not cas_is_valid('50-780-2'), "Failed: '50-780-2' (three-digit middle block)"
+    assert not cas_is_valid('abc'), "Failed: 'abc'"
+    
+    print('PASS')
