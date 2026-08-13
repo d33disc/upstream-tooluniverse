@@ -71,53 +71,11 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object",
-              "properties": {
-                "function": {
-                  "type": "string"
-                },
-                "n_files": {
-                  "type": "integer"
-                },
-                "mean": {
-                  "type": "number"
-                },
-                "median": {
-                  "type": "number"
-                },
-                "min": {
-                  "type": "number"
-                },
-                "max": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "properties": {
-            "status": {
-              "const": "error"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "file",
+        "function",
+        "output"
       ]
     },
     "requires_local_input": true,

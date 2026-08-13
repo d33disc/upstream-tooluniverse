@@ -52,18 +52,12 @@
     ],
     "test_examples": [
       {
-        "image_path": "/path/to/microscopy/cells.tif",
+        "image_path": "/tmp/cellpose_test.png",
         "model_type": "cyto3",
         "channels": [
           0,
           0
         ]
-      },
-      {
-        "image_path": "/path/to/microscopy/nuclei.png",
-        "model_type": "nuclei",
-        "diameter": 30,
-        "save_mask": true
       }
     ],
     "return_schema": {

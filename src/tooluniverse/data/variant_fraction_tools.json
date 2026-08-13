@@ -47,73 +47,18 @@
     },
     "return_schema": {
       "type": "object",
-      "oneOf": [
-        {
-          "properties": {
-            "status": {
-              "const": "success"
-            },
-            "data": {
-              "type": "object",
-              "properties": {
-                "total_variants": {
-                  "type": "integer"
-                },
-                "vaf_filtered": {
-                  "type": "integer"
-                },
-                "coding_variants_below_vaf": {
-                  "type": "integer"
-                },
-                "matching_annotation": {
-                  "type": "integer"
-                },
-                "fraction": {
-                  "type": "number"
-                },
-                "naive_fraction": {
-                  "type": "number"
-                },
-                "vaf_column": {
-                  "type": "string"
-                },
-                "so_column": {
-                  "type": "string"
-                },
-                "vaf_threshold": {
-                  "type": "number"
-                },
-                "annotation": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "total_variants",
-                "coding_variants_below_vaf",
-                "matching_annotation",
-                "fraction"
-              ]
-            }
-          },
-          "required": [
-            "status",
-            "data"
-          ]
-        },
-        {
-          "properties": {
-            "status": {
-              "const": "error"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "error"
-          ]
-        }
+      "additionalProperties": true,
+      "required": [
+        "annotation",
+        "coding_variants_below_vaf",
+        "fraction",
+        "matching_annotation",
+        "naive_fraction",
+        "so_column",
+        "total_variants",
+        "vaf_column",
+        "vaf_filtered",
+        "vaf_threshold"
       ]
     },
     "test_examples": [
