@@ -35,9 +35,13 @@ cp -r "$PLUGIN_SRC/commands" "$DIST_DIR/"
 echo "  [+] Slash commands"
 
 # 4b. Copy helper scripts + bundle the generated API key catalog next to them.
-# Use rsync to exclude __pycache__ / *.pyc so stray local artifacts don't ship.
-rsync -a --exclude='__pycache__' --exclude='*.pyc' \
-    "$PLUGIN_SRC/scripts/" "$DIST_DIR/scripts/"
+# The filtered copy excludes __pycache__ / *.pyc so stray local artifacts don't
+# ship. It runs through copy_skill_tree.py rather than rsync: rsync is an
+# undeclared external dependency that is absent from slim images, where it
+# failed the build with a bare "command not found".
+python3 "$REPO_ROOT/scripts/copy_skill_tree.py" \
+    --exclude='__pycache__/' --exclude='*.pyc' \
+    "$PLUGIN_SRC/scripts" "$DIST_DIR/scripts"
 cp "$REPO_ROOT/src/tooluniverse/data/api_keys_catalog.json" "$DIST_DIR/scripts/"
 echo "  [+] Setup scripts + API key catalog"
 
@@ -79,7 +83,7 @@ skill_count=0
 for skill_dir in "$REPO_ROOT/skills"/*/; do
     dir_name=$(basename "$skill_dir")
     if [ -f "$skill_dir/SKILL.md" ] && [[ "$dir_name" == tooluniverse* ]]; then
-        rsync -a \
+        python3 "$REPO_ROOT/scripts/copy_skill_tree.py" \
             --exclude='test_*.py' \
             --exclude='*_test.py' \
             --exclude='__pycache__/' \
@@ -92,7 +96,7 @@ for skill_dir in "$REPO_ROOT/skills"/*/; do
             --exclude='.mypy_cache/' \
             --exclude='.ruff_cache/' \
             --exclude='.DS_Store' \
-            "$skill_dir" "$DIST_DIR/skills/$dir_name/"
+            "$skill_dir" "$DIST_DIR/skills/$dir_name"
         skill_count=$((skill_count + 1))
     fi
 done

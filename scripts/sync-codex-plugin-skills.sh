@@ -23,8 +23,31 @@ else
     PYTHON_BIN="python3"
 fi
 
-rm -rf "$DEST_DIR"
-mkdir -p "$DEST_DIR"
+SKILL_EXCLUDES=(
+    --exclude='test_*.py'
+    --exclude='*_test.py'
+    --exclude='evals/'
+    --exclude='__pycache__/'
+    --exclude='*.pyc'
+    --exclude='.pytest_cache/'
+    --exclude='.coverage'
+    --exclude='.coverage.*'
+    --exclude='coverage.xml'
+    --exclude='htmlcov/'
+    --exclude='.mypy_cache/'
+    --exclude='.ruff_cache/'
+    --exclude='.DS_Store'
+)
+
+# Build into a staging directory beside the destination and swap it in only once
+# every skill has copied and compacted cleanly. The destination is a tracked
+# tree, so wiping it up front (as this script used to) meant any mid-run failure
+# -- a missing dependency, a description the compaction step refuses to
+# rewrite -- left the repo with the whole skills tree deleted or half-populated.
+# Staging beside the destination keeps the final `mv` on one filesystem.
+mkdir -p "$(dirname "$DEST_DIR")"
+STAGE_DIR="$(mktemp -d "$(dirname "$DEST_DIR")/.$(basename "$DEST_DIR").staging.XXXXXX")"
+trap 'rm -rf "$STAGE_DIR"' EXIT
 
 count=0
 for skill_dir in "$REPO_ROOT/skills/tooluniverse" "$REPO_ROOT"/skills/tooluniverse-* "$REPO_ROOT/skills/setup-tooluniverse"; do
@@ -41,29 +64,17 @@ for skill_dir in "$REPO_ROOT/skills/tooluniverse" "$REPO_ROOT"/skills/tooluniver
         continue
     fi
 
-    rsync -a \
-        --exclude='test_*.py' \
-        --exclude='*_test.py' \
-        --exclude='evals/' \
-        --exclude='__pycache__/' \
-        --exclude='*.pyc' \
-        --exclude='.pytest_cache/' \
-        --exclude='.coverage' \
-        --exclude='.coverage.*' \
-        --exclude='coverage.xml' \
-        --exclude='htmlcov/' \
-        --exclude='.mypy_cache/' \
-        --exclude='.ruff_cache/' \
-        --exclude='.DS_Store' \
-        "$skill_dir"/ "$DEST_DIR/$name/"
+    "$PYTHON_BIN" "$REPO_ROOT/scripts/copy_skill_tree.py" \
+        "${SKILL_EXCLUDES[@]}" \
+        "$skill_dir" "$STAGE_DIR/$name"
 
     # Codex plugin validation currently rejects Claude's hidden-subskill
     # marker. Keep the canonical source unchanged and normalize only the
     # generated Codex copy.
     tmp_file="$(mktemp)"
     awk '$0 != "disable-model-invocation: true" && $0 != "disable-model-invocation: false" { print }' \
-        "$DEST_DIR/$name/SKILL.md" > "$tmp_file"
-    mv "$tmp_file" "$DEST_DIR/$name/SKILL.md"
+        "$STAGE_DIR/$name/SKILL.md" > "$tmp_file"
+    mv "$tmp_file" "$STAGE_DIR/$name/SKILL.md"
 
     # Codex rejects skill descriptions over 1024 characters. Keep the root
     # skill source untouched and compact only the generated plugin copy. The
@@ -71,9 +82,14 @@ for skill_dir in "$REPO_ROOT/skills/tooluniverse" "$REPO_ROOT"/skills/tooluniver
     # unit-testable and so a missing PyYAML fails loudly instead of silently
     # rewriting the description to a bare YAML block-scalar indicator.
     "$PYTHON_BIN" "$REPO_ROOT/scripts/compact_codex_skill_description.py" \
-        "$DEST_DIR/$name/SKILL.md"
+        "$STAGE_DIR/$name/SKILL.md"
 
     count=$((count + 1))
 done
 
-echo "Copied $count Codex plugin skills into plugins/tooluniverse/skills/"
+# Everything copied and compacted: swap the finished tree into place.
+rm -rf "$DEST_DIR"
+mv "$STAGE_DIR" "$DEST_DIR"
+trap - EXIT
+
+echo "Copied $count Codex plugin skills into $DEST_DIR"
