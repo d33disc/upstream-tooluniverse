@@ -247,3 +247,8 @@ skills/evals/*/BIXBENCH_FULL_REPORT.md
 
 # Keep the tracked fork implementation plan despite the general rule above.
 !IMPLEMENTATION_PLAN.md
+
+# Transient staging trees from the plugin skill syncs (swapped into place on
+# success, removed on failure; only linger if a run is hard-killed).
+plugin/.skills.staging.*
+plugins/tooluniverse/.skills.staging.*
