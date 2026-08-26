@@ -1,0 +1,24 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/boltz.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Boltz2 Tool Setup",
+  "summary": "Setup guide for installing Boltz2 and ToolUniverse dependencies, configuring a remote GPU host, running the MCP server, and locating usage examples.",
+  "scope": [
+    "Boltz2",
+    "molecular docking",
+    "MCP server",
+    "GPU environment",
+    "ToolUniverse",
+    "BOLTZ_MCP_SERVER_HOST"
+  ],
+  "cross_refs": [
+    "boltz_MCP.py",
+    "path/to/boltz_mcp_server.py",
+    "ToolUniverse/src/tooluniverse/test/test_mcp_tool.py"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

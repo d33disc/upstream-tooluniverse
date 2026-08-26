@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/USPTO_ODP_API_Reference.md",
+  "type": "SPEC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "USPTO Open Data Portal (ODP) API Reference",
+  "summary": "Defines USPTO ODP authentication, rate limits, REST endpoints, query syntax, response schemas, patent resolution, claims extraction, and API discrepancies.",
+  "scope": [
+    "USPTO Open Data Portal",
+    "REST API",
+    "patent applications",
+    "PTAB",
+    "Office Action DSAPI",
+    "response schema"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

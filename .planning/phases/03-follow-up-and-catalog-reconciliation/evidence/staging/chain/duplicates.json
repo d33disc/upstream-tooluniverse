@@ -1,0 +1,121 @@
+{
+  "records": [
+    {
+      "class": "archived_duplicate",
+      "name": "HMDB_get_diseases",
+      "paths": [
+        {
+          "category": null,
+          "live": false,
+          "path": "src/tooluniverse/data/broken_apis/hmdb_tools.json"
+        },
+        {
+          "category": "metabolite",
+          "live": true,
+          "path": "src/tooluniverse/data/metabolite_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "archived_duplicate",
+      "name": "HMDB_get_metabolite",
+      "paths": [
+        {
+          "category": null,
+          "live": false,
+          "path": "src/tooluniverse/data/broken_apis/hmdb_tools.json"
+        },
+        {
+          "category": "metabolite",
+          "live": true,
+          "path": "src/tooluniverse/data/metabolite_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "archived_duplicate",
+      "name": "HMDB_search",
+      "paths": [
+        {
+          "category": null,
+          "live": false,
+          "path": "src/tooluniverse/data/broken_apis/hmdb_tools.json"
+        },
+        {
+          "category": "metabolite",
+          "live": true,
+          "path": "src/tooluniverse/data/metabolite_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "live_collision",
+      "name": "OpenMeteo_get_air_quality",
+      "paths": [
+        {
+          "category": "open_meteo_airquality",
+          "live": true,
+          "path": "src/tooluniverse/data/open_meteo_airquality_tools.json"
+        },
+        {
+          "category": "open_meteo",
+          "live": true,
+          "path": "src/tooluniverse/data/open_meteo_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "archived_duplicate",
+      "name": "OxO_get_ontology_mappings",
+      "paths": [
+        {
+          "category": null,
+          "live": false,
+          "path": "src/tooluniverse/data/broken_apis/oxo_tools.json"
+        },
+        {
+          "category": "oxo",
+          "live": false,
+          "path": "src/tooluniverse/data/oxo_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "archived_duplicate",
+      "name": "OxO_search_ontology_mappings",
+      "paths": [
+        {
+          "category": null,
+          "live": false,
+          "path": "src/tooluniverse/data/broken_apis/oxo_tools.json"
+        },
+        {
+          "category": "oxo",
+          "live": false,
+          "path": "src/tooluniverse/data/oxo_tools.json"
+        }
+      ]
+    },
+    {
+      "class": "live_collision",
+      "name": "UniProt_get_proteome",
+      "paths": [
+        {
+          "category": "uniprot_proteomes",
+          "live": true,
+          "path": "src/tooluniverse/data/uniprot_proteomes_tools.json"
+        },
+        {
+          "category": "uniprot",
+          "live": true,
+          "path": "src/tooluniverse/data/uniprot_tools.json"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "archived_duplicate": 5,
+    "live_collision": 2,
+    "note": "test_no_duplicate_names_across_live_categories in tests/unit/test_registry_integrity.py is currently pytest.mark.xfail(strict=True) for the live_collision names above (OpenMeteo_get_air_quality, UniProt_get_proteome), pending plan 03-04's D-05 review gate. Do not auto-resolve: a collision is recorded as a finding, never a winner picked."
+  }
+}

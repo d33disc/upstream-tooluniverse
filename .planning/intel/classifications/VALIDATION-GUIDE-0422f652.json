@@ -1,0 +1,31 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/VALIDATION_GUIDE.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Documentation validation guide",
+  "summary": "Guide to reviewing documentation changes, validating generated pages and metadata, smoke-testing examples, and building Sphinx documentation with warnings treated as errors.",
+  "scope": [
+    "documentation validation",
+    "generated pages",
+    "example smoke tests",
+    "Sphinx builds",
+    "machine-readable metadata",
+    "final review"
+  ],
+  "cross_refs": [
+    "AGENTS.md",
+    "README.md",
+    "plugin/README.md",
+    "docs/index.rst",
+    "docs/dev_docs",
+    "docs/guide",
+    "docs/reference",
+    "docs/guide/skills_showcase.rst",
+    "docs/*.rst",
+    "server.json"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

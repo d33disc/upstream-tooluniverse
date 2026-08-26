@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/superpowers/specs/2026-04-17-upstream-sync-design.md",
+  "type": "SPEC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Upstream Sync Design — 2026-04-17",
+  "summary": "Technical design for staged upstream and plugin merges that preserve custom ToolUniverse code through defined conflict-resolution and verification rules.",
+  "scope": [
+    "upstream synchronization",
+    "ToolUniverse fork",
+    "PR 161",
+    "staged merges",
+    "conflict resolution",
+    "rollback plan",
+    "success criteria"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

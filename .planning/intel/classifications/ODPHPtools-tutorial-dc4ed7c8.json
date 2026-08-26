@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/ODPHPtools_tutorial.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "ODPHP Tools (MyHealthfinder + ItemList + TopicSearch + Outlink Fetch)",
+  "summary": "Explains the four ODPHP tools, their implementation files, Python usage, chaining workflow, selection guidance, outputs, and tests.",
+  "scope": [
+    "ODPHP",
+    "MyHealthfinder API",
+    "odphp_myhealthfinder",
+    "odphp_itemlist",
+    "odphp_topicsearch",
+    "odphp_outlink_fetch"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

@@ -1,0 +1,19 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/depmap_24q2.md",
+  "type": "DOC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "DepMap Gene Correlation Analysis Tool - MCP Server",
+  "summary": "Guides installation, data preparation, configuration, operation, and troubleshooting for the DepMap gene-correlation MCP server, with input and output details.",
+  "scope": [
+    "DepMap 24Q2",
+    "gene correlations",
+    "CRISPR knockout data",
+    "MCP server",
+    "DEPMAP_DATA_PATH"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": "Contains input and output specifications, but its dominant structure is a setup, operation, and troubleshooting guide."
+}

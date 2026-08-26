@@ -1,0 +1,39 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/UTILITY_SCRIPTS.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Documentation Utility Scripts",
+  "summary": "Reference guide to scripts for generating, building, validating, analyzing, and synchronizing ToolUniverse documentation.",
+  "scope": [
+    "documentation utility scripts",
+    "documentation generation",
+    "Sphinx builds",
+    "example validation",
+    "documentation analytics",
+    "docstring synchronization"
+  ],
+  "cross_refs": [
+    "tools_config_index.rst",
+    "docs/tools/tools_config_index.rst",
+    "docs/tools/*_tools.rst",
+    "docs/tools/uniprot_tools.rst",
+    "docs/tools/pubmed_tools.rst",
+    "docs/tools/tool_reference.rst",
+    "docs/tools/remote/*.rst",
+    "docs/tools/remote_tools_index.rst",
+    "docs/tools/remote/expert_feedback.rst",
+    "docs/tools/remote/custom_api.rst",
+    "quickstart.rst",
+    "advanced.rst",
+    "installation.rst",
+    "faq.rst",
+    "docs/api/tooluniverse.core.rst",
+    "docs/tools/my_new_tools.rst",
+    "docs/tools/problematic_tools.rst",
+    "DOCUMENTATION_STANDARDS.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

@@ -1,0 +1,24 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/transcriptformer.md",
+  "type": "SPEC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Transcriptformer Gene Embedding Tool",
+  "summary": "Technical contract and setup guide for retrieving context-specific Transcriptformer gene embeddings through a streamable HTTP MCP server.",
+  "scope": [
+    "Transcriptformer",
+    "contextualized gene embeddings",
+    "single-cell RNA sequencing",
+    "TRANSCRIPTFORMER_DATA_PATH",
+    "input parameters",
+    "JSON responses",
+    "MCP server"
+  ],
+  "cross_refs": [
+    "requirements.txt",
+    "transcriptformer_tool.py"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": "Includes tutorial-style data acquisition and server setup, but the dominant signals are input schemas, response contracts, embedding properties, and transport configuration."
+}

@@ -1,0 +1,34 @@
+{
+  "comprehensive_job": "Python 3.12 compatibility",
+  "conclusion": "success",
+  "event": "pull_request",
+  "headSha": "21945440c9f2a15537ba878500a800d9e330eab0",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "Python 3.13 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.10 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.12 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.14 compatibility",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Python 3.11 compatibility",
+      "status": "completed"
+    }
+  ],
+  "url": "https://github.com/d33disc/upstream-tooluniverse/actions/runs/30938185985"
+}

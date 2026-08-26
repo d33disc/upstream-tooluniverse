@@ -1,0 +1,22 @@
+{
+  "fork_oid": "21945440c9f2a15537ba878500a800d9e330eab0",
+  "overall_status": "green",
+  "stages": {
+    "broad_offline": "green",
+    "catalog": "green",
+    "checksums": "green",
+    "ci": "green",
+    "cli_probe": "green",
+    "configured_providers": "green",
+    "environment": "green",
+    "excluded_suites": "green",
+    "git": "green",
+    "mcp_http_probe": "green",
+    "mcp_stdio_probe": "green",
+    "preservation": "green",
+    "python_probe": "green",
+    "rest_probe": "green",
+    "secret_scan": "green",
+    "targeted_tests": "green"
+  }
+}

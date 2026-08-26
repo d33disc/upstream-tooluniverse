@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/Tool_Registration_Chain.md",
+  "type": "SPEC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "ToolUniverse Tool Registration Chain",
+  "summary": "Technical contract for making ToolUniverse tools callable through MCP across definitions, implementations, registries, configuration, wrappers, and package exports.",
+  "scope": [
+    "tool registration chain",
+    "JSON tool definitions",
+    "Python tool classes",
+    "lazy registry",
+    "category configuration",
+    "wrapper stubs",
+    "MCP"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": "Dominant signals are implementation contracts, required file mappings, and explicit rules across the six registration links."
+}

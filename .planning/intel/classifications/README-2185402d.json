@@ -1,0 +1,21 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/translation_tools/README.md",
+  "type": "DOC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Translation Tools",
+  "summary": "Introduces ToolUniverse AgenticTool translation scripts, their files, installation, command-line usage, configuration options, and batch PO translation features.",
+  "scope": [
+    "AgenticTool",
+    "PO file translation",
+    "batch_translate_po.py",
+    "translation_agentic_tool.py",
+    "command-line interface"
+  ],
+  "cross_refs": [
+    "AGENTIC_TRANSLATION_TOOL_SUMMARY.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

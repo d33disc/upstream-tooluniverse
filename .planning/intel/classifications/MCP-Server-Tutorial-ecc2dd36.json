@@ -1,0 +1,26 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/MCP_Server_Tutorial.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Converting any Tool to MCP Server and Using it with ToolUniverse",
+  "summary": "Tutorial for exposing Python programs through FastMCP servers, configuring ToolUniverse integration, invoking registered tools, and troubleshooting common failures.",
+  "scope": [
+    "MCP servers",
+    "FastMCP",
+    "ToolUniverse integration",
+    "MCPAutoLoaderTool",
+    "TxAgent",
+    "client scripts",
+    "troubleshooting"
+  ],
+  "cross_refs": [
+    "run_mcp.py",
+    "/path/to/tooluniverse/data/your_tool_client_tools.json",
+    "your_tool_config.json",
+    "client.py"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

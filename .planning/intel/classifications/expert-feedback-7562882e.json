@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/expert_feedback.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Human Expert Feedback System",
+  "summary": "Guide to installing, deploying, and using ToolUniverse's human-in-the-loop expert consultation system through web, terminal, and MCP interfaces.",
+  "scope": [
+    "Human Expert Feedback System",
+    "ToolUniverse",
+    "human-in-the-loop consultation",
+    "MCP integration",
+    "expert web interface",
+    "router servers"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

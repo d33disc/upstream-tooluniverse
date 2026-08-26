@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/tools/remote/immune_compass.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "COMPASS Immunotherapy Treatment Prediction Tool - MCP Server",
+  "summary": "Guide to installing, configuring, running, and troubleshooting the COMPASS MCP server for immunotherapy response prediction from tumor gene-expression profiles.",
+  "scope": [
+    "COMPASS",
+    "immunotherapy response prediction",
+    "MCP server",
+    "gene expression data",
+    "model weights",
+    "immune cell concepts"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

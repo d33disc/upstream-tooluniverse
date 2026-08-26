@@ -1,0 +1,30 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/Interaction_Surfaces.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "ToolUniverse — Interaction Surfaces",
+  "summary": "Reference guide to ToolUniverse connection surfaces, tool discovery primitives, execution interfaces, orchestration skills, and related integration resources.",
+  "scope": [
+    "ToolUniverse",
+    "connection surfaces",
+    "tool discovery",
+    "MCP",
+    "REST API",
+    "Python SDK",
+    "CLI"
+  ],
+  "cross_refs": [
+    "docs/dev_docs/Embedding_Search.md",
+    "docs/dev_docs/Adding_Tools_Tutorial.md",
+    "SKILL.md",
+    "docs/guide/skills_showcase.rst",
+    "skills/tooluniverse/references/general-strategies.md",
+    "MEMORY.md",
+    "docs/dev_docs/mcp_tool_registration_en.md",
+    "docs/dev_docs/MCP_Server_Tutorial.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

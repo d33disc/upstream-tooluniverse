@@ -1,0 +1,18 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/MCP_TASKS_GUIDE.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "MCP Tasks: Async Operations in ToolUniverse",
+  "summary": "Guide to using and managing MCP Tasks for asynchronous long-running operations in ToolUniverse.",
+  "scope": [
+    "MCP Tasks",
+    "ToolUniverse",
+    "asynchronous operations",
+    "TaskManager"
+  ],
+  "cross_refs": [],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

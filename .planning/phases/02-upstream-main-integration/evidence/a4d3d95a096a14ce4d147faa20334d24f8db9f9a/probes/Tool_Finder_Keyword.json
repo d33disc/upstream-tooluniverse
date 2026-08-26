@@ -1,0 +1,358 @@
+{
+  "arguments": {
+    "description": "protein structure prediction",
+    "limit": 3
+  },
+  "cli": {
+    "discover": {
+      "found": true
+    },
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "result": [
+          {
+            "description": "Search the ELIXIR Bio.tools registry for bioinformatics software tools, databases, and web services. Bio.tools is the comprehensive registry of bioinformatics resources maintained by ELIXIR, containing 30,000+ entries. Returns tool names, descriptions, types, topics, and homepages. Use this to find software for specific bioinformatics tasks (e.g., 'sequence alignment', 'variant calling', 'protein structure prediction'). Example: search 'RNA-seq' to find RNA sequencing analysis tools.",
+            "name": "BioTools_search",
+            "parameter": {
+              "properties": {
+                "format": {
+                  "default": "json",
+                  "description": "Response format. Must be 'json'.",
+                  "required": false,
+                  "type": "string"
+                },
+                "page": {
+                  "default": 1,
+                  "description": "Page number for paginated results (1-based). Default: 1.",
+                  "required": false,
+                  "type": "integer"
+                },
+                "q": {
+                  "description": "Free-text search query. Searches across tool names, descriptions, and topics. Examples: 'blast', 'RNA-seq analysis', 'protein folding', 'variant calling', 'metagenomics'.",
+                  "required": true,
+                  "type": "string"
+                },
+                "size": {
+                  "default": 10,
+                  "description": "Number of results per page (1-50). Default: 10.",
+                  "required": false,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "q"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Get comprehensive information about ViennaRNA – RNA structure prediction and analysis",
+            "name": "get_viennarna_info",
+            "parameter": {
+              "properties": {
+                "include_examples": {
+                  "default": true,
+                  "description": "Whether to include usage examples and quick start guide",
+                  "required": true,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "include_examples"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Predict protein 3D structure from amino acid sequence using ESMFold (Meta's ESM-2 language model). Returns per-residue pLDDT confidence scores (0-1 scale, higher=better) and summary statistics. Also returns the predicted PDB coordinate text. Fast single-sequence prediction (no MSA needed). Best for sequences under 400 residues. No authentication required.",
+            "name": "ESMFold_predict_structure",
+            "parameter": {
+              "properties": {
+                "sequence": {
+                  "description": "Protein amino acid sequence in single-letter code. Example: 'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH'. FASTA headers and whitespace are stripped. Max ~400 residues recommended for fast results.",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence"
+              ],
+              "type": "object"
+            }
+          }
+        ]
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "tool_finder",
+        "configs": {
+          "exclude_tools": [
+            "Tool_RAG",
+            "Tool_Finder",
+            "Finish",
+            "CallAgent",
+            "Tool_Finder_LLM",
+            "Tool_Finder_Keyword"
+          ]
+        },
+        "description": "Simple keyword-based tool finder for discovering relevant tools using text matching",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "Tool_Finder_Keyword",
+        "parameters": {
+          "properties": {
+            "categories": {
+              "description": "Optional list of tool categories to filter by",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "description": {
+              "description": "The description of the tool capability required.",
+              "required": true,
+              "type": "string"
+            },
+            "limit": {
+              "description": "The number of tools to retrieve (default: 10)",
+              "required": false,
+              "type": "integer"
+            },
+            "picked_tool_names": {
+              "description": "Pre-selected tool names to process. If provided, tool selection will skip these tools.",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "return_call_result": {
+              "description": "Whether to return both prompts and tool names. If false, returns only tool prompts.",
+              "required": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "description"
+          ],
+          "type": "object"
+        },
+        "required": [
+          "description"
+        ],
+        "return_schema": {
+          "description": "List of matching tools (name, description, parameter schema), ranked by keyword relevance.",
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/finder_tools.json",
+        "test_examples": [
+          {
+            "categories": [],
+            "description": "Find tools for analyzing gene expression data",
+            "limit": 1,
+            "picked_tool_names": []
+          }
+        ],
+        "type": "ToolFinderKeyword"
+      }
+    },
+    "surface": "cli",
+    "tool": "Tool_Finder_Keyword"
+  },
+  "contract": {
+    "cli": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "missing_keys": [],
+    "name": "Tool_Finder_Keyword",
+    "python": {
+      "missing_keys": [],
+      "reason": "discover -> inspect -> execute completed",
+      "verdict": "pass"
+    },
+    "selection_rule": "rule_2_tool_definition_class",
+    "verdict": "pass"
+  },
+  "name": "Tool_Finder_Keyword",
+  "python": {
+    "discover": {
+      "found": true
+    },
+    "duration_ms": 647.815,
+    "execute": {
+      "error": null,
+      "error_type": null,
+      "missing_keys": [],
+      "result": {
+        "value": [
+          {
+            "description": "Search the ELIXIR Bio.tools registry for bioinformatics software tools, databases, and web services. Bio.tools is the comprehensive registry of bioinformatics resources maintained by ELIXIR, containing 30,000+ entries. Returns tool names, descriptions, types, topics, and homepages. Use this to find software for specific bioinformatics tasks (e.g., 'sequence alignment', 'variant calling', 'protein structure prediction'). Example: search 'RNA-seq' to find RNA sequencing analysis tools.",
+            "name": "BioTools_search",
+            "parameter": {
+              "properties": {
+                "format": {
+                  "default": "json",
+                  "description": "Response format. Must be 'json'.",
+                  "required": false,
+                  "type": "string"
+                },
+                "page": {
+                  "default": 1,
+                  "description": "Page number for paginated results (1-based). Default: 1.",
+                  "required": false,
+                  "type": "integer"
+                },
+                "q": {
+                  "description": "Free-text search query. Searches across tool names, descriptions, and topics. Examples: 'blast', 'RNA-seq analysis', 'protein folding', 'variant calling', 'metagenomics'.",
+                  "required": true,
+                  "type": "string"
+                },
+                "size": {
+                  "default": 10,
+                  "description": "Number of results per page (1-50). Default: 10.",
+                  "required": false,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "q"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Get comprehensive information about ViennaRNA – RNA structure prediction and analysis",
+            "name": "get_viennarna_info",
+            "parameter": {
+              "properties": {
+                "include_examples": {
+                  "default": true,
+                  "description": "Whether to include usage examples and quick start guide",
+                  "required": true,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "include_examples"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "description": "Predict protein 3D structure from amino acid sequence using ESMFold (Meta's ESM-2 language model). Returns per-residue pLDDT confidence scores (0-1 scale, higher=better) and summary statistics. Also returns the predicted PDB coordinate text. Fast single-sequence prediction (no MSA needed). Best for sequences under 400 residues. No authentication required.",
+            "name": "ESMFold_predict_structure",
+            "parameter": {
+              "properties": {
+                "sequence": {
+                  "description": "Protein amino acid sequence in single-letter code. Example: 'MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH'. FASTA headers and whitespace are stripped. Max ~400 residues recommended for fast results.",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence"
+              ],
+              "type": "object"
+            }
+          }
+        ]
+      },
+      "status": "success"
+    },
+    "inspect": {
+      "spec": {
+        "category": "tool_finder",
+        "configs": {
+          "exclude_tools": [
+            "Tool_RAG",
+            "Tool_Finder",
+            "Finish",
+            "CallAgent",
+            "Tool_Finder_LLM",
+            "Tool_Finder_Keyword"
+          ]
+        },
+        "description": "Simple keyword-based tool finder for discovering relevant tools using text matching",
+        "mcp_annotations": {
+          "destructiveHint": false,
+          "readOnlyHint": true
+        },
+        "name": "Tool_Finder_Keyword",
+        "parameter": {
+          "properties": {
+            "categories": {
+              "description": "Optional list of tool categories to filter by",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "description": {
+              "description": "The description of the tool capability required.",
+              "required": true,
+              "type": "string"
+            },
+            "limit": {
+              "description": "The number of tools to retrieve (default: 10)",
+              "required": false,
+              "type": "integer"
+            },
+            "picked_tool_names": {
+              "description": "Pre-selected tool names to process. If provided, tool selection will skip these tools.",
+              "items": {
+                "type": "string"
+              },
+              "required": false,
+              "type": "array"
+            },
+            "return_call_result": {
+              "description": "Whether to return both prompts and tool names. If false, returns only tool prompts.",
+              "required": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "description"
+          ],
+          "type": "object"
+        },
+        "required": [
+          "description"
+        ],
+        "return_schema": {
+          "description": "List of matching tools (name, description, parameter schema), ranked by keyword relevance.",
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "source_file": "/private/var/folders/lq/8gym82x11vv5r5c0dp7jrxm00000gn/T/tu-remerge-audit-e0755067/src/tooluniverse/data/finder_tools.json",
+        "test_examples": [
+          {
+            "categories": [],
+            "description": "Find tools for analyzing gene expression data",
+            "limit": 1,
+            "picked_tool_names": []
+          }
+        ],
+        "type": "ToolFinderKeyword"
+      }
+    },
+    "surface": "python",
+    "tool": "Tool_Finder_Keyword"
+  }
+}

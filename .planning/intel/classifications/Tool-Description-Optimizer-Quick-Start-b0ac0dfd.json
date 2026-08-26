@@ -1,0 +1,20 @@
+{
+  "source_path": "/Users/davis/code/ToolUniverse/docs/dev_docs/Tool_Description_Optimizer_Quick_Start.md",
+  "type": "DOC",
+  "confidence": "high",
+  "manifest_override": false,
+  "title": "Tool Description Optimizer - Quick Start Tutorial",
+  "summary": "Provides a quick-start tutorial for improving ToolUniverse tool descriptions with ToolDescriptionOptimizer, including parameters, examples, outputs, and use cases.",
+  "scope": [
+    "ToolDescriptionOptimizer",
+    "tool descriptions",
+    "quality scores",
+    "optimization parameters"
+  ],
+  "cross_refs": [
+    "Tool_Description_Optimizer_Tutorial.md"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": ""
+}

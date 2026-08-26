@@ -1,0 +1,401 @@
+{
+  "catalog_size": 2658,
+  "emptied_pools": [],
+  "exclusions": [
+    "this plan certifies the shared-core discovery primitives (grep_tools/get_tool_info) only; it does not certify discovery, inspection, or execution across the CLI, MCP stdio, MCP HTTP, or REST transport surfaces -- that certification is Phase 5 / SURF-01 per ROADMAP.md",
+    "86 catalog-wide tool(s) are currently excluded via ToolUniverse._excluded_api_key_tools (missing required_api_keys) in this environment; this run's mechanically-selected sample happened to draw none of them, so the gated array is empty for this run -- the exclusion mechanism itself is proven separately by tests/unit/test_smoke_discovery_sample.py's dedicated gated-exclusion test, not by this run's live sample",
+    "pool 1's flat, globally-sorted cap-5 selected 5 of 14 candidates, all from literature_search_tools.json; uspto_tools.json's pair (USPTO_get_patent_assignment, USPTO_get_patent_transactions -- the same pair Phase 2 plan 02-05 probed for execution) sorts after the literature agents and so is not represented in this run's sample or gated arrays, even though both are gated on USPTO_API_KEY in this environment",
+    "pool 2's candidate names are re-derived from git blobs (fork_oid/upstream_oid recorded in union.json) rather than read from union.json directly, which records only per-file counts; restricted to verdict==union_ok files with merged_name_count==upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+    "catalog_size and the excluded_api_key_tools population are environment-dependent -- this run resolved LLM keys via .tooluniverse/env.py + .env.1password even though the ambient shell had none exported, so a future run with different credentials loaded will show different counts; that is not catalog drift"
+  ],
+  "failed": 0,
+  "gated": [],
+  "gated_count": 0,
+  "passed": 11,
+  "results": [
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "AOPWiki_get_key_event"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "AOPWiki_get_key_event",
+        "parameter_names": [
+          "event_id"
+        ]
+      },
+      "missing_keys": [],
+      "name": "AOPWiki_get_key_event",
+      "pool": "new-upstream",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/aopwiki_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "Alliance_get_alleles_and_models"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "Alliance_get_alleles_and_models",
+        "parameter_names": [
+          "gene_id",
+          "limit"
+        ]
+      },
+      "missing_keys": [],
+      "name": "Alliance_get_alleles_and_models",
+      "pool": "new-upstream",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "Alliance_get_gene_orthologs"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "Alliance_get_gene_orthologs",
+        "parameter_names": [
+          "gene_id",
+          "limit",
+          "stringency"
+        ]
+      },
+      "missing_keys": [],
+      "name": "Alliance_get_gene_orthologs",
+      "pool": "new-upstream",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "Alliance_get_molecular_interactions"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "Alliance_get_molecular_interactions",
+        "parameter_names": [
+          "gene_id",
+          "limit",
+          "page"
+        ]
+      },
+      "missing_keys": [],
+      "name": "Alliance_get_molecular_interactions",
+      "pool": "new-upstream",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "BiGG_download_model"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "BiGG_download_model",
+        "parameter_names": [
+          "format",
+          "model_id",
+          "operation"
+        ]
+      },
+      "missing_keys": [],
+      "name": "BiGG_download_model",
+      "pool": "new-upstream",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/bigg_models_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "DegreesOfUnsaturation_calculate"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "DegreesOfUnsaturation_calculate",
+        "parameter_names": [
+          "Br",
+          "C",
+          "Cl",
+          "F",
+          "H",
+          "N",
+          "S",
+          "formula",
+          "iodine",
+          "operation",
+          "oxygen"
+        ]
+      },
+      "missing_keys": [],
+      "name": "DegreesOfUnsaturation_calculate",
+      "pool": "offline-control",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_3_offline_control: credential-free, deterministic reference tool -- a failure here means the environment, not the catalog",
+      "source_path": "src/tooluniverse/data/degrees_of_unsaturation_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "IntentAnalyzerAgent"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "IntentAnalyzerAgent",
+        "parameter_names": [
+          "context",
+          "user_query"
+        ]
+      },
+      "missing_keys": [],
+      "name": "IntentAnalyzerAgent",
+      "pool": "preserved-custom",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "KeywordExtractorAgent"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "KeywordExtractorAgent",
+        "parameter_names": [
+          "context",
+          "current_keywords",
+          "plan_description",
+          "plan_title"
+        ]
+      },
+      "missing_keys": [],
+      "name": "KeywordExtractorAgent",
+      "pool": "preserved-custom",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "MultiAgentLiteratureSearch"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "MultiAgentLiteratureSearch",
+        "parameter_names": [
+          "max_iterations",
+          "quality_threshold",
+          "query"
+        ]
+      },
+      "missing_keys": [],
+      "name": "MultiAgentLiteratureSearch",
+      "pool": "preserved-custom",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "OverallSummaryAgent"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "OverallSummaryAgent",
+        "parameter_names": [
+          "context",
+          "iterations",
+          "plan_summaries",
+          "total_papers",
+          "total_plans",
+          "user_intent",
+          "user_query"
+        ]
+      },
+      "missing_keys": [],
+      "name": "OverallSummaryAgent",
+      "pool": "preserved-custom",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json",
+      "verdict": "pass"
+    },
+    {
+      "grep": {
+        "found": true,
+        "match_count": 1,
+        "match_names": [
+          "QualityCheckerAgent"
+        ]
+      },
+      "info": {
+        "error": null,
+        "gated": false,
+        "has_schema": true,
+        "missing_keys": [],
+        "name": "QualityCheckerAgent",
+        "parameter_names": [
+          "context",
+          "plans_analysis"
+        ]
+      },
+      "missing_keys": [],
+      "name": "QualityCheckerAgent",
+      "pool": "preserved-custom",
+      "reason": "grep_tools found the tool and get_tool_info returned a parameter schema",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json",
+      "verdict": "pass"
+    }
+  ],
+  "sample": [
+    {
+      "name": "AOPWiki_get_key_event",
+      "pool": "new-upstream",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/aopwiki_tools.json"
+    },
+    {
+      "name": "Alliance_get_alleles_and_models",
+      "pool": "new-upstream",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json"
+    },
+    {
+      "name": "Alliance_get_gene_orthologs",
+      "pool": "new-upstream",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json"
+    },
+    {
+      "name": "Alliance_get_molecular_interactions",
+      "pool": "new-upstream",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/alliance_genome_tools.json"
+    },
+    {
+      "name": "BiGG_download_model",
+      "pool": "new-upstream",
+      "selection_rule": "rule_2_new_upstream: name present in the upstream side (git show 56adcfd9c299078d0c40fde642b0be006510ccf3:<path>) of a union.json union_ok file but absent from the fork side (git show e0755067ebe7cc5374f033c5c28160980c5eddfa:<path>); restricted to files where merged_name_count == upstream_name_count, excluding src/tooluniverse/data/broken_apis/",
+      "source_path": "src/tooluniverse/data/bigg_models_tools.json"
+    },
+    {
+      "name": "DegreesOfUnsaturation_calculate",
+      "pool": "offline-control",
+      "selection_rule": "rule_3_offline_control: credential-free, deterministic reference tool -- a failure here means the environment, not the catalog",
+      "source_path": "src/tooluniverse/data/degrees_of_unsaturation_tools.json"
+    },
+    {
+      "name": "IntentAnalyzerAgent",
+      "pool": "preserved-custom",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json"
+    },
+    {
+      "name": "KeywordExtractorAgent",
+      "pool": "preserved-custom",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json"
+    },
+    {
+      "name": "MultiAgentLiteratureSearch",
+      "pool": "preserved-custom",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json"
+    },
+    {
+      "name": "OverallSummaryAgent",
+      "pool": "preserved-custom",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json"
+    },
+    {
+      "name": "QualityCheckerAgent",
+      "pool": "preserved-custom",
+      "selection_rule": "rule_1_hand_resolved: name defined in src/tooluniverse/data/literature_search_tools.json, one of the files git diff-tree --cc f81448f2047a6f35bd552956a0d9990019a39eb1 --name-only reported as hand-resolved",
+      "source_path": "src/tooluniverse/data/literature_search_tools.json"
+    }
+  ]
+}

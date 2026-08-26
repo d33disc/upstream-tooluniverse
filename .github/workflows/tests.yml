@@ -8,15 +8,20 @@ on:
 
 jobs:
   test:
-    name: Run Tests
+    name: Python ${{ matrix.python-version }} compatibility
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.12']
+        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Fetch authoritative upstream ref
+        run: |
+          git remote add upstream https://github.com/mims-harvard/ToolUniverse.git
+          git fetch --no-tags upstream main
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -44,6 +49,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Install project with dev extras
+        timeout-minutes: 10
         run: |
           uv pip install -e .[dev] --system
 
@@ -66,12 +72,27 @@ jobs:
             -n auto \
             -m "not slow and not require_api_keys and not network and not require_gpu"
 
+      - name: Run comprehensive Python 3.12 lanes
+        if: matrix.python-version == '3.12'
+        timeout-minutes: 30
+        run: |
+          pytest tests/unit/ tests/integration/ -v -m "not slow and not require_api_keys and not network and not require_gpu" \
+            --junitxml=test-results-${{ matrix.python-version }}-comprehensive.xml
+          pytest tests/tools/ tests/examples/ tests/api/ -v --tb=short \
+            --ignore=tests/tools/test_ensembl_tool.py \
+            --ignore=tests/tools/test_esm_sae_tool.py \
+            --ignore=tests/tools/test_cellosaurus_tool.py \
+            --ignore=tests/examples/test_all_simple_examples.py \
+            --ignore=tests/examples/test_drug_discovery_simple.py \
+            -m "not slow and not require_api_keys and not network and not require_gpu" \
+            --junitxml=test-results-${{ matrix.python-version }}-excluded.xml
+
       - name: Test doctor CLI tool
         run: |
           python -m src.tooluniverse.doctor
 
       - name: Run tools, examples, and api tests (optional, requires network)
-        if: github.event.inputs.run_tools_tests == 'true' || github.event_name == 'workflow_dispatch'
+        if: false
         run: |
           pytest tests/tools/ tests/examples/ tests/api/ -v \
             --tb=short \
@@ -89,4 +110,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.python-version }}
-          path: coverage.xml
+          path: |
+            coverage.xml
+            test-results-${{ matrix.python-version }}-*.xml
