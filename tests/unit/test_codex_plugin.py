@@ -237,3 +237,95 @@ def test_build_codex_plugin(tmp_path):
     assert (dist_dir / ".codex-plugin" / "plugin.json").is_file()
     assert (dist_dir / ".mcp.json").is_file()
     assert (dist_dir / "skills" / "tooluniverse" / "SKILL.md").is_file()
+
+
+@pytest.mark.unit
+class TestCodexSkillSyncSafety:
+    """The sync must never damage its destination when it cannot finish.
+
+    ``plugins/tooluniverse/skills/`` is tracked. The sync used to ``rm -rf`` it
+    up front and only then start copying, so any mid-run failure -- a missing
+    external tool, a description the compaction step refuses to rewrite -- left
+    the tree deleted or half-populated. It now builds into a staging directory
+    and swaps that in only after every skill has copied and compacted.
+    """
+
+    SYNC_SCRIPT = REPO_ROOT / "scripts" / "sync-codex-plugin-skills.sh"
+
+    @staticmethod
+    def _dest_with_sentinel(tmp_path: Path) -> Path:
+        dest = tmp_path / "skills"
+        (dest / "previous-skill").mkdir(parents=True)
+        (dest / "previous-skill" / "SKILL.md").write_text("sentinel", encoding="utf-8")
+        return dest
+
+    @staticmethod
+    def _staging_leftovers(dest: Path) -> list:
+        return sorted(dest.parent.glob(f".{dest.name}.staging.*"))
+
+    def test_failed_sync_leaves_destination_intact(self, tmp_path):
+        """A sync that aborts partway leaves the previous tree untouched."""
+        dest = self._dest_with_sentinel(tmp_path)
+
+        # Shadow PyYAML so the per-skill compaction step aborts, which is the
+        # cheapest faithful stand-in for "the sync dies partway through".
+        fake_mods = tmp_path / "fakemods"
+        fake_mods.mkdir()
+        (fake_mods / "yaml.py").write_text(
+            'raise ImportError("simulated missing PyYAML")\n', encoding="utf-8"
+        )
+        env = dict(os.environ)
+        env["PYTHONPATH"] = str(fake_mods) + os.pathsep + env.get("PYTHONPATH", "")
+        env["CODEX_PLUGIN_PYTHON"] = sys.executable
+        env["CODEX_PLUGIN_SKILLS_DEST"] = str(dest)
+
+        result = subprocess.run(
+            ["bash", str(self.SYNC_SCRIPT)],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode != 0, "the sync must fail loudly, but it exited 0"
+        assert (dest / "previous-skill" / "SKILL.md").read_text() == "sentinel", (
+            "the failed sync destroyed the destination it was rebuilding"
+        )
+        assert not self._staging_leftovers(dest), "staging directory was not cleaned up"
+
+    def test_sync_does_not_shell_out_to_rsync(self, tmp_path):
+        """The sync completes on a machine with no working rsync.
+
+        rsync is an undeclared external dependency; on images without it the
+        sync died with a bare ``command not found``. A sabotaged ``rsync`` first
+        on PATH fails the test if anything in the sync still reaches for it.
+        """
+        dest = self._dest_with_sentinel(tmp_path)
+
+        sabotage = tmp_path / "sabotage"
+        sabotage.mkdir()
+        rsync_shim = sabotage / "rsync"
+        rsync_shim.write_text(
+            '#!/bin/sh\necho "rsync must not be required" >&2\nexit 127\n',
+            encoding="utf-8",
+        )
+        rsync_shim.chmod(0o755)
+
+        env = dict(os.environ)
+        env["PATH"] = str(sabotage) + os.pathsep + env["PATH"]
+        env["CODEX_PLUGIN_PYTHON"] = sys.executable
+        env["CODEX_PLUGIN_SKILLS_DEST"] = str(dest)
+
+        result = subprocess.run(
+            ["bash", str(self.SYNC_SCRIPT)],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 0, f"sync failed without rsync: {result.stderr}"
+        assert (dest / "tooluniverse" / "SKILL.md").is_file()
+        # The rebuilt tree replaces the old one wholesale, sentinel included.
+        assert not (dest / "previous-skill").exists()
+        assert not self._staging_leftovers(dest)

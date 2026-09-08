@@ -37,9 +37,29 @@ REPO_ROOT="$(cd .. && pwd)"
 #                                MCP/uvx/plugin marketplace involved)
 CLAUDE_EXCLUDE="tooluniverse-codex-plugin tooluniverse-cs-setup"
 
-# Recreate plugin/skills/ from scratch (Claude packaging — all user-facing skills)
-rm -rf skills
-mkdir skills
+SKILL_EXCLUDES=(
+  --exclude='test_*.py'
+  --exclude='*_test.py'
+  --exclude='evals/'
+  --exclude='__pycache__/'
+  --exclude='*.pyc'
+  --exclude='.pytest_cache/'
+  --exclude='.coverage'
+  --exclude='.coverage.*'
+  --exclude='coverage.xml'
+  --exclude='htmlcov/'
+  --exclude='.mypy_cache/'
+  --exclude='.ruff_cache/'
+  --exclude='.DS_Store'
+)
+
+# Build plugin/skills/ in a staging directory and swap it in only after every
+# skill has copied. plugin/skills/ is tracked, so removing it up front (as this
+# script used to) meant any mid-run failure left the tree deleted or
+# half-populated. Staging beside the destination keeps the final `mv` on one
+# filesystem.
+STAGE_DIR="$(mktemp -d ./.skills.staging.XXXXXX)"
+trap 'rm -rf "$STAGE_DIR"' EXIT
 
 count=0
 for dir in ../skills/tooluniverse ../skills/tooluniverse-* ../skills/setup-tooluniverse; do
@@ -50,23 +70,16 @@ for dir in ../skills/tooluniverse ../skills/tooluniverse-* ../skills/setup-toolu
   [ -f "$dir/SKILL.md" ] || continue
   name=$(basename "$dir")
   [[ " $CLAUDE_EXCLUDE " == *" $name "* ]] && continue
-  rsync -a \
-    --exclude='test_*.py' \
-    --exclude='*_test.py' \
-    --exclude='evals/' \
-    --exclude='__pycache__/' \
-    --exclude='*.pyc' \
-    --exclude='.pytest_cache/' \
-    --exclude='.coverage' \
-    --exclude='.coverage.*' \
-    --exclude='coverage.xml' \
-    --exclude='htmlcov/' \
-    --exclude='.mypy_cache/' \
-    --exclude='.ruff_cache/' \
-    --exclude='.DS_Store' \
-    "$dir"/ "skills/$name/"
+  python3 "$REPO_ROOT/scripts/copy_skill_tree.py" \
+    "${SKILL_EXCLUDES[@]}" \
+    "$dir" "$STAGE_DIR/$name"
   count=$((count + 1))
 done
+
+# Every skill copied cleanly: swap the finished tree into place.
+rm -rf skills
+mv "$STAGE_DIR" skills
+trap - EXIT
 
 echo "Copied $count user-facing skills (filtered) into plugin/skills/"
 
