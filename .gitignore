@@ -210,7 +210,6 @@ skills/evals/
 # Per-user auto-memory / private session notes (never push)
 memory/
 MEMORY.md
-CLAUDE.md
 
 # API keys & secrets
 .env

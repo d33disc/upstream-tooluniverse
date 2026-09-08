@@ -64,3 +64,29 @@ Also useful:
 - Credentials are env-var-based; tools auto-skip when their key is missing.
   Run `tu status` to see what's configured.
 - Set `TOOLUNIVERSE_CACHE_ENABLED=true` for repeatable lookups.
+
+## Blind-agent research protocol
+
+For agents that do NOT know the catalog, use the compact MCP entry
+(`tooluniverse-discover`): it exposes only list_tools, grep_tools,
+get_tool_info, execute_tool plus find_tools (semantic), keeping context lean.
+
+1. **Semantic sweep FIRST, before any docs**: call find_tools with the
+   research question in natural language. This converts the 2,722-tool space
+   into a shortlist of 5-10 candidates in one call. Run one sweep per
+   research facet. get_tool_info then fills in only what is relevant.
+2. **Breadth backstop**: grep_tools(keywords, field=description) if the sweep
+   missed something; list_tools(category=...) only within a suspected
+   category. Never enumerate the full catalog.
+3. **Depth**: get_tool_info on each candidate; read the test_examples
+   (live-verified usage). Return schemas are hardened, so output shape is
+   predictable before the first call.
+4. **Plan, then execute**: one tool per subtask; argument names copied
+   exactly from get_tool_info. Parse {status, data, error_details};
+   error_details.retriable decides whether to retry.
+5. **Evidence rule**: tu is transport, never authority. Cite the underlying
+   API (api.uspto.gov, UniProt, IntAct, ...) in every report.
+
+Meta-rules: three calls per tool max (sweep -> info -> execute). Respect
+vendor limits (USPTO per-URI quota, NIM job latency, TDC Dataverse outages);
+chain outputs between tools (search result IDs feed get-by-id tools).
