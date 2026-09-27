@@ -154,13 +154,17 @@ def test_mcpb_declares_the_package_rather_than_mirroring_its_dependency_list():
     """
     mcpb_requirements = _requirements_by_name(MCPB_PYPROJECT)
 
+    # The bundle declares tooluniverse and nothing else; what a sealed runtime
+    # needs beyond the defaults it asks for as extras on that one requirement,
+    # which is checked below.
     assert set(mcpb_requirements) == {"tooluniverse"}, (
-        "the bundle should declare tooluniverse and nothing else; its "
-        f"dependencies are supplied by the package metadata: {sorted(mcpb_requirements)}"
+        "the bundle should declare tooluniverse plus only what a sealed runtime "
+        "cannot get any other way; everything else is supplied by the package "
+        f"metadata: {sorted(mcpb_requirements)}"
     )
 
     requirement = mcpb_requirements["tooluniverse"]
-    for extra in ("openai", "gemini"):
+    for extra in ("openai", "gemini", "stats", "chem"):
         assert extra in requirement, (
             f"the {extra} extra is optional upstream but mandatory in a sealed "
             f"bundle -- without it that client is unavailable in Desktop: {requirement}"
@@ -171,10 +175,20 @@ def test_mcpb_declares_the_package_rather_than_mirroring_its_dependency_list():
 
 
 def _markitdown_requirements():
-    """Every declared markitdown requirement, keyed by the file that declares it."""
+    """Every declared markitdown requirement, keyed by the file that declares it.
+
+    The extras are searched as well as the base list: markitdown backs 10 tools
+    and costs 91 MB, so it moved behind ``tooluniverse[documents]``. Wherever it
+    is declared, the converter extras it names still have to be the explicit
+    set rather than markitdown's own ``all``.
+    """
     found = {}
     for pyproject in (ROOT_PYPROJECT, MCPB_PYPROJECT):
-        for requirement in _load_dependencies(pyproject):
+        data = _load_pyproject(pyproject)
+        declarations = list(data.get("dependencies", []))
+        for requirements in (data.get("optional-dependencies") or {}).values():
+            declarations.extend(requirements)
+        for requirement in declarations:
             if _distribution_name(requirement) == "markitdown":
                 found.setdefault(pyproject, []).append(requirement)
     return found
