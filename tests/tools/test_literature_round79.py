@@ -427,6 +427,33 @@ class TestMultiAgentParseResult(unittest.TestCase):
         parsed = _parse_result(s)
         self.assertEqual(parsed["user_intent"], "Test")
 
+    def test_parse_result_fenced_json_string(self):
+        from tooluniverse.compose_scripts.enhanced_multi_agent_literature_search import (
+            _parse_result,
+        )
+
+        payload = {
+            "user_intent": "Find CRISPR papers",
+            "search_plans": [{"title": "plan1"}],
+        }
+        fenced = "```json" + chr(10) + json.dumps(payload) + chr(10) + "```"
+        parsed = _parse_result(fenced)
+        self.assertEqual(parsed["user_intent"], "Find CRISPR papers")
+        self.assertEqual(parsed["search_plans"][0]["title"], "plan1")
+
+    def test_parse_result_fenced_json_nested(self):
+        from tooluniverse.compose_scripts.enhanced_multi_agent_literature_search import (
+            _parse_result,
+        )
+
+        nested = {
+            "success": True,
+            "result": "```json" + chr(10) + json.dumps({"user_intent": "Find papers", "search_plans": []}) + chr(10) + "```",
+        }
+        parsed = _parse_result(nested)
+        self.assertEqual(parsed["user_intent"], "Find papers")
+        self.assertIn("search_plans", parsed)
+
 
 if __name__ == "__main__":
     unittest.main()
