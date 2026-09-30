@@ -265,11 +265,32 @@ def compose(
     }
 
 
+def _strip_code_fence(text):
+    """Remove a single surrounding markdown code fence, if present.
+
+    LLM-backed agent tools frequently wrap their JSON payload in a
+    markdown code fence. json.loads chokes on the fence markers, so
+    strip them before parsing.
+    """
+    if not isinstance(text, str):
+        return text
+    stripped = text.strip()
+    if not (stripped.startswith("```") and stripped.rstrip().endswith("```")):
+        return text
+    newline = stripped.find("\n")
+    if newline == -1:
+        return text
+    body = stripped[newline + 1:]
+    if body.rstrip().endswith("```"):
+        body = body.rstrip()[:-3]
+    return body.strip()
+
+
 def _parse_result(result):
-    """Parse tool result into a dict, unwrapping nested JSON strings."""
+    """Parse tool result into a dict, unwrapping nested JSON strings and code fences."""
     if isinstance(result, str):
         try:
-            parsed = json.loads(result)
+            parsed = json.loads(_strip_code_fence(result))
             return parsed if isinstance(parsed, dict) else {"result": parsed}
         except Exception:
             return {"result": result}
@@ -278,7 +299,7 @@ def _parse_result(result):
         inner = result.get("result")
         if isinstance(inner, str):
             try:
-                parsed = json.loads(inner)
+                parsed = json.loads(_strip_code_fence(inner))
                 if isinstance(parsed, dict):
                     return parsed
             except Exception:

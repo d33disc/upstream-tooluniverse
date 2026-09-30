@@ -19,11 +19,10 @@
       "agent_type": "ManagedAgent",
       "available_tools": [],
       "model": {
-        "provider": "AzureOpenAIModel",
-        "model_id": "gpt-5",
-        "api_key": "env:AZURE_OPENAI_API_KEY",
-        "azure_endpoint": "https://azure-ai.hms.edu",
-        "api_version": "2024-10-21"
+        "provider": "OpenAIModel",
+        "model_id": "deepseek-v4-pro",
+        "api_key": "env:DEEPSEEK_API_KEY",
+        "api_base": "https://api.deepseek.com"
       },
       "agent_init_params": {
         "max_steps": 50,
@@ -39,11 +38,10 @@
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -61,11 +59,10 @@
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -88,11 +85,10 @@
             "MedRxiv_search_preprints"
           ],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -119,11 +115,10 @@
             "SemanticScholar_search_papers"
           ],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -151,11 +146,10 @@
             "CORE_search_papers"
           ],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -178,11 +172,10 @@
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -205,11 +198,10 @@
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -263,11 +255,10 @@
       "agent_type": "ManagedAgent",
       "available_tools": [],
       "model": {
-        "provider": "AzureOpenAIModel",
-        "model_id": "gpt-5",
-        "api_key": "env:AZURE_OPENAI_API_KEY",
-        "azure_endpoint": "https://azure-ai.hms.edu",
-        "api_version": "2024-10-21"
+        "provider": "OpenAIModel",
+        "model_id": "deepseek-v4-pro",
+        "api_key": "env:DEEPSEEK_API_KEY",
+        "api_base": "https://api.deepseek.com"
       },
       "agent_init_params": {
         "max_steps": 30,
@@ -293,11 +284,10 @@
             }
           ],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "add_base_tools": true,
@@ -324,11 +314,10 @@
             }
           ],
           "model": {
-            "provider": "AzureOpenAIModel",
-            "model_id": "gpt-5",
-            "api_key": "env:AZURE_OPENAI_API_KEY",
-            "azure_endpoint": "https://azure-ai.hms.edu",
-            "api_version": "2024-10-21"
+            "provider": "OpenAIModel",
+            "model_id": "deepseek-v4-pro",
+            "api_key": "env:DEEPSEEK_API_KEY",
+            "api_base": "https://api.deepseek.com"
           },
           "agent_init_params": {
             "max_steps": 8,
