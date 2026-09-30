@@ -57,7 +57,8 @@ def test_all_models_point_at_deepseek():
 
 
 def test_model_initializes_against_deepseek(monkeypatch):
-    from smolagents import OpenAIModel
+    smolagents = pytest.importorskip("smolagents")
+    OpenAIModel = smolagents.OpenAIModel
 
     from tooluniverse.smolagent_tool import SmolAgentTool
 
