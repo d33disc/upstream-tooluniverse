@@ -37,6 +37,8 @@ concurrency:
 jobs:
   check:
     name: Is the published bundle behind?
+    # Fork guard: publish only from upstream, never a release asset on a fork.
+    if: github.repository == 'mims-harvard/ToolUniverse'
     runs-on: ubuntu-latest
     outputs:
       should_publish: ${{ steps.check.outputs.should_publish }}
