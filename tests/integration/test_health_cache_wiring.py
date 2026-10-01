@@ -62,6 +62,9 @@ _SEED_LIVE_FAERS = [
     "FAERS_count_death_related_by_drug",
     "FAERS_count_drugs_by_drug_event",
     "FAERS_count_outcomes_by_drug_event",
+    # Upstream's BM25 finder (2026-10 sync) ranks these into the top 15 instead.
+    "FAERS_filter_serious_events",
+    "FAERS_count_drug_characterization",
 ]
 _SEED_BROKEN_SIDER = [
     "SIDER_get_drugs_for_side_effect",

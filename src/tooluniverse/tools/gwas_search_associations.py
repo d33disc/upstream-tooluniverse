@@ -49,11 +49,11 @@ def gwas_search_associations(
     p_value : float
         Maximum p-value threshold for filtering (e.g., 5e-8 for genome-wide significa...
     p_value_threshold : float
-        Alias for p_value: maximum p-value threshold.
+        Alias for p_value: maximum p-value threshold (also applied client-side; see p...
     sort : str
-        Sort field (e.g., 'p_value', 'or_value')
+        Sort field (e.g., 'p_value', 'or_value'). Defaults to 'p_value'. When a p_val...
     direction : str
-        Sort direction ('asc' or 'desc')
+        Sort direction ('asc' or 'desc'). Defaults to 'asc'. Combined with a p_value ...
     size : int
         Number of results to return
     page : int

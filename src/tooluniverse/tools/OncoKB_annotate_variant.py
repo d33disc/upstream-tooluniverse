@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OncoKB_annotate_variant(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "annotate_variant",
     gene: Optional[str] = None,
     gene_symbol: Optional[str] = None,
     variant: Optional[str] = None,

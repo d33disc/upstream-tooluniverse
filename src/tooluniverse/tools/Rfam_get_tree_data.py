@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def Rfam_get_tree_data(
     family_id: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_tree_data",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

@@ -1,7 +1,7 @@
 """
 PANTHER_ortholog
 
-Find orthologs of a gene across species using PANTHER evolutionary classification. Returns the or...
+Find orthologs of a gene across species using PANTHER evolutionary classification. Returns EVERY ...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def PANTHER_ortholog(
     validate: bool = True,
 ) -> Any:
     """
-    Find orthologs of a gene across species using PANTHER evolutionary classification. Returns the or...
+    Find orthologs of a gene across species using PANTHER evolutionary classification. Returns EVERY ...
 
     Parameters
     ----------

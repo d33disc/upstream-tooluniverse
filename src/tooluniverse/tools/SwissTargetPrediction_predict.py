@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def SwissTargetPrediction_predict(
-    operation: str,
     smiles: str,
+    operation: Optional[str] = "predict",
     organism: Optional[str] = "Homo_sapiens",
     top_n: Optional[int] = None,
     *,

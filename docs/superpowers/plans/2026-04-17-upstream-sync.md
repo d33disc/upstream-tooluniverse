@@ -228,7 +228,7 @@ git add src/tooluniverse/__init__.py
 
 PR #161 adds 4 entries after `"ComposeTool"`:
 
-```python
+```text
     "CompoundDiseaseProfileTool": "compound_disease_tool",
     "MSigDBTool": "msigdb_tool",
     "CompoundGeneDiseaseAssociationTool": "compound_gene_disease_tool",
@@ -245,7 +245,7 @@ git add src/tooluniverse/_lazy_registry_static.py
 
 PR #161 adds 3 compound tool config paths after the `"compose"` entry:
 
-```python
+```text
     # Compound tools — multi-database queries in a single call
     "compound_gene_disease": os.path.join(
         current_dir, "data", "compound_gene_disease_tools.json"

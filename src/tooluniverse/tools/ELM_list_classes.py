@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ELM_list_classes(
-    operation: str,
+    operation: Optional[str] = "list_classes",
     motif_type: Optional[str] = None,
     query: Optional[str] = None,
     max_results: Optional[int] = 50,

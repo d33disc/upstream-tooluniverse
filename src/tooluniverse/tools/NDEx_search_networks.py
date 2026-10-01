@@ -16,7 +16,7 @@ def NDEx_search_networks(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the NDEx biological network repository for published networks by keyword. NDEx hosts thous...
 
@@ -37,7 +37,7 @@ def NDEx_search_networks(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

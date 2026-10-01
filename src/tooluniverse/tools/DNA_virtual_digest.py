@@ -1,7 +1,7 @@
 """
 DNA_virtual_digest
 
-Perform a virtual restriction enzyme digest on a DNA sequence using the NEB enzyme library (24 en...
+Perform a virtual restriction enzyme digest on a DNA sequence using the NEB enzyme library (25 cu...
 """
 
 from typing import Any, Optional, Callable
@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_virtual_digest(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "virtual_digest",
     enzymes: Optional[list[str]] = None,
     circular: Optional[bool] = False,
     *,
@@ -19,12 +19,12 @@ def DNA_virtual_digest(
     validate: bool = True,
 ) -> Any:
     """
-    Perform a virtual restriction enzyme digest on a DNA sequence using the NEB enzyme library (24 en...
+    Perform a virtual restriction enzyme digest on a DNA sequence using the NEB enzyme library (25 cu...
 
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'virtual_digest' for this tool).
     sequence : str
         DNA sequence (A, T, G, C, N only). Case insensitive.
     enzymes : list[str]

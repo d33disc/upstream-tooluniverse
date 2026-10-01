@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def Survival_kaplan_meier(
-    operation: str,
     durations: list[Any],
     event_observed: list[Any],
+    operation: Optional[str] = "kaplan_meier",
     group_labels: Optional[list[str]] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

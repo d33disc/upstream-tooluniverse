@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OpenFDA_get_approved_products(
-    operation: str,
+    operation: Optional[str] = "get_approved_products",
     drug_name: Optional[str] = None,
     application_number: Optional[str] = None,
     *,

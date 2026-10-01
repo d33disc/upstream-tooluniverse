@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def VDJDB_get_antigen_specificity(
-    operation: str,
     epitope: str,
+    operation: Optional[str] = "get_antigen_specificity",
     species: Optional[str] = None,
     gene: Optional[str] = None,
     mhc_class: Optional[str] = None,

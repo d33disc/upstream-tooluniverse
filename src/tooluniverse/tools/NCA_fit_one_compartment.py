@@ -19,7 +19,7 @@ def NCA_fit_one_compartment(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Fit a one-compartment IV bolus pharmacokinetic model (C(t) = C0 × exp(-k_el × t)) to plasma conce...
 
@@ -46,7 +46,7 @@ def NCA_fit_one_compartment(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

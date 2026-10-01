@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def SIDER_get_drug_indications(
-    operation: str,
+    operation: Optional[str] = "get_indications",
     drug_name: Optional[str] = None,
     sider_drug_id: Optional[str] = None,
     *,

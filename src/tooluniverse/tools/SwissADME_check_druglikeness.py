@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def SwissADME_check_druglikeness(
-    operation: str,
     smiles: str,
+    operation: Optional[str] = "check_druglikeness",
     rules: Optional[list[str]] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

@@ -1,12 +1,12 @@
 import os
 import re
 import tempfile
-import threading
-import time
 
 import requests
 from .base_tool import BaseTool
 from .http_utils import request_with_retry
+from .provider_rate_limit import enforce_provider_rate_limit
+from .extras import install_hint
 from .tool_registry import register_tool
 
 try:
@@ -17,21 +17,39 @@ except ImportError:
     MARKITDOWN_AVAILABLE = False
 
 
+def _coerce_total(value):
+    """Normalize the upstream ``total`` field to a non-negative int or None.
+
+    Fix-R30: Semantic Scholar's OpenAPI spec declares ``total`` on
+    ``PaperRelevanceSearchBatch``/``PaperBulkSearchBatch`` as a *string*
+    ("Approximate number of matching search results.") while the live API
+    returns a JSON integer, so accept both. Anything else -- including a
+    missing key -- yields None, which callers must render as "unknown"
+    rather than substituting the page size.
+    """
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value if value >= 0 else None
+    if isinstance(value, str):
+        text = value.strip()
+        if text.isdigit():
+            return int(text)
+    return None
+
+
 @register_tool("SemanticScholarTool")
 class SemanticScholarTool(BaseTool):
     """
     Tool to search for papers on Semantic Scholar including abstracts.
 
-    API key is read from environment variable SEMANTIC_SCHOLAR_API_KEY.
+    API key is resolved from the active request credential context, with
+    SEMANTIC_SCHOLAR_API_KEY as the local environment fallback.
     Request an API key at: https://www.semanticscholar.org/product/api
 
-    Rate limits:
-    - Without API key: 1 request/second
-    - With API key: 100 requests/second
+    Semantic Scholar currently gives new API keys an introductory quota of 1 request/second.
+    Anonymous requests use a shared upstream pool and may be throttled dynamically.
     """
-
-    _last_request_time = 0.0
-    _rate_limit_lock = threading.Lock()
 
     def __init__(
         self,
@@ -40,8 +58,6 @@ class SemanticScholarTool(BaseTool):
     ):
         super().__init__(tool_config)
         self.base_url = base_url
-        # Get API key from environment as fallback
-        self.default_api_key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "")
         self.session = requests.Session()
         self.session.headers.update({"Accept": "application/json"})
 
@@ -54,9 +70,29 @@ class SemanticScholarTool(BaseTool):
         if not query:
             return {"status": "error", "error": "`query` parameter is required."}
         if limit <= 0:
-            return {"status": "success", "data": [], "metadata": {"total": 0}}
+            # No upstream request is issued when the caller asks for zero rows,
+            # so there is no corpus total to report. `total` is 0 here purely
+            # because nothing was requested -- `total_source` says so explicitly
+            # so this is never mistaken for "the corpus has no matches".
+            return {
+                "status": "success",
+                "data": [],
+                "metadata": {
+                    "query": query,
+                    "returned": 0,
+                    "total": 0,
+                    "total_source": "not_queried",
+                },
+                "truncated": False,
+            }
+        upstream_meta = {}
         papers = self._search(
-            query, limit, year=year, sort=sort, include_abstract=include_abstract
+            query,
+            limit,
+            year=year,
+            sort=sort,
+            include_abstract=include_abstract,
+            upstream_meta=upstream_meta,
         )
         # Check if _search returned an error list
         if papers and isinstance(papers[0], dict) and "error" in papers[0]:
@@ -66,21 +102,44 @@ class SemanticScholarTool(BaseTool):
                 "error": err.get("error", "Unknown error"),
                 "retryable": err.get("retryable", False),
             }
-        return {
-            "status": "success",
-            "data": papers,
-            "metadata": {"total": len(papers), "query": query},
+        # Fix-R30: `total` used to be len(papers), i.e. the size of the single
+        # page just fetched, so it always equalled `limit` (limit=10/5/3 ->
+        # total=10/5/3 for the same query) and a caller could not tell a
+        # 3-paper literature base from a 3000-paper one. Report the corpus
+        # match count the API actually sends back, keep the page size in its
+        # own field, and flag truncation at the top level.
+        returned = len(papers)
+        total = upstream_meta.get("total")
+        metadata = {
+            "query": query,
+            "returned": returned,
+            "total": total,
+            "total_source": (
+                "semantic_scholar" if total is not None else "unavailable"
+            ),
         }
+        response = {"status": "success", "data": papers, "metadata": metadata}
+        if total is not None and total > returned:
+            response["truncated"] = True
+            response["truncation_note"] = (
+                f"Returning {returned} of approximately {total} Semantic Scholar "
+                f"papers matching this query. Raise `limit` (max 100 per request) "
+                f"or narrow the query with `year`/more specific keywords to see more. "
+                f"`total` is the API's approximate match count, not an exact figure."
+            )
+        else:
+            response["truncated"] = False
+        return response
 
-    def _enforce_rate_limit(self, has_api_key: bool) -> None:
-        # Keep anonymous usage below 1 req/sec to reduce 429s.
-        min_interval = 0.02 if has_api_key else 1.05
-        with self._rate_limit_lock:
-            now = time.time()
-            elapsed = now - SemanticScholarTool._last_request_time
-            if elapsed < min_interval:
-                time.sleep(min_interval - elapsed)
-            SemanticScholarTool._last_request_time = time.time()
+    def _enforce_rate_limit(self, api_key: str) -> None:
+        # New authenticated keys start at 1 RPS across Semantic Scholar endpoints. Anonymous
+        # traffic belongs to a shared, adaptive upstream pool, so Retry-After/backoff is more
+        # accurate than imposing the old, incorrect process-wide 1 RPS assumption locally.
+        enforce_provider_rate_limit(
+            "semantic_scholar",
+            api_key,
+            1.0 if api_key else None,
+        )
 
     def _fetch_missing_abstract(self, paper_id: str) -> dict | None:
         paper_id = (paper_id or "").strip()
@@ -89,8 +148,9 @@ class SemanticScholarTool(BaseTool):
 
         url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
         params = {"fields": "abstract,externalIds,openAccessPdf"}
-        headers = {"x-api-key": self.default_api_key} if self.default_api_key else {}
-        self._enforce_rate_limit(bool(self.default_api_key))
+        api_key = self.credential("SEMANTIC_SCHOLAR_API_KEY") or ""
+        headers = {"x-api-key": api_key} if api_key else {}
+        self._enforce_rate_limit(api_key)
         resp = request_with_retry(
             self.session,
             "GET",
@@ -109,8 +169,24 @@ class SemanticScholarTool(BaseTool):
         return payload if isinstance(payload, dict) else None
 
     def _search(
-        self, query, limit, *, year=None, sort=None, include_abstract: bool = False
+        self,
+        query,
+        limit,
+        *,
+        year=None,
+        sort=None,
+        include_abstract: bool = False,
+        upstream_meta: dict | None = None,
     ):
+        """Return the page of papers as a list.
+
+        `upstream_meta`, when a dict is passed in, is populated in place with
+        response-level (non-row) facts from the upstream payload -- currently
+        just `total`, the API's approximate corpus match count. It is an
+        out-parameter rather than a second return value so that the existing
+        callers/tests that treat `_search` as "list of papers or a
+        single-element error list" keep working unchanged.
+        """
         # Include identifiers and lightweight impact signals for better downstream utility.
         fields = [
             "paperId",
@@ -144,8 +220,9 @@ class SemanticScholarTool(BaseTool):
             params["year"] = str(year)
         if sort:
             params["sort"] = sort
-        headers = {"x-api-key": self.default_api_key} if self.default_api_key else {}
-        self._enforce_rate_limit(bool(self.default_api_key))
+        api_key = self.credential("SEMANTIC_SCHOLAR_API_KEY") or ""
+        headers = {"x-api-key": api_key} if api_key else {}
+        self._enforce_rate_limit(api_key)
         # Use /paper/search/bulk when sorting, as /paper/search silently
         # ignores the sort parameter and always returns relevance-ranked results.
         url = self.base_url
@@ -183,6 +260,17 @@ class SemanticScholarTool(BaseTool):
             ]
 
         results = payload.get("data", []) if isinstance(payload, dict) else []
+        # Fix-R30: capture the corpus-level match count that sits alongside
+        # `data`. Both /paper/search (PaperRelevanceSearchBatch) and
+        # /paper/search/bulk (PaperBulkSearchBatch) document a `total` field:
+        # "Approximate number of matching search results." Absent/garbage stays
+        # None -- never backfilled from len(results).
+        if isinstance(upstream_meta, dict):
+            upstream_meta["total"] = (
+                _coerce_total(payload.get("total"))
+                if isinstance(payload, dict)
+                else None
+            )
         if sort:
             # /paper/search/bulk has no `limit` concept of its own (only
             # token-based pagination over its full result set), so the
@@ -354,12 +442,20 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
             paper_id = paper_id.strip()
             api_url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
             params = {"fields": "openAccessPdf"}
+            api_key = self.credential("SEMANTIC_SCHOLAR_API_KEY") or ""
+            headers = {"x-api-key": api_key} if api_key else {}
             try:
+                enforce_provider_rate_limit(
+                    "semantic_scholar",
+                    api_key,
+                    1.0 if api_key else None,
+                )
                 resp = request_with_retry(
                     self.session,
                     "GET",
                     api_url,
                     params=params,
+                    headers=headers,
                     timeout=20,
                     max_attempts=2,
                 )
@@ -387,7 +483,10 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
         if not MARKITDOWN_AVAILABLE:
             return {
                 "status": "error",
-                "error": "markitdown library not available. Install with: pip install 'markitdown[all]'",
+                "error": (
+                    f"markitdown is required to extract text from this PDF. "
+                    f"{install_hint('documents')}"
+                ),
                 "retryable": False,
             }
 
@@ -491,10 +590,10 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
                 total_chars += len(snippet)
                 found += 1
 
-        return {
-            "status": "success",
+        payload = {
             "pdf_url": pdf_url,
             "snippets": snippets,
             "snippets_count": len(snippets),
             "truncated": total_chars >= max_total_chars,
         }
+        return {"status": "success", **payload, "data": payload}

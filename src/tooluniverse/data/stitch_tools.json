@@ -6,7 +6,10 @@
       "type": "object",
       "properties": {
         "identifiers": {
-          "type": "array",
+          "type": [
+            "array",
+            "string"
+          ],
           "items": {
             "type": "string"
           },
@@ -54,44 +57,30 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "success"
-              ]
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stringId_A": {
-                    "type": "string",
-                    "description": "STITCH ID of first entity"
-                  },
-                  "stringId_B": {
-                    "type": "string",
-                    "description": "STITCH ID of second entity"
-                  },
-                  "preferredName_A": {
-                    "type": "string"
-                  },
-                  "preferredName_B": {
-                    "type": "string"
-                  },
-                  "score": {
-                    "type": "number",
-                    "description": "Combined confidence score (0-1)"
-                  }
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stringId_A": {
+                "type": "string",
+                "description": "STITCH ID of first entity"
+              },
+              "stringId_B": {
+                "type": "string",
+                "description": "STITCH ID of second entity"
+              },
+              "preferredName_A": {
+                "type": "string"
+              },
+              "preferredName_B": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number",
+                "description": "Combined confidence score (0-1)"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -120,7 +109,10 @@
       "type": "object",
       "properties": {
         "identifiers": {
-          "type": "array",
+          "type": [
+            "array",
+            "string"
+          ],
           "items": {
             "type": "string"
           },
@@ -161,35 +153,21 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "success"
-              ]
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stringId": {
-                    "type": "string"
-                  },
-                  "preferredName": {
-                    "type": "string"
-                  },
-                  "annotation": {
-                    "type": "string"
-                  }
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stringId": {
+                "type": "string"
+              },
+              "preferredName": {
+                "type": "string"
+              },
+              "annotation": {
+                "type": "string"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",
@@ -246,39 +224,25 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "success"
-              ]
-            },
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stringId": {
-                    "type": "string",
-                    "description": "STITCH identifier"
-                  },
-                  "preferredName": {
-                    "type": "string"
-                  },
-                  "taxonId": {
-                    "type": "integer"
-                  },
-                  "annotation": {
-                    "type": "string"
-                  }
-                }
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stringId": {
+                "type": "string",
+                "description": "STITCH identifier"
+              },
+              "preferredName": {
+                "type": "string"
+              },
+              "taxonId": {
+                "type": "integer"
+              },
+              "annotation": {
+                "type": "string"
               }
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         {
           "type": "object",

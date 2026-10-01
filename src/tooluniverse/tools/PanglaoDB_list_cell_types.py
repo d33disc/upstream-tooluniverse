@@ -14,7 +14,7 @@ def PanglaoDB_list_cell_types(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     List the cell types catalogued in PanglaoDB (panglaodb.se), each with the organ(s) it appears in ...
 
@@ -31,7 +31,7 @@ def PanglaoDB_list_cell_types(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

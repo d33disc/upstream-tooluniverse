@@ -50,7 +50,6 @@ Usage example
 """
 
 # --- Imports ---
-import os
 import re
 
 import requests
@@ -64,7 +63,6 @@ from .tool_registry import register_tool
 # --- Constants ---
 load_dotenv(find_dotenv(usecwd=True))
 
-USPTO_API_KEY = os.environ.get("USPTO_API_KEY")
 BASE_URL = "https://api.uspto.gov/api/v1"
 
 # Publication numbers: US + 4-digit year + 5-or-more digits + A-kind code (A1, A2, A9)
@@ -126,18 +124,19 @@ class PatentResolverTool(BaseTool):
     def __init__(
         self,
         tool_config: dict,
-        api_key: str | None = USPTO_API_KEY,
+        api_key: str | None = None,
         base_url: str = BASE_URL,
     ):
         super().__init__(tool_config)
         self.base_url = base_url
 
-        if not api_key or api_key == "YOUR_API_KEY":
+        # Resolved per request via credential() so hosted BYOK stays request-scoped
+        self._explicit_api_key = api_key
+        key = self._api_key()
+        if not key or key == "YOUR_API_KEY":
             raise ValueError(
                 "Set USPTO_API_KEY environment variable for ODP authentication."
             )
-
-        self.headers = {"X-API-KEY": api_key, "Accept": "application/json"}
 
         # Reuse session with retry --- same resilience pattern as USPTOOpenDataPortalTool
         self.session = requests.Session()
@@ -148,6 +147,13 @@ class PatentResolverTool(BaseTool):
             raise_on_status=False,
         )
         self.session.mount("https://", HTTPAdapter(max_retries=retry))
+
+    def _api_key(self) -> str | None:
+        return self.credential("USPTO_API_KEY") or self._explicit_api_key
+
+    @property
+    def headers(self) -> dict:
+        return {"X-API-KEY": self._api_key(), "Accept": "application/json"}
 
     # -- internal search helpers --
 

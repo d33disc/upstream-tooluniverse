@@ -15,7 +15,7 @@ def GxA_get_experiment_expression(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get gene expression data from a specific Expression Atlas experiment. Returns expression levels a...
 
@@ -24,7 +24,7 @@ def GxA_get_experiment_expression(
     experiment_accession : str
         Expression Atlas experiment accession (e.g., 'E-MTAB-2836' for human tissues ...
     gene_id : str
-        Optional Ensembl gene ID to filter expression data for a specific gene (e.g.,...
+        Optional Ensembl gene ID to look for within the small default SAMPLE of genes...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def GxA_get_experiment_expression(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def Mondo_search_disease(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the Mondo Disease Ontology for diseases by name or keyword. Mondo unifies disease identifi...
 
@@ -34,7 +34,7 @@ def Mondo_search_disease(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

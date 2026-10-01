@@ -16,7 +16,7 @@ def QuickGO_annotations_by_goterm(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for all gene products annotated with a specific Gene Ontology (GO) term using the EBI Quic...
 
@@ -37,7 +37,7 @@ def QuickGO_annotations_by_goterm(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

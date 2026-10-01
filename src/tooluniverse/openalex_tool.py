@@ -1,9 +1,12 @@
-import os
 import requests
 from typing import Any, Dict, Optional
 from .base_tool import BaseTool
-from .http_utils import request_with_retry
+from .credentials import get_credential
+from .http_utils import redact_url_secrets, request_with_retry
+from .logging_config import get_logger
 from .tool_registry import register_tool
+
+logger = get_logger("OpenAlexTool")
 
 
 def _with_api_key(params):
@@ -14,7 +17,7 @@ def _with_api_key(params):
     key is a query parameter named `api_key` (free at openalex.org/settings/api)
     and is read from the OPENALEX_API_KEY environment variable.
     """
-    key = os.environ.get("OPENALEX_API_KEY")
+    key = get_credential("OPENALEX_API_KEY")
     if key:
         params = dict(params or {})
         params["api_key"] = key
@@ -40,9 +43,20 @@ class OpenAlexTool(BaseTool):
                 "status": "error",
                 "error": "`search_keywords` (or `query`) parameter is required and must be non-empty.",
             }
-        max_results = arguments.get("max_results", arguments.get("limit", 10))
-        year_from = arguments.get("year_from", None)
-        year_to = arguments.get("year_to", None)
+        # Fix Round 16: the schema has no `additionalProperties: false`, so a
+        # plausible-but-wrong param name (confirmed live: `num_results` and
+        # `start_year`, both natural guesses given other ToolUniverse
+        # literature tools use those exact names) was silently dropped by
+        # jsonschema and the call fell back to defaults/unfiltered results
+        # with no error -- a caller asking for "papers since 2023" got
+        # 2011/2018 papers back with no indication the year filter never
+        # applied. Accept the same common variants already covered for
+        # search_keywords/max_results above.
+        max_results = arguments.get(
+            "max_results", arguments.get("limit", arguments.get("num_results", 10))
+        )
+        year_from = arguments.get("year_from", arguments.get("start_year", None))
+        year_to = arguments.get("year_to", arguments.get("end_year", None))
         open_access = arguments.get("open_access", None)
         require_has_fulltext = bool(arguments.get("require_has_fulltext", False))
         fulltext_terms = arguments.get("fulltext_terms")
@@ -138,15 +152,17 @@ class OpenAlexTool(BaseTool):
                     # Skip papers with missing data rather than failing completely
                     continue
 
-            print(
-                f"[OpenAlex] Retrieved {len(papers)} papers for keywords: '{search_keywords}'"
+            logger.info(
+                "Retrieved %d papers for keywords: '%s'", len(papers), search_keywords
             )
             return papers
 
         except requests.exceptions.RequestException as e:
             return {
                 "status": "error",
-                "error": f"Error retrieving data from OpenAlex: {e}",
+                "error": redact_url_secrets(
+                    f"Error retrieving data from OpenAlex: {e}"
+                ),
             }
 
     def _extract_paper_info(self, work):
@@ -278,7 +294,11 @@ class OpenAlexTool(BaseTool):
             return self._extract_paper_info(work)
 
         except requests.exceptions.RequestException as e:
-            print(f"Error retrieving paper by DOI {doi}: {e}")
+            logger.warning(
+                "Error retrieving paper by DOI %s: %s",
+                doi,
+                redact_url_secrets(str(e)),
+            )
             return None
 
     def get_papers_by_author(self, author_name, max_results=10):
@@ -309,15 +329,15 @@ class OpenAlexTool(BaseTool):
                 paper_info = self._extract_paper_info(work)
                 papers.append(paper_info)
 
-            print(
-                f"[OpenAlex] Retrieved {len(papers)} papers by author: '{author_name}'"
-            )
+            logger.info("Retrieved %d papers by author: '%s'", len(papers), author_name)
             return papers
 
         except requests.exceptions.RequestException as e:
             return {
                 "status": "error",
-                "error": f"Error retrieving papers by author {author_name}: {e}",
+                "error": redact_url_secrets(
+                    f"Error retrieving papers by author {author_name}: {e}"
+                ),
             }
 
 
@@ -469,7 +489,7 @@ class OpenAlexRESTTool(BaseTool):
                 timeout=self.timeout,
                 max_attempts=3,
             )
-            final_url = getattr(resp, "url", None) or url
+            final_url = redact_url_secrets(getattr(resp, "url", None) or url)
 
             if resp.status_code != 200:
                 return {
@@ -477,13 +497,13 @@ class OpenAlexRESTTool(BaseTool):
                     "error": "OpenAlex API error",
                     "url": final_url,
                     "status_code": resp.status_code,
-                    "detail": (resp.text or "")[:500],
+                    "detail": redact_url_secrets((resp.text or "")[:500]),
                 }
 
             return {"status": "success", "data": resp.json(), "url": final_url}
         except Exception as e:
             return {
                 "status": "error",
-                "error": f"OpenAlex API error: {str(e)}",
+                "error": redact_url_secrets(f"OpenAlex API error: {str(e)}"),
                 "url": url,
             }

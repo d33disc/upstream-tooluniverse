@@ -14,7 +14,7 @@ def GlyGen_get_glycoprotein(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed glycoprotein information from GlyGen by UniProt accession. Returns protein name, gly...
 
@@ -31,7 +31,7 @@ def GlyGen_get_glycoprotein(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def Mondo_get_disease_phenotypes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get HPO (Human Phenotype Ontology) phenotypes associated with a Mondo disease. Returns the phenot...
 
@@ -34,7 +34,7 @@ def Mondo_get_disease_phenotypes(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

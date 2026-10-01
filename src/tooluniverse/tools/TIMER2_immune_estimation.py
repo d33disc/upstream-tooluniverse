@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def TIMER2_immune_estimation(
-    operation: str,
     cancer: str,
+    operation: Optional[str] = "immune_estimation",
     gene: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

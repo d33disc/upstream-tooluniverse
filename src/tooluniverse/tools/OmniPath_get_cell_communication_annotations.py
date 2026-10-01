@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_cell_communication_annotations(
-    proteins: str,
+    proteins: str | list[Any],
     databases: Optional[str] = None,
     genesymbols: Optional[bool] = None,
     *,
@@ -22,7 +22,7 @@ def OmniPath_get_cell_communication_annotations(
 
     Parameters
     ----------
-    proteins : str
+    proteins : str | list[Any]
         UniProt accession(s) or gene symbol(s), comma-separated. Examples: 'P01137,P3...
     databases : str
         Filter by annotation database(s), comma-separated. Cell communication databas...

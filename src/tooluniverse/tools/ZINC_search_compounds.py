@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ZINC_search_compounds(
-    operation: str,
+    operation: Optional[str] = "search_compounds",
     query: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

@@ -15,7 +15,7 @@ def EBIProteins_get_interactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get protein-protein interaction partners for a protein from the EBI Proteins API (sourced from In...
 
@@ -34,7 +34,7 @@ def EBIProteins_get_interactions(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

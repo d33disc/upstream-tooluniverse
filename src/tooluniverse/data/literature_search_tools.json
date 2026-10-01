@@ -319,8 +319,6 @@
       "QualityCheckerAgent",
       "OverallSummaryAgent",
       "ArXiv_search_papers",
-      "BioRxiv_list_recent_preprints",
-      "MedRxiv_get_preprint",
       "HAL_search_archive",
       "Crossref_search_works",
       "PubMed_search_articles",

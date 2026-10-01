@@ -1,7 +1,7 @@
 """
 CTD_get_gene_diseases
 
-Gene -> disease relationships are NOT served by the RENCI CTD mirror (chemical-centric snapshot)....
+PERMANENTLY UNAVAILABLE: this tool always returns an error. No live, free source of CTD's curated...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def CTD_get_gene_diseases(
     validate: bool = True,
 ) -> Any:
     """
-    Gene -> disease relationships are NOT served by the RENCI CTD mirror (chemical-centric snapshot)....
+    PERMANENTLY UNAVAILABLE: this tool always returns an error. No live, free source of CTD's curated...
 
     Parameters
     ----------

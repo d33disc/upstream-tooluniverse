@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CancerPrognosis_search_studies(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "search_studies",
     keyword: Optional[str] = None,
     limit: Optional[int] = None,
     cancer_type: Optional[str] = None,

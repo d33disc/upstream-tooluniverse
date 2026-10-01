@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def SIDER_get_drugs_for_side_effect(
-    operation: str,
+    operation: Optional[str] = "get_drugs_for_side_effect",
     meddra_code: Optional[str] = None,
     side_effect_name: Optional[str] = None,
     limit: Optional[int] = 50,

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def FAERS_filter_serious_events(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "filter_serious_events",
     drug_name: Optional[str] = None,
     seriousness_type: Optional[str] = "all",
     drug: Optional[str] = None,
@@ -36,7 +36,7 @@ def FAERS_filter_serious_events(
     event_type : str
         Alias for seriousness_type. Type of serious event (e.g., hospitalization, dea...
     adverse_event : str
-        Specific adverse event MedDRA term to filter within serious events (e.g., MYO...
+        Specific adverse event to filter within serious events (e.g., 'Myocardial inf...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

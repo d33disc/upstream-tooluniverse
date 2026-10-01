@@ -9,7 +9,6 @@ API Documentation: https://omim.org/help/api
 Requires API key: https://omim.org/api
 """
 
-import os
 import requests
 from typing import Dict, Any, Optional, List
 from .base_tool import BaseTool
@@ -38,7 +37,11 @@ class OMIMTool(BaseTool):
         super().__init__(tool_config)
         self.timeout: int = tool_config.get("timeout", 30)
         self.parameter = tool_config.get("parameter", {})
-        self.api_key = os.environ.get("OMIM_API_KEY", "")
+
+    @property
+    def api_key(self) -> str:
+        """Resolve the OMIM key for the active request."""
+        return self.credential("OMIM_API_KEY") or ""
 
     def _get_params(self, extra_params: Dict = None) -> Dict[str, Any]:
         """Get base parameters with API key."""
@@ -52,7 +55,7 @@ class OMIMTool(BaseTool):
         if not self.api_key:
             return {
                 "status": "error",
-                "error": "OMIM API key required. Set OMIM_API_KEY environment variable. Register at https://omim.org/api",
+                "error": "OMIM API key required. Provide OMIM_API_KEY as a request credential or environment variable. Register at https://omim.org/api",
             }
 
         operation = arguments.get("operation", "")
@@ -114,16 +117,37 @@ class OMIMTool(BaseTool):
             omim_data = data.get("omim", {})
             search_response = omim_data.get("searchResponse", {})
 
+            # Search results are a lightweight index, not full records: keep
+            # only MIM number, title, entry type (prefix), and status. The
+            # full record (text sections, allelic variants, references, gene
+            # map, etc.) is available per-entry via OMIM_get_entry using the
+            # mimNumber returned here.
+            summarized_entries = []
+            for item in search_response.get("entryList", []):
+                entry = item.get("entry", {})
+                summarized_entries.append(
+                    {
+                        "mim_number": entry.get("mimNumber"),
+                        "prefix": entry.get("prefix"),
+                        "status": entry.get("status"),
+                        "preferred_title": entry.get("titles", {}).get(
+                            "preferredTitle"
+                        ),
+                        "matches": entry.get("matches"),
+                    }
+                )
+
             return {
                 "status": "success",
                 "data": {
                     "total_results": search_response.get("totalResults", 0),
                     "start": search_response.get("startIndex", 0),
-                    "entries": search_response.get("entryList", []),
+                    "entries": summarized_entries,
                 },
                 "metadata": {
                     "source": "OMIM",
                     "query": query,
+                    "note": "Use OMIM_get_entry with mim_number for full record details.",
                 },
             }
 

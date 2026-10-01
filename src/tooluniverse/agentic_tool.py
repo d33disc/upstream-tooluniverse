@@ -3,10 +3,12 @@ from __future__ import annotations
 import os
 import json
 import math
+import shutil
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional
 
 from .base_tool import BaseTool
+from .credentials import get_credential, has_credential_context, is_credential_name
 from .tool_registry import register_tool
 from .logging_config import get_logger
 from .llm_clients import (
@@ -56,6 +58,20 @@ API_KEY_ENV_VARS = {
     "VLLM": ["VLLM_SERVER_URL"],
 }
 
+# Keyless backends that run on the host itself. They are process resources, not
+# tenant credentials, so a request credential scope never reaches them: a tenant
+# with no key must fail closed rather than silently spend the host's local LLM.
+LOCAL_BACKENDS = frozenset({"CLAUDE_CLI", "OLLAMA"})
+
+
+def _local_backend_present(api_type: str) -> bool:
+    """A local backend counts only outside a request scope, and only if installed."""
+    if has_credential_context():
+        return False
+    if api_type == "CLAUDE_CLI":
+        return shutil.which("claude") is not None
+    return bool(os.getenv("OLLAMA_SERVER_URL"))
+
 
 @register_tool("AgenticTool")
 class AgenticTool(BaseTool):
@@ -99,9 +115,16 @@ class AgenticTool(BaseTool):
             bool: True if at least one API type has all required keys, False otherwise
         """
         for _api_type, required_vars in API_KEY_ENV_VARS.items():
+            if _api_type in LOCAL_BACKENDS:
+                if _local_backend_present(_api_type):
+                    return True
+                continue
             all_keys_present = True
             for var in required_vars:
-                if not os.getenv(var):
+                value = (
+                    get_credential(var) if is_credential_name(var) else os.getenv(var)
+                )
+                if not value:
                     all_keys_present = False
                     break
             if all_keys_present:
@@ -332,6 +355,10 @@ class AgenticTool(BaseTool):
     ) -> bool:
         """Try to initialize a specific API and model."""
         try:
+            if api_type in LOCAL_BACKENDS and has_credential_context():
+                raise ValueError(
+                    f"{api_type} is a host-local backend, unavailable in a request credential scope"
+                )
             if api_type == "CLAUDE_CLI":
                 self._llm_client = ClaudeCliClient(model_id, server_url, self.logger)
             elif api_type == "OLLAMA":

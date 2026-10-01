@@ -16,7 +16,7 @@ def Ensembl_get_region_features(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get all genomic features overlapping a specified chromosomal region. Returns genes, transcripts, ...
 
@@ -37,7 +37,7 @@ def Ensembl_get_region_features(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -8,14 +8,15 @@ This module provides a reusable base class for REST API tools that handles:
 - Standard error handling and response formatting
 """
 
-import os
 import csv
 import io
 import requests
 import urllib.parse
 from typing import Any, Dict, Optional, Callable
 from .base_tool import BaseTool
-from .http_utils import request_with_retry
+from .http_utils import redact_url_secrets, request_with_retry
+from .provider_rate_limit import enforce_provider_rate_limit
+from .shared_http_session import create_shared_pool_session
 
 
 class BaseRESTTool(BaseTool):
@@ -34,13 +35,36 @@ class BaseRESTTool(BaseTool):
     - `_handle_special_endpoint()` - for endpoint-specific logic
     """
 
+    #: Sent on every request unless a tool's ``fields.headers`` overrides it.
+    #: requests defaults to ``python-requests/<version>``, which some public
+    #: APIs refuse outright -- Harvard Dataverse answers 403 to it and 200 to
+    #: anything else, for the same URL and parameters. Identifying the client
+    #: is also what these APIs ask of automated callers.
+    USER_AGENT = (
+        "ToolUniverse/{version} (+https://github.com/mims-harvard/ToolUniverse)"
+    )
+
     def __init__(self, tool_config):
         super().__init__(tool_config)
-        self.session = requests.Session()
+        # Keep cookies/headers/auth isolated per tool instance while sharing only the underlying
+        # identity-free TCP/TLS transport pools across instances and tenants.
+        self.session = create_shared_pool_session()
+        self.session.headers["User-Agent"] = self._user_agent()
         self.timeout = 30
         self.api_name = tool_config.get(
             "name", self.__class__.__name__.replace("RESTTool", "")
         )
+
+    @classmethod
+    def _user_agent(cls) -> str:
+        """Build the User-Agent, tolerating an uninstalled package."""
+        try:
+            from importlib.metadata import version
+
+            pkg_version = version("tooluniverse")
+        except Exception:
+            pkg_version = "dev"
+        return cls.USER_AGENT.format(version=pkg_version)
 
     def _get_param_mapping(self) -> Dict[str, str]:
         """
@@ -65,6 +89,7 @@ class BaseRESTTool(BaseTool):
             Complete URL with path parameters substituted
         """
         url = self.tool_config["fields"]["endpoint"]
+        path_param_safe = self.tool_config.get("fields", {}).get("path_param_safe", {})
 
         # Apply path_aliases: map alias → canonical name before substitution.
         # Fix-R31B-3: an alias key left in `args` after this point leaked into
@@ -84,7 +109,9 @@ class BaseRESTTool(BaseTool):
             placeholder = f"{{{key}}}"
             if placeholder in url:
                 # URL encode to handle special characters (e.g., DOIs with slashes)
-                encoded_value = urllib.parse.quote(str(value), safe="")
+                encoded_value = urllib.parse.quote(
+                    str(value), safe=path_param_safe.get(key, "")
+                )
                 url = url.replace(placeholder, encoded_value)
 
         # Apply schema defaults for any remaining {param} placeholders
@@ -93,7 +120,9 @@ class BaseRESTTool(BaseTool):
         ):
             placeholder = f"{{{key}}}"
             if placeholder in url and "default" in prop and prop["default"] is not None:
-                encoded_value = urllib.parse.quote(str(prop["default"]), safe="")
+                encoded_value = urllib.parse.quote(
+                    str(prop["default"]), safe=path_param_safe.get(key, "")
+                )
                 url = url.replace(placeholder, encoded_value)
 
         return url
@@ -147,15 +176,15 @@ class BaseRESTTool(BaseTool):
             if "default" in prop and prop["default"] is not None:
                 params[param_mapping.get(key, key)] = prop["default"]
 
-        # Inject an API token from an environment variable into a query param
+        # Inject an API token from a request credential (or environment fallback) into a query param
         # when configured. Config: {"env_var": "WAQI_API_KEY", "param": "token"}.
         # If the env var is unset the config default (e.g. a public "demo"
         # token) is left in place, so this is a non-breaking opt-in.
         auth_param_cfg = self.tool_config.get("fields", {}).get("auth_param")
         if auth_param_cfg:
-            env_value = os.environ.get(auth_param_cfg.get("env_var", ""), "")
-            if env_value:
-                params[auth_param_cfg.get("param", "token")] = env_value
+            credential = self.credential(auth_param_cfg.get("env_var", ""))
+            if credential:
+                params[auth_param_cfg.get("param", "token")] = credential
 
         return params
 
@@ -237,6 +266,87 @@ class BaseRESTTool(BaseTool):
 
         return result
 
+    @staticmethod
+    def _resolve_path(data: Any, path) -> Any:
+        """
+        Walk a list of dict keys / list indices into a decoded JSON payload.
+
+        Returns None if any step is missing, so callers can treat "not found"
+        and "explicitly null" alike (neither is usable as a total/row list).
+        """
+        current = data
+        for step in path or []:
+            if isinstance(step, int) and not isinstance(step, bool):
+                if not isinstance(current, (list, tuple)) or not (
+                    -len(current) <= step < len(current)
+                ):
+                    return None
+                current = current[step]
+            else:
+                if not isinstance(current, dict) or step not in current:
+                    return None
+                current = current[step]
+        return current
+
+    def _apply_pagination_disclosure(self, result: Dict[str, Any]) -> None:
+        """
+        Surface upstream truncation at the top level of the response.
+
+        Opt-in via ``fields.pagination_disclosure``; tools without the key are
+        untouched. Many APIs return a server-side page of a larger result set
+        and report the real total somewhere inside the payload (World Bank puts
+        ``{"page","pages","per_page","total"}`` at ``data[0]``; OData services
+        return ``@odata.count``). Left buried there, a partial answer is
+        indistinguishable from a complete one -- a country panel can lose a
+        whole country and still report ``status: success``.
+
+        Config keys (all paths are lists of dict keys / list indices into
+        ``result["data"]``)::
+
+            {
+              "total_path": [0, "total"],   # int: rows matching upstream
+              "rows_path": [1],             # list: rows actually returned
+              "page_path": [0, "page"],     # optional int
+              "pages_path": [0, "pages"],   # optional int
+              "more_hint": "How to fetch the rest."
+            }
+
+        Sets ``count`` to the real row count (not the length of an envelope),
+        plus ``total_available`` and an explicit ``truncated`` boolean so
+        "complete" and "partial" are never conflated. When truncated, adds a
+        top-level ``truncation_note`` naming the true total.
+        """
+        config = self.tool_config.get("fields", {}).get("pagination_disclosure")
+        if not config:
+            return
+
+        data = result.get("data")
+        total = self._resolve_path(data, config.get("total_path"))
+        rows = self._resolve_path(data, config.get("rows_path"))
+        if not isinstance(total, int) or isinstance(total, bool):
+            return
+        if not isinstance(rows, list):
+            return
+
+        returned = len(rows)
+        result["count"] = returned
+        result["total_available"] = total
+        result["truncated"] = returned < total
+        if returned >= total:
+            return
+
+        page = self._resolve_path(data, config.get("page_path"))
+        pages = self._resolve_path(data, config.get("pages_path"))
+        page_part = ""
+        if isinstance(page, int) and isinstance(pages, int):
+            page_part = f" This is page {page} of {pages}."
+        hint = config.get("more_hint", "")
+        result["truncation_note"] = (
+            f"Partial result: {returned} of {total} matching records were "
+            f"returned; {total - returned} are missing.{page_part} "
+            f"{hint}"
+        ).strip()
+
     def _handle_special_endpoint(
         self, url: str, response: requests.Response, arguments: Dict[str, Any]
     ) -> Optional[Dict[str, Any]]:
@@ -306,14 +416,15 @@ class BaseRESTTool(BaseTool):
                 self.tool_config.get("fields", {}).get("headers") or {}
             )
 
-            # Inject API key from environment variable if auth_header is configured.
-            # Config format: {"env_var": "MY_API_KEY", "header": "x-api-key"}
+            # Inject an API key from a request credential (or environment fallback).
+            # Config: {"env_var": "MY_API_KEY", "header": "x-api-key", "required": true}.
             auth_header_cfg = self.tool_config.get("fields", {}).get("auth_header")
+            api_key = ""
             if auth_header_cfg:
                 env_var = auth_header_cfg.get("env_var", "")
                 header_name = auth_header_cfg.get("header", "")
-                api_key = os.environ.get(env_var, "")
-                if not api_key:
+                api_key = self.credential(env_var)
+                if not api_key and auth_header_cfg.get("required", True):
                     register_url = auth_header_cfg.get("register_url", "")
                     register_hint = (
                         f" Register at {register_url} to obtain a key."
@@ -324,10 +435,30 @@ class BaseRESTTool(BaseTool):
                         "status": "error",
                         "error": (
                             f"{self.api_name} requires an API key. "
-                            f"Set the {env_var} environment variable.{register_hint}"
+                            f"Provide {env_var} as a request credential or set the "
+                            f"environment variable.{register_hint}"
                         ),
                     }
-                custom_headers[header_name] = api_key
+                if api_key:
+                    custom_headers[header_name] = api_key
+
+            rate_limit_cfg = self.tool_config.get("fields", {}).get("rate_limit")
+            if rate_limit_cfg:
+                credential_name = rate_limit_cfg.get("credential", "")
+                rate_limit_credential = (
+                    api_key
+                    if auth_header_cfg
+                    and credential_name == auth_header_cfg.get("env_var")
+                    else self.credential(credential_name) or ""
+                ) or ""
+                requests_per_second = rate_limit_cfg.get(
+                    "authenticated_rps" if rate_limit_credential else "anonymous_rps"
+                )
+                enforce_provider_rate_limit(
+                    rate_limit_cfg.get("provider", self.api_name),
+                    rate_limit_credential,
+                    requests_per_second,
+                )
 
             response = request_with_retry(
                 self.session,
@@ -339,6 +470,15 @@ class BaseRESTTool(BaseTool):
                 max_attempts=3,
             )
 
+            # The echoed `url` is the endpoint only -- query params live in
+            # `params` and never appear in it, so a caller cannot tell what was
+            # actually requested (which page? which filter? which $top?) and
+            # cannot reproduce the call. `fields.echo_request_url` opts a tool
+            # into echoing the fully-resolved request URI instead. Guarded with
+            # getattr so stubbed responses in tests stay valid.
+            if self.tool_config.get("fields", {}).get("echo_request_url"):
+                url = getattr(response, "url", None) or url
+
             # Check for errors (accept any 2xx success status)
             if not (200 <= response.status_code < 300):
                 return {
@@ -346,7 +486,7 @@ class BaseRESTTool(BaseTool):
                     "error": f"{self.api_name} API error",
                     "url": url,
                     "status_code": response.status_code,
-                    "detail": (response.text or "")[:500],
+                    "detail": redact_url_secrets((response.text or "")[:500]),
                 }
 
             # Try special endpoint handling first
@@ -362,14 +502,31 @@ class BaseRESTTool(BaseTool):
                 props = self.tool_config.get("parameter", {}).get("properties", {})
                 limit = arguments.get("limit", props.get("limit", {}).get("default"))
                 data = result.get("data")
-                if (
-                    limit is not None
-                    and isinstance(data, list)
-                    and len(data) > int(limit)
-                ):
-                    result["total_before_limit"] = len(data)
-                    result["data"] = data[: int(limit)]
-                    result["count"] = int(limit)
+                if isinstance(data, list):
+                    preserve_header = self.tool_config.get("fields", {}).get(
+                        "client_side_limit_preserve_header"
+                    )
+                    if preserve_header:
+                        # Tabular APIs such as Census return a 2D array whose
+                        # first row is the schema/header.  Counts and caller
+                        # limits refer to records, not that mandatory header.
+                        total_records = max(0, len(data) - 1)
+                        result["count"] = total_records
+                        if limit is not None:
+                            max_items = max(0, int(limit))
+                            if total_records > max_items:
+                                result["total_before_limit"] = total_records
+                                result["data"] = data[: max_items + 1]
+                            result["count"] = min(total_records, max_items)
+                    elif limit is not None and len(data) > max(0, int(limit)):
+                        max_items = max(0, int(limit))
+                        result["total_before_limit"] = len(data)
+                        result["data"] = data[:max_items]
+                        result["count"] = max_items
+
+            # Disclose server-side pagination/truncation at the top level for
+            # tools that opt in via `fields.pagination_disclosure`.
+            self._apply_pagination_disclosure(result)
 
             # Fix-R32C-4/5: an exact-match backend (e.g. CPIC's PostgREST
             # name=eq.{name}) silently returns status:success with an empty
@@ -392,6 +549,6 @@ class BaseRESTTool(BaseTool):
         except Exception as e:
             return {
                 "status": "error",
-                "error": f"{self.api_name} API error: {str(e)}",
+                "error": redact_url_secrets(f"{self.api_name} API error: {str(e)}"),
                 "url": url,
             }

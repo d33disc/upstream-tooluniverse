@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def MEME_tomtom_compare(
-    operation: str,
     query_motif: str,
+    operation: Optional[str] = "tomtom_compare",
     target_db: Optional[str] = "JASPAR2026_vertebrates",
     evalue_threshold: Optional[float] = 0.5,
     comparison_function: Optional[str] = "pearson",

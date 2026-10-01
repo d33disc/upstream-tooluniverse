@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CellPainting_search_screens(
-    operation: str,
+    operation: Optional[str] = "search_screens",
     query: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

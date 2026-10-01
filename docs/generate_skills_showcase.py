@@ -53,7 +53,7 @@ def categorize_skills(skills: List[Tuple[str, Dict]]) -> Dict[str, List[Tuple[st
     for skill_dir, info in skills:
         if skill_dir.startswith('devtu-'):
             categories['Development Skills'].append((skill_dir, info))
-        elif skill_dir.startswith('setup-'):
+        elif skill_dir.startswith('setup-') or skill_dir == 'host-and-share-remote-tool':
             categories['Setup & Configuration'].append((skill_dir, info))
         elif skill_dir == 'tooluniverse':
             categories['General Purpose'].append((skill_dir, info))
@@ -139,6 +139,8 @@ ToolUniverse provides AI agent skills that teach agents how to conduct sophistic
             elif skill_dir.startswith('setup-'):
                 clean_name = skill_dir.replace('setup-', '').replace('-', ' ').title()
                 display_name = f"Setup: {clean_name}"
+            elif skill_dir == 'host-and-share-remote-tool':
+                display_name = "Host and Share a Remote Tool"
             
             # Truncate long descriptions
             if len(description) > 150:
@@ -181,7 +183,7 @@ ToolUniverse provides AI agent skills that teach agents how to conduct sophistic
                 icon = "♻️"
             elif 'sdk' in skill_dir.lower():
                 icon = "🐍"
-            elif 'setup' in skill_dir.lower():
+            elif 'setup' in skill_dir.lower() or skill_dir == 'host-and-share-remote-tool':
                 icon = "⚙️"
             elif 'devtu' in skill_dir.lower():
                 icon = "🛠️"

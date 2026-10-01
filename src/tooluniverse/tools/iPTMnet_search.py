@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def iPTMnet_search(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "search",
     search_term: Optional[str] = None,
     role: Optional[str] = "Substrate",
     ptm_type: Optional[str] = None,

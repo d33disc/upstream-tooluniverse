@@ -27,36 +27,83 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "gene_id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "species_id": {
-            "type": "integer"
-          },
-          "species_name": {
-            "type": "string"
-          },
-          "common_name": {
-            "type": "string"
-          },
-          "gene_biotype": {
-            "type": "string"
-          },
-          "match_source": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Ensembl gene ID"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene symbol"
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene description"
+              },
+              "species_id": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "NCBI taxonomy ID"
+              },
+              "species_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Scientific species name"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common species name"
+              },
+              "gene_biotype": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene biotype (e.g., protein_coding)"
+              },
+              "match_source": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "How the match was found (name, description, etc.)"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -94,34 +141,76 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "tissue_id": {
-            "type": "string"
-          },
-          "tissue_name": {
-            "type": "string"
-          },
-          "expression_score": {
-            "type": "string"
-          },
-          "score_confidence": {
-            "type": "string"
-          },
-          "expression_state": {
-            "type": "string"
-          },
-          "quality": {
-            "type": "string"
-          },
-          "data_types": {
-            "type": "array",
-            "items": {}
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tissue_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Uberon or CL ontology ID"
+              },
+              "tissue_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Anatomical entity name"
+              },
+              "expression_score": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Expression score (0-100)"
+              },
+              "score_confidence": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Confidence level (high/low)"
+              },
+              "expression_state": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "expressed or not expressed"
+              },
+              "quality": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Quality rating (gold/silver/bronze)"
+              },
+              "data_types": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Data types supporting expression call"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -141,30 +230,69 @@
       {}
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "species_id": {
-            "type": "integer"
-          },
-          "genus": {
-            "type": "string"
-          },
-          "species_name": {
-            "type": "string"
-          },
-          "common_name": {
-            "type": "string"
-          },
-          "genome_version": {
-            "type": "string"
-          },
-          "full_name": {
-            "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "species_id": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "NCBI taxonomy ID"
+              },
+              "genus": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Genus name"
+              },
+              "species_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Species epithet"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common name"
+              },
+              "genome_version": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Genome assembly version"
+              },
+              "full_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Full binomial name"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

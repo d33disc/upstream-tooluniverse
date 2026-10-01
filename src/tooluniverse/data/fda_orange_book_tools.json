@@ -2,14 +2,15 @@
   {
     "type": "FDAOrangeBookTool",
     "name": "FDA_OrangeBook_search_drug",
-    "description": "Search FDA Drugs@FDA database by brand name, generic name, or application number. Returns approval status, products, and basic regulatory info. Example: brand_name='ADVIL' finds all Advil products with NDA numbers.",
+    "description": "Search FDA Drugs@FDA database by brand name, generic name, or application number. Returns approval status, products, and basic regulatory info. Example: brand_name='ADVIL' finds all Advil products with NDA numbers. A query that matches nothing returns status='success' with count=0 and an explanatory note -- an 'error' status means the request itself failed, never that there were no matches.",
     "parameter": {
       "type": "object",
       "required": [],
       "properties": {
         "operation": {
           "const": "search_drug",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "search_drug"
         },
         "brand_name": {
           "type": "string",
@@ -18,6 +19,10 @@
         "generic_name": {
           "type": "string",
           "description": "Generic/active ingredient name (e.g., 'IBUPROFEN', 'ATORVASTATIN')"
+        },
+        "drug_name": {
+          "type": "string",
+          "description": "Drug name of either kind when you do not know whether it is a brand or a generic name (e.g., 'QUVIVIQ', 'IBUPROFEN'). Matches the brand name OR the active-ingredient name. Prefer brand_name or generic_name when you know which one you have."
         },
         "application_number": {
           "type": "string",
@@ -43,6 +48,10 @@
         },
         "total": {
           "type": "integer"
+        },
+        "note": {
+          "type": "string",
+          "description": "Present only when count=0, explaining that the query matched no Drugs@FDA records (an empty result, not a failure)."
         }
       }
     },
@@ -55,7 +64,10 @@
         "generic_name": "ATORVASTATIN",
         "limit": 3
       }
-    ]
+    ],
+    "fields": {
+      "operation": "search_drug"
+    }
   },
   {
     "type": "FDAOrangeBookTool",
@@ -69,7 +81,8 @@
       "properties": {
         "operation": {
           "const": "get_approval_history",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "get_approval_history"
         },
         "application_number": {
           "type": "string",
@@ -104,7 +117,10 @@
       {
         "application_number": "NDA020702"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_approval_history"
+    }
   },
   {
     "type": "FDAOrangeBookTool",
@@ -116,7 +132,8 @@
       "properties": {
         "operation": {
           "const": "get_patent_info",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "get_patent_info"
         },
         "application_number": {
           "type": "string",
@@ -152,7 +169,10 @@
       {
         "brand_name": "LIPITOR"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_patent_info"
+    }
   },
   {
     "type": "FDAOrangeBookTool",
@@ -164,7 +184,8 @@
       "properties": {
         "operation": {
           "const": "get_exclusivity",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "get_exclusivity"
         },
         "application_number": {
           "type": "string",
@@ -203,7 +224,10 @@
       {
         "brand_name": "LIPITOR"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_exclusivity"
+    }
   },
   {
     "type": "FDAOrangeBookTool",
@@ -215,7 +239,8 @@
       "properties": {
         "operation": {
           "const": "check_generic_availability",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "check_generic_availability"
         },
         "brand_name": {
           "type": "string",
@@ -254,7 +279,10 @@
       {
         "brand_name": "LIPITOR"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "check_generic_availability"
+    }
   },
   {
     "type": "FDAOrangeBookTool",
@@ -266,7 +294,8 @@
       "properties": {
         "operation": {
           "const": "get_te_code",
-          "description": "Operation type (fixed)"
+          "description": "Operation type (fixed)",
+          "default": "get_te_code"
         },
         "brand_name": {
           "type": "string",
@@ -299,6 +328,9 @@
       {
         "generic_name": "ATORVASTATIN"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_te_code"
+    }
   }
 ]

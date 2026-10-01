@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ELM_get_instances(
-    operation: str,
+    operation: Optional[str] = "get_instances",
     uniprot_id: Optional[str] = None,
     uniprot_acc: Optional[str] = None,
     motif_type: Optional[str] = None,

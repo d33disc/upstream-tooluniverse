@@ -84,6 +84,18 @@
     ]
   },
   {
+    "name": "BOLTZ_API_KEY",
+    "requirement": "required",
+    "type": "api_key",
+    "domain": "Models & Infrastructure",
+    "register_url": "https://api.boltz.bio/",
+    "purpose": "Authenticate to the official hosted Boltz prediction and administration API.",
+    "without": "Official hosted Boltz API tools are unavailable; the existing self-hosted Boltz MCP integration is unaffected.",
+    "used_by": [
+      "boltz_api_tools.json"
+    ]
+  },
+  {
     "name": "BOLTZ_MCP_SERVER_HOST",
     "requirement": "required",
     "type": "endpoint",
@@ -132,18 +144,6 @@
     ]
   },
   {
-    "name": "CLUE_API_KEY",
-    "requirement": "required",
-    "type": "secret",
-    "domain": "Drugs & Chemistry",
-    "register_url": "https://clue.io",
-    "purpose": "Query Connectivity Map drug\u2013gene perturbation signatures for repurposing.",
-    "without": "CLUE tools are blocked without it. The key is free.",
-    "used_by": [
-      "clue_tools.json"
-    ]
-  },
-  {
     "name": "CLUSPRO_API_SECRET",
     "requirement": "required",
     "type": "secret",
@@ -165,6 +165,18 @@
     "without": "The ClusPro_submit_peptide_docking tool is hidden until both ClusPro keys are set.",
     "used_by": [
       "cluspro_tools.json"
+    ]
+  },
+  {
+    "name": "CONSENSUS_API_KEY",
+    "requirement": "required",
+    "type": "secret",
+    "domain": "Literature & Patents",
+    "register_url": "https://consensus.app/home/api",
+    "purpose": "Search 220M+ peer-reviewed papers via the Consensus API.",
+    "without": "Consensus tools are blocked without it. Requires a paid Consensus account (Pro, Deep, or Teams plan).",
+    "used_by": [
+      "consensus_tools.json"
     ]
   },
   {
@@ -201,6 +213,30 @@
     "without": "Leave blank unless you run your own ESM server.",
     "used_by": [
       "mcp_auto_loader_esm.json"
+    ]
+  },
+  {
+    "name": "EXA_API_KEY",
+    "requirement": "optional",
+    "type": "secret",
+    "domain": "Literature & Patents",
+    "register_url": "https://dashboard.exa.ai/",
+    "purpose": "Raises Exa's rate limits for production use of the web-search MCP connection.",
+    "without": "Works at Exa's free/casual rate limit without it.",
+    "used_by": [
+      "mcp_auto_loader_exa.json"
+    ]
+  },
+  {
+    "name": "EXA_MCP_URL",
+    "requirement": "required",
+    "type": "endpoint",
+    "domain": "Literature & Patents",
+    "register_url": "https://exa.ai",
+    "purpose": "Endpoint URL for the opt-in Exa web-search MCP connection.",
+    "without": "Leave blank to keep this third-party MCP connection disabled. To enable, set this to https://mcp.exa.ai/mcp \u2014 the public endpoint requires no account for casual use.",
+    "used_by": [
+      "mcp_auto_loader_exa.json"
     ]
   },
   {
@@ -242,6 +278,30 @@
     ]
   },
   {
+    "name": "FIRECRAWL_API_KEY",
+    "requirement": "optional",
+    "type": "secret",
+    "domain": "Other",
+    "register_url": "https://www.firecrawl.dev/app/api-keys",
+    "purpose": "Authenticate the backend='firecrawl' option (Firecrawl Search, https://api.firecrawl.dev/v2/search). Searches are billed against the account's credits (a free key includes 1,000) and use the account's rate limits instead of the keyless cap.",
+    "without": "backend='firecrawl' still works keyless within Firecrawl's per-IP daily request and credit cap (HTTP 429 past it, then the normal DDGS fallback). The cap is per IP, so users behind one shared server or NAT share it. The default web_search chain is unaffected.",
+    "used_by": [
+      "web_search_tools.json"
+    ]
+  },
+  {
+    "name": "FOLKLORE_MCP_URL",
+    "requirement": "required",
+    "type": "endpoint",
+    "domain": "Clinical & Safety",
+    "register_url": "https://folklore.helena.bio/integrations",
+    "purpose": "Endpoint URL for the opt-in Folklore Clinical Variant Interpretation MCP connection.",
+    "without": "Leave blank to keep this third-party MCP connection disabled. The public read-only endpoint is https://api.helena.bio/folklore/v1/mcp and requires no authentication.",
+    "used_by": [
+      "mcp_auto_loader_folklore.json"
+    ]
+  },
+  {
     "name": "GEMINI_API_KEY",
     "requirement": "optional",
     "type": "secret",
@@ -251,6 +311,30 @@
     "without": "Only needed if you select Gemini as the agentic LLM provider.",
     "used_by": [
       "agentic_tools.json"
+    ]
+  },
+  {
+    "name": "GENOMIC_INTELLIGENCE_API_KEY",
+    "requirement": "optional",
+    "type": "api_key",
+    "domain": "Models & Infrastructure",
+    "register_url": "https://docs.genomicintelligence.ai/mcp",
+    "purpose": "Optional private Genomic Intelligence credential sent as X-GI-Key to the configured MCP endpoint.",
+    "without": "The hosted public demo works without a key but uses a shared, rate-limited evaluation quota and is not suitable for private sequences or production.",
+    "used_by": [
+      "mcp_auto_loader_gi.json"
+    ]
+  },
+  {
+    "name": "GENOMIC_INTELLIGENCE_MCP_URL",
+    "requirement": "required",
+    "type": "endpoint",
+    "domain": "Models & Infrastructure",
+    "register_url": "https://docs.genomicintelligence.ai",
+    "purpose": "Endpoint URL for the opt-in Genomic Intelligence MCP service.",
+    "without": "Leave blank to keep this third-party MCP service disabled. To use its public demo, set https://mcp.genomicintelligence.ai/mcp.",
+    "used_by": [
+      "mcp_auto_loader_gi.json"
     ]
   },
   {
@@ -340,6 +424,18 @@
       "ncbi_datasets_tools.json",
       "pubmed_tools.json",
       "pubtator3_ext_tools.json"
+    ]
+  },
+  {
+    "name": "NOODLE_MCP_URL",
+    "requirement": "required",
+    "type": "endpoint",
+    "domain": "Literature & Patents",
+    "register_url": "https://noodle.helena.bio/integrations",
+    "purpose": "Endpoint URL for the opt-in Noodle Biomedical Literature Discovery MCP connection.",
+    "without": "Leave blank to keep this third-party MCP connection disabled. The public endpoint requires no authentication.",
+    "used_by": [
+      "mcp_auto_loader_noodle.json"
     ]
   },
   {
@@ -477,6 +573,18 @@
     ]
   },
   {
+    "name": "SERPBASE_API_KEY",
+    "requirement": "optional",
+    "type": "secret",
+    "domain": "Other",
+    "register_url": "https://serpbase.dev",
+    "purpose": "Query the backend='serpbase' option for real Google SERP results (https://api.serpbase.dev), billed per request.",
+    "without": "web_search still works via DDGS/Parallel/DuckDuckGo-HTML/Wikipedia; backend='serpbase' is blocked without it.",
+    "used_by": [
+      "web_search_tools.json"
+    ]
+  },
+  {
     "name": "TXAGENT_MCP_SERVER_HOST",
     "requirement": "required",
     "type": "endpoint",
@@ -486,6 +594,18 @@
     "without": "Leave blank unless you run your own TxAgent.",
     "used_by": [
       "txagent_client_tools.json"
+    ]
+  },
+  {
+    "name": "TYPESAFE_API_KEY",
+    "requirement": "required",
+    "type": "secret",
+    "domain": "Tool Discovery",
+    "register_url": "https://typesafe.ai/",
+    "purpose": "Grade retrieved tool candidates for relevance so Tool_Finder_Jev can rank them.",
+    "without": "Tool_Finder_Jev is not loaded; the other tool finders are unaffected.",
+    "used_by": [
+      "finder_tools.json"
     ]
   },
   {

@@ -7,46 +7,86 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {
-          "type": "string",
-          "enum": ["search_by_gene"],
-          "description": "Operation type"
-        },
         "gene_symbol": {
           "type": "string",
           "description": "Gene symbol to search for (e.g., 'CD3D', 'CD68', 'EPCAM', 'MS4A1')"
         },
         "species": {
           "type": "string",
-          "enum": ["Human", "Mouse"],
+          "enum": [
+            "Human",
+            "Mouse"
+          ],
           "description": "Species filter: 'Human' or 'Mouse'. If omitted, searches both species."
         },
         "tissue_type": {
           "type": "string",
           "description": "Filter results by tissue type (e.g., 'Blood', 'Lung', 'Brain'). Case-insensitive partial match."
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "default": 200,
+          "description": "Maximum records to return. Default 200; total_records reports how many matched, so raise this or page with offset when it is larger."
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": 0,
+          "description": "Records to skip before returning, for paging through total_records."
         }
       },
-      "required": ["operation", "gene_symbol"]
+      "required": [
+        "gene_symbol"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "gene_symbol": {"type": "string"},
-        "species": {"type": "string"},
-        "total_records": {"type": "integer"},
+        "gene_symbol": {
+          "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "total_records": {
+          "type": "integer"
+        },
         "records": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "species": {"type": "string"},
-              "tissue_class": {"type": "string"},
-              "tissue_type": {"type": "string"},
-              "cell_type": {"type": "string"},
-              "cell_name": {"type": "string"},
-              "cell_marker": {"type": "string"},
-              "source": {"type": "string"},
-              "supports": {"type": "integer"}
+              "species": {
+                "type": "string"
+              },
+              "tissue_class": {
+                "type": "string"
+              },
+              "tissue_type": {
+                "type": "string"
+              },
+              "cell_type": {
+                "type": "string"
+              },
+              "cell_name": {
+                "type": "string"
+              },
+              "cell_marker": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "supports": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -64,7 +104,10 @@
         "species": "Human",
         "tissue_type": "Blood"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "search_by_gene"
+    }
   },
   {
     "name": "CellMarker_search_by_cell_type",
@@ -74,51 +117,95 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {
-          "type": "string",
-          "enum": ["search_by_cell_type"],
-          "description": "Operation type"
-        },
         "cell_name": {
           "type": "string",
           "description": "Cell type name to search for (e.g., 'T cell', 'Macrophage', 'B cell', 'Fibroblast')"
         },
         "species": {
           "type": "string",
-          "enum": ["Human", "Mouse"],
+          "enum": [
+            "Human",
+            "Mouse"
+          ],
           "description": "Species filter. If omitted, searches both species."
         },
         "tissue_type": {
           "type": "string",
           "description": "Filter results by tissue type (e.g., 'Blood', 'Lung', 'Brain'). Case-insensitive partial match."
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "default": 200,
+          "description": "Maximum records to return. Default 200; total_records reports how many matched, so raise this or page with offset when it is larger."
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": 0,
+          "description": "Records to skip before returning, for paging through total_records."
         }
       },
-      "required": ["operation", "cell_name"]
+      "required": [
+        "cell_name"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "cell_name": {"type": "string"},
-        "species": {"type": "string"},
-        "total_records": {"type": "integer"},
-        "unique_markers": {"type": "integer"},
+        "cell_name": {
+          "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "total_records": {
+          "type": "integer"
+        },
+        "unique_markers": {
+          "type": "integer"
+        },
         "marker_genes": {
           "type": "array",
-          "items": {"type": "string"}
+          "items": {
+            "type": "string"
+          }
         },
         "records": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "species": {"type": "string"},
-              "tissue_class": {"type": "string"},
-              "tissue_type": {"type": "string"},
-              "cell_type": {"type": "string"},
-              "cell_name": {"type": "string"},
-              "cell_marker": {"type": "string"},
-              "source": {"type": "string"},
-              "supports": {"type": "integer"}
+              "species": {
+                "type": "string"
+              },
+              "tissue_class": {
+                "type": "string"
+              },
+              "tissue_type": {
+                "type": "string"
+              },
+              "cell_type": {
+                "type": "string"
+              },
+              "cell_name": {
+                "type": "string"
+              },
+              "cell_marker": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "supports": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -136,7 +223,10 @@
         "species": "Human",
         "tissue_type": "Blood"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "search_by_cell_type"
+    }
   },
   {
     "name": "CellMarker_list_cell_types",
@@ -146,41 +236,52 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {
-          "type": "string",
-          "enum": ["list_cell_types"],
-          "description": "Operation type"
-        },
         "tissue_type": {
           "type": "string",
           "description": "Tissue type to list cell types for (e.g., 'Blood', 'Lung', 'Brain', 'Liver'). If omitted, returns a global list."
         },
         "species": {
           "type": "string",
-          "enum": ["Human", "Mouse"],
+          "enum": [
+            "Human",
+            "Mouse"
+          ],
           "description": "Species to query (default: 'Human')"
         },
         "cell_class": {
           "type": "string",
-          "enum": ["all", "cancer"],
+          "enum": [
+            "all",
+            "cancer"
+          ],
           "description": "Cell class filter: 'all' for normal+cancer (default), 'cancer' for cancer cells only"
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "species": {"type": "string"},
-        "tissue_type": {"type": "string"},
-        "total_cell_types": {"type": "integer"},
+        "species": {
+          "type": "string"
+        },
+        "tissue_type": {
+          "type": "string"
+        },
+        "total_cell_types": {
+          "type": "integer"
+        },
         "cell_types": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "cell_name": {"type": "string"},
-              "tissue_class": {"type": "string"}
+              "cell_name": {
+                "type": "string"
+              },
+              "tissue_class": {
+                "type": "string"
+              }
             }
           }
         }
@@ -198,7 +299,10 @@
         "species": "Human",
         "cell_class": "cancer"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "list_cell_types"
+    }
   },
   {
     "name": "CellMarker_search_cancer_markers",
@@ -208,11 +312,6 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {
-          "type": "string",
-          "enum": ["search_cancer_markers"],
-          "description": "Operation type"
-        },
         "cancer_type": {
           "type": "string",
           "description": "Cancer tissue type (e.g., 'Breast', 'Lung', 'Brain', 'Liver'). Filters by tissue where cancer occurs."
@@ -224,9 +323,27 @@
         "cell_type": {
           "type": "string",
           "description": "Cancer cell type to search for (e.g., 'Cancer stem cell', 'T cell', 'Macrophage')"
+        },
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "default": 200,
+          "description": "Maximum records to return. Default 200; total_records reports how many matched, so raise this or page with offset when it is larger."
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": 0,
+          "description": "Records to skip before returning, for paging through total_records."
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -234,25 +351,49 @@
         "query": {
           "type": "object",
           "properties": {
-            "cancer_type": {"type": "string"},
-            "gene_symbol": {"type": "string"},
-            "cell_type": {"type": "string"}
+            "cancer_type": {
+              "type": "string"
+            },
+            "gene_symbol": {
+              "type": "string"
+            },
+            "cell_type": {
+              "type": "string"
+            }
           }
         },
-        "total_records": {"type": "integer"},
+        "total_records": {
+          "type": "integer"
+        },
         "records": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "species": {"type": "string"},
-              "tissue_class": {"type": "string"},
-              "tissue_type": {"type": "string"},
-              "cell_type": {"type": "string"},
-              "cell_name": {"type": "string"},
-              "cell_marker": {"type": "string"},
-              "source": {"type": "string"},
-              "supports": {"type": "integer"}
+              "species": {
+                "type": "string"
+              },
+              "tissue_class": {
+                "type": "string"
+              },
+              "tissue_type": {
+                "type": "string"
+              },
+              "cell_type": {
+                "type": "string"
+              },
+              "cell_name": {
+                "type": "string"
+              },
+              "cell_marker": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "supports": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -268,6 +409,9 @@
         "cancer_type": "Breast",
         "cell_type": "T cell"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "search_cancer_markers"
+    }
   }
 ]

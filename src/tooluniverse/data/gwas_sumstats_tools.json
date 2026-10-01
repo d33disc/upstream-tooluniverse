@@ -1,7 +1,7 @@
 [
   {
     "name": "GWASSumStats_list_studies",
-    "description": "List GWAS studies that have deposited full summary statistics with the EBI GWAS Catalog. Unlike the main GWAS Catalog (which stores curated top hits), studies listed here have complete variant-level summary statistics available for download and query. Returns study accession IDs that can be used as filters in GWASSumStats_get_region_associations.",
+    "description": "List studies in the EBI GWAS Catalog, newest API (v2). Returns the study accession with its reported trait, mapped EFO traits, PubMed id, first author, publication date and association count. Use the accession with GWASSumStats_get_region_associations' FTP pointer to fetch that study's full summary statistics.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -24,6 +24,9 @@
         "size": 5
       },
       {
+        "size": 2
+      },
+      {
         "size": 10
       }
     ],
@@ -41,18 +44,31 @@
   },
   {
     "name": "GWASSumStats_get_trait_studies",
-    "description": "Get GWAS studies with deposited summary statistics for a specific EFO trait. Returns study accession IDs for studies that have full variant-level summary statistics. Use EFO trait IDs like 'EFO_0000249' (Alzheimer disease), 'EFO_0001645' (coronary heart disease), 'EFO_0000253' (asthma), 'EFO_0001359' (type 2 diabetes). Get EFO IDs from ols_search_efo_terms or gwas_search_studies.",
+    "description": "Find GWAS Catalog studies for a trait, matched on the EFO trait LABEL rather than an ontology id. The match is a case-insensitive substring of the label, so 'alzheimer' returns more studies than 'Alzheimer disease' and both are valid: use a shorter term to cast wider, a fuller label to narrow. Passing trait_id returns an error explaining this rather than an empty result.",
     "parameter": {
       "type": "object",
       "properties": {
-        "trait_id": {
+        "trait": {
           "type": "string",
-          "description": "EFO trait ontology ID (e.g., 'EFO_0000249' for Alzheimer disease, 'EFO_0001645' for coronary heart disease, 'EFO_0001359' for type 2 diabetes)."
+          "description": "Text matched case-insensitively against the EFO trait label, e.g. 'alzheimer' (438 studies), 'Alzheimer disease' (250), 'body mass index', 'diabetes'."
+        },
+        "size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "Number of studies to return (default 20, max 100)."
+        },
+        "trait_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Deprecated. An ontology id such as 'EFO_0000249'; the API filters on the label, so this returns an error telling you how to resolve it."
         }
       },
-      "required": [
-        "trait_id"
-      ]
+      "required": []
     },
     "fields": {
       "endpoint_type": "get_trait_studies"
@@ -60,10 +76,16 @@
     "type": "GWASSumStatsTool",
     "test_examples": [
       {
-        "trait_id": "EFO_0000249"
+        "trait": "Alzheimer disease",
+        "size": 3
       },
       {
-        "trait_id": "EFO_0001645"
+        "trait": "body mass index",
+        "size": 2
+      },
+      {
+        "trait": "type II diabetes mellitus",
+        "size": 2
       }
     ],
     "return_schema": {
@@ -80,7 +102,7 @@
   },
   {
     "name": "GWASSumStats_get_region_associations",
-    "description": "Query full GWAS summary statistics for variants in a chromosomal region. Returns variant-level association data including p-values, effect sizes (beta/OR), allele frequencies, and study/trait information. Unlike gwas_search_associations (which returns curated top hits), this endpoint provides complete summary statistics from deposited studies. Filter by chromosome region, p-value threshold, and optionally by specific study.",
+    "description": "RETIRED: region-level summary statistics are no longer served over REST. EBI retired /gwas/summary-statistics/api (410 on every path) and the v2 API serves associations only per study, ignoring chromosome, position and p-value filters. This tool now returns an error naming the FTP location (ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/) where the per-study files live, to be queried with tabix. Use GWASSumStats_get_trait_studies to find the accessions to download.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -128,22 +150,7 @@
       "endpoint_type": "get_region_associations"
     },
     "type": "GWASSumStatsTool",
-    "test_examples": [
-      {
-        "chromosome": 9,
-        "bp_lower": 22000000,
-        "bp_upper": 22200000,
-        "p_upper": 5e-08,
-        "size": 10
-      },
-      {
-        "chromosome": 19,
-        "bp_lower": 44900000,
-        "bp_upper": 44920000,
-        "p_upper": 5e-08,
-        "size": 10
-      }
-    ],
+    "test_examples": [],
     "return_schema": {
       "type": "array",
       "items": {
@@ -172,6 +179,17 @@
               "number",
               "null"
             ]
+          },
+          "p_value_reported": {
+            "type": "boolean",
+            "description": "False when p_value is the GWAS Catalog missing-value sentinel (-99) or otherwise not a finite number in [0, 1] rather than a real p-value. Such rows are excluded whenever p_upper is set."
+          },
+          "code": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Upstream GWAS Catalog harmonisation code for the variant (e.g. 10 = forward strand, alleles already correctly oriented; 14 = variant could not be validated for harmonisation). This describes allele harmonisation only and does NOT indicate whether p_value is real -- use p_value_reported for that."
           },
           "beta": {
             "type": [

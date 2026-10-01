@@ -15,7 +15,7 @@ def DisProt_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search DisProt for intrinsically disordered proteins by text query (gene name, protein name, orga...
 
@@ -34,7 +34,7 @@ def DisProt_search(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

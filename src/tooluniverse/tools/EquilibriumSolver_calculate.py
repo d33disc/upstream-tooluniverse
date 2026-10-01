@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def EquilibriumSolver_calculate(
-    operation: str,
     Ksp: float,
+    operation: Optional[str] = "ksp_simple",
     Kf: Optional[float] = None,
     stoich_cation: Optional[int] = 1,
     stoich_anion: Optional[int] = 1,

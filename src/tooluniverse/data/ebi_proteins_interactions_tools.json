@@ -32,52 +32,67 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "query_accession": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "query_accession": {
+              "type": "string"
+            },
+            "interactions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "partner_accession": {
+                    "type": "string",
+                    "description": "UniProt accession of the interaction partner"
+                  },
+                  "gene_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Gene name of the interaction partner"
+                  },
+                  "experiments": {
+                    "type": "integer",
+                    "description": "Number of supporting experiments"
+                  },
+                  "organism_differ": {
+                    "type": "boolean",
+                    "description": "Whether the partner is from a different organism"
+                  },
+                  "intact_id_a": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "intact_id_b": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "description": "Binary protein-protein interactions"
+            }
+          }
         },
-        "interactions": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "partner_accession": {
-                "type": "string",
-                "description": "UniProt accession of the interaction partner"
-              },
-              "gene_name": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Gene name of the interaction partner"
-              },
-              "experiments": {
-                "type": "integer",
-                "description": "Number of supporting experiments"
-              },
-              "organism_differ": {
-                "type": "boolean",
-                "description": "Whether the partner is from a different organism"
-              },
-              "intact_id_a": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "intact_id_b": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
             }
           },
-          "description": "Binary protein-protein interactions"
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -108,71 +123,86 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "query_accession": {
-          "type": "string"
-        },
-        "protein_name": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "protein_existence": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "organism": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "total_interaction_entries": {
-          "type": "integer"
-        },
-        "top_interactions": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "partner_accession": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "query_accession": {
+              "type": "string"
+            },
+            "protein_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "protein_existence": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "organism": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "total_interaction_entries": {
+              "type": "integer"
+            },
+            "top_interactions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "partner_accession": {
+                    "type": "string"
+                  },
+                  "gene_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "experiments": {
+                    "type": "integer"
+                  },
+                  "organism_differ": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "description": "Top interaction partners sorted by experiment count"
+            },
+            "diseases": {
+              "type": "array",
+              "items": {
                 "type": "string"
               },
-              "gene_name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+              "description": "Associated disease names"
+            },
+            "subcellular_locations": {
+              "type": "array",
+              "items": {
+                "type": "string"
               },
-              "experiments": {
-                "type": "integer"
-              },
-              "organism_differ": {
-                "type": "boolean"
-              }
+              "description": "Subcellular location terms"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
             }
           },
-          "description": "Top interaction partners sorted by experiment count"
-        },
-        "diseases": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Associated disease names"
-        },
-        "subcellular_locations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Subcellular location terms"
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

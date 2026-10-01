@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_golden_gate_design(
-    operation: str,
     parts: list[str],
+    operation: Optional[str] = "golden_gate_design",
     enzyme: Optional[str] = "BsaI",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -23,7 +23,7 @@ def DNA_golden_gate_design(
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'golden_gate_design' for this tool).
     parts : list[str]
         List of DNA part sequences to assemble (at least 2). A, T, G, C only.
     enzyme : str

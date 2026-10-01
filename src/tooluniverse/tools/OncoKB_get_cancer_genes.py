@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OncoKB_get_cancer_genes(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_cancer_genes",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

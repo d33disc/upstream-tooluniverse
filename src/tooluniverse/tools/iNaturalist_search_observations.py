@@ -18,7 +18,7 @@ def iNaturalist_search_observations(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for georeferenced species observations from iNaturalist citizen scientists. Filter by taxo...
 
@@ -43,7 +43,7 @@ def iNaturalist_search_observations(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

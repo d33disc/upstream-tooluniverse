@@ -14,7 +14,7 @@ def GxA_get_experiment_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get metadata about a Gene Expression Atlas experiment including species, number of genes and cond...
 
@@ -31,7 +31,7 @@ def GxA_get_experiment_info(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

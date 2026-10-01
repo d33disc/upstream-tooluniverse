@@ -36,10 +36,66 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "resolution": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "experimental_method": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "deposition_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "number_of_entities": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "organism": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -186,10 +242,60 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pdb_id": {
+                "type": "string"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "resolution": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "experimental_method": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "deposition_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "organism": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

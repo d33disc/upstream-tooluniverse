@@ -12,7 +12,7 @@ def GTEx_calculate_eqtl(
     gencode_id: str,
     variant_id: str,
     tissue_site_detail_id: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "calculate_eqtl",
     dataset_id: Optional[str] = "gtex_v8",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

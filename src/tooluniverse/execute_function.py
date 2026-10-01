@@ -36,7 +36,7 @@ import warnings
 import threading
 from pathlib import Path
 from contextlib import nullcontext
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import as_completed
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
@@ -47,6 +47,7 @@ from .exceptions import (
     ToolConfigError,
     ToolServerError,
 )
+from .base_tool import resolve_configured_operation
 from .tool_registry import (
     auto_discover_tools,
     get_tool_registry,
@@ -66,6 +67,15 @@ from .logging_config import (
 from .cache.result_cache_manager import ResultCacheManager
 from .output_hook import HookManager
 from .default_config import default_tool_files, get_default_hook_config
+from .credentials import (
+    ContextThreadPoolExecutor,
+    credential_context,
+    current_credentials,
+    get_credential,
+    has_credential_context,
+    is_credential_name,
+)
+from .credential_instance_cache import CredentialInstanceCache
 
 # Determine the directory where the current file is located
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -75,6 +85,27 @@ _TRUTHY_VALUES = {"true", "1", "yes"}
 LAZY_LOADING_ENABLED = (
     os.getenv("TOOLUNIVERSE_LAZY_LOADING", "true").lower() in _TRUTHY_VALUES
 )
+
+
+def _concise_exception_message(exc: BaseException) -> str:
+    """Return the most useful leaf message without dumping an exception group."""
+    seen = set()
+    current = exc
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        children = getattr(current, "exceptions", None)
+        if children:
+            current = children[0]
+            continue
+        nested = current.__cause__ or current.__context__
+        if nested is not None:
+            current = nested
+            continue
+        message = str(current).strip()
+        return message or type(current).__name__
+    message = str(exc).strip()
+    return message or type(exc).__name__
+
 
 if LAZY_LOADING_ENABLED:
     # Use lazy auto-discovery by default (much faster)
@@ -318,6 +349,12 @@ class ToolUniverse:
         callable_functions (dict): Cache of instantiated tool objects
     """
 
+    #: Serialises lazy tool initialisation (see ``_get_tool_instance``). Shared by
+    #: every instance: overlapping model loads interfere process-wide, whichever
+    #: instance starts them. Re-entrant because one tool's initialisation can
+    #: initialise another.
+    _tool_init_lock = threading.RLock()
+
     # Maximum tool name length for MCP compatibility
     # 50 chars for tool name + 14 chars for 'tooluniverse__' prefix = 64 chars (Claude's limit)
     MAX_TOOL_NAME_LENGTH = 45
@@ -334,6 +371,9 @@ class ToolUniverse:
         profile: Optional[str] = None,
         workspace: Optional[str] = None,
         use_global: bool = False,
+        load_workspace: bool = True,
+        credential_instance_cache_size: Optional[int] = None,
+        credential_instance_cache_ttl: Optional[float] = None,
     ):
         """
         Initialize the ToolUniverse with tool file configurations.
@@ -362,6 +402,16 @@ class ToolUniverse:
             use_global (bool, optional): When True, use the global ``~/.tooluniverse`` directory
                                          as the default workspace instead of ``./.tooluniverse``.
                                          Has no effect if ``workspace`` or ``TOOLUNIVERSE_HOME`` is set.
+            load_workspace (bool, optional): When False, do not read workspace ``.env``,
+                                            Profile, or user tools during initialization.
+                                            Provider servers use this isolation mode so they
+                                            expose only explicitly registered tools.
+            credential_instance_cache_size (int, optional): Maximum request-credential-isolated
+                tool instances retained per ToolUniverse object. Defaults to 256 or
+                ``TOOLUNIVERSE_CREDENTIAL_INSTANCE_CACHE_SIZE``. Set to 0 to disable reuse.
+            credential_instance_cache_ttl (float, optional): Idle expiration in seconds for
+                request-credential-isolated tool instances. Defaults to 900 or
+                ``TOOLUNIVERSE_CREDENTIAL_INSTANCE_CACHE_TTL``. Set to 0 to disable reuse.
         """
         # Set log level if specified
         if log_level is not None:
@@ -375,6 +425,12 @@ class ToolUniverse:
 
         self.name_mapper = ToolNameMapper()
         self.enable_name_shortening = enable_name_shortening
+        # The mapper only learns short->original for names it has shortened
+        # itself. A client that received shortened names from a *different*
+        # process calls back with names this mapper has never seen, so the
+        # reverse index is primed from the registry on the first miss.
+        self._name_mapper_primed = False
+        self.load_workspace = load_workspace
 
         if enable_name_shortening:
             self.logger.debug("Name shortening enabled for MCP compatibility")
@@ -387,6 +443,12 @@ class ToolUniverse:
         self.tool_category_dicts: Dict[str, List[Dict[str, Any]]] = {}
         # Maps tool name → missing required API key names (for better "not found" errors)
         self._excluded_api_key_tools: Dict[str, List[str]] = {}
+        # Keep the corresponding configurations for discovery-only consumers such as
+        # ``tu find``.  Gated tools must stay out of ``all_tool_dict`` so agents cannot
+        # execute them, but dropping their metadata made real tools undiscoverable.
+        self._excluded_api_key_tool_configs: Dict[str, Dict[str, Any]] = {}
+        self._excluded_any_api_key_tools: Dict[str, List[str]] = {}
+        self._credential_tool_load_lock = threading.RLock()
         self.tool_finder = None
         if tool_files is None:
             tool_files = default_tool_files
@@ -399,6 +461,20 @@ class ToolUniverse:
         self.logger.debug("Tool files:")
         self.logger.debug(json.dumps(tool_files, indent=2))
         self.callable_functions = {}
+        credential_cache_size = (
+            int(os.getenv("TOOLUNIVERSE_CREDENTIAL_INSTANCE_CACHE_SIZE", "256"))
+            if credential_instance_cache_size is None
+            else credential_instance_cache_size
+        )
+        credential_cache_ttl = (
+            float(os.getenv("TOOLUNIVERSE_CREDENTIAL_INSTANCE_CACHE_TTL", "900"))
+            if credential_instance_cache_ttl is None
+            else credential_instance_cache_ttl
+        )
+        self._credential_instance_cache = CredentialInstanceCache(
+            max_size=credential_cache_size,
+            idle_ttl_seconds=credential_cache_ttl,
+        )
 
         # Refresh the global tool_type_mappings to include any tools registered during imports
         global tool_type_mappings
@@ -442,13 +518,23 @@ class ToolUniverse:
             in _TRUTHY_VALUES
         )
 
-        cache_path = os.getenv("TOOLUNIVERSE_CACHE_PATH")
+        configured_cache_path = os.getenv("TOOLUNIVERSE_CACHE_PATH")
+        configured_cache_dir = os.getenv("TOOLUNIVERSE_CACHE_DIR")
+        cache_path = configured_cache_path
         if not cache_path and persistence_enabled:
-            base_dir = os.getenv("TOOLUNIVERSE_CACHE_DIR")
+            base_dir = configured_cache_dir
             if not base_dir:
                 base_dir = os.path.join(str(Path.home()), ".tooluniverse")
-            os.makedirs(base_dir, exist_ok=True)
-            cache_path = os.path.join(base_dir, "cache.sqlite")
+            try:
+                os.makedirs(base_dir, exist_ok=True)
+                cache_path = os.path.join(base_dir, "cache.sqlite")
+            except OSError:
+                # A read-only home is common in containers and hosted runners. The default cache
+                # is an optimization, so continue with the memory layer. Explicit user paths still
+                # surface a warning below because they represent requested configuration.
+                if configured_cache_dir:
+                    raise
+                cache_path = None
 
         self.cache_manager = ResultCacheManager(
             memory_size=memory_size,
@@ -457,6 +543,9 @@ class ToolUniverse:
             persistence_enabled=persistence_enabled,
             singleflight=singleflight_enabled,
             default_ttl=default_ttl,
+            warn_on_persistence_error=bool(
+                configured_cache_path or configured_cache_dir
+            ),
         )
 
         self._strict_validation = (
@@ -476,6 +565,13 @@ class ToolUniverse:
         # Priority: workspace= param → TOOLUNIVERSE_HOME env → ./.tooluniverse (local)
         # Use ~/.tooluniverse when use_global=True and no explicit workspace is set.
         self._workspace_dir: Path = self._resolve_workspace(workspace, use_global)
+
+        # Provider runtimes must not inherit a developer's local Profile, tools,
+        # secrets, or saved consumer connections. Keep the path available for
+        # APIs that inspect it, but skip all workspace I/O and auto-loading.
+        if not self.load_workspace:
+            self._workspace_profile_config = None
+            return
 
         # Auto-load .env from workspace directory (secrets stay out of profile.yaml).
         # Existing env vars are never overwritten (shell / system env always wins).
@@ -756,8 +852,12 @@ class ToolUniverse:
         return list(self.tool_files.keys())
 
     def _get_api_key(self, key_name: str):
-        """Get API key from environment variables."""
-        return os.getenv(key_name)
+        """Get an API key from the active request or the environment fallback."""
+        if is_credential_name(key_name):
+            return get_credential(key_name)
+        # required_api_keys historically also contains server URLs, package flags, and other
+        # deployment configuration. Those are not tenant secrets and remain process-scoped.
+        return os.environ.get(key_name)
 
     def _check_api_key_requirements(self, tool_config):
         """
@@ -795,6 +895,53 @@ class ToolUniverse:
         all_valid = len(missing_keys) == 0
 
         return all_valid, missing_keys
+
+    def _activate_credential_tool(self, function_name: str) -> None:
+        """Load a previously gated tool when this request supplies its credentials.
+
+        Tools are still skipped during the initial load for backward compatibility and to
+        avoid constructing clients that require credentials in ``__init__``. A request-scoped
+        credential can activate just the requested tool without changing process environment.
+        Once loaded, execution-time checks keep later requests fail-closed.
+        """
+        missing_keys = self._excluded_api_key_tools.get(function_name)
+        alternative_keys = self._excluded_any_api_key_tools.get(function_name)
+        required_ready = bool(missing_keys) and all(
+            self._get_api_key(key) for key in missing_keys
+        )
+        alternative_ready = bool(alternative_keys) and any(
+            self._get_api_key(key) for key in alternative_keys
+        )
+        if not required_ready and not alternative_ready:
+            return
+
+        with self._credential_tool_load_lock:
+            if function_name in self.all_tool_dict:
+                self._excluded_api_key_tools.pop(function_name, None)
+                self._excluded_any_api_key_tools.pop(function_name, None)
+                return
+            self.load_tools(include_tools=[function_name], quiet=True)
+            if function_name in self.all_tool_dict:
+                self._excluded_api_key_tools.pop(function_name, None)
+                self._excluded_any_api_key_tools.pop(function_name, None)
+
+    def _missing_required_credentials(self, function_name: str) -> List[str]:
+        """Return missing credentials for a loaded or initially gated tool."""
+        tool_config = self.all_tool_dict.get(function_name)
+        if tool_config is not None:
+            return [
+                key
+                for key in tool_config.get("required_api_keys", [])
+                if not self._get_api_key(key)
+            ]
+        return list(self._excluded_api_key_tools.get(function_name, []))
+
+    def _missing_alternative_credentials(self, function_name: str) -> List[str]:
+        """Return an any-of credential group when none of its choices is available."""
+        alternatives = self._excluded_any_api_key_tools.get(function_name, [])
+        if alternatives and not any(self._get_api_key(key) for key in alternatives):
+            return list(alternatives)
+        return []
 
     def generate_env_template(
         self, all_missing_keys, output_file: str = ".env.template"
@@ -905,6 +1052,7 @@ class ToolUniverse:
         exclude_tool_types=None,
         python_files=None,
         quiet=True,
+        _apply_profile_defaults=True,
     ):
         """
         Load tools into the instance, with optional filtering.
@@ -934,6 +1082,11 @@ class ToolUniverse:
                 ``.env.template`` generation. Default ``True``. Pass ``False``
                 to see which keys are missing.
 
+        When a Profile is active, omitted filter arguments inherit the Profile's
+        ``tools`` settings.  This keeps a plain ``load_tools()`` reload consistent
+        with the Profile that initialized the instance.  Explicit arguments still
+        override the corresponding Profile defaults.
+
         Examples:
             # Load everything (default)
             tu.load_tools()
@@ -950,6 +1103,30 @@ class ToolUniverse:
                 exclude_tools=["EuropePMC_slow_tool"],
             )
         """
+        # A Profile describes the tool universe for the lifetime of this instance,
+        # not only for the first load.  Re-applying its omitted filter arguments
+        # prevents a later, otherwise ordinary ``load_tools()`` call from silently
+        # restoring tools that the Profile excluded.  ``load_profile()`` disables
+        # this inheritance for its own load so a newly selected Profile cannot
+        # inherit filters from the previous one.
+        if _apply_profile_defaults:
+            profile_tools = (getattr(self, "_current_profile_config", {}) or {}).get(
+                "tools", {}
+            )
+            if categories is None and tool_type is None:
+                profile_categories = profile_tools.get("categories")
+                categories = profile_categories or None
+            if exclude_tools is None:
+                exclude_tools = profile_tools.get("exclude_tools", [])
+            if exclude_categories is None:
+                exclude_categories = profile_tools.get("exclude_categories", [])
+            if include_tools is None and tools_file is None:
+                include_tools = profile_tools.get("include_tools", [])
+            if include_tool_types is None:
+                include_tool_types = profile_tools.get("include_tool_types", [])
+            if exclude_tool_types is None:
+                exclude_tool_types = profile_tools.get("exclude_tool_types", [])
+
         # --- backward-compat: tool_type → categories ---
         if tool_type is not None:
             warnings.warn(
@@ -968,6 +1145,8 @@ class ToolUniverse:
             self.all_tool_dict = {}
             self.tool_category_dicts = {}
             self._excluded_api_key_tools = {}
+            self._excluded_api_key_tool_configs = {}
+            self._excluded_any_api_key_tools = {}
 
         # Handle tools_file parameter (alternative to include_tools)
         if tools_file:
@@ -1142,6 +1321,11 @@ class ToolUniverse:
         if json_files:
             self._load_user_json_configs(json_files)
 
+        # Connections are explicit, local, and secret-free. Load them after
+        # user configs so their generated proxy names are deterministic and
+        # can be filtered by the normal include/exclude options below.
+        self._load_connected_remote_tools()
+
         # Filter and deduplicate tools
         self._filter_and_deduplicate_tools(
             exclude_tools_set,
@@ -1155,6 +1339,29 @@ class ToolUniverse:
         # Process MCP Auto Loader tools
         self.logger.debug("Checking for MCP Auto Loader tools...")
         self._process_mcp_auto_loaders()
+
+    def _load_connected_remote_tools(self):
+        """Load tools selected with ``tu connect`` without contacting a registry."""
+        if not self.load_workspace:
+            return
+        try:
+            from .remote_connections import connection_configs
+
+            configs = connection_configs()
+        except Exception as exc:
+            self.logger.warning(f"Could not read remote tool connections: {exc}")
+            return
+
+        existing = {
+            item.get("name")
+            for item in self.all_tools
+            if isinstance(item, dict) and item.get("name")
+        }
+        for config in configs:
+            if config.get("name") in existing:
+                continue
+            self.all_tools.append(config)
+            existing.add(config.get("name"))
 
     def _load_tool_names_from_file(self, file_path):
         """
@@ -1294,10 +1501,15 @@ class ToolUniverse:
                 if not all_keys_available:
                     all_missing_keys.update(missing_keys)
                     self._excluded_api_key_tools[tool_name] = list(missing_keys)
+                    self._excluded_api_key_tool_configs[tool_name] = copy.deepcopy(each)
                     self.logger.debug(
                         f"Skipping tool '{tool_name}' due to missing API keys: {', '.join(missing_keys)}"
                     )
                     continue
+                # A partial reload after the operator supplied the key should not
+                # leave stale discovery metadata saying that the tool is gated.
+                self._excluded_api_key_tools.pop(tool_name, None)
+                self._excluded_api_key_tool_configs.pop(tool_name, None)
 
             # Check API key requirements for AgenticTool type
             if each.get("type") == "AgenticTool":
@@ -1311,6 +1523,12 @@ class ToolUniverse:
                         "LLM API keys (AZURE_OPENAI_API_KEY, OPENAI_API_KEY, "
                         "OPENROUTER_API_KEY, GEMINI_API_KEY, or VLLM_SERVER_URL)"
                     )
+                    self._excluded_any_api_key_tools[tool_name] = [
+                        "AZURE_OPENAI_API_KEY",
+                        "OPENAI_API_KEY",
+                        "OPENROUTER_API_KEY",
+                        "GEMINI_API_KEY",
+                    ]
                     continue
 
             # Last-seen wins: user tools loaded after built-ins naturally override them
@@ -1710,21 +1928,6 @@ class ToolUniverse:
                                     f"  - Tools: {', '.join(result['registered_tools'])}"
                                 )
 
-                            # Show available tools in callable_functions
-                            expert_tools = [
-                                name
-                                for name in self.callable_functions.keys()
-                                if name.startswith("expert_")
-                            ]
-                            if expert_tools:
-                                info(
-                                    f"  ✅ Expert tools now available: {', '.join(expert_tools)}"
-                                )
-                            else:
-                                info(
-                                    "  ⚠️  No expert tools found in callable_functions after registration"
-                                )
-
                         finally:
                             self.logger.debug("Closing async loop...")
                             # Clean up any remaining tasks
@@ -1743,12 +1946,12 @@ class ToolUniverse:
                             self.logger.debug("Async loop closed")
 
             except Exception as e:
-                self.logger.debug(f"Exception in auto loader processing: {e}")
-                import traceback
-
-                traceback.print_exc()
-                self.logger.debug(
-                    f"Failed to process MCP Auto Loader '{loader_config['name']}': {str(e)}"
+                self.logger.debug("MCP auto-loader processing failed", exc_info=True)
+                detail = _concise_exception_message(e)
+                warning(
+                    f"Remote MCP server '{loader_config['name']}' is unavailable: "
+                    f"{detail}. The connection was kept; start the server and call "
+                    "load_tools() again."
                 )
 
         # Update tool count after MCP registration
@@ -2217,11 +2420,11 @@ class ToolUniverse:
             dict: Tool configuration with only essential keys for prompting.
         """
         valid_keys = ["name", "description", "parameter", "required"]
-        tool = copy.deepcopy(tool)
-        for key in list(tool.keys()):
-            if key not in valid_keys:
-                del tool[key]
-        return tool
+        # Copy the four keys that survive rather than copying the whole config and
+        # deleting the rest: the discarded keys (return_schema, test_examples,
+        # settings and so on) are the larger part of a tool config, and this runs on
+        # every tool the finders return.
+        return {key: copy.deepcopy(tool[key]) for key in valid_keys if key in tool}
 
     def prepare_tool_prompts(self, tool_list, mode="prompt", valid_keys=None):
         """
@@ -2259,13 +2462,13 @@ class ToolUniverse:
                 f"Invalid mode: {mode}. Must be 'prompt', 'example', or 'custom'"
             )
 
-        copied_list = copy.deepcopy(tool_list)
-        for tool in copied_list:
-            # Create a list of keys to avoid modifying the dictionary during iteration
-            for key in list(tool.keys()):
-                if key not in valid_keys:
-                    del tool[key]
-        return copied_list
+        # Copy only the keys that survive the filter. Deep-copying each tool and
+        # then deleting most of its keys spends the bulk of the work on data that is
+        # thrown away.
+        return [
+            {key: copy.deepcopy(tool[key]) for key in valid_keys if key in tool}
+            for tool in tool_list
+        ]
 
     def get_tool_specification_by_names(self, tool_names, format="default"):
         """
@@ -2431,35 +2634,48 @@ class ToolUniverse:
         if return_prompt:
             return self.prepare_one_tool_prompt(tool_config)
 
-        import copy
-
-        # Process parameter schema based on format
+        # Process parameter schema based on format.
+        #
+        # The only thing written here is a ``required`` flag on each property, so
+        # only the dictionaries on the way to those flags are copied. Deep-copying
+        # the whole configuration also copied the return schema, the test examples
+        # and everything else, on every call, to change one key per property. The
+        # remaining fields are shared with the loaded configuration, as they already
+        # were on the path below that returns ``tool_config`` unchanged.
         if "parameter" in tool_config and isinstance(tool_config["parameter"], dict):
-            processed_config = copy.deepcopy(tool_config)
-            parameter_schema = processed_config["parameter"]
+            parameter_schema = tool_config["parameter"]
 
             if format == "openai":
                 # Recursively sanitize for OpenAI: removes legacy required:bool flags
                 # from nested property schemas, rebuilds required arrays, and strips
-                # additionalProperties:True which OpenAI rejects.
+                # additionalProperties:True which OpenAI rejects. The sanitizer
+                # rebuilds every dictionary it touches, so it needs no copy.
                 sanitized = self._sanitize_schema_for_openai(parameter_schema)
                 return {
-                    "name": processed_config["name"],
-                    "description": processed_config["description"],
+                    "name": tool_config["name"],
+                    "description": tool_config["description"],
                     "parameters": sanitized,
                 }
 
-            if (
-                "properties" in parameter_schema
-                and parameter_schema["properties"] is not None
-            ):
+            properties = parameter_schema.get("properties")
+            if properties is not None:
                 required_properties = parameter_schema.get("required", [])
                 # For default format: add required fields to properties
-                for prop_name, prop_config in parameter_schema["properties"].items():
-                    if isinstance(prop_config, dict):
-                        prop_config["required"] = prop_name in required_properties
-
-                return processed_config
+                processed_properties = {
+                    prop_name: (
+                        {**prop_config, "required": prop_name in required_properties}
+                        if isinstance(prop_config, dict)
+                        else prop_config
+                    )
+                    for prop_name, prop_config in properties.items()
+                }
+                return {
+                    **tool_config,
+                    "parameter": {
+                        **parameter_schema,
+                        "properties": processed_properties,
+                    },
+                }
 
         if format == "openai":
             # Tool has no structured parameter schema — return a valid empty spec
@@ -2529,13 +2745,25 @@ class ToolUniverse:
             lst, return_message=return_message, verbose=verbose, format=format
         )
 
-    def return_all_loaded_tools(self):
+    def return_all_loaded_tools(self, copy_tools=True):
         """
-        Return a deep copy of all loaded tools.
+        Return all loaded tools.
+
+        Args:
+            copy_tools (bool): When True (the default) return a deep copy, so callers
+                cannot modify the live catalogue. Callers on a request path that only
+                read the configurations should pass False: the deep copy walks every
+                tool's parameter schema, which costs hundreds of milliseconds once the
+                catalogue holds a few thousand tools, and it is paid again on every
+                call.
 
         Returns:
-            list: A deep copy of the all_tools list to prevent external modification.
+            list: The loaded tool configurations. With ``copy_tools=False`` the list is
+                a fresh list but the dictionaries in it are the live ones, so they must
+                be treated as read-only.
         """
+        if not copy_tools:
+            return list(self.all_tools)
         return copy.deepcopy(self.all_tools)
 
     def _execute_function_call_list(
@@ -2622,7 +2850,10 @@ class ToolUniverse:
         results: List[Any],
     ) -> List[_BatchJob]:
         if not (
-            use_cache and self.cache_manager is not None and self.cache_manager.enabled
+            use_cache
+            and not has_credential_context()
+            and self.cache_manager is not None
+            and self.cache_manager.enabled
         ):
             return jobs
 
@@ -2715,7 +2946,7 @@ class ToolUniverse:
                 results[idx] = result
 
         if max_workers and max_workers > 1:
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            with ContextThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = [executor.submit(run_job, job) for job in jobs_to_run]
                 for future in as_completed(futures):
                     future.result()
@@ -3006,6 +3237,13 @@ class ToolUniverse:
             str: Resolved tool name (primary identifier in all_tool_dict)
         """
         if function_name:
+            # Prime before resolving, not after. `resolve()` calls
+            # `get_shortened(name)` on a miss, which caches a short name as its
+            # own original; the real original then collides on priming and is
+            # pushed to a `_2` suffix, so the round trip silently breaks for
+            # exactly the names that need it.
+            if function_name not in self.all_tool_dict:
+                self._prime_name_mapper()
             # Let the mapper handle all resolution (aliases, original->short, etc.)
             resolved = self.name_mapper.resolve(
                 function_name, max_length=self.MAX_TOOL_NAME_LENGTH
@@ -3013,10 +3251,50 @@ class ToolUniverse:
             # Only return resolved name if it exists in all_tool_dict
             if resolved in self.all_tool_dict:
                 return resolved
+            # Shortened -> original. `resolve()` covers alias->primary and
+            # original->short but never the reverse, and MCP clients only ever
+            # see the shortened name, so calling back with it failed with
+            # "not found even after loading tools" -- confirmed live for
+            # OpenTargets_get_dise_phen_by_targ_ense (shortened form of
+            # OpenTargets_get_diseases_phenotypes_by_target_ensembl).
+            original = self._resolve_shortened_name(function_name)
+            if original:
+                return original
         return function_name
 
+    def _prime_name_mapper(self) -> None:
+        """Populate the mapper's short->original index from the registry.
+
+        Idempotent and cheap (pure string work, once per instance). Skipped
+        entirely until a lookup actually misses.
+        """
+        if self._name_mapper_primed:
+            return
+        for name in list(self.all_tool_dict.keys()):
+            self.name_mapper.get_shortened(name, self.MAX_TOOL_NAME_LENGTH)
+        self._name_mapper_primed = True
+
+    def _resolve_shortened_name(self, function_name: str) -> str | None:
+        """Map a shortened tool name back to the registered name, or None.
+
+        Collision suffixes (`_2`, `_3`) are assigned in registry iteration
+        order, so a colliding pair could in principle resolve to the other
+        member. Names that do not collide -- the overwhelming majority -- round
+        trip exactly, and the alternative is the current total failure.
+        """
+        self._prime_name_mapper()
+        original = self.name_mapper.get_original(function_name)
+        if original != function_name and original in self.all_tool_dict:
+            return original
+        return None
+
     def run_one_function(
-        self, function_call_json, stream_callback=None, use_cache=False, validate=True
+        self,
+        function_call_json,
+        stream_callback=None,
+        use_cache=False,
+        validate=True,
+        credentials=None,
     ):
         """
         Execute a single function call.
@@ -3030,12 +3308,26 @@ class ToolUniverse:
             stream_callback (callable, optional): Callback for streaming responses.
             use_cache (bool, optional): Whether to use result caching. Defaults to False.
             validate (bool, optional): Whether to validate parameters against schema. Defaults to True.
+            credentials (mapping, optional): Request-scoped credentials. Values remain hidden from
+                tool schemas/arguments and are restored after this call.
 
         Returns:
             str or dict: Result from the tool execution, or error message if validation fails.
         """
+        if credentials is not None:
+            with credential_context(credentials):
+                return self.run_one_function(
+                    function_call_json,
+                    stream_callback=stream_callback,
+                    use_cache=use_cache,
+                    validate=validate,
+                )
+
         function_name = function_call_json.get("name", "")
         arguments = function_call_json.get("arguments", {})
+
+        # A tool gated during process startup can be activated by this request's credentials.
+        self._activate_credential_tool(function_name)
 
         # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
         function_name = self._resolve_tool_name(function_name)
@@ -3053,6 +3345,32 @@ class ToolUniverse:
                 )
             )
 
+        missing_credentials = self._missing_required_credentials(function_name)
+        if missing_credentials:
+            return self._create_dual_format_error(
+                ToolUnavailableError(
+                    f"Tool '{function_name}' requires API key(s): "
+                    f"{', '.join(missing_credentials)}. Provide them as request "
+                    "credentials or environment variables.",
+                    retriable=False,
+                    next_steps=[
+                        "Pass the missing keys in run_one_function(credentials={...})",
+                        "Or set them as local environment variables",
+                    ],
+                )
+            )
+
+        alternative_credentials = self._missing_alternative_credentials(function_name)
+        if alternative_credentials:
+            return self._create_dual_format_error(
+                ToolUnavailableError(
+                    f"Tool '{function_name}' requires at least one API key: "
+                    f"{', '.join(alternative_credentials)}. Provide one as a request "
+                    "credential or environment variable.",
+                    retriable=False,
+                )
+            )
+
         tool_instance = None
         cache_namespace = None
         cache_version = None
@@ -3060,8 +3378,13 @@ class ToolUniverse:
         composed_cache_key = None
         cache_guard = nullcontext()
 
+        # Credential-scoped results must never be reused by another tenant. Disable result caching
+        # rather than putting secret material into a cache key.
         cache_enabled = (
-            use_cache and self.cache_manager is not None and self.cache_manager.enabled
+            use_cache
+            and not has_credential_context()
+            and self.cache_manager is not None
+            and self.cache_manager.enabled
         )
 
         if cache_enabled:
@@ -3109,10 +3432,8 @@ class ToolUniverse:
                 # Update the original dict so coerced arguments are used
                 function_call_json["arguments"] = arguments
 
-            # Strip None values from arguments: optional params default to None in
-            # Python wrappers, but schema validation rejects None for typed params.
-            # None means "not provided" — simply omit such keys.
-            arguments = {k: v for k, v in arguments.items() if v is not None}
+            arguments = self._strip_omitted_none_arguments(function_name, arguments)
+            self._apply_operation_default(function_name, arguments)
             function_call_json["arguments"] = arguments
 
             # Validate parameters if requested
@@ -3136,7 +3457,9 @@ class ToolUniverse:
             tool_arguments = arguments
             try:
                 if tool_instance is None:
-                    tool_instance = self._get_tool_instance(function_name, cache=True)
+                    tool_instance = self._get_tool_instance(
+                        function_name, cache=not has_credential_context()
+                    )
 
                 if tool_instance:
                     result, tool_arguments = self._execute_tool_with_stream(
@@ -3157,7 +3480,9 @@ class ToolUniverse:
                         )
 
                     # Try to get the tool instance again after loading
-                    tool_instance = self._get_tool_instance(function_name, cache=True)
+                    tool_instance = self._get_tool_instance(
+                        function_name, cache=not has_credential_context()
+                    )
                     if tool_instance:
                         result, tool_arguments = self._execute_tool_with_stream(
                             tool_instance,
@@ -3200,6 +3525,9 @@ class ToolUniverse:
                         if tool_instance is not None
                         else "unknown"
                     ),
+                    "category": self.all_tool_dict.get(function_name, {}).get(
+                        "category"
+                    ),
                     "execution_time": time.time(),
                     "arguments": tool_arguments,
                 }
@@ -3233,7 +3561,12 @@ class ToolUniverse:
             return result
 
     async def run_one_function_async(
-        self, function_call_json, stream_callback=None, use_cache=False, validate=True
+        self,
+        function_call_json,
+        stream_callback=None,
+        use_cache=False,
+        validate=True,
+        credentials=None,
     ):
         """
         Async version of run_one_function.
@@ -3241,8 +3574,19 @@ class ToolUniverse:
         Execute a single function call asynchronously (non-blocking).
         Handles both sync and async tools intelligently.
         """
+        if credentials is not None:
+            with credential_context(credentials):
+                return await self.run_one_function_async(
+                    function_call_json,
+                    stream_callback=stream_callback,
+                    use_cache=use_cache,
+                    validate=validate,
+                )
+
         function_name = function_call_json.get("name", "")
         arguments = function_call_json.get("arguments", {})
+
+        self._activate_credential_tool(function_name)
 
         # Resolve original names to shortened names
         function_name = self._resolve_tool_name(function_name)
@@ -3260,13 +3604,41 @@ class ToolUniverse:
                 )
             )
 
+        missing_credentials = self._missing_required_credentials(function_name)
+        if missing_credentials:
+            return self._create_dual_format_error(
+                ToolUnavailableError(
+                    f"Tool '{function_name}' requires API key(s): "
+                    f"{', '.join(missing_credentials)}. Provide them as request "
+                    "credentials or environment variables.",
+                    retriable=False,
+                    next_steps=[
+                        "Pass the missing keys in run_one_function_async(credentials={...})",
+                        "Or set them as local environment variables",
+                    ],
+                )
+            )
+        alternative_credentials = self._missing_alternative_credentials(function_name)
+        if alternative_credentials:
+            return self._create_dual_format_error(
+                ToolUnavailableError(
+                    f"Tool '{function_name}' requires at least one API key: "
+                    f"{', '.join(alternative_credentials)}. Provide one as a request "
+                    "credential or environment variable.",
+                    retriable=False,
+                )
+            )
+
         tool_instance = None
         cache_namespace = None
         cache_version = None
         cache_key = None
 
         cache_enabled = (
-            use_cache and self.cache_manager is not None and self.cache_manager.enabled
+            use_cache
+            and not has_credential_context()
+            and self.cache_manager is not None
+            and self.cache_manager.enabled
         )
 
         if cache_enabled:
@@ -3299,6 +3671,10 @@ class ToolUniverse:
             arguments = self._coerce_arguments_to_schema(function_name, arguments)
             function_call_json["arguments"] = arguments
 
+        arguments = self._strip_omitted_none_arguments(function_name, arguments)
+        self._apply_operation_default(function_name, arguments)
+        function_call_json["arguments"] = arguments
+
         # Validate parameters if requested
         if validate:
             validation_error = self._validate_parameters(function_name, arguments)
@@ -3317,7 +3693,9 @@ class ToolUniverse:
         tool_arguments = arguments
         try:
             if tool_instance is None:
-                tool_instance = self._get_tool_instance(function_name, cache=True)
+                tool_instance = self._get_tool_instance(
+                    function_name, cache=not has_credential_context()
+                )
 
             if tool_instance:
                 result, tool_arguments = await self._execute_tool_with_stream_async(
@@ -3339,7 +3717,9 @@ class ToolUniverse:
                     )
 
                 # Try to get the tool instance again after loading
-                tool_instance = self._get_tool_instance(function_name, cache=True)
+                tool_instance = self._get_tool_instance(
+                    function_name, cache=not has_credential_context()
+                )
                 if tool_instance:
                     result, tool_arguments = await self._execute_tool_with_stream_async(
                         tool_instance,
@@ -3384,6 +3764,7 @@ class ToolUniverse:
                     if tool_instance is not None
                     else "unknown"
                 ),
+                "category": self.all_tool_dict.get(function_name, {}).get("category"),
                 "execution_time": time.time(),
                 "arguments": tool_arguments,
             }
@@ -3617,6 +3998,7 @@ class ToolUniverse:
                     "ComposeTool",
                     "ToolFinderLLM",
                     "ToolFinderKeyword",
+                    "ToolFinderJev",
                     "SmolAgentTool",
                     "ListTools",
                     "GrepTools",
@@ -3669,23 +4051,52 @@ class ToolUniverse:
             return None  # Return None instead of raising
 
     def _get_tool_instance(self, function_name: str, cache: bool = True):
-        """Get or create tool instance with optional caching."""
+        """Get or create a tool instance with process or credential-partitioned caching."""
         # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
         function_name = self._resolve_tool_name(function_name)
 
-        # Check cache first
-        if function_name in self.callable_functions:
+        scoped_credentials = current_credentials()
+        if scoped_credentials is not None and function_name in self.all_tool_dict:
+            tool_config = self.all_tool_dict[function_name]
+            config_payload = json.dumps(
+                tool_config,
+                sort_keys=True,
+                separators=(",", ":"),
+                default=repr,
+            ).encode("utf-8")
+            config_version = hashlib.sha256(config_payload).hexdigest()
+            return self._credential_instance_cache.get_or_create(
+                tool_name=function_name,
+                config_version=config_version,
+                credentials=scoped_credentials,
+                factory=lambda: self.init_tool(tool_config, add_to_cache=False),
+            )
+
+        # Local/single-user execution keeps the original fast process-level instance cache.
+        if cache and function_name in self.callable_functions:
             return self.callable_functions[function_name]
 
-        # Check if known unavailable
-        tool_errors = get_tool_errors()
-        if function_name in tool_errors:
-            self.logger.debug(f"Tool {function_name} is unavailable")
-            return None
+        # One initialisation at a time. Callers that asked for the same
+        # uninitialised tool concurrently (the HTTP server's thread pool, batch
+        # runs) each built their own instance; for a model-backed tool such as
+        # Tool_RAG the overlapping loads failed with "Cannot copy out of meta
+        # tensor", and init_tool then removed the tool for the rest of the
+        # process. A caller that waited finds the instance the first one cached.
+        with self._tool_init_lock:
+            if cache and function_name in self.callable_functions:
+                return self.callable_functions[function_name]
 
-        # Try to initialize
-        if function_name in self.all_tool_dict:
-            return self.init_tool(self.all_tool_dict[function_name], add_to_cache=cache)
+            # Check if known unavailable
+            tool_errors = get_tool_errors()
+            if function_name in tool_errors:
+                self.logger.debug(f"Tool {function_name} is unavailable")
+                return None
+
+            # Try to initialize
+            if function_name in self.all_tool_dict:
+                return self.init_tool(
+                    self.all_tool_dict[function_name], add_to_cache=cache
+                )
 
         return None
 
@@ -3753,6 +4164,26 @@ class ToolUniverse:
         Returns:
             The coerced value (or original if coercion fails or not applicable)
         """
+        # Handle array types. This has to run before the string-only guard
+        # below: a list never gets past that guard, so the per-item recursion
+        # would never be reached and array elements would stay strings while
+        # the same scalar was coerced. As with Fix-R3-06 further down, "type"
+        # may be a union such as ["array", "null"], so accept any union that
+        # offers "array". A list can only ever satisfy the "array" member, so
+        # there is nothing to disambiguate.
+        declared_type = schema.get("type")
+        if (
+            (
+                declared_type == "array"
+                or (isinstance(declared_type, list) and "array" in declared_type)
+            )
+            and isinstance(value, list)
+            and isinstance(schema.get("items"), dict)
+        ):
+            # Recursively coerce array items
+            items_schema = schema["items"]
+            return [self._coerce_value_to_type(item, items_schema) for item in value]
+
         # Only coerce string values
         if not isinstance(value, str):
             return value
@@ -3772,18 +4203,9 @@ class ToolUniverse:
                     return coerced
             return value
 
-        # Handle array types
-        if schema.get("type") == "array" and "items" in schema:
-            if isinstance(value, list):
-                # Recursively coerce array items
-                items_schema = schema["items"]
-                return [
-                    self._coerce_value_to_type(item, items_schema) for item in value
-                ]
-            return value
-
-        # Get the expected type
-        expected_type = schema.get("type")
+        # Get the expected type. Same lookup as declared_type above, and
+        # nothing between them rebinds schema, so reuse that read.
+        expected_type = declared_type
 
         # Fix-R3-06: JSON Schema permits "type" to be a LIST of types, and
         # ["integer", "null"] is this project's own convention for an optional
@@ -3835,6 +4257,36 @@ class ToolUniverse:
 
         return value
 
+    def _strip_omitted_none_arguments(
+        self, function_name: str, arguments: dict
+    ) -> dict:
+        """Drop wrapper-default ``None`` values without deleting valid JSON nulls."""
+        config = self.all_tool_dict.get(function_name, {})
+        parameter_schema = config.get("parameter", {})
+        properties = parameter_schema.get("properties") or {}
+        required = set(parameter_schema.get("required") or [])
+
+        def allows_null(schema: dict) -> bool:
+            schema_type = schema.get("type")
+            if schema_type == "null":
+                return True
+            if isinstance(schema_type, list) and "null" in schema_type:
+                return True
+            return any(
+                allows_null(option)
+                for key in ("oneOf", "anyOf")
+                for option in schema.get(key, [])
+                if isinstance(option, dict)
+            )
+
+        return {
+            name: value
+            for name, value in arguments.items()
+            if value is not None
+            or name in required
+            or allows_null(properties.get(name, {}))
+        }
+
     def _coerce_arguments_to_schema(self, function_name: str, arguments: dict) -> dict:
         """
         Coerce all arguments for a tool to match their schema expectations.
@@ -3875,6 +4327,31 @@ class ToolUniverse:
                 coerced_args[param_name] = param_value
 
         return coerced_args
+
+    def _apply_operation_default(self, function_name: str, arguments: dict) -> None:
+        """Fill in `operation` for tools that are registered as a single operation.
+
+        Many multi-operation tool classes are registered once per operation
+        (``DNA_find_orfs``, ``Epidemiology_nnt``, ...) yet still read
+        ``arguments["operation"]``. Callers naturally omit it — the tool name
+        already says which operation it is — and previously got a bare parameter
+        validation failure, with no signal that the tool was usable at all.
+
+        The tool's own config names the operation (``fields.operation``, else the
+        schema default), so supply it here when the caller left it out. An
+        explicitly passed ``operation`` always wins. Mutates ``arguments`` in
+        place, before validation, so it applies whether or not validation runs.
+
+        The value is resolved through ``resolve_configured_operation`` because
+        ``BaseTool.validate_parameters`` needs the same answer to tell an
+        auto-supplied ``operation`` apart from a caller-supplied one
+        (Feature-26A-8); resolving it in two places would let them drift.
+        """
+        if "operation" in arguments:
+            return
+        operation = resolve_configured_operation(self.all_tool_dict.get(function_name))
+        if operation:
+            arguments["operation"] = operation
 
     def _validate_parameters(
         self, function_name: str, arguments: dict
@@ -4056,7 +4533,7 @@ class ToolUniverse:
             tu.load_tools(include_tools=["UniProt_get_entry_by_accession"])
 
         Note:
-            - This does not affect tool instances in callable_functions cache
+            - This clears process-level and credential-partitioned tool instances
             - Subsequent tool access will trigger on-demand loading
             - Use clear_cache=True if you also want to clear result cache
         """
@@ -4064,6 +4541,10 @@ class ToolUniverse:
         self.all_tools = []
         self.all_tool_dict = {}
         self.tool_category_dicts = {}
+        self._excluded_api_key_tools = {}
+        self._excluded_api_key_tool_configs = {}
+        self._excluded_any_api_key_tools = {}
+        self._credential_instance_cache.clear()
 
         # Clear instantiated tool instances
         self.callable_functions = {}
@@ -4080,6 +4561,11 @@ class ToolUniverse:
             return {"enabled": False}
         return self.cache_manager.stats()
 
+    def get_credential_instance_cache_stats(self) -> Dict[str, Any]:
+        """Return non-secret BYOK tool-instance cache telemetry."""
+
+        return self._credential_instance_cache.stats()
+
     def dump_cache(self, namespace: Optional[str] = None):
         """Iterate over cached entries (persistent layer only)."""
         if not self.cache_manager:
@@ -4088,6 +4574,7 @@ class ToolUniverse:
 
     def close(self):
         """Release resources."""
+        self._credential_instance_cache.clear()
         if self.cache_manager:
             self.cache_manager.close()
 
@@ -4677,6 +5164,18 @@ class ToolUniverse:
             "exclude_tool_types", []
         )
 
+        # Loading a Profile selects a complete tool universe.  Clear the previous
+        # selection before loading Profile sources so ``include_tools`` merge mode
+        # cannot accidentally retain tools selected by an earlier Profile.
+        self.all_tools = []
+        self.all_tool_dict = {}
+        self.tool_category_dicts = {}
+        self._excluded_api_key_tools = {}
+        self._excluded_api_key_tool_configs = {}
+        self._excluded_any_api_key_tools = {}
+        self.callable_functions = {}
+        self._credential_instance_cache.clear()
+
         # Load tools from external sources declared in the Profile
         sources = config.get("sources", [])
         if sources:
@@ -4691,6 +5190,7 @@ class ToolUniverse:
             tools_file=tools_file_param,  # KEY FIX: Pass tools_file
             include_tool_types=include_tool_types,
             exclude_tool_types=exclude_tool_types,
+            _apply_profile_defaults=False,
         )
 
         # Store the configuration for reference

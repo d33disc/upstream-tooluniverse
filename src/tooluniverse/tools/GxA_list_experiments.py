@@ -16,7 +16,7 @@ def GxA_list_experiments(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     List gene expression experiments from EBI Gene Expression Atlas. Can filter by species (e.g., 'Ho...
 
@@ -37,7 +37,7 @@ def GxA_list_experiments(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

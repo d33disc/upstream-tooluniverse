@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def Rfam_get_structure_mapping(
     family_id: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_structure_mapping",
     format: Optional[str] = "json",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

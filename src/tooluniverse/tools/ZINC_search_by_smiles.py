@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def ZINC_search_by_smiles(
-    operation: str,
     smiles: str,
+    operation: Optional[str] = "search_by_smiles",
     dist: Optional[int] = 0,
     adist: Optional[int] = 0,
     database: Optional[str] = "zinc20,zinc22",

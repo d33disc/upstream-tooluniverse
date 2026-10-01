@@ -1,7 +1,7 @@
 """
 DNA_find_restriction_sites
 
-Find restriction enzyme recognition sites in a DNA sequence using the NEB enzyme library (24 comm...
+Find restriction enzyme recognition sites in a DNA sequence using the NEB enzyme library (25 cura...
 """
 
 from typing import Any, Optional, Callable
@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_find_restriction_sites(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "find_restriction_sites",
     enzymes: Optional[list[str]] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -18,12 +18,12 @@ def DNA_find_restriction_sites(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Find restriction enzyme recognition sites in a DNA sequence using the NEB enzyme library (24 comm...
+    Find restriction enzyme recognition sites in a DNA sequence using the NEB enzyme library (25 cura...
 
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'find_restriction_sites' for this tool).
     sequence : str
         DNA sequence (A, T, G, C, N only). Case insensitive. Spaces and newlines are ...
     enzymes : list[str]

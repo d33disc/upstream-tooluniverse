@@ -17,7 +17,7 @@ def QuickGO_annotations_by_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search Gene Ontology (GO) annotations for a specific gene product using the EBI QuickGO browser. ...
 
@@ -40,7 +40,7 @@ def QuickGO_annotations_by_gene(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

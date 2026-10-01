@@ -1,7 +1,5 @@
 """BioGRID Database REST API Tool for protein and genetic interaction data."""
 
-import os
-
 import requests
 from typing import Any, Dict, List, Union
 from .base_tool import BaseTool
@@ -59,8 +57,8 @@ class BioGRIDRESTTool(BaseTool):
             arguments.get("api_key")
             or arguments.get("accesskey")
             or arguments.get("access_key")
-            or os.getenv("BIOGRID_API_KEY")
-            or os.getenv("BIOGRID_ACCESS_KEY")
+            or self.credential("BIOGRID_API_KEY")
+            or self.credential("BIOGRID_ACCESS_KEY")
         )
 
         if not api_key:
@@ -164,8 +162,8 @@ class BioGRIDRESTTool(BaseTool):
                         "the chemicalList parameter is silently ignored and returns "
                         "unrelated protein interactions. Please provide gene_names to "
                         "query interactions for specific proteins, or use "
-                        "ChEMBL_search_mechanisms / DGIdb_search_interactions for "
-                        "drug-protein interaction data."
+                        "ChEMBL_search_mechanisms / DGIdb_get_drug_gene_interactions "
+                        "for drug-protein interaction data."
                     )
                 else:
                     error_msg = (
@@ -234,7 +232,7 @@ class BioGRIDRESTTool(BaseTool):
                 "BioGRID chemicalList filter is not supported by the REST API; "
                 "results reflect all protein interactions for the queried gene(s), "
                 "not filtered by chemical. Use ChEMBL_search_mechanisms or "
-                "DGIdb_search_interactions for drug-protein interaction data."
+                "DGIdb_get_drug_gene_interactions for drug-protein interaction data."
             ),
         }
         if interaction_type_note:

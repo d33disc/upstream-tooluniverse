@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def MEME_list_databases(
-    operation: str,
+    operation: Optional[str] = "list_databases",
     category_filter: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

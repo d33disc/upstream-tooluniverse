@@ -1,7 +1,7 @@
 """
 BVBRC_search_amr
 
-Search for antimicrobial resistance (AMR) phenotype data in BV-BRC. Returns resistance/susceptibi...
+Search for ANTIBACTERIAL resistance (AMR) phenotype data in BV-BRC -- bacteria tested against ant...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def BVBRC_search_amr(
     validate: bool = True,
 ) -> Any:
     """
-    Search for antimicrobial resistance (AMR) phenotype data in BV-BRC. Returns resistance/susceptibi...
+    Search for ANTIBACTERIAL resistance (AMR) phenotype data in BV-BRC -- bacteria tested against ant...
 
     Parameters
     ----------

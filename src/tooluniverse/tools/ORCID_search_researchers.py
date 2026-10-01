@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def ORCID_search_researchers(
-    operation: str,
     query: str,
+    operation: Optional[str] = "search_researchers",
     start: Optional[int] = 0,
     rows: Optional[int] = 10,
     *,

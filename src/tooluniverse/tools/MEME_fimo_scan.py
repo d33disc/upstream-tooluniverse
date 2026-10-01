@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def MEME_fimo_scan(
-    operation: str,
     sequences: str,
     motif_text: str,
+    operation: Optional[str] = "fimo_scan",
     pvalue_threshold: Optional[float] = 0.0001,
     scan_rc: Optional[bool] = True,
     *,

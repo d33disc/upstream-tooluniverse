@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def Rfam_get_covariance_model(
     family_id: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_covariance_model",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

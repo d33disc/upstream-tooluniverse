@@ -16,7 +16,7 @@ def EnsemblMap_translate_coordinates(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Map protein or cDNA positions to genomic coordinates using Ensembl. Converts positions from trans...
 
@@ -37,7 +37,7 @@ def EnsemblMap_translate_coordinates(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

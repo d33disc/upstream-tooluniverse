@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def ZINC_get_purchasable(
-    operation: str,
     zinc_id: str,
+    operation: Optional[str] = "get_purchasable",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

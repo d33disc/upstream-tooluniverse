@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def PharmacoDB_get_cell_line(
-    operation: str,
+    operation: Optional[str] = "get_cell_line",
     cell_name: Optional[str] = None,
     cell_id: Optional[int] = None,
     *,

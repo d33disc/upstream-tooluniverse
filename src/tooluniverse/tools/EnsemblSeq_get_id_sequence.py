@@ -15,7 +15,7 @@ def EnsemblSeq_get_id_sequence(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the amino acid or nucleotide sequence for an Ensembl ID (protein, transcript, or gene). Retri...
 
@@ -34,7 +34,7 @@ def EnsemblSeq_get_id_sequence(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

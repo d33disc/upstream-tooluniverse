@@ -9,6 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ClinicalTrials_search_studies(
+    operation: Optional[str] = "search",
     query_cond: Optional[str] = None,
     query_intr: Optional[str] = None,
     query_term: Optional[str] = None,
@@ -33,6 +34,8 @@ def ClinicalTrials_search_studies(
 
     Parameters
     ----------
+    operation : str
+        Operation (optional; defaults to 'search' for this tool).
     query_cond : str
         Disease or condition to search for (e.g., 'breast cancer', 'type 2 diabetes',...
     query_intr : str
@@ -78,6 +81,7 @@ def ClinicalTrials_search_studies(
     _args = {
         k: v
         for k, v in {
+            "operation": operation,
             "query_cond": query_cond,
             "query_intr": query_intr,
             "query_term": query_term,

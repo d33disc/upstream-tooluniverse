@@ -14,7 +14,7 @@ def EBITaxonomy_search_by_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for organisms by any name (scientific, common, or synonym) in EBI Taxonomy. Unlike scienti...
 
@@ -31,7 +31,7 @@ def EBITaxonomy_search_by_name(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OpenFDA_search_drug_approvals(
-    operation: str,
+    operation: Optional[str] = "search_approvals",
     drug_name: Optional[str] = None,
     sponsor: Optional[str] = None,
     application_number: Optional[str] = None,

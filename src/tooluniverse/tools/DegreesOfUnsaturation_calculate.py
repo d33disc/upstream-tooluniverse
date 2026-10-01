@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def DegreesOfUnsaturation_calculate(
-    operation: str,
+    operation: Optional[str] = "calculate",
     formula: Optional[str] = None,
     C: Optional[int] = None,
     H: Optional[int] = None,

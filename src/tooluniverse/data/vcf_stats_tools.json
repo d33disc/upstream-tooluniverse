@@ -7,7 +7,6 @@
     "parameter": {
       "type": "object",
       "required": [
-        "operation",
         "vcf_path"
       ],
       "properties": {
@@ -50,19 +49,21 @@
       }
     },
     "return_schema": {
-      "type": "object",
-      "additionalProperties": true,
-      "required": [
-        "filters_applied",
-        "indels",
-        "mnps",
-        "multiallelic_sites",
-        "multiallelic_snp_sites",
-        "per_sample",
-        "records",
-        "samples",
-        "snps",
-        "ts_tv"
+      "oneOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
       ]
     },
     "test_examples": [
@@ -71,7 +72,10 @@
         "vcf_path": "/tmp/sample.vcf.gz",
         "pass_only": true
       }
-    ]
+    ],
+    "fields": {
+      "operation": "summary_stats"
+    }
   },
   {
     "name": "VCF_count_variants",
@@ -81,7 +85,6 @@
     "parameter": {
       "type": "object",
       "required": [
-        "operation",
         "vcf_path"
       ],
       "properties": {
@@ -124,14 +127,21 @@
       }
     },
     "return_schema": {
-      "type": "object",
-      "additionalProperties": true,
-      "required": [
-        "filters_applied",
-        "indels",
-        "mnps",
-        "records",
-        "snps"
+      "oneOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
       ]
     },
     "test_examples": [
@@ -140,7 +150,10 @@
         "vcf_path": "/tmp/sample.vcf.gz",
         "min_qual": 30
       }
-    ]
+    ],
+    "fields": {
+      "operation": "count_variants"
+    }
   },
   {
     "name": "VCF_normalize",
@@ -150,7 +163,6 @@
     "parameter": {
       "type": "object",
       "required": [
-        "operation",
         "vcf_path"
       ],
       "properties": {
@@ -185,13 +197,21 @@
       }
     },
     "return_schema": {
-      "type": "object",
-      "additionalProperties": true,
-      "required": [
-        "after",
-        "before",
-        "left_aligned",
-        "multiallelics"
+      "oneOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
       ]
     },
     "test_examples": [
@@ -200,6 +220,9 @@
         "vcf_path": "/tmp/sample.vcf.gz",
         "multiallelics": "split"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "normalize"
+    }
   }
 ]

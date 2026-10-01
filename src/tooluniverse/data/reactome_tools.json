@@ -12,7 +12,9 @@
           "description": "Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways to get top-level pathways, or Reactome_map_uniprot_to_pathways if you have a UniProt protein ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -27,24 +29,78 @@
       "type": "array",
       "items": {
         "oneOf": [
-          {"type": "integer", "description": "Event ID reference"},
+          {
+            "type": "integer",
+            "description": "Event ID reference"
+          },
           {
             "type": "object",
             "properties": {
-              "dbId": {"type": "integer", "description": "Database ID"},
-              "displayName": {"type": "string", "description": "Event display name"},
-              "stId": {"type": "string", "description": "Stable identifier"},
-              "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-              "isInDisease": {"type": "boolean", "description": "Whether event is associated with disease"},
-              "isInferred": {"type": "boolean", "description": "Whether event is inferred"},
-              "maxDepth": {"type": "integer", "description": "Maximum depth"},
-              "name": {"type": "array", "items": {"type": "string"}, "description": "Event names"},
-              "releaseDate": {"type": "string", "description": "Release date"},
-              "speciesName": {"type": "string", "description": "Species name"},
-              "eventOf": {"type": "array", "items": {"type": ["integer", "object"]}, "description": "Parent events (can be IDs or objects)"},
-              "category": {"type": "string", "description": "Event category"},
-              "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Reaction', 'Pathway')"},
-              "className": {"type": "string", "description": "Class name"}
+              "dbId": {
+                "type": "integer",
+                "description": "Database ID"
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Event display name"
+              },
+              "stId": {
+                "type": "string",
+                "description": "Stable identifier"
+              },
+              "stIdVersion": {
+                "type": "string",
+                "description": "Versioned stable ID"
+              },
+              "isInDisease": {
+                "type": "boolean",
+                "description": "Whether event is associated with disease"
+              },
+              "isInferred": {
+                "type": "boolean",
+                "description": "Whether event is inferred"
+              },
+              "maxDepth": {
+                "type": "integer",
+                "description": "Maximum depth"
+              },
+              "name": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Event names"
+              },
+              "releaseDate": {
+                "type": "string",
+                "description": "Release date"
+              },
+              "speciesName": {
+                "type": "string",
+                "description": "Species name"
+              },
+              "eventOf": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "integer",
+                    "object"
+                  ]
+                },
+                "description": "Parent events (can be IDs or objects)"
+              },
+              "category": {
+                "type": "string",
+                "description": "Event category"
+              },
+              "schemaClass": {
+                "type": "string",
+                "description": "Schema class (e.g., 'Reaction', 'Pathway')"
+              },
+              "className": {
+                "type": "string",
+                "description": "Class name"
+              }
             },
             "description": "Event object with full details"
           }
@@ -66,7 +122,9 @@
           "description": "Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways to get top-level pathways, or Reactome_map_uniprot_to_pathways if you have a UniProt protein ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -80,24 +138,96 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "dbId": {"type": "integer", "description": "Database ID"},
-        "displayName": {"type": "string", "description": "Pathway display name"},
-        "stId": {"type": "string", "description": "Stable identifier (e.g., 'R-HSA-73817')"},
-        "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-        "isInDisease": {"type": "boolean", "description": "Whether pathway is associated with disease"},
-        "isInferred": {"type": "boolean", "description": "Whether pathway is inferred"},
-        "maxDepth": {"type": "integer", "description": "Maximum depth of pathway hierarchy"},
-        "name": {"type": "array", "items": {"type": "string"}, "description": "Pathway names"},
-        "releaseDate": {"type": "string", "description": "Release date"},
-        "speciesName": {"type": "string", "description": "Species name"},
-        "compartment": {"type": "array", "items": {"type": "object"}, "description": "Cellular compartments"},
-        "figure": {"type": "array", "items": {"type": "object"}, "description": "Pathway figures"},
-        "goBiologicalProcess": {"type": "object", "description": "GO biological process annotation"},
-        "literatureReference": {"type": "array", "items": {"type": "object"}, "description": "Literature references"},
-        "orthologousEvent": {"type": "array", "items": {"type": "object"}, "description": "Orthologous events in other species"},
-        "hasEvent": {"type": "array", "items": {"type": "object"}, "description": "Events (reactions/subpathways) in this pathway"},
-        "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Pathway')"},
-        "className": {"type": "string", "description": "Class name"}
+        "dbId": {
+          "type": "integer",
+          "description": "Database ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Pathway display name"
+        },
+        "stId": {
+          "type": "string",
+          "description": "Stable identifier (e.g., 'R-HSA-73817')"
+        },
+        "stIdVersion": {
+          "type": "string",
+          "description": "Versioned stable ID"
+        },
+        "isInDisease": {
+          "type": "boolean",
+          "description": "Whether pathway is associated with disease"
+        },
+        "isInferred": {
+          "type": "boolean",
+          "description": "Whether pathway is inferred"
+        },
+        "maxDepth": {
+          "type": "integer",
+          "description": "Maximum depth of pathway hierarchy"
+        },
+        "name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Pathway names"
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "Release date"
+        },
+        "speciesName": {
+          "type": "string",
+          "description": "Species name"
+        },
+        "compartment": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Cellular compartments"
+        },
+        "figure": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Pathway figures"
+        },
+        "goBiologicalProcess": {
+          "type": "object",
+          "description": "GO biological process annotation"
+        },
+        "literatureReference": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Literature references"
+        },
+        "orthologousEvent": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Orthologous events in other species"
+        },
+        "hasEvent": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Events (reactions/subpathways) in this pathway"
+        },
+        "schemaClass": {
+          "type": "string",
+          "description": "Schema class (e.g., 'Pathway')"
+        },
+        "className": {
+          "type": "string",
+          "description": "Class name"
+        }
       }
     }
   },
@@ -114,7 +244,9 @@
           "description": "Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways to get top-level pathways, or Reactome_map_uniprot_to_pathways if you have a UniProt protein ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -149,7 +281,9 @@
           "description": "Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). IMPORTANT: Common names like 'human' or 'mouse' will return HTTP 404. Use exact scientific name (e.g., 'Homo sapiens', 'Mus musculus') or NCBI taxonomy ID. To find available species, use Reactome_list_species."
         }
       },
-      "required": ["species"]
+      "required": [
+        "species"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -165,20 +299,65 @@
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Pathway display name"},
-          "stId": {"type": "string", "description": "Stable identifier"},
-          "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-          "isInDisease": {"type": "boolean", "description": "Whether pathway is associated with disease"},
-          "isInferred": {"type": "boolean", "description": "Whether pathway is inferred"},
-          "maxDepth": {"type": "integer", "description": "Maximum depth"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Pathway names"},
-          "releaseDate": {"type": "string", "description": "Release date"},
-          "speciesName": {"type": "string", "description": "Species name"},
-          "hasDiagram": {"type": "boolean", "description": "Whether pathway has diagram"},
-          "hasEHLD": {"type": "boolean", "description": "Whether pathway has EHLD diagram"},
-          "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Pathway')"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Pathway display name"
+          },
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier"
+          },
+          "stIdVersion": {
+            "type": "string",
+            "description": "Versioned stable ID"
+          },
+          "isInDisease": {
+            "type": "boolean",
+            "description": "Whether pathway is associated with disease"
+          },
+          "isInferred": {
+            "type": "boolean",
+            "description": "Whether pathway is inferred"
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "Maximum depth"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Pathway names"
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Release date"
+          },
+          "speciesName": {
+            "type": "string",
+            "description": "Species name"
+          },
+          "hasDiagram": {
+            "type": "boolean",
+            "description": "Whether pathway has diagram"
+          },
+          "hasEHLD": {
+            "type": "boolean",
+            "description": "Whether pathway has EHLD diagram"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class (e.g., 'Pathway')"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Top-level pathway objects"
       }
@@ -197,7 +376,9 @@
           "description": "Reaction Stable ID (e.g., 'R-HSA-111289'). To find reaction IDs, use Reactome_get_pathway_reactions with a pathway ID to get all reactions in that pathway."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -211,22 +392,91 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "dbId": {"type": "integer", "description": "Database ID"},
-        "displayName": {"type": "string", "description": "Reaction display name"},
-        "stId": {"type": "string", "description": "Stable identifier"},
-        "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-        "isInDisease": {"type": "boolean", "description": "Whether reaction is associated with disease"},
-        "isInferred": {"type": "boolean", "description": "Whether reaction is inferred"},
-        "name": {"type": "array", "items": {"type": "string"}, "description": "Reaction names"},
-        "releaseDate": {"type": "string", "description": "Release date"},
-        "speciesName": {"type": "string", "description": "Species name"},
-        "input": {"type": "array", "items": {"type": ["integer", "object"]}, "description": "Input entities (can be IDs or objects)"},
-        "output": {"type": "array", "items": {"type": ["integer", "object"]}, "description": "Output entities (can be IDs or objects)"},
-        "regulatedBy": {"type": "array", "items": {"type": "object"}, "description": "Regulation information"},
-        "literatureReference": {"type": "array", "items": {"type": "object"}, "description": "Literature references"},
-        "category": {"type": "string", "description": "Reaction category"},
-        "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Reaction')"},
-        "className": {"type": "string", "description": "Class name"}
+        "dbId": {
+          "type": "integer",
+          "description": "Database ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Reaction display name"
+        },
+        "stId": {
+          "type": "string",
+          "description": "Stable identifier"
+        },
+        "stIdVersion": {
+          "type": "string",
+          "description": "Versioned stable ID"
+        },
+        "isInDisease": {
+          "type": "boolean",
+          "description": "Whether reaction is associated with disease"
+        },
+        "isInferred": {
+          "type": "boolean",
+          "description": "Whether reaction is inferred"
+        },
+        "name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Reaction names"
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "Release date"
+        },
+        "speciesName": {
+          "type": "string",
+          "description": "Species name"
+        },
+        "input": {
+          "type": "array",
+          "items": {
+            "type": [
+              "integer",
+              "object"
+            ]
+          },
+          "description": "Input entities (can be IDs or objects)"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "type": [
+              "integer",
+              "object"
+            ]
+          },
+          "description": "Output entities (can be IDs or objects)"
+        },
+        "regulatedBy": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Regulation information"
+        },
+        "literatureReference": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Literature references"
+        },
+        "category": {
+          "type": "string",
+          "description": "Reaction category"
+        },
+        "schemaClass": {
+          "type": "string",
+          "description": "Schema class (e.g., 'Reaction')"
+        },
+        "className": {
+          "type": "string",
+          "description": "Class name"
+        }
       }
     }
   },
@@ -240,13 +490,18 @@
       "properties": {
         "stId": {
           "type": "string",
-          "description": "Complex Stable ID (e.g., 'R-HSA-XXXXX'). To find complex IDs, use Reactome_get_participants with a reaction ID to see complexes participating in that reaction."
+          "description": "Complex Stable ID (e.g., 'R-HSA-3209194', the TP53 Tetramer). To find complex IDs, use Reactome_get_participants with a reaction ID to see complexes participating in that reaction. Passing a Pathway or Reaction stId here will still return data (the endpoint is unified across entity types), but the response's schemaClass will not be 'Complex'."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
+      {
+        "stId": "R-HSA-3209194"
+      },
       {
         "stId": "R-HSA-69541"
       },
@@ -257,17 +512,62 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "dbId": {"type": "integer", "description": "Database ID"},
-        "displayName": {"type": "string", "description": "Complex display name"},
-        "stId": {"type": "string", "description": "Stable identifier"},
-        "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-        "isInDisease": {"type": "boolean", "description": "Whether complex is associated with disease"},
-        "name": {"type": "array", "items": {"type": "string"}, "description": "Complex names"},
-        "speciesName": {"type": "string", "description": "Species name"},
-        "compartment": {"type": "array", "items": {"type": "object"}, "description": "Cellular compartments"},
-        "hasComponent": {"type": "array", "items": {"type": "object"}, "description": "Complex subunits/components"},
-        "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Complex')"},
-        "className": {"type": "string", "description": "Class name"}
+        "dbId": {
+          "type": "integer",
+          "description": "Database ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Complex display name"
+        },
+        "stId": {
+          "type": "string",
+          "description": "Stable identifier"
+        },
+        "stIdVersion": {
+          "type": "string",
+          "description": "Versioned stable ID"
+        },
+        "isInDisease": {
+          "type": "boolean",
+          "description": "Whether complex is associated with disease"
+        },
+        "name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Complex names"
+        },
+        "speciesName": {
+          "type": "string",
+          "description": "Species name"
+        },
+        "compartment": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Cellular compartments"
+        },
+        "hasComponent": {
+          "type": "array",
+          "items": {
+            "type": [
+              "object",
+              "integer"
+            ]
+          },
+          "description": "Complex subunits/components. Reactome fully expands the first occurrence of each distinct subunit but lists repeated (homomeric) copies as a bare dbId integer instead of repeating the full object."
+        },
+        "schemaClass": {
+          "type": "string",
+          "description": "Schema class (e.g., 'Complex')"
+        },
+        "className": {
+          "type": "string",
+          "description": "Class name"
+        }
       }
     }
   },
@@ -284,7 +584,9 @@
           "description": "Interactor Stable ID. To find interactor IDs, use Reactome_get_participants with a reaction ID, or Reactome_map_uniprot_to_pathways/Reactome_map_uniprot_to_reactions if you have a UniProt protein ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -298,17 +600,56 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "dbId": {"type": "integer", "description": "Database ID"},
-        "displayName": {"type": "string", "description": "Interactor display name"},
-        "stId": {"type": "string", "description": "Stable identifier"},
-        "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-        "isInDisease": {"type": "boolean", "description": "Whether interactor is associated with disease"},
-        "name": {"type": "array", "items": {"type": "string"}, "description": "Interactor names"},
-        "speciesName": {"type": "string", "description": "Species name"},
-        "referenceEntity": {"type": "object", "description": "Reference entity (UniProt, ChEBI, etc.)"},
-        "compartment": {"type": "array", "items": {"type": "object"}, "description": "Cellular compartments"},
-        "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Interactor')"},
-        "className": {"type": "string", "description": "Class name"}
+        "dbId": {
+          "type": "integer",
+          "description": "Database ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Interactor display name"
+        },
+        "stId": {
+          "type": "string",
+          "description": "Stable identifier"
+        },
+        "stIdVersion": {
+          "type": "string",
+          "description": "Versioned stable ID"
+        },
+        "isInDisease": {
+          "type": "boolean",
+          "description": "Whether interactor is associated with disease"
+        },
+        "name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Interactor names"
+        },
+        "speciesName": {
+          "type": "string",
+          "description": "Species name"
+        },
+        "referenceEntity": {
+          "type": "object",
+          "description": "Reference entity (UniProt, ChEBI, etc.)"
+        },
+        "compartment": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Cellular compartments"
+        },
+        "schemaClass": {
+          "type": "string",
+          "description": "Schema class (e.g., 'Interactor')"
+        },
+        "className": {
+          "type": "string",
+          "description": "Class name"
+        }
       }
     }
   },
@@ -323,16 +664,31 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}, {}],
+    "test_examples": [
+      {},
+      {}
+    ],
     "return_schema": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer"},
-          "displayName": {"type": "string"},
-          "name": {"type": ["string", "array"], "description": "Species name(s)"},
-          "taxId": {"type": "string"}
+          "dbId": {
+            "type": "integer"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "array"
+            ],
+            "description": "Species name(s)"
+          },
+          "taxId": {
+            "type": "string"
+          }
         }
       }
     }
@@ -354,27 +710,38 @@
         },
         "species": {
           "type": "string",
-          "description": "Optional: Filter by species using exact scientific name (e.g., 'Homo sapiens') or taxonomy ID. Common names like 'human' are not supported."
+          "description": "NOT SUPPORTED by this endpoint; supplying it returns an error. Reactome's /data/query/ids performs no server-side species filtering, so the request cannot be honoured. Filter the returned array client-side on each record's 'speciesName', or use Reactome_list_top_pathways / Reactome_get_events_hierarchy, which take species as a path parameter."
         },
         "types": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Optional: Filter by types (e.g., ['Pathway', 'Reaction'])"
+          "description": "NOT SUPPORTED by this endpoint; supplying it returns an error. Reactome's /data/query/ids performs no server-side type filtering, so the request cannot be honoured. Filter the returned array client-side on each record's 'schemaClass' (e.g. 'Pathway', 'Reaction')."
         }
       },
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
       {
-        "ids": ["R-HSA-73817", "R-HSA-111289"]
+        "ids": [
+          "R-HSA-73817",
+          "R-HSA-111289"
+        ]
       },
       {
-        "ids": ["R-HSA-109581", "R-HSA-111448"],
+        "ids": [
+          "R-HSA-109581",
+          "R-HSA-111448"
+        ],
         "species": "Homo sapiens",
-        "types": ["Pathway", "Reaction"]
+        "types": [
+          "Pathway",
+          "Reaction"
+        ]
       }
     ],
     "return_schema": {
@@ -382,24 +749,105 @@
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Entity display name"},
-          "stId": {"type": "string", "description": "Stable identifier"},
-          "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-          "isInDisease": {"type": "boolean", "description": "Whether entity is associated with disease"},
-          "isInferred": {"type": "boolean", "description": "Whether entity is inferred"},
-          "maxDepth": {"type": "integer", "description": "Maximum depth"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Entity names"},
-          "releaseDate": {"type": "string", "description": "Release date"},
-          "speciesName": {"type": "string", "description": "Species name"},
-          "compartment": {"type": "array", "items": {"type": "object"}, "description": "Cellular compartments"},
-          "literatureReference": {"type": "array", "items": {"type": "object"}, "description": "Literature references"},
-          "orthologousEvent": {"type": "array", "items": {"type": "object"}, "description": "Orthologous events"},
-          "input": {"type": "array", "items": {"type": ["integer", "object"]}, "description": "Input entities (can be IDs or objects, for reactions)"},
-          "output": {"type": "array", "items": {"type": ["integer", "object"]}, "description": "Output entities (can be IDs or objects, for reactions)"},
-          "regulatedBy": {"type": "array", "items": {"type": "object"}, "description": "Regulation information"},
-          "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Pathway', 'Reaction')"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Entity display name"
+          },
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier"
+          },
+          "stIdVersion": {
+            "type": "string",
+            "description": "Versioned stable ID"
+          },
+          "isInDisease": {
+            "type": "boolean",
+            "description": "Whether entity is associated with disease"
+          },
+          "isInferred": {
+            "type": "boolean",
+            "description": "Whether entity is inferred"
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "Maximum depth"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Entity names"
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Release date"
+          },
+          "speciesName": {
+            "type": "string",
+            "description": "Species name"
+          },
+          "compartment": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Cellular compartments"
+          },
+          "literatureReference": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Literature references"
+          },
+          "orthologousEvent": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Orthologous events"
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "object"
+              ]
+            },
+            "description": "Input entities (can be IDs or objects, for reactions)"
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "object"
+              ]
+            },
+            "description": "Output entities (can be IDs or objects, for reactions)"
+          },
+          "regulatedBy": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Regulation information"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class (e.g., 'Pathway', 'Reaction')"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Detailed information about pathways, reactions, or other entities"
       }
@@ -416,11 +864,17 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}, {}],
+    "test_examples": [
+      {},
+      {}
+    ],
     "return_schema": {
       "type": "object",
       "properties": {
-        "value": {"type": "string", "description": "Database version number"}
+        "value": {
+          "type": "string",
+          "description": "Database version number"
+        }
       }
     }
   },
@@ -437,7 +891,9 @@
           "description": "Event Stable ID (pathway or reaction, e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways. To find reaction IDs, use Reactome_get_pathway_reactions with a pathway ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -472,7 +928,9 @@
           "description": "UniProt protein accession (e.g., 'P04637' for TP53, 'P00533' for EGFR)"
         }
       },
-      "required": ["uniprot_id"]
+      "required": [
+        "uniprot_id"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -488,21 +946,69 @@
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Pathway display name"},
-          "stId": {"type": "string", "description": "Stable identifier"},
-          "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-          "isInDisease": {"type": "boolean", "description": "Whether pathway is associated with disease"},
-          "isInferred": {"type": "boolean", "description": "Whether pathway is inferred"},
-          "maxDepth": {"type": "integer", "description": "Maximum depth"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Pathway names"},
-          "releaseDate": {"type": "string", "description": "Release date"},
-          "speciesName": {"type": "string", "description": "Species name"},
-          "hasDiagram": {"type": "boolean", "description": "Whether pathway has diagram"},
-          "hasEHLD": {"type": "boolean", "description": "Whether pathway has EHLD diagram"},
-          "lastUpdatedDate": {"type": "string", "description": "Last update date"},
-          "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Pathway')"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Pathway display name"
+          },
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier"
+          },
+          "stIdVersion": {
+            "type": "string",
+            "description": "Versioned stable ID"
+          },
+          "isInDisease": {
+            "type": "boolean",
+            "description": "Whether pathway is associated with disease"
+          },
+          "isInferred": {
+            "type": "boolean",
+            "description": "Whether pathway is inferred"
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "Maximum depth"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Pathway names"
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Release date"
+          },
+          "speciesName": {
+            "type": "string",
+            "description": "Species name"
+          },
+          "hasDiagram": {
+            "type": "boolean",
+            "description": "Whether pathway has diagram"
+          },
+          "hasEHLD": {
+            "type": "boolean",
+            "description": "Whether pathway has EHLD diagram"
+          },
+          "lastUpdatedDate": {
+            "type": "string",
+            "description": "Last update date"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class (e.g., 'Pathway')"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Pathway objects containing the UniProt protein"
       }
@@ -521,7 +1027,9 @@
           "description": "UniProt protein accession (e.g., 'P04637' for TP53, 'P00533' for EGFR)"
         }
       },
-      "required": ["uniprot_id"]
+      "required": [
+        "uniprot_id"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -537,18 +1045,57 @@
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Reaction display name"},
-          "stId": {"type": "string", "description": "Stable identifier"},
-          "stIdVersion": {"type": "string", "description": "Versioned stable ID"},
-          "isInDisease": {"type": "boolean", "description": "Whether reaction is associated with disease"},
-          "isInferred": {"type": "boolean", "description": "Whether reaction is inferred"},
-          "maxDepth": {"type": "integer", "description": "Maximum depth"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Reaction names"},
-          "releaseDate": {"type": "string", "description": "Release date"},
-          "speciesName": {"type": "string", "description": "Species name"},
-          "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Reaction')"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Reaction display name"
+          },
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier"
+          },
+          "stIdVersion": {
+            "type": "string",
+            "description": "Versioned stable ID"
+          },
+          "isInDisease": {
+            "type": "boolean",
+            "description": "Whether reaction is associated with disease"
+          },
+          "isInferred": {
+            "type": "boolean",
+            "description": "Whether reaction is inferred"
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "Maximum depth"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Reaction names"
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Release date"
+          },
+          "speciesName": {
+            "type": "string",
+            "description": "Species name"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class (e.g., 'Reaction')"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Reaction objects involving the UniProt protein"
       }
@@ -567,7 +1114,9 @@
           "description": "Event Stable ID (reaction or pathway, e.g., 'R-HSA-111289'). To find reaction IDs, use Reactome_get_pathway_reactions with a pathway ID. To find pathway IDs, use Reactome_list_top_pathways."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -583,10 +1132,25 @@
       "items": {
         "type": "object",
         "properties": {
-          "peDbId": {"type": "integer", "description": "Physical entity database ID"},
-          "displayName": {"type": "string", "description": "Participant display name"},
-          "schemaClass": {"type": "string", "description": "Schema class (e.g., 'Complex', 'SimpleEntity')"},
-          "refEntities": {"type": "array", "items": {"type": "object"}, "description": "Reference entities (UniProt, ChEBI, etc.) associated with this participant"}
+          "peDbId": {
+            "type": "integer",
+            "description": "Physical entity database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Participant display name"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class (e.g., 'Complex', 'SimpleEntity')"
+          },
+          "refEntities": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Reference entities (UniProt, ChEBI, etc.) associated with this participant"
+          }
         },
         "description": "Physical entity participating in the event"
       }
@@ -605,7 +1169,9 @@
           "description": "Event Stable ID (reaction or pathway, e.g., 'R-HSA-111289'). To find reaction IDs, use Reactome_get_pathway_reactions with a pathway ID. To find pathway IDs, use Reactome_list_top_pathways."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -621,15 +1187,48 @@
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Reference entity display name"},
-          "stId": {"type": "string", "description": "Stable identifier (e.g., 'uniprot:Q06203')"},
-          "databaseName": {"type": "string", "description": "Database name (e.g., 'UniProt', 'ChEBI')"},
-          "identifier": {"type": "string", "description": "External database identifier"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Entity names"},
-          "otherIdentifier": {"type": "array", "items": {"type": "string"}, "description": "Other identifiers"},
-          "schemaClass": {"type": "string", "description": "Schema class"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Reference entity display name"
+          },
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier (e.g., 'uniprot:Q06203')"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "Database name (e.g., 'UniProt', 'ChEBI')"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "External database identifier"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Entity names"
+          },
+          "otherIdentifier": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other identifiers"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Reference entity objects (UniProt, ChEBI, etc.)"
       }
@@ -648,7 +1247,9 @@
           "description": "Entity Stable ID (pathway, reaction, or physical entity, e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways. To find reaction IDs, use Reactome_get_pathway_reactions. To find entity IDs, use Reactome_get_participants."
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -680,7 +1281,9 @@
           "description": "Entity Stable ID (pathway, e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways to get top-level pathways, or Reactome_map_uniprot_to_pathways if you have a UniProt protein ID."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -696,10 +1299,22 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": {"type": "string", "description": "Event stable ID (e.g., 'R-HSA-111285')"},
-          "name": {"type": "string", "description": "Event display name"},
-          "type": {"type": "string", "description": "Event type (e.g., 'Reaction', 'Pathway')"},
-          "raw": {"type": "string", "description": "Original TSV line"}
+          "id": {
+            "type": "string",
+            "description": "Event stable ID (e.g., 'R-HSA-111285')"
+          },
+          "name": {
+            "type": "string",
+            "description": "Event display name"
+          },
+          "type": {
+            "type": "string",
+            "description": "Event type (e.g., 'Reaction', 'Pathway')"
+          },
+          "raw": {
+            "type": "string",
+            "description": "Original TSV line"
+          }
         },
         "description": "Event objects (reactions or subpathways) parsed from TSV format"
       }
@@ -718,7 +1333,9 @@
           "description": "Entity Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_list_top_pathways. To find reaction IDs, use Reactome_get_pathway_reactions. To find entity IDs, use Reactome_get_participants."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -732,10 +1349,22 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "id": {"type": "string", "description": "Compartment database ID"},
-        "name": {"type": "string", "description": "Compartment name (e.g., 'cytosol')"},
-        "type": {"type": "string", "description": "Compartment type (e.g., 'Compartment')"},
-        "raw": {"type": "string", "description": "Original TSV line"}
+        "id": {
+          "type": "string",
+          "description": "Compartment database ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Compartment name (e.g., 'cytosol')"
+        },
+        "type": {
+          "type": "string",
+          "description": "Compartment type (e.g., 'Compartment')"
+        },
+        "raw": {
+          "type": "string",
+          "description": "Original TSV line"
+        }
       },
       "description": "Compartment information parsed from TSV format"
     }
@@ -753,7 +1382,9 @@
           "description": "Species taxonomy ID (e.g., '9606' for Homo sapiens) or species name. Taxonomy ID is recommended. To find available species and their taxonomy IDs, use Reactome_list_species."
         }
       },
-      "required": ["species"]
+      "required": [
+        "species"
+      ]
     },
     "type": "ReactomeRESTTool",
     "test_examples": [
@@ -769,14 +1400,41 @@
       "items": {
         "type": "object",
         "properties": {
-          "stId": {"type": "string", "description": "Stable identifier"},
-          "name": {"type": "string", "description": "Pathway name"},
-          "species": {"type": "string", "description": "Species name"},
-          "type": {"type": "string", "description": "Event type (e.g., 'TopLevelPathway')"},
-          "diagram": {"type": "boolean", "description": "Whether pathway has diagram"},
-          "totalEntity": {"type": "integer", "description": "Total number of entities"},
-          "totalEntityAndInteractors": {"type": "integer", "description": "Total entities including interactors"},
-          "children": {"type": "array", "items": {"type": "object"}, "description": "Child events (subpathways and reactions), recursively nested"}
+          "stId": {
+            "type": "string",
+            "description": "Stable identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pathway name"
+          },
+          "species": {
+            "type": "string",
+            "description": "Species name"
+          },
+          "type": {
+            "type": "string",
+            "description": "Event type (e.g., 'TopLevelPathway')"
+          },
+          "diagram": {
+            "type": "boolean",
+            "description": "Whether pathway has diagram"
+          },
+          "totalEntity": {
+            "type": "integer",
+            "description": "Total number of entities"
+          },
+          "totalEntityAndInteractors": {
+            "type": "integer",
+            "description": "Total entities including interactors"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Child events (subpathways and reactions), recursively nested"
+          }
         },
         "description": "Top-level pathway with nested hierarchy structure"
       }
@@ -793,21 +1451,54 @@
       "required": []
     },
     "type": "ReactomeRESTTool",
-    "test_examples": [{}, {}],
+    "test_examples": [
+      {},
+      {}
+    ],
     "return_schema": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "dbId": {"type": "integer", "description": "Database ID"},
-          "displayName": {"type": "string", "description": "Disease display name"},
-          "databaseName": {"type": "string", "description": "Database name (e.g., 'DOID')"},
-          "definition": {"type": "string", "description": "Disease definition"},
-          "identifier": {"type": "string", "description": "Disease identifier (e.g., DOID)"},
-          "name": {"type": "array", "items": {"type": "string"}, "description": "Disease names"},
-          "url": {"type": "string", "description": "URL to disease information"},
-          "schemaClass": {"type": "string", "description": "Schema class"},
-          "className": {"type": "string", "description": "Class name"}
+          "dbId": {
+            "type": "integer",
+            "description": "Database ID"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Disease display name"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "Database name (e.g., 'DOID')"
+          },
+          "definition": {
+            "type": "string",
+            "description": "Disease definition"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Disease identifier (e.g., DOID)"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Disease names"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to disease information"
+          },
+          "schemaClass": {
+            "type": "string",
+            "description": "Schema class"
+          },
+          "className": {
+            "type": "string",
+            "description": "Class name"
+          }
         },
         "description": "Disease pathway objects with DOID annotations"
       }

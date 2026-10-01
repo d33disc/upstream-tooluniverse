@@ -54,8 +54,6 @@ Usage
     result = tool.run({"query": "patentApplicationNumber:14966067"})
 """
 
-import os
-
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -86,15 +84,13 @@ class DSAPITool(BaseTool):
         super().__init__(tool_config)
         self.base_url = base_url
 
-        # Read key at init time (not module level) so monkeypatch works in tests
-        api_key = api_key or os.environ.get("USPTO_API_KEY")
-        if not api_key:
+        # Resolved per request via credential() so hosted BYOK stays request-scoped
+        self._explicit_api_key = api_key
+        if not self._api_key():
             raise ValueError(
                 "USPTO_API_KEY environment variable is required. "
                 "Get one at https://developer.uspto.gov"
             )
-
-        self.headers = {"X-API-KEY": api_key, "Accept": "application/json"}
 
         # Retry strategy matches USPTOOpenDataPortalTool for consistency
         self.session = requests.Session()
@@ -105,6 +101,13 @@ class DSAPITool(BaseTool):
             raise_on_status=False,
         )
         self.session.mount("https://", HTTPAdapter(max_retries=retry))
+
+    def _api_key(self) -> str | None:
+        return self.credential("USPTO_API_KEY") or self._explicit_api_key
+
+    @property
+    def headers(self) -> dict:
+        return {"X-API-KEY": self._api_key(), "Accept": "application/json"}
 
     def run(self, arguments: dict | None = None) -> dict:
         """Execute a DSAPI POST request.

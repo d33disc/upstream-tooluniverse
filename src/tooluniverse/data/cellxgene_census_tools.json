@@ -53,7 +53,10 @@
         "operation": "get_census_versions"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_census_versions"
+    }
   },
   {
     "name": "CELLxGENE_get_cell_metadata",
@@ -148,7 +151,10 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_obs_metadata"
+    }
   },
   {
     "name": "CELLxGENE_get_gene_metadata",
@@ -221,7 +227,10 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_var_metadata"
+    }
   },
   {
     "name": "CELLxGENE_get_expression_data",
@@ -314,7 +323,10 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_anndata"
+    }
   },
   {
     "name": "CELLxGENE_get_presence_matrix",
@@ -401,7 +413,10 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_presence_matrix"
+    }
   },
   {
     "name": "CELLxGENE_get_embeddings",
@@ -489,7 +504,10 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "get_embeddings"
+    }
   },
   {
     "name": "CELLxGENE_download_h5ad",
@@ -562,6 +580,9 @@
         "census_version": "stable"
       }
     ],
-    "required_api_keys": []
+    "required_api_keys": [],
+    "fields": {
+      "operation": "download_h5ad"
+    }
   }
 ]

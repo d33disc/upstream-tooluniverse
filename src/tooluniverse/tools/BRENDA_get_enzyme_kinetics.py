@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def BRENDA_get_enzyme_kinetics(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_enzyme_kinetics",
     ec_number: Optional[str] = None,
     enzyme_name: Optional[str] = None,
     organism: Optional[str] = None,

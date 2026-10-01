@@ -10,11 +10,17 @@
           "description": "Gene product identifier, typically a UniProtKB accession. Format: 'UniProtKB:P04637' (TP53), 'UniProtKB:P38398' (BRCA1), 'UniProtKB:P00533' (EGFR)."
         },
         "aspect": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by GO aspect: 'biological_process', 'molecular_function', or 'cellular_component'. Default: all aspects."
         },
         "taxon_id": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Filter by NCBI taxonomy ID. Example: 9606 (human), 10090 (mouse)."
         },
         "limit": {
@@ -23,31 +29,110 @@
           "default": 25
         }
       },
-      "required": ["gene_product_id"]
+      "required": [
+        "gene_product_id"
+      ]
     },
-    "fields": {"endpoint": "annotation_gene"},
+    "fields": {
+      "endpoint": "annotation_gene"
+    },
     "type": "QuickGOTool",
     "test_examples": [
-      {"gene_product_id": "UniProtKB:P04637", "limit": 10},
-      {"gene_product_id": "UniProtKB:P38398", "aspect": "biological_process", "limit": 10}
+      {
+        "gene_product_id": "UniProtKB:P04637",
+        "limit": 10
+      },
+      {
+        "gene_product_id": "UniProtKB:P38398",
+        "aspect": "biological_process",
+        "limit": 10
+      }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "go_id": {"type": ["string", "null"], "description": "GO term accession"},
-          "go_name": {"type": ["string", "null"], "description": "GO term name"},
-          "go_aspect": {"type": ["string", "null"], "description": "GO aspect (biological_process, etc.)"},
-          "gene_product_id": {"type": ["string", "null"], "description": "Gene product accession"},
-          "symbol": {"type": ["string", "null"], "description": "Gene symbol"},
-          "qualifier": {"type": ["string", "null"], "description": "Annotation qualifier"},
-          "go_evidence": {"type": ["string", "null"], "description": "Evidence code (IDA, IMP, ISS, etc.)"},
-          "assigned_by": {"type": ["string", "null"], "description": "Database that made the annotation"},
-          "reference": {"type": ["string", "null"], "description": "Literature reference"}
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "go_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term accession"
+              },
+              "go_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term name"
+              },
+              "go_aspect": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO aspect (biological_process, etc.)"
+              },
+              "gene_product_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene product accession"
+              },
+              "symbol": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene symbol"
+              },
+              "qualifier": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Annotation qualifier"
+              },
+              "go_evidence": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Evidence code (IDA, IMP, ISS, etc.)"
+              },
+              "assigned_by": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Database that made the annotation"
+              },
+              "reference": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Literature reference"
+              }
+            }
+          }
         },
-        "additionalProperties": true
-      }
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -61,7 +146,10 @@
           "description": "Gene Ontology term accession. Examples: 'GO:0006915' (apoptotic process), 'GO:0008150' (biological process), 'GO:0005634' (nucleus), 'GO:0003677' (DNA binding)."
         },
         "taxon_id": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Filter by NCBI taxonomy ID. Example: 9606 (human), 10090 (mouse), 7227 (fly)."
         },
         "limit": {
@@ -70,31 +158,111 @@
           "default": 25
         }
       },
-      "required": ["go_id"]
+      "required": [
+        "go_id"
+      ]
     },
-    "fields": {"endpoint": "annotation_goterm"},
+    "fields": {
+      "endpoint": "annotation_goterm"
+    },
     "type": "QuickGOTool",
     "test_examples": [
-      {"go_id": "GO:0006915", "taxon_id": 9606, "limit": 10},
-      {"go_id": "GO:0003677", "taxon_id": 9606, "limit": 10}
+      {
+        "go_id": "GO:0006915",
+        "taxon_id": 9606,
+        "limit": 10
+      },
+      {
+        "go_id": "GO:0003677",
+        "taxon_id": 9606,
+        "limit": 10
+      }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "gene_product_id": {"type": ["string", "null"], "description": "Gene product accession"},
-          "symbol": {"type": ["string", "null"], "description": "Gene symbol"},
-          "go_id": {"type": ["string", "null"], "description": "GO term accession"},
-          "go_name": {"type": ["string", "null"], "description": "GO term name"},
-          "go_aspect": {"type": ["string", "null"], "description": "GO aspect"},
-          "qualifier": {"type": ["string", "null"], "description": "Annotation qualifier"},
-          "go_evidence": {"type": ["string", "null"], "description": "Evidence code"},
-          "taxon_id": {"type": ["integer", "null"], "description": "NCBI taxonomy ID"},
-          "assigned_by": {"type": ["string", "null"], "description": "Annotating database"}
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_product_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene product accession"
+              },
+              "symbol": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene symbol"
+              },
+              "go_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term accession"
+              },
+              "go_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term name"
+              },
+              "go_aspect": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO aspect"
+              },
+              "qualifier": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Annotation qualifier"
+              },
+              "go_evidence": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Evidence code"
+              },
+              "taxon_id": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "NCBI taxonomy ID"
+              },
+              "assigned_by": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Annotating database"
+              }
+            }
+          }
         },
-        "additionalProperties": true
-      }
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -108,48 +276,121 @@
           "description": "Gene Ontology term accession. Examples: 'GO:0006915' (apoptotic process), 'GO:0008150' (biological process), 'GO:0005634' (nucleus), 'GO:0016020' (membrane)."
         }
       },
-      "required": ["go_id"]
+      "required": [
+        "go_id"
+      ]
     },
-    "fields": {"endpoint": "term_detail"},
+    "fields": {
+      "endpoint": "term_detail"
+    },
     "type": "QuickGOTool",
     "test_examples": [
-      {"go_id": "GO:0006915"},
-      {"go_id": "GO:0005634"}
+      {
+        "go_id": "GO:0006915"
+      },
+      {
+        "go_id": "GO:0005634"
+      }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "id": {"type": "string", "description": "GO term accession"},
-        "name": {"type": ["string", "null"], "description": "GO term name"},
-        "definition": {"type": ["string", "null"], "description": "GO term definition text"},
-        "aspect": {"type": ["string", "null"], "description": "GO aspect (biological_process, etc.)"},
-        "is_obsolete": {"type": "boolean", "description": "Whether the term is obsolete"},
-        "synonyms": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {"type": ["string", "null"]},
-              "type": {"type": ["string", "null"]}
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "GO term accession"
             },
-            "additionalProperties": true
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "GO term name"
+            },
+            "definition": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "GO term definition text"
+            },
+            "aspect": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "GO aspect (biological_process, etc.)"
+            },
+            "is_obsolete": {
+              "type": "boolean",
+              "description": "Whether the term is obsolete"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "type": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "xrefs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "db_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "db_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "usage": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Usage constraints"
+            },
+            "num_children": {
+              "type": "integer",
+              "description": "Number of child terms"
+            }
           }
         },
-        "xrefs": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "db_code": {"type": ["string", "null"]},
-              "db_id": {"type": ["string", "null"]}
-            },
-            "additionalProperties": true
-          }
-        },
-        "usage": {"type": ["string", "null"], "description": "Usage constraints"},
-        "num_children": {"type": "integer", "description": "Number of child terms"}
-      },
-      "additionalProperties": true
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -163,26 +404,66 @@
           "description": "Gene Ontology term accession. Examples: 'GO:0006915' (apoptotic process), 'GO:0008150' (biological process), 'GO:0005575' (cellular component)."
         }
       },
-      "required": ["go_id"]
+      "required": [
+        "go_id"
+      ]
     },
-    "fields": {"endpoint": "term_children"},
+    "fields": {
+      "endpoint": "term_children"
+    },
     "type": "QuickGOTool",
     "test_examples": [
-      {"go_id": "GO:0006915"},
-      {"go_id": "GO:0005634"}
+      {
+        "go_id": "GO:0006915"
+      },
+      {
+        "go_id": "GO:0005634"
+      }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {"type": "string", "description": "Child GO term accession"},
-          "name": {"type": ["string", "null"], "description": "Child term name"},
-          "relation": {"type": ["string", "null"], "description": "Relationship type (is_a, part_of, regulates, etc.)"},
-          "has_children": {"type": "boolean", "description": "Whether this child has further children"}
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Child GO term accession"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Child term name"
+              },
+              "relation": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Relationship type (is_a, part_of, regulates, etc.)"
+              },
+              "has_children": {
+                "type": "boolean",
+                "description": "Whether this child has further children"
+              }
+            }
+          }
         },
-        "additionalProperties": true
-      }
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

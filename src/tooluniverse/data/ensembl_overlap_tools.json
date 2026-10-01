@@ -39,63 +39,78 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "region": {
-          "type": "string"
-        },
-        "species": {
-          "type": "string"
-        },
-        "features": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "feature_type": {
-                "type": "string"
-              },
-              "id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "start": {
-                "type": "integer"
-              },
-              "end": {
-                "type": "integer"
-              },
-              "strand": {
-                "type": "integer"
-              },
-              "biotype": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "external_name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "description": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "region": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "feature_type": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start": {
+                    "type": "integer"
+                  },
+                  "end": {
+                    "type": "integer"
+                  },
+                  "strand": {
+                    "type": "integer"
+                  },
+                  "biotype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "external_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
               }
+            },
+            "type_summary": {
+              "type": "object",
+              "description": "Count of features by type"
             }
           }
         },
-        "type_summary": {
+        {
           "type": "object",
-          "description": "Count of features by type"
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -132,56 +147,71 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "gene_id": {
-          "type": "string"
-        },
-        "features": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "feature_type": {
-                "type": "string"
-              },
-              "id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "start": {
-                "type": "integer"
-              },
-              "end": {
-                "type": "integer"
-              },
-              "biotype": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "external_name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "transcript_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "gene_id": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "feature_type": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start": {
+                    "type": "integer"
+                  },
+                  "end": {
+                    "type": "integer"
+                  },
+                  "biotype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "external_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "transcript_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
               }
+            },
+            "type_summary": {
+              "type": "object"
             }
           }
         },
-        "type_summary": {
-          "type": "object"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

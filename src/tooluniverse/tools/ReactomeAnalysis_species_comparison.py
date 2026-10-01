@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ReactomeAnalysis_species_comparison(
-    identifiers: str,
+    identifiers: str | list[Any],
     species: Optional[int] = None,
     page_size: Optional[int] = None,
     *,
@@ -22,7 +22,7 @@ def ReactomeAnalysis_species_comparison(
 
     Parameters
     ----------
-    identifiers : str
+    identifiers : str | list[Any]
         Newline-separated list of gene/protein identifiers from any species. Supports...
     species : int
         NCBI taxonomy ID of the source species (default 9606 for human). Examples: 10...

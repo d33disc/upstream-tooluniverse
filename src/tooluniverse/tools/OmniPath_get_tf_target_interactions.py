@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_tf_target_interactions(
-    tf_gene: Optional[str] = None,
-    target_gene: Optional[str] = None,
+    tf_gene: Optional[str | list[Any]] = None,
+    target_gene: Optional[str | list[Any]] = None,
     confidence_level: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -22,9 +22,9 @@ def OmniPath_get_tf_target_interactions(
 
     Parameters
     ----------
-    tf_gene : str
+    tf_gene : str | list[Any]
         Transcription factor gene symbol (e.g., 'TP53', 'MYC', 'STAT3'). Mutually exc...
-    target_gene : str
+    target_gene : str | list[Any]
         Target gene symbol to find regulating TFs (e.g., 'CDKN1A', 'BCL2'). Mutually ...
     confidence_level : str
         DoRothEA confidence level filter: A=highest (1-2 sources), B=high (3+ sources...

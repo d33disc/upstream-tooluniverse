@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OncoKB_get_levels(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_levels",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

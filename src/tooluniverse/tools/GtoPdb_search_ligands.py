@@ -17,7 +17,7 @@ def GtoPdb_search_ligands(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the Guide to Pharmacology database for pharmacological ligands (drugs, natural products, e...
 
@@ -26,9 +26,9 @@ def GtoPdb_search_ligands(
     name : str
         Ligand name or INN to search. Examples: 'aspirin', 'morphine', 'dopamine', 'c...
     type_ : str
-        Ligand type filter. Values: 'Approved', 'Synthetic organic', 'Natural product...
+        Ligand type filter, enforced by ToolUniverse against each returned record (Gt...
     approved : bool
-        Filter to approved drugs only (true) or all ligands (false/omit)
+        Filter to approved drugs only (true) or all ligands (false/omit). Enforced by...
     query : str
         Name/keyword to search for. Alias for the "name" parameter.
     stream_callback : Callable, optional
@@ -40,7 +40,7 @@ def GtoPdb_search_ligands(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

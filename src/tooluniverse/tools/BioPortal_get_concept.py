@@ -15,7 +15,7 @@ def BioPortal_get_concept(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a specific concept from a BioPortal ontology, including full defin...
 
@@ -34,7 +34,7 @@ def BioPortal_get_concept(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

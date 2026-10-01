@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ZINC_search_by_properties(
-    operation: str,
+    operation: Optional[str] = "search_by_properties",
     mwt_min: Optional[float] = None,
     mwt_max: Optional[float] = None,
     logp_min: Optional[float] = None,

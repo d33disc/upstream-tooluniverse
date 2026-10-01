@@ -14,7 +14,7 @@ def Mondo_get_disease(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a disease from the Mondo Disease Ontology by its MONDO ID. Returns...
 
@@ -31,7 +31,7 @@ def Mondo_get_disease(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

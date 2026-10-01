@@ -46,19 +46,59 @@
       ]
     },
     "return_schema": {
-      "type": "object",
-      "additionalProperties": true,
-      "required": [
-        "annotation",
-        "coding_variants_below_vaf",
-        "fraction",
-        "matching_annotation",
-        "naive_fraction",
-        "so_column",
-        "total_variants",
-        "vaf_column",
-        "vaf_filtered",
-        "vaf_threshold"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "total_variants": {
+              "type": "integer"
+            },
+            "vaf_filtered": {
+              "type": "integer"
+            },
+            "coding_variants_below_vaf": {
+              "type": "integer"
+            },
+            "matching_annotation": {
+              "type": "integer"
+            },
+            "fraction": {
+              "type": "number"
+            },
+            "naive_fraction": {
+              "type": "number"
+            },
+            "vaf_column": {
+              "type": "string"
+            },
+            "so_column": {
+              "type": "string"
+            },
+            "vaf_threshold": {
+              "type": "number"
+            },
+            "annotation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "total_variants",
+            "coding_variants_below_vaf",
+            "matching_annotation",
+            "fraction"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
       ]
     },
     "test_examples": [
@@ -68,6 +108,7 @@
         "annotation": "synonymous_variant",
         "header_rows": 1
       }
-    ]
+    ],
+    "requires_local_input": true
   }
 ]

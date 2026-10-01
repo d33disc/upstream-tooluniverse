@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def Mcule_list_databases(
-    operation: str,
+    operation: Optional[str] = "list_databases",
     public_only: Optional[bool] = True,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

@@ -42,7 +42,7 @@ def ClinVar_search_variants(
     limit : int
         Alias for max_results: maximum number of results to return.
     clinical_significance : str
-        Filter by clinical significance (e.g., 'Pathogenic', 'Likely pathogenic', 'Be...
+        Filter by clinical significance. Must be one of the classes ClinVar's index a...
     gene_symbol : str
         Alias for gene. HGNC gene symbol (e.g., "DPYD", "CYP2C19").
     significance : str

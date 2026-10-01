@@ -27,7 +27,7 @@ def OMA_get_orthologs(
     rel_type : str
         Filter by orthology relationship type. Options: '1:1' (one-to-one), '1:n' (on...
     per_page : int
-        Number of orthologs to return (default: 20, max: 100).
+        Number of orthologs to return (default: 20). OMA does not paginate this endpo...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

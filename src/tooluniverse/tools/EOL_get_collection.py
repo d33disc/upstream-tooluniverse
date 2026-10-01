@@ -17,7 +17,7 @@ def EOL_get_collection(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get a curated collection from the Encyclopedia of Life. EOL collections are user-curated lists of...
 
@@ -40,7 +40,7 @@ def EOL_get_collection(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

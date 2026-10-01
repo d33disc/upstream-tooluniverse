@@ -35,10 +35,71 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "iNaturalist taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Preferred common name"
+              },
+              "rank": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Taxonomic rank (species, genus, family, etc.)"
+              },
+              "observations_count": {
+                "type": "integer",
+                "description": "Total research-grade observations"
+              },
+              "is_active": {
+                "type": "boolean",
+                "description": "Whether taxon is currently accepted"
+              },
+              "conservation_status": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "IUCN conservation status if available"
+              },
+              "wikipedia_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Link to Wikipedia article"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -214,10 +275,94 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Observation ID"
+              },
+              "species_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Scientific name of observed species"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common name"
+              },
+              "observed_on": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Date of observation (YYYY-MM-DD)"
+              },
+              "place_guess": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Location description"
+              },
+              "latitude": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "GPS latitude"
+              },
+              "longitude": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "GPS longitude"
+              },
+              "quality_grade": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Observation quality grade"
+              },
+              "user": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Observer username"
+              },
+              "photo_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "URL of observation photo"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -273,10 +418,53 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taxon_id": {
+                "type": "integer",
+                "description": "iNaturalist taxon ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Scientific name"
+              },
+              "common_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common name"
+              },
+              "rank": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Taxonomic rank"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Number of observations"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

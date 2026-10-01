@@ -29,7 +29,7 @@ def CPIC_search_gene_drug_pairs(
     cpiclevel : str
         CPIC evidence level to filter by (e.g., 'A', 'B', 'B/C', 'C', 'D'). Omit to i...
     limit : int
-        Maximum number of results to return (default 50)
+        Maximum number of pairs to return. Omit to get every matching pair (CPIC publ...
     gene_symbol : str
         Gene symbol alias (e.g., 'CYP2D6', 'VKORC1') — alternative to genesymbol
     gene : str

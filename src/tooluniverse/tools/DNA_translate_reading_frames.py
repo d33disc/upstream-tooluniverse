@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_translate_reading_frames(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "translate_reading_frames",
     frame: Optional[str] = "all",
     genetic_code: Optional[int] = 1,
     *,
@@ -30,7 +30,7 @@ def DNA_translate_reading_frames(
     frame : str
         Reading frame to translate: '1', '2', '3', or 'all' (default). Frame 1 starts...
     genetic_code : int
-        NCBI genetic code number. Currently only 1 (standard) is supported.
+        NCBI genetic code number. Only 1 (the standard code) is implemented; any othe...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

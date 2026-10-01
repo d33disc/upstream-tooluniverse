@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def GTEx_get_multi_tissue_eqtls(
     gencode_id: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_multi_tissue_eqtls",
     variant_id: Optional[str] = None,
     dataset_id: Optional[str] = "gtex_v8",
     page: Optional[int] = 0,

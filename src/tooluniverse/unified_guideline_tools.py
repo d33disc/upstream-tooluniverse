@@ -4,15 +4,76 @@ Unified Guideline Tools
 Consolidated clinical guidelines search tools from multiple sources.
 """
 
-import html
 import requests
 import time
 import re
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
-from markitdown import MarkItDown
+
+try:
+    from markitdown import MarkItDown
+
+    MARKITDOWN_AVAILABLE = True
+except ImportError:  # pragma: no cover - optional dependency
+    MARKITDOWN_AVAILABLE = False
 from .base_tool import BaseTool
+from .extras import install_hint
 from .tool_registry import register_tool
+
+
+def _guideline_envelope(results, *, total, retrieved=None, source=None):
+    """Wrap one guideline search's rows with what the caller needs to read them.
+
+    Every search tool here returned a bare list, so `limit` rows were
+    indistinguishable from the whole corpus -- and each of these backends
+    reports the real figure in a payload the tool already parsed and then
+    dropped on the floor with a bare expression statement (Europe PMC
+    `hitCount`, TRIP `<total>`, OpenAlex `meta.count`, WHO IRIS
+    `page.totalElements`, NICE `resultCount`). Confirmed live: NICE
+    "infection" is 1057 documents, of which the tool returned 15.
+
+    `retrieved` is separate from `returned` because several of these filter
+    rows client-side after fetching them: a smaller `returned` means this
+    tool dropped rows, so only `total > retrieved` is upstream truncation.
+    `total` is None where the backend genuinely publishes no total (a
+    scraped topic page), which is honest -- unlike reporting the page size,
+    which is the failure this envelope exists to end.
+    """
+    retrieved = len(results) if retrieved is None else retrieved
+    truncated = total > retrieved if isinstance(total, int) else False
+    metadata = {
+        "total": total,
+        "retrieved": retrieved,
+        "truncated": truncated,
+        "returned": len(results),
+    }
+    if source:
+        metadata["source"] = source
+    if truncated:
+        # Every other truncation discloser in the repo pairs the flag with a
+        # sentence saying what to do about it; a bare `truncated: true` states
+        # the fact and withholds the remedy.
+        metadata["truncation_note"] = (
+            f"Returned the top {len(results)} of {total} documents matching this "
+            f"query. This is a ranked slice, not the full result set -- a "
+            f"guideline absent here may still match. Raise `limit` or narrow the "
+            f"query to see more."
+        )
+    return {"status": "success", "data": results, "metadata": metadata}
+
+
+def _is_specific_token(token):
+    """Reject short plain-English words that match almost any abstract.
+
+    Relevance filtering is a substring ``any()`` test, so a two-letter English
+    word such as "of" or "in" matches essentially every record and silently
+    disables the filter. Such words are only discarded when they are plain
+    ASCII letters: short non-Latin terms (医疗) and connected biomedical
+    identifiers (IL-6, COVID-19, H1N1) stay, since those are specific.
+    """
+    if len(token) >= 3:
+        return True
+    return not token.isascii() or not token.isalpha()
 
 
 def _extract_meaningful_terms(query):
@@ -20,8 +81,17 @@ def _extract_meaningful_terms(query):
     if not isinstance(query, str):
         return []
 
-    # Keep alphabetic tokens with length >= 3
-    tokens = re.findall(r"[a-zA-Z]{3,}", query.lower())
+    # Keep connected biomedical identifiers as one token (COVID-19,
+    # HLA-B*57:01, IL-6) as well as Unicode terms.  Splitting at punctuation
+    # turns the numeric suffix into a broad substring filter (e.g. "2019"),
+    # which admits unrelated literature.  Numeric-only fragments are never
+    # useful evidence concepts, so discard them.
+    tokens = re.findall(r"[^\W_]+(?:[-*:/][^\W_]+)*", query.lower())
+    tokens = [
+        token
+        for token in tokens
+        if any(character.isalpha() for character in token) and _is_specific_token(token)
+    ]
     stop_terms = {
         "management",
         "care",
@@ -46,6 +116,34 @@ def _extract_meaningful_terms(query):
     }
     meaningful = [token for token in tokens if token not in stop_terms]
     return meaningful if meaningful else tokens
+
+
+def _markitdown():
+    """Build a converter, or say which extra supplies it.
+
+    The three call sites sit inside ``except Exception`` handlers that return
+    ``str(e)``, so raising here reaches the caller with the instruction intact.
+    """
+    if not MARKITDOWN_AVAILABLE:
+        raise RuntimeError(
+            f"markitdown is required to extract this guideline. "
+            f"{install_hint('documents', 'markitdown')}"
+        )
+    return MarkItDown()
+
+
+class _ContentUnavailable(Exception):
+    """A per-record content fetch failed; the record stays, without that text."""
+
+
+def _abstract_text_from_sections(element: ET.Element) -> str:
+    """Flatten every structured abstract section, preserving inline text."""
+    sections = element.findall(".//AbstractText")
+    return " ".join(
+        "".join(section.itertext()).strip()
+        for section in sections
+        if "".join(section.itertext()).strip()
+    )
 
 
 @register_tool()
@@ -133,12 +231,16 @@ class NICEWebScrapingTool(BaseTool):
 
             try:
                 data = json.loads(script_tag.string)
-                documents = (
-                    data.get("props", {})
-                    .get("pageProps", {})
-                    .get("results", {})
-                    .get("documents", [])
+                search_results = (
+                    data.get("props", {}).get("pageProps", {}).get("results", {})
                 )
+                documents = search_results.get("documents", [])
+                # NICE pages its search at 15 and reports the match count in
+                # the same __NEXT_DATA__ blob this already parses, one key
+                # along from `documents` (live: q=infection -> resultCount
+                # 1057, pageSize 15). Without it `limit: 50` returning 15 rows
+                # reads as "NICE has 15 documents on infection".
+                total = search_results.get("resultCount")
             except (json.JSONDecodeError, KeyError) as e:
                 return {
                     "status": "error",
@@ -233,7 +335,9 @@ class NICEWebScrapingTool(BaseTool):
                     "suggestion": "Try different search terms or check if the NICE website is accessible",
                 }
 
-            return results
+            return _guideline_envelope(
+                results, total=total, retrieved=len(documents), source="NICE"
+            )
 
         except requests.exceptions.RequestException as e:
             return {
@@ -269,20 +373,16 @@ class PubMedGuidelinesTool(BaseTool):
         if not query:
             return {"status": "error", "error": "Query parameter is required"}
 
-        result = self._search_pubmed_guidelines(query, limit, api_key)
-        # Fix-R9E-1: _search_pubmed_guidelines returns either a bare list of
-        # results or an {"status": "error", ...} dict on failure. The
-        # bare-list success case was never wrapped in the standard
-        # {"status": "success", "data": [...]} envelope every sibling tool
-        # (e.g. PubMed_search_articles) uses -- independently reported by
-        # personas across 4 separate rounds, since callers writing generic
-        # status-checking code broke specifically on this tool.
-        if isinstance(result, list):
-            return {"status": "success", "data": result}
-        return result
+        return self._search_pubmed_guidelines(query, limit, api_key)
 
     def _search_pubmed_guidelines(self, query, limit, api_key):
-        """Search PubMed for guideline publications."""
+        """Search PubMed for guidelines, in the standard envelope.
+
+        Fix-R9E-1: the success case used to be returned as a bare list, unlike
+        every sibling tool (e.g. PubMed_search_articles) -- independently
+        reported by personas across 4 separate rounds, since callers writing
+        generic status-checking code broke specifically on this tool.
+        """
         try:
             # Add guideline publication type filter
             guideline_query = f"{query} AND (guideline[Publication Type] OR practice guideline[Publication Type])"
@@ -303,11 +403,20 @@ class PubMedGuidelinesTool(BaseTool):
             search_response.raise_for_status()
             search_data = search_response.json()
 
-            pmids = search_data.get("esearchresult", {}).get("idlist", [])
-            search_data.get("esearchresult", {}).get("count", "0")
+            esearch = search_data.get("esearchresult", {})
+            pmids = esearch.get("idlist", [])
+            try:
+                total = int(esearch.get("count", 0))
+            except (TypeError, ValueError):
+                total = 0
 
+            # esearch reports how many guidelines match; without it a caller
+            # reads `limit` rows as the whole corpus ("therapeutic plasma
+            # exchange" returns 3 of 94).
             if not pmids:
-                return []
+                return _guideline_envelope(
+                    [], total=total, retrieved=0, source="PubMed"
+                )
 
             # Get details for PMIDs
             time.sleep(0.5)  # Be respectful with API calls
@@ -338,28 +447,28 @@ class PubMedGuidelinesTool(BaseTool):
             )
             abstract_response.raise_for_status()
 
-            # Parse each PubMed article independently to avoid matching an
-            # abstract belonging to a different PMID.
-            import re
-
+            # Parse abstracts from XML.  PubMed commonly splits a structured
+            # abstract into several AbstractText nodes (Background, Methods,
+            # Results, Conclusions); treating the first match as the complete
+            # abstract drops the evidence callers need to assess a guideline.
             abstracts = {}
-            xml_text = abstract_response.text
-            for article_xml in re.findall(
-                r"<PubmedArticle>(.*?)</PubmedArticle>", xml_text, re.DOTALL
-            ):
-                pmid_match = re.search(r"<PMID[^>]*>(\d+)</PMID>", article_xml)
-                if not pmid_match:
-                    continue
-                article_pmid = pmid_match.group(1)
-                parts = re.findall(
-                    r"<AbstractText[^>]*>(.*?)</AbstractText>",
-                    article_xml,
-                    re.DOTALL,
-                )
-                abstracts[article_pmid] = " ".join(
-                    html.unescape(re.sub(r"<[^>]+>", "", part)).strip()
-                    for part in parts
-                )
+            if abstract_response.text.strip():
+                try:
+                    abstract_root = ET.fromstring(abstract_response.text)
+                    records = abstract_root.findall(".//PubmedArticle")
+                    records.extend(abstract_root.findall(".//PubmedBookArticle"))
+                    for record in records:
+                        pmid = record.findtext(".//PMID")
+                        if pmid:
+                            abstracts[pmid] = _abstract_text_from_sections(record)
+                except ET.ParseError as e:
+                    return {
+                        "status": "error",
+                        "error": f"Failed to parse PubMed abstract XML: {e}",
+                        "source": "PubMed",
+                    }
+            for pmid in pmids:
+                abstracts.setdefault(pmid, "")
 
             # Process results
             results = []
@@ -399,6 +508,8 @@ class PubMedGuidelinesTool(BaseTool):
                     ).lower()
 
                     matched = sum(term in searchable_text for term in query_terms)
+                    if query_terms and not matched:
+                        continue
                     relevance = matched / len(query_terms) if query_terms else 1.0
 
                     result = {
@@ -423,7 +534,9 @@ class PubMedGuidelinesTool(BaseTool):
 
                     results.append(result)
 
-            return results
+            return _guideline_envelope(
+                results, total=total, retrieved=len(pmids), source="PubMed"
+            )
 
         except requests.exceptions.RequestException as e:
             return {
@@ -476,11 +589,8 @@ class EuropePMCGuidelinesTool(BaseTool):
             response.raise_for_status()
             data = response.json()
 
-            data.get("hitCount", 0)
+            hit_count = data.get("hitCount", 0)
             results_list = data.get("resultList", {}).get("result", [])
-
-            if not results_list:
-                return []
 
             # Process results with stricter filtering
             results = []
@@ -488,15 +598,29 @@ class EuropePMCGuidelinesTool(BaseTool):
                 title = result.get("title", "")
                 pub_type = result.get("pubType", "")
 
-                # Get abstract from detailed API call
-                abstract = self._get_europepmc_abstract(result.get("pmid", ""))
+                # Get abstract from detailed API call. A failed fetch leaves the
+                # record without text and says so; it must neither sink the whole
+                # search nor put an error message where the abstract belongs.
+                content_unavailable = []
+                try:
+                    abstract = self._get_europepmc_abstract(result.get("pmid", ""))
+                except _ContentUnavailable as e:
+                    abstract = ""
+                    content_unavailable.append(str(e))
 
                 # If abstract is too short or just a question, try to get more content
                 if len(abstract) < 200 or abstract.endswith("?"):
-                    # Try to get full text or more detailed content
-                    abstract = self._get_europepmc_full_content(
-                        result.get("pmid", ""), result.get("pmcid", "")
-                    )
+                    # Try to get full text or more detailed content, keeping the
+                    # short abstract when there is nothing fuller to replace it.
+                    try:
+                        fuller = self._get_europepmc_full_content(
+                            result.get("pmid", ""), result.get("pmcid", "")
+                        )
+                    except _ContentUnavailable as e:
+                        fuller = ""
+                        content_unavailable.append(str(e))
+                    if fuller:
+                        abstract = fuller
 
                 # More strict guideline detection
                 title_lower = title.lower()
@@ -531,7 +655,7 @@ class EuropePMCGuidelinesTool(BaseTool):
                 if pmid:
                     url = f"https://europepmc.org/article/MED/{pmid}"
                 elif pmcid:
-                    url = f"https://europepmc.org/article/{pmcid}"
+                    url = f"https://europepmc.org/article/PMC/{pmcid}"
                 elif doi:
                     url = f"https://doi.org/{doi}"
 
@@ -556,6 +680,8 @@ class EuropePMCGuidelinesTool(BaseTool):
                         "url": url,
                         "source": "Europe PMC",
                     }
+                    if content_unavailable:
+                        guideline_result["content_unavailable"] = content_unavailable
 
                     results.append(guideline_result)
 
@@ -563,7 +689,12 @@ class EuropePMCGuidelinesTool(BaseTool):
                     if len(results) >= limit:
                         break
 
-            return results
+            return _guideline_envelope(
+                results,
+                total=hit_count,
+                retrieved=len(results_list),
+                source="Europe PMC",
+            )
 
         except requests.exceptions.RequestException as e:
             return {
@@ -596,15 +727,14 @@ class EuropePMCGuidelinesTool(BaseTool):
             response = self.session.get(base_url, params=params, timeout=15)
             response.raise_for_status()
 
-            # Parse XML response
-            import xml.etree.ElementTree as ET
-
             root = ET.fromstring(response.content)
 
-            # Find abstract text
-            abstract_elem = root.find(".//AbstractText")
-            if abstract_elem is not None:
-                return abstract_elem.text or ""
+            # PubMed structured abstracts may have multiple sections and
+            # inline markup; retain each section instead of the first node's
+            # direct text only.
+            abstract = _abstract_text_from_sections(root)
+            if abstract:
+                return abstract
 
             # Try alternative path
             abstract_elem = root.find(".//abstract")
@@ -613,8 +743,12 @@ class EuropePMCGuidelinesTool(BaseTool):
 
             return ""
 
+        except ET.ParseError as e:
+            raise ValueError(f"Failed to parse Europe PMC abstract XML: {e}") from e
         except Exception as e:
-            return f"Error fetching abstract: {str(e)}"
+            raise _ContentUnavailable(
+                f"abstract for PMID {pmid}: {type(e).__name__}: {e}"
+            ) from e
 
     def _get_europepmc_full_content(self, pmid, pmcid):
         """Get more detailed content from Europe PMC."""
@@ -631,8 +765,6 @@ class EuropePMCGuidelinesTool(BaseTool):
             response = self.session.get(full_text_url, timeout=15)
             if response.status_code == 200:
                 # Parse XML to extract meaningful content
-                import xml.etree.ElementTree as ET
-
                 root = ET.fromstring(response.content)
 
                 # Extract sections that might contain clinical recommendations
@@ -671,7 +803,9 @@ class EuropePMCGuidelinesTool(BaseTool):
             return ""
 
         except Exception as e:
-            return f"Error fetching full content: {str(e)}"
+            raise _ContentUnavailable(
+                f"full text for {pmcid or 'PMID ' + str(pmid)}: {type(e).__name__}: {e}"
+            ) from e
 
 
 @register_tool()
@@ -712,16 +846,14 @@ class TRIPDatabaseTool(BaseTool):
             # Parse XML response
             root = ET.fromstring(response.content)
 
-            total = root.find("total")
-            count = root.find("count")
-
-            int(total.text) if total is not None else 0
-            int(count.text) if count is not None else 0
+            total_elem = root.find("total")
+            # TRIP's <count> is the size of the page it chose to send, not a
+            # match count -- criteria=vancomycin&limit=3 answers <total>12638
+            # <count>20. Only <total> belongs in the envelope; <count> is
+            # covered by `retrieved`.
+            total = int(total_elem.text) if total_elem is not None else None
 
             documents = root.findall("document")
-
-            if not documents:
-                return []
 
             # Process results
             results = []
@@ -799,7 +931,12 @@ class TRIPDatabaseTool(BaseTool):
 
                 results.append(guideline_result)
 
-            return results
+            return _guideline_envelope(
+                results,
+                total=total,
+                retrieved=len(documents),
+                source="TRIP Database",
+            )
 
         except requests.exceptions.RequestException as e:
             return {
@@ -832,7 +969,7 @@ class TRIPDatabaseTool(BaseTool):
                 return self._extract_dmj_guideline_content(url)
 
             # Fallback: generic MarkItDown extraction
-            md = MarkItDown()
+            md = _markitdown()
             result = md.convert(url)
 
             if not result or not getattr(result, "text_content", None):
@@ -917,7 +1054,7 @@ class TRIPDatabaseTool(BaseTool):
     def _extract_bmj_guideline_content(self, url):
         """Fetch BMJ Rapid Recommendation content with key recommendations."""
         try:
-            md = MarkItDown()
+            md = _markitdown()
             result = md.convert(url)
             if not result or not getattr(result, "text_content", None):
                 return {
@@ -1000,7 +1137,7 @@ class TRIPDatabaseTool(BaseTool):
     def _extract_dmj_guideline_content(self, url):
         """Fetch Diabetes & Metabolism Journal guideline content and GRADE statements."""
         try:
-            md = MarkItDown()
+            md = _markitdown()
             result = md.convert(url)
             if not result or not getattr(result, "text_content", None):
                 return {
@@ -1089,17 +1226,45 @@ class TRIPDatabaseTool(BaseTool):
             }
 
 
+def _dc_value(metadata, field):
+    """First value of a Dublin Core field in a DSpace metadata block."""
+    values = metadata.get(field) or []
+    return values[0].get("value") if values else None
+
+
 @register_tool()
 class WHOGuidelinesTool(BaseTool):
     """
     WHO (World Health Organization) Guidelines Search Tool.
     Searches WHO official guidelines from their publications website.
+
+    Two query-specific backends are used, in order:
+
+    1. ``who.int/health-topics/<slug>`` — WHO's curated topic pages. Only
+       exists for terms WHO treats as a health topic ("tuberculosis",
+       "trachoma"), so it misses drug names and most narrow terms.
+    2. WHO IRIS (``iris.who.int``), WHO's official institutional
+       repository, searched over its DSpace REST API.
+
+    Both answer the query that was asked. There is deliberately no
+    generic fallback listing: returning WHO's most recent publications
+    for a query they do not match presents unrelated documents as
+    search results.
+
+    Both backends emit results through ``_result``, so ``is_guideline``
+    means the same thing whichever one answered. Neither WHO topic pages
+    nor IRIS have a "guideline" document type -- topic pages list fact
+    sheets and technical reports alongside guidelines -- so the flag is
+    derived from the record rather than asserted for every hit.
     """
 
     def __init__(self, tool_config):
         super().__init__(tool_config)
         self.base_url = "https://www.who.int"
-        self.guidelines_url = f"{self.base_url}/publications/who-guidelines"
+        self.iris_base_url = "https://iris.who.int"
+        self.iris_search_url = (
+            f"{self.iris_base_url}/server/api/discover/search/objects"
+        )
         self.session = requests.Session()
         self.session.headers.update(
             {
@@ -1174,69 +1339,113 @@ class WHOGuidelinesTool(BaseTool):
                     seen.add(href)
                     full_url = href if href.startswith("http") else self.base_url + href
                     results.append(
-                        {
-                            "title": text,
-                            "url": full_url,
-                            "description": None,
-                            "content": None,
-                            "source": "WHO",
-                            "organization": "World Health Organization",
-                            "is_guideline": True,
-                            "official": True,
-                        }
+                        self._result(
+                            title=text,
+                            url=full_url,
+                            matched_via=f"health_topic:{topic_slug}",
+                        )
                     )
             return results
         except Exception:
             return []
 
-    def _search_who_guidelines(self, query, limit):
-        """Search WHO guidelines via WHO health-topics pages then general guidelines page."""
-        try:
-            time.sleep(0.5)
+    @staticmethod
+    def _result(
+        *,
+        title,
+        url,
+        matched_via,
+        description=None,
+        document_type=None,
+        date_issued=None,
+    ):
+        """Shape one result, whichever backend produced it."""
+        return {
+            "title": title,
+            "url": url,
+            "description": description,
+            "content": None,
+            "source": "WHO",
+            "organization": "World Health Organization",
+            # Neither backend exposes a "guideline" document type, so this
+            # is read off the record instead of asserted for every hit.
+            "is_guideline": "guideline" in f"{title} {document_type or ''}".lower(),
+            "official": True,
+            "document_type": document_type,
+            "date_issued": date_issued,
+            "matched_via": matched_via,
+        }
 
-            # Try WHO health-topics pages for this query (returns topic-specific publications)
-            guidelines = []
-            for slug in self._topic_slug(query):
+    def _search_iris(self, query, limit):
+        """Search WHO IRIS, WHO's official publication repository.
+
+        Used when no WHO health-topic page matches the query. Unlike the
+        topic pages this is a real text search, so a term WHO has no
+        documents for returns nothing rather than something unrelated.
+        """
+        size = max(1, min(int(limit), 100))
+        response = self.session.get(
+            self.iris_search_url,
+            params={"query": query, "size": size, "dsoType": "item"},
+            headers={"Accept": "application/json"},
+            timeout=30,
+        )
+        response.raise_for_status()
+        search_result = response.json().get("_embedded", {}).get("searchResult", {})
+        objects = search_result.get("_embedded", {}).get("objects", [])
+        # IRIS is a DSpace repository and reports the match count in
+        # `page.totalElements` (live: query=tuberculosis&size=3 -> 28435).
+        total = search_result.get("page", {}).get("totalElements")
+
+        results = []
+        for obj in objects[:size]:
+            item = obj.get("_embedded", {}).get("indexableObject", {})
+            metadata = item.get("metadata", {})
+            title = item.get("name") or _dc_value(metadata, "dc.title")
+            if not title:
+                continue
+            handle = item.get("handle")
+            results.append(
+                self._result(
+                    title=title,
+                    url=(
+                        f"{self.iris_base_url}/handle/{handle}"
+                        if handle
+                        else _dc_value(metadata, "dc.identifier.uri")
+                    ),
+                    description=_dc_value(metadata, "dc.description.abstract"),
+                    document_type=_dc_value(metadata, "dc.type"),
+                    date_issued=_dc_value(metadata, "dc.date.issued"),
+                    matched_via="iris_search",
+                )
+            )
+        return _guideline_envelope(
+            results, total=total, retrieved=len(objects), source="WHO IRIS"
+        )
+
+    def _search_who_guidelines(self, query, limit):
+        """Search WHO health-topic pages, then WHO IRIS."""
+        try:
+            # WHO's curated topic pages, where the query names a health topic.
+            for attempt, slug in enumerate(self._topic_slug(query)):
+                if attempt:
+                    # Space out repeat hits on who.int, not the first request
+                    # of the call, which has no predecessor to be polite to.
+                    time.sleep(0.5)
                 guidelines = self._scrape_topic_publications(slug)
                 if guidelines:
-                    break
+                    # A topic page is a curated list, not a search index: it
+                    # publishes no match count, so `total` stays None rather
+                    # than echoing the page size as if it were one.
+                    return _guideline_envelope(
+                        guidelines[:limit],
+                        total=None,
+                        retrieved=len(guidelines),
+                        source="WHO",
+                    )
 
-            # Fall back: scrape the general WHO guidelines page (recent guidelines)
-            if not guidelines:
-                response = self.session.get(self.guidelines_url, timeout=30)
-                response.raise_for_status()
-                soup = BeautifulSoup(response.content, "html.parser")
-                seen = set()
-                for a in soup.find_all("a", href=True):
-                    href = a["href"]
-                    text = a.get_text().strip()
-                    if (
-                        (
-                            "/publications/i/item/" in href
-                            or "/publications/m/item/" in href
-                        )
-                        and text
-                        and len(text) > 10
-                        and href not in seen
-                    ):
-                        seen.add(href)
-                        full_url = (
-                            href if href.startswith("http") else self.base_url + href
-                        )
-                        guidelines.append(
-                            {
-                                "title": text,
-                                "url": full_url,
-                                "description": None,
-                                "content": None,
-                                "source": "WHO",
-                                "organization": "World Health Organization",
-                                "is_guideline": True,
-                                "official": True,
-                            }
-                        )
-
-            return guidelines[:limit]
+            # Otherwise search the WHO IRIS repository for the query itself.
+            return self._search_iris(query, limit)
 
         except requests.exceptions.RequestException as e:
             return {
@@ -1276,6 +1485,9 @@ class OpenAlexGuidelinesTool(BaseTool):
 
     def _search_openalex_guidelines(self, query, limit, year_from=None, year_to=None):
         """Search for clinical guidelines using OpenAlex API."""
+        if limit == 0:
+            return _guideline_envelope([], total=0, retrieved=0, source="OpenAlex")
+
         try:
             # Build search query to focus on guidelines
             search_query = (
@@ -1309,7 +1521,7 @@ class OpenAlexGuidelinesTool(BaseTool):
 
             data = response.json()
             results = data.get("results", [])
-            data.get("meta", {})
+            total = data.get("meta", {}).get("count")
 
             guidelines = []
             for work in results:
@@ -1431,7 +1643,9 @@ class OpenAlexGuidelinesTool(BaseTool):
                     if len(guidelines) >= limit:
                         break
 
-            return guidelines
+            return _guideline_envelope(
+                guidelines, total=total, retrieved=len(results), source="OpenAlex"
+            )
 
         except requests.exceptions.RequestException as e:
             return {
@@ -1627,7 +1841,10 @@ class NICEGuidelineFullTextTool(BaseTool):
                 "full_text_length": len(full_text),
                 "sections_count": len(content_sections),
                 "recommendations": recommendations[:20] if recommendations else None,
-                "recommendations_count": len(recommendations) if recommendations else 0,
+                "recommendations_count": len(recommendations[:20])
+                if recommendations
+                else 0,
+                "total_recommendations": len(recommendations) if recommendations else 0,
                 "source": "NICE",
                 "content_type": "full_guideline",
             }

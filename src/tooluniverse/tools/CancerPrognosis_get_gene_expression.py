@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def CancerPrognosis_get_gene_expression(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_gene_expression",
     cancer: Optional[str] = None,
     cancer_type: Optional[str] = None,
     study_id: Optional[str] = None,

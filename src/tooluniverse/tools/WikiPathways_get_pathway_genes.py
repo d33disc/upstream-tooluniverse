@@ -9,7 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def WikiPathways_get_pathway_genes(
-    pathway_id: str,
+    pathway_id: Optional[str] = None,
+    wpid: Optional[str] = None,
     code: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -23,6 +24,8 @@ def WikiPathways_get_pathway_genes(
     ----------
     pathway_id : str
         WikiPathways pathway identifier. Examples: 'WP254' (Apoptosis, 87 gene produc...
+    wpid : str
+        Alias for `pathway_id`, matching the parameter name used by the sibling WikiP...
     code : str
         Optional filter restricting results to gene products annotated from one ident...
     stream_callback : Callable, optional
@@ -41,7 +44,7 @@ def WikiPathways_get_pathway_genes(
     # Strip None values so optional parameters don't trigger schema validation errors
     _args = {
         k: v
-        for k, v in {"pathway_id": pathway_id, "code": code}.items()
+        for k, v in {"pathway_id": pathway_id, "wpid": wpid, "code": code}.items()
         if v is not None
     }
     return get_shared_client().run_one_function(

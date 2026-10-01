@@ -34,7 +34,7 @@ def OpenTargets_get_evidence_by_datasource(
     disease_name : str
         Disease or phenotype name (e.g., 'Crohn disease'). Auto-resolved to efoId.
     datasourceIds : list[str]
-        List of datasource IDs to filter evidence. Examples: ['clinical_precedence', ...
+        List of datasource IDs to filter evidence. Examples: ['gwas_credible_sets', '...
     size : int
         Maximum evidence rows to return (default: 50)
     stream_callback : Callable, optional

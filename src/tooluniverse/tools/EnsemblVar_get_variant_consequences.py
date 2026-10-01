@@ -15,7 +15,7 @@ def EnsemblVar_get_variant_consequences(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed variant information including consequence type, clinical significance, synonyms, evi...
 
@@ -34,7 +34,7 @@ def EnsemblVar_get_variant_consequences(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

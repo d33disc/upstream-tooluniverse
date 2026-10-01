@@ -15,7 +15,7 @@ def MyDisease_get_disease(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get comprehensive disease annotations from MyDisease.info, a BioThings disease aggregator that in...
 
@@ -34,7 +34,7 @@ def MyDisease_get_disease(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

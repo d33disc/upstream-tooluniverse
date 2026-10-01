@@ -11,7 +11,7 @@ from ._shared_client import get_shared_client
 def USCensus_get_population(
     get: str,
     for_: str,
-    dataset: Optional[str] = None,
+    dataset: Optional[str] = "2022/acs/acs5",
     in_: Optional[str] = None,
     limit: Optional[int] = None,
     *,
@@ -33,7 +33,7 @@ def USCensus_get_population(
     in_ : str
         Geographic filter for sub-national queries. Examples: 'state:06' (within Cali...
     limit : int
-        Maximum number of results to return
+        Maximum number of data rows to return (the header row is preserved and is not...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

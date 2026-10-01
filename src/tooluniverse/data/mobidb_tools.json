@@ -27,116 +27,131 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "accession": {
-          "type": "string"
-        },
-        "gene": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "organism": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "length": {
-          "type": "integer"
-        },
-        "sequence": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "prediction_disorder": {
+      "oneOf": [
+        {
           "type": "object",
           "properties": {
-            "regions": {
-              "type": "array",
-              "items": {
-                "type": "array"
-              },
-              "description": "Predicted disordered regions as [start, end] pairs"
+            "accession": {
+              "type": "string"
             },
-            "content_fraction": {
+            "gene": {
               "type": [
-                "number",
-                "null"
-              ],
-              "description": "Fraction of sequence predicted disordered (0-1)"
-            },
-            "content_count": {
-              "type": [
-                "integer",
+                "string",
                 "null"
               ]
-            }
-          },
-          "description": "MobiDB-lite disorder prediction"
-        },
-        "curated_disorder": {
-          "type": "object",
-          "properties": {
-            "regions": {
-              "type": "array"
             },
-            "content_count": {
+            "name": {
               "type": [
-                "integer",
+                "string",
                 "null"
               ]
-            }
-          },
-          "description": "Curated disorder from DisProt"
-        },
-        "curated_lip": {
-          "type": "object",
-          "properties": {
-            "regions": {
-              "type": "array"
             },
-            "content_count": {
+            "organism": {
               "type": [
-                "integer",
+                "string",
                 "null"
               ]
-            }
-          },
-          "description": "Linear interacting peptides"
-        },
-        "ptm_summary": {
-          "type": "object",
-          "properties": {
-            "count": {
+            },
+            "length": {
               "type": "integer"
             },
-            "types": {
+            "sequence": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prediction_disorder": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array",
+                  "items": {
+                    "type": "array"
+                  },
+                  "description": "Predicted disordered regions as [start, end] pairs"
+                },
+                "content_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "description": "Fraction of sequence predicted disordered (0-1)"
+                },
+                "content_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "description": "MobiDB-lite disorder prediction"
+            },
+            "curated_disorder": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array"
+                },
+                "content_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "description": "Curated disorder from DisProt"
+            },
+            "curated_lip": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array"
+                },
+                "content_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              },
+              "description": "Linear interacting peptides"
+            },
+            "ptm_summary": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "types": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "description": "Post-translational modification summary"
+            },
+            "localization": {
               "type": "array",
               "items": {
                 "type": "string"
               }
             }
-          },
-          "description": "Post-translational modification summary"
-        },
-        "localization": {
-          "type": "array",
-          "items": {
-            "type": "string"
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -167,69 +182,84 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "accession": {
-          "type": "string"
-        },
-        "gene": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "organism": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "length": {
-          "type": "integer"
-        },
-        "predicted_disorder": {
+      "oneOf": [
+        {
           "type": "object",
           "properties": {
-            "regions": {
-              "type": "array"
+            "accession": {
+              "type": "string"
             },
-            "content_fraction": {
+            "gene": {
               "type": [
-                "number",
+                "string",
                 "null"
               ]
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "organism": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "length": {
+              "type": "integer"
+            },
+            "predicted_disorder": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array"
+                },
+                "content_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "curated_disorder_merged": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array"
+                }
+              },
+              "description": "Merged curated disorder from all evidence sources"
+            },
+            "phase_separation": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "type": "array"
+                }
+              },
+              "description": "Phase separation propensity data"
+            },
+            "binding_modes": {
+              "type": "object",
+              "description": "Disorder-to-order and disorder-to-disorder binding transitions"
             }
           }
         },
-        "curated_disorder_merged": {
+        {
           "type": "object",
           "properties": {
-            "regions": {
-              "type": "array"
+            "error": {
+              "type": "string"
             }
           },
-          "description": "Merged curated disorder from all evidence sources"
-        },
-        "phase_separation": {
-          "type": "object",
-          "properties": {
-            "regions": {
-              "type": "array"
-            }
-          },
-          "description": "Phase separation propensity data"
-        },
-        "binding_modes": {
-          "type": "object",
-          "description": "Disorder-to-order and disorder-to-disorder binding transitions"
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

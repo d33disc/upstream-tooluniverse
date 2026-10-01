@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def SwissADME_calculate_adme(
-    operation: str,
     smiles: str,
+    operation: Optional[str] = "calculate_adme",
     molecule_name: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

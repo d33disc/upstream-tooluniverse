@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def PharmacoDB_get_experiments(
-    operation: str,
+    operation: Optional[str] = "get_experiments",
     compound_name: Optional[str] = None,
     cell_line_name: Optional[str] = None,
     dataset_name: Optional[str] = None,

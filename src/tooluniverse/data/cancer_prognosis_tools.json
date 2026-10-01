@@ -11,7 +11,8 @@
           "enum": [
             "get_survival_data"
           ],
-          "description": "Operation type"
+          "description": "Operation type",
+          "default": "get_survival_data"
         },
         "cancer": {
           "type": "string",
@@ -117,7 +118,10 @@
         "study_id": "coadread_tcga",
         "max_patients": 75
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_survival_data"
+    }
   },
   {
     "name": "CancerPrognosis_get_gene_expression",
@@ -131,7 +135,8 @@
           "enum": [
             "get_gene_expression"
           ],
-          "description": "Operation type"
+          "description": "Operation type",
+          "default": "get_gene_expression"
         },
         "cancer": {
           "type": "string",
@@ -280,7 +285,10 @@
         "gene": "EGFR",
         "max_samples": 75
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_gene_expression"
+    }
   },
   {
     "name": "CancerPrognosis_search_studies",
@@ -294,7 +302,8 @@
           "enum": [
             "search_studies"
           ],
-          "description": "Operation type"
+          "description": "Operation type",
+          "default": "search_studies"
         },
         "keyword": {
           "type": "string",
@@ -379,7 +388,10 @@
         "query": "glioblastoma",
         "limit": 5
       }
-    ]
+    ],
+    "fields": {
+      "operation": "search_studies"
+    }
   },
   {
     "name": "CancerPrognosis_get_study_summary",
@@ -393,7 +405,8 @@
           "enum": [
             "get_study_summary"
           ],
-          "description": "Operation type"
+          "description": "Operation type",
+          "default": "get_study_summary"
         },
         "cancer": {
           "type": "string",
@@ -488,6 +501,9 @@
         "operation": "get_study_summary",
         "study_id": "brca_tcga"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_study_summary"
+    }
   }
 ]

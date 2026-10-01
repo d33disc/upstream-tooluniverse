@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def EnzymeKinetics_calculate(
-    operation: str,
     substrate_concs: list[Any],
+    operation: Optional[str] = "michaelis_menten",
     velocities: Optional[list[Any]] = None,
     velocities_no_inhibitor: Optional[list[Any]] = None,
     velocities_with_inhibitor: Optional[list[Any]] = None,

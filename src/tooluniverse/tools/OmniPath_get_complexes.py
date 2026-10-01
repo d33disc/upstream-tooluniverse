@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_complexes(
-    proteins: str,
+    proteins: str | list[Any],
     databases: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -21,7 +21,7 @@ def OmniPath_get_complexes(
 
     Parameters
     ----------
-    proteins : str
+    proteins : str | list[Any]
         UniProt accession(s), comma-separated. Note: gene symbols are NOT supported f...
     databases : str
         Filter by source database(s), comma-separated. Options: CORUM, CellPhoneDB, C...

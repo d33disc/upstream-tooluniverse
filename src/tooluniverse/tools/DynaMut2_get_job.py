@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DynaMut2_get_job(
-    operation: str,
     job_id: str,
+    operation: Optional[str] = "get_job",
     endpoint: Optional[str] = "prediction_single",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

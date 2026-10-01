@@ -14,6 +14,21 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 from tooluniverse import ToolUniverse
 
 
+def _rows(result):
+    """The guideline rows a caller reads.
+
+    Fix-R58-4 gave NICE_Clinical_Guidelines_Search the {status, data,
+    metadata} envelope its sibling guideline searches share, so it can report
+    NICE's own resultCount -- "infection" matches 1057 documents, of which
+    the tool serves 15. The rows moved under `data`; these tests are about
+    the rows, so they read through here.
+    """
+    assert isinstance(result, dict), result
+    assert result["status"] == "success", result
+    assert isinstance(result["metadata"]["total"], int)
+    return result["data"]
+
+
 @pytest.mark.integration
 class TestNICEGuidelinesTool:
     """Test class for NICE Clinical Guidelines Search tool."""
@@ -50,12 +65,11 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        # Should return a list of results
-        assert isinstance(result, list)
-        assert len(result) > 0
+        rows = _rows(result)
+        assert len(rows) > 0
         
         # Check structure of first result
-        first_result = result[0]
+        first_result = rows[0]
         assert "title" in first_result
         assert "url" in first_result
         assert "source" in first_result
@@ -76,12 +90,11 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        # Should return a list of results
-        assert isinstance(result, list)
-        assert len(result) > 0
+        rows = _rows(result)
+        assert len(rows) > 0
         
         # Check structure of first result
-        first_result = result[0]
+        first_result = rows[0]
         assert "title" in first_result
         assert "url" in first_result
         assert "source" in first_result
@@ -102,12 +115,11 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        # Should return a list of results
-        assert isinstance(result, list)
-        assert len(result) > 0
+        rows = _rows(result)
+        assert len(rows) > 0
         
         # Check structure of first result
-        first_result = result[0]
+        first_result = rows[0]
         assert "title" in first_result
         assert "url" in first_result
         assert "source" in first_result
@@ -157,9 +169,8 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        # Should return exactly 1 result when limit is 1
-        assert isinstance(result, list)
-        assert len(result) <= 1
+        # Should return at most 1 row when limit is 1
+        assert len(_rows(result)) <= 1
     
     def test_result_structure(self):
         """Test that results have the expected structure."""
@@ -171,8 +182,9 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        if isinstance(result, list) and len(result) > 0:
-            item = result[0]
+        rows = _rows(result)
+        if rows:
+            item = rows[0]
             
             # Required fields
             required_fields = ["title", "url", "source", "is_guideline", "category"]
@@ -203,10 +215,9 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        if isinstance(result, list):
-            for item in result:
-                url = item.get("url", "")
-                assert url.startswith("https://www.nice.org.uk/guidance/")
+        for item in _rows(result):
+            url = item.get("url", "")
+            assert url.startswith("https://www.nice.org.uk/guidance/")
     
     def test_guideline_id_extraction(self):
         """Test that guideline IDs are properly extracted from URLs."""
@@ -218,21 +229,23 @@ class TestNICEGuidelinesTool:
             }
         })
         
-        if isinstance(result, list):
-            for item in result:
-                url = item.get("url", "")
-                if "/guidance/" in url:
-                    # Extract guideline ID from URL
-                    guideline_id = url.split("/guidance/")[-1].split("/")[0]
-                    assert len(guideline_id) > 0
-                    # NICE guidance IDs aren't limited to ng/cg: technology
-                    # appraisals use "ta", quality standards "qs", public
-                    # health "ph", etc. (a letter prefix + digits). Not-yet-
-                    # published guidance uses the literal segment
-                    # "indevelopment" instead of an ID.
-                    assert guideline_id == "indevelopment" or re.match(
-                        r"^[a-z]{2,4}\d+$", guideline_id
-                    ), f"unexpected guideline ID shape: {guideline_id!r}"
+        for item in _rows(result):
+            url = item.get("url", "")
+            if "/guidance/" in url:
+                # Extract guideline ID from URL
+                guideline_id = url.split("/guidance/")[-1].split("/")[0]
+                assert len(guideline_id) > 0
+                # NICE serves guidance in development under
+                # /guidance/indevelopment/<id> rather than a published
+                # ng*/cg* slug, and a "diabetes" search returns them
+                # alongside published guidance. Asserting only ng/cg made
+                # this test fail whenever NICE happened to rank one of those
+                # into the top results -- it does today, on unmodified main.
+                # Other guidance types use their own letter prefix too:
+                # technology appraisals "ta", quality standards "qs", etc.
+                assert guideline_id == "indevelopment" or re.match(
+                    r"^[a-z]{2,4}\d+$", guideline_id
+                ), f"unexpected guideline ID shape: {guideline_id!r}"
 
 
 if __name__ == "__main__":

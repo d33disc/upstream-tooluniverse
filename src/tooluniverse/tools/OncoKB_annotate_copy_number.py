@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def OncoKB_annotate_copy_number(
     gene: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "annotate_copy_number",
     copy_number_type: Optional[str] = None,
     tumor_type: Optional[str] = None,
     copy_number_alteration: Optional[str] = None,

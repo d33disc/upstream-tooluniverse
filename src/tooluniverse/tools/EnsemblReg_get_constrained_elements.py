@@ -15,7 +15,7 @@ def EnsemblReg_get_constrained_elements(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get evolutionarily constrained elements in a genomic region from the Ensembl Compara database. Co...
 
@@ -34,7 +34,7 @@ def EnsemblReg_get_constrained_elements(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ProtacDB_search_targets(
-    operation: str,
+    operation: Optional[str] = "search_targets",
     target_name: Optional[str] = None,
     uniprot_id: Optional[str] = None,
     *,

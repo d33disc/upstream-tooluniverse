@@ -5,6 +5,27 @@ import re
 import time
 import json as _json
 
+from .credentials import get_credential
+
+
+def _model_family(model_id: str) -> str:
+    """Return the provider-independent model portion of a model ID."""
+    if not isinstance(model_id, str):
+        return ""
+    return model_id.rsplit("/", 1)[-1].lower()
+
+
+def is_reasoning_model(model_id: str) -> bool:
+    """True for OpenAI "reasoning" model families (o1/o3/o4/gpt-5 and their
+    variants, e.g. "o4-mini", "gpt-5-mini"). These models only support the
+    default temperature (reject any explicit value with a 400 error) and
+    take `max_completion_tokens` instead of `max_tokens`. Single source of
+    truth for both restrictions so the two checks can't drift out of sync
+    the way they previously did (temperature normalization was missing
+    "gpt-5" even though token-limit routing already had it).
+    """
+    return _model_family(model_id).startswith(("gpt-5", "o1", "o3", "o4"))
+
 
 class BaseLLMClient:
     def test_api(self) -> None:
@@ -86,7 +107,7 @@ class AzureOpenAIClient(BaseLLMClient):
             f"Resolved Azure API version for {model_id}: {resolved_version}"
         )
 
-        api_key = os.getenv("AZURE_OPENAI_API_KEY")
+        api_key = get_credential("AZURE_OPENAI_API_KEY")
         if not api_key:
             raise ValueError("AZURE_OPENAI_API_KEY not set")
         endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://azure-ai.hms.edu")
@@ -177,9 +198,12 @@ class AzureOpenAIClient(BaseLLMClient):
     def _normalize_temperature(
         self, model_id: str, temperature: Optional[float]
     ) -> Optional[float]:
-        if isinstance(model_id, str) and (
-            model_id.startswith("o3-mini") or model_id.startswith("o4-mini")
-        ):
+        # Reasoning-style models (o-series and gpt-5 family) only support
+        # the default temperature (1) and reject any explicit value with a
+        # 400 error. self._model_id defaults to "gpt-5" (see AgenticTool),
+        # so is_reasoning_model() previously missing "gpt-5" meant this
+        # fired on every default-configured Azure call.
+        if is_reasoning_model(model_id):
             if temperature is not None:
                 self.logger.warning(
                     f"Model {model_id} does not support 'temperature'; ignoring provided value."
@@ -406,7 +430,7 @@ class GeminiClient(BaseLLMClient):
             from google.genai import types as genai_types  # type: ignore
         except Exception as e:  # pragma: no cover
             raise RuntimeError("google-genai not available") from e
-        api_key = os.getenv("GEMINI_API_KEY")
+        api_key = get_credential("GEMINI_API_KEY")
         if not api_key:
             raise ValueError("GEMINI_API_KEY not found")
         self._client = genai.Client(api_key=api_key)
@@ -645,7 +669,7 @@ class OpenAICompatibleClient(BaseLLMClient):
         self.model_name = model_id
         self.logger = logger
 
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = get_credential("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY not set")
 
@@ -722,15 +746,17 @@ class OpenAICompatibleClient(BaseLLMClient):
 
     @classmethod
     def _uses_max_completion_tokens(cls, model_id: str) -> bool:
-        family = cls._model_family(model_id)
-        return family.startswith(("gpt-5", "o1", "o3", "o4"))
+        return is_reasoning_model(model_id)
 
     @classmethod
     def _normalize_temperature(
         cls, model_id: str, temperature: Optional[float]
     ) -> Optional[float]:
-        family = cls._model_family(model_id)
-        if family.startswith(("o1", "o3", "o4")):
+        # Both this and _uses_max_completion_tokens above now delegate to
+        # the single module-level is_reasoning_model() classifier, so the
+        # two checks can no longer independently drift out of sync (gpt-5
+        # was previously missing from this method only).
+        if is_reasoning_model(model_id):
             return None
         return temperature
 
@@ -991,7 +1017,7 @@ class OpenRouterClient(BaseLLMClient):
         self.model_name = model_id
         self.logger = logger
 
-        api_key = os.getenv("OPENROUTER_API_KEY")
+        api_key = get_credential("OPENROUTER_API_KEY")
         if not api_key:
             raise ValueError("OPENROUTER_API_KEY not set")
 

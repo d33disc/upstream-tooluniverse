@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def VDJDB_search_cdr3(
-    operation: str,
     cdr3: str,
+    operation: Optional[str] = "search_cdr3",
     species: Optional[str] = None,
     gene: Optional[str] = None,
     match_type: Optional[str] = "exact",

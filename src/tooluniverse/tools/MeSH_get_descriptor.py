@@ -14,7 +14,7 @@ def MeSH_get_descriptor(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information for a MeSH descriptor by its ID. Returns the descriptor's label, type, a...
 
@@ -31,7 +31,7 @@ def MeSH_get_descriptor(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

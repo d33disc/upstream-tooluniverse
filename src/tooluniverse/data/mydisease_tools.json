@@ -32,48 +32,63 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "disease_id": {
-          "type": "string",
-          "description": "Queried disease identifier"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "disease_id": {
+              "type": "string",
+              "description": "Queried disease identifier"
+            },
+            "mondo": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "MONDO ontology data: label, definition, ancestors, children, xrefs"
+            },
+            "disease_ontology": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Disease Ontology data: name, definition, DOID, ancestors, xrefs"
+            },
+            "ctd": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "CTD data: chemicals and pathways related to disease"
+            },
+            "hpo": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "HPO data: phenotypes related to disease, inheritance, clinical course"
+            },
+            "disgenet": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "DisGeNET gene-disease associations"
+            }
+          }
         },
-        "mondo": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "description": "MONDO ontology data: label, definition, ancestors, children, xrefs"
-        },
-        "disease_ontology": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "description": "Disease Ontology data: name, definition, DOID, ancestors, xrefs"
-        },
-        "ctd": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "description": "CTD data: chemicals and pathways related to disease"
-        },
-        "hpo": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "description": "HPO data: phenotypes related to disease, inheritance, clinical course"
-        },
-        "disgenet": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "description": "DisGeNET gene-disease associations"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -115,24 +130,39 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "total_hits": {
-          "type": "integer",
-          "description": "Total number of matching diseases"
-        },
-        "returned": {
-          "type": "integer",
-          "description": "Number of results returned"
-        },
-        "diseases": {
-          "type": "array",
-          "description": "List of matching diseases with IDs, names, and requested fields",
-          "items": {
-            "type": "object"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "total_hits": {
+              "type": "integer",
+              "description": "Total number of matching diseases"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number of results returned"
+            },
+            "diseases": {
+              "type": "array",
+              "description": "List of matching diseases with IDs, names, and requested fields",
+              "items": {
+                "type": "object"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

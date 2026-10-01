@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def FAERS_analyze_temporal_trends(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "analyze_temporal_trends",
     drug_name: Optional[str] = None,
     adverse_event: Optional[str] = None,
     reaction: Optional[str] = None,
@@ -29,9 +29,9 @@ def FAERS_analyze_temporal_trends(
     drug_name : str
         Generic drug name
     adverse_event : str
-        MedDRA Preferred Term (optional, omit for all events). Use exact MedDRA Prefe...
+        MedDRA Preferred Term (optional, omit for all events). Must be a WHOLE MedDRA...
     reaction : str
-        Alias for adverse_event. MedDRA Preferred Term for the adverse drug reaction.
+        Alias for adverse_event. MedDRA Preferred Term for the adverse drug reaction,...
     drug : str
         Alias for drug_name. Generic drug name.
     stream_callback : Callable, optional

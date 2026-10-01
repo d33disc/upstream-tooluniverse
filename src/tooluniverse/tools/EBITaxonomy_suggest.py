@@ -14,7 +14,7 @@ def EBITaxonomy_suggest(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get taxonomy name suggestions matching a partial query from EBI Taxonomy. Type-ahead style search...
 
@@ -31,7 +31,7 @@ def EBITaxonomy_suggest(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

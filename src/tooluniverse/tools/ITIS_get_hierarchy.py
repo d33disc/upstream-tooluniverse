@@ -14,7 +14,7 @@ def ITIS_get_hierarchy(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get the full taxonomic hierarchy for an organism by its ITIS TSN (Taxonomic Serial Number). Retur...
 
@@ -31,7 +31,7 @@ def ITIS_get_hierarchy(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def ITIS_get_full_record(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get the complete taxonomic record from ITIS for a given TSN (Taxonomic Serial Number). Returns sc...
 
@@ -31,7 +31,7 @@ def ITIS_get_full_record(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

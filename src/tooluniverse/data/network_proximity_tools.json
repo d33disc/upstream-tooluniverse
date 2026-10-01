@@ -2,7 +2,7 @@
   {
     "name": "Network_proximity",
     "type": "NetworkProximityTool",
-    "description": "Graph distance between two node sets on a user-supplied network, with the standard measures from Guney/Barabasi (2016) and Menche (2015) plus a degree-matched random Z-score. Domain-agnostic: any two node sets on any graph (drug targets vs disease module, two pathways, two marker sets, \u2026). Give the network as inline 'edges' pairs or a 2-column 'edgelist_path', plus two node sets ('set_a'/'set_b', or the drug-pharmacology aliases 'targets'/'disease_genes'). measure='closest' (default), 'shortest', or 'separation' (s_AB<0 = overlapping modules). Returns the value, Z-score, and empirical p. Pure networkx+numpy, no network call or API key.",
+    "description": "Graph distance between two node sets on a user-supplied network, with the standard measures from Guney/Barabasi (2016) and Menche (2015) plus a degree-matched random Z-score. Domain-agnostic: any two node sets on any graph (drug targets vs disease module, two pathways, two marker sets, …). Give the network as inline 'edges' pairs or a 2-column 'edgelist_path', plus two node sets ('set_a'/'set_b', or the drug-pharmacology aliases 'targets'/'disease_genes'). measure='closest' (default), 'shortest', or 'separation' (s_AB<0 = overlapping modules). Returns the value, Z-score, and empirical p. Pure networkx+numpy, no network call or API key.",
     "parameter": {
       "type": "object",
       "required": [],
@@ -98,20 +98,74 @@
     },
     "return_schema": {
       "type": "object",
-      "additionalProperties": true,
+      "description": "Network proximity (Guney/Barabasi 'closest'/'shortest' or Menche 'separation') between two node sets, with a degree-matched random Z-score and empirical p-value.",
+      "properties": {
+        "measure": {
+          "type": "string",
+          "description": "Distance measure used: 'closest', 'shortest', or 'separation'."
+        },
+        "value": {
+          "type": "number",
+          "description": "Observed distance/separation value."
+        },
+        "n_set_a_in_network": {
+          "type": "integer",
+          "description": "Number of set_a nodes found in the network."
+        },
+        "n_set_b_in_network": {
+          "type": "integer",
+          "description": "Number of set_b nodes found in the network."
+        },
+        "nodes_in_network": {
+          "type": "integer",
+          "description": "Total number of nodes in the network."
+        },
+        "missing_set_a": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "set_a nodes not found in the network."
+        },
+        "missing_set_b": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "set_b nodes not found in the network."
+        },
+        "z_score": {
+          "type": "number",
+          "description": "Z-score of the observed value against the degree-matched random null."
+        },
+        "p_value": {
+          "type": "number",
+          "description": "Empirical p-value from the randomizations."
+        },
+        "random_mean": {
+          "type": "number",
+          "description": "Mean of the degree-matched random null distribution."
+        },
+        "random_std": {
+          "type": "number",
+          "description": "Standard deviation of the degree-matched random null distribution."
+        },
+        "n_randomizations": {
+          "type": "integer",
+          "description": "Number of randomizations performed."
+        }
+      },
       "required": [
         "measure",
-        "missing_set_a",
-        "missing_set_b",
-        "n_randomizations",
-        "n_set_a_in_network",
-        "n_set_b_in_network",
-        "nodes_in_network",
-        "p_value",
-        "random_mean",
-        "random_std",
         "value",
-        "z_score"
+        "z_score",
+        "p_value"
       ]
     },
     "test_examples": [

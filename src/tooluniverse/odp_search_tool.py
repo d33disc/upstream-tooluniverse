@@ -25,8 +25,6 @@ Flow
     {status, data}
 """
 
-import os
-
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -50,14 +48,14 @@ class ODPSearchTool(BaseTool):
         super().__init__(tool_config)
         self.base_url = base_url
 
-        api_key = api_key or os.environ.get("USPTO_API_KEY")
-        if not api_key:
+        # Resolved per request via credential() so hosted BYOK stays request-scoped
+        self._explicit_api_key = api_key
+        if not self._api_key():
             raise ValueError(
                 "USPTO_API_KEY environment variable is required. "
                 "Get one at https://data.uspto.gov/apis/getting-started"
             )
 
-        self.headers = {"X-API-KEY": api_key, "Accept": "application/json"}
         self.session = requests.Session()
         retry = Retry(
             total=5,
@@ -66,6 +64,13 @@ class ODPSearchTool(BaseTool):
             raise_on_status=False,
         )
         self.session.mount("https://", HTTPAdapter(max_retries=retry))
+
+    def _api_key(self) -> str | None:
+        return self.credential("USPTO_API_KEY") or self._explicit_api_key
+
+    @property
+    def headers(self) -> dict:
+        return {"X-API-KEY": self._api_key(), "Accept": "application/json"}
 
     def run(self, arguments: dict | None = None) -> dict:
         """Execute an ODP JSON-body POST search.

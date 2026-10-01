@@ -16,7 +16,7 @@ def RCSBGraphQL_get_polymer_entity(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Get detailed polymer entity information from PDB structures including amino acid sequence, chain ...
 
@@ -37,7 +37,7 @@ def RCSBGraphQL_get_polymer_entity(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

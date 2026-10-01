@@ -272,7 +272,7 @@ __all__ = [
 
 After completing all 6 links, verify end-to-end:
 
-```python
+```bash
 # Quick test — does it load and accept (bad) input?
 python3 -c "
 from tooluniverse import ToolUniverse
@@ -322,7 +322,7 @@ in reverse order (Link 6 first, then 5, 4, 3, 2, 1).
 
 **Link 2:** `src/tooluniverse/patent_claims_tool.py`
 
-```python
+```text
 @register_tool("PatentClaimsTool")
 class PatentClaimsTool(BaseTool):
     def __init__(self, tool_config, api_key=None):
@@ -335,13 +335,13 @@ class PatentClaimsTool(BaseTool):
 
 **Link 3:** `src/tooluniverse/_lazy_registry_static.py`
 
-```python
+```text
 "PatentClaimsTool": "patent_claims_tool",
 ```
 
 **Link 4:** `src/tooluniverse/default_config.py`
 
-```python
+```text
 "patent_claims": os.path.join(current_dir, "data", "patent_claims_tools.json"),
 ```
 

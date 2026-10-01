@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def MEME_discover_motifs(
-    operation: str,
     sequences: str,
+    operation: Optional[str] = "discover_motifs",
     nmotifs: Optional[int] = 3,
     minw: Optional[int] = 6,
     maxw: Optional[int] = 50,

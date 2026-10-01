@@ -16,7 +16,7 @@ def UniRef_search_clusters(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search UniProt UniRef protein sequence clusters by protein name, gene, organism, or keyword. UniR...
 
@@ -37,7 +37,7 @@ def UniRef_search_clusters(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

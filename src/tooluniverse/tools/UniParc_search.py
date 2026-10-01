@@ -15,7 +15,7 @@ def UniParc_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search UniProt UniParc sequence archive by gene name, organism, or database membership. Finds all...
 
@@ -34,7 +34,7 @@ def UniParc_search(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

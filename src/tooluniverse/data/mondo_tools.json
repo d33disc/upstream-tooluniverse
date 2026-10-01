@@ -36,47 +36,66 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Mondo disease identifier (e.g., MONDO:0004975)"
-          },
-          "name": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Disease name"
-          },
-          "category": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Biolink category (biolink:Disease)"
-          },
-          "description": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Disease description"
-          },
-          "xref": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Cross-references to other ontologies (OMIM, Orphanet, DOID, MeSH, etc.)"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Mondo disease identifier (e.g., MONDO:0004975)"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Disease name"
+              },
+              "category": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Biolink category (biolink:Disease)"
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Disease description"
+              },
+              "xref": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Cross-references to other ontologies (OMIM, Orphanet, DOID, MeSH, etc.)"
+              },
+              "deprecated": {
+                "type": "boolean",
+                "description": "True if this Mondo term is obsolete. Obsolete terms still match searches but carry no annotations."
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -110,143 +129,169 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Mondo disease identifier"
-        },
-        "name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Disease name"
-        },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Disease description"
-        },
-        "synonyms": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Known disease synonyms"
-        },
-        "xrefs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Cross-references (OMIM, Orphanet, DOID, MeSH, ICD-10, NCIT, UMLS, etc.)"
-        },
-        "mappings": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "url": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            }
-          },
-          "description": "Mappings to external ontologies with URLs"
-        },
-        "parent_diseases": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            }
-          },
-          "description": "Parent disease categories in Mondo hierarchy"
-        },
-        "subtypes_count": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "description": "Number of disease subtypes (descendants)"
-        },
-        "causal_genes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Gene CURIE (e.g., HGNC:1884)"
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Gene name"
-              }
-            }
-          },
-          "description": "Known causal genes"
-        },
-        "inheritance": {
-          "type": [
-            "object",
-            "null"
-          ],
+      "oneOf": [
+        {
+          "type": "object",
           "properties": {
             "id": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "HPO inheritance ID (e.g., HP:0000006)"
+              "description": "Mondo disease identifier"
             },
             "name": {
               "type": [
                 "string",
                 "null"
               ],
-              "description": "Inheritance pattern name (e.g., Autosomal dominant)"
+              "description": "Disease name"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Disease description"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Known disease synonyms"
+            },
+            "xrefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Cross-references (OMIM, Orphanet, DOID, MeSH, ICD-10, NCIT, UMLS, etc.)"
+            },
+            "mappings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "description": "Mappings to external ontologies with URLs"
+            },
+            "parent_diseases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "description": "Parent disease categories in Mondo hierarchy"
+            },
+            "subtypes_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of disease subtypes (descendants)"
+            },
+            "causal_genes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Gene CURIE (e.g., HGNC:1884)"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Gene name"
+                  }
+                }
+              },
+              "description": "Known causal genes"
+            },
+            "inheritance": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "HPO inheritance ID (e.g., HP:0000006)"
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Inheritance pattern name (e.g., Autosomal dominant)"
+                }
+              },
+              "description": "Inheritance pattern if known"
+            },
+            "association_counts": {
+              "type": "object",
+              "description": "Counts of different association types (phenotypes, genes, etc.)"
+            },
+            "deprecated": {
+              "type": "boolean",
+              "description": "True if this Mondo term is obsolete. Monarch strips the annotations of obsolete terms, so empty fields mean 'not recorded here', not 'none exist'."
+            },
+            "replaced_by": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "For an obsolete term, the current Mondo term that replaced it (present only when deprecated is true)."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
             }
           },
-          "description": "Inheritance pattern if known"
-        },
-        "association_counts": {
-          "type": "object",
-          "description": "Counts of different association types (phenotypes, genes, etc.)"
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -287,61 +332,76 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "phenotype_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "HPO phenotype identifier (e.g., HP:0000726)"
-          },
-          "phenotype_name": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Phenotype name (e.g., 'Dementia')"
-          },
-          "disease_subtype": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Specific disease subtype contributing this phenotype"
-          },
-          "disease_subtype_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "MONDO ID of the contributing disease subtype"
-          },
-          "predicate": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Relationship predicate"
-          },
-          "negated": {
-            "type": [
-              "boolean",
-              "null"
-            ],
-            "description": "Whether the phenotype association is negated"
-          },
-          "primary_knowledge_source": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Primary data source for this association"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "phenotype_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "HPO phenotype identifier (e.g., HP:0000726)"
+              },
+              "phenotype_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Phenotype name (e.g., 'Dementia')"
+              },
+              "disease_subtype": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Specific disease subtype contributing this phenotype"
+              },
+              "disease_subtype_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "MONDO ID of the contributing disease subtype"
+              },
+              "predicate": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Relationship predicate"
+              },
+              "negated": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Whether the phenotype association is negated"
+              },
+              "primary_knowledge_source": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Primary data source for this association"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

@@ -48,10 +48,43 @@ class OmniPathTool(BaseTool):
         fields = tool_config.get("fields", {})
         self.endpoint = fields.get("endpoint", "ligand_receptor")
 
+    # Gene-name parameters OmniPath takes as a comma-separated string.
+    _LIST_LIKE_PARAMS = (
+        "partners",
+        "sources",
+        "targets",
+        "proteins",
+        "enzymes",
+        "substrates",
+        "tf_gene",
+        "target_gene",
+        "databases",
+        "datasets",
+        "types",
+        "categories",
+        "entity_types",
+    )
+
+    @classmethod
+    def _flatten_list_arguments(cls, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Accept ["EGFR"] as well as "EGFR".
+
+        The sibling interactome tool (humanbase_ppi_analysis) takes a list and
+        refuses a string, so an agent moving between them reliably gets one of
+        the two wrong. Joining here costs nothing and removes the round trip.
+        """
+        flattened = dict(arguments)
+        for key in cls._LIST_LIKE_PARAMS:
+            value = flattened.get(key)
+            if isinstance(value, (list, tuple)):
+                parts = [str(item).strip() for item in value if str(item).strip()]
+                flattened[key] = ",".join(parts) if parts else None
+        return flattened
+
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the OmniPath API call."""
         try:
-            return self._query(arguments)
+            return self._query(self._flatten_list_arguments(arguments))
         except requests.exceptions.Timeout:
             return {
                 "status": "error",
@@ -631,7 +664,10 @@ class OmniPathTool(BaseTool):
 
         params = {
             "genesymbols": "yes",
-            "fields": "sources,references,curation_effort,type",
+            # dorothea_level must be explicitly requested or OmniPath omits it,
+            # which previously made every confidence_levels filter match nothing
+            # (Feature-4C-2).
+            "fields": "sources,references,curation_effort,type,dorothea_level",
             "datasets": "dorothea",
             "sources": tf_gene,
         }
@@ -646,11 +682,24 @@ class OmniPathTool(BaseTool):
 
         interactions = []
         for item in data:
-            dorothea_level = item.get("dorothea_level")
+            # OmniPath returns dorothea_level as a list of confidence-level codes
+            # (an interaction can be tagged at multiple levels, e.g. ["A", "D"]),
+            # not a single scalar string.
+            raw_level = item.get("dorothea_level")
+            if isinstance(raw_level, list):
+                level_set = {lvl for lvl in raw_level if lvl}
+            elif raw_level:
+                level_set = {raw_level}
+            else:
+                level_set = set()
 
             if confidence_levels:
-                levels = [level.strip() for level in confidence_levels.split(",")]
-                if dorothea_level not in levels:
+                requested = {
+                    level.strip()
+                    for level in confidence_levels.split(",")
+                    if level.strip()
+                }
+                if not level_set & requested:
                     continue
 
             interactions.append(
@@ -663,7 +712,7 @@ class OmniPathTool(BaseTool):
                     else (-1 if item.get("is_inhibition") else 0),
                     "is_stimulation": bool(item.get("is_stimulation", 0)),
                     "is_inhibition": bool(item.get("is_inhibition", 0)),
-                    "dorothea_level": dorothea_level,
+                    "dorothea_level": sorted(level_set) if level_set else None,
                     "sources": item.get("sources", []),
                     "curation_effort": item.get("curation_effort"),
                 }
@@ -673,8 +722,9 @@ class OmniPathTool(BaseTool):
 
         by_level = {}
         for i in interactions:
-            lvl = i.get("dorothea_level") or "unknown"
-            by_level.setdefault(lvl, []).append(i)
+            levels = i.get("dorothea_level") or ["unknown"]
+            for lvl in levels:
+                by_level.setdefault(lvl, []).append(i)
 
         return {
             "status": "success",

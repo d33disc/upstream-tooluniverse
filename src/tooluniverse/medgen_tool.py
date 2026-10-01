@@ -12,19 +12,17 @@ No authentication required (NCBI public access).
 Documentation: https://www.ncbi.nlm.nih.gov/medgen/docs/
 """
 
-import os
 import re
-import time
 import requests
 from typing import Any
 from xml.etree import ElementTree
 
 from .base_rest_tool import BaseRESTTool
+from .ncbi_eutils_tool import esearch_query_disclosure
+from .provider_rate_limit import enforce_provider_rate_limit
 from .tool_registry import register_tool
 
 EUTILS_BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
-_NCBI_API_KEY = os.environ.get("NCBI_API_KEY", "")
-_LAST_REQUEST_TIME = 0.0
 
 
 @register_tool("MedGenTool")
@@ -44,19 +42,18 @@ class MedGenTool(BaseRESTTool):
         super().__init__(tool_config)
         self.timeout = 30
         self.operation = tool_config.get("fields", {}).get("operation", "search")
-        self.api_key = _NCBI_API_KEY
+
+    @property
+    def api_key(self) -> str:
+        """Resolve the NCBI API key for the active request."""
+        return self.credential("NCBI_API_KEY") or ""
 
     def _ncbi_get(self, url: str, params: dict) -> requests.Response:
         """Rate-limited GET request to NCBI E-utilities."""
-        global _LAST_REQUEST_TIME
-        # NCBI allows 3 req/s without key, 10 req/s with key
-        min_interval = 0.15 if self.api_key else 0.4
-        elapsed = time.time() - _LAST_REQUEST_TIME
-        if elapsed < min_interval:
-            time.sleep(min_interval - elapsed)
-        if self.api_key:
-            params["api_key"] = self.api_key
-        _LAST_REQUEST_TIME = time.time()
+        api_key = self.api_key
+        enforce_provider_rate_limit("ncbi", api_key, 10.0 if api_key else 3.0)
+        if api_key:
+            params["api_key"] = api_key
         resp = requests.get(url, params=params, timeout=self.timeout)
         resp.raise_for_status()
         return resp
@@ -112,20 +109,31 @@ class MedGenTool(BaseRESTTool):
         resp = self._ncbi_get(f"{EUTILS_BASE}/esearch.fcgi", params)
         search_data = resp.json()
 
-        id_list = search_data.get("esearchresult", {}).get("idlist", [])
-        total_count = int(search_data.get("esearchresult", {}).get("count", 0))
+        esearch_result = search_data.get("esearchresult", {})
+        id_list = esearch_result.get("idlist", [])
+        total_count = int(esearch_result.get("count", 0))
+
+        # Fix-54A-1: medgen esearch drops phrases it cannot match and answers
+        # the remainder, so ``metadata.query`` named a query that was not run.
+        # Measured: "cystic fibrosis zzzqqqxyz nonexistentterm12345" returned
+        # total_count 79 -- identical to "cystic fibrosis" alone -- with both
+        # nonsense phrases in errorlist.phrasesnotfound and nothing surfaced.
+        disclosure = esearch_query_disclosure(esearch_result, source="MedGen")
 
         if not id_list:
+            metadata = {
+                "query": query,
+                "source": "NCBI MedGen",
+            }
+            if disclosure:
+                metadata["query_disclosure"] = disclosure
             return {
                 "status": "success",
                 "data": {
                     "conditions": [],
                     "total_count": 0,
                 },
-                "metadata": {
-                    "query": query,
-                    "source": "NCBI MedGen",
-                },
+                "metadata": metadata,
             }
 
         # Fetch summaries for found IDs
@@ -171,20 +179,23 @@ class MedGenTool(BaseRESTTool):
                 }
             )
 
+        metadata = {
+            "query": query,
+            "source": "NCBI MedGen",
+            "description": (
+                "MedGen aggregates genetic condition data from OMIM, Orphanet, "
+                "ClinVar, HPO, GTR, and GeneReviews."
+            ),
+        }
+        if disclosure:
+            metadata["query_disclosure"] = disclosure
         return {
             "status": "success",
             "data": {
                 "conditions": conditions,
                 "total_count": total_count,
             },
-            "metadata": {
-                "query": query,
-                "source": "NCBI MedGen",
-                "description": (
-                    "MedGen aggregates genetic condition data from OMIM, Orphanet, "
-                    "ClinVar, HPO, GTR, and GeneReviews."
-                ),
-            },
+            "metadata": metadata,
         }
 
     def _get_condition(self, arguments: dict) -> dict:

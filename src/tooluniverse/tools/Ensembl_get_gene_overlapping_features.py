@@ -15,7 +15,7 @@ def Ensembl_get_gene_overlapping_features(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get features overlapping an Ensembl gene by gene ID. Returns all genomic features co-located with...
 
@@ -34,7 +34,7 @@ def Ensembl_get_gene_overlapping_features(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

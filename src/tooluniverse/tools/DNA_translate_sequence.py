@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_translate_sequence(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "translate_sequence",
     codon_table: Optional[str] = "standard",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -23,7 +23,7 @@ def DNA_translate_sequence(
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'translate_sequence' for this tool).
     sequence : str
         DNA coding sequence starting with ATG (A, T, G, C only). Should be in-frame.
     codon_table : str

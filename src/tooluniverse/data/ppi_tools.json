@@ -54,7 +54,7 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "Array of protein-protein interaction records",
+      "description": "Array of interaction records parsed from the STRING TSV network response.",
       "items": {
         "type": "object",
         "properties": {
@@ -65,65 +65,37 @@
             "type": "string"
           },
           "preferredName_A": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "preferredName_B": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "ncbiTaxonId": {
-            "type": [
-              "string",
-              "integer",
-              "null"
-            ]
+            "type": "string"
           },
           "score": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
           },
           "nscore": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
           },
           "fscore": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
+          },
+          "pscore": {
+            "type": "string"
+          },
+          "ascore": {
+            "type": "string"
           },
           "escore": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
           },
           "dscore": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
           },
           "tscore": {
-            "type": [
-              "string",
-              "number",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "additionalProperties": true

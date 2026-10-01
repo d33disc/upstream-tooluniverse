@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def HMDB_get_diseases(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_diseases",
     hmdb_id: Optional[str] = None,
     compound_name: Optional[str] = None,
     pubchem_cid: Optional[str] = None,

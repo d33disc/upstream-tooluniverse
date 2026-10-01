@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def MolecularFormula_analyze(
-    operation: str,
+    operation: Optional[str] = "analyze_formula",
     formula: Optional[str] = None,
     sample_g: Optional[float] = None,
     CO2_g: Optional[float] = None,

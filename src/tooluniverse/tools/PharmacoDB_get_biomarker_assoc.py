@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def PharmacoDB_get_biomarker_assoc(
-    operation: str,
+    operation: Optional[str] = "get_biomarker_associations",
     compound_name: Optional[str] = None,
     compound_id: Optional[int] = None,
     gene_name: Optional[str] = None,

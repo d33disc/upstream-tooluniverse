@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_primer_design(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "primer_design",
     target_start: Optional[int] = None,
     target_end: Optional[int] = None,
     tm_target: Optional[float] = 60.0,
@@ -27,7 +27,7 @@ def DNA_primer_design(
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'primer_design' for this tool).
     sequence : str
         DNA template sequence (A, T, G, C, N only). Must be at least 200 bp for good ...
     target_start : int

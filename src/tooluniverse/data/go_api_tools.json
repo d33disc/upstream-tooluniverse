@@ -27,58 +27,73 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "go_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "GO term identifier"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "go_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "GO term identifier"
+            },
+            "label": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Term name/label"
+            },
+            "definition": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Full text definition"
+            },
+            "synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Exact synonyms"
+            },
+            "related_synonyms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Related synonyms"
+            },
+            "xrefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Cross-references (Reactome, Wikipedia, etc.)"
+            },
+            "alternative_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Alternative/obsolete GO IDs"
+            }
+          }
         },
-        "label": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Term name/label"
-        },
-        "definition": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Full text definition"
-        },
-        "synonyms": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
           },
-          "description": "Exact synonyms"
-        },
-        "related_synonyms": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Related synonyms"
-        },
-        "xrefs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Cross-references (Reactome, Wikipedia, etc.)"
-        },
-        "alternative_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Alternative/obsolete GO IDs"
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -118,61 +133,76 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "go_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "GO term ID"
-          },
-          "go_label": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "GO term name"
-          },
-          "category": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "GO domain (biological_process, molecular_function, cellular_component)"
-          },
-          "evidence_type": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Evidence code (IDA, IMP, ISS, IEA, etc.)"
-          },
-          "evidence_label": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Full evidence description"
-          },
-          "provided_by": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Annotation providers"
-          },
-          "references": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Literature references (PMID, UniProtKB)"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "go_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term ID"
+              },
+              "go_label": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO term name"
+              },
+              "category": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "GO domain (biological_process, molecular_function, cellular_component)"
+              },
+              "evidence_type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Evidence code (IDA, IMP, ISS, IEA, etc.)"
+              },
+              "evidence_label": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Full evidence description"
+              },
+              "provided_by": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Annotation providers"
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Literature references (PMID, UniProtKB)"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -214,54 +244,69 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "gene_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Gene/protein identifier (UniProtKB, HGNC, etc.)"
-          },
-          "gene_label": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Gene symbol or name"
-          },
-          "taxon_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Taxon identifier"
-          },
-          "taxon_label": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Species name"
-          },
-          "evidence_type": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Evidence code"
-          },
-          "references": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Literature references"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gene_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene/protein identifier (UniProtKB, HGNC, etc.)"
+              },
+              "gene_label": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Gene symbol or name"
+              },
+              "taxon_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Taxon identifier"
+              },
+              "taxon_label": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Species name"
+              },
+              "evidence_type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Evidence code"
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Literature references"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]

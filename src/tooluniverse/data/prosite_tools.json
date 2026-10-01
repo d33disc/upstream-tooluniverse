@@ -170,10 +170,70 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Array of PROSITE entries matching the search query",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accession": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "PROSITE accession (e.g., PS00028)"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Full entry name"
+              },
+              "short_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Short entry name identifier"
+              },
+              "type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Entry type (conserved_site, domain, active_site, etc.)"
+              },
+              "source_database": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Source database (prosite)"
+              },
+              "integrated_into": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "InterPro entry this PROSITE pattern is integrated into"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   },
   {
@@ -210,10 +270,70 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Array of PROSITE signature matches found in the scanned sequence",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signature_accession": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "PROSITE accession of the matched pattern (e.g., PS50862)"
+              },
+              "signature_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "PROSITE entry name of the matched pattern"
+              },
+              "start": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Start position of the match in the sequence"
+              },
+              "end": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "End position of the match"
+              },
+              "score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Match score (for profiles; null for patterns)"
+              },
+              "level": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Confidence level (0 = strong match)"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

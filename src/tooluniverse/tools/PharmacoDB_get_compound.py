@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def PharmacoDB_get_compound(
-    operation: str,
+    operation: Optional[str] = "get_compound",
     compound_name: Optional[str] = None,
     compound_id: Optional[int] = None,
     *,

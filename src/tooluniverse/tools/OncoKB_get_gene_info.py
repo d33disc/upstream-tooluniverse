@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OncoKB_get_gene_info(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_gene_info",
     gene: Optional[str] = None,
     gene_symbol: Optional[str] = None,
     *,

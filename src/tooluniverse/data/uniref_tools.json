@@ -208,10 +208,97 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cluster_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "UniRef cluster ID"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cluster name"
+              },
+              "entry_type": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cluster type"
+              },
+              "member_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Number of members"
+              },
+              "updated": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Last update date"
+              },
+              "representative_member_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Representative member ID"
+              },
+              "representative_organism": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Organism of representative"
+              },
+              "representative_protein": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Protein name of representative"
+              },
+              "representative_sequence_length": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Sequence length of representative"
+              },
+              "common_taxon": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Common taxon scientific name"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
     }
   }
 ]

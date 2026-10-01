@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def SABIO_RK_search_reactions(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "search_reactions",
     ec_number: Optional[str] = None,
     enzyme_name: Optional[str] = None,
     substrate: Optional[str] = None,

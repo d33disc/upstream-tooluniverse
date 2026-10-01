@@ -19,19 +19,360 @@ ToolUniverse provides AI agent skills that teach agents how to conduct sophistic
 Setup & Configuration
 ---------------------
 
-.. grid:: 1 1 2 2
+.. grid:: 1 1 2 3
    :gutter: 3
+
+   .. grid-item-card:: ⚙️ Host and Share a Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/host-and-share-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Host, validate, and privately share a user's own model, Python function, workflow, or existing Streamable HTTP MCP endpoint through ToolUniverse Pl...
+
+      +++
+
+      :bdg-info:`host-and-share-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Boltz Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-boltz-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Boltz-2 ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when depl...
+
+      +++
+
+      :bdg-info:`setup-boltz-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Borzoi Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-borzoi-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Borzoi ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deplo...
+
+      +++
+
+      :bdg-info:`setup-borzoi-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Cell2Location Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-cell2location-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the cell2location ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use whe...
+
+      +++
+
+      :bdg-info:`setup-cell2location-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Cellrank Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-cellrank-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the CellRank ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when dep...
+
+      +++
+
+      :bdg-info:`setup-cellrank-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Celltypist Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-celltypist-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the CellTypist ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when d...
+
+      +++
+
+      :bdg-info:`setup-celltypist-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Chrombpnet Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-chrombpnet-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the ChromBPNet ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when d...
+
+      +++
+
+      :bdg-info:`setup-chrombpnet-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Depmap 24Q2 Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-depmap-24q2-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the DepMap 24Q2 ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when ...
+
+      +++
+
+      :bdg-info:`setup-depmap-24q2-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Enformer Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-enformer-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Enformer ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when dep...
+
+      +++
+
+      :bdg-info:`setup-enformer-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Esm Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-esm-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the ESM ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deployin...
+
+      +++
+
+      :bdg-info:`setup-esm-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Expert Feedback Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-expert-feedback-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Human expert feedback ToolUniverse remote tool and optionally relay it through ToolUniverse Connect....
+
+      +++
+
+      :bdg-info:`setup-expert-feedback-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Harmony Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-harmony-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Harmony ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when depl...
+
+      +++
+
+      :bdg-info:`setup-harmony-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Immune Compass Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-immune-compass-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the immune COMPASS ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use wh...
+
+      +++
+
+      :bdg-info:`setup-immune-compass-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Ldsc Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-ldsc-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the LDSC ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deployi...
+
+      +++
+
+      :bdg-info:`setup-ldsc-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Liana Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-liana-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the LIANA ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deploy...
+
+      +++
+
+      :bdg-info:`setup-liana-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Macs3 Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-macs3-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the MACS3 ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deploy...
+
+      +++
+
+      :bdg-info:`setup-macs3-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Milo Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-milo-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Milo ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deployi...
+
+      +++
+
+      :bdg-info:`setup-milo-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Mofa Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-mofa-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the MOFA+ ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deploy...
+
+      +++
+
+      :bdg-info:`setup-mofa-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Monocle3 Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-monocle3-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Monocle 3 ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when de...
+
+      +++
+
+      :bdg-info:`setup-monocle3-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Paga Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-paga-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the PAGA ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deployi...
+
+      +++
+
+      :bdg-info:`setup-paga-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Pinnacle Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-pinnacle-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the PINNACLE ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when dep...
+
+      +++
+
+      :bdg-info:`setup-pinnacle-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Scanvi Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-scanvi-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the scANVI ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deplo...
+
+      +++
+
+      :bdg-info:`setup-scanvi-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Scrublet Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-scrublet-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Scrublet ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when dep...
+
+      +++
+
+      :bdg-info:`setup-scrublet-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Scvelo Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-scvelo-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the scVelo ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deplo...
+
+      +++
+
+      :bdg-info:`setup-scvelo-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Scvi Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-scvi-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the scVI ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when deployi...
+
+      +++
+
+      :bdg-info:`setup-scvi-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Singler Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-singler-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the SingleR ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when depl...
+
+      +++
+
+      :bdg-info:`setup-singler-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Slingshot Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-slingshot-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Slingshot ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when de...
+
+      +++
+
+      :bdg-info:`setup-slingshot-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Squidpy Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-squidpy-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Squidpy ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when depl...
+
+      +++
+
+      :bdg-info:`setup-squidpy-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Tangram Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-tangram-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the Tangram ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use when depl...
+
+      +++
+
+      :bdg-info:`setup-tangram-remote-tool`
 
    .. grid-item-card:: ⚙️ Setup: Tooluniverse
       :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-tooluniverse
       :class-card: hover-lift
       :shadow: md
 
-      Install and configure ToolUniverse for any use case — MCP server (chat-based), CLI (command line with 10 subcommands), or Python SDK (Coding API wi...
+      Install and configure ToolUniverse for any use case — MCP server (chat-based), CLI (command line with 14 subcommands), or Python SDK (Coding API wi...
 
       +++
 
       :bdg-info:`setup-tooluniverse`
+
+   .. grid-item-card:: ⚙️ Setup: Transcriptformer Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-transcriptformer-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the TranscriptFormer ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use ...
+
+      +++
+
+      :bdg-info:`setup-transcriptformer-remote-tool`
+
+   .. grid-item-card:: ⚙️ Setup: Uspto Downloader Remote Tool
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/setup-uspto-downloader-remote-tool
+      :class-card: hover-lift
+      :shadow: md
+
+      Set up, launch, validate, and troubleshoot the USPTO downloader ToolUniverse remote tool and optionally relay it through ToolUniverse Connect. Use ...
+
+      +++
+
+      :bdg-info:`setup-uspto-downloader-remote-tool`
 
 
 General Purpose
@@ -987,7 +1328,7 @@ Research Skills
       :class-card: hover-lift
       :shadow: md
 
-      Molecular cloning assembly design — Gibson Assembly (overlap design for seamless multi-fragment joining) and Golden Gate Assembly (Type IIS / BsaI ...
+      Molecular cloning, in both directions. DESIGN — Gibson Assembly (overlap design for seamless multi-fragment joining) and Golden Gate Assembly (Type...
 
       +++
 
@@ -1047,6 +1388,17 @@ Research Skills
       +++
 
       :bdg-info:`tooluniverse-neuroscience`
+
+   .. grid-item-card:: ✨ Nih Funding Landscape
+      :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/tooluniverse-nih-funding-landscape
+      :class-card: hover-lift
+      :shadow: md
+
+      Analyze NIH grant portfolios and funding history using the OpenNIH FY1985-present corpus, then connect grants to investigators, institutions, publi...
+
+      +++
+
+      :bdg-info:`tooluniverse-nih-funding-landscape`
 
    .. grid-item-card:: ✨ Noncoding Rna
       :link: https://github.com/mims-harvard/ToolUniverse/tree/main/skills/tooluniverse-noncoding-rna
@@ -1427,7 +1779,7 @@ Research Skills
       :class-card: hover-lift
       :shadow: md
 
-      > Generate the success criteria for a task or question, then review work against them. Given a task, goal, or open-ended question, decompose it int...
+      > Review existing work against the user's actual goal and surface evidence-backed strengths, gaps, risks, and next fixes. Use when asked to eval, e...
 
       +++
 

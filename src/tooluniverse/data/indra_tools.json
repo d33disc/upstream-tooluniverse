@@ -9,7 +9,8 @@
         "operation": {
           "type": "string",
           "const": "get_statements",
-          "description": "Operation type (fixed: get_statements)"
+          "description": "Operation type (fixed: get_statements)",
+          "default": "get_statements"
         },
         "agent": {
           "type": "string",
@@ -92,7 +93,10 @@
         "type": "Inhibition",
         "limit": 3
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_statements"
+    }
   },
   {
     "name": "INDRA_get_evidence_count",
@@ -104,7 +108,8 @@
         "operation": {
           "type": "string",
           "const": "get_evidence_count",
-          "description": "Operation type (fixed: get_evidence_count)"
+          "description": "Operation type (fixed: get_evidence_count)",
+          "default": "get_evidence_count"
         },
         "agent": {
           "type": "string",
@@ -147,7 +152,10 @@
         "agent": "EGFR",
         "type": "Inhibition"
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_evidence_count"
+    }
   },
   {
     "name": "INDRA_get_statement_by_hash",
@@ -159,7 +167,8 @@
         "operation": {
           "type": "string",
           "const": "get_statement_by_hash",
-          "description": "Operation type (fixed: get_statement_by_hash)"
+          "description": "Operation type (fixed: get_statement_by_hash)",
+          "default": "get_statement_by_hash"
         },
         "hash": {
           "type": "string",
@@ -203,6 +212,9 @@
         "hash": "-35357180905875939",
         "ev_limit": 3
       }
-    ]
+    ],
+    "fields": {
+      "operation": "get_statement_by_hash"
+    }
   }
 ]

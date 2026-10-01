@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def iPTMnet_get_ptm_sites(
-    operation: str,
     uniprot_id: str,
+    operation: Optional[str] = "get_ptm_sites",
     ptm_type: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,

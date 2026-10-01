@@ -9,6 +9,13 @@ from .tool_registry import register_tool
 
 logger = logging.getLogger(__name__)
 
+
+def _mps_available(torch) -> bool:
+    """Apple Silicon GPU check; a torch build (or test double) may lack the backend."""
+    mps = getattr(getattr(torch, "backends", None), "mps", None)
+    return bool(mps and mps.is_available())
+
+
 # Retrieval instruction used by instruction-tuned encoders (applied to the query only).
 _ENCODER_INSTRUCTION = (
     "Instruct: Given a natural-language request from a scientist, retrieve the software "
@@ -19,6 +26,13 @@ _ENCODER_INSTRUCTION = (
 # Each maps to the ``configs`` used to build a ToolFinderEmbedding with that encoder. This lets a
 # single embedding Tool Finder switch encoders on demand instead of registering a separate tool
 # per encoder. "default" (or an unset argument) uses the tool's configured model (e.g. ToolRAG-T1).
+#: Opt-in for letting a per-call ``embedding_model`` choice download its encoder. An agent
+#: picks that argument from the tool schema, and the open encoders are 7B models (the
+#: gte-Qwen2-7B-instruct weights are about 28 GB): downloading them inside a tool call
+#: filled a user's home quota mid-run. Without the opt-in, a per-call encoder loads only
+#: from the local model cache.
+ENCODER_DOWNLOAD_ENV = "TOOLUNIVERSE_ALLOW_ENCODER_DOWNLOAD"
+
 KNOWN_ENCODERS = {
     "gte-qwen2-7b": {
         "tool_finder_model": "Alibaba-NLP/gte-Qwen2-7B-instruct",
@@ -107,6 +121,9 @@ class ToolFinderEmbedding(BaseTool):
         # Some encoders ship their architecture as repo code and require trust_remote_code.
         # Default False keeps the deployed ToolRAG-T1 behavior byte-identical.
         self.trust_remote_code = bool(_configs.get("trust_remote_code", False))
+        # Load the encoder from the local model cache only (never download). Set for encoders
+        # chosen per call (see ``_resolve_finder``); default False leaves ToolRAG-T1 unchanged.
+        self.local_files_only = bool(_configs.get("local_files_only", False))
         self._embed_provider = None
         self._embedder = None
         if _want_hosted:
@@ -268,7 +285,7 @@ class ToolFinderEmbedding(BaseTool):
             logger.info(f"CUDA is available. GPU count: {torch.cuda.device_count()}")
             logger.info(f"Current CUDA device: {torch.cuda.current_device()}")
             logger.info(f"GPU name: {torch.cuda.get_device_name(0)}")
-        elif torch.backends.mps.is_available():
+        elif _mps_available(torch):
             device = "mps"
             logger.info("MPS (Apple Silicon GPU) is available.")
         else:
@@ -280,10 +297,12 @@ class ToolFinderEmbedding(BaseTool):
         # architecture ships as repo code (e.g. gte-large-en-v1.5, gte-Qwen2-*'s bidirectional
         # variant); set the config ``trust_remote_code: true`` to use those as the encoder.
         logger.info(f"Loading SentenceTransformer model on device: {device}")
+        options = {"local_files_only": True} if self.local_files_only else {}
         self.rag_model = SentenceTransformer(
             self.toolfinder_model,
             device=device,
             trust_remote_code=self.trust_remote_code,
+            **options,
         )
         self.rag_model.max_seq_length = 4096
         self.rag_model.tokenizer.padding_side = "right"
@@ -296,7 +315,7 @@ class ToolFinderEmbedding(BaseTool):
             logger.info(
                 f"Tool_RAG model loaded on GPU: {torch.cuda.get_device_name(0)}"
             )
-        elif torch.backends.mps.is_available():
+        elif _mps_available(torch):
             logger.info("Tool_RAG model loaded on MPS (Apple Silicon GPU)")
         else:
             logger.warning("Tool_RAG model loaded on CPU (GPU not available)")
@@ -419,7 +438,7 @@ class ToolFinderEmbedding(BaseTool):
         else:
             if torch.cuda.is_available():
                 target_device = "cuda"
-            elif torch.backends.mps.is_available():
+            elif _mps_available(torch):
                 target_device = "mps"
             else:
                 target_device = "cpu"
@@ -632,14 +651,29 @@ class ToolFinderEmbedding(BaseTool):
             )
             return self
         if embedding_model not in self._sub_finders:
+            # Hosted encoders are not downloaded; only local open encoders are cache-bound.
+            cache_only = "embedding_backend" not in spec and os.environ.get(
+                ENCODER_DOWNLOAD_ENV, ""
+            ).strip().lower() not in ("1", "true", "yes")
+            configs = {**spec, "exclude_tools": self.exclude_tools}
+            if cache_only:
+                configs["local_files_only"] = True
             sub_config = {
                 "name": self.tool_config.get("name", self.__class__.__name__),
                 "type": "ToolFinderEmbedding",
-                "configs": {**spec, "exclude_tools": self.exclude_tools},
+                "configs": configs,
             }
-            self._sub_finders[embedding_model] = ToolFinderEmbedding(
-                sub_config, self.tooluniverse
-            )
+            try:
+                finder = ToolFinderEmbedding(sub_config, self.tooluniverse)
+            except Exception as exc:
+                if not cache_only:
+                    raise
+                raise RuntimeError(
+                    f"Encoder {embedding_model!r} ({spec['tool_finder_model']}) is not in the local "
+                    f"model cache, and a tool call does not download it. Use embedding_model="
+                    f"'default', download the model beforehand, or set {ENCODER_DOWNLOAD_ENV}=1."
+                ) from exc
+            self._sub_finders[embedding_model] = finder
         return self._sub_finders[embedding_model]
 
     def run(self, arguments):

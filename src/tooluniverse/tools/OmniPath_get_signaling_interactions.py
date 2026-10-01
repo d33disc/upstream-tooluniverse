@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_signaling_interactions(
-    partners: Optional[str] = None,
-    sources: Optional[str] = None,
-    targets: Optional[str] = None,
+    partners: Optional[str | list[Any]] = None,
+    sources: Optional[str | list[Any]] = None,
+    targets: Optional[str | list[Any]] = None,
     datasets: Optional[str] = None,
     directed: Optional[bool] = None,
     signed: Optional[bool] = None,
@@ -27,11 +27,11 @@ def OmniPath_get_signaling_interactions(
 
     Parameters
     ----------
-    partners : str
+    partners : str | list[Any]
         Gene symbol(s) or UniProt ID(s) to query. Comma-separated for multiple. Examp...
-    sources : str
+    sources : str | list[Any]
         Gene symbol(s) or UniProt ID(s) for source/upstream proteins only.
-    targets : str
+    targets : str | list[Any]
         Gene symbol(s) or UniProt ID(s) for target/downstream proteins only.
     datasets : str
         Which OmniPath dataset(s) to query, comma-separated. Options: 'omnipath' (cur...

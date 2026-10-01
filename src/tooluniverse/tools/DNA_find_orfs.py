@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def DNA_find_orfs(
-    operation: str,
     sequence: str,
+    operation: Optional[str] = "find_orfs",
     min_length: Optional[int] = 100,
     strand: Optional[str] = "both",
     *,
@@ -24,7 +24,7 @@ def DNA_find_orfs(
     Parameters
     ----------
     operation : str
-        Operation type
+        Operation (optional; defaults to 'find_orfs' for this tool).
     sequence : str
         DNA sequence (A, T, G, C, N only)
     min_length : int

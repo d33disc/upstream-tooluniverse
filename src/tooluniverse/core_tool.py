@@ -15,6 +15,7 @@ import io
 from urllib.parse import urljoin
 from typing import Dict, List, Any, Optional
 from .base_tool import BaseTool
+from .extras import install_hint
 from .tool_registry import register_tool
 from .http_utils import request_with_retry
 
@@ -27,7 +28,7 @@ except Exception:
     MarkItDown = None
 
 try:
-    import fitz  # PyMuPDF
+    import pymupdf as fitz
 
     FITZ_AVAILABLE = True
 except Exception:
@@ -266,13 +267,20 @@ class CorePDFSnippetsTool(BaseTool):
         if extractor == "markitdown" and not MARKITDOWN_AVAILABLE:
             return {
                 "status": "error",
-                "error": "markitdown library not available. Install with: pip install 'markitdown[all]'",
+                "error": (
+                    "markitdown library not available. Install with: "
+                    "pip install 'markitdown[audio-transcription,az-doc-intel,docx,outlook,pdf,pptx,xls,xlsx,youtube-transcription]'"
+                ),
                 "retryable": False,
             }
         if extractor == "fitz" and not FITZ_AVAILABLE:
             return {
                 "status": "error",
-                "error": "PyMuPDF (fitz) not available. Install with: pip install pymupdf",
+                "error": (
+                    "PyMuPDF backend not available. Install the opt-in backend "
+                    "with: pip install 'tooluniverse[pdf]'. PyMuPDF is licensed "
+                    "under AGPL-3.0 or a commercial Artifex license."
+                ),
                 "retryable": False,
             }
         if extractor == "pypdf" and not PYPDF_AVAILABLE:
@@ -286,7 +294,7 @@ class CorePDFSnippetsTool(BaseTool):
         ):
             return {
                 "status": "error",
-                "error": "No PDF text extractor available (need pymupdf, pypdf, or markitdown).",
+                "error": f"No PDF text extractor available. {install_hint('documents', 'pymupdf')}",
                 "retryable": False,
             }
 
@@ -494,7 +502,7 @@ class CorePDFSnippetsTool(BaseTool):
                 if not MARKITDOWN_AVAILABLE:
                     return {
                         "status": "error",
-                        "error": "No PDF text extractor available (need pymupdf, pypdf, or markitdown).",
+                        "error": f"No PDF text extractor available. {install_hint('documents', 'pymupdf')}",
                         "retryable": False,
                         "retrieval_trace": retrieval_trace,
                     }

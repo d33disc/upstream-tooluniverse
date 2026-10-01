@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def GTEx_get_eqtl_genes(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_eqtl_genes",
     tissue_site_detail_id: Optional[list[str]] = None,
     dataset_id: Optional[str] = "gtex_v8",
     page: Optional[int] = 0,

@@ -61,7 +61,6 @@ Usage example
 
 # --- Imports ---
 import logging
-import os
 import time
 
 import requests
@@ -115,15 +114,13 @@ class PatentDeepLookupTool(BaseTool):
         super().__init__(tool_config)
         self.base_url = base_url
 
-        # Read key at init time (not module level) so monkeypatch works in tests
-        self.api_key = api_key or os.environ.get("USPTO_API_KEY")
+        # Resolved per request via credential() so hosted BYOK stays request-scoped
+        self._explicit_api_key = api_key
         if not self.api_key:
             raise ValueError(
                 "USPTO_API_KEY environment variable is required. "
                 "Get one at https://developer.uspto.gov"
             )
-
-        self.headers = {"X-API-KEY": self.api_key, "Accept": "application/json"}
 
         # Retry on server errors only --- we handle 429 manually for logging
         self.session = requests.Session()
@@ -134,6 +131,15 @@ class PatentDeepLookupTool(BaseTool):
             raise_on_status=False,
         )
         self.session.mount("https://", HTTPAdapter(max_retries=retry))
+
+    @property
+    def api_key(self) -> str | None:
+        """USPTO key for the active credential scope, else the explicit one."""
+        return self.credential("USPTO_API_KEY") or self._explicit_api_key
+
+    @property
+    def headers(self) -> dict:
+        return {"X-API-KEY": self.api_key, "Accept": "application/json"}
 
     # -- validation helpers --
 

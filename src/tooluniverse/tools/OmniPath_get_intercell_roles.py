@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_intercell_roles(
-    proteins: Optional[str] = None,
+    proteins: Optional[str | list[Any]] = None,
     categories: Optional[str] = None,
     scope: Optional[str] = None,
     transmitter: Optional[bool] = None,
@@ -26,7 +26,7 @@ def OmniPath_get_intercell_roles(
 
     Parameters
     ----------
-    proteins : str
+    proteins : str | list[Any]
         Gene symbol(s) or UniProt ID(s), comma-separated. Examples: 'EGFR', 'TGFB1,PD...
     categories : str
         Filter by intercellular role category. Examples: 'ligand', 'receptor', 'adhes...

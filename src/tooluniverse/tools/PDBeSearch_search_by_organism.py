@@ -16,7 +16,7 @@ def PDBeSearch_search_by_organism(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search PDB structures filtered by organism through PDBe's Solr search. Combines keyword search wi...
 
@@ -37,7 +37,7 @@ def PDBeSearch_search_by_organism(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

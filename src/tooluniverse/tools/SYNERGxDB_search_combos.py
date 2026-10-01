@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def SYNERGxDB_search_combos(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "search_combos",
     drug_id_1: Optional[int] = None,
     drug_name_1: Optional[str] = None,
     drug_id_2: Optional[int] = None,

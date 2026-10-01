@@ -9,8 +9,8 @@ from ._shared_client import get_shared_client
 
 
 def OmniPath_get_enzyme_substrate(
-    enzymes: Optional[str] = None,
-    substrates: Optional[str] = None,
+    enzymes: Optional[str | list[Any]] = None,
+    substrates: Optional[str | list[Any]] = None,
     types: Optional[str] = None,
     organisms: Optional[int] = None,
     limit: Optional[int] = None,
@@ -24,9 +24,9 @@ def OmniPath_get_enzyme_substrate(
 
     Parameters
     ----------
-    enzymes : str
+    enzymes : str | list[Any]
         Gene symbol(s) or UniProt ID(s) for enzyme/kinase. Comma-separated for multip...
-    substrates : str
+    substrates : str | list[Any]
         Gene symbol(s) or UniProt ID(s) for substrate. Examples: 'STAT3', 'P40763'.
     types : str
         Modification type filter. Options include: phosphorylation, ubiquitination, a...

@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def ols_search_terms(
     query: str,
-    operation: Optional[str] = None,
+    operation: Optional[str] = "search_terms",
     rows: Optional[int] = 10,
     size: Optional[int] = 10,
     ontology: Optional[str] = None,
@@ -38,7 +38,7 @@ def ols_search_terms(
     ontology : str
         Filter by specific ontology (optional)
     exact_match : bool
-        Search for exact matches only (default: false)
+        Restrict results to exact matches (default: false). The query must equal a te...
     include_obsolete : bool
         Include obsolete terms (default: false)
     limit : int

@@ -14,7 +14,7 @@ def OpenTree_get_taxon(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed taxonomy information for a taxon from the Open Tree of Life by its OTT ID. Returns t...
 
@@ -31,7 +31,7 @@ def OpenTree_get_taxon(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def Statistics_test(
-    operation: str,
+    operation: Optional[str] = "chi_square",
     observed: Optional[list[Any]] = None,
     expected: Optional[list[Any]] = None,
     a: Optional[int] = None,

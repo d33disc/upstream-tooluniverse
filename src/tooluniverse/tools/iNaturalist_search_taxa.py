@@ -15,7 +15,7 @@ def iNaturalist_search_taxa(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search for species and taxa in the iNaturalist taxonomy. Returns matching organisms with their sc...
 
@@ -34,7 +34,7 @@ def iNaturalist_search_taxa(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

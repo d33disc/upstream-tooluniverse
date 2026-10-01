@@ -325,7 +325,8 @@ class TheraSAbDabTool(BaseTool):
                 "data": {
                     "query": query,
                     "therapeutics": filtered[:20],  # Limit results
-                    "count": len(filtered),
+                    "count": len(filtered[:20]),
+                    "total_therapeutics": len(filtered),
                     "source": "Thera-SAbDab (Oxford OPIG)",
                 },
             }
@@ -436,7 +437,8 @@ class TheraSAbDabTool(BaseTool):
                 "data": {
                     "target": target,
                     "therapeutics": filtered[:20],
-                    "count": len(filtered),
+                    "count": len(filtered[:20]),
+                    "total_therapeutics": len(filtered),
                     "source": "Thera-SAbDab (Oxford OPIG)",
                 },
             }

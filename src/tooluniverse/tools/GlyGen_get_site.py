@@ -14,7 +14,7 @@ def GlyGen_get_site(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Get detailed information about a specific glycosylation site from GlyGen. Returns the amino acid ...
 
@@ -31,7 +31,7 @@ def GlyGen_get_site(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def Orphanet_get_gene_diseases(
-    operation: Optional[str] = None,
+    operation: Optional[str] = "get_gene_diseases",
     gene_name: Optional[str] = None,
     gene_symbol: Optional[str] = None,
     *,

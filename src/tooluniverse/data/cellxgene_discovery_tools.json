@@ -25,44 +25,59 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "total_collections": {
-          "type": "integer",
-          "description": "Total number of public collections"
-        },
-        "returned": {
-          "type": "integer",
-          "description": "Number returned in this response"
-        },
-        "collections": {
-          "type": "array",
-          "description": "Collection summaries with name, DOI, dataset count, cell count",
-          "items": {
-            "type": "object",
-            "properties": {
-              "collection_id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "doi": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "dataset_count": {
-                "type": "integer"
-              },
-              "total_cells": {
-                "type": "integer"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "total_collections": {
+              "type": "integer",
+              "description": "Total number of public collections"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number returned in this response"
+            },
+            "collections": {
+              "type": "array",
+              "description": "Collection summaries with name, DOI, dataset count, cell count",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "collection_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "doi": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "dataset_count": {
+                    "type": "integer"
+                  },
+                  "total_cells": {
+                    "type": "integer"
+                  }
+                }
               }
             }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -93,81 +108,96 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "collection_id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "doi": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "dataset_count": {
-          "type": "integer"
-        },
-        "datasets": {
-          "type": "array",
-          "description": "Datasets with cell count, tissues, diseases, organisms, cell types",
-          "items": {
-            "type": "object",
-            "properties": {
-              "dataset_id": {
-                "type": "string"
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "cell_count": {
-                "type": "integer"
-              },
-              "tissues": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "diseases": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "organisms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "cell_types": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "assays": {
-                "type": "array",
-                "items": {
-                  "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "collection_id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "doi": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "dataset_count": {
+              "type": "integer"
+            },
+            "datasets": {
+              "type": "array",
+              "description": "Datasets with cell count, tissues, diseases, organisms, cell types",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataset_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "cell_count": {
+                    "type": "integer"
+                  },
+                  "tissues": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "diseases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "organisms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "cell_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   },
   {
@@ -220,59 +250,74 @@
       }
     ],
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "total_matching": {
-          "type": "integer",
-          "description": "Total datasets matching filters"
-        },
-        "returned": {
-          "type": "integer",
-          "description": "Number returned in this response"
-        },
-        "datasets": {
-          "type": "array",
-          "description": "Matching datasets sorted by cell count",
-          "items": {
-            "type": "object",
-            "properties": {
-              "dataset_id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "cell_count": {
-                "type": "integer"
-              },
-              "tissues": {
-                "type": "array",
-                "items": {
-                  "type": "string"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "total_matching": {
+              "type": "integer",
+              "description": "Total datasets matching filters"
+            },
+            "returned": {
+              "type": "integer",
+              "description": "Number returned in this response"
+            },
+            "datasets": {
+              "type": "array",
+              "description": "Matching datasets sorted by cell count",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataset_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "cell_count": {
+                    "type": "integer"
+                  },
+                  "tissues": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "diseases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "organisms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "explorer_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
-              },
-              "diseases": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "organisms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "explorer_url": {
-                "type": [
-                  "string",
-                  "null"
-                ]
               }
             }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
-      }
+      ]
     }
   }
 ]
