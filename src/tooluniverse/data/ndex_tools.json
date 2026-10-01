@@ -36,90 +36,14 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "uuid": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network UUID (use with NDEx_get_network_summary or NDEx_get_network)"
-              },
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network name"
-              },
-              "description": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network description (truncated)"
-              },
-              "owner": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network owner/contributor"
-              },
-              "node_count": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Number of nodes in the network"
-              },
-              "edge_count": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Number of edges in the network"
-              },
-              "visibility": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network visibility (PUBLIC/PRIVATE)"
-              },
-              "doi": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "DOI if published"
-              },
-              "version": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Network version"
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "uuid",
+          "name"
+        ]
+      }
     }
   },
   {

@@ -75,52 +75,18 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "tf_name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "total_peaks": {
-                "type": [
-                  "string",
-                  "integer",
-                  "null"
-                ]
-              },
-              "dataset_url": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "dataset_id": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": [
-            "error"
-          ],
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          }
-        }
-      ]
+      "type": "array",
+      "additionalProperties": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "dataset_url",
+          "tf_name",
+          "total_peaks"
+        ],
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {
