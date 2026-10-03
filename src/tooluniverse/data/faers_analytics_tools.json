@@ -32,13 +32,40 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "drug_name",
-        "adverse_event",
-        "contingency_table",
-        "metrics",
-        "signal_detection"
-      ]
+      "properties": {
+        "cohort_scope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "How much of the cohort the metrics were computed over actually named the queried drug. Read it before acting on the metrics: the two cohorts can reach opposite verdicts. Null means the split could not be established -- unknown, never zero. Only this key is declared here; the rest of the tool's output is documented in the description.",
+          "properties": {
+            "reports_naming_queried_drug": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Reports whose reported product name was the queried drug. Null when the measurement failed."
+            },
+            "reports_matched_by_name_resolution_only": {
+              "type": "integer",
+              "description": "Reports that matched only through openFDA's SPL active-ingredient annotation, i.e. that named some other product sharing the ingredient."
+            },
+            "percent_matched_by_name_resolution_only": {
+              "type": "number",
+              "description": "The above as a percentage of the analysed cohort. Absent when it is zero."
+            },
+            "reported_name_only_analysis": {
+              "type": "object",
+              "description": "The same 2x2 and its ROR with 95% CI, restricted to reports that named the drug, by the same signal criteria as signal_detection. Absent when the two cohorts are identical; carries contingency_table and a note instead of an ROR when a cell is zero."
+            },
+            "note": {
+              "type": "string",
+              "description": "Which of those situations this call is in, in prose."
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -106,12 +133,94 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "drug_name",
-        "stratified_by",
-        "total_reports",
-        "stratification"
-      ]
+      "properties": {
+        "drug_name": {
+          "type": "string",
+          "description": "Drug the reports were matched on."
+        },
+        "adverse_event": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "MedDRA Preferred Term the query was narrowed to, or null when the drug alone was queried."
+        },
+        "stratified_by": {
+          "type": "string",
+          "description": "Demographic dimension used: sex, age, or country."
+        },
+        "total_reports_matching_query": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Every report matching the drug/event query, from openFDA's meta.results.total. This is the drug's report count. Null when the extra total request failed -- coverage_note then says the total was unavailable."
+        },
+        "stratified_report_count": {
+          "type": "integer",
+          "description": "Reports where the demographic field is recorded -- the subset the groups below sum to, and the denominator of every percentage. Always <= total_reports_matching_query, often far below it."
+        },
+        "total_reports": {
+          "type": "integer",
+          "description": "Legacy alias of stratified_report_count, kept for backward compatibility. NOT the drug's report count; read total_reports_matching_query for that."
+        },
+        "stratification": {
+          "type": "array",
+          "description": "Demographic groups ranked by descending report count.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "group": {
+                "type": [
+                  "string",
+                  "integer"
+                ],
+                "description": "Demographic group label (sex and age codes are decoded; country stays an ISO code)."
+              },
+              "count": {
+                "type": "integer",
+                "description": "Reports in this group."
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Share of stratified_report_count, not of total_reports_matching_query."
+              }
+            }
+          }
+        },
+        "coverage_note": {
+          "type": "string",
+          "description": "Explains that the stratification covers only reports where the demographic is recorded, naming stratified_report_count, total_reports_matching_query and the coverage fraction."
+        },
+        "cohort_scope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "How much of the cohort these groups were computed over actually named the queried drug. openFDA's SPL annotation tags a report with every brand and generic name registered for the active ingredient of a product the report named, so a query collects the whole active-ingredient population. That is correct for a generic name and wrong for a brand whose ingredient has unrelated products (CYANOKIT, a cyanide antidote, has 4,119 reports of which 238 named it; the rest are vitamin B12 supplementation). Null means the split could not be established - unknown, never zero.",
+          "properties": {
+            "reports_naming_queried_drug": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Reports whose reported product name was the queried drug. Null when the measurement failed."
+            },
+            "reports_matched_by_name_resolution_only": {
+              "type": "integer",
+              "description": "Reports that matched only through openFDA's SPL active-ingredient annotation, i.e. that named some other product sharing the ingredient."
+            },
+            "percent_matched_by_name_resolution_only": {
+              "type": "number",
+              "description": "The above as a percentage of the measured cohort. Absent when it is zero."
+            },
+            "note": {
+              "type": "string",
+              "description": "Which cohort was measured and what the split means for these groups, in prose."
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -174,12 +283,36 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "drug_name",
-        "seriousness_type",
-        "total_serious_events",
-        "top_serious_reactions"
-      ]
+      "properties": {
+        "cohort_scope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "How much of the cohort these serious-event counts were computed over actually named the queried drug. openFDA's SPL annotation tags a report with every brand and generic name registered for the active ingredient of a product the report named, so a query collects the whole active-ingredient population - correct for a generic name, wrong for a brand whose ingredient has unrelated products. Measured over all reports matching the drug (and reaction) BEFORE the seriousness filter, which is orthogonal to which product a report named - so do not compare it with total_serious_events. Null means the split could not be established - unknown, never zero. Only this key is declared here; the rest of the output is documented in the description.",
+          "properties": {
+            "reports_naming_queried_drug": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Reports whose reported product name was the queried drug. Null when the measurement failed."
+            },
+            "reports_matched_by_name_resolution_only": {
+              "type": "integer",
+              "description": "Reports that matched only through openFDA's SPL active-ingredient annotation, i.e. that named some other product sharing the ingredient."
+            },
+            "percent_matched_by_name_resolution_only": {
+              "type": "number",
+              "description": "The above as a percentage of the measured cohort. Absent when it is zero."
+            },
+            "note": {
+              "type": "string",
+              "description": "Which cohort was measured and what the split means for these figures, in prose."
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -238,12 +371,137 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "adverse_event",
-        "drug1",
-        "drug2",
-        "comparison"
-      ]
+      "properties": {
+        "adverse_event": {
+          "type": "string",
+          "description": "MedDRA Preferred Term both arms were computed for."
+        },
+        "drug1": {
+          "type": "object",
+          "description": "First drug's arm: its name, the 2x2 case counts, and the metrics and signal verdict derived from them.",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "contingency_table": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The 2x2 case counts this arm's ROR/PRR/IC were computed from, using the same key names as FAERS_calculate_disproportionality. Null only if the underlying analysis omitted them.",
+              "properties": {
+                "a_drug_and_event": {
+                  "type": "integer",
+                  "description": "Reports naming both this drug and this adverse event."
+                },
+                "b_drug_no_event": {
+                  "type": "integer",
+                  "description": "Reports naming this drug but not this adverse event."
+                },
+                "c_no_drug_event": {
+                  "type": "integer",
+                  "description": "Reports naming this adverse event but not this drug."
+                },
+                "d_no_drug_no_event": {
+                  "type": "integer",
+                  "description": "Reports naming neither this drug nor this adverse event."
+                }
+              }
+            },
+            "metrics": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "ROR, PRR and IC with 95% confidence intervals."
+            },
+            "signal_detection": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Whether this arm alone crosses the signal-detection threshold, and how strongly."
+            },
+            "cohort_scope": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "How much of THIS arm's cohort actually named this drug. The drug arm searches openFDA's SPL annotation as well as the reported product name, so it collects every product sharing the active ingredient -- right for a generic name, wrong for a brand whose ingredient has unrelated products. Carries reports_naming_queried_drug, reports_matched_by_name_resolution_only, percent_matched_by_name_resolution_only and a note, plus reported_name_only_analysis (the same 2x2 and ROR restricted to reports that named the drug) when the two differ. Same keys and meaning as FAERS_calculate_disproportionality's. This matters MORE in a comparison than in a single analysis: the verdict is a ratio of the two arms, so one arm describing an active-ingredient population while the other describes a single product moves the comparison itself. Check both arms before reading `comparison`. Null when the split could not be established; null means unknown, never zero."
+            }
+          }
+        },
+        "drug2": {
+          "type": "object",
+          "description": "Second drug's arm, in the same shape as drug1.",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "contingency_table": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "The 2x2 case counts this arm's ROR/PRR/IC were computed from, using the same key names as FAERS_calculate_disproportionality. Null only if the underlying analysis omitted them.",
+              "properties": {
+                "a_drug_and_event": {
+                  "type": "integer",
+                  "description": "Reports naming both this drug and this adverse event."
+                },
+                "b_drug_no_event": {
+                  "type": "integer",
+                  "description": "Reports naming this drug but not this adverse event."
+                },
+                "c_no_drug_event": {
+                  "type": "integer",
+                  "description": "Reports naming this adverse event but not this drug."
+                },
+                "d_no_drug_no_event": {
+                  "type": "integer",
+                  "description": "Reports naming neither this drug nor this adverse event."
+                }
+              }
+            },
+            "metrics": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "ROR, PRR and IC with 95% confidence intervals."
+            },
+            "signal_detection": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Whether this arm alone crosses the signal-detection threshold, and how strongly."
+            },
+            "cohort_scope": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "How much of THIS arm's cohort actually named this drug. The drug arm searches openFDA's SPL annotation as well as the reported product name, so it collects every product sharing the active ingredient -- right for a generic name, wrong for a brand whose ingredient has unrelated products. Carries reports_naming_queried_drug, reports_matched_by_name_resolution_only, percent_matched_by_name_resolution_only and a note, plus reported_name_only_analysis (the same 2x2 and ROR restricted to reports that named the drug) when the two differ. Same keys and meaning as FAERS_calculate_disproportionality's. This matters MORE in a comparison than in a single analysis: the verdict is a ratio of the two arms, so one arm describing an active-ingredient population while the other describes a single product moves the comparison itself. Check both arms before reading `comparison`. Null when the split could not be established; null means unknown, never zero."
+            }
+          }
+        },
+        "comparison": {
+          "type": "string",
+          "description": "Plain-language verdict comparing the two arms. Always read alongside comparison_caveat."
+        },
+        "comparison_caveat": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Set when either arm's a_drug_and_event is below 25, naming the arm and its count and warning that comparison is not an equal-confidence statement. Null when both arms clear the threshold, and also when an arm's count is unavailable -- check contingency_table to tell those two cases apart."
+        },
+        "note": {
+          "type": "string",
+          "description": "Standing caveat that both drugs may show signals from differing baseline risks."
+        }
+      }
     },
     "test_examples": [
       {
@@ -294,12 +552,36 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "drug_name",
-        "adverse_event",
-        "temporal_data",
-        "trend_analysis"
-      ]
+      "properties": {
+        "cohort_scope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "How much of the cohort the series and trend above were computed over actually named the queried drug. openFDA's SPL annotation tags a report with every brand and generic name registered for the active ingredient of a product the report named, so a query collects the whole active-ingredient population - correct for a generic name, wrong for a brand whose ingredient has unrelated products. Measured over the reports the series itself sums to. A trend over a contaminated cohort is the other products' trend: CYANOKIT reports 'Increasing' for a cyanide antidote off 94.2% vitamin B12 reports. Null means the split could not be established - unknown, never zero. Only this key is declared here; the rest of the output is documented in the description.",
+          "properties": {
+            "reports_naming_queried_drug": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Reports whose reported product name was the queried drug. Null when the measurement failed."
+            },
+            "reports_matched_by_name_resolution_only": {
+              "type": "integer",
+              "description": "Reports that matched only through openFDA's SPL active-ingredient annotation, i.e. that named some other product sharing the ingredient."
+            },
+            "percent_matched_by_name_resolution_only": {
+              "type": "number",
+              "description": "The above as a percentage of the measured cohort. Absent when it is zero."
+            },
+            "note": {
+              "type": "string",
+              "description": "Which cohort was measured and what the split means for these figures, in prose."
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
@@ -339,10 +621,36 @@
     },
     "return_schema": {
       "type": "object",
-      "required": [
-        "drug_name",
-        "meddra_hierarchy"
-      ]
+      "properties": {
+        "cohort_scope": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "How much of the cohort this reaction ranking were computed over actually named the queried drug. openFDA's SPL annotation tags a report with every brand and generic name registered for the active ingredient of a product the report named, so a query collects the whole active-ingredient population - correct for a generic name, wrong for a brand whose ingredient has unrelated products. Terms driven by other products sharing the active ingredient cannot be separated out of the ranking. Null means the split could not be established - unknown, never zero. Only this key is declared here; the rest of the output is documented in the description.",
+          "properties": {
+            "reports_naming_queried_drug": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Reports whose reported product name was the queried drug. Null when the measurement failed."
+            },
+            "reports_matched_by_name_resolution_only": {
+              "type": "integer",
+              "description": "Reports that matched only through openFDA's SPL active-ingredient annotation, i.e. that named some other product sharing the ingredient."
+            },
+            "percent_matched_by_name_resolution_only": {
+              "type": "number",
+              "description": "The above as a percentage of the measured cohort. Absent when it is zero."
+            },
+            "note": {
+              "type": "string",
+              "description": "Which cohort was measured and what the split means for these figures, in prose."
+            }
+          }
+        }
+      }
     },
     "test_examples": [
       {
